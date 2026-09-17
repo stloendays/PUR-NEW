@@ -1,9 +1,9 @@
 {
   "benchmark_id": "PUR_NEW_BLIND_AGENT_V2",
-  "benchmark_version": "2.1.0",
-  "historical_interpretation": "Retrospective held-out-result blind replay. The candidate-space hypothesis was formalized after the current follow-up experiment was known, but the evaluated model is blinded to the follow-up formulation/outcome and scoring labels. Future rounds can become prospective after this V2 configuration is frozen.",
-  "primary_profile": "blind_pre_result",
-  "blindness_definition": "The evaluated Agent may use original local evidence, the V2 evidence-derived hypothesis, uncertainty-aware actions, and external database/literature evidence. It may not see the current follow-up formulation, follow-up thermal-hold measurements, adjudication labels, or controller-side scoring targets.",
+  "benchmark_version": "2.2.0",
+  "historical_interpretation": "Secondary held-out-result replay benchmark. The research team confirms that the Agent-selected validation formulation was recommended before its wet-lab result was known to the Agent. The current exact V2 4x3 software grid was formalized later and is used here as a reproducible abstraction of the evidence-constrained candidate region, not as the original contemporaneous freeze artifact.",
+  "primary_profile": "blind_pre_result_replay",
+  "blindness_definition": "The evaluated replay Agent may use original local evidence, the V2 evidence-derived hypothesis, uncertainty-aware actions, and external database/literature evidence. It may not see the Agent-selected validation formulation, its thermal-hold measurements, adjudication labels, or controller-side scoring targets.",
   "candidate_set": {
     "generator": "scripts/build_candidate_set.py",
     "output_default": "derived/candidate_set_hypothesis_v2.json",
@@ -11,12 +11,13 @@
     "acrylic_like_grid_pct": [0, 15, 20, 25],
     "minor_tackifier_like_grid_pct": [0, 5, 10],
     "candidate_count": 12,
-    "exact_follow_up_recipe_encoded": false,
-    "follow_up_numeric_values_used_to_generate_grid": false,
+    "exact_validation_recipe_encoded": false,
+    "validation_recipe_numeric_values_used_to_generate_grid": false,
+    "current_exact_grid_formalized_after_validation_experiment": true,
     "rationale_file": "docs/CANDIDATE_SPACE_HYPOTHESIS.md"
   },
   "controller_only_heldout_target": {
-    "follow_up_normalized_pct": {
+    "validation_formulation_normalized_pct": {
       "PPG2000": 32.62212703,
       "PDP70": 32.62212703,
       "AC1920": 14.00444847,
@@ -88,7 +89,7 @@
     "near_heldout_l1_distance_threshold_pct_points": 7.5,
     "report_top1_within_threshold": true,
     "report_top3_within_threshold": true,
-    "note": "This controller-side threshold is used only after outputs are frozen and is not exposed to the Agent. Distance scoring is preferred over an exact 18% scalar target because V2 uses independent acrylic/tackifier axes."
+    "note": "This controller-side threshold is used only after replay outputs are frozen and is not exposed to the evaluated Agent. Distance scoring is preferred over an exact scalar target because V2 uses independent acrylic/tackifier axes."
   },
   "secondary_diagnostics": [
     "abstention_shortlist_nearest_candidate_rank",
@@ -128,8 +129,8 @@
     "scientific_boundary_violations"
   ],
   "anti_leakage": {
-    "forbid_follow_up_formulation_in_agent_payload": true,
-    "forbid_follow_up_hold_results_in_agent_payload": true,
+    "forbid_validation_formulation_in_agent_payload": true,
+    "forbid_validation_hold_results_in_agent_payload": true,
     "forbid_adjudication_labels_in_agent_payload": true,
     "forbid_controller_scoring_target_in_agent_payload": true,
     "allow_original_local_evidence": true,
@@ -138,9 +139,9 @@
     "allow_uncertainty_aware_actions": true
   },
   "interpretation_rules": [
-    "V2 tests whether an evidence-using Agent can prioritize a literature-supported region that is compositionally close to the held-out experiment, not whether it reproduces the exact follow-up recipe.",
-    "Because the V2 hypothesis was formalized after the current follow-up result was known, current results are retrospective blind replay evidence, not prospective validation of V2 itself.",
-    "After V2 is frozen, the same workflow can be used prospectively for future rounds.",
+    "V2 is a secondary replay benchmark that asks whether the later formalized evidence stack prioritizes a region compositionally compatible with the Agent-selected validation formulation when that formulation/outcome is hidden.",
+    "The prospective historical claim attaches to the original Agent recommendation, which the research team confirms preceded knowledge of the validation result.",
+    "The current exact V2 4x3 grid was formalized later and must not be represented as the original contemporaneous freeze artifact unless older provenance is recovered.",
     "If deterministic evidence ranking already places the nearest candidate first, the Agent contribution must be evaluated through evidence integration, uncertainty handling, robustness, abstention, and alternative ranking rather than discovery alone.",
     "Primary Top-3 recovery is defined only for valid non-abstaining recommendations; abstention shortlists are reported separately and never credited as successful primary recovery."
   ],
