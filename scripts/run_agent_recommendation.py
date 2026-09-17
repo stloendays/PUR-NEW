@@ -7,6 +7,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -240,10 +241,12 @@ def main() -> None:
     client = OpenAI(**client_kwargs)
 
     user_message = "Choose from the supplied candidate set or abstain. Preserve evidence boundaries and return JSON only.\n\n" + json.dumps(input_payload, ensure_ascii=False, sort_keys=True)
+    start = time.perf_counter()
     response = client.chat.completions.create(
         model=model,
         messages=[{"role": "system", "content": prompt_text}, {"role": "user", "content": user_message}],
     )
+    latency_s = time.perf_counter() - start
     content = response.choices[0].message.content
     if not content:
         raise SystemExit("model returned empty content")
@@ -261,11 +264,26 @@ def main() -> None:
     )
     validate(record, recommendation_schema)
 
+    usage = getattr(response, "usage", None)
+    meta = {
+        "benchmark_condition": "direct_llm_blind" if args.context_level == "direct" else "single_pass_tool_context",
+        "context_level": args.context_level,
+        "model": model,
+        "latency_s": latency_s,
+        "prompt_tokens": getattr(usage, "prompt_tokens", None) if usage is not None else None,
+        "completion_tokens": getattr(usage, "completion_tokens", None) if usage is not None else None,
+        "total_tokens": getattr(usage, "total_tokens", None) if usage is not None else None,
+        "input_hash": input_hash,
+        "prompt_hash": prompt_hash,
+    }
+
     args.output_dir.mkdir(parents=True, exist_ok=True)
     output_path = args.output_dir / f"{record['recommendation_id']}.json"
-    if output_path.exists():
+    meta_path = args.output_dir / f"{record['recommendation_id']}.meta.json"
+    if output_path.exists() or meta_path.exists():
         raise SystemExit(f"Refusing to overwrite frozen recommendation: {output_path}")
     output_path.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    meta_path.write_text(json.dumps(meta, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(output_path)
 
 
