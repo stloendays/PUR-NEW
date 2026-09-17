@@ -1,14 +1,17 @@
 {
-  "version": "2.0.0",
-  "scope": "Evidence-derived formulation hypothesis for candidate generation and Agent ranking. This is not a trained predictor and not a mechanistic law.",
+  "version": "2.1.0",
+  "scope": "Evidence-derived formulation hypothesis for reproducible candidate-space formalization, replay benchmarking and future Agent ranking. This is not a trained predictor and not a mechanistic law.",
   "historical_status": {
-    "hypothesis_formalized_after_current_follow_up_result_known": true,
+    "agent_validation_formulation_recommended_before_target_result_known": true,
+    "current_exact_v2_grid_formalized_after_validation_experiment": true,
+    "interpretation": "The prospective historical claim attaches to the Agent recommendation itself. The current exact 4x3 V2 software grid is a later reproducible formalization of the evidence-constrained candidate region and is not represented as the original contemporaneous freeze artifact unless older provenance is recovered.",
+    "repository_freeze_artifact_available": false,
     "allowed_use": [
       "scientific rationale",
-      "held-out-result blind replay",
-      "future prospective rounds after this version is frozen"
-    ],
-    "not_allowed_use": "Do not describe this V2 hypothesis itself as a pre-result recommendation for the already completed follow-up experiment."
+      "replay and ablation benchmark",
+      "candidate-space formalization",
+      "future prospective rounds"
+    ]
   },
   "local_reactive_core_anchor": {
     "formulation_id": "E2",
@@ -35,7 +38,7 @@
         "PAT_US20160215185A1: repeated acrylic tackifying resin examples at approximately 19-20% of total formulation",
         "PAT_US6465104B1 Example 10: 25 wt% low-OH acrylic copolymer with direct 121 C viscosity-stability data"
       ],
-      "interpretation": "15, 20 and 25% are independent coarse literature/patent anchors, not values fitted to the local follow-up recipe."
+      "interpretation": "15, 20 and 25% are independent coarse literature/patent anchors and are not values fitted to the validation formulation."
     },
     "minor_tackifier_like_modifier_pct_total": {
       "grid": [0, 5, 10],
@@ -67,12 +70,12 @@
       "acrylic_like_pct": "acrylic_pct",
       "tackifier_like_pct": "tackifier_pct"
     },
-    "exact_follow_up_recipe_encoded_as_candidate": false,
-    "follow_up_numeric_values_used_to_generate_grid": false
+    "exact_validation_recipe_encoded_as_candidate": false,
+    "validation_recipe_numeric_values_used_to_generate_grid": false
   },
   "action_support_thresholds_pct_points": {
     "strong": 5.0,
     "moderate": 10.0
   },
-  "claim_boundary": "External examples are analogues. They support candidate-family and coarse-range hypotheses, not an exact optimum for AC1920/TK100 and not a proven local molecular mechanism."
+  "claim_boundary": "External examples are analogues. They support candidate-family and coarse-range hypotheses, not an exact optimum for AC1920/TK100 and not a proven local molecular mechanism. The current exact V2 grid is a later formalization and must not be conflated with the original pre-result Agent freeze unless older provenance is recovered."
 }
