@@ -4,12 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pur-new-workflow"
-version = "0.2.0"
-description = "Deterministic and Agent-runtime support for uncertainty-aware PUR formulation workflow"
+version = "0.3.0"
+description = "Deterministic, statistical and Agent-runtime support for uncertainty-aware PUR formulation workflow"
 requires-python = ">=3.11"
 dependencies = [
   "jsonschema>=4.23",
+  "numpy>=2.0",
   "openai>=1.0",
+  "pandas>=2.2",
+  "scipy>=1.14",
+  "statsmodels>=0.14",
 ]
 
 [tool.setuptools.packages.find]
