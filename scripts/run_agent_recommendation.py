@@ -67,7 +67,17 @@ def candidate_map(candidate_set: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {c["candidate_id"]: c for c in candidate_set["candidates"]}
 
 
-def normalize_agent_decision(raw: dict[str, Any], *, candidate_set: dict[str, Any], inspection_status: str, model: str, prompt_hash: str, input_hash: str, workflow_version: str) -> dict[str, Any]:
+def normalize_agent_decision(
+    raw: dict[str, Any],
+    *,
+    candidate_set: dict[str, Any],
+    inspection_status: str,
+    model: str,
+    prompt_hash: str,
+    input_hash: str,
+    workflow_version: str,
+    context_level: str,
+) -> dict[str, Any]:
     allowed_modes = {"performance_candidate", "robustness_probe", "uncertainty_probe", "abstain"}
     mode = raw.get("decision_mode")
     if mode not in allowed_modes:
@@ -95,7 +105,7 @@ def normalize_agent_decision(raw: dict[str, Any], *, candidate_set: dict[str, An
         raise ValueError("alternatives_considered must be a list")
 
     seen_alternatives: set[str] = set()
-    for rank_offset, alt in enumerate(alternatives, start=2):
+    for alt in alternatives:
         alt_id = alt.get("candidate_id")
         if alt_id not in candidates:
             raise ValueError(f"alternative candidate not in candidate set: {alt_id!r}")
@@ -104,13 +114,18 @@ def normalize_agent_decision(raw: dict[str, Any], *, candidate_set: dict[str, An
         if alt_id in seen_alternatives:
             raise ValueError(f"duplicate alternative candidate: {alt_id!r}")
         seen_alternatives.add(alt_id)
-        _ = rank_offset
 
     if mode != "abstain" and len(candidates) >= 3 and len(alternatives) < 2:
         raise ValueError("non-abstaining recommendations must provide at least two ranked alternatives when >=3 candidates exist")
 
     created = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-    rec_seed = canonical_json_bytes({"created_utc": created, "selected_candidate_id": selected_id, "input_hash": input_hash, "model": model})
+    rec_seed = canonical_json_bytes({
+        "created_utc": created,
+        "selected_candidate_id": selected_id,
+        "input_hash": input_hash,
+        "model": model,
+        "context_level": context_level,
+    })
     recommendation_id = f"REC_{created.replace(':', '').replace('-', '')}_{sha256_bytes(rec_seed)[:10]}"
 
     return {
@@ -132,29 +147,30 @@ def normalize_agent_decision(raw: dict[str, Any], *, candidate_set: dict[str, An
             "model": model,
             "prompt_hash": prompt_hash,
             "input_hash": input_hash,
-            "workflow_version": workflow_version,
+            "workflow_version": f"{workflow_version};single_pass={context_level}",
         },
     }
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run and freeze a PUR-NEW Agent recommendation")
+    parser = argparse.ArgumentParser(description="Run a leakage-safe single-pass PUR-NEW benchmark condition")
     parser.add_argument("--candidate-set", type=Path, required=True)
     parser.add_argument("--evidence-state", type=Path, default=ROOT / "derived" / "evidence_state.json")
-    parser.add_argument("--agent-context", type=Path, default=None, help="Optional action-enriched context built by scripts/build_agent_context.py")
-    parser.add_argument("--profile", default="blind_pre_result", help="Evidence-access profile. Defaults to blind_pre_result so benchmark baselines are leakage-safe.")
-    parser.add_argument("--inspection-status", required=True, choices=["no_results_inspected", "some_results_inspected", "unknown"], help="Chronology at recommendation creation; must be supplied explicitly.")
+    parser.add_argument("--agent-context", type=Path, default=None, help="Action-enriched context built by scripts/build_agent_context.py; required for tool_context")
+    parser.add_argument("--context-level", choices=["direct", "tool_context"], default="tool_context")
+    parser.add_argument("--profile", default="blind_pre_result", help="Evidence-access profile. Defaults to blind_pre_result.")
+    parser.add_argument("--inspection-status", required=True, choices=["no_results_inspected", "some_results_inspected", "unknown"])
     parser.add_argument("--output-dir", type=Path, default=ROOT / "records" / "recommendations")
     args = parser.parse_args()
 
     if not args.evidence_state.exists():
         raise SystemExit(f"Evidence state not found: {args.evidence_state}. Run scripts/build_evidence_state.py first.")
+    if args.context_level == "tool_context" and args.agent_context is None:
+        raise SystemExit("--agent-context is required when --context-level=tool_context")
 
     workflow = read_json(ROOT / "configs" / "workflow.json")
-    action_catalog = read_json(ROOT / "configs" / "action_catalog.json")
     raw_evidence = read_json(args.evidence_state)
     candidates = read_json(args.candidate_set)
-    agent_context = read_json(args.agent_context) if args.agent_context else None
     candidate_schema = read_json(ROOT / "schemas" / "candidate_set.schema.json")
     recommendation_schema = read_json(ROOT / "schemas" / "agent_recommendation.schema.json")
     profiles = read_json(ROOT / "configs" / "evidence_access_profiles.json")["profiles"]
@@ -171,19 +187,32 @@ def main() -> None:
 
     evidence = filter_evidence_state(raw_evidence, policy=policy, blinded_formulation_ids=blinded_ids)
 
-    prompt_path = ROOT / "prompts" / "agent_system.txt"
+    if args.context_level == "direct":
+        prompt_path = ROOT / "prompts" / "direct_llm_baseline.txt"
+        input_payload = {
+            "benchmark_condition": "direct_llm_blind",
+            "evidence_profile": args.profile,
+            "evidence_policy": policy,
+            "evidence_state": evidence,
+            "candidate_set": candidates,
+        }
+    else:
+        prompt_path = ROOT / "prompts" / "agent_system.txt"
+        action_catalog = read_json(ROOT / "configs" / "action_catalog.json")
+        agent_context = read_json(args.agent_context) if args.agent_context else None
+        input_payload = {
+            "benchmark_condition": "single_pass_tool_context",
+            "workflow_policy": workflow,
+            "action_catalog": action_catalog,
+            "evidence_profile": args.profile,
+            "evidence_policy": policy,
+            "evidence_state": evidence,
+            "agent_context": agent_context,
+            "candidate_set": candidates,
+        }
+
     prompt_text = prompt_path.read_text(encoding="utf-8")
     prompt_hash = sha256_bytes(prompt_text.encode("utf-8"))
-
-    input_payload = {
-        "workflow_policy": workflow,
-        "action_catalog": action_catalog,
-        "evidence_profile": args.profile,
-        "evidence_policy": policy,
-        "evidence_state": evidence,
-        "agent_context": agent_context,
-        "candidate_set": candidates,
-    }
 
     blind_mode = not bool(policy.get("allow_follow_up_hold_results", False))
     if blind_mode:
@@ -210,17 +239,26 @@ def main() -> None:
         client_kwargs["base_url"] = base_url
     client = OpenAI(**client_kwargs)
 
-    user_message = (
-        "Choose from the supplied candidate set or abstain. Use the action-enriched context as decision support, preserve all evidence boundaries, compare alternatives explicitly, and return JSON only.\n\n"
-        + json.dumps(input_payload, ensure_ascii=False, sort_keys=True)
+    user_message = "Choose from the supplied candidate set or abstain. Preserve evidence boundaries and return JSON only.\n\n" + json.dumps(input_payload, ensure_ascii=False, sort_keys=True)
+    response = client.chat.completions.create(
+        model=model,
+        messages=[{"role": "system", "content": prompt_text}, {"role": "user", "content": user_message}],
     )
-    response = client.chat.completions.create(model=model, messages=[{"role": "system", "content": prompt_text}, {"role": "user", "content": user_message}])
     content = response.choices[0].message.content
     if not content:
         raise SystemExit("model returned empty content")
     raw_decision = extract_json_object(content)
 
-    record = normalize_agent_decision(raw_decision, candidate_set=candidates, inspection_status=args.inspection_status, model=model, prompt_hash=prompt_hash, input_hash=input_hash, workflow_version=workflow["workflow_version"])
+    record = normalize_agent_decision(
+        raw_decision,
+        candidate_set=candidates,
+        inspection_status=args.inspection_status,
+        model=model,
+        prompt_hash=prompt_hash,
+        input_hash=input_hash,
+        workflow_version=workflow["workflow_version"],
+        context_level=args.context_level,
+    )
     validate(record, recommendation_schema)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
