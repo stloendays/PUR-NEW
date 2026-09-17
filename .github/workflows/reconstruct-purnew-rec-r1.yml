@@ -1,0 +1,65 @@
+name: reconstruct-purnew-rec-r1
+
+on:
+  push:
+    paths:
+      - 'records/historical_reconstruction/_payload/**'
+      - '.github/workflows/reconstruct-purnew-rec-r1.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  reconstruct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct workbook from audited payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          payload_dir='records/historical_reconstruction/_payload'
+          target='records/historical_reconstruction/PURNEW_REC_R1_reconstructed.xlsx'
+          expected_sha='80f59c5921c43e0eb70d221979ba2ffefcdb8a38e54fd439b656dfd43edece8e'
+          expected_size='23302'
+
+          cat "${payload_dir}"/part_*.b64 | tr -d '\r\n' | base64 --decode > /tmp/PURNEW_REC_R1_reconstructed.xlsx
+
+          actual_size="$(stat -c%s /tmp/PURNEW_REC_R1_reconstructed.xlsx)"
+          test "${actual_size}" = "${expected_size}"
+          echo "${expected_sha}  /tmp/PURNEW_REC_R1_reconstructed.xlsx" | sha256sum --check --strict
+
+          python - <<'PY'
+          import zipfile
+          p = '/tmp/PURNEW_REC_R1_reconstructed.xlsx'
+          with zipfile.ZipFile(p) as zf:
+              bad = zf.testzip()
+              if bad is not None:
+                  raise SystemExit(f'corrupt zip member: {bad}')
+              required = {'[Content_Types].xml', 'xl/workbook.xml'}
+              missing = required.difference(zf.namelist())
+              if missing:
+                  raise SystemExit(f'missing xlsx members: {sorted(missing)}')
+          print('XLSX zip integrity: OK')
+          PY
+
+          cp /tmp/PURNEW_REC_R1_reconstructed.xlsx "${target}"
+
+      - name: Commit verified workbook
+        shell: bash
+        run: |
+          set -euo pipefail
+          target='records/historical_reconstruction/PURNEW_REC_R1_reconstructed.xlsx'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "${target}"
+          if git diff --cached --quiet; then
+            echo 'Verified workbook already matches repository copy.'
+            exit 0
+          fi
+          git commit -m 'Reconstruct verified PURNEW_REC_R1 workbook'
+          git pull --rebase origin main
+          git push origin HEAD:main
