@@ -23,8 +23,8 @@ formulation state
 2. construct formulation-process state
 3. derive temperature / hold / repeatability descriptors
 4. decompose uncertainty
-5. generate admissible candidate states
-6. Agent recommends the next test point
+5. generate an admissible candidate set
+6. Agent recommends one candidate or abstains
 7. freeze recommendation + criterion + provenance
 8. human operator executes the wet-lab experiment
 9. create a separate experimental adjudication record
@@ -33,7 +33,7 @@ formulation state
 
 The Agent is an **uncertainty-aware scientific recommender**. It does not physically prepare samples or operate the instrument. Its scientific value is judged by whether the recommendation remains useful after human execution.
 
-The full contract is in [`docs/WORKFLOW.md`](docs/WORKFLOW.md).
+The full contract is in [`docs/WORKFLOW.md`](docs/WORKFLOW.md), with runtime boundaries in [`docs/AGENT_RUNTIME.md`](docs/AGENT_RUNTIME.md) and a practical future-round procedure in [`docs/RUNBOOK.md`](docs/RUNBOOK.md).
 
 ## What uncertainty means here
 
@@ -86,16 +86,22 @@ The Agent-facing evaluation framework is in [`docs/AGENT_EVALUATION.md`](docs/AG
 
 ## Executable support layer
 
-The Agent is not asked to do deterministic arithmetic in prose. The repository now includes a small deterministic layer for quantities such as hold-stability index, replicate spread and descriptive temperature fitting.
+Numerical descriptors are deterministic; the Agent is not asked to recalculate them in free-form language.
 
 ```text
 raw CSVs
 -> scripts/build_evidence_state.py
 -> deterministic evidence-state JSON
--> Agent recommendation layer
+-> finite candidate-set JSON
+-> scripts/run_agent_recommendation.py
+-> immutable recommendation JSON
+-> human experiment
+-> separate adjudication JSON
 ```
 
-The current experimental descriptor calculations are locked by unit tests and checked in GitHub Actions.
+The recommendation runner reads API credentials from environment variables only, selects only from the supplied candidate set or abstains, hashes its evidence/prompt inputs, and refuses to overwrite a frozen recommendation.
+
+The current descriptor calculations are locked by unit tests and checked in GitHub Actions.
 
 ## Repository structure
 
@@ -103,33 +109,39 @@ The current experimental descriptor calculations are locked by unit tests and ch
 PUR-NEW/
 ├─ README.md
 ├─ configs/
-│  └─ workflow.json                       # machine-readable decision policy
+│  └─ workflow.json                         # machine-readable decision policy
 ├─ docs/
-│  ├─ WORKFLOW.md                         # canonical closed-loop workflow
-│  ├─ UNCERTAINTY_MODEL.md                # uncertainty decomposition
-│  ├─ AGENT_EVALUATION.md                 # physical evaluation of recommendations
-│  ├─ PROJECT_STATE.md                    # current state and next work
-│  ├─ RESEARCH_NARRATIVE.md               # scientific narrative
-│  ├─ AGENT_ROLE.md                       # Agent evidence contract
-│  ├─ EXPERIMENTAL_EVIDENCE.md            # executed measurements
-│  └─ MANUSCRIPT_PLAN.md                  # paper-facing structure
+│  ├─ WORKFLOW.md                           # canonical closed-loop workflow
+│  ├─ AGENT_RUNTIME.md                      # deterministic/Agent/human boundary
+│  ├─ RUNBOOK.md                            # future prospective-round procedure
+│  ├─ UNCERTAINTY_MODEL.md                  # uncertainty decomposition
+│  ├─ AGENT_EVALUATION.md                   # physical evaluation of recommendations
+│  ├─ PROJECT_STATE.md                      # current state and next work
+│  ├─ RESEARCH_NARRATIVE.md                 # scientific narrative
+│  ├─ AGENT_ROLE.md                         # Agent evidence contract
+│  ├─ EXPERIMENTAL_EVIDENCE.md              # executed measurements
+│  └─ MANUSCRIPT_PLAN.md                    # paper-facing structure
 ├─ data/
 │  ├─ README.md
 │  ├─ formulations.csv
 │  ├─ temperature_sweeps.csv
 │  └─ thermal_hold.csv
+├─ prompts/
+│  └─ agent_system.txt                      # uncertainty-aware recommendation contract
 ├─ records/
-│  └─ README.md                           # immutable recommendation/adjudication layout
+│  └─ README.md                             # immutable recommendation/adjudication layout
 ├─ schemas/
-│  ├─ design_state.schema.json            # formulation + process + evidence state
-│  ├─ agent_recommendation.schema.json    # immutable pre-result recommendation
-│  └─ experiment_adjudication.schema.json # separate post-result record
+│  ├─ design_state.schema.json              # formulation + process + evidence state
+│  ├─ candidate_set.schema.json             # finite admissible candidate set
+│  ├─ agent_recommendation.schema.json      # immutable pre-result recommendation
+│  └─ experiment_adjudication.schema.json   # separate post-result record
 ├─ src/pur_new/
-│  └─ metrics.py                          # deterministic scientific descriptors
+│  └─ metrics.py                            # deterministic scientific descriptors
 ├─ scripts/
-│  └─ build_evidence_state.py             # builds Agent-ready evidence state
+│  ├─ build_evidence_state.py               # builds Agent-ready evidence state
+│  └─ run_agent_recommendation.py           # API Agent -> validated frozen record
 └─ tests/
-   └─ test_metrics.py                     # locks current descriptor calculations
+   └─ test_metrics.py                       # locks current descriptor calculations
 ```
 
 ## Paper-level claim
