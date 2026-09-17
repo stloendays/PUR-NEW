@@ -13,6 +13,7 @@ from pur_new.actions import (  # noqa: E402
     audit_process_unknowns,
     candidate_profile,
     compare_candidate_to_priors,
+    get_candidate_hypothesis,
     get_hold_stability,
     get_repeatability_risk,
     get_temperature_support,
@@ -51,7 +52,9 @@ def main() -> None:
     if include_follow_up:
         local["follow_up_hold"] = get_hold_stability("F1", include_follow_up=True)
 
+    hypothesis = get_candidate_hypothesis() if policy["allow_external_evidence_hints"] else None
     priors = query_external_priors(max_rows=100) if policy["allow_external_evidence_hints"] else []
+
     candidate_actions = []
     for c in candidates:
         candidate_actions.append({
@@ -65,16 +68,20 @@ def main() -> None:
     context = {
         "evidence_access_profile": args.profile,
         "profile_policy": policy,
+        "candidate_space_hypothesis": hypothesis,
         "local_failure_evidence": local,
         "external_prior_hints": priors,
         "candidate_action_outputs": candidate_actions,
         "support_ranking": rank_candidate_support(candidates) if priors else [],
         "interpretation_rules": [
             "External prior hints are analogies, not current-system outcomes.",
-            "In blind_pre_result mode, follow-up thermal-hold results are intentionally absent.",
-            "High original-system hold drift should be treated as a robustness failure that justifies formulation-family changes, not only stoichiometric micro-tuning.",
-            "A candidate near a repeatedly documented resin-modifier region receives prior support only if it remains chemically/operationally admissible.",
-            "Process-history missingness remains uncertainty even when a candidate has strong literature analogue support."
+            "The candidate grid is constructed from the original E2 reactive-core proportions plus independent acrylic/tackifier evidence anchors; it does not encode the exact follow-up recipe.",
+            "In blind_pre_result mode, follow-up thermal-hold results and post-hoc scoring labels are intentionally absent.",
+            "High original-system hold drift is a robustness failure that can justify changing formulation family rather than only micro-tuning NCO/OH.",
+            "Acrylic-like and tackifier-like evidence should be evaluated on separate axes rather than collapsed into one modifier number.",
+            "Modifier functionality matters: low-OH versus higher-OH acrylic stability evidence is directional support, not proof for AC1920/TK100.",
+            "Process-history missingness remains uncertainty even when a candidate has strong literature analogue support.",
+            "If modifier reactivity is unknown, do not assume the original E2 NCO:OH ratio remains chemically exact after modifier addition."
         ]
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
