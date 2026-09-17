@@ -1,0 +1,17 @@
+formulation_id,stage,run_label,temperature_c,time_min,viscosity_reported
+E1,original,GJJ,120,15,708.7
+E1,original,GJJ,120,30,728.6
+E1,original,GJJ,120,60,776.1
+E1,original,GJJ,120,90,828.1
+E5,original,ZYX,120,15,2210
+E5,original,ZYX,120,30,2470
+E5,original,ZYX,120,60,3349
+E5,original,ZYX,120,90,4267
+F1,follow_up,repeat_1,120,15,1230
+F1,follow_up,repeat_1,120,30,1189
+F1,follow_up,repeat_1,120,45,1203
+F1,follow_up,repeat_1,120,60,1228
+F1,follow_up,repeat_2,120,15,1281
+F1,follow_up,repeat_2,120,30,1260
+F1,follow_up,repeat_2,120,45,1289
+F1,follow_up,repeat_2,120,60,1320
