@@ -1,0 +1,7 @@
+comparison,f_stat,p_value,df_diff
+formulation-only -> +day1 flag,4.449279855230137,0.04174297379038206,1.0
+formulation-only -> realization intercept,206.26120265626173,2.486566336031551e-23,4.0
+realization intercept -> realization-specific thermal slopes,1.2416514454001006,0.31554229651700294,6.0
+shared linear thermal shape -> shared quadratic thermal shape,44.702781844654524,1.3000969333871353e-07,1.0
+formulation-specific thermal slopes -> +realization intercept,198.5507349002461,4.2008160598724e-22,4.0
+state intercept/common slope -> formulation-specific slopes,0.3645050539596081,0.6973868105880446,2.0
