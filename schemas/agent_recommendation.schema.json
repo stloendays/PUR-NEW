@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "pur-new/agent_recommendation.schema.json",
-  "title": "Agent recommendation and wet-lab adjudication record",
-  "description": "Machine-readable contract linking a pre-result Agent recommendation to later human-executed physical adjudication.",
+  "title": "Frozen pre-result Agent recommendation",
+  "description": "Immutable recommendation record created before physical result inspection whenever a prospective claim is intended. Experimental outcomes are stored separately using experiment_adjudication.schema.json.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -15,8 +15,7 @@
     "uncertainty",
     "selection_rationale",
     "acceptance_criterion",
-    "provenance",
-    "adjudication"
+    "provenance"
   ],
   "properties": {
     "recommendation_id": {"type": "string", "minLength": 1},
@@ -42,6 +41,11 @@
           "type": ["object", "null"],
           "additionalProperties": true,
           "description": "Reaction history, hold temperature/time, preparation state and other process variables known at recommendation time. Unknown fields remain null."
+        },
+        "measurement_plan": {
+          "type": ["object", "null"],
+          "additionalProperties": true,
+          "description": "The measurement window/condition against which the recommendation will later be adjudicated."
         }
       }
     },
@@ -116,22 +120,6 @@
         "prompt_hash": {"type": ["string", "null"]},
         "input_hash": {"type": ["string", "null"]},
         "workflow_version": {"type": ["string", "null"]}
-      }
-    },
-    "adjudication": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["status"],
-      "properties": {
-        "status": {
-          "enum": ["pending", "supported", "partially_supported", "falsified", "out_of_domain"]
-        },
-        "experiment_date": {"type": ["string", "null"]},
-        "measurement_reference": {"type": ["string", "null"]},
-        "executed_by_human": {"type": ["boolean", "null"]},
-        "deviation_from_recommended_state": {"type": ["string", "null"]},
-        "observed_summary": {"type": ["string", "null"]},
-        "note": {"type": ["string", "null"]}
       }
     }
   },
