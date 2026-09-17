@@ -1,0 +1,43 @@
+formulation_id,run_label,retest_after_1d,temperature_c,viscosity_reported,source_note
+E1,+P,false,80,3015,phosphoric-acid-labelled source run
+E1,+P,false,90,1964,phosphoric-acid-labelled source run
+E1,+P,false,100,1349,phosphoric-acid-labelled source run
+E1,+P,false,110,958,phosphoric-acid-labelled source run
+E1,+P,false,120,699,phosphoric-acid-labelled source run
+E1,+P,false,130,542,phosphoric-acid-labelled source run
+E1,GJJ,true,80,3636,one-day retest
+E1,GJJ,true,90,2288,one-day retest
+E1,GJJ,true,100,1512,one-day retest
+E1,GJJ,true,110,1073,one-day retest
+E1,GJJ,true,120,780,one-day retest
+E1,GJJ,true,130,599,one-day retest
+E2,GJJ,false,80,9462,
+E2,GJJ,false,90,5527,
+E2,GJJ,false,100,3705,
+E2,GJJ,false,110,2622,
+E2,GJJ,false,120,1955,
+E2,GJJ,false,130,1536,
+E2,ZYX,false,80,18780,
+E2,ZYX,false,90,11540,
+E2,ZYX,false,100,7544,
+E2,ZYX,false,110,5710,
+E2,ZYX,false,120,4017,
+E2,ZYX,false,130,3302,
+E2,CHH,false,80,27350,
+E2,CHH,false,90,15560,
+E2,CHH,false,100,10360,
+E2,CHH,false,110,7895,
+E2,CHH,false,120,6977,
+E2,CHH,false,130,5128,
+E2,ZYX,true,80,24470,one-day retest
+E2,ZYX,true,90,15300,one-day retest
+E2,ZYX,true,100,10330,one-day retest
+E2,ZYX,true,110,6671,one-day retest
+E2,ZYX,true,120,4863,one-day retest
+E2,ZYX,true,130,3845,one-day retest
+E3,CHH,false,80,18570,
+E3,CHH,false,90,11550,
+E3,CHH,false,100,7546,
+E3,CHH,false,110,5376,
+E3,CHH,false,120,3839,
+E3,CHH,false,130,2959,
