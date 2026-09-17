@@ -7,6 +7,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -83,7 +84,8 @@ def call_json(
     model: str,
     system_prompt: str,
     payload: dict[str, Any],
-) -> dict[str, Any]:
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    start = time.perf_counter()
     response = client.chat.completions.create(
         model=model,
         messages=[
@@ -95,10 +97,33 @@ def call_json(
             },
         ],
     )
+    elapsed = time.perf_counter() - start
     content = response.choices[0].message.content
     if not content:
         raise ValueError("model returned empty content")
-    return extract_json_object(content)
+    usage = getattr(response, "usage", None)
+    meta = {
+        "model": model,
+        "latency_s": elapsed,
+        "prompt_tokens": getattr(usage, "prompt_tokens", None) if usage is not None else None,
+        "completion_tokens": getattr(usage, "completion_tokens", None) if usage is not None else None,
+        "total_tokens": getattr(usage, "total_tokens", None) if usage is not None else None,
+    }
+    return extract_json_object(content), meta
+
+
+def aggregate_usage(stage_usage: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    def total(key: str) -> int | None:
+        values = [item.get(key) for item in stage_usage.values() if item.get(key) is not None]
+        return int(sum(values)) if values else None
+
+    return {
+        "llm_calls": len(stage_usage),
+        "prompt_tokens": total("prompt_tokens"),
+        "completion_tokens": total("completion_tokens"),
+        "total_tokens": total("total_tokens"),
+        "llm_latency_s": sum(float(item.get("latency_s", 0.0)) for item in stage_usage.values()),
+    }
 
 
 def candidate_map(candidate_set: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -243,16 +268,21 @@ def main() -> None:
     )
 
     api_key = os.environ.get("OPENAI_API_KEY")
-    model = os.environ.get("OPENAI_MODEL")
+    base_model = os.environ.get("OPENAI_MODEL")
     base_url = os.environ.get("OPENAI_BASE_URL")
     if not api_key:
         raise SystemExit("OPENAI_API_KEY is required")
-    if not model:
+    if not base_model:
         raise SystemExit("OPENAI_MODEL is required")
+    stage_models = {
+        stage: os.environ.get(f"OPENAI_MODEL_{stage.upper()}", base_model)
+        for stage in ("planner", "proposer", "skeptic", "judge")
+    }
     kwargs: dict[str, Any] = {"api_key": api_key}
     if base_url:
         kwargs["base_url"] = base_url
     client = OpenAI(**kwargs)
+    stage_usage: dict[str, dict[str, Any]] = {}
 
     planner_action_names = {
         "query_external_priors",
@@ -286,7 +316,12 @@ def main() -> None:
             forbid_follow_up_stage=True,
         )
 
-    planner = call_json(client, model=model, system_prompt=prompts["planner"], payload=planner_payload)
+    planner, stage_usage["planner"] = call_json(
+        client,
+        model=stage_models["planner"],
+        system_prompt=prompts["planner"],
+        payload=planner_payload,
+    )
     tool_trace = execute_planned_actions(
         planner.get("action_requests", []),
         include_follow_up=bool(policy.get("allow_follow_up_hold_results", False)),
@@ -319,7 +354,12 @@ def main() -> None:
             blinded_formulation_ids=blind_identity_ids,
             forbid_follow_up_stage=True,
         )
-    proposer = call_json(client, model=model, system_prompt=prompts["proposer"], payload=proposer_payload)
+    proposer, stage_usage["proposer"] = call_json(
+        client,
+        model=stage_models["proposer"],
+        system_prompt=prompts["proposer"],
+        payload=proposer_payload,
+    )
 
     if args.ablation == "no_skeptic":
         skeptic: dict[str, Any] = {
@@ -345,7 +385,12 @@ def main() -> None:
                 blinded_formulation_ids=blind_identity_ids,
                 forbid_follow_up_stage=True,
             )
-        skeptic = call_json(client, model=model, system_prompt=prompts["skeptic"], payload=skeptic_payload)
+        skeptic, stage_usage["skeptic"] = call_json(
+            client,
+            model=stage_models["skeptic"],
+            system_prompt=prompts["skeptic"],
+            payload=skeptic_payload,
+        )
 
     judge_payload = {
         "ablation": args.ablation,
@@ -364,7 +409,12 @@ def main() -> None:
             blinded_formulation_ids=blind_identity_ids,
             forbid_follow_up_stage=True,
         )
-    judge = call_json(client, model=model, system_prompt=prompts["judge"], payload=judge_payload)
+    judge, stage_usage["judge"] = call_json(
+        client,
+        model=stage_models["judge"],
+        system_prompt=prompts["judge"],
+        payload=judge_payload,
+    )
 
     input_payload = {
         "architecture": architecture,
@@ -385,7 +435,7 @@ def main() -> None:
         judge,
         candidate_set=candidate_set,
         inspection_status=args.inspection_status,
-        model=model,
+        model=stage_models["judge"],
         prompt_hash=prompt_hash,
         input_hash=input_hash,
         workflow_version=workflow["workflow_version"],
@@ -407,6 +457,9 @@ def main() -> None:
         "evidence_policy": policy,
         "filtered_evidence_hash": sha256_bytes(canonical_json_bytes(evidence)),
         "candidate_set_hash": sha256_bytes(canonical_json_bytes(candidate_set)),
+        "stage_models": stage_models,
+        "llm_usage_by_stage": stage_usage,
+        "llm_usage_total": aggregate_usage(stage_usage),
         "planner": planner,
         "tool_trace": tool_trace,
         "candidate_scorecards": cards,
