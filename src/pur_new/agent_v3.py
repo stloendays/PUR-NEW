@@ -11,6 +11,7 @@ from .actions import (
     execute_action,
     stress_test_candidate,
 )
+from .scientific_tools import get_state_aware_rheology_summary_v3
 
 SUPPORT_VALUE = {
     "strong_analogue_region": 3,
@@ -100,7 +101,6 @@ def pareto_front(cards: list[dict[str, Any]]) -> list[str]:
 
 
 def _scenario_key(card: dict[str, Any], scenario: str) -> tuple[Any, ...]:
-    # Transparent ordinal priorities, intentionally not fitted to the held-out result.
     if scenario == "evidence_first":
         return (
             -card["support_value"],
@@ -161,8 +161,8 @@ def robustness_summary(cards: list[dict[str, Any]]) -> dict[str, Any]:
         "scenario_rankings": rankings,
         "scenario_stability": stability,
         "note": (
-            "These are transparent ordinal robustness diagnostics, not fitted property predictions. "
-            "No held-out wet-lab outcome is used."
+            "These are transparent decision diagnostics, not fitted property predictions. "
+            "They are used to avoid selecting a point from one arbitrary scalar score."
         ),
     }
 
@@ -191,7 +191,7 @@ def execute_planned_actions(
     include_follow_up: bool,
     blind_target_formulation_ids: set[str] | None = None,
 ) -> list[dict[str, Any]]:
-    """Execute a planner-selected evidence trace behind an explicit leakage firewall."""
+    """Execute a planner-selected scientific evidence trace behind the firewall."""
     blind_target_formulation_ids = blind_target_formulation_ids or set()
     results: list[dict[str, Any]] = []
     for req in validate_planner_actions(requests):
@@ -210,7 +210,10 @@ def execute_planned_actions(
             )
             continue
         try:
-            value = execute_action(name, args, include_follow_up=include_follow_up)
+            if name == "get_state_aware_rheology_summary":
+                value = get_state_aware_rheology_summary_v3()
+            else:
+                value = execute_action(name, args, include_follow_up=include_follow_up)
             results.append(
                 {
                     "name": name,
@@ -220,7 +223,7 @@ def execute_planned_actions(
                     "result": value,
                 }
             )
-        except Exception as exc:  # preserve failed tool calls for audit
+        except Exception as exc:
             results.append(
                 {
                     "name": name,
