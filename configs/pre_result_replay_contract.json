@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0",
+  "contract_id": "PUR_NEW_PRE_RESULT_REPLAY_R1",
+  "mode": "historical_pre_result_replay",
+  "status": "retrospective_reconstruction_outcome_excluded",
+  "purpose": "Constrain a real API-driven Design Agent to reproduce the author-confirmed pre-result formulation decision logic from reconstructed pre-result evidence, without exposing the later wet-lab outcome. This is a replay-fidelity contract, not an independent blind-discovery benchmark.",
+  "required_evidence_profile": "blind_pre_result",
+  "selection_authority": "hybrid_contract_constrained",
+  "scientific_objective": {
+    "primary_property": "thermal-hold rheological stability",
+    "temperature_c": 120,
+    "primary_window_min": [15, 60],
+    "primary_metric": "absolute SI_15_to_60",
+    "reference_formulation": "E1",
+    "reference_absolute_si_15_to_60": 0.0951037110201778,
+    "strong_support_absolute_si_15_to_60": 0.05,
+    "interpretation": "The next experiment is selected to reduce thermal-hold viscosity drift, not to optimize static viscosity or all adhesive properties."
+  },
+  "required_design_logic": [
+    "Treat thermal-hold viscosity build-up as the target failure mode.",
+    "Retain realization/process-state uncertainty explicitly; do not infer a single deterministic viscosity level from nominal composition.",
+    "Move beyond reactive-core-only micro-tuning and test the externally supported resin-modified formulation family.",
+    "Preserve the E2-centered 50/50 PPG2000/PDP70 reactive-core proportions unless a candidate-specific chemical constraint requires otherwise.",
+    "Use both the acrylic-like and minor-tackifier intervention axes in the replay performance candidate because both directions had independent pre-result analogue support.",
+    "Prefer the smallest modifier intervention that still satisfies the reconstructed evidence-supported lower acrylic region and minor-tackifier region; this is a conservative first-test rule to limit extrapolation from E1-E5 chemistry.",
+    "Require matched 120 C, 15-60 min hold measurements with two independent repeats for physical adjudication."
+  ],
+  "hard_candidate_constraints": {
+    "require_resin_modified": true,
+    "require_acrylic_like_modifier": true,
+    "require_minor_tackifier_like_modifier": true,
+    "acrylic_pct_total_max": 15.0,
+    "tackifier_pct_total_min": 3.0,
+    "tackifier_pct_total_max": 7.0,
+    "total_modifier_pct_total_max": 20.0
+  },
+  "deterministic_tie_break": [
+    "minimum_total_modifier_pct",
+    "minimum_distance_to_directional_acrylic_anchor_15_pct",
+    "minimum_distance_to_minor_tackifier_reference_5_pct",
+    "candidate_id_lexicographic"
+  ],
+  "abstention_rule": "Abstain only if no candidate satisfies every hard candidate constraint or if the evidence firewall reports contamination. Otherwise freeze the highest-priority contract-admissible candidate.",
+  "measurement_contract": {
+    "hold_temperature_c": 120,
+    "hold_time_points_min": [15, 30, 45, 60],
+    "independent_repeats": 2,
+    "primary_support_rule": "mean absolute SI_15_to_60 across two repeats < 9.51% and neither repeat exceeds 15% absolute drift",
+    "strong_support_rule": "mean absolute SI_15_to_60 <= 5%",
+    "failure_rule": "mean absolute SI_15_to_60 >= 9.51%, or non-measurable / visibly lost processability within 60 min"
+  },
+  "forbidden_information": [
+    "validation formulation ID F1",
+    "validation thermal-hold measurements",
+    "post-result adjudication labels",
+    "post-result success/failure language",
+    "controller-only benchmark target coordinates"
+  ],
+  "claim_boundary": "This contract is a later, explicit reconstruction of the pre-result decision logic requested for replay fidelity. It may be used to test whether a real API can reproduce the historical recommendation under the reconstructed rules. It must not be presented as the contemporaneous original freeze algorithm, and it must not replace the separate target-blind benchmark used to assess independent recovery."
+}
