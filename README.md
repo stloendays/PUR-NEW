@@ -59,6 +59,7 @@ The experiment directly supports **rheological stabilization**. The interpretati
 PUR-NEW/
 ├─ README.md
 ├─ docs/
+│  ├─ PROJECT_STATE.md           # fastest entry point: current state and next work
 │  ├─ RESEARCH_NARRATIVE.md      # complete scientific logic
 │  ├─ AGENT_ROLE.md              # what the Agent can and cannot claim
 │  ├─ EXPERIMENTAL_EVIDENCE.md   # executed measurements and interpretation
