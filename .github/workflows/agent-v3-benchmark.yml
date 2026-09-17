@@ -8,14 +8,19 @@ on:
         required: true
         default: gpt-5.6-luna
       repeats:
-        description: Independent LLM runs per condition (use 3-5 for pilot, >=30 for final benchmark)
+        description: Independent LLM runs per condition (3-5 pilot; >=30 manuscript benchmark)
         required: true
         default: "3"
       include_ablations:
-        description: Run all V3 architecture ablations
+        description: Run V3 module ablations
         required: true
         type: boolean
         default: true
+      include_strong_controls:
+        description: Also run evidence-rich single-pass controls for supplementary robustness
+        required: true
+        type: boolean
+        default: false
 
 jobs:
   benchmark:
@@ -33,26 +38,25 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e .
+
       - name: Build blind benchmark inputs
         run: |
           mkdir -p /tmp/pur-agent-benchmark
           python scripts/build_evidence_state.py --output /tmp/pur-agent-benchmark/evidence_state.json
           python scripts/build_candidate_set.py --output /tmp/pur-agent-benchmark/candidate_set.json
+          python scripts/build_naive_baseline_view.py \
+            --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+            --output /tmp/pur-agent-benchmark/naive_baseline_view.json
           python scripts/build_agent_context.py \
             --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
             --profile blind_pre_result \
             --output /tmp/pur-agent-benchmark/agent_context.json
-      - name: Run deterministic evidence-ranker baseline
-        run: |
-          python scripts/run_deterministic_baseline.py \
-            --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
-            --output-dir /tmp/pur-agent-benchmark/deterministic
-      - name: Run direct-LLM and single-pass tool-context baselines
+
+      - name: Run primary naive direct-LLM baseline
         shell: bash
         run: |
           set -uo pipefail
-          mkdir -p /tmp/pur-agent-benchmark/direct_llm
-          mkdir -p /tmp/pur-agent-benchmark/single_pass_tools
+          mkdir -p /tmp/pur-agent-benchmark/naive_direct_llm
           mkdir -p /tmp/pur-agent-benchmark/logs
           run_recorded() {
             condition="$1"; run_index="$2"; out_dir="$3"; shift 3
@@ -70,24 +74,13 @@ jobs:
             fi
           }
           for i in $(seq 1 "${{ inputs.repeats }}"); do
-            run_recorded direct_llm_blind "${i}" /tmp/pur-agent-benchmark/direct_llm \
-              python scripts/run_agent_recommendation.py \
+            run_recorded naive_direct_llm "${i}" /tmp/pur-agent-benchmark/naive_direct_llm \
+              python scripts/run_naive_llm_baseline.py \
                 --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
-                --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
-                --context-level direct \
-                --profile blind_pre_result \
-                --inspection-status no_results_inspected \
-                --output-dir /tmp/pur-agent-benchmark/direct_llm
-            run_recorded single_pass_tool_context "${i}" /tmp/pur-agent-benchmark/single_pass_tools \
-              python scripts/run_agent_recommendation.py \
-                --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
-                --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
-                --agent-context /tmp/pur-agent-benchmark/agent_context.json \
-                --context-level tool_context \
-                --profile blind_pre_result \
-                --inspection-status no_results_inspected \
-                --output-dir /tmp/pur-agent-benchmark/single_pass_tools
+                --naive-view /tmp/pur-agent-benchmark/naive_baseline_view.json \
+                --output-dir /tmp/pur-agent-benchmark/naive_direct_llm
           done
+
       - name: Run full Agent V3
         shell: bash
         run: |
@@ -119,7 +112,8 @@ jobs:
                 --inspection-status no_results_inspected \
                 --output-dir /tmp/pur-agent-benchmark/v3
           done
-      - name: Run Agent V3 ablations
+
+      - name: Run V3 strategy ablations
         if: ${{ inputs.include_ablations }}
         shell: bash
         run: |
@@ -153,14 +147,51 @@ jobs:
                   --output-dir /tmp/pur-agent-benchmark/v3
             done
           done
+
+      - name: Run supplementary evidence-rich controls
+        if: ${{ inputs.include_strong_controls }}
+        shell: bash
+        run: |
+          set -uo pipefail
+          mkdir -p /tmp/pur-agent-benchmark/deterministic
+          mkdir -p /tmp/pur-agent-benchmark/single_pass_tools
+          mkdir -p /tmp/pur-agent-benchmark/logs
+          python scripts/run_deterministic_baseline.py \
+            --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+            --output-dir /tmp/pur-agent-benchmark/deterministic
+          run_recorded() {
+            condition="$1"; run_index="$2"; out_dir="$3"; shift 3
+            log="/tmp/pur-agent-benchmark/logs/${condition}_${run_index}.log"
+            "$@" >"${log}" 2>&1
+            rc=$?
+            cat "${log}"
+            if [[ ${rc} -ne 0 ]]; then
+              python scripts/record_benchmark_failure.py \
+                --condition "${condition}" \
+                --run-index "${run_index}" \
+                --exit-code "${rc}" \
+                --log-file "${log}" \
+                --output-dir "${out_dir}"
+            fi
+          }
+          for i in $(seq 1 "${{ inputs.repeats }}"); do
+            run_recorded single_pass_tool_context "${i}" /tmp/pur-agent-benchmark/single_pass_tools \
+              python scripts/run_agent_recommendation.py \
+                --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+                --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
+                --agent-context /tmp/pur-agent-benchmark/agent_context.json \
+                --context-level tool_context \
+                --profile blind_pre_result \
+                --inspection-status no_results_inspected \
+                --output-dir /tmp/pur-agent-benchmark/single_pass_tools
+          done
+
       - name: Summarize benchmark
         shell: bash
         run: |
           set -euo pipefail
           conditions=(
-            --condition deterministic_evidence_ranker=/tmp/pur-agent-benchmark/deterministic
-            --condition direct_llm_blind=/tmp/pur-agent-benchmark/direct_llm
-            --condition single_pass_tool_context=/tmp/pur-agent-benchmark/single_pass_tools
+            --condition naive_direct_llm=/tmp/pur-agent-benchmark/naive_direct_llm
             --condition v3_full=/tmp/pur-agent-benchmark/v3/full
           )
           if [[ "${{ inputs.include_ablations }}" == "true" ]]; then
@@ -170,11 +201,18 @@ jobs:
               --condition v3_no_state_aware_action=/tmp/pur-agent-benchmark/v3/no_state_aware_action
             )
           fi
+          if [[ "${{ inputs.include_strong_controls }}" == "true" ]]; then
+            conditions+=(
+              --condition deterministic_evidence_ranker=/tmp/pur-agent-benchmark/deterministic
+              --condition single_pass_tool_context=/tmp/pur-agent-benchmark/single_pass_tools
+            )
+          fi
           python scripts/summarize_agent_benchmark.py \
             "${conditions[@]}" \
             --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
             --output-dir /tmp/pur-agent-benchmark/summary
           cat /tmp/pur-agent-benchmark/summary/benchmark_summary.json
+
       - name: Upload benchmark artifacts
         uses: actions/upload-artifact@v4
         with:
