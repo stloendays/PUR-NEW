@@ -23,10 +23,34 @@ jobs:
         run: |
           python -m json.tool configs/formulation_priors.json > /dev/null
           python -m json.tool configs/blind_benchmark_v2.json > /dev/null
+          python -m json.tool configs/agent_v3.json > /dev/null
+          python -m json.tool configs/evidence_access_profiles.json > /dev/null
+      - name: Compile Agent runners
+        run: |
+          python -m py_compile scripts/run_agent_recommendation.py
+          python -m py_compile scripts/run_scientific_agent_v3.py
       - name: Build deterministic evidence state
         run: python scripts/build_evidence_state.py --output /tmp/evidence_state.json
       - name: Sanity-check generated evidence JSON
         run: python -m json.tool /tmp/evidence_state.json > /dev/null
+      - name: Verify blind evidence firewall removes follow-up outcome and identity
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from pur_new.evidence_firewall import assert_blind_payload_clean, filter_evidence_state
+
+          state = json.loads(Path('/tmp/evidence_state.json').read_text())
+          profiles = json.loads(Path('configs/evidence_access_profiles.json').read_text())['profiles']
+          filtered = filter_evidence_state(
+              state,
+              policy=profiles['blind_pre_result'],
+              blinded_formulation_ids={'F1'},
+          )
+          assert_blind_payload_clean(filtered, blinded_formulation_ids={'F1'})
+          Path('/tmp/evidence_state_blind.json').write_text(json.dumps(filtered, indent=2, sort_keys=True) + '\n')
+          PY
+          python -m json.tool /tmp/evidence_state_blind.json > /dev/null
       - name: Build V2 candidate-space formalization
         run: python scripts/build_candidate_set.py --output /tmp/candidate_set_hypothesis_v2.json
       - name: Sanity-check candidate-set JSON
