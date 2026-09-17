@@ -38,15 +38,27 @@ The five-point design separates two local axes:
 
 E2 is therefore the centre of the original local design, not a point selected from the later follow-up result.
 
-## 4. What the initial measurements show
+## 4. Physical/model findings establish the state-aware design theory
 
-The 80-130 C measurements decrease monotonically with temperature for every recorded full sweep. However, nominally identical E2 measurements show large differences in absolute viscosity level across recorded runs. A single deterministic viscosity target is therefore not enough to describe the laboratory system.
+The 80-130 C measurements decrease monotonically with temperature for every recorded full sweep. However, nominally identical E2 measurements show large differences in absolute viscosity level across recorded realizations.
 
-The 120 C hold experiment makes the process-time effect explicit. E1 increases by 9.51% from 15 to 60 min, while E5 increases by 51.54% over the same interval. By 90 min the increases are 16.85% and 93.08%, respectively.
+The stronger statistical result is that much of this variation behaves as a state-specific viscosity-scale shift superimposed on a comparatively transferable local thermal-response shape:
 
-The important conclusion is:
+```text
+ln eta_r(T) = alpha_r + g(T) + epsilon
+```
 
-> thermal-hold stability is a formulation-dependent design response, not merely metadata attached to a viscosity measurement.
+where `alpha_r` is realization/state specific and `g(T)` is shared within the present local chemistry family.
+
+A one-point anchor from a held-out realization reconstructs the remaining measured temperature curve substantially better than formulation identity alone. This establishes a positive design principle:
+
+> **composition defines the chemical formulation, but the experimentally realized rheological state must also be represented explicitly.**
+
+The 120 C hold experiment establishes the second design principle. E1 increases by 9.51% from 15 to 60 min, while E5 increases by 51.54% over the same interval. By 90 min the increases are 16.85% and 93.08%, respectively.
+
+The local apparent temperature-sensitivity descriptor is comparatively concentrated, whereas hold-time drift changes strongly with formulation. The project therefore treats temperature response and thermal-hold stability as **distinct, differently tunable rheological coordinates** rather than reducing rheology to a single static viscosity target.
+
+Together, these physical and modeling findings establish the state-aware design theory **before the Agent is asked to select a new experimental candidate**.
 
 ## 5. Candidate-space hypothesis from independent evidence
 
@@ -116,14 +128,15 @@ x
 {0,5,10}% minor tackifier-like
 ```
 
-The exact later follow-up recipe is not encoded as a discrete candidate.
+The exact historical F1 follow-up recipe is not encoded as a discrete candidate.
 
-## 6. Agent role in the design loop
+## 6. Agent role: prospective recommendation after theory, before outcome
 
 The Agent is not a robotic laboratory controller. It is a **decision layer** operating over:
 
 ```text
-local measured evidence
+state-aware physical/model findings
++ local measured evidence
 + deterministic response descriptors
 + structured uncertainty
 + candidate-space hypothesis
@@ -131,23 +144,44 @@ local measured evidence
 + finite admissible candidates
 ```
 
-Its intended responsibilities are:
+The scientific chronology is explicit:
 
 ```text
-retrieve evidence
--> inspect thermal-hold / repeatability risk
--> compare class-specific candidate priors
--> audit process-history uncertainty
--> stress-test alternatives
--> recommend or abstain
--> record why the point was selected
+physical/model findings
+-> state-aware design theory
+-> admissible candidate space
+-> Agent recommendation while blinded to the corresponding wet-lab outcome
+-> frozen candidate + rationale + falsifiable criterion
+-> human experimental execution
+-> independent physical adjudication
 ```
 
-The human operator performs synthesis and rheology measurement. The experimental result is the physical adjudicator.
+For the prospective validation round, the Agent is not allowed to see the corresponding target experiment result before freeze. It must record why the candidate was selected, what alternatives were considered, what uncertainty remains, and what experimental result would count as support or failure.
 
-## 7. Follow-up formulation and physical result
+This is essential: the later wet-lab result is not an input used to construct the recommendation. It is the external physical test of a decision already frozen.
 
-The follow-up formulation uses the source-reported parts basis:
+See `docs/PROSPECTIVE_VALIDATION_PROTOCOL.md`.
+
+## 7. Human wet-lab execution and adjudication
+
+After the recommendation record is frozen, the human researcher / experimental team performs the synthesis and rheology measurement.
+
+Experimental deviations, missing process metadata and protocol changes are recorded separately from the original recommendation. The Agent does not silently revise the candidate after seeing the outcome.
+
+Only after measurement is the wet-lab result compared with the frozen criterion. The outcome is classified as:
+
+```text
+supported
+partially supported
+not supported
+or inconclusive because of execution / measurement uncertainty
+```
+
+This makes both positive and negative experiments scientifically useful: a positive result supports the recommendation, while a negative result falsifies or weakens it and updates the next design state.
+
+## 8. Historical F1 physical result
+
+The historical follow-up formulation uses the source-reported parts basis:
 
 | PPG2000 | PDP-70 | AC1920 | TK100 | MDI |
 |---:|---:|---:|---:|---:|
@@ -164,29 +198,19 @@ Two repeated 120 C hold measurements give:
 
 The corresponding 15->60 min drifts are -0.16% and +3.04%; the mean profile changes by approximately +1.47%.
 
-Compared on the same 15-60 min interval, the follow-up point is markedly flatter than E1 (+9.51%) and E5 (+51.54%).
+Compared on the same 15-60 min interval, the historical follow-up point is markedly flatter than E1 (+9.51%) and E5 (+51.54%).
 
-Normalized only for post-hoc comparison, the follow-up contains approximately 14.00% AC1920 and 4.12% TK100. It therefore lies close to the independently motivated coarse `15% acrylic-like + 5% minor tackifier-like` cell. This correspondence is **post-hoc physical consistency with the hypothesis**, not proof that V2 was prospectively registered before the experiment.
+Normalized only for post-hoc comparison, it contains approximately 14.00% AC1920 and 4.12% TK100. It therefore lies close to the independently motivated coarse `15% acrylic-like + 5% minor tackifier-like` cell.
 
-## 8. How the current result should be interpreted
+This historical result is useful physical evidence and a retrospective benchmark anchor. It should not be confused with the separate prospective new-candidate validation cycle described above.
 
-The strongest defensible result is:
+## 9. Retrospective replay versus prospective validation
 
-```text
-known formulation/process-state problem
--> evidence-derived candidate hypothesis
--> uncertainty-aware Agent ranking
--> human wet-lab execution
--> physical stability measurement
--> experimental adjudication
--> update next design objective
-```
+Two evaluation modes coexist and must remain clearly separated.
 
-The local rheology directly demonstrates improved thermal-hold stability for the follow-up formulation. The external evidence makes a resin-modification / lower-effective-reactivity hypothesis scientifically plausible, but the current local experiment does not directly measure reaction conversion or identify one molecular mechanism.
+### 9.1 Retrospective F1 / V2 held-out replay
 
-## 9. Benchmark chronology
-
-The V2 candidate-space hypothesis was formalized after the current follow-up result was already known. Therefore the current benchmark must be described as a **held-out-result blind replay**.
+The formal V2 candidate-space hypothesis was documented after the historical F1 result was already known. Therefore the F1 benchmark is described as a **held-out-result blind replay**.
 
 The evaluated model may see:
 
@@ -200,16 +224,46 @@ original experiments
 but not:
 
 ```text
-current follow-up formulation
-current follow-up thermal-hold result
-controller-side scoring labels
+historical F1 formulation/outcome
+controller-side scoring labels derived from that outcome
 ```
 
-If the full Agent repeatedly ranks candidates near the held-out modifier coordinates, that supports consistency between the evidence-grounded design logic and the physical result. It is not the same as a prospective historical prediction.
+This tests whether the evidence-grounded design logic is consistent with the already observed physical result. It is not a prospective historical prediction.
 
-Future rounds conducted after V2 is frozen can be genuinely prospective.
+### 9.2 Prospective new-candidate validation
 
-## 10. Next design objective
+For a new validation round, the chronology is different and stronger:
+
+```text
+state-aware theory already established
+-> Agent sees no corresponding future wet-lab result
+-> recommendation and criterion frozen
+-> human experiment performed
+-> result released only for adjudication
+```
+
+This is the chronology that supports a prospective Agent-validation claim.
+
+## 10. Manuscript-level interpretation
+
+The strongest overall narrative is:
+
+```text
+physical/model findings
+-> state-aware design theory
+-> evidence-derived candidate hypothesis
+-> blinded Agent recommendation
+-> frozen candidate + criterion
+-> human wet-lab execution
+-> independent experimental support / rejection
+-> update next design objective
+```
+
+The paper should therefore not be framed as "an Agent generated a formulation and we later rationalized it." The intended claim is the reverse:
+
+> **the physical/model findings first define a scientifically constrained state-aware design problem; the Agent then makes a falsifiable recommendation within that problem before the corresponding experimental outcome is known to it.**
+
+## 11. Next design objective
 
 Future selection should treat viscosity magnitude and stability separately:
 
@@ -229,8 +283,17 @@ SI(T; t0,t1) = [eta(T,t1) - eta(T,t0)] / eta(T,t0)
 
 The current measurements establish why such a term is needed. They do not establish a universal numerical threshold for all PUR systems.
 
-## 11. Provenance rule
+## 12. Provenance rule
 
-A claim of **prospective physical validation of an Agent recommendation** requires a recommendation record generated and frozen before the corresponding experiment was inspected.
+For every prospective validation round, the repository should preserve an immutable recommendation record generated before the corresponding wet-lab outcome is made available to the Agent.
 
-Without that historical provenance, the current experiment remains valid physical evidence and the V2 benchmark remains valid as a held-out-result replay, but neither should be described as retroactively preregistered.
+That record should contain:
+
+- candidate identity and formulation-process state;
+- alternatives considered;
+- evidence / Action trace;
+- structured uncertainty;
+- pre-result acceptance or falsification criterion;
+- freeze timestamp and provenance.
+
+The later physical result is stored separately and linked to the frozen recommendation only during adjudication.
