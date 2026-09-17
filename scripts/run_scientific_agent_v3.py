@@ -27,6 +27,13 @@ from pur_new.evidence_firewall import (  # noqa: E402
     filter_evidence_state,
 )
 
+ABLATIONS = {
+    "full",
+    "no_skeptic",
+    "no_deterministic_robustness",
+    "no_state_aware_action",
+}
+
 
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -108,6 +115,7 @@ def freeze_recommendation(
     input_hash: str,
     workflow_version: str,
     architecture_version: str,
+    ablation: str,
 ) -> dict[str, Any]:
     allowed_modes = {"performance_candidate", "robustness_probe", "uncertainty_probe", "abstain"}
     mode = raw.get("decision_mode")
@@ -155,6 +163,7 @@ def freeze_recommendation(
             "input_hash": input_hash,
             "model": model,
             "architecture_version": architecture_version,
+            "ablation": ablation,
         }
     )
     recommendation_id = f"REC_V3_{created.replace(':', '').replace('-', '')}_{sha256_bytes(rec_seed)[:10]}"
@@ -178,7 +187,7 @@ def freeze_recommendation(
             "model": model,
             "prompt_hash": prompt_hash,
             "input_hash": input_hash,
-            "workflow_version": f"{workflow_version};agent_v3={architecture_version}",
+            "workflow_version": f"{workflow_version};agent_v3={architecture_version};ablation={ablation}",
         },
     }
 
@@ -188,6 +197,7 @@ def main() -> None:
     parser.add_argument("--candidate-set", type=Path, required=True)
     parser.add_argument("--evidence-state", type=Path, default=ROOT / "derived" / "evidence_state.json")
     parser.add_argument("--profile", default=None)
+    parser.add_argument("--ablation", choices=sorted(ABLATIONS), default="full")
     parser.add_argument(
         "--inspection-status",
         required=True,
@@ -215,12 +225,11 @@ def main() -> None:
     evidence = filter_evidence_state(raw_evidence, policy=policy, blinded_formulation_ids=blinded_ids)
 
     blind_mode = not bool(policy.get("allow_follow_up_hold_results", False))
+    blind_identity_ids = blinded_ids if not policy.get("allow_follow_up_formulation_identity", False) else set()
     if blind_mode:
         assert_blind_payload_clean(
             evidence,
-            blinded_formulation_ids=(
-                blinded_ids if not policy.get("allow_follow_up_formulation_identity", False) else set()
-            ),
+            blinded_formulation_ids=blind_identity_ids,
             forbid_follow_up_stage=True,
         )
 
@@ -254,8 +263,12 @@ def main() -> None:
         "get_temperature_support",
         "get_state_aware_rheology_summary",
     }
+    if args.ablation == "no_state_aware_action":
+        planner_action_names.remove("get_state_aware_rheology_summary")
+
     planner_payload = {
         "architecture_version": architecture["version"],
+        "ablation": args.ablation,
         "workflow_policy": workflow,
         "evidence_profile": profile_name,
         "evidence_policy": policy,
@@ -269,9 +282,7 @@ def main() -> None:
     if blind_mode:
         assert_blind_payload_clean(
             planner_payload,
-            blinded_formulation_ids=(
-                blinded_ids if not policy.get("allow_follow_up_formulation_identity", False) else set()
-            ),
+            blinded_formulation_ids=blind_identity_ids,
             forbid_follow_up_stage=True,
         )
 
@@ -283,9 +294,18 @@ def main() -> None:
     )
 
     cards = build_candidate_cards(candidate_set["candidates"])
-    robustness = robustness_summary(cards)
+    full_robustness = robustness_summary(cards)
+    if args.ablation == "no_deterministic_robustness":
+        robustness: dict[str, Any] = {
+            "stage_skipped": True,
+            "ablation": args.ablation,
+            "note": "Deterministic Pareto and scenario robustness diagnostics intentionally removed for ablation.",
+        }
+    else:
+        robustness = full_robustness
 
     proposer_payload = {
+        "ablation": args.ablation,
         "planner": planner,
         "tool_trace": tool_trace,
         "candidate_set": candidate_set,
@@ -296,24 +316,39 @@ def main() -> None:
     if blind_mode:
         assert_blind_payload_clean(
             proposer_payload,
-            blinded_formulation_ids=(
-                blinded_ids if not policy.get("allow_follow_up_formulation_identity", False) else set()
-            ),
+            blinded_formulation_ids=blind_identity_ids,
             forbid_follow_up_stage=True,
         )
     proposer = call_json(client, model=model, system_prompt=prompts["proposer"], payload=proposer_payload)
 
-    skeptic_payload = {
-        "planner": planner,
-        "tool_trace": tool_trace,
-        "candidate_scorecards": cards,
-        "deterministic_robustness": robustness,
-        "proposer": proposer,
-        "evidence_policy": policy,
-    }
-    skeptic = call_json(client, model=model, system_prompt=prompts["skeptic"], payload=skeptic_payload)
+    if args.ablation == "no_skeptic":
+        skeptic: dict[str, Any] = {
+            "stage_skipped": True,
+            "ablation": args.ablation,
+            "recommendation_survives": None,
+            "preferred_response": "not_evaluated",
+            "required_corrections": [],
+        }
+    else:
+        skeptic_payload = {
+            "ablation": args.ablation,
+            "planner": planner,
+            "tool_trace": tool_trace,
+            "candidate_scorecards": cards,
+            "deterministic_robustness": robustness,
+            "proposer": proposer,
+            "evidence_policy": policy,
+        }
+        if blind_mode:
+            assert_blind_payload_clean(
+                skeptic_payload,
+                blinded_formulation_ids=blind_identity_ids,
+                forbid_follow_up_stage=True,
+            )
+        skeptic = call_json(client, model=model, system_prompt=prompts["skeptic"], payload=skeptic_payload)
 
     judge_payload = {
+        "ablation": args.ablation,
         "planner": planner,
         "tool_trace": tool_trace,
         "candidate_set": candidate_set,
@@ -326,15 +361,14 @@ def main() -> None:
     if blind_mode:
         assert_blind_payload_clean(
             judge_payload,
-            blinded_formulation_ids=(
-                blinded_ids if not policy.get("allow_follow_up_formulation_identity", False) else set()
-            ),
+            blinded_formulation_ids=blind_identity_ids,
             forbid_follow_up_stage=True,
         )
     judge = call_json(client, model=model, system_prompt=prompts["judge"], payload=judge_payload)
 
     input_payload = {
         "architecture": architecture,
+        "ablation": args.ablation,
         "evidence_profile": profile_name,
         "filtered_evidence_state": evidence,
         "candidate_set": candidate_set,
@@ -356,16 +390,19 @@ def main() -> None:
         input_hash=input_hash,
         workflow_version=workflow["workflow_version"],
         architecture_version=architecture["version"],
+        ablation=args.ablation,
     )
     validate(recommendation, recommendation_schema)
 
-    run_dir = args.output_dir / recommendation["recommendation_id"]
+    condition_dir = args.output_dir / args.ablation
+    run_dir = condition_dir / recommendation["recommendation_id"]
     if run_dir.exists():
         raise SystemExit(f"Refusing to overwrite frozen V3 run: {run_dir}")
     run_dir.mkdir(parents=True, exist_ok=False)
 
     deliberation = {
         "architecture": architecture,
+        "ablation": args.ablation,
         "evidence_profile": profile_name,
         "evidence_policy": policy,
         "filtered_evidence_hash": sha256_bytes(canonical_json_bytes(evidence)),
@@ -374,6 +411,7 @@ def main() -> None:
         "tool_trace": tool_trace,
         "candidate_scorecards": cards,
         "deterministic_robustness": robustness,
+        "full_robustness_reference_hash": sha256_bytes(canonical_json_bytes(full_robustness)),
         "proposer": proposer,
         "skeptic": skeptic,
         "judge_raw": judge,
