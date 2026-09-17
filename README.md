@@ -4,7 +4,7 @@
 
 PUR-NEW asks one practical question:
 
-> How should a reactive PUR formulation be selected when rheology depends on both composition and process realization, and when the final decision must still survive physical wet-lab testing?
+> How should a reactive PUR formulation be selected when rheology depends on both composition and process realization, and when the selected decision must survive independent wet-lab testing?
 
 The project treats each experiment as a **formulation-process state** rather than composition alone:
 
@@ -18,67 +18,61 @@ formulation state
 
 ## Scientific chronology
 
-The manuscript follows the actual order of the work:
+The manuscript follows the research team's confirmed order of work:
 
 ```text
-physical / model findings
+original physical experiments
+-> statistical / model findings
 -> state-aware design theory
--> evidence-constrained candidate space
--> Agent sees pre-result evidence only
--> Agent selects and freezes a new candidate + rationale + criterion
+-> evidence-grounded Agent recommendation
+-> freeze the validation formulation + rationale + criterion
 -> human wet-lab execution
 -> independent physical adjudication
 -> support / reject / qualify the recommendation
 -> update the next design state
 ```
 
-The physical/statistical findings are therefore **upstream of the Agent**. They establish why composition alone is insufficient, why process/realization state must remain explicit, and why temperature response and hold stability should be separate design responses.
+The physical/statistical findings are **upstream of the Agent**. They establish why composition alone is insufficient, why process/realization state must remain explicit, and why temperature response and hold stability should be treated as separate design responses.
 
-The Agent is then asked to act on that theory. For the prospective validation round, the corresponding wet-lab outcome is not available to the Agent when the recommendation is made. The candidate, rationale, uncertainty assessment and falsifiable criterion are frozen before the human experiment is evaluated. The later experiment is the external physical adjudicator: it can support, partially support, reject, or render the recommendation inconclusive.
+The current validation formulation was selected by the Agent **before its corresponding wet-lab result was known to the Agent**, according to the research team's confirmed chronology. The formulation is stored internally as `F1`; in manuscript prose it should be called the **Agent-selected validation formulation**.
 
-See [`docs/PROSPECTIVE_VALIDATION_PROTOCOL.md`](docs/PROSPECTIVE_VALIDATION_PROTOCOL.md).
+The current repository does not yet contain the original contemporaneous freeze artifact. The author-confirmed chronology is documented transparently in [`docs/EXPERIMENTAL_CHRONOLOGY.md`](docs/EXPERIMENTAL_CHRONOLOGY.md); that later documentation is not presented as a substitute for an original timestamped record.
 
-## Canonical runtime workflow
+## Canonical workflow
 
 ```text
 original local evidence
 -> rheological state analysis
 -> deterministic descriptors + uncertainty
--> evidence-derived candidate hypothesis
--> external database / literature retrieval
--> finite formulation-process candidate set
--> blinded Agent recommendation or abstention
--> freeze rationale + alternatives + criterion + provenance
+-> evidence-grounded formulation hypothesis
+-> Agent recommendation or abstention
+-> frozen candidate + rationale + criterion
 -> human wet-lab execution
 -> separate physical adjudication
--> update next design round
+-> next-state update
 ```
 
-The Agent is an **uncertainty-aware scientific recommender**. It does not operate laboratory hardware. Its value is judged by whether its pre-frozen recommendation remains useful after human execution.
+The Agent is an **uncertainty-aware scientific recommender**. It does not synthesize material or operate rheology hardware.
 
-## Current local evidence
+## Original local evidence
 
-The original local chemistry uses PPG2000 / STEPANPOL PDP-70 / 4,4'-MDI and a five-point design around two axes:
+The original chemistry uses PPG2000 / STEPANPOL PDP-70 / 4,4'-MDI and a five-point design around two axes:
 
 - NCO:OH perturbation at fixed 50/50 PPG2000/PDP-70;
 - PPG2000/PDP-70 composition perturbation at NCO:OH = 1.80.
 
-At 120 C, the original formulations show substantial hold-time drift:
+At 120 C, two original formulations show strongly different hold-time drift:
 
 | Formulation | 15 min | 60 min | 90 min | 15->60 drift | 15->90 drift |
 |---|---:|---:|---:|---:|---:|
 | E1 | 708.7 | 776.1 | 828.1 | +9.51% | +16.85% |
 | E5 | 2210 | 3349 | 4267 | +51.54% | +93.08% |
 
-The already executed follow-up formulation gave two 120 C repeated 15->60 min changes of **-0.16%** and **+3.04%**; the mean profile changed by about **+1.47%**.
+These original measurements establish thermal-hold stability as a formulation-dependent design response rather than a single-point viscosity metadata field.
 
-The direct local conclusion is therefore **rheological stabilization over the matched hold window**. A specific molecular mechanism is not claimed from rheology alone.
+## Main statistical result: local state-shift master curve
 
-## Main statistical result: a local state-shift master curve
-
-The temperature-sweep data show a stronger structure than simple run-to-run variability.
-
-Across repeated realizations, absolute viscosity can change by several-fold, but the relative 80-130 C thermal-response shape is much more stable. A compact local model is:
+Across repeated realizations, absolute viscosity changes strongly while the relative 80-130 C temperature-response shape is much more stable. A compact local model is:
 
 ```text
 ln eta_r(T) = alpha_r + g(T) + epsilon
@@ -95,13 +89,13 @@ held-temperature formulation-only error   ~= 1.406x
 held-temperature state-aware error        ~= 1.055x
 ```
 
-A stricter test removes one complete realization from training. For E1/E2 cases where the nominal formulation remains represented, formulation identity plus temperature gives roughly **1.60x** multiplicative error, whereas one viscosity anchor from the held realization reduces the error to about **1.065-1.098x** across possible anchor temperatures.
+In a stricter leave-one-realization-out test, formulation identity plus temperature gives roughly **1.60x** multiplicative error for eligible E1/E2 realizations, whereas one viscosity anchor from the unseen realization reduces the error to about **1.065-1.098x**.
 
-A model-free version of the same result is visible by dividing every curve by its own 120 C viscosity. The seven normalized curves collapse to a narrow relative profile with only **3.4-10.3%** non-anchor CV across realizations.
+A model-light version of the same result is visible after normalizing every curve by its own 120 C viscosity: the seven relative curves collapse to only **3.4-10.3%** non-anchor CV.
 
-This supports the practical statement:
+The practical result is:
 
-> Within the present local chemistry family, a new process realization primarily changes viscosity scale; one state-specific anchor can calibrate the rest of the measured temperature curve far better than formulation identity alone.
+> Within the present local chemistry family, process/experimental realization mainly shifts viscosity scale; one state-specific anchor can calibrate the remaining measured temperature curve far better than formulation identity alone.
 
 See:
 
@@ -109,7 +103,7 @@ See:
 - [`docs/STATISTICAL_ROBUSTNESS.md`](docs/STATISTICAL_ROBUSTNESS.md)
 - [`docs/MASTER_CURVE_COLLAPSE.md`](docs/MASTER_CURVE_COLLAPSE.md)
 
-## Two rheological coordinates
+## Distinct rheological coordinates
 
 The local apparent temperature-sensitivity descriptor is comparatively concentrated:
 
@@ -119,26 +113,26 @@ SD                  = 2.27 kJ/mol
 CV                  = 5.4%
 ```
 
-whereas the fitted 120 C log-viscosity drift rates for E1 and E5 differ by about **4.29x**, and F1 moves into a low-drift regime.
+whereas the fitted 120 C log-viscosity drift rates for E1 and E5 differ by about **4.29x**.
 
-The intended claim is therefore:
+The project therefore uses the statement:
 
 > **temperature response and thermal-hold stability are distinct, differently tunable rheological coordinates in the current design.**
 
-The project does not call them universally independent or orthogonal. The broad database also shows that apparent thermal sensitivity changes substantially across chemistry families.
+It does not call them universally independent or orthogonal.
 
 ## External-database boundary
 
 The external database contains 39 dense prepolymer curves and 4559 temperature-viscosity points. `ln(eta)` versus `1/T` is individually regular for most curves (median R2 about 0.9967), but the apparent thermal-sensitivity descriptor spans approximately **34.7-94.2 kJ/mol**.
 
-Cross-validated composition models explain a substantial but incomplete fraction of this broad landscape:
+Cross-validated composition models explain a substantial but incomplete fraction of the broad landscape:
 
 ```text
 apparent thermal descriptor LOOCV R2 ~= 0.59-0.62
 fitted 75 C log-viscosity LOOCV R2   ~= 0.80-0.82
 ```
 
-Thus the project distinguishes two levels:
+The intended multiscale interpretation is:
 
 ```text
 chemistry controls the broad rheological landscape
@@ -146,63 +140,64 @@ chemistry controls the broad rheological landscape
 process / experimental state controls where a local realization sits within that landscape
 ```
 
-The external thermal-curve dataset and the nine viscosity-rise-rate patent records do not share sample identifiers, so they are not used to claim direct external statistical independence between thermal sensitivity and stability.
+## Agent-selected validation formulation
 
-## V2 candidate-space hypothesis
-
-The candidate space is designed from **independent evidence rather than from the later follow-up recipe**.
-
-### Local reactive-core anchor
-
-E2 is the geometric centre of the original local five-point design. Its normalized reactive core is approximately:
+The current validation formulation is stored with internal ID `F1`:
 
 ```text
-PPG2000 39.9047%
-PDP-70  39.9047%
-MDI     20.1907%
+PPG2000 = 39.60
+PDP-70  = 39.60
+AC1920  = 17
+TK100   = 5
+MDI     = 20.19
 ```
 
-### Acrylic-like axis
+The research team confirms that the Agent recommendation was made and frozen before the corresponding wet-lab outcome was known to the Agent.
 
-Independent external PUR evidence provides coarse anchors at:
+The human experimental team then executed the formulation. Two 120 C hold repeats gave 15->60 min changes of:
 
 ```text
-0, 15, 20, 25%
+repeat 1: -0.16%
+repeat 2: +3.04%
+mean profile: approximately +1.47%
 ```
 
-- 15%: peer-reviewed high-temperature reactive-PUR study;
-- ~20%: repeated acrylic-tackifying-resin patent examples;
-- 25%: acrylic-copolymer example with direct hot-hold viscosity-stability data.
+Compared on the same 15-60 min interval, this is substantially flatter than E1 (+9.51%) and E5 (+51.54%). The result is therefore treated as **physical support for the pre-result Agent recommendation with respect to thermal-hold stability**. It is not used as proof of one specific molecular mechanism.
 
-### Minor tackifier-like axis
+## Evidence-constrained candidate-space formalization
 
-Independent PUR formulation evidence supports:
+The repository now contains a reproducible V2 candidate-space abstraction built from:
 
 ```text
-0, 5, 10%
+original E2 reactive core
++
+independent acrylic-like evidence anchors
++
+independent minor-tackifier-like evidence anchors
 ```
 
-- ~5% represents repeatedly documented ~4.8-6.4% tackifier/hydrocarbon-resin examples;
-- 10% is a conservative coarse upper level supported by published formulation guidance.
-
-### V2 finite grid
+The formal grid is:
 
 ```text
-{0,15,20,25}% acrylic-like
-x
-{0,5,10}% minor tackifier-like
-= 12 candidates
+acrylic-like modifier         = {0, 15, 20, 25}%
+minor tackifier-like modifier = {0, 5, 10}%
 ```
 
-For each candidate the original E2 reactive core is scaled into the remaining total-formulation fraction.
+for 12 coarse candidate cells.
 
-The exact historical F1 follow-up recipe is **not** encoded as a discrete candidate.
+Important provenance distinction:
+
+- the **Agent-selected validation formulation** was recommended before its experimental outcome was known to the Agent;
+- the **current exact software implementation of the V2 4x3 grid** was formalized later as a reproducible candidate-space/benchmark abstraction;
+- therefore the grid should not be presented as the contemporaneous freeze artifact unless an older record establishes that.
+
+The V2 grid remains useful for evidence-to-candidate formalization, ablation, replay benchmarking, and future design rounds.
 
 See [`docs/CANDIDATE_SPACE_HYPOTHESIS.md`](docs/CANDIDATE_SPACE_HYPOTHESIS.md).
 
-## Agent evidence/actions
+## Agent actions
 
-The full Agent may use legitimate scientific capabilities including:
+The Agent may use deterministic scientific capabilities including:
 
 ```text
 query_external_priors
@@ -218,110 +213,48 @@ stress_test_candidate
 rank_candidate_support
 ```
 
-The Agent is allowed to see pre-result database/literature evidence and uncertainty-aware actions. Those are core parts of the system, not leakage.
+The decision layer is intended to preserve evidence trace, uncertainty, alternatives, and a falsifiable criterion rather than returning only an unsupported recipe.
 
-For a prospective experimental round, the target candidate's later wet-lab measurements and any outcome-derived controller labels are excluded until after the recommendation record is frozen.
+## Benchmark role
 
-## Retrospective replay versus prospective validation
+The later V2 12-candidate replay is a **secondary reproducibility/ablation benchmark**, not the sole evidence for the Agent-validation claim.
 
-Two different evaluation modes are kept separate.
-
-### Historical F1 / V2 replay
-
-The V2 replay of the already completed F1 follow-up is a **retrospective held-out-result blind replay**. It asks whether the evidence stack, when the known F1 outcome is hidden from the evaluated model, prioritizes a compatible region. It must not be described as prospective validation of that historical F1 experiment.
-
-### Prospective Agent-to-wet-lab cycle
-
-The main validation chronology for a new candidate is stronger:
+Its purpose is to ask whether the formalized evidence stack favors a region compatible with the validation formulation when that formulation/outcome is hidden from the evaluated model. The primary experimental chronology is already:
 
 ```text
-state-aware theory established first
--> Agent blinded to the corresponding future wet-lab outcome
--> recommendation + criterion frozen
--> human experiment executed
--> result revealed only for adjudication
+state-aware theory
+-> pre-result Agent recommendation
+-> freeze
+-> human experiment
+-> physical adjudication
 ```
-
-This is the chronology to use for a prospective Agent-validation claim.
 
 See:
 
+- [`docs/EXPERIMENTAL_CHRONOLOGY.md`](docs/EXPERIMENTAL_CHRONOLOGY.md)
 - [`docs/PROSPECTIVE_VALIDATION_PROTOCOL.md`](docs/PROSPECTIVE_VALIDATION_PROTOCOL.md)
 - [`docs/BLIND_AGENT_BENCHMARK.md`](docs/BLIND_AGENT_BENCHMARK.md)
-- [`configs/blind_benchmark_v2.json`](configs/blind_benchmark_v2.json)
-- [`prompts/local_gpt_benchmark_operator.md`](prompts/local_gpt_benchmark_operator.md)
-
-## Repository structure
-
-```text
-PUR-NEW/
-├─ README.md
-├─ configs/
-│  ├─ workflow.json
-│  ├─ action_catalog.json
-│  ├─ evidence_access_profiles.json
-│  ├─ formulation_priors.json
-│  ├─ blind_benchmark.json
-│  └─ blind_benchmark_v2.json
-├─ docs/
-│  ├─ STATISTICAL_ANALYSIS.md
-│  ├─ STATISTICAL_ROBUSTNESS.md
-│  ├─ MASTER_CURVE_COLLAPSE.md
-│  ├─ CANDIDATE_SPACE_HYPOTHESIS.md
-│  ├─ PROSPECTIVE_VALIDATION_PROTOCOL.md
-│  ├─ BLIND_AGENT_BENCHMARK.md
-│  ├─ WORKFLOW.md
-│  ├─ AGENT_RUNTIME.md
-│  ├─ AGENT_EVALUATION.md
-│  ├─ UNCERTAINTY_MODEL.md
-│  ├─ RESEARCH_NARRATIVE.md
-│  ├─ EXPERIMENTAL_EVIDENCE.md
-│  └─ MANUSCRIPT_PLAN.md
-├─ data/
-│  ├─ external_evidence_hints.csv
-│  ├─ formulations.csv
-│  ├─ temperature_sweeps.csv
-│  └─ thermal_hold.csv
-├─ prompts/
-│  ├─ agent_system.txt
-│  └─ local_gpt_benchmark_operator.md
-├─ src/pur_new/
-│  ├─ metrics.py
-│  └─ actions.py
-├─ scripts/
-│  ├─ build_evidence_state.py
-│  ├─ statistical_analysis.py
-│  ├─ statistical_robustness.py
-│  ├─ master_curve_collapse.py
-│  ├─ build_candidate_set.py
-│  ├─ build_agent_context.py
-│  └─ run_agent_recommendation.py
-└─ records/
-```
 
 ## Claim boundary
 
 Supported by the current physical/model evidence:
 
 - process/experimental realization materially affects measured viscosity level;
-- within the local measured chemistry family, a shared thermal-response shape plus a state-specific scale describes the data substantially better than formulation identity alone;
-- one state anchor reconstructs held-out local realization curves to roughly 6-10% multiplicative error;
+- a shared local thermal-response shape plus a state-specific scale describes the local data substantially better than formulation identity alone;
+- one state anchor reconstructs eligible held-out local realization curves to roughly 6-10% multiplicative error;
 - thermal-hold stability is a separate design response and differs strongly across tested formulations;
-- the historical F1 follow-up is much flatter over the matched hold window;
-- independent external evidence justifies a coarse acrylic/tackifier candidate family.
+- the Agent-selected validation formulation has a much flatter matched 15-60 min hold response than E1/E5;
+- the research team confirms that the Agent recommendation preceded knowledge of that validation result.
 
-Methodological chronology for prospective validation:
+Provenance boundary:
 
-- state-aware design theory is established before the new Agent selection;
-- the Agent does not see the corresponding future wet-lab outcome before freeze;
-- the recommendation, rationale, uncertainty and criterion are frozen before adjudication;
-- humans execute the experiment;
-- the later experimental result independently supports, rejects, or qualifies the recommendation.
+- the current repository does not yet contain the original contemporaneous freeze artifact;
+- the later author-confirmed chronology should not be represented as an original timestamp;
+- the current V2 4x3 grid is a later formalization and should not be conflated with the historical recommendation interface unless older evidence is recovered.
 
-Not supported merely by the current repository:
+Not supported:
 
 - that the local master curve is universal across reactive PUR chemistry;
 - that thermal sensitivity and hold stability are universally statistically independent;
-- that the historical V2 replay prospectively predicted the already completed F1 experiment;
 - that AC1920/TK100 stabilization is proven to arise from one specific molecular reaction pathway;
 - that any external analogue percentage is a universal PUR optimum.
