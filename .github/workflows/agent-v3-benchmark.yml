@@ -50,58 +50,107 @@ jobs:
       - name: Run direct-LLM and single-pass tool-context baselines
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
           mkdir -p /tmp/pur-agent-benchmark/direct_llm
           mkdir -p /tmp/pur-agent-benchmark/single_pass_tools
+          mkdir -p /tmp/pur-agent-benchmark/logs
+          run_recorded() {
+            condition="$1"; run_index="$2"; out_dir="$3"; shift 3
+            log="/tmp/pur-agent-benchmark/logs/${condition}_${run_index}.log"
+            "$@" >"${log}" 2>&1
+            rc=$?
+            cat "${log}"
+            if [[ ${rc} -ne 0 ]]; then
+              python scripts/record_benchmark_failure.py \
+                --condition "${condition}" \
+                --run-index "${run_index}" \
+                --exit-code "${rc}" \
+                --log-file "${log}" \
+                --output-dir "${out_dir}"
+            fi
+          }
           for i in $(seq 1 "${{ inputs.repeats }}"); do
-            echo "direct LLM run ${i}"
-            python scripts/run_agent_recommendation.py \
-              --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
-              --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
-              --context-level direct \
-              --profile blind_pre_result \
-              --inspection-status no_results_inspected \
-              --output-dir /tmp/pur-agent-benchmark/direct_llm
-            echo "single-pass tool-context run ${i}"
-            python scripts/run_agent_recommendation.py \
-              --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
-              --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
-              --agent-context /tmp/pur-agent-benchmark/agent_context.json \
-              --context-level tool_context \
-              --profile blind_pre_result \
-              --inspection-status no_results_inspected \
-              --output-dir /tmp/pur-agent-benchmark/single_pass_tools
+            run_recorded direct_llm_blind "${i}" /tmp/pur-agent-benchmark/direct_llm \
+              python scripts/run_agent_recommendation.py \
+                --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+                --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
+                --context-level direct \
+                --profile blind_pre_result \
+                --inspection-status no_results_inspected \
+                --output-dir /tmp/pur-agent-benchmark/direct_llm
+            run_recorded single_pass_tool_context "${i}" /tmp/pur-agent-benchmark/single_pass_tools \
+              python scripts/run_agent_recommendation.py \
+                --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+                --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
+                --agent-context /tmp/pur-agent-benchmark/agent_context.json \
+                --context-level tool_context \
+                --profile blind_pre_result \
+                --inspection-status no_results_inspected \
+                --output-dir /tmp/pur-agent-benchmark/single_pass_tools
           done
       - name: Run full Agent V3
         shell: bash
         run: |
-          set -euo pipefail
-          mkdir -p /tmp/pur-agent-benchmark/v3
+          set -uo pipefail
+          mkdir -p /tmp/pur-agent-benchmark/v3/full
+          mkdir -p /tmp/pur-agent-benchmark/logs
+          run_recorded() {
+            condition="$1"; run_index="$2"; out_dir="$3"; shift 3
+            log="/tmp/pur-agent-benchmark/logs/${condition}_${run_index}.log"
+            "$@" >"${log}" 2>&1
+            rc=$?
+            cat "${log}"
+            if [[ ${rc} -ne 0 ]]; then
+              python scripts/record_benchmark_failure.py \
+                --condition "${condition}" \
+                --run-index "${run_index}" \
+                --exit-code "${rc}" \
+                --log-file "${log}" \
+                --output-dir "${out_dir}"
+            fi
+          }
           for i in $(seq 1 "${{ inputs.repeats }}"); do
-            echo "V3 full run ${i}"
-            python scripts/run_scientific_agent_v3.py \
-              --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
-              --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
-              --profile blind_pre_result \
-              --ablation full \
-              --inspection-status no_results_inspected \
-              --output-dir /tmp/pur-agent-benchmark/v3
+            run_recorded v3_full "${i}" /tmp/pur-agent-benchmark/v3/full \
+              python scripts/run_scientific_agent_v3.py \
+                --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+                --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
+                --profile blind_pre_result \
+                --ablation full \
+                --inspection-status no_results_inspected \
+                --output-dir /tmp/pur-agent-benchmark/v3
           done
       - name: Run Agent V3 ablations
         if: ${{ inputs.include_ablations }}
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
+          mkdir -p /tmp/pur-agent-benchmark/logs
+          run_recorded() {
+            condition="$1"; run_index="$2"; out_dir="$3"; shift 3
+            log="/tmp/pur-agent-benchmark/logs/${condition}_${run_index}.log"
+            "$@" >"${log}" 2>&1
+            rc=$?
+            cat "${log}"
+            if [[ ${rc} -ne 0 ]]; then
+              python scripts/record_benchmark_failure.py \
+                --condition "${condition}" \
+                --run-index "${run_index}" \
+                --exit-code "${rc}" \
+                --log-file "${log}" \
+                --output-dir "${out_dir}"
+            fi
+          }
           for ablation in no_skeptic no_deterministic_robustness no_state_aware_action; do
+            mkdir -p "/tmp/pur-agent-benchmark/v3/${ablation}"
             for i in $(seq 1 "${{ inputs.repeats }}"); do
-              echo "V3 ${ablation} run ${i}"
-              python scripts/run_scientific_agent_v3.py \
-                --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
-                --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
-                --profile blind_pre_result \
-                --ablation "${ablation}" \
-                --inspection-status no_results_inspected \
-                --output-dir /tmp/pur-agent-benchmark/v3
+              run_recorded "v3_${ablation}" "${i}" "/tmp/pur-agent-benchmark/v3/${ablation}" \
+                python scripts/run_scientific_agent_v3.py \
+                  --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+                  --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
+                  --profile blind_pre_result \
+                  --ablation "${ablation}" \
+                  --inspection-status no_results_inspected \
+                  --output-dir /tmp/pur-agent-benchmark/v3
             done
           done
       - name: Summarize benchmark
