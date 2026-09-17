@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pytest
 
+from pur_new.actions import get_state_aware_rheology_summary
 from pur_new.agent_v3 import pareto_front, selection_entropy
 from pur_new.evidence_firewall import (
     assert_blind_payload_clean,
@@ -45,6 +46,20 @@ def test_blind_firewall_detects_leakage():
     assert len(findings) == 2
     with pytest.raises(ValueError, match="blind payload leakage detected"):
         assert_blind_payload_clean(bad, blinded_formulation_ids={"F1"})
+
+
+def test_state_aware_rheology_action_reproduces_frozen_local_descriptors():
+    summary = get_state_aware_rheology_summary()
+    state = summary["state_shift_evidence"]
+    thermal = summary["temperature_sensitivity"]
+
+    assert summary["source_scope"] == "original pre-validation local data only"
+    assert state["n_complete_realizations"] == 7
+    assert state["non_anchor_cv_range"][0] == pytest.approx(0.0338594, rel=1e-4)
+    assert state["non_anchor_cv_range"][1] == pytest.approx(0.103424, rel=1e-4)
+    assert thermal["mean_apparent_E_eta_kJ_mol"] == pytest.approx(41.8680, rel=1e-4)
+    assert thermal["sd_apparent_E_eta_kJ_mol"] == pytest.approx(2.26705, rel=1e-4)
+    assert thermal["median_ln_eta_inverse_T_r2"] == pytest.approx(0.994776, rel=1e-4)
 
 
 def test_pareto_front_is_weight_free():
