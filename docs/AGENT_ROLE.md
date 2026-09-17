@@ -110,9 +110,9 @@ A(candidate) = -J_perf - lambda_U * U_penalty + beta_IG * information_value
 
 These expressions define the structure of the decision problem. They do not imply that all numerical weights are already calibrated. Any numerical weights used for a prospective test must be frozen before seeing that result.
 
-## 4. Recommendation contract
+## 4. Immutable recommendation record
 
-A paper-facing recommendation must contain at least:
+A paper-facing pre-result recommendation contains at least:
 
 ```text
 recommendation_id
@@ -126,22 +126,42 @@ structured uncertainty
 selection_rationale
 pre-result acceptance criterion
 provenance
-adjudication status
 ```
 
 The machine-readable contract is `../schemas/agent_recommendation.schema.json`.
 
-The most important scientific object is therefore not an Agent-generated paragraph. It is the linked pair:
+Once `record_status = frozen`, this record is immutable. Experimental results are **not** appended by editing the frozen recommendation.
+
+## 5. Separate experimental adjudication record
+
+After a human performs the experiment, the result is stored in a second record using `../schemas/experiment_adjudication.schema.json` and linked by `recommendation_id`.
+
+The post-result record contains:
 
 ```text
-frozen pre-result recommendation
-<->
-human-executed post-result adjudication
+recommendation_id
+actual formulation/process state
+measurement references
+deviation from recommended state
+derived experimental metrics
+comparison against the frozen criterion
+adjudication status
+experimental provenance
 ```
 
-## 5. Human execution and experimental authority
+This separation prevents a post-result edit from silently changing what the Agent originally recommended.
 
-After the recommendation is frozen, a human operator performs the preparation and rheology measurement.
+The central scientific object is therefore the pair:
+
+```text
+immutable pre-result recommendation
+<->
+linked human-executed experimental adjudication
+```
+
+## 6. Human execution and experimental authority
+
+A human operator performs sample preparation and rheology measurement.
 
 The laboratory result has authority over the recommendation. The Agent must be allowed to be wrong.
 
@@ -154,9 +174,9 @@ falsified
 out_of_domain
 ```
 
-A falsified recommendation is not deleted. It becomes evidence for updating the uncertainty model or process-state representation.
+A falsified recommendation is retained. It becomes evidence for updating the uncertainty model or process-state representation.
 
-## 6. Allowed Agent claims
+## 7. Allowed Agent claims
 
 The Agent may:
 
@@ -179,7 +199,7 @@ The Agent may not:
 - claim a molecular mechanism from rheology alone;
 - present a fragile top-1 result as uniquely superior when the decision margin is negligible.
 
-## 7. Current paper-facing interpretation
+## 8. Current paper-facing interpretation
 
 The current experiments show why this architecture is necessary: rheology changes with process realization and thermal-hold history, while the follow-up formulation shows a substantially flatter 120 °C response over the shared 15-60 min window.
 
