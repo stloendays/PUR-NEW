@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "profiles": {
+    "blind_pre_result": {
+      "description": "For prospective/blind Agent evaluation. The Agent may see original-system measurements and external analogue evidence, but not follow-up wet-lab outcomes.",
+      "allow_original_temperature_sweeps": true,
+      "allow_original_hold_data": true,
+      "allow_follow_up_formulation_identity": true,
+      "allow_follow_up_hold_results": false,
+      "allow_external_evidence_hints": true,
+      "allow_post_result_adjudication": false
+    },
+    "closed_loop_design": {
+      "description": "For the current human-in-the-loop design cycle after prior experiments are known.",
+      "allow_original_temperature_sweeps": true,
+      "allow_original_hold_data": true,
+      "allow_follow_up_formulation_identity": true,
+      "allow_follow_up_hold_results": true,
+      "allow_external_evidence_hints": true,
+      "allow_post_result_adjudication": true
+    },
+    "literature_only_sanity": {
+      "description": "Ablation profile used to test whether literature/database priors alone favor resin-modified formulation families.",
+      "allow_original_temperature_sweeps": false,
+      "allow_original_hold_data": false,
+      "allow_follow_up_formulation_identity": false,
+      "allow_follow_up_hold_results": false,
+      "allow_external_evidence_hints": true,
+      "allow_post_result_adjudication": false
+    }
+  },
+  "hard_rule": "A blind-pre-result run must never expose follow-up hold measurements, adjudication labels, or text derived from those outcomes."
+}
