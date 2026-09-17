@@ -4,9 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pur-new-workflow"
-version = "0.1.0"
-description = "Deterministic support layer for uncertainty-aware PUR formulation workflow"
+version = "0.2.0"
+description = "Deterministic and Agent-runtime support for uncertainty-aware PUR formulation workflow"
 requires-python = ">=3.11"
+dependencies = [
+  "jsonschema>=4.23",
+  "openai>=1.0",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
