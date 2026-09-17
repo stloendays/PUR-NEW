@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import csv
-import json
 from pathlib import Path
 from typing import Any
 
@@ -12,10 +11,6 @@ RESULTS = ROOT / "analysis" / "results"
 def _read_csv(name: str) -> list[dict[str, str]]:
     with (RESULTS / name).open(newline="", encoding="utf-8") as fh:
         return list(csv.DictReader(fh))
-
-
-def _read_json(name: str) -> dict[str, Any]:
-    return json.loads((RESULTS / name).read_text(encoding="utf-8"))
 
 
 def _float(row: dict[str, str], key: str) -> float:
@@ -51,7 +46,7 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
     ]
 
     thermal_E = [_float(r, "apparent_E_kJ_mol") for r in thermal_rows]
-    thermal_r2 = [_float(r, "r2") for r in thermal_rows]
+    thermal_r2 = [_float(r, "r2_lneta_vs_invT") for r in thermal_rows]
     mean_E = sum(thermal_E) / len(thermal_E)
     if len(thermal_E) > 1:
         mean_sq = sum((x - mean_E) ** 2 for x in thermal_E) / (len(thermal_E) - 1)
@@ -111,7 +106,7 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
                 "mean_apparent_E_eta_kJ_mol": mean_E,
                 "sd_apparent_E_eta_kJ_mol": sd_E,
                 "cv_apparent_E_eta": sd_E / mean_E if mean_E else None,
-                "median_like_curve_fit_quality": sorted(thermal_r2)[len(thermal_r2) // 2],
+                "median_curve_r2": sorted(thermal_r2)[len(thermal_r2) // 2],
                 "interpretation": (
                     "The apparent temperature-sensitivity descriptor is comparatively concentrated within the local chemistry family; it is not a molecular reaction activation energy."
                 ),
