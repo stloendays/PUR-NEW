@@ -1,0 +1,126 @@
+name: agent-v3-benchmark
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: OpenAI-compatible model name
+        required: true
+        default: gpt-5.6-luna
+      repeats:
+        description: Independent runs per condition (use 3-5 for pilot, >=30 for final benchmark)
+        required: true
+        default: "3"
+      include_ablations:
+        description: Run all V3 architecture ablations
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+      OPENAI_MODEL: ${{ inputs.model }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+      - name: Build blind benchmark inputs
+        run: |
+          mkdir -p /tmp/pur-agent-benchmark
+          python scripts/build_evidence_state.py --output /tmp/pur-agent-benchmark/evidence_state.json
+          python scripts/build_candidate_set.py --output /tmp/pur-agent-benchmark/candidate_set.json
+          python scripts/build_agent_context.py \
+            --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+            --profile blind_pre_result \
+            --output /tmp/pur-agent-benchmark/agent_context.json
+      - name: Run single-pass baselines
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/pur-agent-benchmark/single_pass_no_tools
+          mkdir -p /tmp/pur-agent-benchmark/single_pass_tools
+          for i in $(seq 1 "${{ inputs.repeats }}"); do
+            echo "single-pass no-tools run ${i}"
+            python scripts/run_agent_recommendation.py \
+              --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+              --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
+              --profile blind_pre_result \
+              --inspection-status no_results_inspected \
+              --output-dir /tmp/pur-agent-benchmark/single_pass_no_tools
+            echo "single-pass tools run ${i}"
+            python scripts/run_agent_recommendation.py \
+              --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+              --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
+              --agent-context /tmp/pur-agent-benchmark/agent_context.json \
+              --profile blind_pre_result \
+              --inspection-status no_results_inspected \
+              --output-dir /tmp/pur-agent-benchmark/single_pass_tools
+          done
+      - name: Run full Agent V3
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/pur-agent-benchmark/v3
+          for i in $(seq 1 "${{ inputs.repeats }}"); do
+            echo "V3 full run ${i}"
+            python scripts/run_scientific_agent_v3.py \
+              --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+              --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
+              --profile blind_pre_result \
+              --ablation full \
+              --inspection-status no_results_inspected \
+              --output-dir /tmp/pur-agent-benchmark/v3
+          done
+      - name: Run Agent V3 ablations
+        if: ${{ inputs.include_ablations }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for ablation in no_skeptic no_deterministic_robustness no_state_aware_action; do
+            for i in $(seq 1 "${{ inputs.repeats }}"); do
+              echo "V3 ${ablation} run ${i}"
+              python scripts/run_scientific_agent_v3.py \
+                --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+                --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
+                --profile blind_pre_result \
+                --ablation "${ablation}" \
+                --inspection-status no_results_inspected \
+                --output-dir /tmp/pur-agent-benchmark/v3
+            done
+          done
+      - name: Summarize benchmark
+        shell: bash
+        run: |
+          set -euo pipefail
+          conditions=(
+            --condition single_pass_no_tools=/tmp/pur-agent-benchmark/single_pass_no_tools
+            --condition single_pass_tools=/tmp/pur-agent-benchmark/single_pass_tools
+            --condition v3_full=/tmp/pur-agent-benchmark/v3/full
+          )
+          if [[ "${{ inputs.include_ablations }}" == "true" ]]; then
+            conditions+=(
+              --condition v3_no_skeptic=/tmp/pur-agent-benchmark/v3/no_skeptic
+              --condition v3_no_deterministic_robustness=/tmp/pur-agent-benchmark/v3/no_deterministic_robustness
+              --condition v3_no_state_aware_action=/tmp/pur-agent-benchmark/v3/no_state_aware_action
+            )
+          fi
+          python scripts/summarize_agent_benchmark.py \
+            "${conditions[@]}" \
+            --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+            --output-dir /tmp/pur-agent-benchmark/summary
+          cat /tmp/pur-agent-benchmark/summary/benchmark_summary.json
+      - name: Upload benchmark artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-v3-benchmark-${{ github.run_id }}
+          path: /tmp/pur-agent-benchmark
+          if-no-files-found: error
