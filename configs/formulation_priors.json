@@ -1,5 +1,5 @@
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "scope": "Evidence-derived formulation hypothesis for reproducible candidate-space formalization, replay benchmarking and future Agent ranking. This is not a trained predictor and not a mechanistic law.",
   "historical_status": {
     "agent_validation_formulation_recommended_before_target_result_known": true,
@@ -8,7 +8,7 @@
     "repository_freeze_artifact_available": false,
     "allowed_use": [
       "scientific rationale",
-      "replay and ablation benchmark",
+      "replay benchmark",
       "candidate-space formalization",
       "future prospective rounds"
     ]
@@ -32,13 +32,14 @@
   "candidate_axes": {
     "acrylic_like_modifier_pct_total": {
       "grid": [0, 15, 20, 25],
-      "direct_evidence_anchors_pct": [15, 19.37, 19.57, 19.78, 19.98, 25],
+      "direct_evidence_anchors_pct": [19.37, 19.57, 19.78, 19.98, 25],
+      "provisional_noncommensurate_evidence_pct": [15],
       "evidence": [
-        "PAPER_CN_ADHESIVES_2025_34_09_54: 15% acrylic resin identified as the preferred overall level in a heat-resistant PUR formulation study",
         "PAT_US20160215185A1: repeated acrylic tackifying resin examples at approximately 19-20% of total formulation",
-        "PAT_US6465104B1 Example 10: 25 wt% low-OH acrylic copolymer with direct 121 C viscosity-stability data"
+        "PAT_US6465104B1 Example 10: 25 wt% low-OH acrylic copolymer with direct 121 C viscosity-stability data",
+        "PAPER_CN_ADHESIVES_2025_34_09_54: reports a 15% preferred acrylic-resin addition level, retained as directional lower-bound evidence until its fraction denominator is reverified"
       ],
-      "interpretation": "15, 20 and 25% are independent coarse literature/patent anchors and are not values fitted to the validation formulation."
+      "interpretation": "20 and 25% are directly commensurate coarse anchors in the current curated record. The 15% grid level is retained as a lower-bound design point, but the literature denominator for the reported 15% addition level is not treated as an exact total-formulation anchor until reverified."
     },
     "minor_tackifier_like_modifier_pct_total": {
       "grid": [0, 5, 10],
@@ -77,5 +78,6 @@
     "strong": 5.0,
     "moderate": 10.0
   },
+  "fraction_basis_audit": "See data/external_evidence_basis_audit.csv. Evidence percentages are only treated as directly commensurate numeric anchors when their denominator is represented as total-formulation or a curated equivalent; ambiguous addition-level percentages remain directional evidence.",
   "claim_boundary": "External examples are analogues. They support candidate-family and coarse-range hypotheses, not an exact optimum for AC1920/TK100 and not a proven local molecular mechanism. The current exact V2 grid is a later formalization and must not be conflated with the original pre-result Agent freeze unless older provenance is recovered."
 }
