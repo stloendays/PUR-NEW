@@ -27,6 +27,7 @@ PLANNER_ACTIONS = {
     "get_hold_stability",
     "get_repeatability_risk",
     "get_temperature_support",
+    "get_state_aware_rheology_summary",
 }
 
 
