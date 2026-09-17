@@ -1,6 +1,6 @@
 {
   "benchmark_id": "PUR_NEW_BLIND_AGENT_V2",
-  "benchmark_version": "2.0.0",
+  "benchmark_version": "2.1.0",
   "historical_interpretation": "Retrospective held-out-result blind replay. The candidate-space hypothesis was formalized after the current follow-up experiment was known, but the evaluated model is blinded to the follow-up formulation/outcome and scoring labels. Future rounds can become prospective after this V2 configuration is frozen.",
   "primary_profile": "blind_pre_result",
   "blindness_definition": "The evaluated Agent may use original local evidence, the V2 evidence-derived hypothesis, uncertainty-aware actions, and external database/literature evidence. It may not see the current follow-up formulation, follow-up thermal-hold measurements, adjudication labels, or controller-side scoring targets.",
@@ -26,6 +26,43 @@
     "nearest_candidate_id": "HYP_A15p0_T05p0",
     "scoring_space": "two-dimensional modifier plane: acrylic-like pct and tackifier-like pct",
     "must_not_enter_agent_payload": true
+  },
+  "ranking_contract": {
+    "rank_1": "selected_candidate_id for non-abstaining valid recommendations",
+    "rank_2_plus": "alternatives_considered in strict descending preference order",
+    "top_3": "selected_candidate_id followed by the first two unique valid alternatives",
+    "alternatives_must_be_ordered": true,
+    "alternatives_must_be_unique": true,
+    "selected_candidate_must_not_repeat_in_alternatives": true,
+    "abstention_primary_top1": false,
+    "abstention_primary_top3": false,
+    "abstention_shortlist_diagnostic": "For abstentions, alternatives may be analyzed separately as an uncertainty shortlist but do not count toward primary Top-1 or Top-3 recovery."
+  },
+  "run_record_contract": {
+    "required_controller_fields": [
+      "model",
+      "run_index",
+      "run_status",
+      "decision_mode",
+      "rank1_candidate_id",
+      "rank2_candidate_id",
+      "rank3_candidate_id",
+      "rank1_acrylic_pct",
+      "rank1_tackifier_pct",
+      "rank1_total_modifier_pct",
+      "nearest_candidate_rank",
+      "modifier_plane_l1_distance_top1",
+      "modifier_plane_l1_distance_best_top3",
+      "abstain",
+      "invalid_output",
+      "api_failure",
+      "scientific_boundary_violation"
+    ],
+    "run_status_values": ["valid_recommendation", "abstain", "invalid_output", "api_failure"],
+    "raw_response_retained": true,
+    "normalized_recommendation_retained": true,
+    "action_trace_retained": true,
+    "failed_runs_retained": true
   },
   "run_protocol": {
     "pilot_runs_per_model": 5,
@@ -53,6 +90,11 @@
     "report_top3_within_threshold": true,
     "note": "This controller-side threshold is used only after outputs are frozen and is not exposed to the Agent. Distance scoring is preferred over an exact 18% scalar target because V2 uses independent acrylic/tackifier axes."
   },
+  "secondary_diagnostics": [
+    "abstention_shortlist_nearest_candidate_rank",
+    "abstention_shortlist_within_distance_threshold",
+    "decision_margin_if_numerically_defined"
+  ],
   "baselines": [
     {
       "id": "uniform_random",
@@ -99,7 +141,8 @@
     "V2 tests whether an evidence-using Agent can prioritize a literature-supported region that is compositionally close to the held-out experiment, not whether it reproduces the exact follow-up recipe.",
     "Because the V2 hypothesis was formalized after the current follow-up result was known, current results are retrospective blind replay evidence, not prospective validation of V2 itself.",
     "After V2 is frozen, the same workflow can be used prospectively for future rounds.",
-    "If deterministic evidence ranking already places the nearest candidate first, the Agent contribution must be evaluated through evidence integration, uncertainty handling, robustness, abstention, and alternative ranking rather than discovery alone."
+    "If deterministic evidence ranking already places the nearest candidate first, the Agent contribution must be evaluated through evidence integration, uncertainty handling, robustness, abstention, and alternative ranking rather than discovery alone.",
+    "Primary Top-3 recovery is defined only for valid non-abstaining recommendations; abstention shortlists are reported separately and never credited as successful primary recovery."
   ],
   "artifact_layout": "records/benchmarks/PUR_NEW_BLIND_AGENT_V2/<run_id>/"
 }
