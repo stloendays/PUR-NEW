@@ -150,6 +150,8 @@ The coarse levels are tied to external sources rather than to the later follow-u
 
 A successful Agent run therefore means that the evidence stack naturally favors a region near the held-out formulation; it does not mean the correct recipe was preloaded as one discrete option.
 
+`configs/blind_benchmark.json` is retained only as deprecated V1 history. All new runs and scoring use `configs/blind_benchmark_v2.json`.
+
 ---
 
 ## 5. Full-Agent information flow
@@ -216,7 +218,34 @@ The correct Agent use is:
 
 ---
 
-## 7. Benchmark protocol
+## 7. API output and ranking contract
+
+Every API call must return structured JSON only. The raw model response is preserved, then normalized and frozen by the runner.
+
+For a valid non-abstaining recommendation:
+
+```text
+Rank 1 = selected_candidate_id
+Rank 2 = alternatives_considered[0]
+Rank 3 = alternatives_considered[1]
+```
+
+`alternatives_considered` is therefore not an unordered explanation list. It is a **strict descending preference ranking**.
+
+Rules:
+
+- alternatives must be valid candidate IDs from the supplied set;
+- alternatives must be unique;
+- the selected candidate must not appear again in alternatives;
+- when at least three candidates exist, non-abstaining outputs must provide at least two alternatives;
+- `abstain` requires `selected_candidate_id = null`;
+- alternatives attached to an abstention are an uncertainty shortlist only and do **not** count toward primary Top-1 or Top-3 recovery.
+
+This prevents a model from receiving benchmark credit merely for mentioning the held-out-near candidate somewhere in an unordered list.
+
+---
+
+## 8. Benchmark protocol
 
 Use `configs/blind_benchmark_v2.json`.
 
@@ -238,9 +267,33 @@ Record every run, including:
 
 Do not silently discard failures.
 
+Each controller-side run row should retain at least:
+
+```text
+model
+run_index
+run_status
+decision_mode
+rank1_candidate_id
+rank2_candidate_id
+rank3_candidate_id
+rank1 acrylic-like %
+rank1 tackifier-like %
+rank1 total modifier %
+nearest-candidate rank
+Top-1 distance
+best Top-3 distance
+abstain flag
+invalid-output flag
+API-failure flag
+scientific-boundary-violation flag
+```
+
+The raw response, normalized frozen recommendation and action/evidence trace must remain available for audit.
+
 ---
 
-## 8. Controller-side scoring
+## 9. Controller-side scoring
 
 After recommendations are frozen, the controller may compare candidate rankings with the held-out follow-up formulation.
 
@@ -264,13 +317,15 @@ abstention rate
 scientific-boundary violation rate
 ```
 
+Primary Top-3 recovery is evaluated only for valid non-abstaining recommendations. For abstentions, any listed alternatives are summarized separately as an **abstention shortlist diagnostic** and never credited as primary recovery.
+
 Distance-based scoring is preferred over the old exact-18% scalar metric because V2 no longer encodes a total-modifier answer point.
 
 The held-out target and distance threshold exist only in `configs/blind_benchmark_v2.json` on the controller side and must not enter the Agent payload.
 
 ---
 
-## 9. Ablations
+## 10. Ablations
 
 ### Full Agent — primary
 
@@ -296,7 +351,7 @@ Tests whether the explicit evidence-to-grid rationale helps the Agent use the ca
 
 ---
 
-## 10. Scientific interpretation
+## 11. Scientific interpretation
 
 If the full Agent repeatedly prioritizes candidates near the held-out modifier coordinates while the ablations degrade, a defensible result is:
 
