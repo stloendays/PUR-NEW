@@ -1,71 +1,102 @@
-# Blind multi-model Agent benchmark
+# Full-Agent blind multi-model benchmark
 
 ## Objective
 
-Quantify how reliably the PUR-NEW decision Agent recovers the formulation region that is later supported by wet-lab thermal-hold measurements, **without exposing those follow-up outcomes to the evaluated model**.
+Quantify how reliably the **full PUR-NEW decision Agent** recovers the formulation region later supported by wet-lab thermal-hold measurements while remaining blind to those held-out outcomes.
 
-The benchmark is designed to answer a narrow question:
+The benchmark asks:
 
-> Given only the original-system rheology, structured uncertainty, admissible candidate grid, and external PUR analogue priors, how often does an Agent rank a resin-modified formulation in the experimentally relevant modifier region near the top?
+> Given the information and tools genuinely available before the follow-up experiment — original-system rheology, structured uncertainty, uncertainty-aware actions, external PUR database/literature evidence, and an admissible candidate set — how often does the Agent prioritize the resin-modified formulation region that is later physically supported?
 
-This benchmark evaluates recommendation quality, not autonomous laboratory control.
+## 1. What "blind" means
 
-## 1. Strict separation of roles
+Blindness applies to the **future outcome**, not to the Agent's legitimate scientific capabilities.
 
-There are two roles:
+### The evaluated Agent SHOULD see in the primary condition
 
-### Benchmark controller
+- original local temperature-sweep and thermal-hold evidence available before follow-up;
+- process-state/missingness information;
+- uncertainty-aware deterministic actions and their outputs;
+- external PUR patent/literature/database evidence available before follow-up;
+- admissible candidate set;
+- workflow policy and scientific decision prompt.
 
-The controller may know the held-out experimental result and may read this benchmark plan. It is responsible for:
+### The evaluated Agent MUST NOT see
 
-- building the candidate set;
-- building the blind Agent context;
-- calling one or more GPT models repeatedly;
-- storing raw recommendation records;
-- scoring recommendations after all runs finish;
-- never inserting held-out labels into the evaluated model payload.
+- F1/follow-up thermal-hold measurements;
+- follow-up adjudication labels;
+- benchmark target/success region;
+- scoring labels;
+- prose derived from the held-out follow-up result.
 
-### Evaluated Agent
+Thus the main experiment evaluates the Agent system, not a stripped-down plain LLM.
 
-The evaluated Agent receives only:
-
-```text
-configs/workflow.json
-+ deterministic original-system evidence
-+ configs/formulation_priors.json / external evidence hints
-+ action-enriched blind context
-+ finite admissible candidate set
-+ prompts/agent_system.txt
-```
-
-It must not receive:
-
-```text
-follow-up hold measurements
-follow-up adjudication labels
-benchmark target region
-benchmark success labels
-text derived from the follow-up outcome
-```
-
-The evaluated model selects only from the candidate set or abstains.
-
-## 2. Evidence profile
+## 2. Primary full-Agent condition
 
 Use `blind_pre_result` from `configs/evidence_access_profiles.json`.
 
-This profile permits:
+The intended information flow is:
 
-- original temperature sweeps;
-- original thermal-hold evidence;
-- external analogue priors;
-- formulation/process uncertainty descriptors.
+```text
+original local evidence
++ structured uncertainty
++ deterministic actions
++ external database/literature retrieval
++ finite candidate set
+------------------------------
+Agent recommendation
+```
 
-It blocks follow-up hold results and post-result adjudication.
+Only the later wet-lab outcome is hidden.
 
-A run that exposes held-out follow-up outcomes is invalid and must not be included in benchmark statistics.
+Removing database evidence or action enrichment is reserved for ablation studies.
 
-## 3. Candidate set
+## 3. Database evidence contract
+
+External database evidence is part of the Agent's intended capability and should be visible in the primary benchmark.
+
+Preferred implementation:
+
+```text
+Agent/query layer
+-> fixed retrieval/action rule
+-> source rows/chunks with source_id + evidence_locator + limitations
+-> Agent reasoning
+```
+
+A curated evidence summary may also be supplied if its construction is documented and does not use the held-out outcome.
+
+For the strongest claim, preserve:
+
+- retrieval query or filter;
+- returned source IDs;
+- evidence locators;
+- raw retrieved rows/chunks;
+- source limitations;
+- timestamp/hash.
+
+The database is a scientific evidence source, not a hidden scoring oracle.
+
+## 4. Action contract
+
+The primary benchmark should expose uncertainty-aware actions such as:
+
+- `query_external_priors`;
+- `inspect_formulation`;
+- `get_hold_stability`;
+- `get_repeatability_risk`;
+- `get_temperature_support`;
+- `audit_process_unknowns`;
+- `candidate_profile`;
+- `compare_candidate_to_priors`;
+- `stress_test_candidate`;
+- `rank_candidate_support`.
+
+Whether implemented as true API/tool calls or as deterministic action outputs embedded in a frozen Agent context, the action layer must be the same across compared models.
+
+Record an action/evidence trace for each run so the paper can distinguish a correct answer from a correct evidence-use path.
+
+## 5. Candidate set
 
 Generate the canonical candidate set with:
 
@@ -76,18 +107,16 @@ python scripts/build_candidate_set.py
 Default total modifier grid:
 
 ```text
-0, 5, 10, 15, 18, 20, 25 wt/parts-% of normalized total
+0, 5, 10, 15, 18, 20, 25 % normalized total
 ```
 
-The generator uses a transparent 80/20 AC1920/TK100 modifier split and a fixed normalized MDI fraction for this candidate family. These are candidate-generation assumptions, not learned mechanistic laws.
+The generator uses the documented AC1920/TK100 split and normalized MDI assumption for this benchmark family. These are candidate-generation assumptions, not mechanistic laws.
 
-The experimentally used follow-up formulation normalizes to approximately 18.12% combined AC1920+TK100. Therefore the 18% grid point is the closest canonical recovery point, while 15-21% is treated as the broader supported modifier region for region-level scoring.
+The controller uses the held-out experiment only after model recommendations are frozen to score recovery. The evaluated Agent must not receive the scoring target.
 
-**Important:** this scoring information belongs to the benchmark controller only and is not injected into the evaluated Agent request.
+## 6. Context construction
 
-## 4. Action-enriched context
-
-Build the blind context with:
+Build the main context with:
 
 ```bash
 python scripts/build_agent_context.py \
@@ -96,23 +125,14 @@ python scripts/build_agent_context.py \
   --output derived/agent_context_blind.json
 ```
 
-The context exposes deterministic action outputs rather than asking the LLM to rediscover everything from raw CSVs. Current action families include:
+Before any model call, audit the final payload/tool-access layer for leakage. The audit must specifically distinguish:
 
-- external-prior lookup;
-- original hold-stability inspection;
-- repeatability-risk inspection;
-- temperature-support inspection;
-- candidate composition profiling;
-- process-history missingness audit;
-- analogue-region comparison;
-- candidate stress testing;
-- transparent support ranking.
+```text
+allowed: pre-result database evidence, uncertainty actions, original experiments
+forbidden: follow-up results, adjudication labels, benchmark target labels
+```
 
-These actions are allowed to make relevant evidence easier to use. They are not allowed to encode the held-out experimental answer.
-
-## 5. Models and repetitions
-
-Use multiple GPT-family models available through the configured OpenAI-compatible endpoint.
+## 7. Models and repetitions
 
 Recommended protocol:
 
@@ -121,141 +141,96 @@ pilot: 5 independent runs per model
 full benchmark: >=30 independent runs per model
 ```
 
-Use the same candidate set, blind context, system prompt, evidence-access profile, and decoding policy for all models unless the benchmark explicitly studies one of those factors.
+Use identical candidate set, action policy, database evidence policy, system prompt and decoding settings across models.
 
-Record for every run:
+Record every run, including failures and abstentions.
 
-```text
-model
-run index
-UTC timestamp
-selected candidate
-ordered alternatives
-decision mode
-uncertainty vector
-acceptance criterion
-input hash
-prompt hash
-candidate-set hash
-raw model response
-validated frozen recommendation path
-```
+## 8. Primary metrics
 
-Do not silently drop failed or abstaining runs.
+After recommendations are frozen, compute:
 
-## 6. Primary metrics
+### Exact-grid Top-1 recovery
 
-### A. Exact-grid Top-1 recovery
+Top-1 equals the canonical 18% grid point.
 
-```text
-selected candidate == 18% modifier grid point
-```
+### Supported-region Top-1 recovery
 
-This is the strictest discrete recovery metric.
+Top-1 modifier fraction lies in the controller-defined 15-21% region.
 
-### B. Supported-region Top-1 recovery
+### Supported-region Top-3 recall
 
-```text
-selected modifier fraction in [15%, 21%]
-```
+At least one Top-3 candidate lies in 15-21%.
 
-This evaluates whether the Agent identifies the correct formulation region rather than one exact discretization point.
+### Near-experimental Top-3 recall
 
-### C. Supported-region Top-3 recall
+At least one Top-3 candidate lies in 17-20%.
 
-Treat the selected candidate plus the first two ordered alternatives as Top-3.
+### Selection distribution
 
-```text
-at least one Top-3 candidate in [15%, 21%]
-```
+Empirical distribution over candidate IDs and modifier fractions.
 
-### D. Near-experimental Top-3 recall
+### Abstention and invalid-output rates
 
-A stricter regional metric:
+Report rather than discard them.
 
-```text
-at least one Top-3 candidate in [17%, 20%]
-```
+### Descriptive enrichment over random
 
-### E. Rank stability
+Compare recovery frequency with the finite candidate-set random baseline without overstating independence across repeated LLM calls.
 
-For each model, report the empirical selection distribution over candidate IDs and modifier fractions. High concentration around one region is stronger evidence than a single successful run.
+## 9. Evidence-use diagnostics
 
-### F. Abstention rate
+For each run, record whether the Agent:
 
-Report abstentions as outcomes, not errors. Excessive abstention may indicate that the uncertainty policy is too conservative.
+- recognized original thermal-hold drift;
+- recognized repeat/run variability;
+- treated process history as uncertainty;
+- used external database evidence;
+- used action outputs/tools;
+- distinguished analogue support from direct proof;
+- invented any unsupported measurement or mechanism.
 
-### G. Resin-family enrichment over random
+## 10. Ablations
 
-For a candidate set of size `N`, compare observed recovery with the random-selection baseline. Report enrichment descriptively; do not imply statistical independence across repeated LLM calls without an appropriate analysis.
+The full-Agent condition is the primary result.
 
-## 7. Secondary diagnostics
-
-Record whether the Agent correctly identifies the dominant evidence pattern:
-
-- original reactive-only system shows thermal-hold drift;
-- nominally identical formulations can show large run-to-run spread;
-- process history is an explicit uncertainty source;
-- external PUR evidence supports resin/tackifier-modified formulation families;
-- acrylic-like modifier examples cluster near ~20% total-formulation fraction in the curated analogue evidence;
-- analogue evidence supports a design region, not the exact wet-lab optimum.
-
-Also record whether the Agent violates any scientific boundary:
-
-- invents missing viscosity values;
-- treats unknown process metadata as zero;
-- claims a molecular mechanism from rheology alone;
-- cites held-out follow-up results in blind mode;
-- selects a candidate outside the supplied finite set.
-
-## 8. Ablations
-
-Run at least three evidence conditions when budget permits:
-
-### `literature_only_sanity`
-
-Question: do external database priors alone enrich resin-modified candidates?
-
-### `blind_pre_result`
-
-Primary benchmark. Original local evidence + external priors, no follow-up result.
-
-### `blind_pre_result` without external hints
-
-Ablation created by withholding `external_prior_hints` and analogue actions while retaining the original-system evidence.
-
-This comparison estimates how much the curated database contributes beyond the local failure evidence.
-
-Do not use `closed_loop_design` as a blind benchmark condition because it may expose the follow-up result.
-
-## 9. Interpretation
-
-The strongest useful result is not that an LLM reproduces the exact source-parts recipe digit-for-digit. The scientifically relevant result is that a structured Agent repeatedly concentrates recommendation mass in the same resin-modified region that is later supported by wet-lab measurements.
-
-A defensible paper-facing statement, if supported by the benchmark, is:
-
-> Under a held-out evidence protocol, the Agent repeatedly prioritized the resin-modified formulation region later supported by physical thermal-hold measurements, with the exact hit/Top-k recovery reported across repeated model runs.
-
-Use the measured frequencies from the benchmark. Do not replace them with subjective confidence estimates.
-
-## 10. Artifacts
-
-Store benchmark outputs under:
+### A. Full Agent — primary
 
 ```text
-records/benchmarks/<benchmark_id>/
-  manifest.json
-  runs.jsonl
-  summary.json
-  model_<name>/recommendations/*.json
+local evidence + uncertainty actions + database evidence
 ```
 
-The manifest must include hashes of:
+### B. No external database
 
-- candidate set;
-- Agent context;
-- system prompt;
-- benchmark config;
-- git commit.
+```text
+local evidence + uncertainty actions
+```
 
-This makes the benchmark auditable and prevents later changes in prompt/data from being mixed into the same reported result.
+This estimates the incremental value of the external database.
+
+### C. No action enrichment
+
+```text
+local evidence + database evidence
+```
+
+Remove deterministic action-derived summaries/tools while keeping the scientific objective and prompt quality otherwise matched.
+
+### D. Literature-only sanity
+
+```text
+database evidence only
+```
+
+This is a diagnostic of the prior, not the main Agent benchmark.
+
+## 11. Scientific interpretation
+
+The strongest useful result is not that a plain LLM reproduces the exact source-parts recipe digit-for-digit.
+
+The relevant result is that the **full evidence-using Agent** repeatedly concentrates recommendation mass in the same resin-modified region that is later supported by wet-lab measurements.
+
+A defensible paper-facing statement, if supported by the measured benchmark frequencies, is:
+
+> Under a held-out-outcome protocol, an uncertainty-aware Agent equipped with pre-result local evidence, database evidence and deterministic scientific actions repeatedly prioritized the resin-modified formulation region later supported by physical thermal-hold measurements.
+
+The benchmark must remain capable of failing. Do not tune the retrieval rule, priors, candidate grid, prompt or scoring region after inspecting pilot outputs to improve apparent performance. Version any justified methodological change as a new benchmark.
