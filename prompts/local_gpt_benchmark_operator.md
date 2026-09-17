@@ -1,18 +1,39 @@
-# Local operator prompt: run the PUR-NEW blind GPT benchmark
+# Local operator prompt: run the PUR-NEW full-Agent blind GPT benchmark
 
-You are working locally on the repository `stloendays/PUR-NEW`.
+You are working locally on `stloendays/PUR-NEW`.
 
-Your task is to implement and execute a reproducible blind benchmark of the PUR-NEW formulation Agent across multiple GPT-family models using the repository's current evidence/action framework.
+Your task is to implement and execute a reproducible benchmark of the **full PUR-NEW Agent system** across multiple GPT-family models.
 
-## Scientific objective
+## Core scientific question
 
-Test whether the Agent, **without seeing the follow-up thermal-hold outcomes**, repeatedly prioritizes the resin-modified formulation region that is later supported by physical experiment.
+Can an uncertainty-aware Agent, using the information it is genuinely supposed to have before the follow-up experiment, repeatedly prioritize the resin-modified formulation region that is later supported by physical experiment?
 
-Do not optimize the benchmark after seeing model outputs. Do not modify target labels, prior ranges, candidate grid, or success metrics to improve apparent performance.
+## Important clarification: what "blind" means
+
+The evaluated GPT is blind only to the **held-out follow-up experimental outcome and benchmark labels**.
+
+The primary benchmark MUST give the evaluated Agent access to:
+
+1. original local formulation/rheology evidence available before the follow-up experiment;
+2. explicit process-state and missingness information;
+3. uncertainty-aware actions/tool outputs;
+4. external PUR database/literature evidence available before the follow-up result;
+5. finite admissible candidate set;
+6. the normal scientific decision contract in `prompts/agent_system.txt`.
+
+Do **not** cripple the primary Agent by hiding its database or uncertainty-aware actions. Removing those capabilities is an ablation experiment only.
+
+The evaluated GPT must NOT receive:
+
+- F1/follow-up thermal-hold measurements;
+- repeat-1/repeat-2 final stability values;
+- follow-up adjudication labels;
+- benchmark target region/success labels;
+- post-hoc prose derived from the held-out follow-up result.
 
 ## Read first
 
-Read these files before changing code:
+Read:
 
 - `README.md`
 - `docs/WORKFLOW.md`
@@ -23,73 +44,140 @@ Read these files before changing code:
 - `configs/evidence_access_profiles.json`
 - `configs/action_catalog.json`
 - `configs/formulation_priors.json`
+- `data/external_evidence_hints.csv`
 - `prompts/agent_system.txt`
 - `scripts/build_candidate_set.py`
 - `scripts/build_agent_context.py`
 - `scripts/run_agent_recommendation.py`
 - `src/pur_new/actions.py`
 
-## Non-negotiable anti-leakage rule
+## Primary condition
 
-The GPT model being evaluated must never receive:
+Use `blind_pre_result`, but interpret it correctly:
 
-- F1/follow-up thermal-hold measurements;
-- follow-up adjudication labels;
-- the benchmark target region or success labels;
-- any prose derived from the held-out follow-up outcome.
+```text
+original local evidence
++ uncertainty-aware actions
++ external database/literature evidence
++ candidate set
++ process-state uncertainty
+------------------------------
+Agent decision
+```
 
-The benchmark controller may know these only for post-hoc scoring.
+Only the later wet-lab result is held out.
 
-Use `blind_pre_result` for the main benchmark.
+If feasible, prefer exposing database evidence through retrieval/actions rather than dumping an opaque hand-picked answer into the prompt. The Agent should be able to call or consume outputs from actions such as:
 
-## Work to do
+- `query_external_priors`
+- `inspect_formulation`
+- `get_hold_stability`
+- `get_repeatability_risk`
+- `get_temperature_support`
+- `audit_process_unknowns`
+- `candidate_profile`
+- `compare_candidate_to_priors`
+- `stress_test_candidate`
+- `rank_candidate_support`
 
-1. Pull the latest `main` and create a clean working branch such as `benchmark/blind-gpt-v1`.
+Record which actions/evidence were used for each decision.
 
-2. Build the canonical candidate set with the existing generator. Do not alter the default candidate grid for the primary benchmark.
+## Anti-leakage audit
 
-3. Build the blind Agent context with `blind_pre_result`.
+Before any API call, programmatically verify that the final Agent payload/tool-access layer contains no held-out follow-up values, no adjudication label, and no benchmark scoring region. Fail closed on leakage.
 
-4. Audit the generated context before any API call. Programmatically assert that it does not contain follow-up hold values, follow-up adjudication labels, or benchmark scoring labels. Fail closed if leakage is detected.
+Do not confuse legitimate database evidence with leakage. External patent/literature evidence is intentionally available to the Agent in the primary condition.
 
-5. Add a benchmark runner, preferably `scripts/run_blind_benchmark.py`, that:
-   - reads model names from environment variable `PUR_BENCHMARK_MODELS` as a comma-separated list;
-   - uses `OPENAI_API_KEY` and optional `OPENAI_BASE_URL` without printing secrets;
-   - uses the same frozen candidate set, context, and system prompt for every model;
-   - performs a pilot of 5 runs/model by default, with a CLI option for 30+ runs/model;
-   - records every run, including API failures and abstentions;
-   - stores raw model output and validated recommendation data;
-   - does not overwrite existing benchmark artifacts;
-   - hashes the candidate set, blind context, system prompt, benchmark config, and git commit.
+## Benchmark implementation
 
-6. For the evaluated GPT call, reuse the scientific decision contract in `prompts/agent_system.txt`. The model should select one supplied candidate or abstain, and should return ordered alternatives. Do not tell the evaluated model which modifier region is considered successful.
+1. Pull latest `main` and create a clean branch, e.g. `benchmark/full-agent-blind-v1`.
+2. Build the canonical candidate set using the existing generator; do not change the V1 grid.
+3. Build the Agent context using `blind_pre_result`.
+4. Implement `scripts/run_blind_benchmark.py`.
+5. Read models from `PUR_BENCHMARK_MODELS`.
+6. Use `OPENAI_API_KEY` and optional `OPENAI_BASE_URL`; never print or commit secrets.
+7. Pilot with 5 runs/model; support >=30 runs/model.
+8. Use the same frozen candidate set, pre-result evidence, database evidence, action policy, and system prompt for all compared models.
+9. Save every run, including abstentions, invalid outputs, and API failures.
+10. Save raw output, normalized recommendation, action/evidence trace, hashes, timestamp, git commit, model, and run index.
+11. Implement deterministic post-hoc scorer `scripts/score_blind_benchmark.py`.
+12. Do not let scoring labels flow back into the evaluated Agent.
 
-7. Add a deterministic scoring script, preferably `scripts/score_blind_benchmark.py`. The scoring script may read `configs/blind_benchmark.json` because scoring happens after model output is frozen. Compute at least:
-   - exact-grid Top-1 recovery at the 18% grid point;
-   - supported-region Top-1 recovery for 15-21% modifier;
-   - supported-region Top-3 recall;
-   - near-experimental Top-3 recall for 17-20%;
-   - selection distribution by candidate and modifier fraction;
-   - abstention rate;
-   - invalid-output/API-failure rate;
-   - descriptive enrichment over random selection.
+## Primary metrics
 
-8. Add three benchmark conditions when feasible:
-   - `literature_only_sanity`;
-   - `blind_pre_result`;
-   - `blind_pre_result_without_external_hints`.
+Compute after recommendations are frozen:
 
-   For the third condition, remove external-prior information from the Agent payload without otherwise changing the original-system evidence. Do not create a weaker straw-man prompt.
+- exact-grid Top-1 recovery at 18% modifier;
+- 15-21% supported-region Top-1 recovery;
+- 15-21% supported-region Top-3 recall;
+- 17-20% near-experimental Top-3 recall;
+- candidate/modifier selection distribution;
+- abstention rate;
+- invalid/API-failure rate;
+- descriptive enrichment over random.
 
-9. Add tests for:
-   - anti-leakage filtering;
-   - candidate-grid parsing;
-   - scoring logic;
-   - Top-3 extraction;
-   - abstention handling;
-   - reproducible artifact manifests.
+Also summarize:
 
-10. Store outputs under:
+- whether process-history/repeatability uncertainty was recognized;
+- whether database evidence was actually used;
+- which actions were used;
+- whether the Agent distinguished analogue support from direct proof.
+
+## Ablations
+
+The main scientific result is the **full Agent** condition above.
+
+Then, as secondary ablations, compare:
+
+### A. Full Agent / primary
+
+```text
+local evidence + uncertainty actions + database evidence
+```
+
+### B. No external database
+
+```text
+local evidence + uncertainty actions
+```
+
+Remove only external database/literature evidence.
+
+### C. No action enrichment
+
+```text
+local evidence + database evidence, but without deterministic action-derived summaries/tools
+```
+
+Keep the same scientific objective and do not intentionally degrade the prompt.
+
+### D. Literature-only sanity check
+
+```text
+database evidence only
+```
+
+This is a diagnostic, not the main benchmark.
+
+These ablations answer whether performance comes from the full Agent architecture, the local experiment, the database, or their combination.
+
+## Database discipline
+
+The Agent should see genuine pre-result database evidence. However, do not create a post-hoc database summary whose only purpose is to encode the known experimental answer.
+
+For the strongest paper claim:
+
+- freeze the retrieval query/rule;
+- preserve returned source IDs/evidence locators;
+- record retrieved rows/chunks;
+- allow broad relevant evidence, including evidence that may not support the final candidate;
+- keep source limitations visible.
+
+The database is evidence available to the Agent, not a hidden scoring oracle.
+
+## Artifacts
+
+Store under:
 
 ```text
 records/benchmarks/<benchmark_id>/
@@ -98,38 +186,46 @@ records/benchmarks/<benchmark_id>/
   summary.json
   model_<sanitized_model_name>/
     recommendations/
+    action_traces/
 ```
 
-11. Run the local test suite before and after the benchmark implementation.
+## Tests
 
-12. Run a small pilot first. If the API/model names are valid, run 5 calls per model. Do not automatically launch a costly 30-run/model benchmark unless the environment clearly indicates that this is intended or the user has asked for the full run.
+Add tests for:
 
-13. At the end, report:
-   - exact commands executed;
-   - models actually available and used;
-   - per-model pilot metrics;
-   - aggregate metrics;
-   - any leakage/validation failures;
-   - where artifacts were written;
-   - commit SHA(s);
-   - what would be needed for the full 30-run/model benchmark.
+- anti-leakage;
+- candidate-grid parsing;
+- database/action visibility in the full-Agent condition;
+- Top-3 extraction;
+- scoring;
+- abstention/invalid output handling;
+- reproducible manifests/hashes.
 
-## Environment
+Run `pytest` before and after implementation.
 
-Use:
+## Final report
 
-```bash
-export OPENAI_API_KEY=...
-export OPENAI_BASE_URL=...        # optional, for the user's OpenAI-compatible proxy
-export PUR_BENCHMARK_MODELS='model-a,model-b,model-c'
-```
+Report:
 
-Never commit or print API keys.
+1. models actually used;
+2. runs/model;
+3. exact Top-1;
+4. supported-region Top-1;
+5. supported-region Top-3;
+6. near-experimental Top-3;
+7. abstention and invalid rates;
+8. selection distributions;
+9. action-use frequencies;
+10. database-evidence-use diagnostics;
+11. full-Agent vs no-database vs no-action ablation differences;
+12. leakage audit result;
+13. artifact paths;
+14. commit SHA(s).
 
-## Interpretation discipline
+## Interpretation
 
-A good result is not defined as reproducing the exact source-parts formulation digit-for-digit. The primary scientific question is whether the Agent repeatedly concentrates recommendations in the resin-modified region supported by the external analogue evidence and later physical experiment.
+The benchmark must remain capable of failing. Do not tune candidate priors, prompts, scoring intervals, retrieval rules, or database summaries after seeing pilot outputs in order to improve recovery.
 
-The benchmark must remain capable of failing. If GPT models prefer another region, abstain, or show unstable rankings, report that result faithfully and diagnose why.
+The primary claim we are testing is not "a plain GPT guessed 18%". It is:
 
-Do not change candidate priors, scoring intervals, or prompts after seeing the pilot in order to increase hit rate. If a methodological change is scientifically justified, version it as a new benchmark rather than silently replacing V1.
+> A full uncertainty-aware scientific Agent, equipped with pre-result local evidence, database evidence and deterministic actions, can concentrate experimental recommendations in a formulation region later supported by wet-lab measurements.
