@@ -1,15 +1,20 @@
 {
-  "catalog_version": "1.0.0",
+  "catalog_version": "1.1.0",
   "purpose": "Deterministic actions available to the PUR-NEW decision Agent before it freezes a recommendation.",
   "actions": [
     {
       "name": "query_external_priors",
-      "description": "Retrieve curated analogue evidence from the external PUR database. Use this to learn admissible formulation motifs and approximate modifier-fraction regions without reading held-out wet-lab outcomes.",
-      "when_to_use": ["before selecting a formulation family", "when considering resin/tackifier modification", "when local evidence is sparse"]
+      "description": "Retrieve source-level analogue evidence from the curated external PUR evidence table, including source identifiers, evidence locators, candidate-space role and limitations.",
+      "when_to_use": ["before selecting a formulation family", "when considering acrylic/tackifier modification", "when local evidence is sparse"]
+    },
+    {
+      "name": "get_candidate_hypothesis",
+      "description": "Return the frozen evidence-derived candidate-space hypothesis, the original E2 reactive-core anchor, independent acrylic/tackifier axes and the historical/claim boundary. This exposes why the candidate grid exists without exposing held-out follow-up results.",
+      "when_to_use": ["before comparing candidates", "to distinguish evidence-derived grid design from post-hoc scoring"]
     },
     {
       "name": "inspect_formulation",
-      "description": "Inspect one measured formulation from the current evidence table and compute transparent composition summaries such as total reported amount and resin-modifier fraction when available.",
+      "description": "Inspect one measured formulation and compute transparent composition summaries including polyol, acrylic-like, tackifier-like, combined-modifier and MDI fractions.",
       "when_to_use": ["to understand the original design state", "to distinguish formulation from process effects"]
     },
     {
@@ -34,29 +39,31 @@
     },
     {
       "name": "candidate_profile",
-      "description": "Compute a transparent candidate profile from its formulation state: total reported amount, polyol fraction, MDI fraction, AC1920+TK100 modifier fraction, and whether the candidate is resin-modified.",
-      "when_to_use": ["for every serious candidate", "before comparing a candidate with external priors"]
+      "description": "Compute a candidate profile with separate acrylic-like and tackifier-like fractions instead of collapsing all modifiers into one number.",
+      "when_to_use": ["for every serious candidate", "before comparing a candidate with class-specific external priors"]
     },
     {
       "name": "compare_candidate_to_priors",
-      "description": "Compare a candidate's modifier fraction with curated literature/patent analogue regions. This is an analogy-support action, not a predicted experimental outcome.",
-      "when_to_use": ["when the candidate contains AC1920/TK100 or another resin modifier", "to distinguish supported versus extreme modifier loading"]
+      "description": "Compare acrylic-like and tackifier-like axes separately with independent evidence anchors frozen in formulation_priors.json. Returns analogue support, not predicted wet-lab performance.",
+      "when_to_use": ["for resin-modified candidates", "to distinguish independently supported coarse levels from extrapolative ones"]
     },
     {
       "name": "stress_test_candidate",
-      "description": "Apply deterministic risk flags to a candidate using current local failure modes, evidence coverage and external analogue support. It returns reasons, not a fabricated viscosity prediction.",
+      "description": "Apply deterministic risk flags using candidate-space support, process-history missingness and grid boundaries. It returns reasons, not a fabricated viscosity prediction.",
       "when_to_use": ["before freezing the recommendation", "to expose whether the selection survives robustness checks"]
     },
     {
       "name": "rank_candidate_support",
-      "description": "Create a transparent support-oriented ordering using evidence coverage, external analogue support, thermal-hold failure relevance and process-state completeness. This is a decision aid and must not be described as a trained predictive model.",
-      "when_to_use": ["when several candidates remain plausible", "to obtain a reproducible pre-LLM ordering"]
+      "description": "Create a transparent support-oriented ordering from the same allowed evidence. This is a deterministic baseline/decision aid and must not be described as a trained predictive model.",
+      "when_to_use": ["when several candidates remain plausible", "to benchmark what the evidence alone already provides before LLM reasoning"]
     }
   ],
   "invariants": [
     "Actions may expose only evidence allowed by the active evidence-access profile.",
-    "Held-out experimental outcomes must never be converted into hints for a blind Agent evaluation.",
+    "Held-out follow-up outcomes and scoring labels must never be converted into candidate-space hints in blind replay.",
+    "The V2 grid uses the original E2 reactive-core proportions and independent external evidence anchors; it does not encode the exact follow-up recipe.",
     "External analogue evidence is directional prior information, not proof of the current formulation's optimum.",
+    "If AC1920 or TK100 are later shown to have NCO-reactive functionality, stoichiometry must be recalculated rather than assuming the E2 NCO:OH value remains unchanged.",
     "No action may invent a molecular mechanism or an unmeasured viscosity value."
   ]
 }
