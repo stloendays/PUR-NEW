@@ -245,20 +245,22 @@ def main() -> None:
         kwargs["base_url"] = base_url
     client = OpenAI(**kwargs)
 
+    planner_action_names = {
+        "query_external_priors",
+        "get_candidate_hypothesis",
+        "inspect_formulation",
+        "get_hold_stability",
+        "get_repeatability_risk",
+        "get_temperature_support",
+        "get_state_aware_rheology_summary",
+    }
     planner_payload = {
         "architecture_version": architecture["version"],
         "workflow_policy": workflow,
         "evidence_profile": profile_name,
         "evidence_policy": policy,
         "allowed_planner_actions": sorted(
-            [a["name"] for a in action_catalog["actions"] if a["name"] in {
-                "query_external_priors",
-                "get_candidate_hypothesis",
-                "inspect_formulation",
-                "get_hold_stability",
-                "get_repeatability_risk",
-                "get_temperature_support",
-            }]
+            [a["name"] for a in action_catalog["actions"] if a["name"] in planner_action_names]
         ),
         "filtered_evidence_state": evidence,
         "candidate_space_summary": candidate_set.get("provenance", {}),
