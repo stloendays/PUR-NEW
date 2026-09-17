@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pur-new/agent_recommendation.schema.json",
+  "title": "Agent recommendation and wet-lab adjudication record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "recommendation_id",
+    "created_utc",
+    "result_inspection_status_at_creation",
+    "formulation_state",
+    "process_state",
+    "uncertainty_summary",
+    "selection_rationale",
+    "provenance",
+    "adjudication"
+  ],
+  "properties": {
+    "recommendation_id": {"type": "string", "minLength": 1},
+    "created_utc": {"type": "string", "minLength": 1},
+    "result_inspection_status_at_creation": {
+      "enum": ["no_results_inspected", "some_results_inspected", "unknown"]
+    },
+    "formulation_state": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Exact formulation recommended by the Agent. Preserve source units / parts."
+    },
+    "process_state": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Reaction history, hold temperature/time, preparation state and other process variables known at recommendation time."
+    },
+    "uncertainty_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "selection_rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_direction_or_acceptance_criterion": {
+      "type": ["string", "null"]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generated_by"],
+      "properties": {
+        "generated_by": {"enum": ["agent", "human", "hybrid"]},
+        "git_commit": {"type": ["string", "null"]},
+        "run_id": {"type": ["string", "null"]},
+        "model": {"type": ["string", "null"]},
+        "prompt_hash": {"type": ["string", "null"]},
+        "input_hash": {"type": ["string", "null"]}
+      }
+    },
+    "adjudication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": ["pending", "supported", "partially_supported", "falsified", "out_of_domain"]
+        },
+        "experiment_date": {"type": ["string", "null"]},
+        "measurement_reference": {"type": ["string", "null"]},
+        "note": {"type": ["string", "null"]}
+      }
+    }
+  }
+}
