@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pur-new/design_state.schema.json",
+  "title": "PUR formulation-process design state",
+  "description": "Canonical state supplied to the Agent. Missing values remain explicit and are never silently converted to zero.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["state_id", "formulation_state", "process_state", "evidence_state", "provenance"],
+  "properties": {
+    "state_id": {"type": "string", "minLength": 1},
+    "formulation_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["components"],
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "amount", "unit"],
+            "properties": {
+              "name": {"type": "string"},
+              "role": {"type": ["string", "null"]},
+              "amount": {"type": ["number", "null"]},
+              "unit": {"type": ["string", "null"]}
+            }
+          }
+        },
+        "nco_oh": {"type": ["number", "null"]},
+        "notes": {"type": ["string", "null"]}
+      }
+    },
+    "process_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reaction_temperature_C": {"type": ["number", "null"]},
+        "reaction_duration_min": {"type": ["number", "null"]},
+        "addition_history": {"type": ["string", "null"]},
+        "mixing_history": {"type": ["string", "null"]},
+        "sample_age_h": {"type": ["number", "null"]},
+        "hold_temperature_C": {"type": ["number", "null"]},
+        "hold_time_min": {"type": ["number", "null"]},
+        "run_label": {"type": ["string", "null"]},
+        "preparation_perturbation": {"type": ["string", "null"]},
+        "measurement_sequence": {"type": ["string", "null"]},
+        "notes": {"type": ["string", "null"]}
+      }
+    },
+    "evidence_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "temperature_sweep_reference": {"type": ["string", "null"]},
+        "thermal_hold_reference": {"type": ["string", "null"]},
+        "replicate_count": {"type": ["integer", "null"], "minimum": 0},
+        "derived_descriptors": {"type": "object", "additionalProperties": true},
+        "missing_fields": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_files": {"type": "array", "items": {"type": "string"}},
+        "created_utc": {"type": ["string", "null"]},
+        "created_by": {"type": ["string", "null"]},
+        "git_commit": {"type": ["string", "null"]}
+      }
+    }
+  }
+}
