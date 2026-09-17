@@ -31,6 +31,8 @@ jobs:
           python -m py_compile scripts/run_scientific_agent_v3.py
           python -m py_compile scripts/run_deterministic_baseline.py
           python -m py_compile scripts/build_naive_baseline_view.py
+          python -m py_compile scripts/build_candidate_set.py
+          python -m py_compile scripts/build_refinement_set.py
           python -m py_compile scripts/run_naive_llm_baseline.py
           python -m py_compile scripts/summarize_agent_benchmark.py
           python -m py_compile scripts/analysis_audit_v1.py
@@ -56,10 +58,50 @@ jobs:
           Path('/tmp/evidence_state_blind.json').write_text(json.dumps(filtered, indent=2, sort_keys=True) + '\n')
           PY
           python -m json.tool /tmp/evidence_state_blind.json > /dev/null
-      - name: Build V2 candidate-space formalization
+      - name: Build V2 coarse candidate-space formalization
         run: python scripts/build_candidate_set.py --output /tmp/candidate_set_hypothesis_v2.json
-      - name: Sanity-check candidate-set JSON
+      - name: Sanity-check coarse candidate-set JSON
         run: python -m json.tool /tmp/candidate_set_hypothesis_v2.json > /dev/null
+      - name: Build outcome-blind fine-refinement space
+        run: |
+          python scripts/build_refinement_set.py --output /tmp/candidate_set_refinement_v1.json
+          python -m json.tool /tmp/candidate_set_refinement_v1.json > /dev/null
+      - name: Audit refinement anti-leakage and coordinate basis
+        run: |
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+
+          ref = json.loads(Path('/tmp/candidate_set_refinement_v1.json').read_text())
+          prov = ref['provenance']
+          assert prov['coordinate_basis'] == 'normalized_total_wt_percent'
+          assert prov['reads_formulations_csv'] is False
+          assert prov['reads_follow_up_measurements'] is False
+          assert prov['uses_validation_recipe_numeric_values_to_generate_domain'] is False
+          assert prov['uses_validation_outcome_to_generate_domain'] is False
+
+          text = Path('scripts/build_refinement_set.py').read_text()
+          assert 'data/formulations.csv' not in text
+          assert 'F1' not in text
+          assert 'thermal_hold.csv' not in text
+
+          rows = list(csv.DictReader(Path('data/formulations.csv').open()))
+          f1 = next(r for r in rows if r['formulation_id'] == 'F1')
+          parts = [float(f1[k]) for k in ['ppg2000','pdp70','ac1920','tk100','mdi']]
+          total = sum(parts)
+          ac = float(f1['ac1920']) / total * 100.0
+          tk = float(f1['tk100']) / total * 100.0
+          assert 13.9 < ac < 14.1
+          assert 4.0 < tk < 4.2
+
+          coords = [
+              (float(c['formulation_state']['acrylic_like_modifier_pct']),
+               float(c['formulation_state']['minor_tackifier_like_modifier_pct']))
+              for c in ref['candidates']
+          ]
+          nearest = min(abs(a-ac) + abs(t-tk) for a,t in coords)
+          assert nearest < 1.0, nearest
+          PY
       - name: Build and audit naive headline baseline view
         run: |
           python scripts/build_naive_baseline_view.py \
