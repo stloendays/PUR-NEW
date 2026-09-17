@@ -2,27 +2,55 @@
 
 ## Status and claim boundary
 
-This document formalizes **why a resin-modified candidate region is scientifically plausible** and how the current repository represents that region reproducibly.
+This document formalizes **why a resin-modified candidate region is scientifically plausible** and how PUR-NEW represents that region reproducibly.
 
-Two provenance facts must be kept separate:
+Three facts must remain separate:
 
 1. the research team confirms that the **Agent-selected validation formulation** was recommended before its corresponding wet-lab result was known to the Agent;
-2. the current exact V2 `4 x 3` software grid was formalized later and is therefore a reproducible abstraction of the evidence-constrained region, not automatically the contemporaneous historical selection interface.
+2. the current exact coarse `4 x 3` grid was formalized later as a reproducible benchmark abstraction;
+3. the current fine-refinement generator was also formalized later and is an outcome-blind operationalization for replay/future prospective rounds, **not a reconstructed historical freeze algorithm**.
 
-The present document must not be used to fabricate a pre-experiment timestamp for the V2 grid. It may be used to explain the scientific rationale of the candidate family, support replay/ablation benchmarking, and define future prospective search spaces.
-
-See `docs/EXPERIMENTAL_CHRONOLOGY.md` for the author-confirmed Agent-to-experiment order.
+Therefore the prospective historical claim belongs to the recommendation chronology, not to a fabricated software timestamp.
 
 ---
 
-## 1. Local anchor: why use the E2 reactive core
+## 1. The apparent “17% problem” is partly a coordinate-basis problem
 
-The original five-point local design contains two axes:
+The laboratory validation recipe is stored as **source-reported parts**:
+
+```text
+PPG2000 = 39.60
+PDP-70  = 39.60
+AC1920  = 17
+TK100   = 5
+MDI     = 20.19
+```
+
+These numbers are not normalized total-formulation wt%.
+
+After normalization by the recipe total, the modifier coordinates are approximately:
+
+```text
+AC1920 = 14.00 wt% of total formulation
+TK100  = 4.12 wt% of total formulation
+```
+
+By contrast, the Agent candidate axes are defined in **normalized-total wt% coordinates**.
+
+Therefore it is incorrect to compare the raw source-reported `17/5` directly with a normalized `15/5` grid cell. The correct comparison is approximately `14.00/4.12` versus `15/5`.
+
+This basis normalization must be applied before any distance, region-recovery, or nearest-candidate analysis.
+
+---
+
+## 2. Local anchor: E2 reactive core
+
+The original five-point local design contains two perturbation directions:
 
 - E1 / E2 / E3: PPG2000:PDP-70 = 50:50 while NCO:OH changes from 1.70 to 1.90;
 - E4 / E2 / E5: NCO:OH = 1.80 while PPG2000/PDP-70 changes around the 50:50 point.
 
-Therefore E2 is the **geometric centre of the original local formulation design**.
+E2 is therefore the geometric centre of the original local formulation design.
 
 E2 source amounts are:
 
@@ -32,7 +60,7 @@ PDP-70  = 119.71 g
 MDI     = 60.57 g
 ```
 
-Normalizing only this original E2 reactive core gives approximately:
+Normalizing the E2 reactive core gives approximately:
 
 ```text
 PPG2000 = 39.9047%
@@ -40,137 +68,113 @@ PDP-70  = 39.9047%
 MDI     = 20.1907%
 ```
 
-The V2 candidate-space formalization preserves these relative core proportions while allocating part of the total formulation to modifier axes.
+Candidate generation preserves these relative core proportions while allocating part of total formulation to modifier axes.
 
-If a modifier contributes reactive OH or another NCO-reactive group, the true NCO:OH ratio must be recalculated from verified material specifications. Until then, the E2 ratio is only a reactive-core anchor.
+If a modifier contributes NCO-reactive functionality, true stoichiometry must be recalculated from verified material specifications. The E2 NCO:OH label is a reactive-core anchor only.
 
 ---
 
-## 2. Independent evidence for an acrylic-like modifier region
+## 3. Evidence for the resin-modified region
 
-The external evidence does not point to one universal acrylic fraction. It provides several independent anchors that justify a coarse **15-25% exploration region**.
+### Acrylic-like modifier
 
-### 2.1 15% acrylic resin
+Current curated evidence supports a broad resin-modified direction rather than one exact optimum.
 
-A 2025 peer-reviewed study on high-temperature reactive PUR reported a formulation family in which **15% acrylic resin** was identified as the preferred overall level.
+- US20160215185A1 contains repeated acrylic tackifying-resin examples near 19–20% of total formulation.
+- US6465104B1 Example 10 uses 25 wt% low-OH acrylic copolymer and reports direct 121 °C viscosity-stability behavior.
+- A 2025 heat-resistant PUR study reports a 15% preferred acrylic-resin addition level; because the denominator requires re-verification, this is retained as directional lower-bound evidence rather than an exact commensurate total-wt% anchor.
 
-Use here:
-
-```text
-15% = low/mid acrylic evidence anchor
-```
-
-Limitation: the optimization target was broader adhesive performance, not the same local hot-hold protocol.
-
-### 2.2 Approximately 20% acrylic tackifying resin
-
-US20160215185A1 reports several moisture-curing PUR examples containing approximately **19-20% acrylic tackifying resin**.
-
-Use here:
-
-```text
-20% = repeated acrylic evidence anchor
-```
-
-Limitation: the examples report single-temperature melt viscosity and adhesion rather than the local hold-time trajectory.
-
-### 2.3 25% acrylic copolymer with direct hot-hold stability data
-
-US6465104B1 Example 10 uses **25 wt% acrylic copolymer**. At 121 C, the low-OH acrylic example increased from 5125 to 7000 cP over 0.5-8 h, versus 9375 to 16500 cP for a higher-OH acrylic comparator at the same loading.
-
-Use here:
-
-```text
-25% = upper acrylic evidence anchor
-modifier functionality/reactive-group density = plausible stability variable
-```
-
-### 2.4 Acrylic-axis formalization
-
-The reproducible V2 axis is therefore:
+The coarse acrylic design axis is therefore:
 
 ```text
 0, 15, 20, 25 wt% of normalized total formulation
 ```
 
-where `0%` is the reactive-only control and the nonzero levels are coarse independent evidence anchors.
+### Minor tackifier-like modifier
 
----
+US5932680A contains examples around 4.8–6.4% tackifying/hydrocarbon resin and a broader preferred resin range around 3–10 wt%. US20070155859A1 separately supports tackifier/rheology-control use below roughly 10 wt%.
 
-## 3. Independent evidence for a minor tackifier-like region
-
-US5932680A describes working examples around **4.8-6.4%** tackifying/hydrocarbon resin and a preferred resin range of roughly **3-10 wt%**.
-
-US20070155859A1 separately describes tackifiers/rheology-control agents as typically used below about 10 wt%.
-
-The reproducible V2 axis is therefore:
+The coarse tackifier axis is therefore:
 
 ```text
 0, 5, 10 wt% of normalized total formulation
 ```
 
-where `5%` represents the repeatedly documented minor-resin region and `10%` is a conservative coarse upper level.
+These sources justify a **candidate family and region**, not a proven local AC1920/TK100 optimum.
 
 ---
 
-## 4. Independent evidence that modifier identity can affect hot-hold stability
+## 4. Hierarchical design instead of pretending that 17/5 came from 12 points
 
-### US6465104B1
+The design logic is explicitly hierarchical.
 
-At identical 25 wt% acrylic loading, a low-OH acrylic copolymer showed substantially slower viscosity increase at 121 C than a higher-OH acrylic comparator. This supports the hypothesis that effective reactive-group density can influence viscosity build-up during hot holding.
+### Stage 1 — coarse region identification
 
-### US20030022973A1
-
-Reactive PUR examples containing functional tackifiers and acrylic copolymer report different viscosity/stability values depending on formulation. Because several variables change, this source is used as directional evidence rather than causal proof.
-
-These sources justify **testing modifier chemistry**, not claiming a proven AC1920/TK100 molecular mechanism.
-
----
-
-## 5. Why thermal-hold stability is an explicit objective
-
-Reactive-hot-melt formulation art treats viscosity rise during elevated-temperature holding as a practical failure mode.
-
-The local protocol is different from the long external hot-hold windows, so external thresholds are not copied into the local acceptance criterion. The transferable point is narrower:
-
-> thermal-hold viscosity drift is a formulation objective that should be evaluated separately from single-point viscosity.
-
----
-
-## 6. Reproducible V2 candidate-space construction
-
-The formal grid is the Cartesian product:
+The controlled benchmark uses the Cartesian product:
 
 ```text
 acrylic-like modifier = {0, 15, 20, 25}%
 minor tackifier-like modifier = {0, 5, 10}%
 ```
 
-for 12 coarse formulation-family cells.
+This gives 12 coarse cells.
 
-For a candidate with acrylic fraction `a` and tackifier fraction `t`:
+Its purpose is to test whether a reasoning method enters the **resin-modified region** rather than remaining trapped in reactive-core-only tuning.
+
+It is a region-level benchmark and is not presented as the original historical candidate picker.
+
+### Stage 2 — outcome-blind fine refinement
+
+`scripts/build_refinement_set.py` creates a finer normalized-total-wt% search space after the resin-modified family has been identified.
+
+Crucially, the generator:
+
+- reads the audited E2 core only from `configs/formulation_priors.json`;
+- does **not** read `data/formulations.csv`;
+- does not read the validation formulation;
+- does not read follow-up thermal-hold measurements;
+- does not use the validation outcome to define its domain.
+
+The acrylic refinement domain is derived from directly commensurate external anchors plus the predeclared support-distance rule; the tackifier domain comes from the independently documented control-to-upper range.
+
+The current fine-refinement implementation is useful for reproducible replay and future prospective rounds, but it must not be claimed as the exact historical algorithm that originally produced the validation recipe.
+
+---
+
+## 5. Candidate construction
+
+For normalized acrylic fraction `a` and tackifier fraction `t` in percent:
 
 ```text
 m = (a + t) / 100
-```
-
-and the original E2 reactive core is scaled by the remaining fraction:
-
-```text
-PPG2000 = (1-m) * 39.9047
-PDP-70  = (1-m) * 39.9047
-MDI     = (1-m) * 20.1907
+PPG2000 = 100 * (1-m) * 0.3990466
+PDP-70  = 100 * (1-m) * 0.3990466
+MDI     = 100 * (1-m) * 0.2019067
 AC-like = a
 TK-like = t
 ```
 
-This construction has three important properties:
+This construction separates three things cleanly:
 
-1. the reactive-core ratios come from the original E2 design;
-2. modifier levels come from independent literature/patent anchors;
-3. the Agent-selected validation formulation is not inserted as an exact discrete answer point.
+1. local reactive-core geometry from E2;
+2. externally supported modifier directions;
+3. controller-side comparison with the held-out validation recipe only **after** recommendations are frozen.
 
-The grid therefore tests a **region-level scientific hypothesis**, not recipe memorization.
+---
+
+## 6. Why this preserves conclusion validity
+
+The paper should not claim:
+
+> “The Agent searched 12 candidates and selected AC1920=17, TK100=5.”
+
+That statement is false because `17/5` is a source-parts representation and the later 12-cell grid is a normalized-total-wt% benchmark.
+
+The defensible claim is:
+
+> **The Agent recommendation entered an evidence-supported resin-modified formulation region before the wet-lab outcome was available. A later coarse grid formalized that region for controlled replay, while a separately defined outcome-blind fine-refinement layer operationalizes local search without reading the validation recipe or outcome.**
+
+The wet-lab experiment then adjudicates the recommendation with respect to thermal-hold rheological stability.
 
 ---
 
@@ -186,15 +190,17 @@ The grid therefore tests a **region-level scientific hypothesis**, not recipe me
 
 ### H3 — region hypothesis
 
-> A practically useful region should occur within the externally supported coarse space spanned by 15-25% acrylic-like resin and 0-10% minor tackifier-like resin rather than requiring an unrestricted composition search.
+> A useful design region should occur within the externally supported resin-modified neighborhood rather than requiring unrestricted global composition search.
 
-These hypotheses remain falsifiable in replay and future experiments.
+These hypotheses remain falsifiable; none requires the exact historical recipe to be encoded in the replay grid.
 
 ---
 
 ## 8. Relation to the Agent-selected validation formulation
 
-The formulation stored internally as `F1` is the **Agent-selected validation formulation**:
+The validation formulation is stored internally as `F1` but should be called **Agent-selected validation formulation** in the manuscript.
+
+Source-reported parts:
 
 ```text
 PPG2000 39.60
@@ -204,20 +210,16 @@ TK100    5
 MDI     20.19
 ```
 
-Normalized only for comparison, it contains approximately:
+Normalized modifier coordinates are approximately:
 
 ```text
-AC1920 14.00%
-TK100   4.12%
+AC1920 14.00 wt%
+TK100   4.12 wt%
 ```
 
-and therefore lies close to the later formalized `15% acrylic-like + 5% minor tackifier-like` V2 cell.
+Hence the formulation is compositionally close to the later coarse `15/5` cell in the correct normalized coordinate system.
 
-The research team confirms that this formulation was recommended before its wet-lab outcome was known to the Agent. However, the current repository does not establish that the exact V2 4x3 software grid already existed in this form at the time of that recommendation.
-
-The correct interpretation is therefore:
-
-> the prospective status belongs to the **Agent recommendation**, while the V2 grid is a later reproducible formalization of the evidence-constrained candidate region.
+This proximity is evaluated **controller-side only** and must never enter the blind Agent payload.
 
 ---
 
@@ -225,4 +227,4 @@ The correct interpretation is therefore:
 
 Recommended wording:
 
-> The initial rheological analyses established a state-aware design problem in which absolute viscosity was strongly realization dependent while the local temperature-response shape was comparatively transferable. Independent literature and patent evidence further supported resin-modified PUR as a scientifically plausible strategy for improving hot-hold stability. Using the pre-result evidence available at the time, the design Agent selected a resin-modified validation formulation before its subsequent wet-lab response was known. The formulation was then prepared and tested by the human experimental team. A later 12-cell acrylic/tackifier grid was introduced to formalize the evidence-constrained candidate region for reproducible replay, ablation, and future design rounds; this later grid is not presented as the contemporaneous freeze artifact unless older provenance is recovered.
+> The initial rheological analyses established a state-aware design problem in which absolute viscosity was strongly realization dependent while the local temperature-response shape was comparatively transferable. Independent literature and patent evidence supported resin modification as a plausible intervention for hot-hold instability. The design Agent selected a resin-modified validation formulation before its subsequent wet-lab response was known. For reproducible replay, the formulation space was later represented hierarchically: a coarse 12-cell grid assessed region-level recovery, while an outcome-blind fine-refinement layer operationalized local search within the evidence-supported region. These later software representations are not presented as the original contemporaneous freeze artifact.
