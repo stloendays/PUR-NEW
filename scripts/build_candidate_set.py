@@ -87,7 +87,7 @@ def make_candidate(
             "data/thermal_hold.csv::original_only",
         ],
         "constraint_notes": [
-            "Acrylic-like and tackifier-like levels come from independent external evidence anchors, not the later follow-up recipe.",
+            "Acrylic-like and tackifier-like levels come from independent external evidence anchors, not from the validation formulation's numeric composition.",
             "The PPG2000/PDP70/MDI core is the original E2 formulation normalized and scaled into the remaining mass fraction.",
             "The original E2 NCO:OH label remains valid only if added modifiers do not contribute NCO-reactive functionality; true stoichiometry must be recalculated when modifier chemistry is verified.",
             "Reaction-history fields remain unknown and therefore contribute process-history uncertainty.",
@@ -123,13 +123,14 @@ def main() -> None:
     out = {
         "candidate_set_id": "EVIDENCE_DERIVED_HYPOTHESIS_GRID_V2",
         "decision_context": (
-            "Test the hypothesis that a resin-modified family can improve hot-hold robustness relative to an unmodified reactive core. "
+            "Formalize the evidence-constrained resin-modification region for reproducible replay, ablation and future design rounds. "
             "The grid preserves the original E2 reactive-core proportions and varies only independently supported coarse acrylic-like and minor-tackifier-like modifier levels."
         ),
         "candidates": candidates,
         "provenance": {
             "generator": "scripts/build_candidate_set.py",
             "hypothesis_document": "docs/CANDIDATE_SPACE_HYPOTHESIS.md",
+            "chronology_document": "docs/EXPERIMENTAL_CHRONOLOGY.md",
             "prior_file": "configs/formulation_priors.json",
             "external_evidence_file": "data/external_evidence_hints.csv",
             "local_anchor_formulation": args.anchor_formulation,
@@ -137,11 +138,13 @@ def main() -> None:
                 "acrylic_like_modifier_pct": acrylic_grid,
                 "minor_tackifier_like_modifier_pct": tackifier_grid,
             },
-            "uses_follow_up_numeric_values_to_generate_candidates": False,
-            "hypothesis_formalized_after_current_follow_up_result_known": True,
+            "uses_validation_recipe_numeric_values_to_generate_candidates": False,
+            "agent_validation_formulation_recommended_before_target_result_known": True,
+            "current_exact_v2_grid_formalized_after_validation_experiment": True,
+            "repository_contains_original_contemporaneous_freeze_artifact": False,
             "historical_interpretation": (
-                "Suitable for retrospective held-out-result blind replay and future prospective rounds after freeze; "
-                "not itself evidence of a pre-result recommendation for the already completed follow-up experiment."
+                "The research team confirms that the Agent recommendation preceded knowledge of the validation result. "
+                "The current exact V2 4x3 software grid is a later reproducible formalization of the evidence-constrained candidate region and must not be represented as the original freeze artifact unless older provenance is recovered."
             ),
         },
     }
