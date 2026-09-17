@@ -29,6 +29,7 @@ jobs:
         run: |
           python -m py_compile scripts/run_agent_recommendation.py
           python -m py_compile scripts/run_scientific_agent_v3.py
+          python -m py_compile scripts/run_hierarchical_agent.py
           python -m py_compile scripts/run_deterministic_baseline.py
           python -m py_compile scripts/build_naive_baseline_view.py
           python -m py_compile scripts/build_candidate_set.py
