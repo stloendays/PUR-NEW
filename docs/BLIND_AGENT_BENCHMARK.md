@@ -1,236 +1,311 @@
-# Full-Agent blind multi-model benchmark
+# Full-Agent held-out-result benchmark — V2
 
 ## Objective
 
-Quantify how reliably the **full PUR-NEW decision Agent** recovers the formulation region later supported by wet-lab thermal-hold measurements while remaining blind to those held-out outcomes.
+PUR-NEW V2 asks a narrower and more defensible question than the earlier scalar-modifier benchmark:
 
-The benchmark asks:
+> If the Agent is given the original local rheology, uncertainty-aware actions, an independently evidence-derived candidate hypothesis, and external PUR database/literature evidence — but is blinded to the current follow-up formulation and its wet-lab outcome — does it prioritize candidates that are compositionally close to the later successful follow-up region?
 
-> Given the information and tools genuinely available before the follow-up experiment — original-system rheology, structured uncertainty, uncertainty-aware actions, external PUR database/literature evidence, and an admissible candidate set — how often does the Agent prioritize the resin-modified formulation region that is later physically supported?
+The benchmark evaluates the **full evidence-using Agent**, not a plain LLM.
 
-## 1. What "blind" means
+## Historical status
 
-Blindness applies to the **future outcome**, not to the Agent's legitimate scientific capabilities.
+V2 is a **retrospective held-out-result blind replay** for the already completed follow-up experiment.
 
-### The evaluated Agent SHOULD see in the primary condition
+The candidate-space hypothesis in `docs/CANDIDATE_SPACE_HYPOTHESIS.md` was formalized after the current follow-up result was already known. However, the V2 grid itself is rebuilt without using any numeric value from that follow-up recipe:
 
-- original local temperature-sweep and thermal-hold evidence available before follow-up;
-- process-state/missingness information;
-- uncertainty-aware deterministic actions and their outputs;
-- external PUR patent/literature/database evidence available before follow-up;
-- admissible candidate set;
-- workflow policy and scientific decision prompt.
+- the reactive core is anchored to original formulation E2;
+- acrylic-like levels are independently anchored at 15, 20 and 25% by external evidence;
+- minor tackifier-like levels are independently anchored at 5 and 10% by external evidence/guidance;
+- the exact follow-up recipe is not one of the discrete generated candidates.
 
-### The evaluated Agent MUST NOT see
+Therefore V2 can test whether the evidence stack is **consistent with** the held-out experiment, but it must not be described as prospective validation of V2 itself.
 
-- F1/follow-up thermal-hold measurements;
-- follow-up adjudication labels;
-- benchmark target/success region;
-- scoring labels;
-- prose derived from the held-out follow-up result.
+Once V2 is frozen, future design rounds can use the same structure prospectively.
 
-Thus the main experiment evaluates the Agent system, not a stripped-down plain LLM.
+---
 
-## 2. Primary full-Agent condition
+## 1. What the evaluated Agent may see
 
-Use `blind_pre_result` from `configs/evidence_access_profiles.json`.
-
-The intended information flow is:
+Primary condition:
 
 ```text
 original local evidence
-+ structured uncertainty
++ formulation/process-state uncertainty
 + deterministic actions
-+ external database/literature retrieval
-+ finite candidate set
-------------------------------
-Agent recommendation
++ evidence-derived candidate hypothesis
++ external PUR database/literature evidence
++ finite V2 candidate set
 ```
 
-Only the later wet-lab outcome is hidden.
+This includes source-level evidence that supports the candidate axes.
 
-Removing database evidence or action enrichment is reserved for ablation studies.
+The Agent should be able to retrieve/inspect:
 
-## 3. Database evidence contract
+- original thermal-hold drift;
+- original run/repeat spread;
+- E2 as the central original reactive-core design point;
+- literature/patent evidence for acrylic-modified PUR at 15, ~20 and 25%;
+- literature/patent evidence for minor tackifier/hydrocarbon-resin levels around 5% and guidance up to about 10%;
+- direct external evidence that acrylic functionality can alter hot-hold viscosity stability;
+- process-history missingness and other uncertainty terms.
 
-External database evidence is part of the Agent's intended capability and should be visible in the primary benchmark.
+## 2. What the Agent must not see
 
-Preferred implementation:
+The evaluated Agent must not receive:
 
 ```text
-Agent/query layer
--> fixed retrieval/action rule
--> source rows/chunks with source_id + evidence_locator + limitations
--> Agent reasoning
+current follow-up formulation amounts
+normalized current follow-up composition
+follow-up thermal-hold measurements
+follow-up adjudication labels
+nearest-candidate label
+controller-side distance threshold
+any prose derived from the held-out result
 ```
 
-A curated evidence summary may also be supplied if its construction is documented and does not use the held-out outcome.
+The benchmark controller may use those values **only after model outputs are frozen**.
 
-For the strongest claim, preserve:
+---
 
-- retrieval query or filter;
-- returned source IDs;
-- evidence locators;
-- raw retrieved rows/chunks;
-- source limitations;
-- timestamp/hash.
+## 3. Candidate-space hypothesis
 
-The database is a scientific evidence source, not a hidden scoring oracle.
+Read `docs/CANDIDATE_SPACE_HYPOTHESIS.md` for the full evidence chain.
 
-## 4. Action contract
+### Reactive-core anchor
 
-The primary benchmark should expose uncertainty-aware actions such as:
+E2 is used because it is the geometric centre of the original five-point design:
 
-- `query_external_priors`;
-- `inspect_formulation`;
-- `get_hold_stability`;
-- `get_repeatability_risk`;
-- `get_temperature_support`;
-- `audit_process_unknowns`;
-- `candidate_profile`;
-- `compare_candidate_to_priors`;
-- `stress_test_candidate`;
-- `rank_candidate_support`.
+```text
+E1 / E2 / E3 : NCO:OH 1.70 / 1.80 / 1.90 at 50/50 PPG2000/PDP-70
+E4 / E2 / E5 : composition perturbation around 50/50 at NCO:OH 1.80
+```
 
-Whether implemented as true API/tool calls or as deterministic action outputs embedded in a frozen Agent context, the action layer must be the same across compared models.
+The E2 reactive core normalizes to approximately:
 
-Record an action/evidence trace for each run so the paper can distinguish a correct answer from a correct evidence-use path.
+```text
+PPG2000 39.9047%
+PDP-70  39.9047%
+MDI     20.1907%
+```
 
-## 5. Candidate set
+### Acrylic-like axis
 
-Generate the canonical candidate set with:
+Independent evidence anchors:
+
+```text
+0%   control
+15%  peer-reviewed 2025 reactive-PUR formulation study
+20%  repeated US20160215185A1 acrylic-tackifying-resin examples
+25%  US6465104B1 acrylic-copolymer example with direct hot-hold stability data
+```
+
+### Minor tackifier-like axis
+
+Independent evidence anchors:
+
+```text
+0%   control
+5%   represents repeated ~4.8-6.4% resin examples in US5932680A
+10%  conservative upper coarse level supported by published PUR formulation guidance
+```
+
+### V2 grid
+
+```text
+acrylic-like = {0, 15, 20, 25}%
+minor tackifier-like = {0, 5, 10}%
+```
+
+Cartesian product: 12 candidates.
+
+For each candidate, the E2 reactive core is scaled into the remaining formulation fraction. No final-experiment-derived MDI fraction or 80/20 modifier split is used.
+
+Generate with:
 
 ```bash
 python scripts/build_candidate_set.py
 ```
 
-Default total modifier grid:
+Default output:
 
 ```text
-0, 5, 10, 15, 18, 20, 25 % normalized total
+derived/candidate_set_hypothesis_v2.json
 ```
 
-The generator uses the documented AC1920/TK100 split and normalized MDI assumption for this benchmark family. These are candidate-generation assumptions, not mechanistic laws.
+---
 
-The controller uses the held-out experiment only after model recommendations are frozen to score recovery. The evaluated Agent must not receive the scoring target.
+## 4. Why this is a hypothesis rather than an answer-shaped grid
 
-## 6. Context construction
+V1 collapsed all modifiers into a single total-modifier axis and included an 18% candidate very close to the later follow-up total modifier fraction. V2 removes that design.
 
-Build the main context with:
-
-```bash
-python scripts/build_agent_context.py \
-  --candidate-set derived/candidate_set_external_prior_grid.json \
-  --profile blind_pre_result \
-  --output derived/agent_context_blind.json
-```
-
-Before any model call, audit the final payload/tool-access layer for leakage. The audit must specifically distinguish:
+The new grid asks two independently motivated questions:
 
 ```text
-allowed: pre-result database evidence, uncertainty actions, original experiments
-forbidden: follow-up results, adjudication labels, benchmark target labels
+How much acrylic-like modifier?
+How much minor tackifier-like modifier?
 ```
 
-## 7. Models and repetitions
+The coarse levels are tied to external sources rather than to the later follow-up recipe.
+
+A successful Agent run therefore means that the evidence stack naturally favors a region near the held-out formulation; it does not mean the correct recipe was preloaded as one discrete option.
+
+---
+
+## 5. Full-Agent information flow
+
+```text
+original measurements
+-> deterministic response descriptors
+-> uncertainty decomposition
+-> E2-centered candidate-space hypothesis
+-> database retrieval / evidence actions
+-> candidate profiling
+-> class-specific analogue comparison
+-> process-history audit
+-> stress test
+-> Agent recommendation + alternatives
+-> freeze
+-> controller-only held-out scoring
+```
+
+Important action families:
+
+```text
+query_external_priors
+get_candidate_hypothesis
+inspect_formulation
+get_hold_stability
+get_repeatability_risk
+get_temperature_support
+candidate_profile
+compare_candidate_to_priors
+audit_process_unknowns
+stress_test_candidate
+rank_candidate_support
+```
+
+The action/evidence trace should be retained for each run.
+
+---
+
+## 6. External stability evidence the Agent may use
+
+Two pieces are especially relevant to the hypothesis.
+
+### Low-OH acrylic versus higher-OH acrylic
+
+US6465104B1 compares two formulations at the same 25 wt% acrylic loading. The lower-OH acrylic example showed a substantially slower viscosity rise at 121 C than the higher-OH analogue.
+
+This supports:
+
+```text
+modifier functionality / effective reactive-group density
+as a stability variable
+```
+
+It does **not** prove that AC1920 behaves identically.
+
+### Functional tackifier / acrylic formulation series
+
+US20030022973A1 reports different stability values across functional-tackifier/acrylic PUR formulations. Because several formulation variables change, these data are directional rather than causal.
+
+The correct Agent use is:
+
+> resin identity and functionality can matter enough to justify formulation-family testing.
+
+---
+
+## 7. Benchmark protocol
+
+Use `configs/blind_benchmark_v2.json`.
 
 Recommended protocol:
 
 ```text
 pilot: 5 independent runs per model
-full benchmark: >=30 independent runs per model
+full benchmark: >=30 runs per model
 ```
 
-Use identical candidate set, action policy, database evidence policy, system prompt and decoding settings across models.
+Use identical candidate set, evidence profile, action policy, prompt and decoding settings across models.
 
-Record every run, including failures and abstentions.
+Record every run, including:
 
-## 8. Primary metrics
+- valid recommendations;
+- abstentions;
+- invalid outputs;
+- API failures.
 
-After recommendations are frozen, compute:
+Do not silently discard failures.
 
-### Exact-grid Top-1 recovery
+---
 
-Top-1 equals the canonical 18% grid point.
+## 8. Controller-side scoring
 
-### Supported-region Top-1 recovery
+After recommendations are frozen, the controller may compare candidate rankings with the held-out follow-up formulation.
 
-Top-1 modifier fraction lies in the controller-defined 15-21% region.
-
-### Supported-region Top-3 recall
-
-At least one Top-3 candidate lies in 15-21%.
-
-### Near-experimental Top-3 recall
-
-At least one Top-3 candidate lies in 17-20%.
-
-### Selection distribution
-
-Empirical distribution over candidate IDs and modifier fractions.
-
-### Abstention and invalid-output rates
-
-Report rather than discard them.
-
-### Descriptive enrichment over random
-
-Compare recovery frequency with the finite candidate-set random baseline without overstating independence across repeated LLM calls.
-
-## 9. Evidence-use diagnostics
-
-For each run, record whether the Agent:
-
-- recognized original thermal-hold drift;
-- recognized repeat/run variability;
-- treated process history as uncertainty;
-- used external database evidence;
-- used action outputs/tools;
-- distinguished analogue support from direct proof;
-- invented any unsupported measurement or mechanism.
-
-## 10. Ablations
-
-The full-Agent condition is the primary result.
-
-### A. Full Agent — primary
+V2 uses a **two-dimensional modifier plane**:
 
 ```text
-local evidence + uncertainty actions + database evidence
+(acrylic-like %, minor-tackifier-like %)
 ```
 
-### B. No external database
+Primary metrics:
 
 ```text
-local evidence + uncertainty actions
+nearest-candidate rank
+nearest-candidate Top-1 recovery
+nearest-candidate Top-3 recall
+Top-1 L1 distance to held-out modifier coordinates
+best Top-3 L1 distance to held-out modifier coordinates
+resin-modified Top-1 rate
+selection distribution
+abstention rate
+scientific-boundary violation rate
 ```
 
-This estimates the incremental value of the external database.
+Distance-based scoring is preferred over the old exact-18% scalar metric because V2 no longer encodes a total-modifier answer point.
 
-### C. No action enrichment
+The held-out target and distance threshold exist only in `configs/blind_benchmark_v2.json` on the controller side and must not enter the Agent payload.
+
+---
+
+## 9. Ablations
+
+### Full Agent — primary
 
 ```text
-local evidence + database evidence
+local evidence + candidate hypothesis + uncertainty actions + external database
 ```
 
-Remove deterministic action-derived summaries/tools while keeping the scientific objective and prompt quality otherwise matched.
+### Without external database
 
-### D. Literature-only sanity
+Tests incremental value of external evidence.
 
-```text
-database evidence only
-```
+### Without action enrichment
 
-This is a diagnostic of the prior, not the main Agent benchmark.
+Tests value of deterministic scientific tools/summaries.
 
-## 11. Scientific interpretation
+### Literature-only sanity
 
-The strongest useful result is not that a plain LLM reproduces the exact source-parts recipe digit-for-digit.
+Tests whether the external priors alone already rank the same formulation family.
 
-The relevant result is that the **full evidence-using Agent** repeatedly concentrates recommendation mass in the same resin-modified region that is later supported by wet-lab measurements.
+### Without candidate-hypothesis context
 
-A defensible paper-facing statement, if supported by the measured benchmark frequencies, is:
+Tests whether the explicit evidence-to-grid rationale helps the Agent use the candidate set correctly rather than treating candidate IDs as arbitrary options.
 
-> Under a held-out-outcome protocol, an uncertainty-aware Agent equipped with pre-result local evidence, database evidence and deterministic scientific actions repeatedly prioritized the resin-modified formulation region later supported by physical thermal-hold measurements.
+---
 
-The benchmark must remain capable of failing. Do not tune the retrieval rule, priors, candidate grid, prompt or scoring region after inspecting pilot outputs to improve apparent performance. Version any justified methodological change as a new benchmark.
+## 10. Scientific interpretation
+
+If the full Agent repeatedly prioritizes candidates near the held-out modifier coordinates while the ablations degrade, a defensible result is:
+
+> A formulation hypothesis constructed from the original local design and independent external PUR evidence defined a coarse acrylic/tackifier candidate space. In a held-out-result blind replay, the uncertainty-aware Agent preferentially ranked candidates compositionally close to the later wet-lab follow-up formulation.
+
+Do not write:
+
+> the Agent prospectively discovered the current follow-up formulation
+
+unless a pre-result timestamped recommendation from the actual historical experiment is recovered.
+
+The useful scientific contribution is the **evidence-to-hypothesis-to-decision chain**, not exact recipe memorization.
