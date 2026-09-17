@@ -1,0 +1,55 @@
+{
+  "local_temperature": {
+    "n_points": 42,
+    "n_formulations_with_full_sweeps": 3,
+    "n_realizations": 7,
+    "local_apparent_E_mean_kJ_mol": 41.86797857142563,
+    "local_apparent_E_sd_kJ_mol": 2.2670502419331617,
+    "local_apparent_E_cv": 0.054147592486836586,
+    "median_curve_r2": 0.9947761549778832,
+    "master_curve_collapse_rmse_log": 0.07453976991808449,
+    "master_curve_collapse_factor": 1.0773881903103166,
+    "one_point_anchor_min_factor": 1.0623153471300206,
+    "one_point_anchor_max_factor": 1.0925994056883697,
+    "mixed_effects": {
+      "n_realization_groups": 7,
+      "random_intercept_sd_log": 0.32477976634669503,
+      "residual_sd_log": 0.047151405700663736,
+      "icc": 0.9793579506206554,
+      "one_sd_state_scale_factor": 1.383725869417561
+    }
+  },
+  "local_hold": {
+    "E1_vs_E5_time_slope_interaction_F": 419.9466593004165,
+    "E1_vs_E5_time_slope_interaction_p": 3.348881821888711e-05,
+    "F1_common_slope_per_h": 0.02391018887009544,
+    "F1_common_slope_95ci": [-0.03368543420990198, 0.08150581195009285],
+    "F1_common_slope_p": 0.33469751857597263,
+    "F1_repeat_mean_offset_ratio": 1.0618959934063437,
+    "F1_repeat_ratio_cv": 0.01421791656925938,
+    "E1_SI_15_60": 0.09510371102017776,
+    "E5_SI_15_60": 0.5153846153846153,
+    "F1_mean_SI_15_60": 0.014735165272799682,
+    "F1_abs_drift_reduction_vs_E1": 0.845062142005443,
+    "F1_abs_drift_reduction_vs_E5": 0.9714093808139708
+  },
+  "external_database": {
+    "n_curves": 39,
+    "n_curve_points": 4559,
+    "median_curve_r2": 0.9967001076270855,
+    "n_curve_r2_ge_0_98": 37,
+    "apparent_E_range_kJ_mol": [34.73532697238916, 94.15329095047686],
+    "composition_model_E_r2": 0.7706518019483953,
+    "composition_model_E_pNCO_coef_kJ_mol_per_pct": -1.4308647111115504,
+    "composition_model_E_pNCO_p": 0.007436503950100103,
+    "composition_model_ln_eta75_r2": 0.8843647619747342,
+    "composition_model_eta75_multiplier_per_plus1pct_pNCO": 0.7496931068919468,
+    "paired_static_viscosity_stability": {
+      "n_paired_formulations": 9,
+      "pearson_log_viscosity_vs_rise_rate_r": -0.21767540963427917,
+      "pearson_p": 0.5736936993431261,
+      "spearman_rho": -0.3514675116774037,
+      "spearman_p": 0.35366632980887097
+    }
+  }
+}
