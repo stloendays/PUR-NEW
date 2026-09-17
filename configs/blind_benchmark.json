@@ -1,6 +1,6 @@
 {
   "benchmark_id": "PUR_NEW_BLIND_AGENT_V1",
-  "benchmark_version": "1.1.0",
+  "benchmark_version": "1.2.0",
   "primary_profile": "blind_pre_result",
   "blindness_definition": "Blind means blind to the held-out follow-up wet-lab outcome and benchmark scoring labels. The evaluated Agent is NOT blinded to the uncertainty-aware actions or pre-result database/literature evidence that constitute the Agent system.",
   "primary_agent_capabilities": {
@@ -16,9 +16,15 @@
   "candidate_set": {
     "generator": "scripts/build_candidate_set.py",
     "default_modifier_grid_pct": [0, 5, 10, 15, 18, 20, 25],
+    "grid_sensitivity_sets_pct": {
+      "coarse_no_exact_18": [0, 5, 10, 15, 20, 25],
+      "shifted_grid": [2.5, 7.5, 12.5, 17.5, 22.5]
+    },
     "exact_recovery_modifier_pct": 18,
     "supported_region_pct": [15, 21],
-    "near_experimental_region_pct": [17, 20]
+    "near_experimental_region_pct": [17, 20],
+    "primary_recovery_unit": "supported_region",
+    "exact_grid_recovery_role": "secondary_discretization_sensitive_metric"
   },
   "run_protocol": {
     "pilot_runs_per_model": 5,
@@ -30,12 +36,31 @@
     "seed_policy": "record_if_endpoint_supports_seed; otherwise record run_index and treat calls as repeated stochastic realizations"
   },
   "primary_metrics": [
-    "exact_grid_top1_recovery",
     "supported_region_top1_recovery",
     "supported_region_top3_recall",
     "near_experimental_top3_recall",
     "selection_distribution",
-    "abstention_rate"
+    "abstention_rate",
+    "grid_sensitivity_consistency"
+  ],
+  "secondary_metrics": [
+    "exact_grid_top1_recovery",
+    "decision_margin",
+    "scientific_boundary_violation_rate"
+  ],
+  "baselines": [
+    {
+      "id": "uniform_random",
+      "description": "Uniform selection from the supplied finite candidate set; report the analytic supported-region hit probability for each grid."
+    },
+    {
+      "id": "external_prior_nearest",
+      "description": "Deterministic non-LLM baseline that selects the candidate closest to the central resin-modifier fraction supported by the permitted curated external analogue examples."
+    },
+    {
+      "id": "transparent_support_ranker",
+      "description": "Deterministic ranking from the same permitted evidence/actions, without free-form LLM reasoning."
+    }
   ],
   "diagnostics": [
     "dominant_uncertainty_identification",
@@ -43,12 +68,15 @@
     "external_database_use",
     "action_use_trace",
     "process_history_uncertainty_use",
-    "scientific_boundary_violations"
+    "scientific_boundary_violations",
+    "candidate_grid_dependence"
   ],
   "ablations": [
     "literature_only_sanity",
     "blind_pre_result_without_external_database",
-    "blind_pre_result_without_action_enrichment"
+    "blind_pre_result_without_action_enrichment",
+    "blind_pre_result_coarse_grid_without_exact_18",
+    "blind_pre_result_shifted_grid"
   ],
   "anti_leakage": {
     "forbid_follow_up_hold_results_in_agent_payload": true,
@@ -57,8 +85,14 @@
     "forbid_post_result_text_derived_from_follow_up_in_agent_payload": true,
     "controller_may_read_scoring_labels": true,
     "allow_pre_result_database_evidence": true,
-    "allow_uncertainty_aware_actions": true
+    "allow_uncertainty_aware_actions": true,
+    "report_if_candidate_grid_was_defined_after_follow_up_result_was_known": true
   },
+  "interpretation_rules": [
+    "Region-level recovery is primary because exact 18 percent recovery is sensitive to candidate discretization.",
+    "If the external-prior deterministic baseline already recovers the supported region, the Agent contribution must be argued from uncertainty handling, robustness, abstention, or evidence integration rather than region discovery alone.",
+    "A successful result on the default grid should remain directionally consistent on a grid that omits the exact 18 percent point before claiming robust recovery."
+  ],
   "artifact_layout": "records/benchmarks/<benchmark_id>/",
   "note": "The primary benchmark evaluates the full Agent stack: local evidence + uncertainty-aware actions + external database evidence. Only the held-out follow-up outcome and scoring labels are hidden. Tool/database removal is an ablation, not the primary condition."
 }
