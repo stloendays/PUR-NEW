@@ -1,0 +1,105 @@
+{
+  "benchmark_id": "PUR_NEW_BLIND_AGENT_V2",
+  "benchmark_version": "2.0.0",
+  "historical_interpretation": "Retrospective held-out-result blind replay. The candidate-space hypothesis was formalized after the current follow-up experiment was known, but the evaluated model is blinded to the follow-up formulation/outcome and scoring labels. Future rounds can become prospective after this V2 configuration is frozen.",
+  "primary_profile": "blind_pre_result",
+  "blindness_definition": "The evaluated Agent may use original local evidence, the V2 evidence-derived hypothesis, uncertainty-aware actions, and external database/literature evidence. It may not see the current follow-up formulation, follow-up thermal-hold measurements, adjudication labels, or controller-side scoring targets.",
+  "candidate_set": {
+    "generator": "scripts/build_candidate_set.py",
+    "output_default": "derived/candidate_set_hypothesis_v2.json",
+    "reactive_core_anchor": "E2",
+    "acrylic_like_grid_pct": [0, 15, 20, 25],
+    "minor_tackifier_like_grid_pct": [0, 5, 10],
+    "candidate_count": 12,
+    "exact_follow_up_recipe_encoded": false,
+    "follow_up_numeric_values_used_to_generate_grid": false,
+    "rationale_file": "docs/CANDIDATE_SPACE_HYPOTHESIS.md"
+  },
+  "controller_only_heldout_target": {
+    "follow_up_normalized_pct": {
+      "PPG2000": 32.62212703,
+      "PDP70": 32.62212703,
+      "AC1920": 14.00444847,
+      "TK100": 4.11895543,
+      "MDI": 16.63234204
+    },
+    "nearest_candidate_id": "HYP_A15p0_T05p0",
+    "scoring_space": "two-dimensional modifier plane: acrylic-like pct and tackifier-like pct",
+    "must_not_enter_agent_payload": true
+  },
+  "run_protocol": {
+    "pilot_runs_per_model": 5,
+    "full_runs_per_model": 30,
+    "store_failed_runs": true,
+    "store_abstentions": true,
+    "require_same_blind_payload_across_models": true,
+    "recommended_temperature": 0.2,
+    "seed_policy": "record_if_endpoint_supports_seed; otherwise record run_index and treat calls as repeated stochastic realizations"
+  },
+  "primary_metrics": [
+    "nearest_candidate_rank",
+    "nearest_candidate_top1_recovery",
+    "nearest_candidate_top3_recall",
+    "modifier_plane_l1_distance_top1",
+    "modifier_plane_l1_distance_best_top3",
+    "resin_modified_top1_rate",
+    "selection_distribution",
+    "abstention_rate",
+    "scientific_boundary_violation_rate"
+  ],
+  "secondary_region_metrics": {
+    "near_heldout_l1_distance_threshold_pct_points": 7.5,
+    "report_top1_within_threshold": true,
+    "report_top3_within_threshold": true,
+    "note": "This controller-side threshold is used only after outputs are frozen and is not exposed to the Agent. Distance scoring is preferred over an exact 18% scalar target because V2 uses independent acrylic/tackifier axes."
+  },
+  "baselines": [
+    {
+      "id": "uniform_random",
+      "description": "Uniform selection from the 12-candidate grid."
+    },
+    {
+      "id": "transparent_support_ranker",
+      "description": "Deterministic ranking from the same allowed evidence/actions without free-form LLM reasoning."
+    },
+    {
+      "id": "database_only_axis_ranker",
+      "description": "Rank candidates by class-specific distance to independent acrylic/tackifier evidence anchors, without local rheology."
+    }
+  ],
+  "ablations": [
+    "full_agent_v2",
+    "without_external_database",
+    "without_action_enrichment",
+    "literature_only_sanity",
+    "without_candidate_hypothesis_context"
+  ],
+  "diagnostics": [
+    "dominant_uncertainty_identification",
+    "candidate_hypothesis_use",
+    "external_database_use",
+    "low_OH_acrylic_stability_evidence_use",
+    "minor_tackifier_axis_use",
+    "process_history_uncertainty_use",
+    "modifier_reactivity_stoichiometry_caveat",
+    "action_use_trace",
+    "scientific_boundary_violations"
+  ],
+  "anti_leakage": {
+    "forbid_follow_up_formulation_in_agent_payload": true,
+    "forbid_follow_up_hold_results_in_agent_payload": true,
+    "forbid_adjudication_labels_in_agent_payload": true,
+    "forbid_controller_scoring_target_in_agent_payload": true,
+    "allow_original_local_evidence": true,
+    "allow_evidence_derived_candidate_hypothesis": true,
+    "allow_pre_result_external_database_evidence": true,
+    "allow_uncertainty_aware_actions": true
+  },
+  "interpretation_rules": [
+    "V2 tests whether an evidence-using Agent can prioritize a literature-supported region that is compositionally close to the held-out experiment, not whether it reproduces the exact follow-up recipe.",
+    "Because the V2 hypothesis was formalized after the current follow-up result was known, current results are retrospective blind replay evidence, not prospective validation of V2 itself.",
+    "After V2 is frozen, the same workflow can be used prospectively for future rounds.",
+    "If deterministic evidence ranking already places the nearest candidate first, the Agent contribution must be evaluated through evidence integration, uncertainty handling, robustness, abstention, and alternative ranking rather than discovery alone."
+  ],
+  "artifact_layout": "records/benchmarks/PUR_NEW_BLIND_AGENT_V2/<run_id>/"
+}
