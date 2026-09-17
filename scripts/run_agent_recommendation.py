@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -14,6 +15,12 @@ from jsonschema import validate
 from openai import OpenAI
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from pur_new.evidence_firewall import (  # noqa: E402
+    assert_blind_payload_clean,
+    filter_evidence_state,
+)
 
 
 def read_json(path: Path) -> Any:
@@ -97,8 +104,6 @@ def normalize_agent_decision(raw: dict[str, Any], *, candidate_set: dict[str, An
         if alt_id in seen_alternatives:
             raise ValueError(f"duplicate alternative candidate: {alt_id!r}")
         seen_alternatives.add(alt_id)
-        # Array order is the benchmark rank contract: item 0 -> Rank 2, item 1 -> Rank 3, etc.
-        # Preference ordering itself is semantic and is enforced by the system prompt.
         _ = rank_offset
 
     if mode != "abstain" and len(candidates) >= 3 and len(alternatives) < 2:
@@ -137,6 +142,7 @@ def main() -> None:
     parser.add_argument("--candidate-set", type=Path, required=True)
     parser.add_argument("--evidence-state", type=Path, default=ROOT / "derived" / "evidence_state.json")
     parser.add_argument("--agent-context", type=Path, default=None, help="Optional action-enriched context built by scripts/build_agent_context.py")
+    parser.add_argument("--profile", default="blind_pre_result", help="Evidence-access profile. Defaults to blind_pre_result so benchmark baselines are leakage-safe.")
     parser.add_argument("--inspection-status", required=True, choices=["no_results_inspected", "some_results_inspected", "unknown"], help="Chronology at recommendation creation; must be supplied explicitly.")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "records" / "recommendations")
     args = parser.parse_args()
@@ -146,12 +152,24 @@ def main() -> None:
 
     workflow = read_json(ROOT / "configs" / "workflow.json")
     action_catalog = read_json(ROOT / "configs" / "action_catalog.json")
-    evidence = read_json(args.evidence_state)
+    raw_evidence = read_json(args.evidence_state)
     candidates = read_json(args.candidate_set)
     agent_context = read_json(args.agent_context) if args.agent_context else None
     candidate_schema = read_json(ROOT / "schemas" / "candidate_set.schema.json")
     recommendation_schema = read_json(ROOT / "schemas" / "agent_recommendation.schema.json")
+    profiles = read_json(ROOT / "configs" / "evidence_access_profiles.json")["profiles"]
+    if args.profile not in profiles:
+        raise SystemExit(f"Unknown evidence profile: {args.profile}")
+    policy = profiles[args.profile]
     validate(candidates, candidate_schema)
+
+    architecture_path = ROOT / "configs" / "agent_v3.json"
+    blinded_ids: set[str] = set()
+    if architecture_path.exists():
+        architecture = read_json(architecture_path)
+        blinded_ids = set(architecture.get("blinded_target_formulation_ids", []))
+
+    evidence = filter_evidence_state(raw_evidence, policy=policy, blinded_formulation_ids=blinded_ids)
 
     prompt_path = ROOT / "prompts" / "agent_system.txt"
     prompt_text = prompt_path.read_text(encoding="utf-8")
@@ -160,10 +178,23 @@ def main() -> None:
     input_payload = {
         "workflow_policy": workflow,
         "action_catalog": action_catalog,
+        "evidence_profile": args.profile,
+        "evidence_policy": policy,
         "evidence_state": evidence,
         "agent_context": agent_context,
         "candidate_set": candidates,
     }
+
+    blind_mode = not bool(policy.get("allow_follow_up_hold_results", False))
+    if blind_mode:
+        assert_blind_payload_clean(
+            input_payload,
+            blinded_formulation_ids=(
+                blinded_ids if not policy.get("allow_follow_up_formulation_identity", False) else set()
+            ),
+            forbid_follow_up_stage=True,
+        )
+
     input_hash = sha256_bytes(canonical_json_bytes(input_payload))
 
     api_key = os.environ.get("OPENAI_API_KEY")
