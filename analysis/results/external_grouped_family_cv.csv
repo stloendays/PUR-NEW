@@ -1,0 +1,5 @@
+model,n_predicted_curves,n_structural_ood_families,grouped_family_cv_r2,grouped_family_cv_rmse,grouped_family_cv_multiplicative_error
+thermal_additive,36,1,0.39258666471238524,9.704509648551689,
+thermal_pNCO_by_polyol,36,1,0.3732371654264446,9.857869237219592,
+viscosity75_additive,36,1,0.7296210193994871,0.5857068604495842,1.7962602423158325
+viscosity75_pNCO_by_polyol,36,1,0.7434310004375064,0.5705529276952278,1.769245045614149
