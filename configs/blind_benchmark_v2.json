@@ -1,12 +1,18 @@
 {
   "benchmark_id": "PUR_NEW_BLIND_AGENT_V2",
-  "benchmark_version": "2.2.0",
-  "historical_interpretation": "Secondary held-out-result replay benchmark. The research team confirms that the Agent-selected validation formulation was recommended before its wet-lab result was known to the Agent. The current exact V2 4x3 software grid was formalized later and is used here as a reproducible abstraction of the evidence-constrained candidate region, not as the original contemporaneous freeze artifact.",
+  "benchmark_version": "2.3.0",
+  "historical_interpretation": "Secondary held-out-result replay benchmark. The research team confirms that the Agent-selected validation formulation was recommended before its wet-lab result was known to the Agent. The current coarse grid and fine-refinement software were formalized later and are reproducible abstractions/operationalizations, not the original contemporaneous freeze artifact.",
   "primary_profile": "blind_pre_result_replay",
-  "blindness_definition": "The evaluated replay Agent may use original local evidence, the V2 evidence-derived hypothesis, uncertainty-aware actions, and external database/literature evidence. It may not see the Agent-selected validation formulation, its thermal-hold measurements, adjudication labels, or controller-side scoring targets.",
+  "blindness_definition": "The evaluated replay Agent may use original local evidence, the evidence-derived hypothesis, uncertainty-aware actions, and allowed external evidence. It may not see the Agent-selected validation formulation, its thermal-hold measurements, adjudication labels, or controller-side scoring targets.",
+  "coordinate_basis": {
+    "candidate_axes": "normalized_total_wt_percent",
+    "validation_recipe_source": "source_reported_parts",
+    "controller_rule": "Normalize source-reported validation parts by their own total before any candidate-space comparison."
+  },
   "candidate_set": {
     "generator": "scripts/build_candidate_set.py",
     "output_default": "derived/candidate_set_hypothesis_v2.json",
+    "design_stage": "coarse_region_identification",
     "reactive_core_anchor": "E2",
     "acrylic_like_grid_pct": [0, 15, 20, 25],
     "minor_tackifier_like_grid_pct": [0, 5, 10],
@@ -16,7 +22,24 @@
     "current_exact_grid_formalized_after_validation_experiment": true,
     "rationale_file": "docs/CANDIDATE_SPACE_HYPOTHESIS.md"
   },
+  "fine_refinement": {
+    "generator": "scripts/build_refinement_set.py",
+    "output_default": "derived/candidate_set_refinement_v1.json",
+    "design_stage": "outcome_blind_fine_refinement",
+    "default_step_pct_points": 1.0,
+    "reads_formulations_csv": false,
+    "reads_validation_recipe": false,
+    "reads_validation_outcome": false,
+    "historical_interpretation": "Current reproducible refinement layer for replay/future prospective use; not claimed as the original historical freeze algorithm."
+  },
   "controller_only_heldout_target": {
+    "source_reported_parts": {
+      "PPG2000": 39.60,
+      "PDP70": 39.60,
+      "AC1920": 17.0,
+      "TK100": 5.0,
+      "MDI": 20.19
+    },
     "validation_formulation_normalized_pct": {
       "PPG2000": 32.62212703,
       "PDP70": 32.62212703,
@@ -24,8 +47,9 @@
       "TK100": 4.11895543,
       "MDI": 16.63234204
     },
-    "nearest_candidate_id": "HYP_A15p0_T05p0",
-    "scoring_space": "two-dimensional modifier plane: acrylic-like pct and tackifier-like pct",
+    "nearest_coarse_candidate_id": "HYP_A15p0_T05p0",
+    "legacy_nearest_candidate_id_alias": "HYP_A15p0_T05p0",
+    "scoring_space": "two-dimensional modifier plane in normalized-total wt% coordinates",
     "must_not_enter_agent_payload": true
   },
   "ranking_contract": {
@@ -36,34 +60,7 @@
     "alternatives_must_be_unique": true,
     "selected_candidate_must_not_repeat_in_alternatives": true,
     "abstention_primary_top1": false,
-    "abstention_primary_top3": false,
-    "abstention_shortlist_diagnostic": "For abstentions, alternatives may be analyzed separately as an uncertainty shortlist but do not count toward primary Top-1 or Top-3 recovery."
-  },
-  "run_record_contract": {
-    "required_controller_fields": [
-      "model",
-      "run_index",
-      "run_status",
-      "decision_mode",
-      "rank1_candidate_id",
-      "rank2_candidate_id",
-      "rank3_candidate_id",
-      "rank1_acrylic_pct",
-      "rank1_tackifier_pct",
-      "rank1_total_modifier_pct",
-      "nearest_candidate_rank",
-      "modifier_plane_l1_distance_top1",
-      "modifier_plane_l1_distance_best_top3",
-      "abstain",
-      "invalid_output",
-      "api_failure",
-      "scientific_boundary_violation"
-    ],
-    "run_status_values": ["valid_recommendation", "abstain", "invalid_output", "api_failure"],
-    "raw_response_retained": true,
-    "normalized_recommendation_retained": true,
-    "action_trace_retained": true,
-    "failed_runs_retained": true
+    "abstention_primary_top3": false
   },
   "run_protocol": {
     "pilot_runs_per_model": 5,
@@ -75,9 +72,8 @@
     "seed_policy": "record_if_endpoint_supports_seed; otherwise record run_index and treat calls as repeated stochastic realizations"
   },
   "primary_metrics": [
-    "nearest_candidate_rank",
-    "nearest_candidate_top1_recovery",
-    "nearest_candidate_top3_recall",
+    "coarse_region_top1_recovery",
+    "coarse_region_top3_recall",
     "modifier_plane_l1_distance_top1",
     "modifier_plane_l1_distance_best_top3",
     "resin_modified_top1_rate",
@@ -89,44 +85,23 @@
     "near_heldout_l1_distance_threshold_pct_points": 7.5,
     "report_top1_within_threshold": true,
     "report_top3_within_threshold": true,
-    "note": "This controller-side threshold is used only after replay outputs are frozen and is not exposed to the evaluated Agent. Distance scoring is preferred over an exact scalar target because V2 uses independent acrylic/tackifier axes."
+    "note": "Controller-side distance scoring is performed only after outputs are frozen. Exact recipe recovery is not a primary metric because the coarse grid is a region benchmark and the validation recipe was reported on a different raw-parts basis."
   },
-  "secondary_diagnostics": [
-    "abstention_shortlist_nearest_candidate_rank",
-    "abstention_shortlist_within_distance_threshold",
-    "decision_margin_if_numerically_defined"
-  ],
   "baselines": [
     {
+      "id": "naive_direct_llm",
+      "description": "Primary manuscript baseline: same foundation model, raw original local measurements and candidate compositions only; no state-aware theory, external evidence tools, planner, skeptic, judge or robustness layer."
+    },
+    {
       "id": "uniform_random",
-      "description": "Uniform selection from the 12-candidate grid."
-    },
-    {
-      "id": "transparent_support_ranker",
-      "description": "Deterministic ranking from the same allowed evidence/actions without free-form LLM reasoning."
-    },
-    {
-      "id": "database_only_axis_ranker",
-      "description": "Rank candidates by class-specific distance to independent acrylic/tackifier evidence anchors, without local rheology."
+      "description": "Chance-level uniform selection from the 12 coarse cells."
     }
   ],
-  "ablations": [
-    "full_agent_v2",
-    "without_external_database",
-    "without_action_enrichment",
-    "literature_only_sanity",
-    "without_candidate_hypothesis_context"
-  ],
-  "diagnostics": [
-    "dominant_uncertainty_identification",
-    "candidate_hypothesis_use",
-    "external_database_use",
-    "low_OH_acrylic_stability_evidence_use",
-    "minor_tackifier_axis_use",
-    "process_history_uncertainty_use",
-    "modifier_reactivity_stoichiometry_caveat",
-    "action_use_trace",
-    "scientific_boundary_violations"
+  "supplementary_controls": [
+    "transparent_support_ranker",
+    "single_pass_tool_context",
+    "database_only_axis_ranker",
+    "agent_v3_ablations"
   ],
   "anti_leakage": {
     "forbid_validation_formulation_in_agent_payload": true,
@@ -139,11 +114,11 @@
     "allow_uncertainty_aware_actions": true
   },
   "interpretation_rules": [
-    "V2 is a secondary replay benchmark that asks whether the later formalized evidence stack prioritizes a region compositionally compatible with the Agent-selected validation formulation when that formulation/outcome is hidden.",
+    "The 12-cell grid is a coarse region-level replay benchmark, not a claim that the historical recommendation was selected from exactly 12 candidates.",
+    "Raw validation parts 17/5 must never be compared directly with normalized-total candidate coordinates; the corresponding controller-side normalized coordinates are approximately 14.00/4.12.",
     "The prospective historical claim attaches to the original Agent recommendation, which the research team confirms preceded knowledge of the validation result.",
-    "The current exact V2 4x3 grid was formalized later and must not be represented as the original contemporaneous freeze artifact unless older provenance is recovered.",
-    "If deterministic evidence ranking already places the nearest candidate first, the Agent contribution must be evaluated through evidence integration, uncertainty handling, robustness, abstention, and alternative ranking rather than discovery alone.",
-    "Primary Top-3 recovery is defined only for valid non-abstaining recommendations; abstention shortlists are reported separately and never credited as successful primary recovery."
+    "The current fine-refinement layer is outcome-blind by construction but was formalized later; it supports reproducibility and future prospective design, not retroactive reconstruction of the historical selection algorithm.",
+    "Any claim of architecture advantage must be based on repeated blind runs and must report failure, abstention, leakage and scientific-boundary diagnostics alongside recovery metrics."
   ],
   "artifact_layout": "records/benchmarks/PUR_NEW_BLIND_AGENT_V2/<run_id>/"
 }
