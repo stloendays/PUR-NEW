@@ -80,8 +80,26 @@ def load_deliberation_for_recommendation(path: Path) -> dict[str, Any] | None:
     return None
 
 
+def load_runtime_meta(path: Path, deliberation: dict[str, Any] | None) -> dict[str, Any]:
+    if deliberation is not None:
+        total = deliberation.get("llm_usage_total")
+        if isinstance(total, dict):
+            return total
+    if path.name != "recommendation.json":
+        meta_path = path.with_name(f"{path.stem}.meta.json")
+        if meta_path.exists():
+            meta = read_json(meta_path)
+            return {
+                "llm_calls": 1,
+                "prompt_tokens": meta.get("prompt_tokens"),
+                "completion_tokens": meta.get("completion_tokens"),
+                "total_tokens": meta.get("total_tokens"),
+                "llm_latency_s": meta.get("latency_s"),
+            }
+    return {}
+
+
 def controller_target(target_cfg: dict[str, Any]) -> dict[str, float]:
-    """Read current target naming while remaining compatible with older V2 records."""
     for key in ("validation_formulation_normalized_pct", "follow_up_normalized_pct"):
         value = target_cfg.get(key)
         if isinstance(value, dict):
@@ -119,6 +137,7 @@ def summarize_condition(
         best_top3 = min(top3_distances) if top3_distances else None
 
         deliberation = load_deliberation_for_recommendation(path)
+        runtime = load_runtime_meta(path, deliberation)
         tool_calls = None
         tool_ok_fraction = None
         leakage_findings = 0
@@ -159,6 +178,11 @@ def summarize_condition(
                 "best_top3_l1_distance": best_top3,
                 "tool_calls": tool_calls,
                 "tool_ok_fraction": tool_ok_fraction,
+                "llm_calls": runtime.get("llm_calls"),
+                "prompt_tokens": runtime.get("prompt_tokens"),
+                "completion_tokens": runtime.get("completion_tokens"),
+                "total_tokens": runtime.get("total_tokens"),
+                "llm_latency_s": runtime.get("llm_latency_s"),
                 "structural_leakage_findings": leakage_findings,
                 "skeptic_boundary_check": skeptic_boundary,
                 "skeptic_leakage_check": skeptic_leakage,
@@ -195,6 +219,11 @@ def summarize_condition(
         "mean_best_top3_l1_distance": mean_numeric("best_top3_l1_distance", valid),
         "mean_tool_calls": mean_numeric("tool_calls"),
         "mean_tool_ok_fraction": mean_numeric("tool_ok_fraction"),
+        "mean_llm_calls": mean_numeric("llm_calls"),
+        "mean_prompt_tokens": mean_numeric("prompt_tokens"),
+        "mean_completion_tokens": mean_numeric("completion_tokens"),
+        "mean_total_tokens": mean_numeric("total_tokens"),
+        "mean_llm_latency_s": mean_numeric("llm_latency_s"),
         "runs_with_structural_leakage": sum(r["structural_leakage_findings"] > 0 for r in rows),
         "skeptic_boundary_failures": sum(r["skeptic_boundary_check"] == "fail" for r in rows),
         "skeptic_leakage_failures": sum(r["skeptic_leakage_check"] == "fail" for r in rows),
@@ -253,8 +282,8 @@ def main() -> None:
         "conditions": summaries,
         "interpretation": (
             "This scorer is controller-side only. Held-out target coordinates must never be included in Agent payloads. "
-            "Failed attempts are retained and counted. Architecture advantage should be claimed only if the full Agent improves "
-            "recovery/robustness without increasing failure, leakage, or scientific-boundary violations."
+            "Failed attempts are retained and counted. Token/latency metrics are reported so any V3 gain can be interpreted against extra inference cost. "
+            "Architecture advantage should be claimed only if the full Agent improves recovery/robustness without increasing failure, leakage, or scientific-boundary violations beyond an acceptable trade-off."
         ),
     }
     (args.output_dir / "benchmark_summary.json").write_text(
@@ -274,6 +303,11 @@ def main() -> None:
         "best_top3_l1_distance",
         "tool_calls",
         "tool_ok_fraction",
+        "llm_calls",
+        "prompt_tokens",
+        "completion_tokens",
+        "total_tokens",
+        "llm_latency_s",
         "structural_leakage_findings",
         "skeptic_boundary_check",
         "skeptic_leakage_check",
