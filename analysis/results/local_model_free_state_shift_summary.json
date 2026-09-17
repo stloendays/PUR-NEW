@@ -1,0 +1,10 @@
+{
+  "analysis_set": "chemistry_audited_primary",
+  "n_complete_realizations": 6,
+  "n_temperatures": 6,
+  "pc1_explained_between_realization_variance_fraction": 0.9963223664910995,
+  "pc1_constant_vertical_shift_cosine_similarity": 0.9998144622544137,
+  "excluded_realization": "E1__+P__day1_0",
+  "exclusion_reason": "phosphoric-acid-labelled source condition; exact additive identity/amount is not represented in formulations.csv",
+  "interpretation": "After centering by temperature, the dominant between-realization mode is nearly a constant vertical shift in log viscosity."
+}
