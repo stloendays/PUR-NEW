@@ -2,7 +2,7 @@
 
 ## Uncertainty-aware, Agent-guided formulation design for reactive polyurethane hot-melt adhesives
 
-This repository contains the **current experimental story only**. It is intentionally rebuilt as a clean project and does not carry over historical synthetic candidate-space benchmarks or legacy recovery tasks.
+This repository contains the **current experimental and Agent-guided design workflow** for the project.
 
 ## Research question
 
@@ -34,7 +34,7 @@ The Agent **does not physically operate the laboratory**. Its value is evaluated
 
 ## Current experimental evidence
 
-The local experimental system uses **PPG2000 / STEPANPOL PDP-70 / 4,4'-MDI**. The original five-point design varies NCO:OH and the PPG2000/PDP-70 blend ratio. Temperature sweeps show the expected monotonic viscosity decrease with temperature, but the more important result is the sensitivity to preparation history and time at temperature.
+The local experimental system uses **PPG2000 / STEPANPOL PDP-70 / 4,4'-MDI**. The original five-point design varies NCO:OH and the PPG2000/PDP-70 blend ratio. Temperature sweeps show monotonic viscosity decrease with temperature, while the more important result is the sensitivity to preparation history and time at temperature.
 
 At 120 °C, the original formulations show substantial viscosity build-up during thermal holding:
 
