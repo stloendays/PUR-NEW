@@ -1,0 +1,67 @@
+{
+  "version": "3.0.0",
+  "name": "PUR_NEW_SCIENTIFIC_DECISION_AGENT_V3",
+  "purpose": "Multi-stage, evidence-firewalled, falsification-aware scientific decision Agent for PUR formulation selection.",
+  "default_evidence_profile": "blind_pre_result",
+  "blinded_target_formulation_ids": ["F1"],
+  "stages": [
+    {
+      "id": "planner",
+      "prompt": "prompts/agent_v3_planner.txt",
+      "role": "define failure mode, evidence plan, abstention triggers and counterfactual checks"
+    },
+    {
+      "id": "tool_execution",
+      "role": "execute only planner-requested read-only scientific actions behind the evidence firewall"
+    },
+    {
+      "id": "deterministic_candidate_analysis",
+      "role": "build candidate scorecards, Pareto front and transparent robustness scenarios without held-out outcomes"
+    },
+    {
+      "id": "proposer",
+      "prompt": "prompts/agent_v3_proposer.txt",
+      "role": "rank a shortlist from the allowed evidence"
+    },
+    {
+      "id": "skeptic",
+      "prompt": "prompts/agent_v3_skeptic.txt",
+      "role": "attempt to falsify the provisional top candidate and audit leakage/scientific boundaries"
+    },
+    {
+      "id": "judge",
+      "prompt": "prompts/agent_v3_judge.txt",
+      "role": "resolve proposer-versus-skeptic evidence and freeze a recommendation or abstain"
+    }
+  ],
+  "architecture_principles": [
+    "result data are structurally removed before any blind LLM payload is assembled",
+    "planning and evidence acquisition occur before candidate selection",
+    "deterministic scientific calculations are separated from language-model judgment",
+    "candidate choice is stress-tested across transparent ordinal priorities rather than one hidden scalar score",
+    "a dedicated skeptic must try to falsify the provisional recommendation",
+    "the final judge may choose a performance candidate, robustness probe, uncertainty probe, or abstain",
+    "only concise auditable rationales and tool outputs are stored; hidden chain-of-thought is not required"
+  ],
+  "benchmark_ablations": [
+    "direct_llm",
+    "tool_llm_single_pass",
+    "agent_v2_single_pass",
+    "agent_v3_no_skeptic",
+    "agent_v3_no_deterministic_robustness",
+    "agent_v3_no_external_evidence",
+    "agent_v3_full"
+  ],
+  "primary_agent_metrics": [
+    "held_out_region_rank",
+    "top1_and_top3_region_recovery",
+    "selection_entropy_across_repeated_runs",
+    "abstention_rate",
+    "scientific_boundary_violation_rate",
+    "evidence_leakage_rate",
+    "evidence_trace_completeness",
+    "counterfactual_robustness",
+    "tool_call_count"
+  ],
+  "claim_boundary": "V3 is an improved present-day implementation of the scientific decision architecture. It must not be described as the exact historical code that generated the earlier validation formulation unless matching archived runtime provenance is recovered."
+}
