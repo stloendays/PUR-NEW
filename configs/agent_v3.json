@@ -1,41 +1,43 @@
 {
-  "version": "3.3.0",
+  "version": "3.3.1",
   "name": "PUR_NEW_DISCOVERY_TO_EXPERIMENT_AGENT_V3",
-  "purpose": "Scientific decision Agent that first extracts material-response regularities from measured PUR rheology, translates those regularities into design rules, then selects an informative formulation-process experiment using local evidence, external priors and uncertainty-aware tools.",
+  "purpose": "Scientific decision Agent that first extracts material-response regularities from measured PUR rheology, then uses those regularities, external evidence and uncertainty-aware tools to select one useful formulation-process experiment point.",
   "default_evidence_profile": "blind_pre_result",
   "blinded_target_formulation_ids": ["F1"],
+  "canonical_flow": "planner -> evidence/tool layer -> proposer -> skeptic -> robustness adjudicator -> judge -> freeze",
   "stages": [
     {
       "id": "planner",
       "prompt": "prompts/agent_v3_planner.txt",
-      "role": "identify the physical failure mode and the relevant rheological regularities before any candidate ranking"
+      "role": "identify the physical failure mode, upstream rheological regularities, evidence needs and measurement objective before candidate ranking"
     },
     {
-      "id": "tool_execution",
-      "role": "execute planner-requested read-only scientific actions; the state-aware rheology tool exposes the paper's upstream physical/model findings without validation outcomes"
-    },
-    {
-      "id": "scientific_translation",
-      "role": "translate discovered state-shift, thermal-response and temporal-stability patterns into experiment-selection rules"
-    },
-    {
-      "id": "deterministic_candidate_analysis",
-      "role": "profile chemically admissible candidates and provide transparent support/risk diagnostics without pretending to predict unmeasured viscosity"
+      "id": "evidence_tool_layer",
+      "role": "execute read-only scientific tools, including the paper-derived state-aware rheology tool, external evidence retrieval, formulation inspection and process-state audits"
     },
     {
       "id": "proposer",
       "prompt": "prompts/agent_v3_proposer.txt",
-      "role": "select the experiment point that best tests the discovered physical problem and evidence-supported formulation hypothesis"
+      "role": "rank experiment points according to scientific usefulness for the discovered material problem"
     },
     {
       "id": "skeptic",
       "prompt": "prompts/agent_v3_skeptic.txt",
-      "role": "check whether the proposed point really follows from the scientific findings, remains interpretable, and avoids leakage or unsupported mechanism claims"
+      "role": "try to falsify the provisional recommendation and test scientific interpretability, leakage and claim boundaries"
+    },
+    {
+      "id": "robustness_adjudicator",
+      "prompt": "prompts/agent_v3_robustness.txt",
+      "role": "adjudicate whether the proposed point remains useful under alternative evidence priorities, process-state uncertainty and the skeptic's strongest objections"
     },
     {
       "id": "judge",
       "prompt": "prompts/agent_v3_judge.txt",
-      "role": "freeze one useful experiment point, an uncertainty probe, or abstain when no scientifically interpretable test is available"
+      "role": "resolve proposer, skeptic and robustness records and make the final pre-result decision"
+    },
+    {
+      "id": "freeze",
+      "role": "programmatically validate and freeze the recommendation with timestamp, hashes, model, candidate state, uncertainty and falsifiable acceptance criterion"
     }
   ],
   "required_scientific_sequence": [
@@ -43,13 +45,15 @@
     "state the positive material regularities and their boundaries",
     "translate those regularities into a design objective",
     "use external evidence to identify chemically plausible intervention directions",
-    "compare admissible experiment points",
-    "stress-test interpretability and uncertainty",
-    "freeze the selected formulation-process point and falsifiable measurement criterion"
+    "compare admissible formulation-process experiment points",
+    "challenge the provisional point scientifically",
+    "adjudicate robustness to reasonable alternative evidence interpretations",
+    "freeze one useful experiment point and a falsifiable measurement criterion"
   ],
   "core_scientific_tool": {
     "name": "get_state_aware_rheology_summary",
     "required_before_candidate_ranking": true,
+    "role": "Convert the paper's upstream findings into machine-usable design rules without exposing the validation formulation or its outcome.",
     "returns": [
       "formulation-only versus state-aware model comparison",
       "state-shift master-curve structure",
@@ -61,13 +65,14 @@
   },
   "architecture_principles": [
     "physical discovery comes before candidate ranking",
-    "the Agent should use the paper's measured regularities as decision tools rather than rediscovering them from prose each run",
-    "state-aware rheology, external chemistry evidence and process uncertainty serve different scientific roles and must remain separated",
-    "candidate selection should maximize scientific usefulness for the observed failure mode, not benchmark score",
+    "the Agent uses measured rheological regularities as scientific tools rather than optimizing benchmark recovery",
+    "state-aware rheology, external chemistry evidence and process uncertainty serve distinct scientific roles",
+    "candidate selection should maximize usefulness and interpretability for the observed material failure mode",
     "deterministic calculations are separated from language-model judgment",
-    "the skeptic is a quality-control step for scientific usefulness, not a component whose removal must be benchmarked as a headline claim",
-    "result data are structurally removed before blind replay payloads are assembled",
-    "only concise auditable rationales and tool outputs are stored; hidden chain-of-thought is not required"
+    "the Skeptic and Robustness Adjudicator are decision-quality controls, not components that need ablation to justify their existence",
+    "held-out result data are structurally removed before blind replay payloads are assembled",
+    "the final recommendation is frozen before physical adjudication",
+    "only concise auditable outputs are stored; hidden chain-of-thought is not scientific evidence"
   ],
   "primary_agent_outputs": [
     "identified physical failure mode",
@@ -76,44 +81,25 @@
     "selected formulation-process experiment point",
     "ranked alternatives",
     "measurement plan tied to the discovered failure mode",
+    "skeptic audit",
+    "robustness adjudication",
     "decomposed uncertainty",
     "falsifiable acceptance criterion"
   ],
-  "primary_benchmark": {
-    "headline_baseline": "naive_direct_llm",
-    "headline_agent": "agent_v3_full",
-    "baseline_information_budget": {
-      "raw_original_local_measurements": true,
-      "candidate_compositions": true,
-      "state_aware_theory_summary": false,
-      "external_database_or_literature": false,
-      "scientific_actions": false,
-      "candidate_space_rationale": false,
-      "planner": false,
-      "skeptic": false
-    },
-    "interpretation": "The main comparison measures the value of the complete PUR-NEW decision strategy relative to an unguided direct-LLM formulation choice. It is intentionally an information-and-strategy ladder rather than a matched-information architecture test."
-  },
-  "supplementary_controls": [
-    "single_pass_tool_context",
-    "deterministic_evidence_ranker",
-    "optional V3 component ablations"
-  ],
-  "supplementary_control_role": "Use stronger evidence-rich controls only as robustness checks to show that the main result is not solely an artifact of a weak baseline. They are not the headline comparison.",
   "evaluation_priority": [
-    "scientific usefulness of the selected experiment",
+    "physical wet-lab adjudication of the selected point",
+    "scientific usefulness of the experiment",
     "traceable use of measured local regularities",
-    "physical wet-lab adjudication",
-    "improvement over the naive direct-LLM baseline",
     "reproducibility of the recommendation under the same evidence contract",
     "scientific-boundary and leakage compliance"
   ],
+  "secondary_replay_role": "Repeated held-out replay may be used only as a reproducibility/consistency check. It is not the main scientific contribution and does not require component ablations.",
   "non_goals": [
-    "making the baseline artificially nonsensical or giving it forbidden/incorrect information",
-    "proving that every internal Agent module is individually necessary through headline ablation",
-    "optimizing benchmark recovery as the main scientific objective",
+    "proving that every internal Agent module is individually necessary through ablation",
+    "making architecture benchmarking the main scientific contribution",
+    "optimizing held-out-region recovery as the main objective",
     "claiming that literature-prior proximity predicts the wet-lab outcome",
-    "replacing the material-science result with an LLM architecture comparison"
+    "replacing the material-science result with an LLM-systems paper"
   ],
-  "claim_boundary": "V3.3 is the current discovery-to-experiment implementation. It operationalizes the physical/model findings and improves scientific decision support, but it must not be described as the exact historical code that generated the earlier validation formulation unless matching archived runtime provenance is recovered."
+  "claim_boundary": "V3.3.1 is the current discovery-to-experiment implementation. It operationalizes the physical/model findings and improves scientific decision support, but it must not be described as the exact historical code that generated the earlier validation formulation unless matching archived runtime provenance is recovered."
 }
