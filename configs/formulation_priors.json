@@ -1,17 +1,28 @@
 {
-  "version": "2.2.0",
-  "scope": "Evidence-derived formulation hypothesis for reproducible candidate-space formalization, replay benchmarking and future Agent ranking. This is not a trained predictor and not a mechanistic law.",
+  "version": "2.3.0",
+  "scope": "Evidence-derived formulation hypothesis for reproducible candidate-space formalization, hierarchical region-to-refinement design, replay benchmarking and future Agent ranking. This is not a trained predictor and not a mechanistic law.",
   "historical_status": {
     "agent_validation_formulation_recommended_before_target_result_known": true,
     "current_exact_v2_grid_formalized_after_validation_experiment": true,
-    "interpretation": "The prospective historical claim attaches to the Agent recommendation itself. The current exact 4x3 V2 software grid is a later reproducible formalization of the evidence-constrained candidate region and is not represented as the original contemporaneous freeze artifact unless older provenance is recovered.",
+    "current_fine_refinement_algorithm_formalized_after_validation_experiment": true,
+    "interpretation": "The prospective historical claim attaches to the Agent recommendation itself. The current coarse grid and fine-refinement software are later reproducible operationalizations of the evidence-constrained region and are not represented as the original contemporaneous freeze algorithm unless older provenance is recovered.",
     "repository_freeze_artifact_available": false,
     "allowed_use": [
       "scientific rationale",
-      "replay benchmark",
+      "region-level replay benchmark",
       "candidate-space formalization",
+      "outcome-blind fine refinement",
       "future prospective rounds"
     ]
+  },
+  "coordinate_systems": {
+    "agent_search_basis": "normalized_total_wt_percent",
+    "historical_lab_recipe_basis": "source_reported_parts",
+    "comparison_rule": "Any source-reported recipe must be normalized by its own total before comparison with Agent search coordinates. Raw source parts must never be compared numerically to normalized-total wt% coordinates.",
+    "validation_recipe_normalized_for_controller_only_comparison": {
+      "AC1920_pct_total_approx": 14.00444847,
+      "TK100_pct_total_approx": 4.11895543
+    }
   },
   "local_reactive_core_anchor": {
     "formulation_id": "E2",
@@ -51,6 +62,28 @@
       "interpretation": "5% represents the repeatedly documented minor-resin region and 10% is a conservative coarse upper level."
     }
   },
+  "hierarchical_design": {
+    "stage_1": {
+      "name": "coarse_region_identification",
+      "generator": "scripts/build_candidate_set.py",
+      "purpose": "Test whether reasoning enters the evidence-supported resin-modified formulation family under a small controlled decision space.",
+      "candidate_count": 12
+    },
+    "stage_2": {
+      "name": "outcome_blind_fine_refinement",
+      "generator": "scripts/build_refinement_set.py",
+      "purpose": "Operationalize continuous/local refinement after the resin-modified family has been selected. This implementation supports reproducibility and future prospective use; it is not represented as the historical freeze algorithm.",
+      "default_step_pct_points": 1.0,
+      "domain_rule": {
+        "acrylic_lower": "lowest coarse design level justified by the evidence audit after excluding the reactive-only control",
+        "acrylic_upper": "highest directly commensurate acrylic evidence anchor",
+        "tackifier_lower": "minimum coarse tackifier grid value",
+        "tackifier_upper": "maximum coarse tackifier grid value"
+      },
+      "reads_validation_recipe": false,
+      "reads_validation_outcome": false
+    }
+  },
   "stability_hypotheses": {
     "H1_formulation_family": "Partial replacement of the reactive-only formulation by an acrylic-like and/or minor tackifier-like resin can reduce hot-hold viscosity drift under matched process conditions.",
     "H2_functionality": "At comparable acrylic loading, lower effective reactive-group density or lower-OH acrylic chemistry is expected to be more favorable for hot-hold viscosity stability than more highly reactive acrylic chemistry.",
@@ -62,7 +95,7 @@
     "EP0293602A2: viscosity rise during prolonged elevated-temperature holding is explicitly treated as a reactive-hot-melt formulation failure mode"
   ],
   "candidate_construction": {
-    "rule": "Cartesian product of acrylic_like_modifier_pct_total and minor_tackifier_like_modifier_pct_total. Scale the E2 normalized reactive core into the remaining total-formulation fraction.",
+    "rule": "Stage 1 uses the Cartesian product of coarse acrylic/tackifier design levels. Stage 2 uses an outcome-blind fine grid inside the predeclared resin-modified region. Both stages scale the E2 normalized reactive core into the remaining total-formulation fraction.",
     "formula": {
       "modifier_total_fraction": "m=(acrylic_pct+tackifier_pct)/100",
       "PPG2000_pct": "100*(1-m)*0.3990466349",
@@ -72,12 +105,13 @@
       "tackifier_like_pct": "tackifier_pct"
     },
     "exact_validation_recipe_encoded_as_candidate": false,
-    "validation_recipe_numeric_values_used_to_generate_grid": false
+    "validation_recipe_numeric_values_used_to_generate_grid": false,
+    "validation_recipe_numeric_values_used_to_generate_refinement_domain": false
   },
   "action_support_thresholds_pct_points": {
     "strong": 5.0,
     "moderate": 10.0
   },
   "fraction_basis_audit": "See data/external_evidence_basis_audit.csv. Evidence percentages are only treated as directly commensurate numeric anchors when their denominator is represented as total-formulation or a curated equivalent; ambiguous addition-level percentages remain directional evidence.",
-  "claim_boundary": "External examples are analogues. They support candidate-family and coarse-range hypotheses, not an exact optimum for AC1920/TK100 and not a proven local molecular mechanism. The current exact V2 grid is a later formalization and must not be conflated with the original pre-result Agent freeze unless older provenance is recovered."
+  "claim_boundary": "External examples are analogues. They support candidate-family and coarse-region hypotheses, not an exact optimum for AC1920/TK100 and not a proven local molecular mechanism. The historical prospective claim is that the Agent recommendation preceded the validation outcome. The current coarse grid and fine-refinement algorithm are later reproducible formalizations and must not be conflated with the original historical freeze algorithm unless older provenance is recovered."
 }
