@@ -1,0 +1,3 @@
+analysis_set,model,n_points,n_realizations,r2,aic,bic,fit_multiplicative_rmse,held_temperature_multiplicative_error
+chemistry_audited_primary,formulation_only_linear,36,6,0.8518908559372586,35.88089839644209,42.21497415026653,1.4281775603191074,1.4417957113157764
+chemistry_audited_primary,state_shared_quadratic,36,6,0.9976662109445803,-105.5355288022651,-92.86737729461623,1.0457538382790756,1.0577654055099894
