@@ -16,7 +16,29 @@ formulation state
 -> rheological response + structured uncertainty
 ```
 
-## Canonical workflow
+## Scientific chronology
+
+The manuscript follows the actual order of the work:
+
+```text
+physical / model findings
+-> state-aware design theory
+-> evidence-constrained candidate space
+-> Agent sees pre-result evidence only
+-> Agent selects and freezes a new candidate + rationale + criterion
+-> human wet-lab execution
+-> independent physical adjudication
+-> support / reject / qualify the recommendation
+-> update the next design state
+```
+
+The physical/statistical findings are therefore **upstream of the Agent**. They establish why composition alone is insufficient, why process/realization state must remain explicit, and why temperature response and hold stability should be separate design responses.
+
+The Agent is then asked to act on that theory. For the prospective validation round, the corresponding wet-lab outcome is not available to the Agent when the recommendation is made. The candidate, rationale, uncertainty assessment and falsifiable criterion are frozen before the human experiment is evaluated. The later experiment is the external physical adjudicator: it can support, partially support, reject, or render the recommendation inconclusive.
+
+See [`docs/PROSPECTIVE_VALIDATION_PROTOCOL.md`](docs/PROSPECTIVE_VALIDATION_PROTOCOL.md).
+
+## Canonical runtime workflow
 
 ```text
 original local evidence
@@ -25,14 +47,14 @@ original local evidence
 -> evidence-derived candidate hypothesis
 -> external database / literature retrieval
 -> finite formulation-process candidate set
--> Agent recommendation or abstention
+-> blinded Agent recommendation or abstention
 -> freeze rationale + alternatives + criterion + provenance
 -> human wet-lab execution
 -> separate physical adjudication
 -> update next design round
 ```
 
-The Agent is an **uncertainty-aware scientific recommender**. It does not operate laboratory hardware. Its value is judged by whether its evidence-grounded recommendation remains useful after human execution.
+The Agent is an **uncertainty-aware scientific recommender**. It does not operate laboratory hardware. Its value is judged by whether its pre-frozen recommendation remains useful after human execution.
 
 ## Current local evidence
 
@@ -174,7 +196,7 @@ x
 
 For each candidate the original E2 reactive core is scaled into the remaining total-formulation fraction.
 
-The exact current follow-up recipe is **not** encoded as a discrete candidate.
+The exact historical F1 follow-up recipe is **not** encoded as a discrete candidate.
 
 See [`docs/CANDIDATE_SPACE_HYPOTHESIS.md`](docs/CANDIDATE_SPACE_HYPOTHESIS.md).
 
@@ -198,28 +220,33 @@ rank_candidate_support
 
 The Agent is allowed to see pre-result database/literature evidence and uncertainty-aware actions. Those are core parts of the system, not leakage.
 
-Held-out follow-up formulation/outcome and controller-side scoring labels are excluded from the V2 replay payload.
+For a prospective experimental round, the target candidate's later wet-lab measurements and any outcome-derived controller labels are excluded until after the recommendation record is frozen.
 
-## Benchmark status
+## Retrospective replay versus prospective validation
 
-The current V2 benchmark is explicitly a **retrospective held-out-result blind replay** for the already completed follow-up experiment.
+Two different evaluation modes are kept separate.
 
-Why: the formal V2 candidate-space hypothesis was written after the current follow-up result was already known.
+### Historical F1 / V2 replay
 
-Therefore V2 can test whether the evidence stack naturally prioritizes a region close to the held-out experiment, but it must not be described as prospectively validated for that already completed experiment.
+The V2 replay of the already completed F1 follow-up is a **retrospective held-out-result blind replay**. It asks whether the evidence stack, when the known F1 outcome is hidden from the evaluated model, prioritizes a compatible region. It must not be described as prospective validation of that historical F1 experiment.
 
-Future rounds can become genuinely prospective once the V2 configuration is frozen before new experiments.
+### Prospective Agent-to-wet-lab cycle
 
-The V2 controller evaluates candidate rankings in a two-dimensional modifier plane:
+The main validation chronology for a new candidate is stronger:
 
 ```text
-(acrylic-like %, minor-tackifier-like %)
+state-aware theory established first
+-> Agent blinded to the corresponding future wet-lab outcome
+-> recommendation + criterion frozen
+-> human experiment executed
+-> result revealed only for adjudication
 ```
 
-rather than using the old exact-18%-total-modifier target.
+This is the chronology to use for a prospective Agent-validation claim.
 
 See:
 
+- [`docs/PROSPECTIVE_VALIDATION_PROTOCOL.md`](docs/PROSPECTIVE_VALIDATION_PROTOCOL.md)
 - [`docs/BLIND_AGENT_BENCHMARK.md`](docs/BLIND_AGENT_BENCHMARK.md)
 - [`configs/blind_benchmark_v2.json`](configs/blind_benchmark_v2.json)
 - [`prompts/local_gpt_benchmark_operator.md`](prompts/local_gpt_benchmark_operator.md)
@@ -241,6 +268,7 @@ PUR-NEW/
 │  ├─ STATISTICAL_ROBUSTNESS.md
 │  ├─ MASTER_CURVE_COLLAPSE.md
 │  ├─ CANDIDATE_SPACE_HYPOTHESIS.md
+│  ├─ PROSPECTIVE_VALIDATION_PROTOCOL.md
 │  ├─ BLIND_AGENT_BENCHMARK.md
 │  ├─ WORKFLOW.md
 │  ├─ AGENT_RUNTIME.md
@@ -273,22 +301,27 @@ PUR-NEW/
 
 ## Claim boundary
 
-Supported now:
+Supported by the current physical/model evidence:
 
 - process/experimental realization materially affects measured viscosity level;
 - within the local measured chemistry family, a shared thermal-response shape plus a state-specific scale describes the data substantially better than formulation identity alone;
 - one state anchor reconstructs held-out local realization curves to roughly 6-10% multiplicative error;
 - thermal-hold stability is a separate design response and differs strongly across tested formulations;
-- the current follow-up formulation is much flatter over the matched hold window;
-- independent external evidence justifies a coarse acrylic/tackifier candidate family;
-- the V2 Agent can be tested in a held-out-result replay without exposing the follow-up result.
+- the historical F1 follow-up is much flatter over the matched hold window;
+- independent external evidence justifies a coarse acrylic/tackifier candidate family.
+
+Methodological chronology for prospective validation:
+
+- state-aware design theory is established before the new Agent selection;
+- the Agent does not see the corresponding future wet-lab outcome before freeze;
+- the recommendation, rationale, uncertainty and criterion are frozen before adjudication;
+- humans execute the experiment;
+- the later experimental result independently supports, rejects, or qualifies the recommendation.
 
 Not supported merely by the current repository:
 
 - that the local master curve is universal across reactive PUR chemistry;
 - that thermal sensitivity and hold stability are universally statistically independent;
-- that V2 prospectively predicted the already completed follow-up experiment;
+- that the historical V2 replay prospectively predicted the already completed F1 experiment;
 - that AC1920/TK100 stabilization is proven to arise from one specific molecular reaction pathway;
 - that any external analogue percentage is a universal PUR optimum.
-
-A prospective Agent claim requires a timestamped frozen recommendation created before the corresponding future experiment is inspected.
