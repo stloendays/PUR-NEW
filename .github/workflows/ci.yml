@@ -37,6 +37,7 @@ jobs:
           python -m py_compile scripts/run_naive_llm_baseline.py
           python -m py_compile scripts/summarize_agent_benchmark.py
           python -m py_compile scripts/analysis_audit_v1.py
+          python -m py_compile scripts/check_manuscript_citations.py
       - name: Build deterministic evidence state
         run: python scripts/build_evidence_state.py --output /tmp/evidence_state.json
       - name: Sanity-check generated evidence JSON
@@ -153,3 +154,5 @@ jobs:
         run: python scripts/master_curve_collapse.py --bootstrap 1000 --output-dir /tmp/master-curve-collapse
       - name: Sanity-check master-curve summary
         run: python -m json.tool /tmp/master-curve-collapse/master_curve_collapse_summary.json > /dev/null
+      - name: Validate manuscript citation integrity
+        run: python scripts/check_manuscript_citations.py
