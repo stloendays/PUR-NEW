@@ -1,11 +1,11 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "profiles": {
     "blind_pre_result": {
-      "description": "For prospective/blind Agent evaluation. The Agent may see original-system measurements and external analogue evidence, but not follow-up wet-lab outcomes.",
+      "description": "For prospective/blind Agent evaluation. The Agent may see original-system measurements and external analogue evidence, but not the target validation formulation identity, its wet-lab outcome, or any outcome-derived labels.",
       "allow_original_temperature_sweeps": true,
       "allow_original_hold_data": true,
-      "allow_follow_up_formulation_identity": true,
+      "allow_follow_up_formulation_identity": false,
       "allow_follow_up_hold_results": false,
       "allow_external_evidence_hints": true,
       "allow_post_result_adjudication": false
@@ -29,5 +29,5 @@
       "allow_post_result_adjudication": false
     }
   },
-  "hard_rule": "A blind-pre-result run must never expose follow-up hold measurements, adjudication labels, or text derived from those outcomes."
+  "hard_rule": "A blind-pre-result run must never expose the target validation formulation identity, follow-up hold measurements, adjudication labels, or text derived from those outcomes."
 }
