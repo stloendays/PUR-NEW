@@ -1,0 +1,14 @@
+chemistry_family,n_curves,structural_ood_reason
+C__44M,3,
+C__MLQ,4,
+D__44M,4,
+D__I,2,
+D__MLQ,4,
+D__TD80,2,
+D__W,2,
+P__44M,4,
+P__I,2,
+P__MLQ,4,
+P__TD80,3,
+P__TDS,3,"TDS isocyanate category is absent from every other family, so a categorical model cannot predict this held-out family without extrapolating to an unseen factor level."
+P__W,2,
