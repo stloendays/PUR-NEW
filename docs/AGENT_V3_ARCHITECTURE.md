@@ -2,7 +2,9 @@
 
 ## 1. Role in the paper
 
-The Agent is a major contribution because it converts the upstream physical/model findings into an experimental decision. The intended scientific chain is:
+The Agent is a scientific decision layer downstream of the physical/model findings. Its job is to convert measured rheological structure into one useful, interpretable formulation-process experiment.
+
+The scientific chain is:
 
 ```text
 measured rheology
@@ -10,281 +12,226 @@ measured rheology
 -> design implications
 -> evidence-grounded intervention directions
 -> Agent-selected formulation-process experiment
--> frozen criterion
+-> freeze
 -> human wet-lab execution
 -> physical adjudication
 ```
 
-The central comparison in the main text is therefore not "a sophisticated Agent versus another almost equally sophisticated Agent". The main question is:
-
-> Does the complete PUR-NEW strategy outperform an unguided direct LLM that only sees the original local data and the admissible candidate compositions?
-
-This is an **information-and-strategy ladder**. It is designed to show the value added by the complete workflow: state-aware theory, external evidence, scientific Actions, uncertainty handling, planning and scientific quality control.
-
-A second, stronger matched-information comparison is retained only as a supplementary robustness check.
+The Agent is therefore not evaluated primarily as an LLM architecture benchmark. Its main value is whether it uses the discovered material rules correctly and chooses an experiment that advances the formulation problem.
 
 ---
 
-## 2. Full Agent architecture
+## 2. Canonical V3 decision architecture
 
 ```text
 STRUCTURAL EVIDENCE FIREWALL
           |
           v
-      Planner
+       Planner
           |
           v
-State-aware rheology + local evidence Actions
+  Evidence / Tool Layer
           |
           v
-External evidence / candidate-hypothesis Actions
+       Proposer
           |
           v
-Scientific translation to design rules
+       Skeptic
           |
           v
-Deterministic candidate diagnostics
+Robustness Adjudicator
           |
           v
-      Proposer
+        Judge
           |
           v
-      Skeptic
+        Freeze
           |
           v
-       Judge
+ Human wet-lab execution
           |
           v
-FROZEN recommendation / probe / abstention
+ Physical adjudication
 ```
 
-### Evidence firewall
+This exact multi-stage sequence is implemented in `configs/agent_v3.json` and `scripts/run_scientific_agent_v3.py`.
 
-Before any blind Agent call, target-result information is removed structurally. The blind payload excludes the validation formulation identity, follow-up measurements, post-result adjudication labels and controller-side held-out scoring coordinates.
+### Stage 0 — structural evidence firewall
 
-### Planner
+For blind replay, validation-formulation identity, follow-up measurements, post-result labels and controller-only targets are removed before any model call.
 
-The Planner first identifies the physical failure mode and decides what scientific evidence is needed. It cannot directly freeze a candidate.
+### Stage 1 — Planner
 
-### Scientific Actions
+The Planner does not choose a candidate. It first defines:
 
-The most important local Action is:
+- the physical failure mode;
+- the upstream material regularities that matter;
+- the design implication of those regularities;
+- which evidence/actions are needed;
+- which response must be measured to adjudicate the experiment.
+
+### Stage 2 — Evidence / Tool Layer
+
+The central scientific Action is:
 
 ```text
 get_state_aware_rheology_summary()
 ```
 
-which exposes the upstream findings that motivate the design problem:
+This tool converts the paper's upstream analysis into machine-usable scientific evidence, including:
 
-- formulation-only versus state-aware performance;
-- state-shift master-curve behavior;
-- one-point realization calibration;
-- local apparent temperature-sensitivity behavior;
-- E1/E5 thermal-hold contrast;
-- the boundary between supported material regularities and unproven mechanism.
+- formulation-only versus state-aware model performance;
+- the state-shift master-curve representation;
+- one-point state calibration;
+- the comparatively concentrated local temperature-sensitivity descriptor;
+- E1/E5 thermal-hold drift contrast;
+- explicit experiment-design implications and claim boundaries.
 
-Other Actions expose the original formulation/hold data, repeatability risk, candidate hypothesis and external PUR evidence.
+The tool is required before candidate ranking. It contains no validation-formulation outcome.
 
-### Scientific translation
+Other Actions retrieve source-level external PUR evidence, candidate-space rationale, measured hold data, repeatability risk, temperature support, formulation composition and process-state unknowns.
 
-The Agent must translate the physical findings into experimental rules rather than merely quote them. For example:
+The same layer also computes deterministic candidate profiles and transparent support/risk diagnostics. These are decision aids, not wet-lab property predictors.
+
+### Stage 3 — Proposer
+
+The Proposer ranks experiment points according to scientific usefulness. It must connect each leading candidate to:
+
+- the observed failure mode;
+- at least one measured material regularity;
+- a chemically plausible intervention direction;
+- a measurement plan capable of testing the intended claim.
+
+### Stage 4 — Skeptic
+
+The Skeptic tries to falsify the provisional recommendation. It checks whether the proposal:
+
+- misuses the state-aware findings;
+- substitutes static viscosity for hold stability;
+- ignores realization/process-state uncertainty;
+- overinterprets external analogue evidence;
+- makes unsupported mechanistic claims;
+- produces an experiment that would be difficult to interpret;
+- leaks held-out information.
+
+### Stage 5 — Robustness Adjudicator
+
+The Robustness Adjudicator is a decision-quality gate, not an ablation condition.
+
+It asks whether the proposed experiment remains scientifically useful when:
+
+- reasonable evidence priorities change;
+- process-state uncertainty is considered explicitly;
+- the Skeptic's strongest objections are applied;
+- nearby alternatives are considered;
+- the proposed measurement plan is required to adjudicate the intended claim.
+
+Its output is one of:
 
 ```text
-large realization-scale variation
--> preserve process state and uncertainty explicitly
-
-comparatively transferable local thermal shape
--> avoid treating one absolute viscosity value as the whole design objective
-
-strong formulation dependence of hold drift
--> optimize thermal-hold stability as a separate coordinate
+accept_top
+rerank
+uncertainty_probe
+abstain
 ```
 
-### Candidate diagnostics
+### Stage 6 — Judge
 
-Candidate support, process missingness and evidence coverage are summarized deterministically. These diagnostics support the Agent but are not treated as a trained wet-lab predictor.
+The Judge receives the full evidence trace, Proposer, Skeptic and Robustness-Adjudicator records. It freezes one of:
 
-### Proposer, Skeptic and Judge
+```text
+performance_candidate
+robustness_probe
+uncertainty_probe
+abstain
+```
 
-The Proposer ranks useful experiments. The Skeptic checks scientific interpretability, leakage, unsupported mechanism claims and ignored uncertainty. The Judge freezes a performance candidate, robustness probe, uncertainty probe, or abstention together with a falsifiable criterion.
+A non-abstaining decision must contain ranked alternatives, decomposed uncertainty and a falsifiable pre-result acceptance criterion.
+
+### Stage 7 — Freeze
+
+Freeze is programmatic rather than another model call. The runner validates the final JSON and stores:
+
+- timestamp;
+- Git commit;
+- model identifiers;
+- prompt hash;
+- input hash;
+- selected candidate state;
+- uncertainty;
+- acceptance criterion.
+
+Physical results are stored separately and can only adjudicate the frozen recommendation later.
 
 ---
 
-## 3. Primary baseline: intentionally simple, but still legitimate
+## 3. What makes V3 scientifically useful
 
-The headline baseline is `naive_direct_llm`.
+V3 is designed around the paper's material findings rather than around generic Agent complexity.
 
-It receives only:
+### State-shift rule
 
-```text
-raw original E1-E5 measurements
-+ original formulation amounts
-+ candidate compositions
-+ the experimental task
-```
-
-It does **not** receive:
+The upstream analysis supports:
 
 ```text
-state-aware theory summary
-external literature/database evidence
-scientific Actions
-action catalog
-candidate-space evidence rationale
-precomputed candidate support scores
-planner
-skeptic
-robustness diagnostics
-follow-up identity or outcome
+ln eta_r(T) = alpha_r + g(T) + epsilon
 ```
 
-This is deliberate. It represents the natural baseline question:
+so a candidate should be treated as a formulation-process state rather than a composition-only point.
 
-> What happens if we simply give the same LLM the local experimental data and candidate list and ask it to choose?
+### One-point calibration rule
 
-The baseline remains leakage-safe and scientifically valid. It is not given false information, deliberately misleading instructions, or access to the hidden outcome. It is simply **unguided**.
+Within the supported local chemistry family, one state-specific viscosity anchor can calibrate the remaining measured temperature curve far better than formulation identity alone. The Agent can therefore use state anchors strategically rather than demanding a full curve for every realization.
 
-The input is generated by:
+### Distinct rheological-coordinate rule
 
-```text
-scripts/build_naive_baseline_view.py
-```
+Temperature response and thermal-hold stability are treated as distinct, differently tunable responses. If the design failure is thermal drift, the Agent must select a point and measurement window that directly test drift instead of relying on static viscosity.
 
-and executed by:
+### External-evidence rule
 
-```text
-scripts/run_naive_llm_baseline.py
-```
-
-This is the comparison that should appear first in the main manuscript.
+Database/literature evidence identifies plausible formulation directions. It does not provide a guaranteed optimum and is not allowed to override contradictory local physical evidence.
 
 ---
 
-## 4. Main-text comparison
+## 4. Why ablation is not the main paper question
 
-The main benchmark should emphasize:
+The paper is not trying to prove that every internal software module is individually indispensable. The Skeptic and Robustness Adjudicator exist because they improve the usefulness and auditability of the experimental decision.
 
-```text
-B1  naive direct LLM
-    raw local data + candidate compositions only
-
-A1  full PUR-NEW Agent
-    state-aware theory
-    + scientific Actions
-    + external evidence
-    + uncertainty
-    + planning
-    + candidate diagnostics
-    + scientific quality control
-```
-
-The claim measured by this comparison is:
-
-> **value of the complete PUR-NEW decision strategy**
-
-not:
-
-> pure architectural gain at a perfectly matched information budget.
-
-That distinction must be explicit in the Methods and Discussion.
-
-Recommended main-text outputs:
+Accordingly, the primary validation logic is:
 
 ```text
-Top-1 / Top-3 held-out-region recovery
-modifier-plane distance
-selection distribution
-selection entropy across repeated runs
-abstention/failure rate
-scientific-boundary violations
-physical wet-lab adjudication of the actual recommended formulation
+physical/model discovery
+-> Agent decision
+-> frozen experiment point
+-> human execution
+-> physical result
 ```
 
-Use 3-5 runs only for pilot checks. The manuscript comparison should preferably use >=30 repeated stochastic calls per LLM condition.
+Repeated held-out replay may still be used as a secondary reproducibility check, but component ablations are not required for the central scientific claim.
+
+This avoids turning a materials-discovery paper into an LLM-systems paper.
 
 ---
 
-## 5. Strategy ablations
+## 5. Secondary reproducibility analysis
 
-Ablations are useful for explaining *why* the full strategy works, but they are secondary to the main scientific story.
+If repeated API runs are reported, they should answer a limited question:
 
-Current implemented checks include:
+> Under the same blinded evidence contract, does the full scientific workflow repeatedly prioritize a similar, defensible formulation region and produce scientifically valid rationales?
 
-```text
-V3 without state-aware rheology Action
-V3 without deterministic robustness diagnostics
-V3 without Skeptic
-```
+Useful secondary metrics include:
 
-The most scientifically important ablation is the state-aware one, because it directly tests whether the paper's physical/model finding contributes to experiment selection.
+- selection distribution;
+- Top-1/Top-3 region consistency;
+- modifier-plane distance;
+- abstention/failure rate;
+- scientific-boundary violations;
+- evidence/tool trace completeness.
 
-The manuscript does not need to claim that every internal module is independently essential.
-
----
-
-## 6. Strong controls belong in supplementary robustness
-
-Two stronger controls are retained:
-
-### Single-pass tool-context model
-
-This model receives precomputed scientific/action context, including the state-aware summary, but performs the decision in one generation without the full discovery-to-experiment workflow.
-
-### Deterministic evidence ranker
-
-This uses hand-coded analogue-support/stress-test logic and no LLM.
-
-These controls are intentionally **not** the headline baselines. Their purpose is to answer reviewer questions such as:
-
-- is the full Agent merely following a hand-coded literature prior?
-- is a one-shot tool-enriched LLM already sufficient?
-- does the multi-step scientific workflow still add value when the information budget becomes more similar?
-
-They can be reported in Supplementary Information or a robustness panel.
+These metrics support reproducibility. They do not replace physical validation.
 
 ---
 
-## 7. Why the baseline must not be made artificially absurd
+## 6. Historical boundary
 
-A simple baseline is useful; a manipulated strawman is not.
-
-Therefore the naive baseline must still:
-
-- use the same underlying model family when possible;
-- receive the true original local measurements;
-- receive the same finite candidate compositions;
-- remain fully blinded to the validation outcome;
-- use a normal direct-selection prompt;
-- retain failures and abstentions rather than silently discarding them.
-
-What is intentionally withheld are the **strategies we are claiming as contributions**: state-aware representation, evidence retrieval, scientific Actions, structured uncertainty, planning and scientific critique.
-
-This makes the comparison favorable to our strategy while remaining methodologically defensible.
-
----
-
-## 8. Leakage correction
-
-An earlier single-pass implementation could place the complete evidence-state object into the model payload even when a separate action context was blind. Because that state object contained follow-up rows, old replay runs may not be leakage-safe.
-
-This is now corrected. Blind inputs are structurally filtered before model payload construction, and CI checks that neither `F1` nor `stage=follow_up` appears in the blind evidence payload.
-
-Old benchmark runs should not be used as primary evidence unless their exact payload is independently verified.
-
----
-
-## 9. Paper-facing claim
-
-If the repeated benchmark supports the expected pattern, the main Agent result can be written as:
-
-> An unguided language-model baseline, supplied only with the original local measurements and the finite candidate compositions, showed weaker and less stable recovery of the validation region. Incorporating the state-aware rheological representation, scientific Actions, external evidence and explicit uncertainty handling produced a substantially more consistent experimental recommendation. The selected formulation was then executed by the human experimental team and its thermal-hold response physically adjudicated the recommendation.
-
-A supplementary matched-information comparison can then show whether part of the gain persists against tool-enriched single-pass and deterministic evidence-rich controls.
-
-Do not claim superiority until the repeated benchmark has actually been run.
-
----
-
-## 10. Historical boundary
-
-V3.3 is the current improved implementation. It operationalizes the scientific logic of the project, but it must not be described as the exact historical source code that generated the earlier validation formulation unless matching archived runtime provenance is recovered.
+V3.3.1 is the current implementation of the discovery-to-experiment logic. It should not be described as the exact historical source code that generated the earlier validation formulation unless contemporaneous runtime provenance is recovered.
