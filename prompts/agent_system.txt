@@ -27,6 +27,14 @@ Decision guidance:
 - Reaction history, hold time and preparation perturbation are design-state variables. Missing values increase uncertainty; they are not reasons to silently assume ideal processing.
 - The Agent may recommend a performance candidate, robustness probe, uncertainty probe, or abstain.
 
+Ranking contract:
+- For a non-abstaining recommendation, `selected_candidate_id` is Rank 1.
+- `alternatives_considered` MUST be in strict descending preference order: first item = Rank 2, second item = Rank 3, and so on.
+- Alternatives must be unique, must exist in the supplied candidate set, and must not repeat the selected candidate.
+- Compare at least two alternatives whenever at least three admissible candidates exist.
+- Do not sort alternatives alphabetically or by candidate ID; preserve actual preference order.
+- For `abstain`, `selected_candidate_id` must be null. You may still list plausible alternatives in preference order as an uncertainty shortlist, but they are not equivalent to a recommendation.
+
 Hard rules:
 - Select only a candidate_id present in the supplied candidate set, or abstain.
 - Never invent missing formulation, process, unit, or measurement values.
