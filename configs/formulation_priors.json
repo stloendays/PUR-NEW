@@ -1,5 +1,5 @@
 {
-  "version": "2.3.0",
+  "version": "2.3.1",
   "scope": "Evidence-derived formulation hypothesis for reproducible candidate-space formalization, hierarchical region-to-refinement design, replay benchmarking and future Agent ranking. This is not a trained predictor and not a mechanistic law.",
   "historical_status": {
     "agent_validation_formulation_recommended_before_target_result_known": true,
@@ -19,10 +19,7 @@
     "agent_search_basis": "normalized_total_wt_percent",
     "historical_lab_recipe_basis": "source_reported_parts",
     "comparison_rule": "Any source-reported recipe must be normalized by its own total before comparison with Agent search coordinates. Raw source parts must never be compared numerically to normalized-total wt% coordinates.",
-    "validation_recipe_normalized_for_controller_only_comparison": {
-      "AC1920_pct_total_approx": 14.00444847,
-      "TK100_pct_total_approx": 4.11895543
-    }
+    "controller_target_location": "configs/blind_benchmark_v2.json only; validation recipe coordinates are intentionally excluded from Agent priors"
   },
   "local_reactive_core_anchor": {
     "formulation_id": "E2",
@@ -75,8 +72,8 @@
       "purpose": "Operationalize continuous/local refinement after the resin-modified family has been selected. This implementation supports reproducibility and future prospective use; it is not represented as the historical freeze algorithm.",
       "default_step_pct_points": 1.0,
       "domain_rule": {
-        "acrylic_lower": "lowest coarse design level justified by the evidence audit after excluding the reactive-only control",
-        "acrylic_upper": "highest directly commensurate acrylic evidence anchor",
+        "acrylic_lower": "minimum directly commensurate acrylic evidence anchor minus the predeclared strong-support distance",
+        "acrylic_upper": "maximum directly commensurate acrylic evidence anchor",
         "tackifier_lower": "minimum coarse tackifier grid value",
         "tackifier_upper": "maximum coarse tackifier grid value"
       },
@@ -95,7 +92,7 @@
     "EP0293602A2: viscosity rise during prolonged elevated-temperature holding is explicitly treated as a reactive-hot-melt formulation failure mode"
   ],
   "candidate_construction": {
-    "rule": "Stage 1 uses the Cartesian product of coarse acrylic/tackifier design levels. Stage 2 uses an outcome-blind fine grid inside the predeclared resin-modified region. Both stages scale the E2 normalized reactive core into the remaining total-formulation fraction.",
+    "rule": "Stage 1 uses the Cartesian product of coarse acrylic/tackifier design levels. Stage 2 uses an outcome-blind fine grid inside an evidence-derived refinement domain. Both stages scale the E2 normalized reactive core into the remaining total-formulation fraction.",
     "formula": {
       "modifier_total_fraction": "m=(acrylic_pct+tackifier_pct)/100",
       "PPG2000_pct": "100*(1-m)*0.3990466349",
