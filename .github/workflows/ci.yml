@@ -23,3 +23,7 @@ jobs:
         run: python scripts/build_evidence_state.py --output /tmp/evidence_state.json
       - name: Sanity-check generated JSON
         run: python -m json.tool /tmp/evidence_state.json > /dev/null
+      - name: Reproduce local statistical analysis
+        run: python scripts/statistical_analysis.py --output-dir /tmp/statistical-analysis
+      - name: Sanity-check statistical summary
+        run: python -m json.tool /tmp/statistical-analysis/analysis_summary.json > /dev/null
