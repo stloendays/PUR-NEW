@@ -151,7 +151,7 @@ Current rheology supports stabilization, not direct molecular-kinetic proof.
 
 ## Writing rule
 
-Do not bring unrelated historical benchmark narratives into this paper. Every section should serve one of four functions:
+Every manuscript section should strengthen one of four functions:
 
 ```text
 physical problem
@@ -160,4 +160,4 @@ wet-lab adjudication
 closed-loop design update
 ```
 
-Anything that does not strengthen one of these four functions should remain outside the main repository and manuscript.
+Material that does not strengthen one of these four functions should remain outside the main manuscript.
