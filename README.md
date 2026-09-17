@@ -45,8 +45,8 @@ original local evidence
 -> rheological state analysis
 -> deterministic descriptors + uncertainty
 -> evidence-grounded formulation hypothesis
--> Agent recommendation or abstention
--> frozen candidate + rationale + criterion
+-> scientific decision Agent
+-> frozen candidate / probe / abstention + criterion
 -> human wet-lab execution
 -> separate physical adjudication
 -> next-state update
@@ -166,7 +166,7 @@ Compared on the same 15-60 min interval, this is substantially flatter than E1 (
 
 ## Evidence-constrained candidate-space formalization
 
-The repository now contains a reproducible V2 candidate-space abstraction built from:
+The repository contains a reproducible V2 candidate-space abstraction built from:
 
 ```text
 original E2 reactive core
@@ -191,13 +191,50 @@ Important provenance distinction:
 - the **current exact software implementation of the V2 4x3 grid** was formalized later as a reproducible candidate-space/benchmark abstraction;
 - therefore the grid should not be presented as the contemporaneous freeze artifact unless an older record establishes that.
 
-The V2 grid remains useful for evidence-to-candidate formalization, ablation, replay benchmarking, and future design rounds.
-
 See [`docs/CANDIDATE_SPACE_HYPOTHESIS.md`](docs/CANDIDATE_SPACE_HYPOTHESIS.md).
 
-## Agent actions
+## Scientific Decision Agent V3
 
-The Agent may use deterministic scientific capabilities including:
+The paper-level Agent is no longer implemented as a single LLM call over a long prompt. V3 separates scientific decision making into auditable stages:
+
+```text
+STRUCTURAL EVIDENCE FIREWALL
+          |
+          v
+       Planner
+          |
+          v
+planner-selected scientific Actions
+          |
+          v
+deterministic candidate analysis
+(Pareto + robustness scenarios)
+          |
+          v
+      Proposer
+          |
+          v
+      Skeptic
+(falsification / leakage / boundary audit)
+          |
+          v
+       Judge
+          |
+          v
+frozen recommendation / probe / abstention
+```
+
+The Planner decides what evidence is needed before selection. The Proposer ranks candidates. The Skeptic actively searches for reasons the provisional recommendation may be wrong or scientifically overstated. The Judge resolves those conflicts and may select a performance candidate, a robustness probe, an uncertainty probe, or abstain.
+
+A dedicated deterministic Action exposes the paper's own pre-validation physical/model finding to the Agent:
+
+```text
+get_state_aware_rheology_summary
+```
+
+It recomputes realization spread, the 120 C-normalized curve collapse, apparent `E_eta` descriptors, and original E1/E5 hold-failure evidence directly from the original CSV files.
+
+Other Actions include:
 
 ```text
 query_external_priors
@@ -213,24 +250,95 @@ stress_test_candidate
 rank_candidate_support
 ```
 
-The decision layer is intended to preserve evidence trace, uncertainty, alternatives, and a falsifiable criterion rather than returning only an unsupported recipe.
+See [`docs/AGENT_V3_ARCHITECTURE.md`](docs/AGENT_V3_ARCHITECTURE.md).
 
-## Benchmark role
+## Structural anti-leakage firewall
 
-The later V2 12-candidate replay is a **secondary reproducibility/ablation benchmark**, not the sole evidence for the Agent-validation claim.
+An audit of the earlier single-pass runner found that, although its precomputed Action context hid follow-up results, the runner also passed the complete `evidence_state.json` to the model. Because that file contains follow-up rows, an old blind replay could contain validation-outcome information in the raw evidence payload.
 
-Its purpose is to ask whether the formalized evidence stack favors a region compatible with the validation formulation when that formulation/outcome is hidden from the evaluated model. The primary experimental chronology is already:
+This has been corrected at the infrastructure level.
+
+For `blind_pre_result` runs, the code now removes **before any LLM call**:
 
 ```text
-state-aware theory
--> pre-result Agent recommendation
--> freeze
--> human experiment
--> physical adjudication
+target validation formulation identity
+follow-up hold rows
+follow-up mean-profile descriptors
+post-result adjudication labels
+controller-side held-out scoring targets
 ```
+
+CI fails if the structurally filtered blind evidence contains `F1` or any `stage=follow_up` record.
+
+Benchmark results generated before this correction should not be used as primary evidence of Agent superiority unless their exact payload can be shown independently to be leakage-free.
+
+## Architecture benchmark
+
+The Agent contribution is evaluated against strong baselines rather than a weak prompt-only comparator:
+
+```text
+B0 deterministic evidence ranker
+B1 direct LLM blind
+B2 single-pass tool-context model
+A1 V3 without Skeptic
+A2 V3 without deterministic robustness
+A3 V3 without state-aware rheology Action
+A4 full V3
+```
+
+All language-model conditions use the same model, the same candidate set, and the same structurally filtered pre-result evidence. `B2` receives the same state-aware/action information available to V3, so any V3 advantage must come from the **decision architecture**, not from seeing more data.
+
+Primary benchmark outputs include:
+
+```text
+held-out-region rank
+Top-1 / Top-3 regional recovery
+modifier-plane distance
+selection entropy across repeated runs
+abstention rate
+scientific-boundary violations
+structural leakage rate
+evidence/tool-trace completeness
+tool-call count and success rate
+```
+
+Use 3-5 repeated runs only as a pilot. The paper-facing stochastic benchmark should normally use at least 30 runs per condition.
+
+The manual workflow is:
+
+```text
+.github/workflows/agent-v3-benchmark.yml
+```
+
+and the controller-side scorer is:
+
+```text
+scripts/summarize_agent_benchmark.py
+```
+
+The architecture advantage is **not assumed**. It should be claimed only if full V3 improves selection quality/stability and scientific validity over the deterministic, direct, single-pass and ablated conditions.
+
+## Benchmark role versus physical validation
+
+Two claims are deliberately separated:
+
+```text
+physical validation:
+pre-result Agent recommendation
+-> human experiment
+-> low-drift physical support
+
+architecture validation:
+full V3
+vs deterministic / direct / single-pass / ablated conditions
+under the same leakage-safe replay
+```
+
+The first establishes that an Agent-guided experimental decision was physically useful. The second tests whether the advanced Agent architecture contributes beyond a generic LLM or encoded literature prior.
 
 See:
 
+- [`docs/AGENT_V3_ARCHITECTURE.md`](docs/AGENT_V3_ARCHITECTURE.md)
 - [`docs/EXPERIMENTAL_CHRONOLOGY.md`](docs/EXPERIMENTAL_CHRONOLOGY.md)
 - [`docs/PROSPECTIVE_VALIDATION_PROTOCOL.md`](docs/PROSPECTIVE_VALIDATION_PROTOCOL.md)
 - [`docs/BLIND_AGENT_BENCHMARK.md`](docs/BLIND_AGENT_BENCHMARK.md)
@@ -246,13 +354,27 @@ Supported by the current physical/model evidence:
 - the Agent-selected validation formulation has a much flatter matched 15-60 min hold response than E1/E5;
 - the research team confirms that the Agent recommendation preceded knowledge of that validation result.
 
+Implemented now:
+
+- structural pre-LLM evidence firewall;
+- state-aware rheology Action;
+- Planner -> Actions -> deterministic robustness -> Proposer -> Skeptic -> Judge architecture;
+- deterministic/direct/tool-context baselines;
+- module-level ablations;
+- repeated-run benchmark metrics and GitHub Actions workflow.
+
+Not yet supported until the repeated benchmark is run:
+
+- that full V3 statistically or consistently outperforms all baselines;
+- that any one V3 module is necessary for recovery of the held-out-near region.
+
 Provenance boundary:
 
-- the current repository does not yet contain the original contemporaneous freeze artifact;
+- the current repository does not contain the original contemporaneous historical freeze artifact;
 - the later author-confirmed chronology should not be represented as an original timestamp;
-- the current V2 4x3 grid is a later formalization and should not be conflated with the historical recommendation interface unless older evidence is recovered.
+- V3 is the current improved implementation and should not be called the exact historical code that selected F1 unless matching archived provenance is recovered.
 
-Not supported:
+Not supported scientifically:
 
 - that the local master curve is universal across reactive PUR chemistry;
 - that thermal sensitivity and hold stability are universally statistically independent;
