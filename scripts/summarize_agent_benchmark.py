@@ -4,7 +4,6 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-import math
 import sys
 from collections import Counter
 from pathlib import Path
@@ -70,6 +69,18 @@ def load_deliberation_for_recommendation(path: Path) -> dict[str, Any] | None:
     if sibling.exists():
         return read_json(sibling)
     return None
+
+
+def controller_target(target_cfg: dict[str, Any]) -> dict[str, float]:
+    """Read current target naming while remaining compatible with older V2 records."""
+    for key in ("validation_formulation_normalized_pct", "follow_up_normalized_pct"):
+        value = target_cfg.get(key)
+        if isinstance(value, dict):
+            return value
+    raise KeyError(
+        "controller_only_heldout_target must contain validation_formulation_normalized_pct "
+        "or legacy follow_up_normalized_pct"
+    )
 
 
 def summarize_condition(
@@ -187,7 +198,7 @@ def main() -> None:
     benchmark = read_json(args.benchmark_config)
     axes = candidate_axes(candidate_set)
     target_cfg = benchmark["controller_only_heldout_target"]
-    target_pct = target_cfg["follow_up_normalized_pct"]
+    target_pct = controller_target(target_cfg)
     target = (float(target_pct["AC1920"]), float(target_pct["TK100"]))
     nearest_candidate_id = str(target_cfg["nearest_candidate_id"])
     architecture = read_json(ROOT / "configs" / "agent_v3.json")
