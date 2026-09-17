@@ -1,0 +1,62 @@
+{
+  "catalog_version": "1.0.0",
+  "purpose": "Deterministic actions available to the PUR-NEW decision Agent before it freezes a recommendation.",
+  "actions": [
+    {
+      "name": "query_external_priors",
+      "description": "Retrieve curated analogue evidence from the external PUR database. Use this to learn admissible formulation motifs and approximate modifier-fraction regions without reading held-out wet-lab outcomes.",
+      "when_to_use": ["before selecting a formulation family", "when considering resin/tackifier modification", "when local evidence is sparse"]
+    },
+    {
+      "name": "inspect_formulation",
+      "description": "Inspect one measured formulation from the current evidence table and compute transparent composition summaries such as total reported amount and resin-modifier fraction when available.",
+      "when_to_use": ["to understand the original design state", "to distinguish formulation from process effects"]
+    },
+    {
+      "name": "get_hold_stability",
+      "description": "Return measured thermal-hold trajectories and deterministic SI descriptors for a formulation. No extrapolation is performed.",
+      "when_to_use": ["when thermal stability is a design objective", "to identify high-drift reference behavior"]
+    },
+    {
+      "name": "get_repeatability_risk",
+      "description": "Return nominal repeat/run spread from measured temperature sweeps, including CV and max/min ratio where available.",
+      "when_to_use": ["before trusting a single nominal viscosity", "when process-history uncertainty may dominate"]
+    },
+    {
+      "name": "get_temperature_support",
+      "description": "Return measured temperature support and descriptive temperature-response summaries for a formulation.",
+      "when_to_use": ["to avoid extrapolation", "to check whether a candidate is evaluated inside observed support"]
+    },
+    {
+      "name": "audit_process_unknowns",
+      "description": "Audit missing reaction/preparation/hold metadata for a candidate or measured formulation and convert missingness into explicit process-history uncertainty.",
+      "when_to_use": ["before final ranking", "when two candidates look similar on nominal composition"]
+    },
+    {
+      "name": "candidate_profile",
+      "description": "Compute a transparent candidate profile from its formulation state: total reported amount, polyol fraction, MDI fraction, AC1920+TK100 modifier fraction, and whether the candidate is resin-modified.",
+      "when_to_use": ["for every serious candidate", "before comparing a candidate with external priors"]
+    },
+    {
+      "name": "compare_candidate_to_priors",
+      "description": "Compare a candidate's modifier fraction with curated literature/patent analogue regions. This is an analogy-support action, not a predicted experimental outcome.",
+      "when_to_use": ["when the candidate contains AC1920/TK100 or another resin modifier", "to distinguish supported versus extreme modifier loading"]
+    },
+    {
+      "name": "stress_test_candidate",
+      "description": "Apply deterministic risk flags to a candidate using current local failure modes, evidence coverage and external analogue support. It returns reasons, not a fabricated viscosity prediction.",
+      "when_to_use": ["before freezing the recommendation", "to expose whether the selection survives robustness checks"]
+    },
+    {
+      "name": "rank_candidate_support",
+      "description": "Create a transparent support-oriented ordering using evidence coverage, external analogue support, thermal-hold failure relevance and process-state completeness. This is a decision aid and must not be described as a trained predictive model.",
+      "when_to_use": ["when several candidates remain plausible", "to obtain a reproducible pre-LLM ordering"]
+    }
+  ],
+  "invariants": [
+    "Actions may expose only evidence allowed by the active evidence-access profile.",
+    "Held-out experimental outcomes must never be converted into hints for a blind Agent evaluation.",
+    "External analogue evidence is directional prior information, not proof of the current formulation's optimum.",
+    "No action may invent a molecular mechanism or an unmeasured viscosity value."
+  ]
+}
