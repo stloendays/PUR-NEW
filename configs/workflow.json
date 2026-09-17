@@ -1,0 +1,56 @@
+{
+  "workflow_id": "PUR_NEW_CLOSED_LOOP_V1",
+  "workflow_version": "1.0.0",
+  "design_state_schema": "schemas/design_state.schema.json",
+  "recommendation_schema": "schemas/agent_recommendation.schema.json",
+  "response_policy": {
+    "preserve_source_units": true,
+    "unknown_values_remain_unknown": true,
+    "default_temperature_policy": "measured_range_only",
+    "default_time_policy": "measured_window_only",
+    "hold_stability_metric": "SI=(eta_t1-eta_t0)/eta_t0",
+    "hold_loss_default": "abs(SI)",
+    "repeatability_is_descriptive_when_n_small": true
+  },
+  "uncertainty_dimensions": [
+    "measurement",
+    "repeatability",
+    "process_history",
+    "extrapolation",
+    "evidence_coverage"
+  ],
+  "decision_modes": [
+    "performance_candidate",
+    "robustness_probe",
+    "uncertainty_probe",
+    "abstain"
+  ],
+  "hard_rules": {
+    "agent_actuates_lab": false,
+    "human_execution_required_for_physical_result": true,
+    "prospective_claim_requires_frozen_pre_result_record": true,
+    "post_result_criteria_rewrite_allowed": false,
+    "mechanism_claim_from_rheology_alone_allowed": false,
+    "silent_zero_imputation_allowed": false
+  },
+  "objective": {
+    "terms": [
+      "L_viscosity",
+      "L_temperature_response",
+      "L_hold_stability",
+      "L_repeatability",
+      "feasibility_penalties"
+    ],
+    "uncertainty_penalty": true,
+    "information_value_term": true,
+    "weights_status": "not_yet_calibrated",
+    "rule": "Any numerical weights used for a prospective recommendation must be frozen before result inspection."
+  },
+  "adjudication_states": [
+    "pending",
+    "supported",
+    "partially_supported",
+    "falsified",
+    "out_of_domain"
+  ]
+}
