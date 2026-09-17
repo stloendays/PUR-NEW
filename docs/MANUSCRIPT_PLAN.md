@@ -4,8 +4,6 @@
 
 **Uncertainty-Aware Agent-Guided Formulation Design with Wet-Lab Validation for Reactive Polyurethane Hot-Melt Adhesives**
 
-The title can be shortened later once the final journal scope is chosen.
-
 ## Central paper logic
 
 The manuscript should follow one continuous argument:
@@ -15,14 +13,17 @@ The manuscript should follow one continuous argument:
 2. Reaction history, thermal hold time and preparation perturbation are known variables and should enter the design loop.
 3. Static viscosity targeting alone is therefore incomplete.
 4. Deterministic descriptors quantify temperature response, hold drift and repeatability.
-5. The Agent reasons over those descriptors plus structured uncertainty.
-6. The Agent recommends a formulation-process state and freezes a falsifiable criterion.
-7. A human executes the recommended experiment.
-8. A separate wet-lab record adjudicates the frozen recommendation.
-9. The measured stability information updates the next design state.
+5. Independent literature/patent evidence is used to formulate a finite resin-modification hypothesis space.
+6. The Agent reasons over local evidence, external evidence, structured uncertainty and the finite candidate set.
+7. The Agent recommends a formulation-process state and freezes a falsifiable criterion.
+8. A human executes the experiment.
+9. A separate wet-lab record adjudicates the recommendation.
+10. The measured stability information updates the next design state.
 ```
 
-The Agent is not presented as a robotic chemist. The scientific claim is about **decision quality under uncertainty** and **physical validation of a recommendation**.
+The Agent is not presented as a robotic chemist. The scientific claim is about **evidence-grounded decision quality under uncertainty** and **physical adjudication of a recommendation**.
+
+---
 
 ## Suggested Results and Discussion order
 
@@ -33,11 +34,11 @@ Introduce E1-E5 and explain the two local axes:
 - NCO:OH at fixed 50/50 PPG2000/PDP-70;
 - PPG2000/PDP-70 ratio at fixed NCO:OH = 1.80.
 
-Show the 80-130 °C sweeps and the large E2 run-to-run spread. The purpose is to establish that process realization materially changes the absolute viscosity level.
+Show the 80-130 C sweeps and the large E2 run-to-run spread. The purpose is to establish that process realization materially changes the absolute viscosity level.
 
 ### 2. Thermal holding exposes the process-stability problem
 
-Show E1 and E5 at 120 °C. Quantify drift using the shared stability index.
+Show E1 and E5 at 120 C. Quantify drift using the shared stability index.
 
 Key numbers:
 
@@ -70,11 +71,88 @@ extrapolation
 evidence coverage
 ```
 
-This section is important because it prevents the Agent contribution from becoming an opaque language-model decision.
+This section prevents the Agent contribution from becoming an opaque language-model decision.
 
-### 4. Agent-guided recommendation under uncertainty
+### 4. Evidence-derived candidate-space hypothesis
 
-Describe the Agent as a decision layer above deterministic descriptors.
+This section must explicitly answer:
+
+> Why were these formulation candidates considered in the first place?
+
+Use `docs/CANDIDATE_SPACE_HYPOTHESIS.md` as the source of truth.
+
+#### 4.1 Local reactive-core anchor
+
+E2 is used as the central local design point because it sits at:
+
+```text
+PPG2000:PDP-70 = 50:50
+NCO:OH = 1.80
+```
+
+between the E1/E3 stoichiometric perturbations and E4/E5 composition perturbations.
+
+Its normalized reactive core is approximately:
+
+```text
+PPG2000 39.9047%
+PDP-70  39.9047%
+MDI     20.1907%
+```
+
+The candidate generator preserves these relative core proportions and allocates part of the total formulation to modifier axes.
+
+#### 4.2 Acrylic-like modifier axis
+
+Three independent external anchors define the coarse acrylic axis:
+
+- **15%**: peer-reviewed 2025 heat-resistant reactive-PUR study reporting 15% acrylic resin as the preferred overall level in that system;
+- **~20%**: repeated US20160215185A1 examples containing roughly 19-20% acrylic tackifying resin;
+- **25%**: US6465104B1 Example 10, which also provides direct 121 C viscosity-stability data.
+
+Therefore:
+
+```text
+acrylic-like axis = {0, 15, 20, 25}%
+```
+
+#### 4.3 Minor tackifier-like axis
+
+US5932680A provides working examples around 4.8-6.4% resin and a preferred resin range of about 3-10 wt%. US20070155859A1 separately describes tackifiers/rheology-control agents as typically used below about 10 wt%.
+
+Therefore:
+
+```text
+minor tackifier-like axis = {0, 5, 10}%
+```
+
+#### 4.4 Stability hypothesis
+
+US6465104B1 reports substantially slower hot-hold viscosity increase for a low-OH acrylic copolymer than for a higher-OH acrylic at the same 25 wt% loading. This supports the hypothesis that **modifier functionality/effective reactive-group density**, rather than loading alone, can affect hot-hold stability.
+
+US20030022973A1 provides additional directional evidence that functional-tackifier/acrylic formulation changes alter reported stability values.
+
+The paper-facing hypothesis is:
+
+> Partial replacement of an unstable reactive-only PUR formulation by an acrylic-like modifier and an optional minor tackifier-like modifier may reduce thermal-hold viscosity build-up, with modifier functionality and process history treated as explicit uncertainties.
+
+The candidate set is the 12-point Cartesian product:
+
+```text
+{0,15,20,25}% acrylic-like
+x
+{0,5,10}% tackifier-like
+```
+
+The exact current follow-up recipe is **not** encoded as a discrete candidate.
+
+#### 4.5 Chronology caveat
+
+This formal V2 hypothesis was written after the current follow-up experiment was already known. Therefore the current multi-model benchmark is a **held-out-result blind replay**, not prospective validation of V2 itself. Future rounds can be prospective once V2 is frozen.
+
+### 5. Agent-guided recommendation under uncertainty
+
+Describe the Agent as a decision layer above deterministic descriptors and evidence retrieval.
 
 The Agent may choose among:
 
@@ -85,21 +163,33 @@ uncertainty probe
 abstain
 ```
 
-The paper should show an immutable pre-result recommendation record containing:
+The primary Agent condition should include:
+
+```text
+original local evidence
++ structured uncertainty
++ candidate-space hypothesis
++ uncertainty-aware actions
++ external database/literature retrieval
++ finite candidate set
+```
+
+The Agent should preserve an evidence trace showing which source rows/actions informed the recommendation.
+
+The paper should show an immutable recommendation record containing:
 
 - selected formulation-process state;
 - alternatives considered;
 - structured uncertainty;
+- evidence/action trace;
 - recommendation rationale;
 - process variables to control / perturb;
 - falsifiable acceptance criterion;
 - timestamp and provenance.
 
-If the historical pre-result record for the current follow-up point is recovered, show it directly. If it is not recovered, retain the workflow as the forward design contract and describe the existing follow-up result as Agent-guided closed-loop validation rather than retroactive preregistration.
+### 6. Human-executed wet-lab adjudication
 
-### 5. Human-executed wet-lab adjudication
-
-Present the follow-up formulation and the two repeated 120 °C hold measurements.
+Present the follow-up formulation and the two repeated 120 C hold measurements.
 
 Use the common 15-60 min window only:
 
@@ -114,9 +204,38 @@ Relative to the mean-profile absolute drift, the observed flattening is approxim
 
 These are descriptive stability-gain ratios on a matched window, not significance tests.
 
-The physical result must be stored separately from the recommendation and linked by `recommendation_id`. This makes the experimental adjudication independent of the original Agent wording.
+The physical result must be stored separately from the recommendation and linked by `recommendation_id`.
 
-### 6. Stability-aware design update
+### 7. Held-out-result Agent benchmark
+
+Use V2 rather than the older answer-shaped scalar-modifier grid.
+
+Primary benchmark question:
+
+> Does the full Agent, while blinded to the current follow-up formulation/outcome, rank candidates close to the later experimental composition in the two-dimensional acrylic/tackifier modifier plane?
+
+Primary metrics should include:
+
+```text
+nearest-candidate rank
+nearest-candidate Top-1 / Top-3 recovery
+modifier-plane distance of Top-1 and Top-3
+selection distribution
+abstention rate
+scientific-boundary violation rate
+```
+
+Ablations:
+
+```text
+full Agent
+without external database
+without action enrichment
+literature-only sanity
+without explicit candidate-hypothesis context
+```
+
+### 8. Stability-aware design update
 
 Introduce the next-generation objective conceptually:
 
@@ -128,24 +247,25 @@ J_perf = w_eta L_viscosity
        + feasibility penalties
 ```
 
-Then introduce the uncertainty/information layer conceptually:
+and the uncertainty/information layer:
 
 ```text
 A(candidate) = -J_perf - lambda_U U_penalty + beta_IG information_value
 ```
 
-The paper should state explicitly that this is the architecture of the next design round. Numerical weights should not be presented as calibrated unless they are actually frozen and used prospectively.
+Numerical weights should not be presented as calibrated unless they are actually frozen and used prospectively.
+
+---
 
 ## Figure plan
 
 ### Figure 1 — Scientific and runtime architecture
 
-Use a two-level diagram:
-
 ```text
 Raw evidence
 -> deterministic descriptors
 -> formulation-process state + uncertainty
+-> external evidence -> candidate-space hypothesis
 -> Agent recommendation
 -> immutable freeze
 -> human wet-lab execution
@@ -153,44 +273,34 @@ Raw evidence
 -> state update
 ```
 
-This should make the boundary between deterministic computation, Agent reasoning and human actuation visually explicit.
-
 ### Figure 2 — Temperature-dependent viscosity and preparation sensitivity
 
-Show the recorded 80-130 °C curves. Highlight the spread among E2-labelled runs without assigning unverified meanings to GJJ/ZYX/CHH.
+Show 80-130 C curves and E2 spread.
 
-### Figure 3 — 120 °C hold stability
+### Figure 3 — Evidence-to-candidate-space map
 
-Plot E1, E5 and both follow-up repeats together. Emphasize the matched 15-60 min interval. E1/E5 may retain their 90 min points, but the caption must state that follow-up measurements stop at 60 min.
-
-### Figure 4 — Recommendation-to-experiment adjudication
-
-Show the evidence contract rather than a generic Agent cartoon:
+Show:
 
 ```text
-uncertainty vector
--> selected candidate + alternatives
--> frozen criterion
--> human execution
--> measured SI / repeat consistency
--> supported / partially supported / falsified / out-of-domain
+local E2 core
++
+15 / 20 / 25% acrylic evidence anchors
++
+5 / 10% minor tackifier evidence anchors
+-> 4 x 3 finite hypothesis grid
 ```
 
-If the historical recommendation record is recoverable, Figure 4 should include its actual timestamp/provenance. Otherwise use this as the forward workflow and keep the current experiment labelled closed-loop.
+Include source labels and limitations rather than only a cartoon.
 
-## Agent evaluation
+### Figure 4 — 120 C hold stability
 
-Avoid a single vague "Agent accuracy" number. Report a compact scorecard built from:
+Plot E1, E5 and both follow-up repeats together; emphasize the matched 15-60 min interval.
 
-```text
-physical criterion success
-matched-window stability gain
-replicate consistency
-uncertainty calibration, when a prior uncertainty statement exists
-decision margin / robustness
-```
+### Figure 5 — Agent recommendation and held-out physical comparison
 
-The detailed contract is in `AGENT_EVALUATION.md`.
+Show candidate ranking/action trace and the position of the held-out follow-up composition only on the controller/evaluation side.
+
+---
 
 ## Claim hierarchy
 
@@ -201,30 +311,38 @@ The detailed contract is in `AGENT_EVALUATION.md`.
 - the follow-up formulation is substantially flatter over 15-60 min than E1 and E5;
 - repeated measurements reproduce the near-flat response qualitatively and quantitatively.
 
+### Evidence-supported hypotheses
+
+- resin-modified PUR is a justified candidate family when reactive-only formulations show robustness problems;
+- independent external evidence supports coarse acrylic-like levels around 15, 20 and 25%;
+- independent external evidence supports a minor tackifier-like axis around 5% with a coarse upper level near 10%;
+- acrylic reactive-group density/functionality can affect hot-hold viscosity stability.
+
 ### Claims that require provenance
 
-- the follow-up point was recommended by the Agent before result inspection;
-- the experiment is a strictly prospective physical validation of that recommendation.
+- the current follow-up point was prospectively recommended by the Agent before result inspection;
+- the current experiment is a strictly prospective validation of the V2 Agent hypothesis.
 
-These claims should be used only when the timestamped recommendation record is attached.
+Do not use these unless a pre-result timestamped record is recovered.
 
 ### Claims that should remain mechanistic hypotheses
 
-- stabilization occurs specifically because AC1920/TK100 reduce reaction kinetics;
-- one particular molecular reaction pathway is responsible for the viscosity build-up.
+- stabilization occurs specifically because AC1920/TK100 reduce one particular reaction rate;
+- one molecular pathway alone is responsible for the viscosity build-up.
 
-Current rheology supports stabilization, not direct molecular-kinetic proof.
+Current rheology supports stabilization and the external literature supports a formulation hypothesis, not direct local molecular-kinetic proof.
 
 ## Writing rule
 
-Every manuscript section should strengthen one of five functions:
+Every manuscript section should strengthen one of six functions:
 
 ```text
 physical problem
 state + uncertainty representation
+evidence-derived candidate hypothesis
 Agent recommendation logic
 wet-lab adjudication
 closed-loop update
 ```
 
-Material that does not strengthen one of these five functions should remain outside the main manuscript.
+Material that does not strengthen one of these functions should remain outside the main manuscript.
