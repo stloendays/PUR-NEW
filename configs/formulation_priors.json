@@ -1,26 +1,78 @@
 {
-  "version": "1.0.0",
-  "scope": "Directional priors for candidate generation and ranking; not trained predictions and not mechanistic laws.",
-  "priors": {
-    "resin_modified_family": {
-      "support": [
-        "PAT_US5932680A: tackifying/hydrocarbon-resin-containing PUR examples",
-        "PAT_US20160215185A1: acrylic-tackifying-resin-containing PUR examples"
+  "version": "2.0.0",
+  "scope": "Evidence-derived formulation hypothesis for candidate generation and Agent ranking. This is not a trained predictor and not a mechanistic law.",
+  "historical_status": {
+    "hypothesis_formalized_after_current_follow_up_result_known": true,
+    "allowed_use": [
+      "scientific rationale",
+      "held-out-result blind replay",
+      "future prospective rounds after this version is frozen"
+    ],
+    "not_allowed_use": "Do not describe this V2 hypothesis itself as a pre-result recommendation for the already completed follow-up experiment."
+  },
+  "local_reactive_core_anchor": {
+    "formulation_id": "E2",
+    "reason": "E2 is the geometric centre of the original five-point local design: 50/50 PPG2000/PDP-70 and NCO:OH=1.80, centered between E1/E3 stoichiometric perturbations and E4/E5 composition perturbations.",
+    "source_amounts": {
+      "PPG2000": 119.71,
+      "PDP70": 119.71,
+      "MDI": 60.57,
+      "unit": "g"
+    },
+    "normalized_core_fractions": {
+      "PPG2000": 0.3990466349,
+      "PDP70": 0.3990466349,
+      "MDI": 0.2019067302
+    },
+    "stoichiometry_note": "The E2 NCO:OH=1.80 label applies to the original reactive core. If a modifier contributes reactive OH or another NCO-reactive group, true stoichiometry must be recalculated from verified material specifications."
+  },
+  "candidate_axes": {
+    "acrylic_like_modifier_pct_total": {
+      "grid": [0, 15, 20, 25],
+      "direct_evidence_anchors_pct": [15, 19.37, 19.57, 19.78, 19.98, 25],
+      "evidence": [
+        "PAPER_CN_ADHESIVES_2025_34_09_54: 15% acrylic resin identified as the preferred overall level in a heat-resistant PUR formulation study",
+        "PAT_US20160215185A1: repeated acrylic tackifying resin examples at approximately 19-20% of total formulation",
+        "PAT_US6465104B1 Example 10: 25 wt% low-OH acrylic copolymer with direct 121 C viscosity-stability data"
       ],
-      "interpretation": "When an unmodified reactive PUR shows strong thermal-hold drift or run spread, a resin-modified formulation family is a justified design branch rather than only micro-tuning NCO/OH."
+      "interpretation": "15, 20 and 25% are independent coarse literature/patent anchors, not values fitted to the local follow-up recipe."
     },
-    "single_modifier_regions": {
-      "minor_tackifier_or_hydrocarbon_fraction_total": [0.04, 0.06],
-      "acrylic_tackifying_resin_fraction_total": [0.18, 0.21],
-      "interpretation": "These ranges summarize analogue examples in the curated database; they are not current-system optima."
-    },
-    "dual_modifier_heuristic": {
-      "major_acrylic_like_fraction_total": [0.12, 0.16],
-      "minor_tackifier_like_fraction_total": [0.03, 0.05],
-      "combined_modifier_fraction_total": [0.15, 0.21],
-      "preferred_structure": "major acrylic-like modifier + minor tackifier-like modifier",
-      "interpretation": "A transparent synthesis of two external analogue motifs. It is a candidate-generation heuristic, not directly reported by one source and not fit to the follow-up wet-lab outcome."
+    "minor_tackifier_like_modifier_pct_total": {
+      "grid": [0, 5, 10],
+      "direct_evidence_anchors_pct": [4.8, 5.3, 5.7, 5.8, 5.9, 6.4],
+      "evidence": [
+        "PAT_US5932680A: examples around 4.8-6.4% tackifying/hydrocarbon resin and preferred resin range 3-10 wt%",
+        "PAT_US20070155859A1: tackifiers/rheology-control agents typically used below about 10 wt%"
+      ],
+      "interpretation": "5% represents the repeatedly documented minor-resin region and 10% is a conservative coarse upper level."
     }
   },
-  "anti_leakage_rule": "These priors must be constructed from external evidence and pre-result design knowledge only. Follow-up hold outcomes must not alter the ranges in a run presented as blind/prospective."
+  "stability_hypotheses": {
+    "H1_formulation_family": "Partial replacement of the reactive-only formulation by an acrylic-like and/or minor tackifier-like resin can reduce hot-hold viscosity drift under matched process conditions.",
+    "H2_functionality": "At comparable acrylic loading, lower effective reactive-group density or lower-OH acrylic chemistry is expected to be more favorable for hot-hold viscosity stability than more highly reactive acrylic chemistry.",
+    "H3_region": "A useful candidate region is expected within the externally supported coarse space spanned by 15-25% acrylic-like modifier and 0-10% minor tackifier-like modifier, while preserving the relative E2 reactive-core proportions."
+  },
+  "stability_support": [
+    "PAT_US6465104B1 Example 10 vs 11: 25 wt% low-OH acrylic showed 37% viscosity increase over 0.5-8 h at 121 C versus 76% for the higher-OH acrylic comparator",
+    "PAT_US20030022973A1: modifier-containing reactive-PUR examples reported different hot-melt stability values depending on tackifier/acrylic formulation; use only as directional evidence because other variables also differ",
+    "EP0293602A2: viscosity rise during prolonged elevated-temperature holding is explicitly treated as a reactive-hot-melt formulation failure mode"
+  ],
+  "candidate_construction": {
+    "rule": "Cartesian product of acrylic_like_modifier_pct_total and minor_tackifier_like_modifier_pct_total. Scale the E2 normalized reactive core into the remaining total-formulation fraction.",
+    "formula": {
+      "modifier_total_fraction": "m=(acrylic_pct+tackifier_pct)/100",
+      "PPG2000_pct": "100*(1-m)*0.3990466349",
+      "PDP70_pct": "100*(1-m)*0.3990466349",
+      "MDI_pct": "100*(1-m)*0.2019067302",
+      "acrylic_like_pct": "acrylic_pct",
+      "tackifier_like_pct": "tackifier_pct"
+    },
+    "exact_follow_up_recipe_encoded_as_candidate": false,
+    "follow_up_numeric_values_used_to_generate_grid": false
+  },
+  "action_support_thresholds_pct_points": {
+    "strong": 5.0,
+    "moderate": 10.0
+  },
+  "claim_boundary": "External examples are analogues. They support candidate-family and coarse-range hypotheses, not an exact optimum for AC1920/TK100 and not a proven local molecular mechanism."
 }
