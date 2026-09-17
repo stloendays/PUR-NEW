@@ -110,6 +110,14 @@ def controller_target(target_cfg: dict[str, Any]) -> dict[str, float]:
     )
 
 
+def controller_nearest_candidate_id(target_cfg: dict[str, Any]) -> str:
+    for key in ("nearest_coarse_candidate_id", "nearest_candidate_id", "legacy_nearest_candidate_id_alias"):
+        value = target_cfg.get(key)
+        if value:
+            return str(value)
+    raise KeyError("controller_only_heldout_target must define a nearest coarse candidate id")
+
+
 def summarize_condition(
     name: str,
     files: list[Path],
@@ -246,7 +254,7 @@ def main() -> None:
     target_cfg = benchmark["controller_only_heldout_target"]
     target_pct = controller_target(target_cfg)
     target = (float(target_pct["AC1920"]), float(target_pct["TK100"]))
-    nearest_candidate_id = str(target_cfg["nearest_candidate_id"])
+    nearest_candidate_id = controller_nearest_candidate_id(target_cfg)
     architecture = read_json(ROOT / "configs" / "agent_v3.json")
     blinded_ids = set(architecture.get("blinded_target_formulation_ids", []))
 
@@ -275,15 +283,16 @@ def main() -> None:
     args.output_dir.mkdir(parents=True, exist_ok=True)
     result = {
         "heldout_target_used_controller_side_only": {
-            "nearest_candidate_id": nearest_candidate_id,
+            "coordinate_basis": "normalized_total_wt_percent",
+            "nearest_coarse_candidate_id": nearest_candidate_id,
             "target_acrylic_pct": target[0],
             "target_tackifier_pct": target[1],
         },
         "conditions": summaries,
         "interpretation": (
             "This scorer is controller-side only. Held-out target coordinates must never be included in Agent payloads. "
-            "Failed attempts are retained and counted. Token/latency metrics are reported so any V3 gain can be interpreted against extra inference cost. "
-            "Architecture advantage should be claimed only if the full Agent improves recovery/robustness without increasing failure, leakage, or scientific-boundary violations beyond an acceptable trade-off."
+            "The 12-cell set is a coarse region benchmark, so distance and region recovery are more defensible than claiming exact recipe reconstruction. "
+            "Failed attempts are retained and counted. Token/latency metrics are reported so any Agent gain can be interpreted against extra inference cost."
         ),
     }
     (args.output_dir / "benchmark_summary.json").write_text(
@@ -291,26 +300,11 @@ def main() -> None:
     )
 
     fieldnames = [
-        "condition",
-        "file",
-        "ablation",
-        "decision_mode",
-        "selected_candidate_id",
-        "nearest_candidate_rank",
-        "nearest_candidate_top1",
-        "nearest_candidate_top3",
-        "top1_l1_distance",
-        "best_top3_l1_distance",
-        "tool_calls",
-        "tool_ok_fraction",
-        "llm_calls",
-        "prompt_tokens",
-        "completion_tokens",
-        "total_tokens",
-        "llm_latency_s",
-        "structural_leakage_findings",
-        "skeptic_boundary_check",
-        "skeptic_leakage_check",
+        "condition", "file", "ablation", "decision_mode", "selected_candidate_id",
+        "nearest_candidate_rank", "nearest_candidate_top1", "nearest_candidate_top3",
+        "top1_l1_distance", "best_top3_l1_distance", "tool_calls", "tool_ok_fraction",
+        "llm_calls", "prompt_tokens", "completion_tokens", "total_tokens", "llm_latency_s",
+        "structural_leakage_findings", "skeptic_boundary_check", "skeptic_leakage_check"
     ]
     with (args.output_dir / "benchmark_runs.csv").open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=fieldnames)
