@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import csv
 import json
+import math
+import statistics
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -9,6 +11,7 @@ from typing import Any
 from .metrics import coefficient_of_variation, hold_stability_index, max_min_ratio
 
 ROOT = Path(__file__).resolve().parents[2]
+R_GAS = 8.31446261815324
 
 
 def _read_csv(path: Path) -> list[dict[str, str]]:
@@ -144,6 +147,131 @@ def get_temperature_support(formulation_id: str) -> dict[str, Any]:
         "formulation_id": formulation_id,
         "temperature_support_c": [min(temps), max(temps)] if temps else None,
         "n_points": len(rows),
+    }
+
+
+def _linear_fit(xs: list[float], ys: list[float]) -> tuple[float, float, float]:
+    xbar = statistics.fmean(xs)
+    ybar = statistics.fmean(ys)
+    sxx = sum((x - xbar) ** 2 for x in xs)
+    if sxx <= 0:
+        raise ValueError("x values have zero variance")
+    slope = sum((x - xbar) * (y - ybar) for x, y in zip(xs, ys)) / sxx
+    intercept = ybar - slope * xbar
+    pred = [intercept + slope * x for x in xs]
+    sst = sum((y - ybar) ** 2 for y in ys)
+    sse = sum((y - p) ** 2 for y, p in zip(ys, pred))
+    r2 = 1.0 - sse / sst if sst > 0 else 1.0
+    return slope, intercept, r2
+
+
+def get_state_aware_rheology_summary() -> dict[str, Any]:
+    """Recompute the local pre-result state-aware rheology evidence from raw CSV files.
+
+    This action intentionally uses only original temperature sweeps and original hold
+    data. It does not inspect the later validation formulation or its outcome.
+    """
+    rows = load_temperature_sweeps()
+    by_run: dict[tuple[str, str, bool], list[tuple[float, float]]] = defaultdict(list)
+    for row in rows:
+        key = (
+            row["formulation_id"],
+            row["run_label"],
+            row["retest_after_1d"].lower() == "true",
+        )
+        by_run[key].append((float(row["temperature_c"]), float(row["viscosity_reported"])))
+
+    normalized_by_temp: dict[float, list[float]] = defaultdict(list)
+    eta_descriptors: list[dict[str, Any]] = []
+    for (formulation_id, run_label, retest), series in sorted(by_run.items()):
+        series = sorted(series)
+        anchor = next((eta for temp, eta in series if temp == 120.0), None)
+        if anchor is None or len(series) < 3:
+            continue
+        for temp, eta in series:
+            normalized_by_temp[temp].append(eta / anchor)
+        xs = [1.0 / (temp + 273.15) for temp, _ in series]
+        ys = [math.log(eta) for _, eta in series]
+        slope, _intercept, r2 = _linear_fit(xs, ys)
+        eta_descriptors.append({
+            "formulation_id": formulation_id,
+            "run_label": run_label,
+            "retest_after_1d": retest,
+            "apparent_E_eta_kJ_mol": slope * R_GAS / 1000.0,
+            "ln_eta_vs_inverse_T_r2": r2,
+        })
+
+    collapse = []
+    non_anchor_cvs = []
+    for temp, values in sorted(normalized_by_temp.items()):
+        cv = coefficient_of_variation(values) if len(values) >= 2 else None
+        item = {
+            "temperature_c": temp,
+            "n_realizations": len(values),
+            "mean_eta_over_eta120": statistics.fmean(values),
+            "cross_realization_cv": cv,
+            "min_eta_over_eta120": min(values),
+            "max_eta_over_eta120": max(values),
+        }
+        collapse.append(item)
+        if temp != 120.0 and cv is not None:
+            non_anchor_cvs.append(cv)
+
+    e_values = [x["apparent_E_eta_kJ_mol"] for x in eta_descriptors]
+    r2_values = [x["ln_eta_vs_inverse_T_r2"] for x in eta_descriptors]
+
+    e2_by_temp: dict[float, list[float]] = defaultdict(list)
+    for row in rows:
+        if row["formulation_id"] == "E2":
+            e2_by_temp[float(row["temperature_c"])].append(float(row["viscosity_reported"]))
+    e2_spread = [
+        {
+            "temperature_c": temp,
+            "n_realizations": len(values),
+            "max_min_ratio": max_min_ratio(values),
+        }
+        for temp, values in sorted(e2_by_temp.items())
+        if len(values) >= 2
+    ]
+
+    hold_summary: dict[str, Any] = {}
+    for formulation_id in ("E1", "E5"):
+        data = get_hold_stability(formulation_id, include_follow_up=False)
+        hold_summary[formulation_id] = [
+            {
+                "run_label": run["run_label"],
+                "si_15_to_60": run.get("si_15_to_60"),
+                "si_15_to_90": run.get("si_15_to_90"),
+            }
+            for run in data["runs"]
+        ]
+
+    return {
+        "source_scope": "original pre-validation local data only",
+        "state_shift_evidence": {
+            "n_complete_realizations": len(eta_descriptors),
+            "e2_matched_temperature_spread": e2_spread,
+            "anchor_normalized_collapse": collapse,
+            "non_anchor_cv_range": [min(non_anchor_cvs), max(non_anchor_cvs)] if non_anchor_cvs else None,
+            "non_anchor_cv_mean": statistics.fmean(non_anchor_cvs) if non_anchor_cvs else None,
+        },
+        "temperature_sensitivity": {
+            "per_realization": eta_descriptors,
+            "mean_apparent_E_eta_kJ_mol": statistics.fmean(e_values) if e_values else None,
+            "sd_apparent_E_eta_kJ_mol": statistics.stdev(e_values) if len(e_values) >= 2 else None,
+            "cv_apparent_E_eta": coefficient_of_variation(e_values) if len(e_values) >= 2 else None,
+            "range_apparent_E_eta_kJ_mol": [min(e_values), max(e_values)] if e_values else None,
+            "median_ln_eta_inverse_T_r2": statistics.median(r2_values) if r2_values else None,
+            "interpretation": "apparent rheological temperature-sensitivity descriptor; not a reaction activation energy",
+        },
+        "original_hold_failure_evidence": hold_summary,
+        "design_theory": [
+            "nominal composition alone does not locate the realized viscosity level",
+            "within the measured local chemistry family, normalized thermal-response shape is much more conserved than absolute viscosity",
+            "process/realization state should remain explicit in the design object",
+            "thermal-hold stability should be optimized separately from static viscosity and local thermal-response shape",
+        ],
+        "claim_boundary": "Local state-shift evidence is not asserted to be universal across reactive-PUR chemistry families.",
     }
 
 
@@ -338,6 +466,8 @@ def execute_action(name: str, args: dict[str, Any], *, include_follow_up: bool) 
         return get_repeatability_risk(**args)
     if name == "get_temperature_support":
         return get_temperature_support(**args)
+    if name == "get_state_aware_rheology_summary":
+        return get_state_aware_rheology_summary()
     if name == "candidate_profile":
         return candidate_profile(**args)
     if name == "compare_candidate_to_priors":
