@@ -6,7 +6,6 @@ import hashlib
 import json
 import os
 import subprocess
-import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -31,9 +30,7 @@ def canonical_json_bytes(value: Any) -> bytes:
 
 def current_git_commit() -> str | None:
     try:
-        return subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL
-        ).strip()
+        return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()
     except Exception:
         return None
 
@@ -50,8 +47,7 @@ def extract_json_object(text: str) -> dict[str, Any]:
     try:
         value = json.loads(stripped)
     except json.JSONDecodeError:
-        start = stripped.find("{")
-        end = stripped.rfind("}")
+        start, end = stripped.find("{"), stripped.rfind("}")
         if start < 0 or end <= start:
             raise ValueError("model output did not contain a JSON object")
         value = json.loads(stripped[start : end + 1])
@@ -64,16 +60,7 @@ def candidate_map(candidate_set: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return {c["candidate_id"]: c for c in candidate_set["candidates"]}
 
 
-def normalize_agent_decision(
-    raw: dict[str, Any],
-    *,
-    candidate_set: dict[str, Any],
-    inspection_status: str,
-    model: str,
-    prompt_hash: str,
-    input_hash: str,
-    workflow_version: str,
-) -> dict[str, Any]:
+def normalize_agent_decision(raw: dict[str, Any], *, candidate_set: dict[str, Any], inspection_status: str, model: str, prompt_hash: str, input_hash: str, workflow_version: str) -> dict[str, Any]:
     allowed_modes = {"performance_candidate", "robustness_probe", "uncertainty_probe", "abstain"}
     mode = raw.get("decision_mode")
     if mode not in allowed_modes:
@@ -98,19 +85,11 @@ def normalize_agent_decision(
 
     alternatives = raw.get("alternatives_considered", [])
     for alt in alternatives:
-        alt_id = alt.get("candidate_id")
-        if alt_id not in candidates:
-            raise ValueError(f"alternative candidate not in candidate set: {alt_id!r}")
+        if alt.get("candidate_id") not in candidates:
+            raise ValueError(f"alternative candidate not in candidate set: {alt.get('candidate_id')!r}")
 
     created = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-    rec_seed = canonical_json_bytes(
-        {
-            "created_utc": created,
-            "selected_candidate_id": selected_id,
-            "input_hash": input_hash,
-            "model": model,
-        }
-    )
+    rec_seed = canonical_json_bytes({"created_utc": created, "selected_candidate_id": selected_id, "input_hash": input_hash, "model": model})
     recommendation_id = f"REC_{created.replace(':', '').replace('-', '')}_{sha256_bytes(rec_seed)[:10]}"
 
     return {
@@ -140,32 +119,20 @@ def normalize_agent_decision(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run and freeze a PUR-NEW Agent recommendation")
     parser.add_argument("--candidate-set", type=Path, required=True)
-    parser.add_argument(
-        "--evidence-state",
-        type=Path,
-        default=ROOT / "derived" / "evidence_state.json",
-    )
-    parser.add_argument(
-        "--inspection-status",
-        required=True,
-        choices=["no_results_inspected", "some_results_inspected", "unknown"],
-        help="Chronology at recommendation creation; must be supplied explicitly.",
-    )
-    parser.add_argument(
-        "--output-dir",
-        type=Path,
-        default=ROOT / "records" / "recommendations",
-    )
+    parser.add_argument("--evidence-state", type=Path, default=ROOT / "derived" / "evidence_state.json")
+    parser.add_argument("--agent-context", type=Path, default=None, help="Optional action-enriched context built by scripts/build_agent_context.py")
+    parser.add_argument("--inspection-status", required=True, choices=["no_results_inspected", "some_results_inspected", "unknown"], help="Chronology at recommendation creation; must be supplied explicitly.")
+    parser.add_argument("--output-dir", type=Path, default=ROOT / "records" / "recommendations")
     args = parser.parse_args()
 
     if not args.evidence_state.exists():
-        raise SystemExit(
-            f"Evidence state not found: {args.evidence_state}. Run scripts/build_evidence_state.py first."
-        )
+        raise SystemExit(f"Evidence state not found: {args.evidence_state}. Run scripts/build_evidence_state.py first.")
 
     workflow = read_json(ROOT / "configs" / "workflow.json")
+    action_catalog = read_json(ROOT / "configs" / "action_catalog.json")
     evidence = read_json(args.evidence_state)
     candidates = read_json(args.candidate_set)
+    agent_context = read_json(args.agent_context) if args.agent_context else None
     candidate_schema = read_json(ROOT / "schemas" / "candidate_set.schema.json")
     recommendation_schema = read_json(ROOT / "schemas" / "agent_recommendation.schema.json")
     validate(candidates, candidate_schema)
@@ -176,7 +143,9 @@ def main() -> None:
 
     input_payload = {
         "workflow_policy": workflow,
+        "action_catalog": action_catalog,
         "evidence_state": evidence,
+        "agent_context": agent_context,
         "candidate_set": candidates,
     }
     input_hash = sha256_bytes(canonical_json_bytes(input_payload))
@@ -195,30 +164,16 @@ def main() -> None:
     client = OpenAI(**client_kwargs)
 
     user_message = (
-        "Choose from the supplied candidate set or abstain. Return JSON only.\n\n"
+        "Choose from the supplied candidate set or abstain. Use the action-enriched context as decision support, preserve all evidence boundaries, compare alternatives explicitly, and return JSON only.\n\n"
         + json.dumps(input_payload, ensure_ascii=False, sort_keys=True)
     )
-    response = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": prompt_text},
-            {"role": "user", "content": user_message},
-        ],
-    )
+    response = client.chat.completions.create(model=model, messages=[{"role": "system", "content": prompt_text}, {"role": "user", "content": user_message}])
     content = response.choices[0].message.content
     if not content:
         raise SystemExit("model returned empty content")
     raw_decision = extract_json_object(content)
 
-    record = normalize_agent_decision(
-        raw_decision,
-        candidate_set=candidates,
-        inspection_status=args.inspection_status,
-        model=model,
-        prompt_hash=prompt_hash,
-        input_hash=input_hash,
-        workflow_version=workflow["workflow_version"],
-    )
+    record = normalize_agent_decision(raw_decision, candidate_set=candidates, inspection_status=args.inspection_status, model=model, prompt_hash=prompt_hash, input_hash=input_hash, workflow_version=workflow["workflow_version"])
     validate(record, recommendation_schema)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
