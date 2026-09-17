@@ -18,22 +18,8 @@ from openai import OpenAI
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from pur_new.agent_v3 import (  # noqa: E402
-    build_candidate_cards,
-    execute_planned_actions,
-    robustness_summary,
-)
-from pur_new.evidence_firewall import (  # noqa: E402
-    assert_blind_payload_clean,
-    filter_evidence_state,
-)
-
-ABLATIONS = {
-    "full",
-    "no_skeptic",
-    "no_deterministic_robustness",
-    "no_state_aware_action",
-}
+from pur_new.agent_v3 import build_candidate_cards, execute_planned_actions, robustness_summary  # noqa: E402
+from pur_new.evidence_firewall import assert_blind_payload_clean, filter_evidence_state  # noqa: E402
 
 
 def read_json(path: Path) -> Any:
@@ -140,7 +126,6 @@ def freeze_recommendation(
     input_hash: str,
     workflow_version: str,
     architecture_version: str,
-    ablation: str,
 ) -> dict[str, Any]:
     allowed_modes = {"performance_candidate", "robustness_probe", "uncertainty_probe", "abstain"}
     mode = raw.get("decision_mode")
@@ -169,6 +154,8 @@ def freeze_recommendation(
         raise ValueError("alternatives_considered must be a list")
     seen: set[str] = set()
     for alt in alternatives:
+        if not isinstance(alt, dict):
+            raise ValueError("each alternative must be an object")
         alt_id = alt.get("candidate_id")
         if alt_id not in candidates:
             raise ValueError(f"alternative not in candidate set: {alt_id!r}")
@@ -188,7 +175,6 @@ def freeze_recommendation(
             "input_hash": input_hash,
             "model": model,
             "architecture_version": architecture_version,
-            "ablation": ablation,
         }
     )
     recommendation_id = f"REC_V3_{created.replace(':', '').replace('-', '')}_{sha256_bytes(rec_seed)[:10]}"
@@ -212,17 +198,30 @@ def freeze_recommendation(
             "model": model,
             "prompt_hash": prompt_hash,
             "input_hash": input_hash,
-            "workflow_version": f"{workflow_version};agent_v3={architecture_version};ablation={ablation}",
+            "workflow_version": f"{workflow_version};agent_v3={architecture_version}",
         },
     }
 
 
+def ensure_core_scientific_action(action_requests: Any) -> list[dict[str, Any]]:
+    requests = list(action_requests) if isinstance(action_requests, list) else []
+    if not any(isinstance(req, dict) and req.get("name") == "get_state_aware_rheology_summary" for req in requests):
+        requests.insert(
+            0,
+            {
+                "name": "get_state_aware_rheology_summary",
+                "args": {},
+                "reason": "Required upstream physical/model evidence before candidate ranking.",
+            },
+        )
+    return requests
+
+
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run the PUR-NEW multi-stage scientific decision Agent V3")
+    parser = argparse.ArgumentParser(description="Run the PUR-NEW discovery-to-experiment Agent V3")
     parser.add_argument("--candidate-set", type=Path, required=True)
     parser.add_argument("--evidence-state", type=Path, default=ROOT / "derived" / "evidence_state.json")
     parser.add_argument("--profile", default=None)
-    parser.add_argument("--ablation", choices=sorted(ABLATIONS), default="full")
     parser.add_argument(
         "--inspection-status",
         required=True,
@@ -252,20 +251,17 @@ def main() -> None:
     blind_mode = not bool(policy.get("allow_follow_up_hold_results", False))
     blind_identity_ids = blinded_ids if not policy.get("allow_follow_up_formulation_identity", False) else set()
     if blind_mode:
-        assert_blind_payload_clean(
-            evidence,
-            blinded_formulation_ids=blind_identity_ids,
-            forbid_follow_up_stage=True,
-        )
+        assert_blind_payload_clean(evidence, blinded_formulation_ids=blind_identity_ids, forbid_follow_up_stage=True)
 
     prompts: dict[str, str] = {}
     for stage in architecture["stages"]:
         if "prompt" in stage:
-            path = ROOT / stage["prompt"]
-            prompts[stage["id"]] = path.read_text(encoding="utf-8")
-    prompt_hash = sha256_bytes(
-        canonical_json_bytes({stage: prompts[stage] for stage in sorted(prompts)})
-    )
+            prompts[stage["id"]] = (ROOT / stage["prompt"]).read_text(encoding="utf-8")
+    required_prompt_stages = {"planner", "proposer", "skeptic", "robustness_adjudicator", "judge"}
+    missing_prompts = required_prompt_stages - prompts.keys()
+    if missing_prompts:
+        raise SystemExit(f"missing V3 prompts: {sorted(missing_prompts)}")
+    prompt_hash = sha256_bytes(canonical_json_bytes({stage: prompts[stage] for stage in sorted(prompts)}))
 
     api_key = os.environ.get("OPENAI_API_KEY")
     base_model = os.environ.get("OPENAI_MODEL")
@@ -274,9 +270,10 @@ def main() -> None:
         raise SystemExit("OPENAI_API_KEY is required")
     if not base_model:
         raise SystemExit("OPENAI_MODEL is required")
+
     stage_models = {
         stage: os.environ.get(f"OPENAI_MODEL_{stage.upper()}", base_model)
-        for stage in ("planner", "proposer", "skeptic", "judge")
+        for stage in required_prompt_stages
     }
     kwargs: dict[str, Any] = {"api_key": api_key}
     if base_url:
@@ -293,12 +290,8 @@ def main() -> None:
         "get_temperature_support",
         "get_state_aware_rheology_summary",
     }
-    if args.ablation == "no_state_aware_action":
-        planner_action_names.remove("get_state_aware_rheology_summary")
-
     planner_payload = {
         "architecture_version": architecture["version"],
-        "ablation": args.ablation,
         "workflow_policy": workflow,
         "evidence_profile": profile_name,
         "evidence_policy": policy,
@@ -310,11 +303,7 @@ def main() -> None:
         "candidate_ids": [c["candidate_id"] for c in candidate_set["candidates"]],
     }
     if blind_mode:
-        assert_blind_payload_clean(
-            planner_payload,
-            blinded_formulation_ids=blind_identity_ids,
-            forbid_follow_up_stage=True,
-        )
+        assert_blind_payload_clean(planner_payload, blinded_formulation_ids=blind_identity_ids, forbid_follow_up_stage=True)
 
     planner, stage_usage["planner"] = call_json(
         client,
@@ -322,38 +311,26 @@ def main() -> None:
         system_prompt=prompts["planner"],
         payload=planner_payload,
     )
+
+    action_requests = ensure_core_scientific_action(planner.get("action_requests", []))
     tool_trace = execute_planned_actions(
-        planner.get("action_requests", []),
+        action_requests,
         include_follow_up=bool(policy.get("allow_follow_up_hold_results", False)),
         blind_target_formulation_ids=blinded_ids,
     )
-
     cards = build_candidate_cards(candidate_set["candidates"])
-    full_robustness = robustness_summary(cards)
-    if args.ablation == "no_deterministic_robustness":
-        robustness: dict[str, Any] = {
-            "stage_skipped": True,
-            "ablation": args.ablation,
-            "note": "Deterministic Pareto and scenario robustness diagnostics intentionally removed for ablation.",
-        }
-    else:
-        robustness = full_robustness
+    deterministic_robustness = robustness_summary(cards)
 
     proposer_payload = {
-        "ablation": args.ablation,
         "planner": planner,
         "tool_trace": tool_trace,
         "candidate_set": candidate_set,
         "candidate_scorecards": cards,
-        "deterministic_robustness": robustness,
+        "deterministic_decision_diagnostics": deterministic_robustness,
         "evidence_policy": policy,
     }
     if blind_mode:
-        assert_blind_payload_clean(
-            proposer_payload,
-            blinded_formulation_ids=blind_identity_ids,
-            forbid_follow_up_stage=True,
-        )
+        assert_blind_payload_clean(proposer_payload, blinded_formulation_ids=blind_identity_ids, forbid_follow_up_stage=True)
     proposer, stage_usage["proposer"] = call_json(
         client,
         model=stage_models["proposer"],
@@ -361,54 +338,55 @@ def main() -> None:
         payload=proposer_payload,
     )
 
-    if args.ablation == "no_skeptic":
-        skeptic: dict[str, Any] = {
-            "stage_skipped": True,
-            "ablation": args.ablation,
-            "recommendation_survives": None,
-            "preferred_response": "not_evaluated",
-            "required_corrections": [],
-        }
-    else:
-        skeptic_payload = {
-            "ablation": args.ablation,
-            "planner": planner,
-            "tool_trace": tool_trace,
-            "candidate_scorecards": cards,
-            "deterministic_robustness": robustness,
-            "proposer": proposer,
-            "evidence_policy": policy,
-        }
-        if blind_mode:
-            assert_blind_payload_clean(
-                skeptic_payload,
-                blinded_formulation_ids=blind_identity_ids,
-                forbid_follow_up_stage=True,
-            )
-        skeptic, stage_usage["skeptic"] = call_json(
-            client,
-            model=stage_models["skeptic"],
-            system_prompt=prompts["skeptic"],
-            payload=skeptic_payload,
-        )
+    skeptic_payload = {
+        "planner": planner,
+        "tool_trace": tool_trace,
+        "candidate_scorecards": cards,
+        "deterministic_decision_diagnostics": deterministic_robustness,
+        "proposer": proposer,
+        "evidence_policy": policy,
+    }
+    if blind_mode:
+        assert_blind_payload_clean(skeptic_payload, blinded_formulation_ids=blind_identity_ids, forbid_follow_up_stage=True)
+    skeptic, stage_usage["skeptic"] = call_json(
+        client,
+        model=stage_models["skeptic"],
+        system_prompt=prompts["skeptic"],
+        payload=skeptic_payload,
+    )
 
-    judge_payload = {
-        "ablation": args.ablation,
+    robustness_payload = {
         "planner": planner,
         "tool_trace": tool_trace,
         "candidate_set": candidate_set,
         "candidate_scorecards": cards,
-        "deterministic_robustness": robustness,
+        "deterministic_decision_diagnostics": deterministic_robustness,
         "proposer": proposer,
         "skeptic": skeptic,
         "evidence_policy": policy,
     }
     if blind_mode:
-        assert_blind_payload_clean(
-            judge_payload,
-            blinded_formulation_ids=blind_identity_ids,
-            forbid_follow_up_stage=True,
-        )
+        assert_blind_payload_clean(robustness_payload, blinded_formulation_ids=blind_identity_ids, forbid_follow_up_stage=True)
+    robustness_adjudication, stage_usage["robustness_adjudicator"] = call_json(
+        client,
+        model=stage_models["robustness_adjudicator"],
+        system_prompt=prompts["robustness_adjudicator"],
+        payload=robustness_payload,
+    )
+
+    judge_payload = {
+        "planner": planner,
+        "tool_trace": tool_trace,
+        "candidate_set": candidate_set,
+        "candidate_scorecards": cards,
+        "deterministic_decision_diagnostics": deterministic_robustness,
+        "proposer": proposer,
+        "skeptic": skeptic,
+        "robustness_adjudication": robustness_adjudication,
+        "evidence_policy": policy,
+    }
+    if blind_mode:
+        assert_blind_payload_clean(judge_payload, blinded_formulation_ids=blind_identity_ids, forbid_follow_up_stage=True)
     judge, stage_usage["judge"] = call_json(
         client,
         model=stage_models["judge"],
@@ -418,16 +396,16 @@ def main() -> None:
 
     input_payload = {
         "architecture": architecture,
-        "ablation": args.ablation,
         "evidence_profile": profile_name,
         "filtered_evidence_state": evidence,
         "candidate_set": candidate_set,
         "planner": planner,
         "tool_trace": tool_trace,
         "candidate_scorecards": cards,
-        "deterministic_robustness": robustness,
+        "deterministic_decision_diagnostics": deterministic_robustness,
         "proposer": proposer,
         "skeptic": skeptic,
+        "robustness_adjudication": robustness_adjudication,
     }
     input_hash = sha256_bytes(canonical_json_bytes(input_payload))
 
@@ -440,19 +418,16 @@ def main() -> None:
         input_hash=input_hash,
         workflow_version=workflow["workflow_version"],
         architecture_version=architecture["version"],
-        ablation=args.ablation,
     )
     validate(recommendation, recommendation_schema)
 
-    condition_dir = args.output_dir / args.ablation
-    run_dir = condition_dir / recommendation["recommendation_id"]
+    run_dir = args.output_dir / recommendation["recommendation_id"]
     if run_dir.exists():
         raise SystemExit(f"Refusing to overwrite frozen V3 run: {run_dir}")
     run_dir.mkdir(parents=True, exist_ok=False)
 
     deliberation = {
         "architecture": architecture,
-        "ablation": args.ablation,
         "evidence_profile": profile_name,
         "evidence_policy": policy,
         "filtered_evidence_hash": sha256_bytes(canonical_json_bytes(evidence)),
@@ -463,10 +438,10 @@ def main() -> None:
         "planner": planner,
         "tool_trace": tool_trace,
         "candidate_scorecards": cards,
-        "deterministic_robustness": robustness,
-        "full_robustness_reference_hash": sha256_bytes(canonical_json_bytes(full_robustness)),
+        "deterministic_decision_diagnostics": deterministic_robustness,
         "proposer": proposer,
         "skeptic": skeptic,
+        "robustness_adjudication": robustness_adjudication,
         "judge_raw": judge,
         "recommendation_id": recommendation["recommendation_id"],
     }
