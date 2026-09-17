@@ -84,9 +84,25 @@ def normalize_agent_decision(raw: dict[str, Any], *, candidate_set: dict[str, An
         }
 
     alternatives = raw.get("alternatives_considered", [])
-    for alt in alternatives:
-        if alt.get("candidate_id") not in candidates:
-            raise ValueError(f"alternative candidate not in candidate set: {alt.get('candidate_id')!r}")
+    if not isinstance(alternatives, list):
+        raise ValueError("alternatives_considered must be a list")
+
+    seen_alternatives: set[str] = set()
+    for rank_offset, alt in enumerate(alternatives, start=2):
+        alt_id = alt.get("candidate_id")
+        if alt_id not in candidates:
+            raise ValueError(f"alternative candidate not in candidate set: {alt_id!r}")
+        if selected_id is not None and alt_id == selected_id:
+            raise ValueError("selected candidate must not be repeated in alternatives_considered")
+        if alt_id in seen_alternatives:
+            raise ValueError(f"duplicate alternative candidate: {alt_id!r}")
+        seen_alternatives.add(alt_id)
+        # Array order is the benchmark rank contract: item 0 -> Rank 2, item 1 -> Rank 3, etc.
+        # Preference ordering itself is semantic and is enforced by the system prompt.
+        _ = rank_offset
+
+    if mode != "abstain" and len(candidates) >= 3 and len(alternatives) < 2:
+        raise ValueError("non-abstaining recommendations must provide at least two ranked alternatives when >=3 candidates exist")
 
     created = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     rec_seed = canonical_json_bytes({"created_utc": created, "selected_candidate_id": selected_id, "input_hash": input_hash, "model": model})
