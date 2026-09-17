@@ -1,46 +1,50 @@
 {
-  "catalog_version": "1.2.0",
-  "purpose": "Deterministic actions available to the PUR-NEW decision Agent before it freezes a recommendation.",
+  "catalog_version": "1.3.0",
+  "purpose": "Deterministic scientific actions for a discovery-first PUR Agent: first extract material-response structure from measured evidence, then use that structure to choose informative formulation-process experiments.",
   "actions": [
+    {
+      "name": "get_state_aware_rheology_summary",
+      "description": "Return the paper's upstream rheological findings from pre-validation evidence only: formulation-only versus state-aware model comparison, the state-shift master-curve structure, leave-one-temperature validation, one-point state calibration, the local apparent temperature-sensitivity coordinate, and the E1/E5 thermal-hold drift contrast. Also returns explicit design rules and measurement implications. The validation formulation/outcome is excluded.",
+      "when_to_use": [
+        "first, before candidate ranking",
+        "to identify which material-response regularities should control experiment selection",
+        "to decide whether a new point should target viscosity level, state calibration, thermal response, or hold stability"
+      ]
+    },
     {
       "name": "query_external_priors",
       "description": "Retrieve source-level analogue evidence from the curated external PUR evidence table, including source identifiers, evidence locators, candidate-space role and limitations.",
-      "when_to_use": ["before selecting a formulation family", "when considering acrylic/tackifier modification", "when local evidence is sparse"]
+      "when_to_use": ["after the local physical failure mode is identified", "when considering a formulation-family change", "when local chemistry coverage is sparse"]
     },
     {
       "name": "get_candidate_hypothesis",
-      "description": "Return the frozen evidence-derived candidate-space hypothesis, the original E2 reactive-core anchor, independent acrylic/tackifier axes and the historical/claim boundary. This exposes why the candidate grid exists without exposing held-out follow-up results.",
-      "when_to_use": ["before comparing candidates", "to distinguish evidence-derived grid design from post-hoc scoring"]
-    },
-    {
-      "name": "get_state_aware_rheology_summary",
-      "description": "Recompute the pre-validation local state-aware rheology evidence directly from the original temperature-sweep and hold CSV files, including realization spread, 120 C anchor-normalized curve collapse, apparent E_eta descriptors, and the E1/E5 hold-failure contrast. The action never inspects the later validation result.",
-      "when_to_use": ["before defining the design objective", "when deciding whether composition-only reasoning is sufficient", "when separating thermal response from hold stability"]
+      "description": "Return the evidence-derived candidate-space hypothesis, the original E2 reactive-core anchor, independent acrylic/tackifier axes and the historical/claim boundary. This supports experiment selection; it is not itself a discovered optimum.",
+      "when_to_use": ["after establishing the local design objective", "before comparing candidate formulations"]
     },
     {
       "name": "inspect_formulation",
       "description": "Inspect one measured formulation and compute transparent composition summaries including polyol, acrylic-like, tackifier-like, combined-modifier and MDI fractions.",
-      "when_to_use": ["to understand the original design state", "to distinguish formulation from process effects"]
+      "when_to_use": ["to understand a measured reference state", "to compare chemistry axes without conflating them with process state"]
     },
     {
       "name": "get_hold_stability",
       "description": "Return measured thermal-hold trajectories and deterministic SI descriptors for a formulation. No extrapolation is performed.",
-      "when_to_use": ["when thermal stability is a design objective", "to identify high-drift reference behavior"]
+      "when_to_use": ["when thermal stability is the observed failure mode", "to compare candidate design objectives with original high-drift references"]
     },
     {
       "name": "get_repeatability_risk",
       "description": "Return nominal repeat/run spread from measured temperature sweeps, including CV and max/min ratio where available.",
-      "when_to_use": ["before trusting a single nominal viscosity", "when process-history uncertainty may dominate"]
+      "when_to_use": ["before treating one nominal viscosity as a material property", "when realization/process-state uncertainty may dominate"]
     },
     {
       "name": "get_temperature_support",
       "description": "Return measured temperature support and descriptive temperature-response summaries for a formulation.",
-      "when_to_use": ["to avoid extrapolation", "to check whether a candidate is evaluated inside observed support"]
+      "when_to_use": ["to avoid unsupported extrapolation", "to choose an anchor temperature inside measured support"]
     },
     {
       "name": "audit_process_unknowns",
       "description": "Audit missing reaction/preparation/hold metadata for a candidate or measured formulation and convert missingness into explicit process-history uncertainty.",
-      "when_to_use": ["before final ranking", "when two candidates look similar on nominal composition"]
+      "when_to_use": ["before final experiment selection", "when two candidates are compositionally similar but state uncertainty differs"]
     },
     {
       "name": "candidate_profile",
@@ -49,27 +53,27 @@
     },
     {
       "name": "compare_candidate_to_priors",
-      "description": "Compare acrylic-like and tackifier-like axes separately with independent evidence anchors frozen in formulation_priors.json. Returns analogue support, not predicted wet-lab performance.",
-      "when_to_use": ["for resin-modified candidates", "to distinguish independently supported coarse levels from extrapolative ones"]
+      "description": "Compare acrylic-like and tackifier-like axes separately with independent evidence anchors. Returns analogue support, not predicted wet-lab performance.",
+      "when_to_use": ["for resin-modified candidates", "to identify supported versus extrapolative chemistry directions"]
     },
     {
       "name": "stress_test_candidate",
       "description": "Apply deterministic risk flags using candidate-space support, process-history missingness and grid boundaries. It returns reasons, not a fabricated viscosity prediction.",
-      "when_to_use": ["before freezing the recommendation", "to expose whether the selection survives robustness checks"]
+      "when_to_use": ["before freezing an experiment point", "to check whether a chemically plausible point remains interpretable under known uncertainties"]
     },
     {
       "name": "rank_candidate_support",
-      "description": "Create a transparent support-oriented ordering from the same allowed evidence. This is a deterministic baseline/decision aid and must not be described as a trained predictive model.",
-      "when_to_use": ["when several candidates remain plausible", "to benchmark what the evidence alone already provides before LLM reasoning"]
+      "description": "Create a transparent support-oriented ordering from the allowed evidence. This is a decision aid, not the scientific objective and not a trained property predictor.",
+      "when_to_use": ["only after the scientific objective has been derived from the measured rheology", "when several candidates remain plausible"]
     }
   ],
   "invariants": [
+    "The Agent must identify the physical/material pattern before ranking formulation candidates.",
+    "The state-aware rheology tool may use only original pre-validation measurements and analyses derived from them; it must not expose the validation formulation or its outcome.",
+    "Candidate ranking is downstream of scientific pattern extraction and must target the observed failure mode or a high-value uncertainty.",
     "Actions may expose only evidence allowed by the active evidence-access profile.",
-    "Held-out target identity, follow-up outcomes and scoring labels must never be converted into candidate-space hints in blind evaluation.",
-    "The state-aware rheology summary must be recomputed only from pre-validation local data.",
-    "The V2 grid uses the original E2 reactive-core proportions and independent external evidence anchors; it does not encode the exact follow-up recipe.",
     "External analogue evidence is directional prior information, not proof of the current formulation's optimum.",
-    "If AC1920 or TK100 are later shown to have NCO-reactive functionality, stoichiometry must be recalculated rather than assuming the E2 NCO:OH value remains unchanged.",
+    "Missing process history remains uncertainty rather than being silently set to ideal values.",
     "No action may invent a molecular mechanism or an unmeasured viscosity value."
   ]
 }
