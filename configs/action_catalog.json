@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.1.0",
+  "catalog_version": "1.2.0",
   "purpose": "Deterministic actions available to the PUR-NEW decision Agent before it freezes a recommendation.",
   "actions": [
     {
@@ -11,6 +11,11 @@
       "name": "get_candidate_hypothesis",
       "description": "Return the frozen evidence-derived candidate-space hypothesis, the original E2 reactive-core anchor, independent acrylic/tackifier axes and the historical/claim boundary. This exposes why the candidate grid exists without exposing held-out follow-up results.",
       "when_to_use": ["before comparing candidates", "to distinguish evidence-derived grid design from post-hoc scoring"]
+    },
+    {
+      "name": "get_state_aware_rheology_summary",
+      "description": "Recompute the pre-validation local state-aware rheology evidence directly from the original temperature-sweep and hold CSV files, including realization spread, 120 C anchor-normalized curve collapse, apparent E_eta descriptors, and the E1/E5 hold-failure contrast. The action never inspects the later validation result.",
+      "when_to_use": ["before defining the design objective", "when deciding whether composition-only reasoning is sufficient", "when separating thermal response from hold stability"]
     },
     {
       "name": "inspect_formulation",
@@ -60,7 +65,8 @@
   ],
   "invariants": [
     "Actions may expose only evidence allowed by the active evidence-access profile.",
-    "Held-out follow-up outcomes and scoring labels must never be converted into candidate-space hints in blind replay.",
+    "Held-out target identity, follow-up outcomes and scoring labels must never be converted into candidate-space hints in blind evaluation.",
+    "The state-aware rheology summary must be recomputed only from pre-validation local data.",
     "The V2 grid uses the original E2 reactive-core proportions and independent external evidence anchors; it does not encode the exact follow-up recipe.",
     "External analogue evidence is directional prior information, not proof of the current formulation's optimum.",
     "If AC1920 or TK100 are later shown to have NCO-reactive functionality, stoichiometry must be recalculated rather than assuming the E2 NCO:OH value remains unchanged.",
