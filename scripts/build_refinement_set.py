@@ -67,8 +67,8 @@ def main() -> None:
     acrylic_grid = inclusive_grid(acrylic_min, acrylic_max, args.step)
     tackifier_grid = inclusive_grid(tackifier_min, tackifier_max, args.step)
 
-    # Important anti-leakage property: this generator never reads data/formulations.csv.
-    # The E2 anchor comes only from the audited pre-result prior configuration.
+    # Anti-leakage property: the refinement generator obtains its reactive-core
+    # anchor exclusively from the audited pre-result prior configuration.
     anchor = anchor_from_priors(priors, expected_id=args.anchor_formulation)
 
     candidates = []
