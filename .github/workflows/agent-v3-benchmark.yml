@@ -8,7 +8,7 @@ on:
         required: true
         default: gpt-5.6-luna
       repeats:
-        description: Independent runs per condition (use 3-5 for pilot, >=30 for final benchmark)
+        description: Independent LLM runs per condition (use 3-5 for pilot, >=30 for final benchmark)
         required: true
         default: "3"
       include_ablations:
@@ -42,25 +42,32 @@ jobs:
             --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
             --profile blind_pre_result \
             --output /tmp/pur-agent-benchmark/agent_context.json
-      - name: Run single-pass baselines
+      - name: Run deterministic evidence-ranker baseline
+        run: |
+          python scripts/run_deterministic_baseline.py \
+            --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
+            --output-dir /tmp/pur-agent-benchmark/deterministic
+      - name: Run direct-LLM and single-pass tool-context baselines
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/pur-agent-benchmark/single_pass_no_tools
+          mkdir -p /tmp/pur-agent-benchmark/direct_llm
           mkdir -p /tmp/pur-agent-benchmark/single_pass_tools
           for i in $(seq 1 "${{ inputs.repeats }}"); do
-            echo "single-pass no-tools run ${i}"
+            echo "direct LLM run ${i}"
             python scripts/run_agent_recommendation.py \
               --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
               --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
+              --context-level direct \
               --profile blind_pre_result \
               --inspection-status no_results_inspected \
-              --output-dir /tmp/pur-agent-benchmark/single_pass_no_tools
-            echo "single-pass tools run ${i}"
+              --output-dir /tmp/pur-agent-benchmark/direct_llm
+            echo "single-pass tool-context run ${i}"
             python scripts/run_agent_recommendation.py \
               --candidate-set /tmp/pur-agent-benchmark/candidate_set.json \
               --evidence-state /tmp/pur-agent-benchmark/evidence_state.json \
               --agent-context /tmp/pur-agent-benchmark/agent_context.json \
+              --context-level tool_context \
               --profile blind_pre_result \
               --inspection-status no_results_inspected \
               --output-dir /tmp/pur-agent-benchmark/single_pass_tools
@@ -102,8 +109,9 @@ jobs:
         run: |
           set -euo pipefail
           conditions=(
-            --condition single_pass_no_tools=/tmp/pur-agent-benchmark/single_pass_no_tools
-            --condition single_pass_tools=/tmp/pur-agent-benchmark/single_pass_tools
+            --condition deterministic_evidence_ranker=/tmp/pur-agent-benchmark/deterministic
+            --condition direct_llm_blind=/tmp/pur-agent-benchmark/direct_llm
+            --condition single_pass_tool_context=/tmp/pur-agent-benchmark/single_pass_tools
             --condition v3_full=/tmp/pur-agent-benchmark/v3/full
           )
           if [[ "${{ inputs.include_ablations }}" == "true" ]]; then
