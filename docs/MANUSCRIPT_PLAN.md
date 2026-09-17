@@ -4,27 +4,33 @@
 
 **State-Conditioned Rheological Design and Uncertainty-Aware Agent Guidance for Reactive Polyurethane Hot-Melt Adhesives**
 
-The title should foreground the physical/statistical result before the Agent contribution. A shorter journal-specific title can be chosen later.
+The title should foreground the physical/statistical result before the Agent contribution.
 
 ## Central paper logic
 
-The manuscript should follow one continuous argument:
+The paper must follow the real scientific chronology rather than presenting the Agent as the origin of the physical insight.
 
 ```text
-1. Reactive PUR rheology depends on both chemistry and experimental/process realization.
-2. In the present local chemistry family, realization strongly changes absolute viscosity level.
-3. However, the 80-130 C relative temperature-response shape is comparatively conserved.
-4. A realization-specific scale shift plus a shared thermal-response function therefore forms a low-dimensional local rheological state model.
-5. One state anchor can calibrate an unseen realization far more accurately than formulation identity alone.
-6. Isothermal viscosity drift is a second, differently tunable rheological response: E1/E5 differ strongly and F1 enters a low-drift regime.
-7. Broad external data show that chemistry controls the wider thermal-response landscape, so the local master curve is not universal.
-8. These results motivate a state-aware design representation with explicit uncertainty and separate temperature/stability objectives.
-9. Independent literature/patent evidence defines a finite resin-modification hypothesis space.
-10. The Agent reasons over local state evidence, external evidence and uncertainty, then recommends or abstains.
-11. Human wet-lab execution provides the physical adjudication and updates the next design round.
+1. Local experiments reveal that reactive-PUR rheology depends on chemistry and experimental/process realization.
+2. State-shift modeling shows that repeated realizations mainly change viscosity scale while preserving a comparatively transferable local thermal-response shape.
+3. One state anchor calibrates an unseen realization far better than formulation identity alone.
+4. Thermal response and thermal-hold stability emerge as distinct, differently tunable rheological coordinates.
+5. These physical/model findings establish the state-aware design theory.
+6. External evidence and the original E2 reactive core define an admissible resin-modification candidate space.
+7. The Agent receives only pre-result evidence, reasons within this state-aware design theory, and selects a new candidate.
+8. The candidate, rationale, uncertainty assessment and falsifiable criterion are frozen before the corresponding wet-lab outcome is available to the Agent.
+9. The human experimental team executes the recommended formulation.
+10. The later experiment independently supports, partially supports, rejects, or qualifies the frozen recommendation.
+11. The physical adjudication updates the next design state.
 ```
 
-The Agent is not presented as a robotic chemist. The paper should remain scientifically useful even if a reader ignores the LLM implementation: the first contribution is the **structure of reactive-PUR rheological variability**, and the second is an **evidence-grounded decision layer built on that structure**.
+The main methodological statement is therefore:
+
+> **The physical/model findings first establish a state-aware design theory; the Agent then makes a blinded, falsifiable recommendation within that theory; human wet-lab execution provides an independent physical adjudication of the pre-frozen recommendation.**
+
+The paper should remain scientifically useful even if a reader ignores the LLM implementation. The first contribution is the **structure of reactive-PUR rheological variability**; the second is an **evidence-grounded decision layer tested prospectively against physical experiment**.
+
+See `docs/PROSPECTIVE_VALIDATION_PROTOCOL.md`.
 
 ---
 
@@ -32,20 +38,20 @@ The Agent is not presented as a robotic chemist. The paper should remain scienti
 
 ### 1. Local formulation design and raw temperature-dependent rheology
 
-Introduce E1-E5 and explain the two local axes:
+Introduce E1-E5 and the two local axes:
 
 - NCO:OH at fixed 50/50 PPG2000/PDP-70;
 - PPG2000/PDP-70 ratio at fixed NCO:OH = 1.80.
 
-Show the 80-130 C sweeps. Emphasize that nominal formulation does not uniquely determine measured viscosity level. The strongest example is E2, whose recorded realizations differ by roughly 2.8-3.6x at matched temperatures.
+Show the 80-130 C sweeps. Emphasize that nominal formulation does not uniquely determine measured viscosity level. E2 realizations differ by roughly 2.8-3.6x at matched temperatures.
 
-Do not yet interpret GJJ/ZYX/CHH as causal categories. They are within-operator realization labels from the same operator.
+GJJ/ZYX/CHH are within-operator realization labels from the same operator, not operator categories.
 
 ### 2. State-shift master curve and one-point calibration
 
 This is the primary modeling result.
 
-#### 2.1 Model-free curve collapse
+#### 2.1 Model-light curve collapse
 
 Normalize every recorded curve by its own 120 C viscosity:
 
@@ -53,13 +59,13 @@ Normalize every recorded curve by its own 120 C viscosity:
 relative_eta(T) = eta(T) / eta(120 C)
 ```
 
-Across the seven realizations, the non-anchor normalized-curve CV is only about 3.4-10.3% despite the much larger spread in absolute viscosity.
+Across the seven realizations, the non-anchor normalized-curve CV is only about 3.4-10.3% despite much larger absolute-viscosity spread.
 
-This is the clearest visual evidence that realization predominantly changes viscosity scale while preserving a transferable local temperature-response shape.
+This provides direct visual evidence that realization predominantly changes viscosity scale while preserving a transferable local temperature-response shape.
 
 #### 2.2 Positive state model
 
-Use the compact structural model:
+Use:
 
 ```text
 ln eta_r(T) = alpha_r + g(T) + epsilon
@@ -67,11 +73,11 @@ ln eta_r(T) = alpha_r + g(T) + epsilon
 
 where `alpha_r` is realization/state specific and `g(T)` is shared within the measured local chemistry family.
 
-The preferred low-complexity implementation is a quadratic function in inverse temperature. The conclusion is robust to using a quadratic function in ordinary temperature, while a cubic inverse-temperature term gives negligible cross-validation improvement and worse BIC.
+The preferred implementation is a low-complexity quadratic function in inverse temperature. The conclusion is robust to using a quadratic function in ordinary temperature; a cubic inverse-temperature term gives negligible cross-validation improvement and worse BIC.
 
 #### 2.3 Formulation-only versus state-aware comparison
 
-Report the formal comparison:
+Report:
 
 ```text
 formulation-only R2 ~= 0.895
@@ -93,13 +99,11 @@ point residual SD   ~= 0.047 log-unit
 ICC                 ~= 0.979
 ```
 
-Because there are only seven realization groups, do not make the mixed-effects model the headline inferential result.
+With only seven realization groups, mixed-effects should not be the headline inferential result.
 
 #### 2.4 Strict unseen-realization one-point calibration
 
-This is the strongest predictive test.
-
-Remove one complete realization from training. For E1/E2 cases where the nominal formulation remains represented by another realization, compare:
+Remove one complete realization from training. For E1/E2 cases where the nominal formulation remains represented, compare:
 
 ```text
 formulation identity + shared quadratic thermal response
@@ -116,26 +120,24 @@ one-point calibrated:   ~1.065-1.098x
 
 At the operationally relevant 120 C anchor, all six eligible held-out E1/E2 realizations improve relative to formulation-only prediction.
 
-The manuscript-facing statement should be:
+Use the manuscript-facing statement:
 
 > Within a nominal formulation already represented in the local chemistry family, a new realization cannot be located accurately from formulation identity alone, but one state-specific viscosity anchor is sufficient to calibrate the remaining measured temperature curve to roughly 6-10% multiplicative error.
 
-Do not call this universal chemistry extrapolation. It is state calibration within the local chemistry family.
-
 ### 3. Temperature response and thermal-hold stability are distinct, differently tunable coordinates
 
-The individual local 80-130 C curves have a comparatively concentrated apparent temperature-sensitivity descriptor:
+Local temperature sensitivity:
 
 ```text
 mean apparent E_eta = 41.87 kJ/mol
 SD                  = 2.27 kJ/mol
 CV                  = 5.4%
-median curve R2     = 0.9948
+median curve R2      = 0.9948
 ```
 
-`E_eta` is a rheological temperature-sensitivity descriptor, not a molecular reaction activation energy.
+`E_eta` is an apparent rheological temperature-sensitivity descriptor, not a molecular reaction activation energy.
 
-In contrast, the 120 C hold response is strongly formulation dependent:
+Thermal-hold response at 120 C:
 
 ```text
 E1 fitted dln(eta)/dt ~= 0.125 h^-1
@@ -146,63 +148,47 @@ ratio                 ~= 4.29x
 Matched 15-60 min drift:
 
 ```text
-E1  +9.51%
-E5 +51.54%
+E1      +9.51%
+E5     +51.54%
 F1 mean +1.47%
 ```
 
-F1 therefore reduces absolute matched-window drift by about 84.5% versus E1 and 97.1% versus E5.
-
-Use the phrase:
+Use:
 
 > **distinct, differently tunable rheological coordinates**
 
-Do not use `independent` or `orthogonal`, because E5 and F1 do not yet have matched full temperature sweeps and the external thermal/stability datasets do not overlap sample-by-sample.
+Do not use `independent` or `orthogonal` because matched temperature-and-hold characterization is still incomplete across formulations.
 
 ### 4. External database defines the generalization boundary
 
 The 39 external prepolymer curves contain 4559 temperature-viscosity points.
 
-Their temperature curves remain highly regular:
-
 ```text
 median ln(eta)-1/T R2 = 0.9967
 37 / 39 curves have R2 >= 0.98
+apparent E_eta range ~= 34.7-94.2 kJ/mol
 ```
 
-but apparent thermal sensitivity spans roughly:
+Prefer cross-validated composition-model strength:
 
 ```text
-34.7-94.2 kJ/mol
+thermal descriptor LOOCV R2 ~= 0.59-0.62
+fitted 75 C log-viscosity LOOCV R2 ~= 0.80-0.82
 ```
 
-Thus the approximately 42 kJ/mol local scale is not a universal PUR constant.
-
-Prefer cross-validated composition-model strength over in-sample R2 when discussing the database:
-
-```text
-thermal descriptor:
-  additive composition LOOCV R2 ~= 0.593
-  pNCO x polyol model LOOCV R2 ~= 0.616
-
-fitted 75 C log-viscosity:
-  additive composition LOOCV R2 ~= 0.797
-  pNCO x polyol model LOOCV R2 ~= 0.822
-```
-
-The correct multiscale interpretation is:
+The multiscale interpretation is:
 
 ```text
 chemistry controls the broad rheological landscape
 +
-process/experimental state controls where a local realization sits within that landscape
+process / experimental state controls where a local realization sits within that landscape
 ```
 
-The external temperature-curve dataset and the nine viscosity-rise-rate patent records have no shared sample identifiers, so they must not be used to claim direct external statistical independence between thermal sensitivity and stability.
+The external thermal-curve dataset and viscosity-rise-rate records are not sample-matched, so they must not be used to claim universal statistical independence between thermal sensitivity and stability.
 
-### 5. Deterministic state construction and uncertainty decomposition
+### 5. State-aware design theory and uncertainty representation
 
-Only after the physical/statistical result is established, introduce the design-state representation:
+Only after the physical/statistical results are established, introduce the design object:
 
 ```text
 formulation state
@@ -214,7 +200,7 @@ formulation state
 + missingness
 ```
 
-Separate uncertainty into:
+Uncertainty is separated into:
 
 ```text
 measurement
@@ -224,26 +210,17 @@ extrapolation
 evidence coverage
 ```
 
-This section should explicitly connect to the modeling result: the workflow keeps state because the data show that collapsing realizations into composition alone destroys predictive information.
+This is the key bridge to the Agent: state is retained because the experimental/model results show that composition-only representation discards predictive information.
 
 ### 6. Evidence-derived candidate-space hypothesis
 
-This section answers:
+The candidate space answers:
 
-> Why were these formulation candidates considered?
+> Why should these formulation families be considered at all?
 
 Use `docs/CANDIDATE_SPACE_HYPOTHESIS.md` as the source of truth.
 
-#### 6.1 Local reactive-core anchor
-
-E2 is the central local design point:
-
-```text
-PPG2000:PDP-70 = 50:50
-NCO:OH = 1.80
-```
-
-Its normalized reactive core is approximately:
+The E2 reactive core is the local anchor:
 
 ```text
 PPG2000 39.9047%
@@ -251,35 +228,40 @@ PDP-70  39.9047%
 MDI     20.1907%
 ```
 
-#### 6.2 Acrylic-like modifier axis
-
 Independent evidence defines:
 
 ```text
-acrylic-like axis = {0, 15, 20, 25}%
-```
-
-using the peer-reviewed 15% example, repeated ~19-20% patent examples and the 25% hot-hold-stability example already documented in the repository.
-
-#### 6.3 Minor tackifier-like axis
-
-Independent PUR formulation evidence supports:
-
-```text
+acrylic-like axis         = {0, 15, 20, 25}%
 minor tackifier-like axis = {0, 5, 10}%
 ```
 
-The resulting V2 candidate set is the 12-point Cartesian product.
+The resulting V2 candidate set is the 12-point Cartesian product, with the E2 reactive core scaled into the remaining formulation fraction.
 
-The exact current follow-up recipe is not encoded as a discrete candidate.
+This section explains the **admissible chemistry search space**. It does not determine which candidate the Agent must choose.
 
-#### 6.4 Chronology caveat
+### 7. Blinded Agent recommendation and freeze
 
-The formal V2 hypothesis was written after the current follow-up experiment was known. Therefore the current benchmark is a **held-out-result blind replay**, not prospective validation of V2 itself. Future rounds can be prospective once V2 is frozen.
+This is the decisive chronology for the Agent claim.
 
-### 7. Agent-guided recommendation under uncertainty
+The Agent is a decision layer above the already established state-aware theory. It may use:
 
-Describe the Agent as a decision layer above deterministic descriptors and evidence retrieval.
+```text
+original local evidence
++ state-aware rheology descriptors
++ structured uncertainty
++ candidate-space hypothesis
++ deterministic Actions
++ external database/literature evidence
++ finite candidate set
+```
+
+For the prospective validation round, it must **not** see:
+
+```text
+the corresponding future wet-lab result
+post-result interpretation
+outcome-derived adjudication labels
+```
 
 The Agent may choose:
 
@@ -290,52 +272,59 @@ uncertainty probe
 abstain
 ```
 
-The primary Agent condition should include:
+Before wet-lab adjudication, freeze an immutable recommendation record containing:
+
+- selected formulation-process state;
+- alternatives considered;
+- evidence and Action trace;
+- uncertainty and missing variables;
+- rationale;
+- process variables to control / perturb;
+- falsifiable acceptance or rejection criterion;
+- timestamp and provenance.
+
+The candidate must not be changed after the outcome becomes known.
+
+### 8. Human-executed prospective wet-lab adjudication
+
+After freeze, the human experimental team prepares and measures the candidate.
+
+The experiment is not an additional pre-selection input to the Agent. It is an **external physical adjudicator** of the frozen decision.
+
+The result should be classified against the pre-frozen criterion as:
 
 ```text
-original local evidence
-+ state-aware rheology descriptors
-+ structured uncertainty
-+ candidate-space hypothesis
-+ uncertainty-aware actions
-+ external database/literature retrieval
-+ finite candidate set
+supported
+partially supported
+not supported
+or inconclusive because of execution / measurement uncertainty
 ```
 
-The paper should show an immutable recommendation record containing selected state, alternatives, uncertainty, evidence/action trace, rationale, controlled/perturbed process variables, acceptance criterion, timestamp and provenance.
+A negative experiment remains informative because it falsifies or weakens the recommendation and updates the next design state.
 
-### 8. Human-executed wet-lab adjudication
+### 9. Historical F1 result and retrospective V2 replay
 
-Present the follow-up formulation and the two repeated 120 C hold measurements.
-
-Use the common 15-60 min window only:
-
-- repeat 1: -0.16%;
-- repeat 2: +3.04%;
-- mean profile: +1.47%.
-
-The physical result is stored separately from the recommendation and linked by `recommendation_id`.
-
-### 9. Held-out-result Agent benchmark
-
-Use V2 rather than the older answer-shaped scalar modifier grid.
-
-Primary question:
-
-> Does the full Agent, while blinded to the current follow-up formulation/outcome, rank candidates close to the later experimental composition in the two-dimensional modifier plane?
-
-Primary metrics:
+Keep the historical F1 result as useful physical evidence:
 
 ```text
-nearest-candidate rank
-Top-1 / Top-3 regional recovery
-modifier-plane distance
-selection distribution
-abstention rate
-scientific-boundary violation rate
+15-60 min repeat 1: -0.16%
+15-60 min repeat 2: +3.04%
+mean profile:        +1.47%
 ```
 
-Report deterministic/literature baselines so the Agent is not credited merely for following an obvious ~20% literature prior.
+However, distinguish it from the prospective new-candidate validation.
+
+The formal V2 candidate-space documentation was written after the historical F1 result was already known. Therefore an F1 benchmark that hides its result from the evaluated model is a **retrospective held-out-result blind replay**, not the prospective validation claim.
+
+Use the replay for robustness / benchmarking, while the main Agent-validation chronology is:
+
+```text
+state-aware theory
+-> blinded recommendation
+-> freeze
+-> human experiment
+-> independent adjudication
+```
 
 ### 10. Stability-aware design update
 
@@ -355,33 +344,32 @@ and the uncertainty/information layer:
 A(candidate) = -J_perf - lambda_U U_penalty + beta_IG information_value
 ```
 
-Do not present numerical weights as calibrated until they are frozen and used prospectively.
+Numerical weights should not be presented as calibrated until frozen and used prospectively.
 
 ---
 
 ## Figure plan
 
-### Figure 1 — Scientific and runtime architecture
+### Figure 1 — Scientific chronology and runtime architecture
 
 ```text
-raw evidence
--> rheological state structure
--> deterministic descriptors + uncertainty
--> external evidence / candidate hypothesis
--> Agent recommendation
--> immutable freeze
--> human wet-lab execution
--> physical adjudication
--> state update
+Physical + model findings
+-> State-aware design theory
+-> Evidence-constrained candidate space
+-> Blinded Agent recommendation
+-> FROZEN candidate + criterion
+-> Human wet-lab execution
+-> Independent physical adjudication
+-> State / model update
 ```
+
+The figure must visually prevent an arrow from the target experimental result back into the pre-freeze recommendation stage.
 
 ### Figure 2 — State-shift master curve and one-point calibration
 
-Recommended four panels:
-
 ```text
-A raw 80-130 C curves, showing absolute realization spread
-B curves normalized by eta(120 C), showing master-curve collapse
+A raw 80-130 C curves
+B curves normalized by eta(120 C)
 C shared-shape bootstrap band and/or apparent E_eta by realization
 D strict unseen-realization error: formulation-only vs one-point calibrated
 ```
@@ -390,11 +378,9 @@ This should be the strongest quantitative figure in the paper.
 
 ### Figure 3 — Thermal-hold stability as a second rheological coordinate
 
-Plot E1, E5 and both F1 repeats at 120 C. Show matched-window SI and, where appropriate, fitted log-drift rates. A small inset may contrast the narrow local E_eta distribution with the much larger hold-rate effect size, while avoiding an orthogonality claim.
+Plot E1, E5 and historical F1 repeats at 120 C. Show matched-window SI and fitted log-drift rates where appropriate.
 
 ### Figure 4 — Evidence-to-candidate-space map
-
-Show:
 
 ```text
 local E2 core
@@ -405,60 +391,67 @@ local E2 core
 -> 4 x 3 finite hypothesis grid
 ```
 
-Include evidence limitations.
+### Figure 5 — Frozen Agent recommendation and prospective physical adjudication
 
-### Figure 5 — Agent recommendation and held-out physical comparison
+Show:
 
-Show candidate ranking/action trace and the held-out follow-up composition only on the controller/evaluation side.
+```text
+pre-result Agent inputs
+-> selected candidate + alternatives
+-> frozen rationale / uncertainty / criterion
+|| temporal boundary ||
+human experiment
+-> observed result
+-> support / reject / qualify
+```
+
+Historical F1/V2 replay can be placed in a supplementary benchmark figure if needed.
 
 ---
 
 ## Claim hierarchy
 
-### Strong claims supported by current local data
+### Strong physical/model claims
 
 - nominal formulation alone does not determine observed viscosity level across repeated realizations;
 - within the measured local chemistry family, much of the realization effect behaves approximately as a viscosity-scale shift;
 - a shared local temperature-response shape plus one realization anchor predicts held-out realization curves much more accurately than formulation identity alone;
 - thermal-hold stability differs strongly across tested formulations;
-- the F1 follow-up enters a substantially lower-drift regime over the matched 15-60 min interval.
+- the historical F1 follow-up enters a substantially lower-drift regime over the matched 15-60 min interval.
 
-### Strong claims supported by external database context
+### Strong methodological claim for the prospective round
+
+- the physical/model findings establish the state-aware design theory first;
+- the Agent makes a recommendation without access to the corresponding wet-lab outcome;
+- the recommendation and criterion are frozen before adjudication;
+- humans execute the experiment;
+- the later physical result independently supports, rejects, or qualifies the frozen recommendation.
+
+### Strong external-database context
 
 - dense external PUR/prepolymer temperature curves are individually regular in `ln(eta)` versus `1/T`;
-- the thermal-sensitivity scale varies substantially across chemistry families;
-- composition explains a meaningful but incomplete fraction of between-curve thermal and viscosity variation.
-
-### Evidence-supported hypotheses
-
-- resin-modified PUR is a justified candidate family when reactive-only formulations show robustness problems;
-- acrylic-like and minor-tackifier-like axes used in V2 are independently grounded in external evidence;
-- modifier functionality/reactive-group density may influence hot-hold stability.
-
-### Claims that require prospective provenance
-
-- a future experimental point was selected before its result was known;
-- a future wet-lab result prospectively validates a frozen Agent recommendation.
+- thermal-sensitivity scale varies substantially across chemistry families;
+- composition explains a meaningful but incomplete fraction of between-curve rheological variation.
 
 ### Claims that remain too strong
 
 - the local master curve is universal across reactive PUR chemistry;
 - temperature sensitivity and stability are universally statistically independent;
-- one molecular pathway alone explains the observed viscosity build-up;
-- any literature modifier percentage is a universal optimum.
+- one molecular pathway alone explains viscosity build-up;
+- any literature modifier percentage is a universal optimum;
+- the historical F1/V2 replay was itself prospectively preregistered.
 
 ## Writing rule
 
-Every main-text section should strengthen one of seven functions:
+The manuscript should always preserve this direction of causality:
 
 ```text
-physical variability problem
-low-dimensional rheological state structure
-distinct stability response
-state + uncertainty representation
-evidence-derived candidate hypothesis
-Agent recommendation logic
-wet-lab adjudication / closed-loop update
+physical/model finding
+-> design theory
+-> blinded recommendation
+-> freeze
+-> experiment
+-> adjudication
 ```
 
-Material that does not strengthen one of these functions should remain in Supplementary Information.
+Never write the story as if the experimental outcome was used to choose the candidate that it later appears to validate.
