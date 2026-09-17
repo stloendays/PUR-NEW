@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "scope": "Directional priors for candidate generation and ranking; not trained predictions and not mechanistic laws.",
+  "priors": {
+    "resin_modified_family": {
+      "support": [
+        "PAT_US5932680A: tackifying/hydrocarbon-resin-containing PUR examples",
+        "PAT_US20160215185A1: acrylic-tackifying-resin-containing PUR examples"
+      ],
+      "interpretation": "When an unmodified reactive PUR shows strong thermal-hold drift or run spread, a resin-modified formulation family is a justified design branch rather than only micro-tuning NCO/OH."
+    },
+    "single_modifier_regions": {
+      "minor_tackifier_or_hydrocarbon_fraction_total": [0.04, 0.06],
+      "acrylic_tackifying_resin_fraction_total": [0.18, 0.21],
+      "interpretation": "These ranges summarize analogue examples in the curated database; they are not current-system optima."
+    },
+    "dual_modifier_heuristic": {
+      "major_acrylic_like_fraction_total": [0.12, 0.16],
+      "minor_tackifier_like_fraction_total": [0.03, 0.05],
+      "combined_modifier_fraction_total": [0.15, 0.21],
+      "preferred_structure": "major acrylic-like modifier + minor tackifier-like modifier",
+      "interpretation": "A transparent synthesis of two external analogue motifs. It is a candidate-generation heuristic, not directly reported by one source and not fit to the follow-up wet-lab outcome."
+    }
+  },
+  "anti_leakage_rule": "These priors must be constructed from external evidence and pre-result design knowledge only. Follow-up hold outcomes must not alter the ranges in a run presented as blind/prospective."
+}
