@@ -25,8 +25,17 @@ def discover_recommendations(path: Path) -> list[Path]:
     if path.is_file():
         return [path]
     files.extend(path.rglob("recommendation.json"))
-    files.extend(p for p in path.rglob("REC_*.json") if p.name != "recommendation.json")
+    files.extend(
+        p for p in path.rglob("REC_*.json")
+        if p.name != "recommendation.json" and not p.name.endswith(".meta.json")
+    )
     return sorted(set(files))
+
+
+def discover_failures(path: Path) -> list[Path]:
+    if path.is_file():
+        return []
+    return sorted(path.rglob("failure_*.json"))
 
 
 def parse_condition(text: str) -> tuple[str, Path]:
@@ -86,13 +95,15 @@ def controller_target(target_cfg: dict[str, Any]) -> dict[str, float]:
 def summarize_condition(
     name: str,
     files: list[Path],
+    failure_files: list[Path],
     *,
     axes: dict[str, tuple[float, float]],
     nearest_candidate_id: str,
     target: tuple[float, float],
     blinded_ids: set[str],
-) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]]]:
     rows: list[dict[str, Any]] = []
+    failures = [read_json(path) for path in failure_files]
     selections: list[str | None] = []
 
     for path in files:
@@ -155,7 +166,9 @@ def summarize_condition(
         )
 
     valid = [r for r in rows if r["selected_candidate_id"] is not None]
-    n = len(rows)
+    n_completed = len(rows)
+    n_failed = len(failures)
+    n_attempted = n_completed + n_failed
     selected_counts = Counter(r["selected_candidate_id"] or "__ABSTAIN__" for r in rows)
 
     def mean_numeric(key: str, subset: list[dict[str, Any]] = rows) -> float | None:
@@ -164,9 +177,12 @@ def summarize_condition(
 
     summary = {
         "condition": name,
-        "n_runs": n,
+        "n_attempted": n_attempted,
+        "n_completed": n_completed,
+        "n_failed": n_failed,
+        "failure_rate": n_failed / n_attempted if n_attempted else None,
         "n_nonabstaining": len(valid),
-        "abstention_rate": (n - len(valid)) / n if n else None,
+        "abstention_rate_among_completed": (n_completed - len(valid)) / n_completed if n_completed else None,
         "selection_entropy_bits": selection_entropy(selections),
         "selection_distribution": dict(sorted(selected_counts.items())),
         "nearest_candidate_top1_rate": (
@@ -182,8 +198,9 @@ def summarize_condition(
         "runs_with_structural_leakage": sum(r["structural_leakage_findings"] > 0 for r in rows),
         "skeptic_boundary_failures": sum(r["skeptic_boundary_check"] == "fail" for r in rows),
         "skeptic_leakage_failures": sum(r["skeptic_leakage_check"] == "fail" for r in rows),
+        "failure_types": dict(sorted(Counter(str(f.get("failure_type", "unknown")) for f in failures).items())),
     }
-    return summary, rows
+    return summary, rows, failures
 
 
 def main() -> None:
@@ -206,11 +223,14 @@ def main() -> None:
 
     summaries = []
     all_rows: list[dict[str, Any]] = []
+    all_failures: list[dict[str, Any]] = []
     for name, path in args.condition:
         files = discover_recommendations(path)
-        summary, rows = summarize_condition(
+        failure_files = discover_failures(path)
+        summary, rows, failures = summarize_condition(
             name,
             files,
+            failure_files,
             axes=axes,
             nearest_candidate_id=nearest_candidate_id,
             target=target,
@@ -218,6 +238,10 @@ def main() -> None:
         )
         summaries.append(summary)
         all_rows.extend(rows)
+        for failure in failures:
+            item = dict(failure)
+            item.setdefault("condition", name)
+            all_failures.append(item)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     result = {
@@ -229,7 +253,8 @@ def main() -> None:
         "conditions": summaries,
         "interpretation": (
             "This scorer is controller-side only. Held-out target coordinates must never be included in Agent payloads. "
-            "Architecture advantage should be claimed only if the full Agent improves recovery/robustness without increasing leakage or scientific-boundary violations."
+            "Failed attempts are retained and counted. Architecture advantage should be claimed only if the full Agent improves "
+            "recovery/robustness without increasing failure, leakage, or scientific-boundary violations."
         ),
     }
     (args.output_dir / "benchmark_summary.json").write_text(
@@ -258,6 +283,9 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(all_rows)
 
+    (args.output_dir / "benchmark_failures.json").write_text(
+        json.dumps(all_failures, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     print(args.output_dir)
 
 
