@@ -13,14 +13,16 @@ The manuscript should follow one continuous argument:
 ```text
 1. Reactive PUR rheology depends on both formulation and process state.
 2. Reaction history, thermal hold time and preparation perturbation are known variables and should enter the design loop.
-3. A static viscosity target alone is therefore insufficient.
-4. The Agent's role is to quantify uncertainty / robustness and recommend what should be tested.
-5. A human executes the recommended formulation and measurement.
-6. The wet-lab result adjudicates the recommendation.
-7. The measured stability information is fed back into the next design objective.
+3. Static viscosity targeting alone is therefore incomplete.
+4. Deterministic descriptors quantify temperature response, hold drift and repeatability.
+5. The Agent reasons over those descriptors plus structured uncertainty.
+6. The Agent recommends a formulation-process state and freezes a falsifiable criterion.
+7. A human executes the recommended experiment.
+8. A separate wet-lab record adjudicates the frozen recommendation.
+9. The measured stability information updates the next design state.
 ```
 
-The Agent is not presented as a robotic chemist. The scientific claim is about **decision quality under uncertainty** and **physical validation of the recommendation**.
+The Agent is not presented as a robotic chemist. The scientific claim is about **decision quality under uncertainty** and **physical validation of a recommendation**.
 
 ## Suggested Results and Discussion order
 
@@ -46,23 +48,56 @@ Key numbers:
 
 The conclusion is not that hold time was previously unknown. The conclusion is that its **effect size is formulation dependent and large enough to become a design objective**.
 
-### 3. Agent-guided recommendation under uncertainty
+### 3. Deterministic state construction and uncertainty decomposition
 
-Describe the information available to the Agent:
+Before introducing the Agent, show what information is made explicit:
 
 ```text
 formulation state
-+ reaction / preparation history
-+ thermal hold conditions
-+ observed variability
--> uncertainty-aware recommendation
++ process state
++ measured support
++ hold / temperature / repeatability descriptors
++ missingness
 ```
 
-State explicitly that the Agent recommends; the operator executes.
+Then separate uncertainty into:
 
-The paper should show a recommendation record containing the formulation point, rationale, uncertainty summary, process conditions and timestamp/provenance.
+```text
+measurement
+repeatability
+process history
+extrapolation
+evidence coverage
+```
 
-### 4. Human-executed wet-lab adjudication
+This section is important because it prevents the Agent contribution from becoming an opaque language-model decision.
+
+### 4. Agent-guided recommendation under uncertainty
+
+Describe the Agent as a decision layer above deterministic descriptors.
+
+The Agent may choose among:
+
+```text
+performance candidate
+robustness probe
+uncertainty probe
+abstain
+```
+
+The paper should show an immutable pre-result recommendation record containing:
+
+- selected formulation-process state;
+- alternatives considered;
+- structured uncertainty;
+- recommendation rationale;
+- process variables to control / perturb;
+- falsifiable acceptance criterion;
+- timestamp and provenance.
+
+If the historical pre-result record for the current follow-up point is recovered, show it directly. If it is not recovered, retain the workflow as the forward design contract and describe the existing follow-up result as Agent-guided closed-loop validation rather than retroactive preregistration.
+
+### 5. Human-executed wet-lab adjudication
 
 Present the follow-up formulation and the two repeated 120 °C hold measurements.
 
@@ -72,59 +107,90 @@ Use the common 15-60 min window only:
 - repeat 2: +3.04%;
 - mean profile: +1.47%.
 
-This is the physical evidence used to judge the quality of the recommendation.
+Relative to the mean-profile absolute drift, the observed flattening is approximately:
 
-### 5. Stability-aware design update
+- 6.45x versus E1;
+- 34.98x versus E5.
+
+These are descriptive stability-gain ratios on a matched window, not significance tests.
+
+The physical result must be stored separately from the recommendation and linked by `recommendation_id`. This makes the experimental adjudication independent of the original Agent wording.
+
+### 6. Stability-aware design update
 
 Introduce the next-generation objective conceptually:
 
 ```text
-J = w_eta L_viscosity
-  + w_T L_temperature_response
-  + w_S L_hold_stability
-  + feasibility penalties
+J_perf = w_eta L_viscosity
+       + w_T L_temperature_response
+       + w_S L_hold_stability
+       + w_R L_repeatability
+       + feasibility penalties
 ```
 
-The central methodological advance is the transition from one-shot target matching to an iterative formulation-process design loop.
+Then introduce the uncertainty/information layer conceptually:
+
+```text
+A(candidate) = -J_perf - lambda_U U_penalty + beta_IG information_value
+```
+
+The paper should state explicitly that this is the architecture of the next design round. Numerical weights should not be presented as calibrated unless they are actually frozen and used prospectively.
 
 ## Figure plan
 
-### Figure 1 — Scientific architecture
+### Figure 1 — Scientific and runtime architecture
 
-A compact workflow figure:
+Use a two-level diagram:
 
 ```text
-Evidence
-  -> formulation + process state
-  -> uncertainty-aware Agent
-  -> recommended test point
-  -> human wet-lab execution
-  -> rheology / stability result
-  -> adjudication
-  -> next design round
+Raw evidence
+-> deterministic descriptors
+-> formulation-process state + uncertainty
+-> Agent recommendation
+-> immutable freeze
+-> human wet-lab execution
+-> separate physical adjudication
+-> state update
 ```
+
+This should make the boundary between deterministic computation, Agent reasoning and human actuation visually explicit.
 
 ### Figure 2 — Temperature-dependent viscosity and preparation sensitivity
 
-Show the recorded 80-130 °C curves. Highlight the spread among E2-labelled runs without over-interpreting the GJJ/ZYX/CHH labels.
+Show the recorded 80-130 °C curves. Highlight the spread among E2-labelled runs without assigning unverified meanings to GJJ/ZYX/CHH.
 
 ### Figure 3 — 120 °C hold stability
 
-Plot E1, E5 and both follow-up repeats together. The visual comparison should emphasize the matched 15-60 min interval. E1/E5 may retain their 90 min points, but the figure caption must state that follow-up measurements stop at 60 min.
+Plot E1, E5 and both follow-up repeats together. Emphasize the matched 15-60 min interval. E1/E5 may retain their 90 min points, but the caption must state that follow-up measurements stop at 60 min.
 
 ### Figure 4 — Recommendation-to-experiment adjudication
 
-Summarize:
+Show the evidence contract rather than a generic Agent cartoon:
 
 ```text
-Agent recommendation
--> uncertainty rationale
+uncertainty vector
+-> selected candidate + alternatives
+-> frozen criterion
 -> human execution
--> observed stability drift
--> supported / partially supported / falsified
+-> measured SI / repeat consistency
+-> supported / partially supported / falsified / out-of-domain
 ```
 
-This should be the figure that makes the Agent contribution concrete.
+If the historical recommendation record is recoverable, Figure 4 should include its actual timestamp/provenance. Otherwise use this as the forward workflow and keep the current experiment labelled closed-loop.
+
+## Agent evaluation
+
+Avoid a single vague "Agent accuracy" number. Report a compact scorecard built from:
+
+```text
+physical criterion success
+matched-window stability gain
+replicate consistency
+uncertainty calibration, when a prior uncertainty statement exists
+decision margin / robustness
+```
+
+The detailed contract is in `AGENT_EVALUATION.md`.
 
 ## Claim hierarchy
 
@@ -151,13 +217,14 @@ Current rheology supports stabilization, not direct molecular-kinetic proof.
 
 ## Writing rule
 
-Every manuscript section should strengthen one of four functions:
+Every manuscript section should strengthen one of five functions:
 
 ```text
 physical problem
+state + uncertainty representation
 Agent recommendation logic
 wet-lab adjudication
-closed-loop design update
+closed-loop update
 ```
 
-Material that does not strengthen one of these four functions should remain outside the main manuscript.
+Material that does not strengthen one of these five functions should remain outside the main manuscript.
