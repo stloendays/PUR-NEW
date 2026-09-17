@@ -5,7 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
-from build_candidate_set import load_anchor_core, make_candidate
+from build_candidate_set import make_candidate
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -23,6 +23,20 @@ def inclusive_grid(start: float, stop: float, step: float) -> list[float]:
         values.append(round(x, 8))
         x += step
     return values
+
+
+def anchor_from_priors(priors: dict, expected_id: str = "E2") -> dict[str, float | str]:
+    cfg = priors["local_reactive_core_anchor"]
+    if str(cfg["formulation_id"]) != expected_id:
+        raise ValueError(f"configured anchor is {cfg['formulation_id']!r}, expected {expected_id!r}")
+    fractions = cfg["normalized_core_fractions"]
+    return {
+        "formulation_id": expected_id,
+        "nco_oh": "1.80",
+        "PPG2000_fraction": float(fractions["PPG2000"]),
+        "PDP70_fraction": float(fractions["PDP70"]),
+        "MDI_fraction": float(fractions["MDI"]),
+    }
 
 
 def main() -> None:
@@ -45,10 +59,6 @@ def main() -> None:
     acrylic_anchors = [float(x) for x in acrylic_cfg["direct_evidence_anchors_pct"]]
     tack_grid = [float(x) for x in tack_cfg["grid"]]
 
-    # The refinement domain is derived only from pre-result evidence definitions:
-    # lower acrylic bound = lowest independent evidence anchor minus the already-declared
-    # strong-support distance; upper acrylic bound = highest independent evidence anchor.
-    # The tackifier domain retains the independently documented control-to-upper range.
     acrylic_min = max(0.0, min(acrylic_anchors) - strong_support)
     acrylic_max = max(acrylic_anchors)
     tackifier_min = min(tack_grid)
@@ -56,7 +66,10 @@ def main() -> None:
 
     acrylic_grid = inclusive_grid(acrylic_min, acrylic_max, args.step)
     tackifier_grid = inclusive_grid(tackifier_min, tackifier_max, args.step)
-    anchor = load_anchor_core(args.anchor_formulation)
+
+    # Important anti-leakage property: this generator never reads data/formulations.csv.
+    # The E2 anchor comes only from the audited pre-result prior configuration.
+    anchor = anchor_from_priors(priors, expected_id=args.anchor_formulation)
 
     candidates = []
     for acrylic in acrylic_grid:
@@ -80,13 +93,15 @@ def main() -> None:
             "coordinate_basis": "normalized_total_wt_percent",
             "design_layer": "fine_refinement",
             "anchor_formulation": args.anchor_formulation,
+            "anchor_source": "configs/formulation_priors.json::local_reactive_core_anchor",
+            "reads_formulations_csv": False,
             "grid_step_pct_points": args.step,
             "acrylic_domain_pct": [acrylic_min, acrylic_max],
             "tackifier_domain_pct": [tackifier_min, tackifier_max],
             "domain_derivation": {
-                "acrylic_lower": "minimum independent acrylic evidence anchor minus predeclared strong-support distance",
-                "acrylic_upper": "maximum independent acrylic evidence anchor",
-                "tackifier": "independently documented coarse control-to-upper range",
+                "acrylic_lower": "minimum directly commensurate acrylic evidence anchor minus predeclared strong-support distance",
+                "acrylic_upper": "maximum directly commensurate acrylic evidence anchor",
+                "tackifier": "independently documented coarse control-to-upper range"
             },
             "reads_follow_up_measurements": False,
             "uses_validation_recipe_numeric_values_to_generate_domain": False,
@@ -97,8 +112,8 @@ def main() -> None:
             "basis_warning": (
                 "Historical source-reported formulation parts and normalized-total wt% are different coordinate systems. "
                 "Normalize lab recipes before any distance or region comparison."
-            ),
-        },
+            )
+        }
     }
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
