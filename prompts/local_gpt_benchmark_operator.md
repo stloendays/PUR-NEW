@@ -40,6 +40,8 @@ Read:
 - `scripts/run_agent_recommendation.py`
 - `src/pur_new/actions.py`
 
+`configs/blind_benchmark.json` is deprecated V1 history only. Do not use it for new benchmark runs or scoring.
+
 ## V2 candidate construction
 
 Do not use the old scalar modifier grid.
@@ -133,6 +135,31 @@ rank_candidate_support
 
 Record the evidence/action trace for every run.
 
+## API output ranking contract
+
+The model output is structured JSON. Preserve the raw response before normalization.
+
+For every valid non-abstaining response:
+
+```text
+Rank 1 = selected_candidate_id
+Rank 2 = alternatives_considered[0]
+Rank 3 = alternatives_considered[1]
+```
+
+The alternatives list must be treated as a strict preference ranking, not an unordered explanation list.
+
+Validation rules:
+
+- all ranked IDs must exist in the supplied candidate set;
+- alternatives must be unique;
+- selected candidate must not repeat in alternatives;
+- provide at least two alternatives when at least three candidates exist;
+- abstain requires `selected_candidate_id = null`;
+- alternatives on an abstention are stored as an uncertainty shortlist only and do not count toward primary Top-1/Top-3 recovery.
+
+The repository runner now enforces candidate validity, uniqueness, non-repetition and the minimum-two-alternatives rule. Semantic preference ordering is enforced by the system prompt and audited in saved output.
+
 ## Implement/run the multi-model benchmark
 
 Add or update `scripts/run_blind_benchmark.py`.
@@ -148,6 +175,41 @@ Requirements:
 - save valid recommendations, abstentions, invalid outputs and API failures;
 - save raw response, normalized recommendation, action/evidence trace, timestamps, hashes, model, run index and git commit;
 - never overwrite an existing benchmark directory.
+
+## Run-level statistics table
+
+Create a controller-side flat table with one row per API call. At minimum include:
+
+```text
+model
+run_index
+run_status
+decision_mode
+rank1_candidate_id
+rank2_candidate_id
+rank3_candidate_id
+rank1_acrylic_pct
+rank1_tackifier_pct
+rank1_total_modifier_pct
+nearest_candidate_rank
+modifier_plane_l1_distance_top1
+modifier_plane_l1_distance_best_top3
+abstain
+invalid_output
+api_failure
+scientific_boundary_violation
+```
+
+Use `run_status` values:
+
+```text
+valid_recommendation
+abstain
+invalid_output
+api_failure
+```
+
+Do not coerce abstention into API failure, and do not silently drop invalid/API-failure rows.
 
 ## Scoring
 
@@ -172,6 +234,8 @@ abstention rate
 invalid/API-failure rate
 scientific-boundary violation rate
 ```
+
+Primary Top-3 recovery is defined only for valid non-abstaining recommendations. If an abstaining run lists plausible alternatives, score those only in a separate abstention-shortlist diagnostic.
 
 ## Baselines
 
@@ -208,9 +272,11 @@ Add tests for:
 - no F1/follow-up numbers used in candidate generation;
 - class-specific prior comparison;
 - anti-leakage;
-- Top-3 extraction;
+- strict Top-3 extraction from selected + ordered alternatives;
+- rejection of duplicate/repeated alternatives;
 - two-dimensional distance scoring;
 - abstention/invalid output handling;
+- abstention shortlist separated from primary Top-3;
 - reproducible manifests/hashes.
 
 Run `pytest` before any API calls.
@@ -223,6 +289,7 @@ Use:
 records/benchmarks/PUR_NEW_BLIND_AGENT_V2/<run_id>/
   manifest.json
   runs.jsonl
+  run_table.csv
   summary.json
   model_<name>/
     recommendations/
