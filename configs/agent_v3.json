@@ -1,75 +1,96 @@
 {
-  "version": "3.1.0",
-  "name": "PUR_NEW_SCIENTIFIC_DECISION_AGENT_V3",
-  "purpose": "Multi-stage, evidence-firewalled, falsification-aware scientific decision Agent for PUR formulation selection.",
+  "version": "3.2.0",
+  "name": "PUR_NEW_DISCOVERY_TO_EXPERIMENT_AGENT_V3",
+  "purpose": "Scientific decision Agent that first extracts material-response regularities from measured PUR rheology, translates those regularities into design rules, then selects an informative formulation-process experiment using local evidence, external priors and uncertainty-aware tools.",
   "default_evidence_profile": "blind_pre_result",
   "blinded_target_formulation_ids": ["F1"],
   "stages": [
     {
       "id": "planner",
       "prompt": "prompts/agent_v3_planner.txt",
-      "role": "define failure mode, evidence plan, abstention triggers and counterfactual checks"
+      "role": "identify the physical failure mode and the relevant rheological regularities before any candidate ranking"
     },
     {
       "id": "tool_execution",
-      "role": "execute only planner-requested read-only scientific actions behind the evidence firewall"
+      "role": "execute planner-requested read-only scientific actions; the state-aware rheology tool exposes the paper's upstream physical/model findings without validation outcomes"
+    },
+    {
+      "id": "scientific_translation",
+      "role": "translate discovered state-shift, thermal-response and temporal-stability patterns into experiment-selection rules"
     },
     {
       "id": "deterministic_candidate_analysis",
-      "role": "build candidate scorecards, Pareto front and transparent robustness scenarios without held-out outcomes"
+      "role": "profile chemically admissible candidates and provide transparent support/risk diagnostics without pretending to predict unmeasured viscosity"
     },
     {
       "id": "proposer",
       "prompt": "prompts/agent_v3_proposer.txt",
-      "role": "rank a shortlist from the allowed evidence"
+      "role": "select the experiment point that best tests the discovered physical problem and evidence-supported formulation hypothesis"
     },
     {
       "id": "skeptic",
       "prompt": "prompts/agent_v3_skeptic.txt",
-      "role": "attempt to falsify the provisional top candidate and audit leakage/scientific boundaries"
+      "role": "check whether the proposed point really follows from the scientific findings, remains interpretable, and avoids leakage or unsupported mechanism claims"
     },
     {
       "id": "judge",
       "prompt": "prompts/agent_v3_judge.txt",
-      "role": "resolve proposer-versus-skeptic evidence and freeze a recommendation or abstain"
+      "role": "freeze one useful experiment point, an uncertainty probe, or abstain when no scientifically interpretable test is available"
     }
   ],
+  "required_scientific_sequence": [
+    "understand the measured rheological structure",
+    "state the positive material regularities and their boundaries",
+    "translate those regularities into a design objective",
+    "use external evidence to identify chemically plausible intervention directions",
+    "compare admissible experiment points",
+    "stress-test interpretability and uncertainty",
+    "freeze the selected formulation-process point and falsifiable measurement criterion"
+  ],
+  "core_scientific_tool": {
+    "name": "get_state_aware_rheology_summary",
+    "required_before_candidate_ranking": true,
+    "returns": [
+      "formulation-only versus state-aware model comparison",
+      "state-shift master-curve structure",
+      "one-point state calibration evidence",
+      "local apparent temperature-sensitivity coordinate",
+      "E1/E5 thermal-hold drift contrast",
+      "experiment-design implications and claim boundaries"
+    ]
+  },
   "architecture_principles": [
-    "result data are structurally removed before any blind LLM payload is assembled",
-    "planning and evidence acquisition occur before candidate selection",
-    "deterministic scientific calculations are separated from language-model judgment",
-    "candidate choice is stress-tested across transparent ordinal priorities rather than one hidden scalar score",
-    "a dedicated skeptic must try to falsify the provisional recommendation",
-    "the final judge may choose a performance candidate, robustness probe, uncertainty probe, or abstain",
+    "physical discovery comes before candidate ranking",
+    "the Agent should use the paper's measured regularities as decision tools rather than rediscovering them from prose each run",
+    "state-aware rheology, external chemistry evidence and process uncertainty serve different scientific roles and must remain separated",
+    "candidate selection should maximize scientific usefulness for the observed failure mode, not benchmark score",
+    "deterministic calculations are separated from language-model judgment",
+    "the skeptic is a quality-control step for scientific usefulness, not a component whose removal must be benchmarked",
+    "result data are structurally removed before blind replay payloads are assembled",
     "only concise auditable rationales and tool outputs are stored; hidden chain-of-thought is not required"
   ],
-  "benchmark_conditions": [
-    "deterministic_evidence_ranker",
-    "direct_llm_blind",
-    "single_pass_tool_context",
-    "agent_v3_no_skeptic",
-    "agent_v3_no_deterministic_robustness",
-    "agent_v3_no_state_aware_action",
-    "agent_v3_full"
+  "primary_agent_outputs": [
+    "identified physical failure mode",
+    "material regularities used in the decision",
+    "design implication derived from each regularity",
+    "selected formulation-process experiment point",
+    "ranked alternatives",
+    "measurement plan tied to the discovered failure mode",
+    "decomposed uncertainty",
+    "falsifiable acceptance criterion"
   ],
-  "implemented_v3_ablations": [
-    "full",
-    "no_skeptic",
-    "no_deterministic_robustness",
-    "no_state_aware_action"
+  "evaluation_priority": [
+    "scientific usefulness of the selected experiment",
+    "traceable use of measured local regularities",
+    "physical wet-lab adjudication",
+    "reproducibility of the recommendation under the same evidence contract",
+    "scientific-boundary and leakage compliance"
   ],
-  "primary_agent_metrics": [
-    "held_out_region_rank",
-    "top1_and_top3_region_recovery",
-    "modifier_plane_distance",
-    "selection_entropy_across_repeated_runs",
-    "abstention_rate",
-    "scientific_boundary_violation_rate",
-    "evidence_leakage_rate",
-    "evidence_trace_completeness",
-    "counterfactual_robustness",
-    "tool_call_count"
+  "non_goals": [
+    "proving that every internal Agent module is individually necessary through ablation",
+    "optimizing benchmark recovery as the main scientific objective",
+    "claiming that literature-prior proximity predicts the wet-lab outcome",
+    "replacing the material-science result with an LLM architecture comparison"
   ],
-  "fair_comparison_rule": "All language-model conditions use the same structurally filtered pre-result evidence and the same candidate set. Tool-context conditions may receive deterministic action outputs; direct-LLM does not. Held-out target coordinates are controller-side only.",
-  "claim_boundary": "V3 is an improved present-day implementation of the scientific decision architecture. It must not be described as the exact historical code that generated the earlier validation formulation unless matching archived runtime provenance is recovered."
+  "claim_boundary": "V3.2 is the current discovery-to-experiment implementation. It operationalizes the physical/model findings and improves scientific decision support, but it must not be described as the exact historical code that generated the earlier validation formulation unless matching archived runtime provenance is recovered."
 }
