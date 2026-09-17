@@ -28,18 +28,18 @@ The recorded full sweeps all decrease monotonically between 80 and 130 °C.
 
 The prime (`'`) denotes the source-sheet retest after one day of storage.
 
-The labels GJJ, ZYX and CHH are retained exactly as run labels. This repository does not infer whether they should be interpreted as operators, batches, instruments or another category unless the laboratory metadata are later confirmed.
+GJJ, ZYX and CHH are retained as source run labels. Project metadata confirms that these records were produced by the **same operator**. They are therefore treated as opaque within-operator experimental realizations. Differences among them are not assigned to operator effects or to any specific preparation mechanism unless the corresponding process metadata are available.
 
 The absolute viscosity unit should be copied from the original instrument/source record in the final manuscript. Until that metadata is explicitly confirmed, the numeric values are treated here as **source-reported viscosity values** rather than assigning an inferred unit.
 
-### Repeat/run sensitivity in E2
+### Within-operator realization sensitivity in E2
 
-Across the three E2-labelled full sweeps, the reported values span:
+Across the three non-day-1 E2-labelled full sweeps, the reported values span:
 
 - 80 °C: 9462 to 27350, a max/min ratio of about 2.89;
 - 120 °C: 1955 to 6977, a max/min ratio of about 3.57.
 
-This spread is why preparation history and experimental perturbation belong in the design state rather than being discarded as nuisance metadata.
+The statistical analysis shows that these differences are dominated by a realization-specific viscosity-scale shift while much of the temperature-response shape remains transferable. See [`STATISTICAL_ANALYSIS.md`](STATISTICAL_ANALYSIS.md).
 
 ## 3. Thermal-hold stability at 120 °C
 
@@ -92,16 +92,23 @@ The matched 15->60 min drifts are:
 
 There is no 90 min measurement for the follow-up formulation in the supplied data, so the comparison with E1/E5 must use the common 15-60 min window.
 
+Relative to the matched absolute drift of the mean profile, the follow-up reduces observed drift by approximately **84.5% versus E1** and **97.1% versus E5**.
+
 ## 5. Directly supported conclusions
 
 The current measurements directly support:
 
 - monotonic viscosity decrease with temperature in the recorded full sweeps;
-- large run-to-run / preparation-state sensitivity in the original system;
+- large within-operator realization/state sensitivity in the original system;
+- a transferable local temperature-response shape once realization-specific viscosity scale is represented;
 - substantial 120 °C viscosity build-up in E1 and especially E5;
 - near-flat 15-60 min response in two repeats of the follow-up formulation;
-- the need to include process-time stability in the design objective.
+- the need to treat thermal response and process-time stability as distinct rheological design coordinates.
+
+The formal model comparison, cross-validation, mixed-effects sensitivity analysis and database context are documented in [`STATISTICAL_ANALYSIS.md`](STATISTICAL_ANALYSIS.md).
 
 ## 6. Interpretation boundary
 
 The data do **not** directly prove a molecular kinetic mechanism. The working explanation that AC1920/TK100 lower the effective reactive fraction is compatible with the formulation change and the observed stabilization, but no direct conversion, NCO-consumption or time-resolved spectroscopic measurement is included here.
+
+The current data also do not justify calling temperature response and temporal stability statistically independent or orthogonal across all PUR chemistry. The supported wording is that they are **distinct, differently tunable rheological coordinates** in the tested system.
