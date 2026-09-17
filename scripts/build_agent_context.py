@@ -16,6 +16,7 @@ from pur_new.actions import (  # noqa: E402
     get_candidate_hypothesis,
     get_hold_stability,
     get_repeatability_risk,
+    get_state_aware_rheology_summary,
     get_temperature_support,
     query_external_priors,
     rank_candidate_support,
@@ -45,6 +46,7 @@ def main() -> None:
         local["original_hold_E1"] = get_hold_stability("E1", include_follow_up=False)
         local["original_hold_E5"] = get_hold_stability("E5", include_follow_up=False)
     if policy["allow_original_temperature_sweeps"]:
+        local["state_aware_rheology_summary"] = get_state_aware_rheology_summary()
         local["repeatability_E2"] = get_repeatability_risk("E2")
         local["temperature_support_E1"] = get_temperature_support("E1")
         local["temperature_support_E2"] = get_temperature_support("E2")
@@ -74,9 +76,10 @@ def main() -> None:
         "candidate_action_outputs": candidate_actions,
         "support_ranking": rank_candidate_support(candidates) if priors else [],
         "interpretation_rules": [
+            "The state-aware rheology summary is recomputed from original pre-validation data and is shared with the single-pass baseline for a fair architecture comparison.",
             "External prior hints are analogies, not current-system outcomes.",
             "The candidate grid is constructed from the original E2 reactive-core proportions plus independent acrylic/tackifier evidence anchors; it does not encode the exact follow-up recipe.",
-            "In blind_pre_result mode, follow-up thermal-hold results and post-hoc scoring labels are intentionally absent.",
+            "In blind_pre_result mode, the target validation formulation identity, follow-up thermal-hold results and post-hoc scoring labels are intentionally absent.",
             "High original-system hold drift is a robustness failure that can justify changing formulation family rather than only micro-tuning NCO/OH.",
             "Acrylic-like and tackifier-like evidence should be evaluated on separate axes rather than collapsed into one modifier number.",
             "Modifier functionality matters: low-OH versus higher-OH acrylic stability evidence is directional support, not proof for AC1920/TK100.",
