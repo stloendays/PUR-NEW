@@ -1,0 +1,175 @@
+{
+  "candidate_set_id": "PUR_NEW_HISTORICAL_REPLAY_SHORTLIST_R1",
+  "decision_context": "Unranked, anonymized reconstruction of the historical pre-result shortlist used only for replay fidelity. Candidate order and IDs do not encode the author-confirmed historical rank. The later validation outcome is not included.",
+  "candidates": [
+    {
+      "candidate_id": "RPL_C01",
+      "formulation_state": {
+        "PPG2000": 39.904663488783,
+        "PDP70": 39.904663488783,
+        "AC1920": 0.0,
+        "TK100": 0.0,
+        "MDI": 20.1906730224341,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "historical_replay_shortlist"
+      },
+      "process_state": {
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "mixing_history": null,
+        "sample_age": null,
+        "hold_temperature_c": 120,
+        "hold_time_min": 60
+      },
+      "evidence_references": ["LOCAL_FORMULATIONS", "LOCAL_HOLD"],
+      "constraint_notes": ["Reactive-core control; does not test the resin-modification hypothesis."]
+    },
+    {
+      "candidate_id": "RPL_C02",
+      "formulation_state": {
+        "PPG2000": 29.92849761658725,
+        "PDP70": 29.92849761658725,
+        "AC1920": 25.0,
+        "TK100": 0.0,
+        "MDI": 15.143004766825575,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "historical_replay_shortlist"
+      },
+      "process_state": {
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "mixing_history": null,
+        "sample_age": null,
+        "hold_temperature_c": 120,
+        "hold_time_min": 60
+      },
+      "evidence_references": ["PAT_US6465104B1"],
+      "constraint_notes": ["High-loading acrylic-only analogue candidate."]
+    },
+    {
+      "candidate_id": "RPL_C03",
+      "formulation_state": {
+        "PPG2000": 33.91896396546555,
+        "PDP70": 33.91896396546555,
+        "AC1920": 15.0,
+        "TK100": 0.0,
+        "MDI": 17.162072069068984,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "historical_replay_shortlist"
+      },
+      "process_state": {
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "mixing_history": null,
+        "sample_age": null,
+        "hold_temperature_c": 120,
+        "hold_time_min": 60
+      },
+      "evidence_references": ["PAPER_CN_ADHESIVES_2025_34_09_54"],
+      "constraint_notes": ["Lower-loading acrylic-only candidate."]
+    },
+    {
+      "candidate_id": "RPL_C04",
+      "formulation_state": {
+        "PPG2000": 32.6221270285856,
+        "PDP70": 32.6221270285856,
+        "AC1920": 14.0044484718675,
+        "TK100": 4.11895543290222,
+        "MDI": 16.6323420380592,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "historical_replay_shortlist"
+      },
+      "process_state": {
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "mixing_history": null,
+        "sample_age": null,
+        "hold_temperature_c": 120,
+        "hold_time_min": 60
+      },
+      "measurement_plan": {
+        "temperature_c": 120,
+        "time_points_min": [15, 30, 45, 60],
+        "independent_repeats": 2
+      },
+      "evidence_references": ["LOCAL_HOLD", "PAPER_CN_ADHESIVES_2025_34_09_54", "PAT_US5932680A"],
+      "constraint_notes": ["Dual-axis lower-intervention candidate; composition is expressed only on the normalized-total basis for replay."]
+    },
+    {
+      "candidate_id": "RPL_C05",
+      "formulation_state": {
+        "PPG2000": 29.92849761658725,
+        "PDP70": 29.92849761658725,
+        "AC1920": 20.0,
+        "TK100": 5.0,
+        "MDI": 15.143004766825575,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "historical_replay_shortlist"
+      },
+      "process_state": {
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "mixing_history": null,
+        "sample_age": null,
+        "hold_temperature_c": 120,
+        "hold_time_min": 60
+      },
+      "evidence_references": ["PAT_US20160215185A1", "PAT_US5932680A"],
+      "constraint_notes": ["Dual-axis higher-loading candidate with strong analogue proximity."]
+    },
+    {
+      "candidate_id": "RPL_C06",
+      "formulation_state": {
+        "PPG2000": 31.9237307910264,
+        "PDP70": 31.9237307910264,
+        "AC1920": 20.0,
+        "TK100": 0.0,
+        "MDI": 16.15253841794728,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "historical_replay_shortlist"
+      },
+      "process_state": {
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "mixing_history": null,
+        "sample_age": null,
+        "hold_temperature_c": 120,
+        "hold_time_min": 60
+      },
+      "evidence_references": ["PAT_US20160215185A1"],
+      "constraint_notes": ["Acrylic-only candidate close to the repeated 19-20% analogue region."]
+    },
+    {
+      "candidate_id": "RPL_C07",
+      "formulation_state": {
+        "PPG2000": 31.9237307910264,
+        "PDP70": 31.9237307910264,
+        "AC1920": 15.0,
+        "TK100": 5.0,
+        "MDI": 16.15253841794728,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "historical_replay_shortlist"
+      },
+      "process_state": {
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "mixing_history": null,
+        "sample_age": null,
+        "hold_temperature_c": 120,
+        "hold_time_min": 60
+      },
+      "evidence_references": ["PAPER_CN_ADHESIVES_2025_34_09_54", "PAT_US5932680A"],
+      "constraint_notes": ["Dual-axis coarse lower-region comparator."]
+    }
+  ],
+  "provenance": {
+    "source": "Retrospective reconstruction of the author-confirmed pre-result shortlist recorded in the PUR-NEW recommendation workbook.",
+    "candidate_order_encodes_rank": false,
+    "candidate_ids_encode_historical_identity": false,
+    "validation_outcome_included": false,
+    "validation_outcome_used_to_rank": false,
+    "historical_status": "reconstructed, not contemporaneous timestamp evidence",
+    "coordinate_basis": "normalized_total_wt_percent",
+    "claim_boundary": "This candidate set supports replay fidelity only. It must not be used as the target-blind candidate space for independent-recovery benchmarking."
+  }
+}
