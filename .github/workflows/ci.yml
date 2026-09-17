@@ -30,6 +30,8 @@ jobs:
           python -m py_compile scripts/run_agent_recommendation.py
           python -m py_compile scripts/run_scientific_agent_v3.py
           python -m py_compile scripts/run_deterministic_baseline.py
+          python -m py_compile scripts/build_naive_baseline_view.py
+          python -m py_compile scripts/run_naive_llm_baseline.py
           python -m py_compile scripts/summarize_agent_benchmark.py
       - name: Build deterministic evidence state
         run: python scripts/build_evidence_state.py --output /tmp/evidence_state.json
@@ -57,7 +59,31 @@ jobs:
         run: python scripts/build_candidate_set.py --output /tmp/candidate_set_hypothesis_v2.json
       - name: Sanity-check candidate-set JSON
         run: python -m json.tool /tmp/candidate_set_hypothesis_v2.json > /dev/null
-      - name: Smoke-test deterministic baseline and controller scorer
+      - name: Build and audit naive headline baseline view
+        run: |
+          python scripts/build_naive_baseline_view.py \
+            --candidate-set /tmp/candidate_set_hypothesis_v2.json \
+            --output /tmp/naive_baseline_view.json
+          python -m json.tool /tmp/naive_baseline_view.json > /dev/null
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          view = json.loads(Path('/tmp/naive_baseline_view.json').read_text())
+          budget = view['information_budget']
+          assert budget['raw_original_local_measurements_only'] is True
+          assert budget['state_aware_theory_summary'] is False
+          assert budget['external_database_or_literature'] is False
+          assert budget['scientific_actions'] is False
+          assert budget['candidate_space_rationale'] is False
+          assert budget['planner_or_skeptic'] is False
+          text = json.dumps(view, sort_keys=True)
+          assert 'F1' not in text
+          assert 'follow_up' not in text
+          assert 'get_state_aware_rheology_summary' not in text
+          assert 'external_evidence_hints' not in text
+          PY
+      - name: Smoke-test deterministic supplementary baseline and controller scorer
         run: |
           python scripts/run_deterministic_baseline.py \
             --candidate-set /tmp/candidate_set_hypothesis_v2.json \
