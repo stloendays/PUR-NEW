@@ -27,3 +27,7 @@ jobs:
         run: python scripts/statistical_analysis.py --output-dir /tmp/statistical-analysis
       - name: Sanity-check statistical summary
         run: python -m json.tool /tmp/statistical-analysis/analysis_summary.json > /dev/null
+      - name: Reproduce statistical robustness checks
+        run: python scripts/statistical_robustness.py --output-dir /tmp/statistical-robustness
+      - name: Sanity-check robustness summary
+        run: python -m json.tool /tmp/statistical-robustness/robustness_summary.json > /dev/null
