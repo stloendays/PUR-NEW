@@ -1,0 +1,25 @@
+name: workflow-ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package and test runner
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e . pytest
+      - name: Run unit tests
+        run: pytest
+      - name: Build deterministic evidence state
+        run: python scripts/build_evidence_state.py --output /tmp/evidence_state.json
+      - name: Sanity-check generated JSON
+        run: python -m json.tool /tmp/evidence_state.json > /dev/null
