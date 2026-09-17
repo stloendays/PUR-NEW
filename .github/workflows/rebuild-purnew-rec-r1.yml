@@ -1,0 +1,39 @@
+name: rebuild-purnew-rec-r1-xlsx
+
+on:
+  push:
+    paths:
+      - '_transfer/PURNEW_REC_R1/**'
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Rebuild workbook from verified chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p records/historical_reconstruction
+          cat _transfer/PURNEW_REC_R1/part_*.txt | base64 -d > records/historical_reconstruction/PURNEW_REC_R1_reconstructed.xlsx
+          echo '80f59c5921c43e0eb70d221979ba2ffefcdb8a38e54fd439b656dfd43edece8e  records/historical_reconstruction/PURNEW_REC_R1_reconstructed.xlsx' | sha256sum -c -
+          test "$(stat -c%s records/historical_reconstruction/PURNEW_REC_R1_reconstructed.xlsx)" = "23302"
+          unzip -t records/historical_reconstruction/PURNEW_REC_R1_reconstructed.xlsx
+      - name: Commit verified workbook
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add records/historical_reconstruction/PURNEW_REC_R1_reconstructed.xlsx
+          if git diff --cached --quiet; then
+            echo 'Workbook already matches verified binary.'
+            exit 0
+          fi
+          git commit -m 'Rebuild verified PURNEW_REC_R1 workbook binary'
+          git push
