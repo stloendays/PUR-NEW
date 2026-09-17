@@ -33,6 +33,7 @@ jobs:
           python -m py_compile scripts/build_naive_baseline_view.py
           python -m py_compile scripts/run_naive_llm_baseline.py
           python -m py_compile scripts/summarize_agent_benchmark.py
+          python -m py_compile scripts/analysis_audit_v1.py
       - name: Build deterministic evidence state
         run: python scripts/build_evidence_state.py --output /tmp/evidence_state.json
       - name: Sanity-check generated evidence JSON
@@ -101,6 +102,10 @@ jobs:
         run: python scripts/statistical_robustness.py --output-dir /tmp/statistical-robustness
       - name: Sanity-check robustness summary
         run: python -m json.tool /tmp/statistical-robustness/robustness_summary.json > /dev/null
+      - name: Run provenance-aware chemistry audit
+        run: python scripts/analysis_audit_v1.py --output-dir /tmp/analysis-audit-v1
+      - name: Sanity-check provenance-aware audit
+        run: python -m json.tool /tmp/analysis-audit-v1/audit_summary.json > /dev/null
       - name: Reproduce anchor-normalized master curve
         run: python scripts/master_curve_collapse.py --bootstrap 1000 --output-dir /tmp/master-curve-collapse
       - name: Sanity-check master-curve summary
