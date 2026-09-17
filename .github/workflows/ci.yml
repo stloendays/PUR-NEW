@@ -25,10 +25,12 @@ jobs:
           python -m json.tool configs/blind_benchmark_v2.json > /dev/null
           python -m json.tool configs/agent_v3.json > /dev/null
           python -m json.tool configs/evidence_access_profiles.json > /dev/null
-      - name: Compile Agent runners
+      - name: Compile Agent and benchmark runners
         run: |
           python -m py_compile scripts/run_agent_recommendation.py
           python -m py_compile scripts/run_scientific_agent_v3.py
+          python -m py_compile scripts/run_deterministic_baseline.py
+          python -m py_compile scripts/summarize_agent_benchmark.py
       - name: Build deterministic evidence state
         run: python scripts/build_evidence_state.py --output /tmp/evidence_state.json
       - name: Sanity-check generated evidence JSON
@@ -55,6 +57,16 @@ jobs:
         run: python scripts/build_candidate_set.py --output /tmp/candidate_set_hypothesis_v2.json
       - name: Sanity-check candidate-set JSON
         run: python -m json.tool /tmp/candidate_set_hypothesis_v2.json > /dev/null
+      - name: Smoke-test deterministic baseline and controller scorer
+        run: |
+          python scripts/run_deterministic_baseline.py \
+            --candidate-set /tmp/candidate_set_hypothesis_v2.json \
+            --output-dir /tmp/deterministic-baseline
+          python scripts/summarize_agent_benchmark.py \
+            --condition deterministic_evidence_ranker=/tmp/deterministic-baseline \
+            --candidate-set /tmp/candidate_set_hypothesis_v2.json \
+            --output-dir /tmp/benchmark-summary
+          python -m json.tool /tmp/benchmark-summary/benchmark_summary.json > /dev/null
       - name: Reproduce local statistical analysis
         run: python scripts/statistical_analysis.py --output-dir /tmp/statistical-analysis
       - name: Sanity-check statistical summary
