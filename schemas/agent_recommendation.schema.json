@@ -2,45 +2,107 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "pur-new/agent_recommendation.schema.json",
   "title": "Agent recommendation and wet-lab adjudication record",
+  "description": "Machine-readable contract linking a pre-result Agent recommendation to later human-executed physical adjudication.",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "recommendation_id",
     "created_utc",
+    "record_status",
     "result_inspection_status_at_creation",
-    "formulation_state",
-    "process_state",
-    "uncertainty_summary",
+    "decision_mode",
+    "selected_candidate",
+    "uncertainty",
     "selection_rationale",
+    "acceptance_criterion",
     "provenance",
     "adjudication"
   ],
   "properties": {
     "recommendation_id": {"type": "string", "minLength": 1},
     "created_utc": {"type": "string", "minLength": 1},
+    "record_status": {"enum": ["draft", "frozen"]},
     "result_inspection_status_at_creation": {
       "enum": ["no_results_inspected", "some_results_inspected", "unknown"]
     },
-    "formulation_state": {
+    "decision_mode": {
+      "enum": ["performance_candidate", "robustness_probe", "uncertainty_probe", "abstain"]
+    },
+    "selected_candidate": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {"type": ["string", "null"]},
+        "formulation_state": {
+          "type": ["object", "null"],
+          "additionalProperties": true,
+          "description": "Exact formulation recommended by the Agent. Preserve source units / parts."
+        },
+        "process_state": {
+          "type": ["object", "null"],
+          "additionalProperties": true,
+          "description": "Reaction history, hold temperature/time, preparation state and other process variables known at recommendation time. Unknown fields remain null."
+        }
+      }
+    },
+    "alternatives_considered": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate_id"],
+        "properties": {
+          "candidate_id": {"type": "string"},
+          "relative_reason": {"type": ["string", "null"]},
+          "acquisition_value": {"type": ["number", "null"]}
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "status"],
+        "properties": {
+          "name": {"type": "string"},
+          "status": {"enum": ["pass", "fail", "unknown"]},
+          "detail": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "uncertainty": {
       "type": "object",
-      "additionalProperties": true,
-      "description": "Exact formulation recommended by the Agent. Preserve source units / parts."
+      "additionalProperties": false,
+      "required": [
+        "measurement",
+        "repeatability",
+        "process_history",
+        "extrapolation",
+        "evidence_coverage"
+      ],
+      "properties": {
+        "measurement": {"$ref": "#/$defs/uncertainty_component"},
+        "repeatability": {"$ref": "#/$defs/uncertainty_component"},
+        "process_history": {"$ref": "#/$defs/uncertainty_component"},
+        "extrapolation": {"$ref": "#/$defs/uncertainty_component"},
+        "evidence_coverage": {"$ref": "#/$defs/uncertainty_component"},
+        "aggregate_penalty": {"type": ["number", "null"]},
+        "aggregation_rule": {"type": ["string", "null"]},
+        "decision_margin": {"type": ["number", "null"]}
+      }
     },
-    "process_state": {
+    "selection_rationale": {"type": "string", "minLength": 1},
+    "acceptance_criterion": {
       "type": "object",
-      "additionalProperties": true,
-      "description": "Reaction history, hold temperature/time, preparation state and other process variables known at recommendation time."
-    },
-    "uncertainty_summary": {
-      "type": "string",
-      "minLength": 1
-    },
-    "selection_rationale": {
-      "type": "string",
-      "minLength": 1
-    },
-    "expected_direction_or_acceptance_criterion": {
-      "type": ["string", "null"]
+      "additionalProperties": false,
+      "required": ["claim", "criterion"],
+      "properties": {
+        "claim": {"type": "string", "minLength": 1},
+        "criterion": {"type": "string", "minLength": 1},
+        "measurement_window": {"type": ["string", "null"]},
+        "failure_condition": {"type": ["string", "null"]}
+      }
     },
     "provenance": {
       "type": "object",
@@ -52,7 +114,8 @@
         "run_id": {"type": ["string", "null"]},
         "model": {"type": ["string", "null"]},
         "prompt_hash": {"type": ["string", "null"]},
-        "input_hash": {"type": ["string", "null"]}
+        "input_hash": {"type": ["string", "null"]},
+        "workflow_version": {"type": ["string", "null"]}
       }
     },
     "adjudication": {
@@ -65,6 +128,23 @@
         },
         "experiment_date": {"type": ["string", "null"]},
         "measurement_reference": {"type": ["string", "null"]},
+        "executed_by_human": {"type": ["boolean", "null"]},
+        "deviation_from_recommended_state": {"type": ["string", "null"]},
+        "observed_summary": {"type": ["string", "null"]},
+        "note": {"type": ["string", "null"]}
+      }
+    }
+  },
+  "$defs": {
+    "uncertainty_component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {"enum": ["known", "estimated", "unknown", "not_applicable"]},
+        "value": {"type": ["number", "null"]},
+        "unit_or_scale": {"type": ["string", "null"]},
+        "method": {"type": ["string", "null"]},
         "note": {"type": ["string", "null"]}
       }
     }
