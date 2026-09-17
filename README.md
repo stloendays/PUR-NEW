@@ -27,7 +27,7 @@ formulation state
 6. Agent recommends the next test point
 7. freeze recommendation + criterion + provenance
 8. human operator executes the wet-lab experiment
-9. experiment adjudicates the recommendation
+9. create a separate experimental adjudication record
 10. update response evidence and uncertainty for the next round
 ```
 
@@ -82,29 +82,54 @@ Two repeated 120 °C hold measurements give 15->60 min changes of **-0.16%** and
 
 The direct experimental conclusion is **rheological stabilization over the matched hold window**. The explanation that the added resin components reduce the effective reactive fraction remains a formulation rationale rather than direct molecular-kinetic proof.
 
+The Agent-facing evaluation framework is in [`docs/AGENT_EVALUATION.md`](docs/AGENT_EVALUATION.md).
+
+## Executable support layer
+
+The Agent is not asked to do deterministic arithmetic in prose. The repository now includes a small deterministic layer for quantities such as hold-stability index, replicate spread and descriptive temperature fitting.
+
+```text
+raw CSVs
+-> scripts/build_evidence_state.py
+-> deterministic evidence-state JSON
+-> Agent recommendation layer
+```
+
+The current experimental descriptor calculations are locked by unit tests and checked in GitHub Actions.
+
 ## Repository structure
 
 ```text
 PUR-NEW/
 ├─ README.md
 ├─ configs/
-│  └─ workflow.json                    # machine-readable decision policy
+│  └─ workflow.json                       # machine-readable decision policy
 ├─ docs/
-│  ├─ WORKFLOW.md                      # canonical closed-loop workflow
-│  ├─ UNCERTAINTY_MODEL.md             # uncertainty decomposition
-│  ├─ PROJECT_STATE.md                 # current state and next work
-│  ├─ RESEARCH_NARRATIVE.md            # scientific narrative
-│  ├─ AGENT_ROLE.md                    # Agent evidence contract
-│  ├─ EXPERIMENTAL_EVIDENCE.md         # executed measurements
-│  └─ MANUSCRIPT_PLAN.md               # paper-facing structure
+│  ├─ WORKFLOW.md                         # canonical closed-loop workflow
+│  ├─ UNCERTAINTY_MODEL.md                # uncertainty decomposition
+│  ├─ AGENT_EVALUATION.md                 # physical evaluation of recommendations
+│  ├─ PROJECT_STATE.md                    # current state and next work
+│  ├─ RESEARCH_NARRATIVE.md               # scientific narrative
+│  ├─ AGENT_ROLE.md                       # Agent evidence contract
+│  ├─ EXPERIMENTAL_EVIDENCE.md            # executed measurements
+│  └─ MANUSCRIPT_PLAN.md                  # paper-facing structure
 ├─ data/
 │  ├─ README.md
 │  ├─ formulations.csv
 │  ├─ temperature_sweeps.csv
 │  └─ thermal_hold.csv
-└─ schemas/
-   ├─ design_state.schema.json          # formulation + process + evidence state
-   └─ agent_recommendation.schema.json  # frozen recommendation + adjudication
+├─ records/
+│  └─ README.md                           # immutable recommendation/adjudication layout
+├─ schemas/
+│  ├─ design_state.schema.json            # formulation + process + evidence state
+│  ├─ agent_recommendation.schema.json    # immutable pre-result recommendation
+│  └─ experiment_adjudication.schema.json # separate post-result record
+├─ src/pur_new/
+│  └─ metrics.py                          # deterministic scientific descriptors
+├─ scripts/
+│  └─ build_evidence_state.py             # builds Agent-ready evidence state
+└─ tests/
+   └─ test_metrics.py                     # locks current descriptor calculations
 ```
 
 ## Paper-level claim
