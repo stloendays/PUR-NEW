@@ -1,98 +1,13 @@
 {
-  "benchmark_id": "PUR_NEW_BLIND_AGENT_V1",
-  "benchmark_version": "1.2.0",
-  "primary_profile": "blind_pre_result",
-  "blindness_definition": "Blind means blind to the held-out follow-up wet-lab outcome and benchmark scoring labels. The evaluated Agent is NOT blinded to the uncertainty-aware actions or pre-result database/literature evidence that constitute the Agent system.",
-  "primary_agent_capabilities": {
-    "uncertainty_aware_actions_required": true,
-    "database_evidence_required": true,
-    "original_local_evidence_required": true,
-    "finite_candidate_set_required": true,
-    "process_state_and_missingness_required": true,
-    "ordered_alternatives_required": true,
-    "abstention_allowed": true,
-    "recommended_database_interface": "retrieval/action access to pre-result external evidence; curated summaries may be included only when their construction is documented and independent of held-out outcomes"
-  },
-  "candidate_set": {
-    "generator": "scripts/build_candidate_set.py",
-    "default_modifier_grid_pct": [0, 5, 10, 15, 18, 20, 25],
-    "grid_sensitivity_sets_pct": {
-      "coarse_no_exact_18": [0, 5, 10, 15, 20, 25],
-      "shifted_grid": [2.5, 7.5, 12.5, 17.5, 22.5]
-    },
-    "exact_recovery_modifier_pct": 18,
-    "supported_region_pct": [15, 21],
-    "near_experimental_region_pct": [17, 20],
-    "primary_recovery_unit": "supported_region",
-    "exact_grid_recovery_role": "secondary_discretization_sensitive_metric"
-  },
-  "run_protocol": {
-    "pilot_runs_per_model": 5,
-    "full_runs_per_model": 30,
-    "store_failed_runs": true,
-    "store_abstentions": true,
-    "require_same_blind_payload_across_models": true,
-    "recommended_temperature": 0.2,
-    "seed_policy": "record_if_endpoint_supports_seed; otherwise record run_index and treat calls as repeated stochastic realizations"
-  },
-  "primary_metrics": [
-    "supported_region_top1_recovery",
-    "supported_region_top3_recall",
-    "near_experimental_top3_recall",
-    "selection_distribution",
-    "abstention_rate",
-    "grid_sensitivity_consistency"
-  ],
-  "secondary_metrics": [
-    "exact_grid_top1_recovery",
-    "decision_margin",
-    "scientific_boundary_violation_rate"
-  ],
-  "baselines": [
-    {
-      "id": "uniform_random",
-      "description": "Uniform selection from the supplied finite candidate set; report the analytic supported-region hit probability for each grid."
-    },
-    {
-      "id": "external_prior_nearest",
-      "description": "Deterministic non-LLM baseline that selects the candidate closest to the central resin-modifier fraction supported by the permitted curated external analogue examples."
-    },
-    {
-      "id": "transparent_support_ranker",
-      "description": "Deterministic ranking from the same permitted evidence/actions, without free-form LLM reasoning."
-    }
-  ],
-  "diagnostics": [
-    "dominant_uncertainty_identification",
-    "resin_family_reasoning",
-    "external_database_use",
-    "action_use_trace",
-    "process_history_uncertainty_use",
-    "scientific_boundary_violations",
-    "candidate_grid_dependence"
-  ],
-  "ablations": [
-    "literature_only_sanity",
-    "blind_pre_result_without_external_database",
-    "blind_pre_result_without_action_enrichment",
-    "blind_pre_result_coarse_grid_without_exact_18",
-    "blind_pre_result_shifted_grid"
-  ],
-  "anti_leakage": {
-    "forbid_follow_up_hold_results_in_agent_payload": true,
-    "forbid_adjudication_labels_in_agent_payload": true,
-    "forbid_benchmark_target_region_in_agent_payload": true,
-    "forbid_post_result_text_derived_from_follow_up_in_agent_payload": true,
-    "controller_may_read_scoring_labels": true,
-    "allow_pre_result_database_evidence": true,
-    "allow_uncertainty_aware_actions": true,
-    "report_if_candidate_grid_was_defined_after_follow_up_result_was_known": true
-  },
-  "interpretation_rules": [
-    "Region-level recovery is primary because exact 18 percent recovery is sensitive to candidate discretization.",
-    "If the external-prior deterministic baseline already recovers the supported region, the Agent contribution must be argued from uncertainty handling, robustness, abstention, or evidence integration rather than region discovery alone.",
-    "A successful result on the default grid should remain directionally consistent on a grid that omits the exact 18 percent point before claiming robust recovery."
-  ],
-  "artifact_layout": "records/benchmarks/<benchmark_id>/",
-  "note": "The primary benchmark evaluates the full Agent stack: local evidence + uncertainty-aware actions + external database evidence. Only the held-out follow-up outcome and scoring labels are hidden. Tool/database removal is an ablation, not the primary condition."
+  "benchmark_id": "PUR_NEW_BLIND_AGENT_V1_LEGACY",
+  "benchmark_version": "1.x",
+  "status": "deprecated",
+  "do_not_use_for_new_runs": true,
+  "superseded_by": "configs/blind_benchmark_v2.json",
+  "reason": "The V1 scalar total-modifier benchmark encoded an exact 18% recovery target that is not present in the current two-axis V2 candidate generator. New runs must use V2, which scores the independently evidence-derived acrylic-like x minor-tackifier-like plane and keeps exact-recipe recovery out of the primary endpoint.",
+  "legacy_only": {
+    "historical_candidate_axis": "single total-modifier fraction",
+    "historical_exact_target_pct": 18,
+    "interpretation": "Retained only to document repository history. Do not combine V1 metrics with V2 results."
+  }
 }
