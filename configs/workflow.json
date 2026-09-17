@@ -1,9 +1,11 @@
 {
   "workflow_id": "PUR_NEW_CLOSED_LOOP_V1",
-  "workflow_version": "1.1.0",
+  "workflow_version": "1.2.0",
   "design_state_schema": "schemas/design_state.schema.json",
+  "candidate_set_schema": "schemas/candidate_set.schema.json",
   "recommendation_schema": "schemas/agent_recommendation.schema.json",
   "adjudication_schema": "schemas/experiment_adjudication.schema.json",
+  "agent_prompt": "prompts/agent_system.txt",
   "response_policy": {
     "preserve_source_units": true,
     "unknown_values_remain_unknown": true,
@@ -27,6 +29,7 @@
     "abstain"
   ],
   "hard_rules": {
+    "agent_selects_only_from_candidate_set_or_abstains": true,
     "agent_actuates_lab": false,
     "human_execution_required_for_physical_result": true,
     "recommendation_record_is_immutable_after_freeze": true,
@@ -59,5 +62,12 @@
     "key": "recommendation_id",
     "pre_result_record": "agent_recommendation",
     "post_result_record": "experiment_adjudication"
+  },
+  "runtime": {
+    "evidence_builder": "scripts/build_evidence_state.py",
+    "recommendation_runner": "scripts/run_agent_recommendation.py",
+    "api_credentials_from_environment_only": true,
+    "required_environment": ["OPENAI_API_KEY", "OPENAI_MODEL"],
+    "optional_environment": ["OPENAI_BASE_URL"]
   }
 }
