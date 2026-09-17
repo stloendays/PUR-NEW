@@ -2,76 +2,150 @@
 
 ## Position of the Agent
 
-The Agent is an **uncertainty-aware scientific recommender**. It does not actuate laboratory hardware and it does not replace the operator.
+The Agent is an **uncertainty-aware scientific recommender** inside a human-in-the-loop experimental workflow.
 
-Its task is to transform available formulation evidence and known process-state variables into a ranked, inspectable recommendation about what should be tested next.
+It does not actuate laboratory hardware. Its job is to turn the current formulation/process/evidence state into a traceable recommendation about **what should be tested next and why**.
 
-## Inputs
+The canonical execution sequence is defined in `WORKFLOW.md`.
 
-The design state should expose, where available:
+## 1. Inputs
+
+The Agent receives four explicit blocks.
+
+### Formulation state
 
 ```text
-Formulation state
-- component identities
-- component fractions / parts
-- NCO:OH or related stoichiometric variables
-
-Process state
-- reaction / preparation history
-- thermal hold temperature
-- thermal hold time
-- preparation or batch perturbation
-
-Evidence state
-- observed rheology
-- replicate spread
-- missing or uncertain fields
-- applicability of prior evidence
+component identities
+component amounts / fractions
+stoichiometric descriptors when known
+formulation-family context
 ```
 
-Unknown information should remain unknown rather than being silently converted to zero.
+### Process state
 
-## Agent actions
+```text
+reaction / preparation history
+hold temperature and time
+sample age / storage state when known
+preparation or batch perturbation
+measurement sequence
+```
 
-The Agent may:
+### Evidence state
 
-1. compare candidate states;
-2. quantify or summarize uncertainty;
-3. flag weakly supported extrapolation;
-4. rank candidate measurements by scientific value or robustness;
-5. recommend a formulation / process-state point;
-6. explain the evidence supporting that recommendation;
-7. abstain when evidence is insufficient.
+```text
+measured rheology
+hold trajectories
+replicate spread
+missing fields
+support range of available evidence
+```
 
-The Agent may not:
+### Uncertainty state
 
-- claim that a sample was physically prepared when it was not;
-- claim that a measurement exists before it is produced;
-- convert a retrospective choice into a prospective prediction;
-- claim molecular mechanism from rheology alone;
-- hide the uncertainty that motivated the recommendation.
+```text
+measurement
+repeatability
+process_history
+extrapolation
+evidence_coverage
+```
 
-## Recommendation contract
+Unknown information remains unknown. The Agent may reason about missingness; it may not silently replace it with zero.
 
-A paper-facing recommendation should be stored before result inspection with at least:
+## 2. What the Agent actually does
+
+The Agent follows five decision steps:
+
+```text
+STATE -> AUDIT -> COMPARE -> RECOMMEND -> FREEZE
+```
+
+### STATE
+
+Read the formulation-process state rather than composition alone.
+
+### AUDIT
+
+Identify missing information, unsupported extrapolation and dominant uncertainty sources.
+
+### COMPARE
+
+Compare admissible candidates using the current performance objective, robustness requirements and information value.
+
+### RECOMMEND
+
+Choose one of four actions:
+
+```text
+performance_candidate
+robustness_probe
+uncertainty_probe
+abstain
+```
+
+### FREEZE
+
+Store the selected candidate, alternatives, uncertainty vector, acceptance criterion and provenance before physical result inspection whenever a prospective claim is intended.
+
+## 3. Decision objective
+
+The Agent should not optimize viscosity magnitude alone.
+
+The generic design loss is
+
+```text
+J_perf = w_eta * L_viscosity
+       + w_T   * L_temperature_response
+       + w_S   * L_hold_stability
+       + w_R   * L_repeatability
+       + feasibility_penalties
+```
+
+The ranking policy may further penalize uncertainty and reward information value:
+
+```text
+A(candidate) = -J_perf - lambda_U * U_penalty + beta_IG * information_value
+```
+
+These expressions define the structure of the decision problem. They do not imply that all numerical weights are already calibrated. Any numerical weights used for a prospective test must be frozen before seeing that result.
+
+## 4. Recommendation contract
+
+A paper-facing recommendation must contain at least:
 
 ```text
 recommendation_id
 created_utc
-formulation_state
-process_state
-uncertainty_summary
+record_status
+decision_mode
+selected_candidate
+alternatives_considered
+constraints
+structured uncertainty
 selection_rationale
-expected_direction_or_acceptance_criterion
-source / run provenance
-result_inspection_status
+pre-result acceptance criterion
+provenance
+adjudication status
 ```
 
-After the human experiment is executed, the result is appended as a separate adjudication record.
+The machine-readable contract is `../schemas/agent_recommendation.schema.json`.
 
-## Experimental adjudication
+The most important scientific object is therefore not an Agent-generated paragraph. It is the linked pair:
 
-The experimental outcome is used to classify the recommendation, for example:
+```text
+frozen pre-result recommendation
+<->
+human-executed post-result adjudication
+```
+
+## 5. Human execution and experimental authority
+
+After the recommendation is frozen, a human operator performs the preparation and rheology measurement.
+
+The laboratory result has authority over the recommendation. The Agent must be allowed to be wrong.
+
+Possible adjudication states are:
 
 ```text
 supported
@@ -80,16 +154,33 @@ falsified
 out_of_domain
 ```
 
-The important scientific object is therefore not an Agent-generated sentence. It is the traceable pair:
+A falsified recommendation is not deleted. It becomes evidence for updating the uncertainty model or process-state representation.
 
-```text
-pre-result recommendation <-> post-experiment adjudication
-```
+## 6. Allowed Agent claims
 
-## Current paper-facing interpretation
+The Agent may:
 
-The strongest intended claim is:
+- compare candidate formulation-process states;
+- quantify or summarize uncertainty;
+- flag weakly supported extrapolation;
+- recommend a performance candidate;
+- recommend a robustness probe;
+- recommend an uncertainty-reduction experiment;
+- explain why one candidate is preferred;
+- abstain when evidence is insufficient.
 
-> An Agent that cannot physically manipulate the laboratory can still contribute scientifically by representing process-state uncertainty, recommending a formulation point, and being judged by the subsequent human-executed experiment.
+The Agent may not:
 
-For the final follow-up formulation, the wet-lab evidence is already available and shows a near-flat 120 °C viscosity response over 15-60 min in two repeated measurements. To call that result a strictly prospective validation of an Agent recommendation, the corresponding pre-result recommendation trace must also be attached here. Until then, the rheological result is retained without overstating chronology.
+- claim that a sample was physically prepared when it was not;
+- invent an unmeasured result;
+- hide missing process history;
+- convert a retrospective choice into a prospective prediction;
+- rewrite an acceptance criterion after seeing the result;
+- claim a molecular mechanism from rheology alone;
+- present a fragile top-1 result as uniquely superior when the decision margin is negligible.
+
+## 7. Current paper-facing interpretation
+
+The current experiments show why this architecture is necessary: rheology changes with process realization and thermal-hold history, while the follow-up formulation shows a substantially flatter 120 °C response over the shared 15-60 min window.
+
+The strongest Agent-specific wording depends on provenance. If a timestamped recommendation trace predating the follow-up measurement is available, the experiment may adjudicate that recommendation prospectively. If not, the result remains a valid Agent-guided closed-loop validation without retroactive preregistration language.
