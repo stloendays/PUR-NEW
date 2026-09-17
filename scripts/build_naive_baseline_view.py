@@ -85,7 +85,7 @@ def main() -> None:
             "scientific_actions": False,
             "candidate_space_rationale": False,
             "planner_or_skeptic": False,
-            "follow_up_identity_or_outcome": False,
+            "hidden_validation_identity_or_outcome": False,
         },
         "original_formulations": [
             {
