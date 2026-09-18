@@ -87,6 +87,32 @@ jobs:
           assert '-0.16' not in text
           assert '3.04' not in text
           PY
+      - name: Audit pre-result knowledge guidance provenance
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          contract = json.loads(Path('configs/pre_result_replay_contract.json').read_text())
+          guidance = {
+              'knowledge_guidance': contract['knowledge_guidance'],
+              'constraint_provenance': contract['constraint_provenance'],
+              'anti_posthoc_rule': contract['anti_posthoc_rule'],
+          }
+          text = json.dumps(guidance, sort_keys=True)
+
+          # Guidance may cite only pre-result evidence/principles; controller target
+          # coordinates and later physical outcomes must not enter this layer.
+          for token in ['F1', '14.004448', '4.118955', '1.47', '-0.16', '3.04', '1230', '1320']:
+              assert token not in text, token
+
+          assert 'PAT_US5932680A' in text
+          assert 'PAT_US20160215185A1' in text
+          assert 'PAT_US6465104B1' in text
+          assert 'PAPER_CN_ADHESIVES_2025_34_09_54' in text
+          assert 'directional' in contract['constraint_provenance']['acrylic_pct_total_max_15']['note'].lower()
+          assert 'not a literature-derived universal threshold' in contract['constraint_provenance']['total_modifier_pct_total_max_20']['note']
+          PY
       - name: Build V2 coarse candidate-space formalization
         run: python scripts/build_candidate_set.py --output /tmp/candidate_set_hypothesis_v2.json
       - name: Sanity-check coarse candidate-set JSON
