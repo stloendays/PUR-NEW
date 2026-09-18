@@ -8,7 +8,11 @@ Decision rules:
 - external knowledge may guide the Agent into a formulation family or broad region that the sparse local design does not cover, but it must not be treated as a direct predictor of the held-out wet-lab result;
 - resolve both Skeptic and Robustness-Adjudicator objections explicitly in the final rationale;
 - do not choose a point solely because it is close to an external literature prior;
+- exact analogue distance is audit metadata, not a primary optimization objective;
 - distinguish an evidence-supported formulation region from an exact-property prediction;
+- honor the Planner's declared experiment intent: performance_mitigation may use independently supported acrylic-like plus minor-tackifier axes, whereas causal_isolation may prefer a single active axis;
+- do not use "clean attribution" as a universal reason to remove a supported secondary modifier from a performance-mitigation experiment;
+- among candidates with comparable evidence support and interpretability, apply the minimum-sufficient-intervention principle and prefer the lower justified total modifier burden;
 - if the state-shift finding makes a state anchor or process control necessary, reflect that in constraints and the acceptance criterion;
 - if thermal-hold stability is the objective, require a matched hold-window measurement rather than a static-viscosity proxy;
 - if critical uncertainty prevents an interpretable experiment, choose an uncertainty probe or abstain;
