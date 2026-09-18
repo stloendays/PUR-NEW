@@ -191,8 +191,8 @@ pC <- ggplot(matched, aes(y = order, x = growth_15_60_pct)) +
   theme_pur() +
   theme(legend.position = "none")
 
-# Panel D: asymmetry summary in dimensionless terms without implying equal scales.
-# Temperature: CV of E_eta. Time: E5/E1 ratio of fitted log-drift slopes.
+# Panel D: descriptive asymmetry summary.
+# The two quantities have different definitions and must not share a quantitative effect-size axis.
 hold_dyn <- read.csv(file.path(results_dir, "local_hold_dynamics.csv"), check.names = FALSE)
 k_e1 <- hold_dyn$linear_lneta_slope_per_h[hold_dyn$formulation_id == "E1"][1]
 k_e5 <- hold_dyn$linear_lneta_slope_per_h[hold_dyn$formulation_id == "E5"][1]
@@ -203,31 +203,34 @@ summary_df <- data.frame(
     c("Temperature-response\nspread", "Thermal-hold\ncontrast"),
     levels = rev(c("Temperature-response\nspread", "Thermal-hold\ncontrast"))
   ),
-  x0 = c(0, 1),
-  x1 = c(e_cv, drift_ratio),
-  display = c(sprintf("CV(Eeta) = %.2f%%", e_cv), sprintf("kE5 / kE1 = %.2fx", drift_ratio)),
+  x = 1,
+  display = c(
+    sprintf("CV(Eeta) = %.2f%%", e_cv),
+    sprintf("kE5 / kE1 = %.2fx", drift_ratio)
+  ),
   type = c("thermal", "time")
 )
 
-pD <- ggplot(summary_df, aes(y = coordinate)) +
-  geom_segment(aes(x = x0, xend = x1, yend = coordinate, colour = type), linewidth = 2.2, lineend = "round") +
-  geom_point(aes(x = x1, colour = type), size = 3.2) +
-  geom_text(aes(x = x1, label = display), nudge_x = 0.32, hjust = 0, size = 2.7) +
-  scale_colour_manual(values = c("thermal" = pal[["core"]], "time" = pal[["drift"]])) +
-  scale_x_continuous(
-    limits = c(0, 6.8),
-    breaks = c(0, 2, 4, 6),
-    labels = c("0", "2", "4", "6"),
-    expand = expansion(mult = c(0.02, 0.02))
+pD <- ggplot(summary_df, aes(y = coordinate, x = x, colour = type)) +
+  geom_point(size = 4.2) +
+  geom_text(
+    aes(label = display),
+    x = 1.12, hjust = 0, size = 3.0, colour = pal[["dark"]]
   ) +
+  scale_colour_manual(values = c("thermal" = pal[["core"]], "time" = pal[["drift"]])) +
+  scale_x_continuous(limits = c(0.92, 1.95), breaks = NULL) +
   labs(
-    title = "D  Rheological variability is anisotropic",
-    subtitle = "Descriptors use different units; lengths are descriptive, not a common effect-size scale",
-    x = "Descriptor magnitude (native dimensionless summary)",
+    title = "D  Rheological coordinates respond differently",
+    subtitle = "Native descriptors are reported side-by-side; no common effect-size scale is implied",
+    x = NULL,
     y = NULL
   ) +
   theme_pur() +
-  theme(legend.position = "none")
+  theme(
+    legend.position = "none",
+    axis.line.x = element_blank(),
+    axis.ticks.x = element_blank()
+  )
 
 fig <- (pA | pB) / (pC | pD)
 fig <- fig + plot_annotation(
