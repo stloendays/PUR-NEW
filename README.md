@@ -175,6 +175,8 @@ data/external_evidence_basis_audit.csv
 
 Ambiguous addition-level percentages remain directional evidence rather than exact total-formulation anchors.
 
+In the Agent, these sources are not treated as passive references. They are converted into **machine-actionable scientific priors** that constrain which formulation families and broad regions are chemically plausible. The local E1-E5 experiments diagnose the failure mode; the literature/database layer supplies knowledge that is absent from the sparse local design, such as acrylic-modified and minor-tackifier-modified reactive-PUR intervention directions. These priors guide the search but do not reveal or predict the later validation outcome.
+
 ---
 
 ## 6. Agent-selected validation formulation and physical adjudication
@@ -261,6 +263,20 @@ It now uses the chemistry-provenance audit and exposes, without the validation o
 - experiment-design implications and claim boundaries.
 
 The Agent is therefore designed to use the paper's discovered material regularities to choose an experiment, rather than simply search for a literature recipe.
+
+Its pre-result decision logic is explicitly **knowledge-guided**:
+
+```text
+local E1-E5 evidence
+-> state-aware rheological diagnosis
+-> literature/database formulation priors
+-> physical and uncertainty constraints
+-> Agent formulation decision
+```
+
+The intended interpretation is not that the LLM independently guessed the later successful formulation from sparse data alone. Instead, the Agent uses pre-result scientific knowledge to redirect the decision from further reactive-core micro-tuning toward an externally supported resin-modified formulation family. The later wet-lab result then physically adjudicates that evidence-guided decision.
+
+A separate replay protocol preserves the distinction between (i) reproducing the reconstructed historical pre-result decision logic and (ii) independently recovering the experimentally supported region under a target-blind benchmark. See `docs/PRE_RESULT_REPLAY_PROTOCOL.md`.
 
 The Skeptic and Robustness Adjudicator are decision-quality controls. The central materials paper does **not** require component-wise ablation to prove that each internal stage is individually necessary.
 
