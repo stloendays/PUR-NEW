@@ -8,7 +8,7 @@ Three facts must remain separate:
 
 1. the research team confirms that the **Agent-selected validation formulation** was recommended before its corresponding wet-lab result was known to the Agent;
 2. the current exact coarse `4 x 3` grid was formalized later as a reproducible benchmark abstraction;
-3. the current fine-refinement generator was also formalized later and is an outcome-blind operationalization for replay/future prospective rounds, **not a reconstructed historical freeze algorithm**.
+3. the current fine-refinement generator was also formalized later and is an outcome-blind operationalization for preexperimental reconstruction/future prospective rounds, **not a reconstructed historical freeze algorithm**.
 
 Therefore the prospective historical claim belongs to the recommendation chronology, not to a fabricated software timestamp.
 
@@ -137,7 +137,7 @@ Crucially, the generator:
 
 The acrylic refinement domain is derived from directly commensurate external anchors plus the predeclared support-distance rule; the tackifier domain comes from the independently documented control-to-upper range.
 
-The current fine-refinement implementation is useful for reproducible replay and future prospective rounds, but it must not be claimed as the exact historical algorithm that originally produced the validation recipe.
+The current fine-refinement implementation is useful for outcome-blind preexperimental reconstruction and future prospective rounds, but it must not be claimed as the exact historical algorithm that originally produced the validation recipe.
 
 ---
 
@@ -172,7 +172,7 @@ That statement is false because `17/5` is a source-parts representation and the 
 
 The defensible claim is:
 
-> **The Agent recommendation entered an evidence-supported resin-modified formulation region before the wet-lab outcome was available. A later coarse grid formalized that region for controlled replay, while a separately defined outcome-blind fine-refinement layer operationalizes local search without reading the validation recipe or outcome.**
+> **The current outcome-blind reconstruction asks whether pre-result evidence alone leads the Agent into an evidence-supported resin-modified formulation region. A coarse grid formalizes that region, while a separately defined outcome-blind fine-refinement layer operationalizes local search without reading the validation recipe or outcome.**
 
 The wet-lab experiment then adjudicates the recommendation with respect to thermal-hold rheological stability.
 
@@ -192,7 +192,7 @@ The wet-lab experiment then adjudicates the recommendation with respect to therm
 
 > A useful design region should occur within the externally supported resin-modified neighborhood rather than requiring unrestricted global composition search.
 
-These hypotheses remain falsifiable; none requires the exact historical recipe to be encoded in the replay grid.
+These hypotheses remain falsifiable; none requires the exact historical recipe to be encoded in the reconstruction grid.
 
 ---
 
@@ -227,4 +227,4 @@ This proximity is evaluated **controller-side only** and must never enter the bl
 
 Recommended wording:
 
-> The initial rheological analyses established a state-aware design problem in which absolute viscosity was strongly realization dependent while the local temperature-response shape was comparatively transferable. Independent literature and patent evidence supported resin modification as a plausible intervention for hot-hold instability. The design Agent selected a resin-modified validation formulation before its subsequent wet-lab response was known. For reproducible replay, the formulation space was later represented hierarchically: a coarse 12-cell grid assessed region-level recovery, while an outcome-blind fine-refinement layer operationalized local search within the evidence-supported region. These later software representations are not presented as the original contemporaneous freeze artifact.
+> The initial rheological analyses established a state-aware design problem in which absolute viscosity was strongly realization dependent while the local temperature-response shape was comparatively transferable. Independent literature and patent evidence support resin modification as a plausible intervention for hot-hold instability. In the current outcome-blind reconstruction, the formulation space is represented hierarchically: a coarse grid assesses region-level recovery, while an outcome-blind fine-refinement layer operationalizes local search within the evidence-supported region. These software representations are not presented as the original contemporaneous freeze artifact.

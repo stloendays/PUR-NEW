@@ -6,6 +6,10 @@ This stage is not an architecture benchmark and not an ablation. It is a decisio
 
 Assess:
 - whether the proposed point still addresses the measured physical failure mode if the exact literature-prior weighting changes;
+- whether the decision remains sensible when exact analogue-distance rewards are removed and external evidence is treated as a supported region;
+- whether the Planner's experiment intent is performance_mitigation or causal_isolation, and whether the modifier-axis complexity matches that intent;
+- for performance mitigation, whether an independently supported dual-axis candidate gives a stronger test without requiring an unnecessarily large total modifier burden;
+- for causal isolation, whether a single-axis candidate would be cleaner;
 - whether it remains interpretable given process-state uncertainty;
 - whether the recommendation depends on one fragile score or unsupported assumption;
 - whether a nearby alternative would provide a cleaner test of the same discovered rule;

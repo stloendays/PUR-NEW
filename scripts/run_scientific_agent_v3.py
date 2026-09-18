@@ -217,6 +217,43 @@ def ensure_core_scientific_action(action_requests: Any) -> list[dict[str, Any]]:
     return requests
 
 
+def normalize_judge_output(raw: dict[str, Any]) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Preserve prose while coercing schema-designated numeric slots to number/null.
+
+    Some OpenAI-compatible models occasionally place explanatory prose in numeric-only
+    uncertainty fields. This normalization does not change the decision, candidate,
+    rationale, or evidence. It moves that prose into the adjacent note field and records
+    every coercion for auditability before schema validation and freeze.
+    """
+    out = json.loads(json.dumps(raw))
+    changes: list[dict[str, Any]] = []
+    uncertainty = out.get("uncertainty")
+    if not isinstance(uncertainty, dict):
+        return out, changes
+
+    for key in ("measurement", "repeatability", "process_history", "extrapolation", "evidence_coverage"):
+        item = uncertainty.get(key)
+        if not isinstance(item, dict):
+            continue
+        value = item.get("value")
+        if value is None or isinstance(value, (int, float)) and not isinstance(value, bool):
+            continue
+        prior_note = item.get("note")
+        moved = str(value)
+        item["value"] = None
+        item["note"] = f"{prior_note}; model value text: {moved}" if prior_note else f"model value text: {moved}"
+        changes.append({"path": f"uncertainty.{key}.value", "original": value, "coerced_to": None})
+
+    for key in ("aggregate_penalty", "decision_margin"):
+        value = uncertainty.get(key)
+        if value is None or isinstance(value, (int, float)) and not isinstance(value, bool):
+            continue
+        uncertainty[key] = None
+        changes.append({"path": f"uncertainty.{key}", "original": value, "coerced_to": None})
+
+    return out, changes
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run the PUR-NEW discovery-to-experiment Agent V3")
     parser.add_argument("--candidate-set", type=Path, required=True)
@@ -290,14 +327,24 @@ def main() -> None:
         "get_temperature_support",
         "get_state_aware_rheology_summary",
     }
+    planner_action_specs = [
+        {
+            "name": a["name"],
+            "description": a.get("description"),
+            "when_to_use": a.get("when_to_use", []),
+            "parameters": a.get("parameters", {"type": "object", "additionalProperties": True}),
+        }
+        for a in action_catalog["actions"]
+        if a["name"] in planner_action_names
+    ]
+    planner_action_specs.sort(key=lambda item: item["name"])
+    planner_action_schemas = {item["name"]: item["parameters"] for item in planner_action_specs}
     planner_payload = {
         "architecture_version": architecture["version"],
         "workflow_policy": workflow,
         "evidence_profile": profile_name,
         "evidence_policy": policy,
-        "allowed_planner_actions": sorted(
-            [a["name"] for a in action_catalog["actions"] if a["name"] in planner_action_names]
-        ),
+        "allowed_planner_actions": planner_action_specs,
         "filtered_evidence_state": evidence,
         "candidate_space_summary": candidate_set.get("provenance", {}),
         "candidate_ids": [c["candidate_id"] for c in candidate_set["candidates"]],
@@ -317,6 +364,7 @@ def main() -> None:
         action_requests,
         include_follow_up=bool(policy.get("allow_follow_up_hold_results", False)),
         blind_target_formulation_ids=blinded_ids,
+        action_schemas=planner_action_schemas,
     )
     cards = build_candidate_cards(candidate_set["candidates"])
     deterministic_robustness = robustness_summary(cards)
@@ -387,12 +435,13 @@ def main() -> None:
     }
     if blind_mode:
         assert_blind_payload_clean(judge_payload, blinded_formulation_ids=blind_identity_ids, forbid_follow_up_stage=True)
-    judge, stage_usage["judge"] = call_json(
+    judge_raw, stage_usage["judge"] = call_json(
         client,
         model=stage_models["judge"],
         system_prompt=prompts["judge"],
         payload=judge_payload,
     )
+    judge, judge_normalization = normalize_judge_output(judge_raw)
 
     input_payload = {
         "architecture": architecture,
@@ -442,7 +491,9 @@ def main() -> None:
         "proposer": proposer,
         "skeptic": skeptic,
         "robustness_adjudication": robustness_adjudication,
-        "judge_raw": judge,
+        "judge_raw": judge_raw,
+        "judge_normalized": judge,
+        "judge_normalization": judge_normalization,
         "recommendation_id": recommendation["recommendation_id"],
     }
     (run_dir / "deliberation.json").write_text(

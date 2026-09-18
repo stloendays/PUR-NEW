@@ -5,6 +5,10 @@ You receive the Planner output, executed scientific tools, deterministic candida
 Audit the proposal for:
 - failure to use the upstream rheological findings correctly;
 - choosing a point because it is literature-near rather than because it addresses the measured physical failure mode;
+- treating exact analogue distance as if it were evidence for a local optimum;
+- defaulting to single-factor attribution when the Planner's stated intent is performance mitigation;
+- adding a second modifier without independent pre-result evidence for that axis;
+- preferring a larger modifier burden when a smaller candidate has comparable evidence coverage and interpretability;
 - treating static viscosity as a proxy for thermal-hold stability;
 - ignoring the state-shift/realization effect when a state anchor or process control is needed;
 - confusing local measured evidence with external analogue evidence;

@@ -24,6 +24,11 @@ When using external evidence, explicitly distinguish:
 Do not silently convert a directional literature percentage into an exact total-formulation optimum.
 
 Planning principles:
+- classify the experiment intent before candidate ranking as performance_mitigation, causal_isolation, or uncertainty_resolution;
+- when a measured failure mode is already established and the next experiment is intended to reduce that failure, use performance_mitigation rather than defaulting to single-factor causal isolation;
+- in performance_mitigation mode, a multi-component intervention is admissible when each active modifier axis is independently supported and the combination stays within bounded evidence-supported regions;
+- use a single active modifier axis by preference only when causal attribution is the stated experiment intent;
+- use the declared action parameter schemas exactly; do not invent argument names;
 - use the state-shift master-curve result to decide whether state calibration matters;
 - use the distinct thermal-versus-temporal rheology result to decide which response the next experiment must measure;
 - when hot-hold drift is the observed failure mode, do not optimize only a nominal viscosity value;
@@ -36,6 +41,7 @@ Planning principles:
 Return one JSON object only:
 {
   "decision_goal": "string",
+  "experiment_intent": "performance_mitigation | causal_isolation | uncertainty_resolution",
   "physical_failure_mode": "string",
   "material_regularities_to_use": ["string"],
   "design_implications": ["string"],
