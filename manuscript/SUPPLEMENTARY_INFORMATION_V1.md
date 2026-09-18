@@ -446,7 +446,7 @@ The principal manuscript quantities can be regenerated from the following versio
 | local formulations | `data/formulations.csv` |
 | temperature-sweep measurements | `data/temperature_sweeps.csv` |
 | thermal-hold measurements | `data/thermal_hold.csv` |
-| apparent local (E_\eta) fits | `analysis/results/local_thermal_curve_fits.csv` |
+| apparent local $E_\eta$ fits | `analysis/results/local_thermal_curve_fits.csv` |
 | one-point LOFO transfer | `analysis/results/local_leave_one_formulation_one_point.csv` |
 | pooled anchor analysis | `analysis/results/local_leave_one_formulation_pooled.csv` |
 | strict formulation + temperature holdout | `analysis/results/local_joint_formulation_temperature_extrapolation.csv` |
