@@ -148,6 +148,144 @@ def leave_one_formulation_one_point(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.
     return pd.DataFrame(pooled), pd.DataFrame(detail)
 
 
+
+def bounded_formulation_temperature_extrapolation(
+    df: pd.DataFrame,
+    anchor_temp_c: float = 110.0,
+    target_temps_c: tuple[float, ...] = (120.0, 130.0),
+    bootstrap_reps: int = 10000,
+    bootstrap_seed: int = 20260918,
+) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
+    """Strict local extrapolation with formulation and target temperatures both held out.
+
+    For each nominal formulation, the shared thermal shape is learned only from
+    the other formulations and only at temperatures <= anchor_temp_c. One measured
+    anchor from each realization of the held formulation locates its state offset.
+    The held realization is then predicted at target_temps_c, which were not used
+    in shape fitting.
+
+    This is intentionally a short-range, local-chemistry test. It does not support
+    cross-family or universal PUR extrapolation claims.
+    """
+    detail: list[dict] = []
+
+    for held_formulation in sorted(df["formulation_id"].unique()):
+        train = df[
+            (df["formulation_id"] != held_formulation)
+            & (df["temperature_c"] <= anchor_temp_c)
+        ].copy()
+        held_all = df[df["formulation_id"] == held_formulation].copy()
+
+        shape = smf.ols(
+            "ln_eta ~ C(realization_id) + dx + I(dx**2)", data=train
+        ).fit()
+        beta1 = float(shape.params["dx"])
+        beta2 = float(shape.params["I(dx ** 2)"])
+
+        for realization_id, held in held_all.groupby("realization_id"):
+            anchor_rows = held[held["temperature_c"] == anchor_temp_c]
+            if anchor_rows.empty:
+                continue
+            anchor = anchor_rows.iloc[0]
+
+            for target_temp in target_temps_c:
+                rows = held[held["temperature_c"] == target_temp]
+                if rows.empty:
+                    continue
+                row = rows.iloc[0]
+                pred_ln = (
+                    anchor["ln_eta"]
+                    + beta1 * (row["dx"] - anchor["dx"])
+                    + beta2 * (row["dx"] ** 2 - anchor["dx"] ** 2)
+                )
+                pred = math.exp(float(pred_ln))
+                obs = float(row["viscosity_reported"])
+                logerr = float(pred_ln - row["ln_eta"])
+                detail.append(
+                    {
+                        "held_formulation": held_formulation,
+                        "held_realization": realization_id,
+                        "anchor_temperature_c": float(anchor_temp_c),
+                        "target_temperature_c": float(target_temp),
+                        "observed_viscosity_reported": obs,
+                        "predicted_viscosity_reported": pred,
+                        "log_error_pred_over_obs": logerr,
+                        "absolute_percentage_error": abs(pred / obs - 1.0),
+                    }
+                )
+
+    detail_df = pd.DataFrame(detail)
+    if detail_df.empty:
+        raise ValueError("No bounded formulation-temperature extrapolation rows were generated")
+
+    def summarize(group: pd.DataFrame, scope: str, group_label: str) -> dict:
+        rmse_log = _rmse(group["log_error_pred_over_obs"].to_numpy())
+        return {
+            "scope": scope,
+            "group": group_label,
+            "n_predictions": int(len(group)),
+            "rmse_log": rmse_log,
+            "multiplicative_rmse": math.exp(rmse_log),
+            "median_absolute_percentage_error": float(
+                group["absolute_percentage_error"].median()
+            ),
+            "mean_absolute_percentage_error": float(
+                group["absolute_percentage_error"].mean()
+            ),
+            "max_multiplicative_error": float(
+                np.exp(np.abs(group["log_error_pred_over_obs"]).max())
+            ),
+        }
+
+    summary_rows = [summarize(detail_df, "overall", "all")]
+    for temp, group in detail_df.groupby("target_temperature_c"):
+        summary_rows.append(summarize(group, "target_temperature_c", f"{temp:g}"))
+    for formulation, group in detail_df.groupby("held_formulation"):
+        summary_rows.append(summarize(group, "held_formulation", str(formulation)))
+    summary_df = pd.DataFrame(summary_rows)
+
+    # Cluster bootstrap at the realization level so the two target temperatures
+    # from one realization are always resampled together.
+    rng = np.random.default_rng(bootstrap_seed)
+    realization_ids = detail_df["held_realization"].drop_duplicates().to_numpy()
+    boot = []
+    for _ in range(bootstrap_reps):
+        sampled = rng.choice(realization_ids, size=len(realization_ids), replace=True)
+        pieces = [
+            detail_df[detail_df["held_realization"] == realization_id]
+            for realization_id in sampled
+        ]
+        resampled = pd.concat(pieces, ignore_index=True)
+        boot.append(
+            math.exp(_rmse(resampled["log_error_pred_over_obs"].to_numpy()))
+        )
+    bootstrap_ci = np.quantile(np.asarray(boot), [0.025, 0.5, 0.975])
+
+    overall = summary_df.iloc[0].to_dict()
+    overall.update(
+        {
+            "anchor_temperature_c": float(anchor_temp_c),
+            "target_temperatures_c": [float(x) for x in target_temps_c],
+            "n_held_formulations": int(detail_df["held_formulation"].nunique()),
+            "n_held_realizations": int(detail_df["held_realization"].nunique()),
+            "bootstrap_unit": "held_realization",
+            "bootstrap_reps": int(bootstrap_reps),
+            "bootstrap_seed": int(bootstrap_seed),
+            "bootstrap_multiplicative_rmse_ci95": [
+                float(bootstrap_ci[0]),
+                float(bootstrap_ci[2]),
+            ],
+            "bootstrap_multiplicative_rmse_median": float(bootstrap_ci[1]),
+            "claim_boundary": (
+                "Short-range (10-20 C) local formulation-and-temperature extrapolation "
+                "within the chemistry-audited E1-E3 neighborhood only; not cross-family "
+                "or universal reactive-PUR extrapolation."
+            ),
+        }
+    )
+    return detail_df, summary_df, overall
+
+
 def thermal_descriptor_summary(df: pd.DataFrame) -> dict:
     values = []
     for _rid, group in df.groupby("realization_id"):
@@ -278,6 +416,16 @@ def main() -> None:
     lofo.to_csv(args.output_dir / "leave_one_formulation_one_point.csv", index=False)
     lofo_detail.to_csv(args.output_dir / "leave_one_formulation_one_point_detail.csv", index=False)
 
+    extrap_detail, extrap_summary, extrap_overall = bounded_formulation_temperature_extrapolation(audited)
+    extrap_detail.to_csv(
+        args.output_dir / "local_joint_formulation_temperature_extrapolation.csv",
+        index=False,
+    )
+    extrap_summary.to_csv(
+        args.output_dir / "local_joint_formulation_temperature_extrapolation_summary.csv",
+        index=False,
+    )
+
     pca = model_free_state_shift(audited)
     thermal = thermal_descriptor_summary(audited)
     summary = {
@@ -293,6 +441,7 @@ def main() -> None:
         "model_free_state_shift": pca,
         "audited_thermal_descriptor": thermal,
         "lofo_120c": lofo[lofo["anchor_temperature_c"] == 120.0].to_dict(orient="records"),
+        "bounded_local_extrapolation": extrap_overall,
         "reporting_rule": (
             "Audits are chosen for scientific relevance before interpreting whether they strengthen or weaken a claim. Results that do not support a claim should not be silently deleted; they can remain exploratory/supporting rather than headline evidence."
         ),
