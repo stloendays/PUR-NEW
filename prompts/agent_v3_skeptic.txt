@@ -8,6 +8,9 @@ Audit the proposal for:
 - treating static viscosity as a proxy for thermal-hold stability;
 - ignoring the state-shift/realization effect when a state anchor or process control is needed;
 - confusing local measured evidence with external analogue evidence;
+- treating directional/noncommensurate literature percentages as exact total-formulation anchors;
+- disguising a reconstructed conservative decision rule as if it were a directly measured literature fact;
+- any guidance rule that appears tuned to the held-out validation recipe or later wet-lab result rather than traceable to pre-result local data, paper-derived rules, external literature/database evidence, or an explicitly labeled conservative design principle;
 - unsupported causal/mechanistic claims;
 - unrecognized process-history or stoichiometric uncertainty;
 - an experiment whose outcome would be difficult to interpret scientifically;
