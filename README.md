@@ -179,36 +179,58 @@ In the Agent, these sources are not treated as passive references. They are conv
 
 ---
 
-## 6. Agent-selected validation formulation and physical adjudication
+## 6. Outcome-blind Agent evaluation against a held-out wet-lab result
 
-The internal validation formulation is:
+The current paper does **not** rely on an unverifiable contemporaneous recommendation record.
+Instead, Agent decision quality is measured through a reproducible outcome-blind
+reconstruction.
 
-```text
-PPG2000 = 39.60
-PDP-70  = 39.60
-AC1920  = 17
-TK100   = 5
-MDI     = 20.19
-```
+The scored Arm B benchmark uses a 73-node candidate lattice derived from the original E1-E5
+design and pre-result external evidence. The held-out validated composition is deliberately
+not a lattice node, so exact recipe recovery is impossible by construction. A structural
+blindness audit verifies that the held-out formulation and follow-up measurements are
+unreachable from the Agent runtime; direct probes through all four formulation-specific
+action paths are rejected by the evidence firewall.
 
-According to the research team's confirmed chronology, the Agent recommendation preceded knowledge of the corresponding wet-lab outcome. The current repository does not contain the original contemporaneous freeze artifact, so this chronology is not presented as a Git timestamp claim.
-
-Human-executed 120 C hold repeats gave:
-
-```text
-15-60 min repeat 1: -0.16%
-15-60 min repeat 2: +3.04%
-mean profile:        +1.47%
-```
-
-Compared on the same 15-60 min interval:
+The enforced chronology is:
 
 ```text
-E1: +9.51%
-E5: +51.54%
+pre-result evidence
+-> Agent decision
+-> frozen recommendation + hashes
+-> BLIND PHASE CLOSED
+-> held-out wet-lab truth loaded
+-> adjudication
 ```
 
-The validation formulation therefore occupies a substantially lower-drift regime. The result supports the Agent-guided decision with respect to thermal-hold stability, but does not identify a unique AC1920/TK100 molecular mechanism.
+Confirmatory v3h results:
+
+```text
+10 attempted runs
+8 committed decisions
+2 abstentions
+8 / 8 committed decisions in the predeclared near region
+mean modifier-plane L1 = 2.281 percentage points
+median modifier-plane L1 = 1.877 percentage points
+```
+
+The lattice itself contains:
+
+```text
+18 / 73 near-region candidates = 24.66%
+48 / 73 dual-axis candidates   = 65.75%
+uniform-random mean L1         = 12.074 percentage points
+```
+
+The naive single-pass LLM baseline produced 0/7 near-region decisions and repeatedly selected
+the same reactive-core-only candidate.
+
+Attribution is explicit: approximately 94% of the quantitative distance improvement comes
+from the transparent deterministic rule layer. The language-model layer contributes a smaller
+decision step; this remains observable when the deterministic candidate ordering is withheld
+from every model payload.
+
+The held-out wet-lab measurement is used only as the post-closure adjudication yardstick.
 
 ---
 
