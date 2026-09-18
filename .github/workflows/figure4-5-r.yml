@@ -1,0 +1,71 @@
+name: render-figure4-5-r
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/figure4_rheological_coordinates.R"
+      - "scripts/figure5_outcome_blind_agent.R"
+      - "data/temperature_sweeps.csv"
+      - "data/thermal_hold.csv"
+      - "analysis/results/local_thermal_curve_fits.csv"
+      - "analysis/results/local_hold_dynamics.csv"
+      - "derived/stage1_blind_candidate_space_v1.json"
+      - "results/stage1_blind_replay_v3h/arm_b_blind/frozen_recommendations.csv"
+      - "results/stage1_blind_replay_v3h/arm_b_blind/adjudication_summary.json"
+      - "results/STAGE1_AI4SCI_REPORT.md"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::ggplot2
+            any::patchwork
+            any::scales
+            any::jsonlite
+            any::svglite
+          cache-version: 1
+      - name: Render Figure 4 and Figure 5
+        run: |
+          Rscript scripts/figure4_rheological_coordinates.R
+          Rscript scripts/figure5_outcome_blind_agent.R
+      - name: Verify outputs
+        run: |
+          test -s analysis/figures/Figure4_rheological_coordinates.pdf
+          test -s analysis/figures/Figure4_rheological_coordinates.svg
+          test -s analysis/figures/Figure4_rheological_coordinates.png
+          test -s analysis/figures/Figure5_outcome_blind_agent.pdf
+          test -s analysis/figures/Figure5_outcome_blind_agent.svg
+          test -s analysis/figures/Figure5_outcome_blind_agent.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Figure4-5-manuscript
+          path: |
+            analysis/figures/Figure4_rheological_coordinates.pdf
+            analysis/figures/Figure4_rheological_coordinates.svg
+            analysis/figures/Figure4_rheological_coordinates.png
+            analysis/figures/Figure5_outcome_blind_agent.pdf
+            analysis/figures/Figure5_outcome_blind_agent.svg
+            analysis/figures/Figure5_outcome_blind_agent.png
+      - name: Commit rendered manuscript figures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add analysis/figures/Figure4_rheological_coordinates.* analysis/figures/Figure5_outcome_blind_agent.*
+          if git diff --cached --quiet; then
+            echo "No figure changes to commit"
+          else
+            git commit -m "figures: render rheology and blind-agent main figures [skip ci]"
+            git push
+          fi
