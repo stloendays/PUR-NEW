@@ -35,9 +35,13 @@ problem under sparse evidence rather than a property-prediction problem. We use 
 independently measured wet-lab outcome as a frozen, outcome-blind benchmark for a multi-stage
 scientific decision agent, with the held-out formulation removed structurally rather than by
 prompt instruction. The agent identifies the temporal failure mode in 5/5 runs of every
-configuration and selects a dual-axis resin intervention in 8/8 committed runs
-(95% Wilson 0.68–1.00), against 0/7 for a single-pass baseline on identical evidence — worse
-than uniform random selection over the same candidate space (65.8%). Separating the
+configuration and places all 8 committed confirmatory decisions inside the predeclared
+near-region of the held-out formulation, with mean modifier-plane L1 distance of
+2.281 percentage points. A single-pass baseline on identical evidence enters the near region
+in 0/7 valid runs, while exact uniform random selection over the same 73-node lattice does so
+24.66% of the time. Directional dual-axis recovery is also 8/8 for the Agent versus 0/7 for
+the single-pass baseline, but is treated as a weaker endpoint because 65.75% of lattice nodes
+already contain both axes. Separating the
 deterministic ranking layer from the language-model layer attributes 94% of the quantitative
 improvement to the former; the latter is confirmed by withholding the precomputed ranking,
 after which the agent still departs from it in 7/8 runs. We argue that completed experiments,
@@ -79,8 +83,11 @@ conserved — apparent sensitivity 42.05 ± 2.43 kJ mol⁻¹, CV 5.8% — while 
 coefficient moves 4.29× across the design (0.1252 h⁻¹ to 0.5375 h⁻¹, both log-linear with
 R² > 0.997).
 
-The measured result is that **temperature response and time stability are separable
-dimensions and only the latter is composition-controlled**. Our interpretation, consistent
+The measured local result is that **temperature response and time stability are distinct,
+differently tunable dimensions in the present chemistry neighborhood**. The local
+temperature-response descriptor is comparatively concentrated, whereas the broader
+39-prepolymer external library spans a much wider thermal-sensitivity range; the local
+finding is therefore not generalized across PUR chemistry. Our interpretation, consistent
 with but not proven by these data, is that the final rheology reflects the structure the
 prepolymerization actually produced and how it continues to evolve, rather than an additive
 combination of the input polyols. We do not claim a molecular pathway; no chain-level
