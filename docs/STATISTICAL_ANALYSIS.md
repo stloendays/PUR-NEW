@@ -91,6 +91,25 @@ This is a stronger and more useful conclusion than simply stating that process h
 
 > **Within the present chemistry family, experimental realization primarily shifts the viscosity scale, while the temperature-response shape is transferable enough that one state anchor can calibrate the rest of the curve.**
 
+### Bounded local formulation-and-temperature extrapolation
+
+A stricter stress test withheld **both** formulation identity and the high-temperature prediction region. For each fold, one formulation was removed completely from shape fitting. The shared quadratic thermal response was learned only from the other formulations at temperatures **<=110 C**. For each realization of the unseen formulation, a single measured **110 C** viscosity value was then used to set the state offset, after which the model predicted the unseen **120 C and 130 C** responses.
+
+Across 12 held predictions from six realizations and three nominal formulations, the pooled log-RMSE was **0.0845**, corresponding to a multiplicative RMSE of **1.088x**. The median absolute percentage error was **5.68%** and the mean absolute percentage error was **6.32%**. Performance was similar at the two extrapolated temperatures:
+
+| held target temperature | multiplicative RMSE |
+|---|---:|
+| 120 C | **1.087x** |
+| 130 C | **1.089x** |
+
+A 10,000-replicate cluster bootstrap that resampled complete held realizations gave a 95% interval of approximately **1.043x-1.126x** for the pooled multiplicative RMSE. The largest individual multiplicative error was approximately **1.189x**.
+
+This test is stronger than ordinary interpolation because neither the held formulation nor the 120-130 C target region contributes to fitting the shared thermal shape. It therefore supports a **short-range local extrapolation** claim:
+
+> **Within the chemistry-audited E1-E3 neighborhood, the shared thermal-response representation can transfer to a completely unseen formulation and extrapolate 10-20 C beyond the fitted temperature range after one state-specific anchor measurement.**
+
+The scope is deliberately narrow. This result does **not** establish cross-family transfer, long-range extrapolation, or a universal reactive-PUR master curve. The broader external database shows substantially wider thermal-sensitivity variation across chemistry families, so cross-chemistry extrapolation remains outside the supported claim.
+
 ### Mixed-effects sensitivity analysis
 
 A mixed-effects model with formulation fixed effects, a shared quadratic thermal response and realization random intercept gives:
@@ -178,11 +197,11 @@ The database also contains one patent family with **9 formulations** reporting b
 
 ### Primary paper claim — strongest current result
 
-**State-shift master curve + one-point state calibration.**
+**State-shift master curve + one-point state calibration + bounded local extrapolation.**
 
 This result has the cleanest quantitative support because the same nominal formulations were measured across repeated realizations and the competing models can be compared directly. It produces a positive, practically testable statement:
 
-> **A realization-specific viscosity-scale parameter plus a shared thermal-response function reconstructs the local 80–130 °C rheology far better than formulation identity and temperature alone; one anchor measurement calibrates an unseen realization to approximately 6–9% multiplicative prediction error across the remaining temperatures.**
+> **A realization-specific viscosity-scale parameter plus a shared thermal-response function reconstructs the local 80–130 °C rheology far better than formulation identity and temperature alone; one anchor measurement transfers that shape to an unseen local formulation, and a stricter formulation-plus-temperature holdout retains approximately 1.09x pooled multiplicative error for 120–130 °C predictions.**
 
 This should be the main statistical/modeling result.
 

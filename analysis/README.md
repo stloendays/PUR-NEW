@@ -38,3 +38,27 @@ python scripts/statistical_analysis.py \
 ```
 
 The run labels GJJ, ZYX and CHH are treated as opaque within-operator realization labels. They are not interpreted as different operators.
+
+
+## Strict local transfer and bounded extrapolation
+
+The chemistry-audited transfer analysis now has two levels:
+
+1. `local_leave_one_formulation_one_point.csv` and `local_leave_one_formulation_pooled.csv` test one-point reconstruction when an entire nominal formulation is absent from thermal-shape fitting.
+2. `local_joint_formulation_temperature_extrapolation.csv` and `local_joint_formulation_temperature_extrapolation_summary.csv` apply a stricter joint holdout: the target formulation is absent from shape fitting, the shared shape is trained only through 110 C, one 110 C state anchor is supplied, and 120/130 C are predicted.
+
+The second test gives a pooled multiplicative RMSE of approximately **1.088x** across 12 held predictions. It is reported only as **10-20 C short-range local extrapolation within the chemistry-audited E1-E3 neighborhood**.
+
+Recompute the provenance-aware audit with:
+
+```bash
+python scripts/analysis_audit_v1.py --output-dir analysis/results
+```
+
+Render the manuscript Figure 3 with R:
+
+```bash
+Rscript scripts/figure3_local_transfer.R
+```
+
+The R script writes `analysis/figures/Figure3_local_transfer.pdf` and `analysis/figures/Figure3_local_transfer.svg`.
