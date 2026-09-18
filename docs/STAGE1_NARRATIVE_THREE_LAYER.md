@@ -110,9 +110,11 @@ Two model-free results make this more than a fit:
 - **Between-realization variance is a pure vertical shift.** PC1 carries **99.6 %** of the
   between-realization variance, and its cosine similarity to a constant vertical shift is
   **0.9998**. Realization state moves the viscosity *level* and leaves the *shape* alone.
-- **The shape is conserved.** Apparent temperature sensitivity across realizations is
-  **42.05 ± 2.43 kJ/mol** (CV 5.8 %), median per-curve R² 0.9924. This is a rheological
-  descriptor, not a reaction activation energy.
+- **The shape is locally conserved across the audited formulation neighborhood.** Apparent
+  temperature sensitivity across realizations is **42.05 ± 2.43 kJ/mol** (CV 5.8 %),
+  median per-curve R² 0.9924. This is a rheological descriptor, not a reaction activation
+  energy. The broader external 39-prepolymer library spans approximately **34.7–94.2
+  kJ/mol**, so this local concentration must not be generalized across PUR chemistry.
 
 Consequence: one in-range anchor measurement locates a previously held-out formulation on
 the shared curve to **6.3–9.9 %** multiplicative error (leave-one-formulation-out).
@@ -121,22 +123,25 @@ Putting the three coordinates side by side:
 
 | coordinate | what controls it | spread | usable as a design lever? |
 |---|---|---|---|
-| level α_r | realization / process state | dominant, ×2.8–3.6 within one nominal formulation | **no** — not formulation-controlled |
-| shape g(T) | conserved across the local family | CV 5.8 % | **no** — nothing to move |
-| temporal drift k | formulation | **4.29×** between E1 and E5 | **yes** |
+| level α_r | realization / process state is a dominant local source | ×2.8–3.6 within one nominal formulation | **not reliably set by formulation alone** |
+| shape g(T) | comparatively concentrated across this local family | CV 5.8 % locally; much broader across external PUR chemistry | **weak local lever, not universally fixed** |
+| temporal drift k | strongly formulation-responsive in the measured local contrast | **4.29×** between E1 and E5 | **clearest local design lever** |
 
-**This is the physical content of the headline conclusion.** The nonlinear amplification is
-real but it lands almost entirely on the *level*: PC1 carries 99.6 % of between-realization
-variance as a pure vertical shift, so prepolymerization and structural evolution move where
-the curve sits, not its shape. Temperature sensitivity is therefore a *conserved* dimension
-(E_η CV 5.8 %) while time stability is a *composition-controlled* one (4.29×). Two distinct
-rheological dimensions, and only the second one answers to formulation.
+**This is the physical content of the local headline conclusion.** In the audited E1–E3
+neighborhood, the dominant realization-to-realization variability lands on the *level*: PC1
+carries 99.6 % of between-realization variance as a near-constant vertical shift. The local
+temperature-response descriptor is comparatively concentrated (E_η CV 5.8 %), whereas the
+measured thermal-hold response changes 4.29× across the E1/E5 formulation contrast. These are
+therefore distinct and differently tunable rheological coordinates **within the present local
+design**. The external 39-prepolymer library shows that temperature sensitivity itself remains
+chemistry-dependent on the broader PUR landscape.
 
-**This is also what makes the decision problem well-posed.** Static viscosity is a
-realization artefact as much as a formulation property, and the thermal-response shape is
-not a lever at all. The only coordinate that both varies with composition and matters for
-the application is the temporal one — so the next experiment must be a matched hold test,
-not a viscosity match.
+**This is what makes the next local decision well-posed.** Static viscosity cannot be treated
+as a formulation-only scalar because realization state moves its level substantially. Within
+the measured neighborhood, thermal-response shape offers less leverage than the formulation-
+sensitive hold drift. The next experiment should therefore prioritize a matched hold test
+rather than another single-point viscosity match; this is a local design consequence, not a
+claim that temperature response is never formulation-tunable.
 
 ## Layer 3 — AI: a decision problem under sparse evidence
 
@@ -174,31 +179,33 @@ from it in 7 of 8 runs.
 ## How the three layers lock together
 
 ```
-conclusion  final rheology is not additive in raw polyol properties; it is a
-            composition-dependent nonlinear amplification through prepolymerization
-            and structural evolution. Temperature sensitivity and time stability are
-            two distinct dimensions; the latter is far more composition-tunable.
+conclusion  final rheology is not determined by nominal composition alone. In the
+            audited local family, realization mainly shifts viscosity level while
+            thermal-hold drift changes strongly with formulation. Across broader PUR
+            chemistry, temperature sensitivity is also chemistry-dependent.
     |
     v
 chemistry   same recipe -> 2.80-3.57x realized viscosity  (amplification is real)
             modest composition move -> 4.29x drift          (and it is nonlinear)
             best local point still fails: E1 +9.51% in 45 min
     v
-physics     the amplification lands on the LEVEL: PC1 99.6%, cos 0.9998
-            the SHAPE is conserved: E_eta 42.05 +/- 2.43 kJ/mol, CV 5.8%
-            the DRIFT is not: 4.29x
-            => temperature sensitivity and time stability are separable,
-               and only the second answers to formulation
+physics     local realization variation lands mainly on the LEVEL:
+            PC1 99.6%, cos 0.9998
+            local SHAPE is concentrated: E_eta 42.05 +/- 2.43 kJ/mol, CV 5.8%
+            local DRIFT contrast is much larger: 4.29x
+            => distinct local coordinates; drift is the stronger measured lever
+            => broader database prevents treating temperature sensitivity as universal
     v
 AI          so the decision is "which hold experiment", not "which viscosity"
             sparse evidence + uncovered intervention family => decision problem
             completed wet-lab result => frozen outcome-blind benchmark
 ```
 
-Each layer supplies the premise the next one needs. The chemistry says drift is the
-problem; the physics says drift is the *only* actionable coordinate and static viscosity is
-a trap; the AI section is then evaluating a decision that the physics has already shown to
-be the correct one to make.
+Each layer supplies the premise the next one needs. The chemistry identifies drift as the
+unresolved local processing problem; the physics shows that static viscosity is strongly
+state-conditioned and that drift is the clearest formulation-responsive coordinate measured
+in this neighborhood; the AI section then evaluates a decision grounded in that scoped
+physical conclusion rather than assuming the same lever dominates all PUR chemistries.
 
 ## Figure plan
 
