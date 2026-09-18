@@ -1,5 +1,14 @@
 # State-Conditioned Rheology Guides Evidence-Grounded Formulation Decisions in Reactive Polyurethane Hot-Melt Adhesives
 
+
+**Junbo Tong¹, Jianming Zhao²\***
+
+¹ Department of Chemistry, Faculty of Science, National University of Singapore, 3 Science Drive 3, Singapore 117543, Singapore  
+² Ningbo Yinjun Technology, Ningbo, Zhejiang, China  
+
+\*Corresponding author: Jianming Zhao
+
+
 ## Abstract
 
 Reactive polyurethane hot-melt adhesives (PURs) are commonly formulated from nominal composition and processing temperature, although practical melt rheology also reflects the state realized during preparation and thermal residence. Here, six chemistry-audited realizations (36 temperature–viscosity measurements) from a local PPG2000/STEPANPOL PDP-70/4,4′-MDI family reveal a low-dimensional, experimentally calibratable state dependence. Nominally identical E2 realizations differed by 2.80–3.57-fold across 80–130 °C, yet a realization-specific viscosity scale combined with a shared thermal response explained 99.77% of log-viscosity variation versus 85.2% for a formulation-only model, reducing held-temperature multiplicative error from 1.442× to 1.058×. In leave-one-formulation-out tests, one 110 °C anchor predicted 120–130 °C viscosity with a pooled multiplicative RMSE of 1.088×. At 120 °C, the apparent log-viscosity drift differed 4.29-fold between two original formulations, while a resin-modified validation formulation reduced mean absolute 15–60 min drift to 1.60% versus 9.51% for the best original local reference. These physical coordinates were combined with curated PUR evidence in a retrospective outcome-blind Agent reconstruction. The held-out formulation was absent from the 73-node candidate lattice; 8 of 10 runs committed to a candidate and all 8 committed decisions fell within the predeclared near region. A strategy-ladder decomposition assigned approximately 94% of the best-case distance reduction to deterministic scientific policy, with the language model operating inside the evidence-bounded decision space. The resulting framework separates viscosity level, thermal response and thermal-hold trajectory, using AI to select bounded experiments rather than replace physical characterization.
@@ -54,7 +63,7 @@ $$
 
 where $\alpha_r$ is the realization-specific viscosity-scale coordinate.
 
-After chemistry-aware curation, the primary dataset contained 36 observations from six complete realizations of E1–E3. One E1 curve carrying phosphoric-acid context was excluded from the primary model because the additive condition was not encoded in the compact formulation definition and was retained only for sensitivity analysis.
+After chemistry-aware curation, the primary dataset contained six complete realizations of E1–E3 measured at six temperatures per realization (80, 90, 100, 110, 120 and 130 °C), giving 36 temperature–viscosity observations in total. One E1 curve carrying phosphoric-acid context was excluded from the primary model because the additive condition was not encoded in the compact formulation definition and was retained only for sensitivity analysis.
 
 The formulation-only model explained 85.2% of the variation in log viscosity. Introducing realization-specific scale terms with a shared low-complexity inverse-temperature response increased the explained variation to 99.77%. The same advantage was observed in prediction: held-temperature multiplicative error decreased from approximately 1.442× for the formulation-only model to 1.058× for the state-conditioned model.
 
@@ -287,7 +296,13 @@ The resulting workflow links state calibration, trajectory-aware formulation des
 
 ---
 
-## 5. Data and Code Availability
+## 5. Competing Interests
+
+The authors declare no competing interests.
+
+---
+
+## 6. Data and Code Availability
 
 Versioned local formulation tables, chemistry-audited temperature-sweep data, thermal-hold records, statistical analysis scripts, blindness-audit code, candidate-space generation, and scientific-Agent workflows are available in the public project repository at https://github.com/stloendays/PUR-NEW. The manuscript analyses should be associated with a frozen release or archived commit at submission. External data with separate licensing or provenance constraints should be redistributed only in accordance with their source terms.
 
