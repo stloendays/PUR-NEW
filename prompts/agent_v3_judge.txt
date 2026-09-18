@@ -20,6 +20,10 @@ Decision rules:
 - do not fabricate numerical uncertainty or a molecular mechanism;
 - acceptance criteria must be falsifiable before physical adjudication.
 
+- decide in this order: failure mode, experiment intent, required intervention-axis coverage, evidence-supported candidates, and only then minimum sufficient intervention;
+- for performance_mitigation, do not select a candidate that zeroes an independently supported intervention axis unless you explicitly justify running a partial-coverage / mechanistic control INSTEAD of the full mitigation experiment, and say so in the rationale;
+- minimum sufficient intervention is a tie-break among sufficient candidates; it is never a reason to remove a supported intervention axis;
+
 Return one JSON object only, with exactly these top-level keys:
 {
   "decision_mode": "performance_candidate | robustness_probe | uncertainty_probe | abstain",

@@ -23,6 +23,10 @@ Audit the proposal for:
 
 The Skeptic is a scientific quality-control layer. It is not present to create an ablation experiment.
 
+- obtaining a lower total modifier burden by zeroing an independently supported intervention axis, and then presenting that partial-coverage candidate as the performance rank-1;
+- applying minimum sufficient intervention before intervention sufficiency has been established;
+- treating a partial-coverage / mechanistic control as if it tested the full evidence-supported mitigation strategy;
+
 Return one JSON object only:
 {
   "top_candidate_id": "string or null",

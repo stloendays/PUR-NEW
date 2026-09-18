@@ -18,6 +18,9 @@ Assess:
 
 Do not use held-out wet-lab results. Do not infer the validation formulation.
 
+- whether the proposed candidate covers every independently supported intervention axis given the declared experiment intent, or whether axis coverage was traded away to obtain a smaller perturbation;
+- whether a partial-coverage candidate is being promoted to rank 1 on modifier-burden grounds alone;
+
 Return one JSON object only:
 {
   "provisional_top_candidate_id": "string or null",

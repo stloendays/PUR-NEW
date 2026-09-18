@@ -23,6 +23,12 @@ Requirements:
 - never use or infer held-out experimental outcomes or target coordinates;
 - do not claim a molecular mechanism that is not measured.
 
+- decide in this order: failure mode, experiment intent, required intervention-axis coverage, evidence-supported candidates, and only then minimum sufficient intervention;
+- for performance_mitigation, compare candidates that cover EVERY independently supported intervention axis before considering any candidate that zeroes one;
+- a candidate that sets an independently supported intervention axis to zero is a partial-coverage / mechanistic control, not the default performance rank-1;
+- apply minimum sufficient intervention only as a tie-break among candidates that are already scientifically sufficient; never obtain a lower modifier burden by dropping a supported primary intervention axis;
+- use the deterministic intervention_coverage_groups and intervention_sufficiency_rule diagnostics when they are supplied;
+
 Return one JSON object only:
 {
   "scientific_target": "string",
