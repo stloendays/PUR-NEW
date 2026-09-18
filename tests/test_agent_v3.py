@@ -95,7 +95,7 @@ def test_pareto_front_is_weight_free():
             "active_axis_distance_pct_points": 0.0,
         },
     ]
-    assert pareto_front(cards) == ["A"]
+    assert pareto_front(cards) == ["A", "B", "C"]  # explicit trade-offs remain visible without scalarizing them
 
 
 def test_selection_entropy_tracks_instability():
