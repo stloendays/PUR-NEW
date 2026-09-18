@@ -9,6 +9,27 @@ The project now separates two different questions that must not be conflated.
 
 The first is implemented by `scripts/run_pre_result_replay_agent.py`. The second remains the separate blind benchmark / hierarchical coarse-to-refinement workflow.
 
+## Scientific interpretation: knowledge-guided, not target-guided
+
+The pre-result Design Agent is **not** interpreted as an unguided LLM that happened to guess the later successful formulation. Its intended scientific role is to integrate four pre-result evidence layers:
+
+```text
+sparse local E1-E5 experiments
+-> diagnose thermal-hold instability and state uncertainty
+-> paper-derived state-aware rheological rules
+-> curated PUR literature/database formulation priors
+-> physical + uncertainty constraints
+-> evidence-guided formulation decision
+```
+
+The local experiments identify the failure mode but do not uniquely specify an acrylic/tackifier intervention. The cross-family move is therefore guided by external scientific knowledge. Curated patents and papers support acrylic-modified and minor-tackifier-modified reactive-PUR formulation families and provide broad analogue regions. These external data are used as **machine-actionable scientific priors**, not as direct property labels or a lookup table for the later validation result.
+
+The interpretation to preserve in the manuscript is:
+
+> The Agent's value lies in grounding sparse local experimental evidence in paper-derived rheological rules and curated PUR formulation knowledge, thereby guiding the LLM from local failure diagnosis toward an experimentally plausible intervention family.
+
+This does **not** mean that the literature uniquely determines the exact validation recipe. Exact historical replay rules that go beyond directly commensurate external anchors must remain explicitly labeled as reconstructed decision principles.
+
 ## Evidence firewall
 
 Historical replay always uses the `blind_pre_result` evidence profile. The Agent may use original E1-E5 temperature-sweep and thermal-hold evidence plus pre-result external analogue evidence. It may not receive F1 identity, validation hold measurements, post-result adjudication labels, or controller-only target coordinates.
@@ -33,6 +54,16 @@ This shortlist is retrospective. It is not claimed to be the contemporaneous ori
 - matched 120 C, 15/30/45/60 min measurements with two independent repeats for later physical adjudication.
 
 Under the current reconstructed shortlist, the contract admits `RPL_C04` and `RPL_C07`; the frozen minimum-intervention tie-break ranks `RPL_C04` first.
+
+The constraint provenance is intentionally heterogeneous:
+
+- approximately 19-20 wt% acrylic is supported by repeated directly commensurate external examples;
+- approximately 4.8-6.4 wt% minor tackifier/hydrocarbon resin is supported by curated patent examples;
+- the reported 15% acrylic level is retained only as **directional lower-region evidence** because its denominator is not yet verified as directly commensurate total-formulation wt%;
+- the preference for the smallest admissible modifier burden is an explicit conservative experimental-design principle used to limit extrapolation away from the sparse local chemistry;
+- requiring both modifier axes simultaneously is part of the reconstructed historical decision logic with independent external support for each axis, not a universal chemical law.
+
+This provenance distinction prevents a reconstructed rule from being presented as if it were a directly measured literature fact.
 
 ## Two replay modes
 
@@ -60,7 +91,7 @@ Do not use strict replay accuracy as evidence that the Agent independently redis
 
 Allowed:
 
-> A contract-constrained pre-result Design Agent reproducibly replayed the author-confirmed formulation decision using reconstructed pre-result evidence while excluding the later wet-lab outcome.
+> An evidence-guided pre-result Design Agent reproducibly replayed the author-confirmed formulation decision by integrating original local measurements, paper-derived rheological rules, and curated PUR literature/database priors while excluding the later wet-lab outcome.
 
 Also allowed, if the blind benchmark supports it:
 
