@@ -65,7 +65,7 @@ This analysis should be added only from an authentic recovered pre-result record
 
 If the original recommendation record contains alternatives or a decision margin, preserve them and assess whether the recommendation remained preferred under reasonable evidence perturbations.
 
-The later V2 replay benchmark can provide a separate reproducibility/ablation view, but it is not a substitute for the original historical recommendation record.
+The current Stage-1 reconstruction provides an outcome-blind decision-quality view, but it is not a substitute for the unavailable contemporaneous historical machine record.
 
 ## 2. Current physical adjudication
 
@@ -124,7 +124,7 @@ The current chronology record is `docs/EXPERIMENTAL_CHRONOLOGY.md`. If an older 
 
 The absence of that artifact should be disclosed; it should not be converted into a claim that the recommendation was retrospective.
 
-## 5. Role of the V2 replay benchmark
+## 5. Role of the Stage-1 preexperimental reconstruction
 
 The later V2 12-candidate benchmark is secondary.
 
