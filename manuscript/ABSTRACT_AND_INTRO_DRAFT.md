@@ -27,10 +27,12 @@ realized rheology is not additive in nominal polyol composition — three nomina
 preparations span 2.80–3.57× in measured viscosity at matched temperature — and that this
 variability enters almost entirely as a vertical shift in ln η, with the first principal
 component carrying 99.6% of between-realization variance at cosine 0.9998 to a constant
-offset. Consequently the apparent temperature sensitivity is conserved across preparations
-(42.05 ± 2.43 kJ mol⁻¹, CV 5.8%) while the isothermal drift coefficient varies 4.29× with
-composition. Temperature response and time stability are separable rheological dimensions,
-and only the second answers to formulation. This makes the next-experiment choice a decision
+offset. Consequently the apparent temperature sensitivity is comparatively concentrated across the
+audited local preparations (42.05 ± 2.43 kJ mol⁻¹, CV 5.8%), while the isothermal drift
+coefficient varies 4.29× across the measured formulation contrast. Temperature response and
+time stability are therefore distinct, differently tunable local rheological dimensions. The
+broader 39-prepolymer evidence base spans a much wider thermal-sensitivity range, so this
+local concentration is not generalized across PUR chemistry. This makes the next-experiment choice a decision
 problem under sparse evidence rather than a property-prediction problem. We use a completed,
 independently measured wet-lab outcome as a frozen, outcome-blind benchmark for a multi-stage
 scientific decision agent, with the held-out formulation removed structurally rather than by
