@@ -44,7 +44,7 @@ This exclusion is based on chemical comparability rather than on the direction o
 
 ## Supplementary Table S2 | Chemistry-audited temperature-sweep realizations
 
-| Realization | Formulation | Retest after 1 d | n temperatures | Apparent (E_\eta) (kJ mol(^{-1})) | (R^2), (ln\eta) vs (1/T) |
+| Realization | Formulation | Retest after 1 d | n temperatures | Apparent $E_\eta$ (kJ mol$^{-1}$) | $R^2$, $\ln\eta$ vs $1/T$ |
 |---|---|---:|---:|---:|---:|
 | E1 GJJ day-1 | E1 | yes | 6 | 42.712 | 0.9962 |
 | E2 CHH | E2 | no | 6 | 37.634 | 0.9651 |
@@ -376,11 +376,11 @@ The naive single-pass LLM baseline and uniform-random lattice baseline are retai
 
 For a single uniform-random draw from the same candidate lattice, the exact near-region probability is
 
-[
-18/73 = 24.66%.
-]
+$
+18/73 = 24.66\%.
+$
 
-The confirmatory Agent committed-selection rate inside the near region is 100% (8/8 committed decisions).
+At the run level, the confirmatory Agent recovered the near region in 8 of 10 attempted runs (80%); the remaining two runs abstained. Conditional on commitment, all 8 of 8 selected candidates were inside the near region.
 
 The benchmark should not be interpreted as evidence that the language model independently discovered the formulation. The deterministic scientific policy defines most of the useful geometry of the decision space.
 
