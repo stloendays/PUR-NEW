@@ -150,29 +150,77 @@ The Planner first defines the physical failure mode and determines which evidenc
 
 This architecture is not presented as a general-purpose LLM benchmark. Its purpose in this study is narrower: to ensure that the formulation decision is explicitly traceable to the material regularities discovered in the first half of the work.
 
-### 2.7 Agent-guided formulation selection is supported by subsequent wet-lab adjudication
+### 2.7 Outcome-blind reconstruction quantifies Agent decision quality
 
-The state-aware analysis identified thermal-hold drift, rather than static viscosity alone, as the central design failure. Importantly, the formulation recommendation was not treated as an unguided language-model guess. The local experiments supplied the failure diagnosis and realization-state constraints, the paper-derived rheological analysis defined the response that had to be optimized, and the curated PUR literature/database layer supplied formulation-family priors that were absent from the sparse local design. External evidence supported acrylic-modified and minor-tackifier-modified reactive-PUR formulations as chemically defensible intervention directions, while conservative design constraints limited extrapolation away from the E1-E5 chemistry. The Agent therefore operated as an evidence-guided decision layer that translated heterogeneous pre-result knowledge into a testable formulation choice. According to the confirmed experimental chronology, the Agent recommendation preceded access to the corresponding validation outcome. The current repository does not contain the original contemporaneous freeze artifact, and the manuscript therefore treats this chronology as author-confirmed rather than as a Git-timestamp claim.
+Because the contemporaneous pre-experiment recommendation artifact was not retained in the
+present repository, the Agent contribution is evaluated here through a stricter,
+code-enforced **outcome-blind reconstruction** rather than through an unverifiable historical
+chronology claim. The completed wet-lab result is treated only as a frozen held-out yardstick.
+It is structurally unavailable to the Agent until after recommendations have been frozen.
 
-The selected validation formulation used the source-reported parts basis:
+The scored Arm B benchmark uses a 73-node candidate lattice constructed from the measured
+E1-E5 design and pre-result external formulation evidence. The held-out validated composition
+is deliberately **not** a node of this lattice, so exact recipe recovery is impossible by
+construction. Candidate identifiers carry no rank or historical identity, and no candidate
+contains the later measurement schedule. An automated blindness audit inspects every runtime-
+reachable artifact and additionally probes the action layer; attempts to access the held-out
+formulation through formulation inspection, hold-stability, repeatability-risk, or temperature-
+support actions are blocked by the evidence firewall. Only this target-blind arm is used for
+independent recovery claims.
 
-| Component | Source-reported amount |
-|---|---:|
-| PPG2000 | 39.60 |
-| PDP-70 | 39.60 |
-| AC1920 | 17 |
-| TK100 | 5 |
-| MDI | 20.19 |
+The evaluation chronology is machine enforced:
 
-The local source does not explicitly report the NCO:OH ratio for this formulation, and no value is inferred here. Likewise, the present experiment does not isolate AC1920 and TK100 as separate causal variables.
+```text
+pre-result evidence
+-> Agent run
+-> recommendation freeze + hash
+-> BLIND PHASE CLOSED
+-> held-out truth loaded
+-> adjudication
+```
 
-The formulation was subsequently prepared and measured by the human experimental team during a 120 C thermal hold. Two repeated trajectories were obtained over 15-60 min. Repeat 1 changed from 1230 to 1228 in source-reported viscosity, corresponding to -0.16%. Repeat 2 changed from 1281 to 1320, corresponding to +3.04%. The mean profile changed by approximately +1.47%.
+The adjudicator refuses to score before the blind-closure record exists and re-verifies the
+hash of the frozen recommendations before comparison. This design separates the scientific
+decision from the later outcome without relying on prompt-level instructions to ignore known
+information.
 
-By comparison, the original E1 and E5 references increased by +9.51% and +51.54%, respectively, over the same 15-60 min interval. Expressed as reductions in absolute endpoint drift, the mean validation profile corresponds to approximately 84.5% lower drift than E1 and approximately 97.1% lower drift than E5.
+On the confirmatory v3h series, the Agent committed to a named candidate in 8 of 10 runs and
+abstained in 2. All 8 committed decisions fell within the predeclared 7.5 percentage-point
+modifier-plane L1 neighborhood of the held-out formulation. Their mean modifier-plane L1
+distance was 2.281 percentage points and the median was 1.877 percentage points. The nearest
+lattice node lies 1.877 percentage points from the held-out formulation, so this median is the
+construction floor rather than sub-grid recovery.
 
-This result is important for two reasons. First, it demonstrates that the design objective identified from the earlier physical analysis was experimentally actionable: the formulation was moved into a substantially lower-drift regime. Second, the validation formulation did not need to have the lowest initial viscosity in order to have the best hold stability. This directly supports the premise that instantaneous viscosity and thermal-hold stability are non-redundant design targets.
+The near-region endpoint is more discriminating than simply asking whether both modifier
+axes are nonzero. Of the 73 frozen candidates, only 18 (24.66%) lie in the near region,
+whereas 48 (65.75%) are nonzero on both modifier axes. The Agent achieved 8/8 near-region
+recovery among committed v3h runs; a naive single-pass LLM on the identical evidence produced
+0/7 near-region decisions and repeatedly selected the same reactive-core-only candidate.
+Uniform random selection over the frozen lattice would enter the near region 24.66% of the
+time and has a mean modifier-plane L1 distance of 12.074 percentage points. The naive baseline
+therefore fails systematically rather than merely adding variance.
 
-The result should nevertheless be interpreted at the level supported by the experiment. It demonstrates successful stabilization of the measured rheological response under the tested formulation and time window. It does not prove that the effect is caused by one specific molecular pathway, and it does not separate the individual causal contribution of AC1920 from that of TK100. This boundary is especially important because prior acrylic-modification studies show that acrylic functionality and whether the modifier is reactive or nonreactive can materially change the resulting polyurethane network and rheology [@Jung2008AcrylicModification].
+The deterministic and language-model contributions were also separated. Re-engineering the
+transparent rule layer moved its best candidate from 15.115 to 2.615 percentage points from
+the held-out formulation, accounting for approximately 94% of the total distance improvement.
+To test whether the model merely copied this ranking, the confirmatory Agent was run with the
+deterministic ordering withheld while per-candidate evidence remained available. In 7 of 8
+committed runs it departed from the hidden deterministic rank-1, and its modal choice was the
+nearest available lattice node. Thus the dominant quantitative gain belongs to the explicit
+scientific rules, while the language-model layer contributes a smaller but measurable
+decision step inside the evidence-constrained region.
+
+Cross-model runs preserved the same protocol. The nearest lattice node remained the modal
+selection for GPT-5.6-Luna, GPT-5.5, and GPT-5.6-Sol, although abstention behavior was
+model-dependent. These results are therefore interpreted as evidence for the decision
+architecture and its evidence-grounding, not as a claim that one base model is universally
+superior.
+
+The completed wet-lab experiment remains scientifically important because it supplies the
+held-out physical yardstick: the selected intervention region corresponds to a substantially
+lower thermal-hold-drift regime than the original E1/E5 references over the matched
+15-60 min window. In the Agent benchmark, however, those measurements enter only after blind
+closure and serve solely for adjudication.
 
 ### 2.8 A state-conditioned design framework emerges from the combined results
 
@@ -287,11 +335,31 @@ The Planner identifies the physical failure mode and requests deterministic acti
 
 The freeze step is programmatic. Recommendation records include the candidate state, uncertainty decomposition, falsifiable acceptance criterion, timestamps, input hashes, prompt hashes, model identifiers, and repository provenance where available. Wet-lab results are stored separately and are used only for subsequent adjudication.
 
-### 3.10 Evidence firewall and chronology
+### 3.10 Outcome-blind evidence firewall and adjudication protocol
 
-For replay or blinded analysis, validation-formulation identity and follow-up results are removed before model calls. The state-aware scientific tool is computed only from original pre-validation local measurements.
+The Agent benchmark uses a target-blind runtime profile in which the held-out formulation,
+its follow-up measurements, derived post-result statistics, and adjudication labels are
+removed before any model payload is assembled. Access is controlled structurally rather than
+through an instruction to ignore known results.
 
-The research team confirms that the validation formulation was recommended before the corresponding wet-lab result was available to the Agent. The current repository does not contain the original contemporaneous freeze artifact; therefore, this chronology is reported as author-confirmed rather than as repository-timestamp proof.
+The blindness audit enumerates every artifact reachable by the Agent runtime and tests the
+action layer directly. The scored Arm B candidate space contains 73 nodes generated from the
+original local design and external pre-result evidence; it contains neither the held-out
+composition nor its measurement schedule. Any action request targeting the blinded
+formulation is rejected as `blocked_by_evidence_firewall`.
+
+Each benchmark series writes immutable strategy/config hashes before execution. After all
+runs in a series have completed, their recommendations are summarized without loading the
+held-out truth and a `BLIND_PHASE_CLOSED` record is written. Only then may the adjudication
+routine load the held-out result. The adjudicator re-checks the frozen recommendation CSV
+hash before scoring. This produces an auditable sequence of evidence restriction,
+recommendation freeze, blind closure, and post-unblind evaluation.
+
+The primary confirmatory series contains 10 GPT-5.6-Luna runs under identical evidence and
+candidate space with the deterministic candidate ordering withheld from the model. Cross-
+model transfer was evaluated separately and not pooled with the primary series. Failed
+engineering invocations and schema/infrastructure defects are retained as provenance but are
+not counted as scientific decisions.
 
 ### 3.11 Statistical scope and interpretation
 
