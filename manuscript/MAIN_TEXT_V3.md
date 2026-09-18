@@ -289,7 +289,7 @@ The resulting workflow links state calibration, trajectory-aware formulation des
 
 ## 5. Data and Code Availability
 
-Versioned local formulation tables, chemistry-audited temperature-sweep data, thermal-hold records, statistical analysis scripts, blindness-audit code, candidate-space generation, and scientific-Agent workflows are maintained in the project repositories. External data with separate licensing or provenance constraints should be redistributed only in accordance with their source terms.
+Versioned local formulation tables, chemistry-audited temperature-sweep data, thermal-hold records, statistical analysis scripts, blindness-audit code, candidate-space generation, and scientific-Agent workflows are available in the public project repository at https://github.com/stloendays/PUR-NEW. The manuscript analyses should be associated with a frozen release or archived commit at submission. External data with separate licensing or provenance constraints should be redistributed only in accordance with their source terms.
 
 ---
 
