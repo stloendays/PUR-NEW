@@ -93,17 +93,26 @@ Same candidate lattice, same pre-result evidence, same model, same metric. The n
 baseline view is built by `scripts/build_naive_baseline_view.py` and verified to contain
 no F1 row, no follow-up stage and none of the follow-up viscosity values.
 
-| arm | N | named | dual-axis | near-region | modifier L1 |
-|---|---:|---:|---|---|---:|
-| naive single-pass LLM | 10 | 7 | **0/7** [0.00, 0.35] | 0/7 | **18.123** |
-| transparent support ranker | 1 | 1 | 0/1 | 0/1 | 15.623 |
-| uniform random over the lattice (exact) | — | — | 65.8 % | 24.7 % | 12.074 |
-| **agent (v3h)** | 10 | 8 | **8/8** [0.68, 1.00] | 8/8 | **2.281** |
+| arm | N | named | near-region | modifier L1 | dual-axis |
+|---|---:|---:|---|---:|---|
+| naive single-pass LLM | 10 | 7 | **0/7** | **18.123** | 0/7 [0.00, 0.35] |
+| transparent support ranker | 1 | 1 | 0/1 | 15.623 | 0/1 |
+| uniform random over the lattice (exact) | — | — | **24.7 %** | 12.074 | 65.8 % |
+| **agent (v3h)** | 10 | 8 | **8/8** | **2.281** | 8/8 [0.68, 1.00] |
 
-**The naive single-pass LLM performs worse than chance.** All 7 of its valid runs selected
-`S1C01` — the reactive-core-only E1 composition — so it never left the measured chemistry at
-all, while uniform random selection would enter the dual-axis region 65.8 % of the time. The
-failure is systematic, not noisy: the same wrong candidate every time.
+The **near-region metric is the more discriminating lattice-level endpoint**: only 18 of
+73 candidates (24.66 %) lie within the predeclared 7.5 percentage-point L1 region, whereas
+48 of 73 (65.75 %) are merely nonzero on both modifier axes. Thus dual-axis recovery is best
+read as directional intervention-family recovery, while near-region recovery and modifier-plane
+L1 quantify whether the decision concentrated in the experimentally supported neighborhood.
+Under independent uniform draws from the frozen lattice, eight consecutive near-region hits
+would occur with probability approximately **1.37 × 10^-5**; this is a descriptive lattice
+null, not a substitute for the predeclared benchmark analysis.
+
+**The naive single-pass LLM performs worse than chance on both direction and region.** All 7
+of its valid runs selected `S1C01` — the reactive-core-only E1 composition — so it never
+left the measured chemistry and never entered the near region. The failure is systematic,
+not noisy: the same wrong candidate every time.
 
 This is the comparison that establishes the scaffolding is doing the work. Naive-LLM invalid
 output rate was 3/10; three follow-up diagnostic invocations all succeeded, so those failures
@@ -193,10 +202,12 @@ What this demonstrates as a method, independent of the PUR chemistry:
 May:
 > Using a completed wet-lab result as a frozen, outcome-blind benchmark, we show that revising a
 > scientific agent's decision strategy using only general experimental-design principles moves
-> its pre-result recommendations from 0/5 to 8/8 dual-axis intervention recovery
-> (95 % Wilson [0.00,0.43] → [0.68,1.00]), against a naive single-pass baseline on the identical
-> evidence that recovers 0/7 and performs worse than uniform random selection over the same
-> candidate space. We attribute 94 % of the accompanying distance improvement to the
+> its pre-result recommendations from 0/5 to 8/8 near-region recovery, with mean modifier-plane
+> L1 distance reduced from 12.115 to 2.281 percentage points. Directional dual-axis recovery
+> simultaneously moves from 0/5 to 8/8 (95 % Wilson [0.00,0.43] → [0.68,1.00]). A naive
+> single-pass baseline on identical evidence recovers 0/7 near-region and 0/7 dual-axis
+> decisions, while the frozen lattice itself contains 24.7 % near-region and 65.8 % dual-axis
+> candidates under uniform random selection. We attribute 94 % of the accompanying distance improvement to the
 > deterministic rule layer and the remainder to the language-model layer — the latter verified
 > by withholding the precomputed ranking, after which the agent still departed from it in 7 of 8
 > runs. The selected candidate is modal for all three models tested.
@@ -205,3 +216,17 @@ May not:
 > that the agent validates the wet-lab result (it performs no measurement); that the five
 > versions are independent blind trials; or that agreement at 1.877 pp reflects resolution finer
 > than the candidate lattice permits.
+
+
+## 9. Record-count provenance
+
+The repository contains several different counting units that should not be conflated:
+
+- **27 primary Luna strategy-ladder runs** (v1/v2/v3/v4/v3h), each using five LLM stages:
+  **135 real LLM calls** and approximately **6.8 million tokens**.
+- **36 frozen LLM recommendation records** when the two cross-model series are added.
+- **38 total `recommendation.json` artifacts** in the frozen result commit because two
+  additional records are deterministic-rule baselines rather than LLM Agent outputs.
+
+Manuscript text should name the counting unit explicitly rather than describing all 38 files
+as Agent recommendations tied to the 135-call statistic.
