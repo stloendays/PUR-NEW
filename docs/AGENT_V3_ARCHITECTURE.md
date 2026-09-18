@@ -58,7 +58,7 @@ This exact multi-stage sequence is implemented in `configs/agent_v3.json` and `s
 
 ### Stage 0 — structural evidence firewall
 
-For blind replay, validation-formulation identity, follow-up measurements, post-result labels and controller-only targets are removed before any model call.
+For outcome-blind preexperimental reconstruction, validation-formulation identity, follow-up measurements, post-result labels and controller-only targets are removed before any model call.
 
 ### Stage 1 — Planner
 
@@ -219,7 +219,7 @@ physical/model discovery
 -> physical result
 ```
 
-Repeated held-out replay may still be used as a secondary reproducibility check, but component ablations are not required for the central scientific claim.
+The active Stage-1 study is a single outcome-blind preexperimental reconstruction. Repeated independent runs assess decision stability; they are not a separate replay-fidelity arm.
 
 This avoids turning a materials-discovery paper into an LLM-systems paper.
 
