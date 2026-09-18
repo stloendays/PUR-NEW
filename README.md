@@ -340,11 +340,13 @@ Repository CI runs the local audit automatically.
 
 ## 9. Manuscript status
 
-The first real main-text draft is now in:
+The current manuscript master draft is:
 
 ```text
-manuscript/MAIN_TEXT_DRAFT.md
+manuscript/MAIN_TEXT_V2.md
 ```
+
+The earlier `manuscript/MAIN_TEXT_DRAFT.md` is retained as a versioned predecessor rather than overwritten.
 
 The intended Results order is:
 
