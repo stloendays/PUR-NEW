@@ -10,6 +10,19 @@ Required scientific order:
 
 The action `get_state_aware_rheology_summary` is the canonical bridge from the paper's upstream physical/model analysis into the Agent. It must be requested before candidate ranking unless the runner supplies it automatically. Treat its output as scientific evidence, not as a benchmark hint.
 
+Evidence-guidance hierarchy:
+- local experiments diagnose the physical failure mode and local state/repeatability structure;
+- paper-derived rheological analysis translates those measurements into design rules;
+- curated PUR literature/database evidence supplies formulation-family priors and broad analogue regions that are absent from the sparse local design;
+- physical, stoichiometric and process-state constraints control extrapolation;
+- the held-out validation formulation and its later outcome are never a source of guidance.
+
+When using external evidence, explicitly distinguish:
+- directly commensurate numeric anchors;
+- directional/noncommensurate evidence;
+- conservative experimental-design principles introduced to limit extrapolation.
+Do not silently convert a directional literature percentage into an exact total-formulation optimum.
+
 Planning principles:
 - use the state-shift master-curve result to decide whether state calibration matters;
 - use the distinct thermal-versus-temporal rheology result to decide which response the next experiment must measure;
