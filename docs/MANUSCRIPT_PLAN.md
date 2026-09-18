@@ -16,7 +16,7 @@ The current main-text draft is `manuscript/MAIN_TEXT_DRAFT.md`.
 1. Original local PUR experiments reveal large realization-dependent viscosity shifts.
 2. Chemistry-provenance audit separates the phosphoric-acid-labelled E1 +P curve from the clean same-composition state analysis.
 3. A low-dimensional state-shift structure remains: realization mainly changes viscosity scale while a shared local thermal-response shape is transferable.
-4. One viscosity anchor calibrates an entirely held-out local formulation state to roughly 6-10% pooled multiplicative error.
+4. One viscosity anchor calibrates an entirely held-out local formulation state to roughly 6-10% pooled multiplicative error; a stricter formulation-plus-temperature holdout retains approximately 1.09x error for 120-130 C short-range extrapolation.
 5. Temperature response and thermal-hold stability are distinct, differently tunable rheological coordinates.
 6. External PUR evidence defines a chemically plausible resin-modification direction and its generalization boundary.
 7. The Agent uses these material rules as scientific tools, reasons over uncertainty and external evidence, and selects a formulation-process experiment.
@@ -76,11 +76,11 @@ Interpretation:
 
 The earlier all-recorded-curves analysis can remain in Supplementary Information as a sensitivity analysis.
 
-### Result 2 — One-point calibration across a held-out local formulation
+### Result 2 — One-point formulation transfer and bounded local extrapolation
 
-Remove one nominal formulation entirely, learn the shared thermal shape from the others, give the held formulation one anchor, and predict its remaining temperatures.
+First remove one nominal formulation entirely, learn the shared thermal shape from the others, give each held realization one anchor, and predict its remaining temperatures.
 
-At 120 C:
+At a 120 C anchor:
 
 ```text
 held E1 ~= 1.028x
@@ -89,13 +89,33 @@ held E3 ~= 1.049x
 pooled  ~= 1.099x
 ```
 
-Across available anchors, pooled error is roughly 1.06-1.10x.
+Across available anchors, pooled error remains roughly 1.06-1.10x.
+
+Then apply a stricter **joint formulation-and-temperature holdout**:
+
+```text
+shape fitting: other formulations only, temperatures <= 110 C
+held formulation: completely unseen during shape fitting
+state information from held realization: one measured 110 C anchor
+prediction targets: 120 C and 130 C
+```
+
+Results:
+
+```text
+n held predictions = 12
+pooled multiplicative RMSE = 1.088x
+120 C multiplicative RMSE = 1.087x
+130 C multiplicative RMSE = 1.089x
+median absolute percentage error = 5.68%
+realization-bootstrap 95% interval = 1.043x-1.126x
+```
 
 Paper-facing conclusion:
 
-> **Within the current local chemistry family, one state-specific viscosity anchor can locate a previously unseen formulation on the shared thermal-response shape with roughly 6-10% pooled multiplicative error.**
+> **Within the chemistry-audited E1-E3 neighborhood, a state-specific anchor transfers the shared thermal-response shape to a previously unseen formulation, and the same representation supports 10-20 C short-range extrapolation beyond the fitted temperature range with approximately 1.09x pooled multiplicative error.**
 
-Do not describe this as universal chemistry extrapolation.
+Do not describe this as universal chemistry extrapolation, long-range extrapolation, or transfer across unrelated PUR chemistry families.
 
 ### Result 3 — Temperature response and thermal-hold stability are distinct coordinates
 
@@ -179,6 +199,7 @@ The Action now performs the chemistry-provenance audit and returns:
 - audited state-shift model comparison;
 - model-free state-shift check;
 - leave-one-formulation one-point calibration;
+- bounded formulation-and-temperature extrapolation with a strict claim boundary;
 - audited local thermal descriptor;
 - original E1/E5 hold contrast;
 - experiment-design implications and claim boundaries.
@@ -257,9 +278,21 @@ C model-free PC1 loading versus constant vertical-shift vector
 D formulation-only versus state-aware held-temperature error
 ```
 
-### Figure 3 — One-point formulation transfer
+### Figure 3 — Local formulation transfer and bounded extrapolation
 
-Show leave-one-formulation-out error across anchor temperatures. Highlight the 120 C anchor because it also matches the thermal-hold test temperature.
+Use the reproducible R script `scripts/figure3_local_transfer.R`.
+
+```text
+A pooled leave-one-formulation-out error across anchor temperatures
+B held E1/E2/E3 errors using the 120 C anchor
+C observed versus predicted viscosity for the stricter joint holdout:
+  - held formulation absent from shape fitting
+  - shared shape fitted only through 110 C
+  - one 110 C anchor from the held realization
+  - prediction at unseen 120 C and 130 C
+```
+
+Panel C should report the pooled 1.088x multiplicative RMSE, 5.68% median absolute percentage error, and realization-bootstrap 95% interval of 1.043x-1.126x. The caption must call this **short-range local extrapolation** and explicitly exclude cross-chemistry or universal extrapolation claims.
 
 ### Figure 4 — Thermal-hold stability and physical validation
 
