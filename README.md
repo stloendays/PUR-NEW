@@ -343,10 +343,10 @@ Repository CI runs the local audit automatically.
 The current manuscript master draft is:
 
 ```text
-manuscript/MAIN_TEXT_V2.md
+manuscript/MAIN_TEXT_V3.md
 ```
 
-The earlier `manuscript/MAIN_TEXT_DRAFT.md` is retained as a versioned predecessor rather than overwritten.
+The earlier `manuscript/MAIN_TEXT_V2.md` and `manuscript/MAIN_TEXT_DRAFT.md` files are retained as versioned predecessors rather than overwritten.
 
 The intended Results order is:
 
