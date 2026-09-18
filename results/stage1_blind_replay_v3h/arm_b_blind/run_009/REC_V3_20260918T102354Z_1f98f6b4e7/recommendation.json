@@ -1,0 +1,153 @@
+{
+  "acceptance_criterion": {
+    "claim": "S1C41 mitigates thermal-hold viscosity drift relative to a matched E2 reactive-core reference without an unacceptable shift in calibrated viscosity level, temperature response, or processability.",
+    "criterion": "Before physical adjudication, predeclare the replicate count, paired or blocked uncertainty estimator, minimum practically meaningful SI reduction, and acceptable viscosity and temperature-response bounds. Accept only if at least two independent S1C41 realizations show lower SI(15-60 min) and SI(15-90 min) than their matched co-prepared E2 controls, with both reductions exceeding the predeclared uncertainty and practical-effect threshold, after candidate-specific 120 C anchoring and validated state calibration where applicable.",
+    "failure_condition": "Fail or defer adjudication if either required hold interval is missing, the reduction is not reproducible across at least two independent realizations, the effect does not exceed the predeclared uncertainty and practical threshold, candidate-specific calibration is not validated, modifier functionality or NCO:OH is unresolved, or stability improvement is accompanied by an unacceptable viscosity level, temperature-response shift, or processability change.",
+    "measurement_window": "Replicate temperature sweeps from 80-130 C with an in-range 120 C anchor; thermal hold at 120 C with measurements at 15, 60, and 90 min; matched co-prepared E2 controls."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Full axis coverage and lower total burden, but its 2.5% tackifier loading is below the independently supported 3-10% region and repeated 4.8-6.4% cluster, making a null result harder to interpret."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C35",
+      "relative_reason": "Full coverage with lower modifier burden, but both loadings are less strongly supported and may produce an effect smaller than the observed E2 realization variability."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C39",
+      "relative_reason": "Useful acrylic-only mechanistic control for causal isolation, but it zeroes the independently supported tackifier axis and is not appropriate for the declared performance-mitigation experiment."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C11",
+      "relative_reason": "Useful tackifier-only mechanistic control, but it omits the acrylic-like axis and therefore does not test the complete supported mitigation strategy."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The candidate will be tested directly for viscosity increase during a 120 C hold over 15-90 min using SI at 15-60 and 15-90 min.",
+      "name": "Failure-mode alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C41 activates both independently supported axes: 15% acrylic-like modifier and 5% minor-tackifier-like modifier.",
+      "name": "Performance-mitigation axis coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "Both modifier loadings lie within the supplied bounded evidence regions; external priors define a formulation family and coarse region, not an exact property prediction.",
+      "name": "Evidence-supported formulation region",
+      "status": "pass"
+    },
+    {
+      "detail": "The E2 reactive-core proportions are retained, but true NCO:OH must be recalculated after verifying whether AC1920 or TK100 contributes reactive functionality.; model status text: qualified",
+      "name": "Reactive-core preservation",
+      "status": "unknown"
+    },
+    {
+      "detail": "Use the measured 80-130 C sweep and 120 C hold with adjudication at 15, 60, and 90 min.",
+      "name": "Temperature and hold-window support",
+      "status": "pass"
+    },
+    {
+      "detail": "The local state-aware model supports one-point calibration within the audited local chemistry, but transfer to the modified chemistry must be checked with candidate-specific 120 C anchors before calibration is applied.; model status text: qualified",
+      "name": "State calibration",
+      "status": "unknown"
+    },
+    {
+      "detail": "Co-prepare and block candidate and E2 realizations with matched preparation, preconditioning, sample age, measurement sequence, and complete process-history records.; model status text: qualified",
+      "name": "Process-history control",
+      "status": "unknown"
+    },
+    {
+      "detail": "Use at least two independent realizations and a prespecified paired or blocked uncertainty analysis because E2 showed substantial realization spread.; model status text: qualified",
+      "name": "Repeatability",
+      "status": "unknown"
+    },
+    {
+      "detail": "Acceptability bounds for calibrated viscosity level, temperature-response slope, and processability must be predeclared before physical adjudication.",
+      "name": "Usability exclusion",
+      "status": "unknown"
+    }
+  ],
+  "created_utc": "2026-09-18T10:23:54Z",
+  "decision_mode": "performance_candidate",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "9f2e1238dc9ca81f44d8b7c63131a05bbd090e762ec76c106f1116d30d932bfe",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T102354Z_1f98f6b4e7",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T102354Z_1f98f6b4e7",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C41",
+    "formulation_state": {
+      "AC1920": 15.0,
+      "MDI": 16.1525384179,
+      "PDP70": 31.923730791,
+      "PPG2000": 31.923730791,
+      "TK100": 5.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "The established failure mode is thermal-hold viscosity increase at 120 C, not merely an unfavorable static viscosity. Local experiments show formulation-dependent drift, with E1 substantially more stable than E5, while E2 exhibits large realization/process-state spread. The state-aware rheology analysis supports separating static viscosity, temperature response, and temporal hold stability, and supports one-point calibration within the audited local chemistry; transfer to the modified chemistry remains a testable uncertainty. The selected S1C41 preserves the E2 reactive-core proportions and covers both independently supported intervention axes, using 15% acrylic-like modifier and 5% minor-tackifier-like modifier. The modifier family and broad loading regions come from curated PUR literature/database priors; those priors are analogical or directional and are not treated as predictors of the held-out wet-lab result. The local measurements determine the failure endpoint, E2 comparison basis, state-calibration requirement, and repeatability controls. The conservative design constraints are matched co-prepared E2 controls, verified modifier functionality with recalculated NCO:OH, candidate-specific state anchors, replicate holds, complete process-history records, and predeclared usability and uncertainty rules. S1C40 is rejected as primary because its 2.5% tackifier level is below the supplied evidence-bounded region, while S1C35 has weaker loading support and may be too small relative to E2 variability. The Skeptic's concerns are resolved by reranking to S1C41, requiring stoichiometric verification, candidate-specific calibration validation, paired controls, and operational uncertainty criteria. The Robustness Adjudicator's objection to removing a supported secondary modifier is also resolved: single-axis candidates remain controls for causal isolation, but the declared intent is performance mitigation, for which complete supported-axis coverage is required. This decision identifies an evidence-supported formulation region and experiment, not an exact-property prediction or molecular mechanism.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Candidate diagnostics and curated pre-result evidence",
+      "note": "Both independently supported intervention axes are covered; evidence supports a region and formulation family, not an exact optimum or property value.",
+      "status": "known",
+      "unit_or_scale": "intervention-axis coverage",
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Candidate-specific 120 C anchor and 80-130 C response compatibility check",
+      "note": "Temperature and hold windows are locally supported, but transfer of the state-shift model to the modified chemistry is unresolved.",
+      "status": "estimated",
+      "unit_or_scale": "chemistry and state-model transfer",
+      "value": null
+    },
+    "measurement": {
+      "method": "SI=(eta_t1-eta_t0)/eta_t0 at 15-60 and 15-90 min, with raw trajectories at 15, 60, and 90 min",
+      "note": "The required measurement window and SI definition are specified; candidate-level measurement uncertainty is not yet measured.",
+      "status": "known",
+      "unit_or_scale": "SI at 120 C",
+      "value": null
+    },
+    "process_history": {
+      "method": "Record mixing history, reaction temperature/time, preconditioning, sample age, and measurement sequence",
+      "note": "The candidate scorecard has six missing process-history fields.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "Replicate temperature sweeps and matched thermal holds with paired or blocked E2 controls",
+      "note": "The local E2 record indicates substantial spread, including sample CV approximately 0.46-0.58; the candidate-specific uncertainty must be estimated prospectively.",
+      "status": "estimated",
+      "unit_or_scale": "local E2 realization spread",
+      "value": null
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "finished_utc": "2026-09-18T08:19:51Z",
+  "returncode": 1,
+  "run_index": 5,
+  "started_utc": "2026-09-18T08:19:46Z",
+  "status": "error",
+  "stderr": "Traceback (most recent call last):\n  File \"D:\\Research\\PUR-NEW\\scripts\\run_scientific_agent_v3.py\", line 550, in <module>\n    main()\n  File \"D:\\Research\\PUR-NEW\\scripts\\run_scientific_agent_v3.py\", line 394, in main\n    assert_blind_payload_clean(planner_payload, blinded_formulation_ids=blind_identity_ids, forbid_follow_up_stage=True)\n  File \"D:\\Research\\PUR-NEW\\src\\pur_new\\evidence_firewall.py\", line 86, in assert_blind_payload_clean\n    findings = find_blind_payload_violations(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Research\\PUR-NEW\\src\\pur_new\\evidence_firewall.py\", line 76, in find_blind_payload_violations\n    walk(value, \"\")\n  File \"D:\\Research\\PUR-NEW\\src\\pur_new\\evidence_firewall.py\", line 71, in walk\n    walk(child, f\"{path}.{key}\" if path else str(key))\n  File \"D:\\Research\\PUR-NEW\\src\\pur_new\\evidence_firewall.py\", line 74, in walk\n    walk(child, f\"{path}[{i}]\")\n  File \"D:\\Research\\PUR-NEW\\src\\pur_new\\evidence_firewall.py\", line 71, in walk\n    walk(child, f\"{path}.{key}\" if path else str(key))\n  File \"D:\\Research\\PUR-NEW\\src\\pur_new\\evidence_firewall.py\", line 71, in walk\n    walk(child, f\"{path}.{key}\" if path else str(key))\n  File \"D:\\Research\\PUR-NEW\\src\\pur_new\\evidence_firewall.py\", line 68, in walk\n    if fid in blinded_formulation_ids:\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: unhashable type: 'dict'",
+  "stdout": "",
+  "wall_seconds": 5.13
+}

@@ -1,0 +1,138 @@
+{
+  "acceptance_criterion": {
+    "claim": "S1C40 is ready for an interpretable full-coverage performance-mitigation experiment only after the uncertainty probe establishes comparable stoichiometry, controlled process history, adequate repeatability, and valid state calibration.",
+    "criterion": "Before performance adjudication, verify AC1920 and TK100 reactive-group content, recalculate the actual NCO:OH ratio and predeclare its allowable deviation; freeze conditioning, mixing, reaction, sample-age, batch, operator, and thermal-history metadata; predeclare independent-preparation and repeat-run counts, SI aggregation, uncertainty estimation, and quantitative initial-viscosity and 80-130 C temperature-response bounds; and demonstrate that raw and state-calibrated comparisons meet the predeclared state-transfer discrepancy limit.",
+    "failure_condition": "Do not freeze S1C40 as a performance candidate if reactive stoichiometry cannot be verified, process history cannot be matched, repeatability is comparable to the predeclared mitigation threshold, state calibration fails its validity check, or quantitative viscosity and temperature-response bounds cannot be established.",
+    "measurement_window": "Uncertainty probe followed, if passed, by matched 120 C holds at 15, 30, 60, and 90 min plus replicated 80-130 C temperature sweeps."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Preferred conditional performance candidate: full coverage of both independently supported modifier axes at the lowest-burden leading full-coverage point, but execution is not yet interpretable because reactive stoichiometry, process history, repeatability rules, and state-transfer validity are unresolved."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C41",
+      "relative_reason": "Full-coverage robustness follow-up with 5 wt% tackifier-like modifier; useful if S1C40 is inconclusive or loading-sensitive, but it has greater modifier burden and does not resolve the primary uncertainty before execution."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C45",
+      "relative_reason": "Full-coverage robustness point with stronger acrylic-like intervention; useful for testing insufficient acrylic loading, but it increases burden and relies more heavily on noncommensurate analogue evidence."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C10",
+      "relative_reason": "Low-burden tackifier-only mechanistic control; informative for causal isolation but inappropriate as the primary performance-mitigation experiment because it zeroes the independently supported acrylic-like axis."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The established failure is 120 C thermal-hold viscosity drift, with E5 substantially worse than E1; any later performance test must use the matched 15, 30, 60, and 90 min hold trajectory.",
+      "name": "failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "The declared intent is performance_mitigation, so a later full-coverage intervention may combine acrylic-like and minor-tackifier-like axes.",
+      "name": "experiment_intent",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C40, S1C41, and S1C45 cover both independently supported axes; S1C10 is retained only as a possible causal control.",
+      "name": "required_intervention_axis_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "The leading candidates preserve the E2 50/50 PDP70/PPG2000 reactive-core proportions.",
+      "name": "local_reactive_core_anchor",
+      "status": "pass"
+    },
+    {
+      "detail": "The candidate family is within the bounded evidence-supported region, but external acrylic and tackifier percentages are formulation-family priors and not direct predictors of local wet-lab performance.",
+      "name": "modifier_evidence_region",
+      "status": "pass"
+    },
+    {
+      "detail": "AC1920 and TK100 functionality and reactive-group content are unspecified; the nominal E2 NCO:OH value cannot be transferred without recalculation and an allowable deviation.",
+      "name": "reactive_stoichiometry",
+      "status": "fail"
+    },
+    {
+      "detail": "Candidate process fields are missing, while E2 shows large realization spread, including approximately 0.46-0.58 CV and a 120 C maximum/minimum ratio of approximately 3.57.",
+      "name": "process_history_and_realization_control",
+      "status": "fail"
+    },
+    {
+      "detail": "The state-aware shared-shape model is strongly supported only within the measured reactive-core chemistry family; transfer to AC1920/TK100 candidates requires an explicit raw-versus-calibrated validity check.",
+      "name": "state_transfer_validity",
+      "status": "unknown"
+    },
+    {
+      "detail": "The matched 120 C hold and supported 80-130 C sweep are specified conceptually, but independent-preparation counts, SI uncertainty aggregation, repeatability thresholds, viscosity bounds, and temperature-response bounds remain to be frozen.",
+      "name": "measurement_plan_sufficiency",
+      "status": "unknown"
+    },
+    {
+      "detail": "The payload reports that the operational V2 grid was formalized after validation and that no repository freeze artifact is available; outcome-blind provenance cannot be independently verified from the supplied record.",
+      "name": "provenance_audit",
+      "status": "unknown"
+    }
+  ],
+  "created_utc": "2026-09-18T09:09:50Z",
+  "decision_mode": "abstain",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "d076a50de8ad4ef5c70215940816e95032bd23fce27c952072110c99f5796f9b",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T090950Z_2966744ef5",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T090950Z_2966744ef5",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": null,
+  "selection_rationale": "The measured local evidence establishes formulation-dependent 120 C hold drift and substantial realization/process-state variation; paper-derived rheological rules require separate measurement of static viscosity, temperature response, and matched thermal-hold drift, with state-aware calibration used only where transfer is validated. Curated PUR literature/database priors support an acrylic-like modifier family in a broad region and a minor tackifier-like axis near 5 wt% or below about 10 wt%, but they do not predict the held-out result or establish an optimum or molecular mechanism. Under the declared performance_mitigation intent, both independently supported axes must remain covered; therefore S1C40 remains the conditional primary performance candidate, while S1C41 and S1C45 are robustness alternatives and S1C10 is only a causal control. However, the Skeptic's objections are decisive before freezing a performance point: candidate stoichiometry is unknown, process-history uncertainty is high, replicate and SI decision rules are underspecified, usable-viscosity bounds are absent, and state-model transfer is unverified. The Robustness Adjudicator correctly preserves S1C40's conditional ranking and rejects a rank reversal to a partial-coverage point, but recommends an uncertainty probe. The minimum-burden principle is applied only within sufficient full-coverage candidates; it is not used to remove either supported axis. No exact analogue distance is used as a primary objective. The next action is therefore to resolve stoichiometry, process-state, repeatability, state-transfer, and acceptance-rule uncertainties before executing the full mitigation experiment.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "deterministic intervention-coverage diagnostics",
+      "note": "Coverage supports a candidate region, not an exact-property prediction.",
+      "status": "known",
+      "unit_or_scale": "independently supported intervention axes for S1C40/S1C41/S1C45",
+      "value": 2
+    },
+    "extrapolation": {
+      "method": "comparison with supplied local support and curated analogue priors",
+      "note": "Temperature support is known as 80-130 C, but chemistry-family transfer beyond the measured reactive core remains uncertain.",
+      "status": "estimated",
+      "unit_or_scale": "bounded formulation and measurement region",
+      "value": null
+    },
+    "measurement": {
+      "method": "three-run repeatability measurement",
+      "note": "The supplied local repeatability estimate is large enough to confound an expected mitigation effect.",
+      "status": "estimated",
+      "unit_or_scale": "coefficient of variation at 120 C for E2",
+      "value": 0.46
+    },
+    "process_history": {
+      "method": null,
+      "note": "Conditioning, mixing, reaction, sample-age, batch, operator, and thermal-history fields are unspecified for candidates.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "E2 repeatability assessment",
+      "note": "Independent-preparation and repeat-run decision rules for the candidate are not yet frozen.",
+      "status": "estimated",
+      "unit_or_scale": "maximum/minimum viscosity ratio at 120 C",
+      "value": 3.5687979539641943
+    }
+  }
+}

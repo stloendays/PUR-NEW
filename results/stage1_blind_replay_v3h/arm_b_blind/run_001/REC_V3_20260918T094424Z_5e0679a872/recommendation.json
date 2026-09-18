@@ -1,0 +1,168 @@
+{
+  "acceptance_criterion": {
+    "claim": "S1C41 mitigates the established 120 C thermal-hold viscosity drift relative to the E5 failure reference without the apparent benefit being explained solely by initial viscosity or uncontrolled realization state.",
+    "criterion": "Under matched 120 C preparation and state-calibrated comparison, S1C41 must show SI15-60 < 0.515 and SI15-90 < 0.931, with both directions reproduced across independent realizations; initial 120 C viscosity and the 80-130 C response must be reported separately, verified stoichiometry must pass before testing, and predefined processability and repeatability limits must not be exceeded.",
+    "failure_condition": "Fail if either hold-drift criterion is not met, the improvement is not reproduced, the effect disappears after state calibration, verified stoichiometry is unavailable or inconsistent, processability or repeatability limits are exceeded, or the candidate requires measurements outside the supported temperature or time domain.",
+    "measurement_window": "80-130 C temperature sweep including 120 C, plus matched 120 C hold measurements at 15, 30, 60, and 90 min; include same-batch E2 reference, E5 comparison, and at least one independent repeat realization."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Lower modifier burden, but its 2.5 wt% tackifier level is below the curated supported region and is better treated as a low-dose uncertainty probe rather than the primary full-mitigation experiment."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C45",
+      "relative_reason": "Full-coverage alternative with higher acrylic-like loading, but it has greater modifier burden without stronger evidence that the added acrylic is necessary."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C39",
+      "relative_reason": "Useful single-axis acrylic attribution control, but it zeroes an independently supported tackifier axis and therefore does not test the full performance-mitigation strategy."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "Targets the measured 120 C thermal-hold viscosity drift, with E5 showing SI15-60 of 0.515 and SI15-90 of 0.931.",
+      "name": "failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "Performance mitigation permits a combined acrylic-like and minor-tackifier-like intervention.",
+      "name": "experiment_intent",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C41 activates both independently supported axes: 15 wt% acrylic-like modifier and 5 wt% tackifier-like modifier.",
+      "name": "required_intervention_axis_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "Preserves the E2 50/50 PDP70/PPG2000 reactive-core proportions.",
+      "name": "local_reactive_core_preservation",
+      "status": "pass"
+    },
+    {
+      "detail": "The 5 wt% tackifier level lies within the curated repeated minor-resin cluster of approximately 4.8-6.4 wt% and the broader 3-10 wt% region.",
+      "name": "tackifier_evidence_region",
+      "status": "pass"
+    },
+    {
+      "detail": "The 15 wt% acrylic-like level is inside the bounded directional/support region, but external evidence remains analogue guidance rather than a local property predictor.",
+      "name": "acrylic_evidence_region",
+      "status": "pass"
+    },
+    {
+      "detail": "The 120 C anchor and hold lie within the measured 80-130 C temperature support.",
+      "name": "temperature_support",
+      "status": "pass"
+    },
+    {
+      "detail": "Require the 120 C trajectory at 15, 30, 60, and 90 min, including SI15-60 and SI15-90.",
+      "name": "matched_hold_measurement",
+      "status": "pass"
+    },
+    {
+      "detail": "Use a state-specific 120 C anchor, matched preparation, and at least one independent repeat realization before interpreting viscosity-scale differences.",
+      "name": "state_calibration",
+      "status": "pass"
+    },
+    {
+      "detail": "Candidate process history is unspecified; mixing, moisture, thermal history, aging, operator, batch, and realization records must be matched and documented.",
+      "name": "process_history_control",
+      "status": "unknown"
+    },
+    {
+      "detail": "Verify AC1920 and TK100 reactive-group functionality and recalculate NCO:OH before finalizing amounts; the E2 ratio alone is insufficient.",
+      "name": "stoichiometric_feasibility",
+      "status": "unknown"
+    },
+    {
+      "detail": "Must be measured under the matched protocol with predefined laboratory limits established before physical adjudication.",
+      "name": "processability_and_repeatability",
+      "status": "unknown"
+    },
+    {
+      "detail": "The selected modifier levels and measurement window remain within the supplied bounded candidate and local measurement regions.",
+      "name": "extrapolation",
+      "status": "pass"
+    }
+  ],
+  "created_utc": "2026-09-18T09:44:24Z",
+  "decision_mode": "performance_candidate",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "d8d58f82368be8de92ca42cabb6e59c1a71b4a60f8853d53fadc5762d8897abf",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T094424Z_5e0679a872",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T094424Z_5e0679a872",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C41",
+    "formulation_state": {
+      "AC1920": 15.0,
+      "MDI": 16.1525384179,
+      "PDP70": 31.923730791,
+      "PPG2000": 31.923730791,
+      "TK100": 5.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "The measured failure mode is thermal-hold instability, not static viscosity mismatch: E5 drifts strongly at 120 C while E1 is comparatively stable, and E2 shows large realization-dependent viscosity spread. The local experiments therefore require a matched 120 C hold, an 80-130 C sweep, a state-specific anchor, and replicate/process-history control. The paper-derived rheological rule is that realization state can primarily shift viscosity scale while a local thermal-response shape remains transferable after calibration; this supports separating initial viscosity from temporal drift and using a 120 C state anchor. Curated PUR literature/database evidence supports an acrylic-like intervention family in a broad 15-25 wt% region and a minor tackifier-like region near 5 wt% and below about 10 wt%, but does not predict the held-out wet-lab result or identify an exact optimum. S1C41 is selected because it covers both independently supported axes at 15 wt% acrylic-like modifier and 5 wt% tackifier-like modifier, while preserving the E2 reactive-core balance. The lower-burden S1C40 is not selected as primary because its 2.5 wt% tackifier level is below the stated supported region; minimum sufficient intervention is therefore not applied until axis coverage is adequate. The conservative experimental-design constraints are matched preparation, verified stoichiometry, moisture and thermal-history control, a same-batch E2 reference, an E5 comparison, and predefined processability and repeatability checks. The Skeptic objection is resolved by downgrading S1C40 to an optional low-dose uncertainty probe and requiring quantitative pre-run adjudication conditions. The Robustness Adjudicator objection is resolved by selecting S1C41, retaining both supported axes, and requiring functionality-based NCO:OH recalculation. The result is an evidence-supported formulation region and experiment decision, not an exact-property prediction or causal attribution of either modifier axis.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "candidate-axis coverage audit",
+      "note": "Coverage supports experiment selection but does not establish mitigation efficacy.; model value text: full coverage of both independently supported intervention axes",
+      "status": "known",
+      "unit_or_scale": "categorical",
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Comparison with measured 80-130 C support and curated evidence regions",
+      "note": "External priors support a formulation family and broad region, not an exact-property prediction.; model value text: low for temperature and modifier-region bounds; unknown for exact local response",
+      "status": "estimated",
+      "unit_or_scale": "qualitative",
+      "value": null
+    },
+    "measurement": {
+      "method": "120 C hold measurements at 15, 30, 60, and 90 min",
+      "note": "These are local reference measurements, not predictions for S1C41.; model value text: E5 SI15-60=0.515; SI15-90=0.931; E1 SI15-60=0.095; SI15-90=0.168",
+      "status": "known",
+      "unit_or_scale": "dimensionless SI",
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Candidate process history, moisture, aging, and thermal history are not supplied.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "three E2 realizations across 80-130 C",
+      "note": "Substantial realization/process-state spread requires replicate comparison.; model value text: E2 temperature-sweep CV approximately 0.464-0.585; 120 C max/min ratio 3.569",
+      "status": "known",
+      "unit_or_scale": "CV and ratio",
+      "value": null
+    }
+  }
+}

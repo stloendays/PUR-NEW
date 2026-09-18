@@ -1,0 +1,17 @@
+{
+  "arm_dir": "results\\stage1_blind_replay_v4\\arm_b_blind",
+  "blind_summary_sha256": "da5ac4579f0f3b58eb5a8e96a01246416a5c2af848ce5bbc8fed033fa4388ff3",
+  "closed_utc": "2026-09-18T09:44:55Z",
+  "declaration": "All Stage-1 recommendations above were generated and written to disk before any held-out validation data were loaded. They are immutable from this timestamp.",
+  "frozen_recommendations_csv_sha256": "7dd6911fa01412b322de634f9b03ab854358dd2a3c22796cea78610d21f55464",
+  "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+  "n_runs": 5,
+  "per_run_recommendation_sha256": {
+    "1": "6045a8be002105df7a552379e28f8c1753f26ea429dcefc4faa105dc878acf73",
+    "2": "f9ec3d44b64406d567eb65a69d4e5c4d2c1ab2b96a7a69f200c8fe9f43f0352f",
+    "3": "c01b23d3cb4144fc36ba3c1ffc7eec1cd03077652a2e4c721293cfc4da86ef35",
+    "4": "527560c65dc55c3cf7ac8ccde85a86ddad5f2c5adde44fbae84c55f6f362679e",
+    "5": "686f4c042f121110c8206e36377ec32bcfca8cb7f0b9cb8c3b959a1a0506a232"
+  },
+  "status": "BLIND PHASE CLOSED"
+}

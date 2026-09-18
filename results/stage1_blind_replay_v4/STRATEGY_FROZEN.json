@@ -1,0 +1,45 @@
+{
+  "change": "Coverage gate retained unchanged. Scenario orderings, rank-1 stability counts and the Pareto front are withheld from every model-facing payload, so the Agent must select within the admissible set by reasoning from candidate evidence attributes rather than deferring to a precomputed rank-1.",
+  "combined_strategy_hash": "77bf26b03f3d48dc615507e9ce10de0f7415ea94558222916d09ee80d08e4c48",
+  "declaration": "Frozen as of this timestamp. No rule, prior, threshold, tie-break, prompt or candidate coordinate may change after the first valid frozen recommendation.",
+  "design_provenance": "This revision was specified by the user while v3 was still running (2 of 5 runs complete) and was frozen BEFORE any v3 adjudication against the held-out result. It therefore cannot have been tuned on v3 distances.",
+  "file_sha256": {
+    "configs/action_catalog.json": "20c763a128fe9ea9a79b83eea4a8763b0eaaeb3e25c7ac47e836d9cb53a4f3cd",
+    "configs/agent_v3.json": "c1391a68e4a994eaf9e7d2193e305966d760193e9d2145b958aaf7fd66f28a2c",
+    "configs/evidence_access_profiles.json": "0906341975695613a02614ab867a5c906baa4b0503116afa67ffb9e973c9ee17",
+    "configs/formulation_priors.json": "7be699d8705910ac1fd85d56dd9976506f9867c20926c59eaee69c29ae82beea",
+    "configs/workflow.json": "6c3aa2e9d7d7ddb42525f5ec28ccc89a48549b05ba7a8417ebc0b4f6dc32d282",
+    "data/external_evidence_hints.csv": "9419cb5006ca72457aebed77676dfed94f62ecd9795e820f3d4db3cce4621560",
+    "derived/evidence_state.json": "8ca085b1529f94b2fc6ed3bfdd0f5fb938a4580159ed04ece39fac42c023bc81",
+    "derived/stage1_blind_candidate_space_v1.json": "2b92e5d976e76b674a05f9b8fc17f4c78cc873b42641fbe67b35a37beeec4346",
+    "prompts/agent_v3_judge.txt": "81e462ee8252fb59fe615f9574a8a2173f017c085eb9fdaea2858a27d38ef36d",
+    "prompts/agent_v3_planner.txt": "7644203f19b3076fcb165be6226e876bad1bfdf3abc462b95001e8947bcec805",
+    "prompts/agent_v3_proposer.txt": "b6800b762998c6f992d3afb6b7ae0c627df569dd03441402c07f7475f84df40f",
+    "prompts/agent_v3_robustness.txt": "bea49b51d88c851525466fe7a3ac5245cf1dfdaa93d83e08f4b826c0e3fd3fb4",
+    "prompts/agent_v3_skeptic.txt": "96e0327c195efa60a18f4fb7fd6be8f352cb9717c7767766ebef4814a058191d",
+    "scripts/run_scientific_agent_v3.py": "723f71ea48122ba50d03bacaaf46328ed4b95867dd941c8286422275f0c7a09d",
+    "src/pur_new/actions.py": "a9127237c56f5eae29e56df102f15b90e23379b6074ee971316351ef438638c3",
+    "src/pur_new/agent_v3.py": "112c9c992c9572fa00c990288f53ed649c7d491e3510cafdc09647bda1e86f6b",
+    "src/pur_new/evidence_firewall.py": "a27992695b3015b1cbf29224b409bc208c5d72e9231f8cce19de52b221a3145b",
+    "src/pur_new/scientific_tools.py": "24ba8d0ed8f28c94a3812acbc0f260b9f18a9a0f46a787e8451bff0b673390ca"
+  },
+  "frozen_utc": "2026-09-18T09:20:36Z",
+  "full_diagnostics_retained_in": "deliberation.json -> deterministic_decision_diagnostics (full) and deterministic_diagnostics_sent_to_model (redacted)",
+  "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+  "strategy_id": "STAGE1_PREEXPERIMENTAL_V4",
+  "strategy_name": "COVERAGE_GATE_RETAINED_DETERMINISTIC_RANKING_WITHHELD",
+  "supersedes_strategy": {
+    "frozen_utc": "2026-09-18T08:57:04Z",
+    "hash": "1c61215603670606e3edd755e4c3dddc1ac70cdf689829652858a16de1cf5a7a",
+    "strategy_id": "STAGE1_PREEXPERIMENTAL_V3"
+  },
+  "unchanged": [
+    "candidate lattice (73 nodes, identical to v1/v2/v3)",
+    "evidence snapshot",
+    "coverage gate and intervention sufficiency rule",
+    "analogue distance remains audit-only",
+    "no target coordinate anywhere"
+  ],
+  "verified": "All 36 full-coverage candidate identifiers appear an identical number of times in the redacted payload; none is singled out.",
+  "why_pareto_front_also_withheld": "Its intersection with the full-coverage group is only 2 of 36 candidates and includes the deterministic rank-1; shown next to the gate it is the precomputed answer in another form."
+}

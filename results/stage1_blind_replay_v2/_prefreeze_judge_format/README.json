@@ -1,0 +1,13 @@
+{
+  "status": "preserved_pre_fix_failure",
+  "runs_attempted": 3,
+  "runs_with_frozen_recommendation": 0,
+  "failures": {
+    "run_001": "ValueError: selected candidate repeated in alternatives",
+    "run_002": "ValidationError: constraints[3].status 'qualified' not in [pass,fail,unknown]",
+    "run_003": "ValueError: selected_candidate_id must be present in candidate set"
+  },
+  "classification": "run_001 and run_002 are Judge output-FORMAT mismatches against the record schema. run_003 is a genuine invalid decision and remains a hard failure by design.",
+  "fix": "normalize_judge_output extended to coerce constraint status to the enum (original wording preserved in detail) and to drop a self-referential or duplicated alternative. Selection, rationale, evidence and candidate choice are untouched. Rejected runs now also write rejected_deliberation.json so invalid decisions stay auditable.",
+  "freeze_impact": "None. Zero valid frozen recommendations existed under the superseded freeze."
+}

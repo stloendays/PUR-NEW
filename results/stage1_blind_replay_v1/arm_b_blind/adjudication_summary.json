@@ -1,0 +1,27 @@
+{
+  "arm_dir": "results\\stage1_blind_replay_v1\\arm_b_blind",
+  "blind_phase_closed_utc": "2026-09-18T07:35:31Z",
+  "claim_boundary": "Distances are to a formulation that is not a node of the Arm B candidate lattice; exact recovery was impossible by construction. Direction and region recovery are the scorable quantities.",
+  "held_out_truth_normalized_pct": {
+    "AC1920": 14.004448,
+    "MDI": 16.632342,
+    "PDP70": 32.622127,
+    "PPG2000": 32.622127,
+    "TK100": 4.118955
+  },
+  "level1_thermal_hold_objective_recovery_rate": 1.0,
+  "level2_acrylic_like_recovery_rate": 1.0,
+  "level2_minor_tackifier_recovery_rate": 0.0,
+  "level2_resin_modification_recovery_rate": 1.0,
+  "level3_near_region_rate": 0.0,
+  "modifier_plane_l1": {
+    "max": 15.1145,
+    "mean": 12.1145,
+    "median": 10.1145,
+    "min": 10.1145
+  },
+  "n_runs": 5,
+  "n_scored": 5,
+  "near_region_l1_threshold_pct_points": 7.5,
+  "unblinded_utc": "2026-09-18T07:35:56Z"
+}

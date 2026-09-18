@@ -1,0 +1,163 @@
+{
+  "acceptance_criterion": {
+    "claim": "S1C41 is a conservative full-coverage acrylic-like plus minor-tackifier-like performance probe that can mitigate the local 120 C hot-hold drift failure relative to the high-drift E5 reference.",
+    "criterion": "Under a matched 120 C hold protocol with a pre-hold 120 C state anchor and either an S1C41 repeat or matched same-day E2/E5 reference, primary success requires SI_15_to_90 <= 0.465 and SI_15_to_60 <= 0.258. Strong success is SI values approaching the E1 low-drift regime, approximately within 2x E1 for both windows.",
+    "failure_condition": "Fail the mitigation claim if SI remains E5-like, if only static viscosity is measured, if state/run spread is comparable to the claimed effect without repeat or state-aware normalization, or if processability at 120 C becomes unusable for the design goal.",
+    "measurement_window": "120 C thermal hold with measurements sufficient to compute SI from 15-60 min and 15-90 min; include 15, 60, and 90 min, with 30 min if feasible."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C46",
+      "relative_reason": "Also full-coverage and closer to the directly commensurate 19-20 wt% acrylic analogue region, but it uses a higher total modifier burden than S1C41; preferred only if the first test should strengthen the acrylic-axis challenge rather than use a conservative lower-bound full-coverage probe."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C51",
+      "relative_reason": "Full-coverage and best aligned with the repeated 19-20 wt% acrylic plus 5 wt% minor-resin analogue anchors, but larger total modifier burden and greater dilution of the E2 reactive core make it secondary under minimum-sufficient-intervention tie-breaking."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Full-coverage with lower total modifier burden, but the 2.5 wt% tackifier-like level is below the repeated 4.8-6.4 wt% minor-resin cluster, so it is better as a later robustness probe than the primary performance-mitigation experiment."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C49",
+      "relative_reason": "A useful acrylic-only mechanistic control, but it zeroes the independently supported minor-tackifier-like axis and therefore does not test the full performance-mitigation strategy."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C01",
+      "relative_reason": "Baseline/no-intervention control inside the measured local chemistry, but it does not test the resin-modification mitigation hypothesis for the established hot-hold drift failure."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The experiment targets 120 C hot-hold viscosity drift using SI over 15-60 min and 15-90 min, not static viscosity alone.",
+      "name": "failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "Planner intent is performance_mitigation, so a dual-axis acrylic-like plus minor-tackifier-like intervention is appropriate when both axes are independently supported.",
+      "name": "experiment_intent",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C41 covers both independently supported axes: AC1920 15 wt% and TK100 5 wt%; no supported axis is zeroed.",
+      "name": "supported_axis_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "15 wt% acrylic-like is a conservative lower-region analogue-supported point; 5 wt% tackifier-like matches the repeated minor-resin cluster around 4.8-6.4 wt% and remains below the conservative 10 wt% guidance.",
+      "name": "evidence_region",
+      "status": "pass"
+    },
+    {
+      "detail": "Applied only after requiring full coverage. S1C41 is selected as the lower-burden full-coverage performance probe, not because it is an exact external analogue match.",
+      "name": "minimum_sufficient_intervention",
+      "status": "pass"
+    },
+    {
+      "detail": "All candidates have missing process-history fields. The run must document mixing, reaction, moisture exposure, sample age, loading history, and sampling sequence.",
+      "name": "process_history_control",
+      "status": "unknown"
+    },
+    {
+      "detail": "Decision requires a mandatory 120 C pre-hold viscosity state anchor plus either an S1C41 repeat or a matched same-day E2/E5 reference sufficient for state-aware normalization.",
+      "name": "state_anchor_requirement",
+      "status": "pass"
+    },
+    {
+      "detail": "AC1920 and TK100 functionality and possible NCO/OH balance effects are unresolved; composition/functionality audit is required before causal interpretation.",
+      "name": "stoichiometry_audit",
+      "status": "unknown"
+    },
+    {
+      "detail": "Acceptance requires matched 120 C hold-window measurement, not a static-viscosity proxy.",
+      "name": "thermal_hold_measurement",
+      "status": "pass"
+    },
+    {
+      "detail": "Selection uses only supplied pre-result local measurements, external priors, candidate diagnostics, and audits; no held-out formulation identity or outcome is used.",
+      "name": "leakage_boundary",
+      "status": "pass"
+    }
+  ],
+  "created_utc": "2026-09-18T13:04:36Z",
+  "decision_mode": "performance_candidate",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "bd5632af362ba96ad43d115bf7d7097f2ba0b0e2945aa848f9fc59d4f9ac965c",
+    "model": "gpt-5.5",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T130436Z_ffa8a3611a",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T130436Z_ffa8a3611a",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C41",
+    "formulation_state": {
+      "AC1920": 15.0,
+      "MDI": 16.1525384179,
+      "PDP70": 31.923730791,
+      "PPG2000": 31.923730791,
+      "TK100": 5.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "Failure mode: the local material failure is 120 C hot-hold viscosity drift, established by E5 SI_15_to_60 = 0.515 and SI_15_to_90 = 0.931 versus much lower E1 drift; ordinary monotonic temperature thinning is not the failure. Experiment intent: the Planner requested performance_mitigation, so the first candidate should test the full independently supported mitigation strategy rather than a single-axis attribution control. Required intervention coverage: acrylic-like and minor-tackifier-like axes are independently supported, and S1C41 covers both with AC1920 15 wt% and TK100 5 wt%. Local experiments supplied the E1/E5 hold-drift contrast, E2 as the reactive-core anchor, the 80-130 C support including 120 C, and the high E2 repeatability/process-state risk. Paper-derived rheological rules supplied the state-aware vertical-shift regularity, the one-point 120 C state-anchor implication, and the warning that static viscosity/temperature response cannot substitute for hold stability. Curated PUR literature/database priors supplied the broad acrylic-modified region, directly commensurate acrylic anchors near 19-20 and 25 wt%, lower-region directional support near 15 wt%, and minor tackifier guidance around 5 wt% and below about 10 wt%. Conservative experimental-design constraints introduced here are full-axis coverage for performance mitigation, mandatory matched hold-window SI measurement, mandatory state anchoring/repeat or same-day reference, and minimum-sufficient total modifier burden only among sufficient full-coverage candidates. Skeptic objections are resolved by framing S1C41 as a conservative lower-bound full-coverage performance probe, not as a local optimum or exact literature match; by making state anchoring and repeat/reference controls mandatory rather than optional; and by requiring a composition/functionality audit before causal claims. Robustness objections are resolved by retaining S1C46 and S1C51 as predefined escalation candidates if S1C41 fails, rather than rejecting the dual-axis hypothesis from one lower-bound dose. Exact analogue distance is audit metadata only and is not the primary optimization objective.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Candidate diagnostics and curated prior trace",
+      "note": "S1C41 has full supported-axis coverage with strong analogue-region support, while process and stoichiometric uncertainties remain.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Evidence-region audit from candidate scorecards and external priors",
+      "note": "S1C41 is inside the supported acrylic-like and minor-tackifier-like region, but external analogues are not direct predictors of local outcome.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": null,
+      "note": "S1C41 has not been measured; acceptance depends on future matched 120 C hold SI data.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Candidate process-state fields are missing; process controls must be imposed prospectively.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "E2 repeatability-risk tool trace",
+      "note": "E2 showed large run spread across 80-130 C, so repeat or matched same-day reference normalization is mandatory.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

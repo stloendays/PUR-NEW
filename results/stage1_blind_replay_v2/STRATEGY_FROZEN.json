@@ -1,0 +1,44 @@
+{
+  "amendment_history": [
+    {
+      "frozen_utc": "2026-09-18T08:36:56Z",
+      "hash": "8daeb3c93f8c3ad87b39b286c2fa5daa2bb949b773e6bb039045ae5085f60bf6",
+      "reason": "null-selection to abstain mapping (prompt/freezer contract inconsistency). Format only; no scoring rule, prior, threshold, tie-break, prompt or candidate coordinate changed. 0 valid frozen recommendations existed."
+    },
+    {
+      "frozen_utc": "2026-09-18T08:21:36Z",
+      "hash": "9796fd3a942997aa16bc6c01500f65cf321c68a5e6adb103b49c9d802942d3b3",
+      "reason": "Judge output-format normalization (constraint enum, alternatives dedupe) plus rejected-run evidence retention. Format only; no scoring rule, prior, threshold, tie-break, prompt or candidate coordinate changed. 0 valid frozen recommendations existed."
+    },
+    {
+      "combined_strategy_hash": "5f4eb323668ec8331ae1fd15375f2f8e7342783d4b95d4f82725962ed5691e7e",
+      "frozen_utc": "2026-09-18T08:19:17Z",
+      "reason": "evidence_firewall type-guard bug fix; 0 valid frozen recommendations existed under the superseded freeze, so no scientific rule was ever applied to a real decision. No scoring rule, prior, threshold, tie-break, prompt or candidate coordinate changed."
+    }
+  ],
+  "combined_strategy_hash": "6bce55c2ccea0c401e8cee429b342f02b279aba7de38b9aa6a551ab89345ec26",
+  "declaration": "Scientific decision rules are frozen as of this timestamp. No rule, prior, threshold, tie-break, prompt or candidate coordinate may be changed after the first valid frozen recommendation.",
+  "file_sha256": {
+    "configs/action_catalog.json": "20c763a128fe9ea9a79b83eea4a8763b0eaaeb3e25c7ac47e836d9cb53a4f3cd",
+    "configs/agent_v3.json": "c1391a68e4a994eaf9e7d2193e305966d760193e9d2145b958aaf7fd66f28a2c",
+    "configs/evidence_access_profiles.json": "0906341975695613a02614ab867a5c906baa4b0503116afa67ffb9e973c9ee17",
+    "configs/formulation_priors.json": "7be699d8705910ac1fd85d56dd9976506f9867c20926c59eaee69c29ae82beea",
+    "configs/workflow.json": "6c3aa2e9d7d7ddb42525f5ec28ccc89a48549b05ba7a8417ebc0b4f6dc32d282",
+    "data/external_evidence_hints.csv": "9419cb5006ca72457aebed77676dfed94f62ecd9795e820f3d4db3cce4621560",
+    "derived/evidence_state.json": "8ca085b1529f94b2fc6ed3bfdd0f5fb938a4580159ed04ece39fac42c023bc81",
+    "derived/stage1_blind_candidate_space_v1.json": "2b92e5d976e76b674a05f9b8fc17f4c78cc873b42641fbe67b35a37beeec4346",
+    "prompts/agent_v3_judge.txt": "b3cbfa6bdb50e3da0c8892cfe141406bab1103d298502e195595e72203f08f2a",
+    "prompts/agent_v3_planner.txt": "7644203f19b3076fcb165be6226e876bad1bfdf3abc462b95001e8947bcec805",
+    "prompts/agent_v3_proposer.txt": "9bdc2f4b0ca2a4324a3e385a9039c2316839415ed19b2c5975f355210450ab62",
+    "prompts/agent_v3_robustness.txt": "7e3424de781a45aa59ad2a531551d913248e2be0f18404bcb96fd0765a16ff9d",
+    "prompts/agent_v3_skeptic.txt": "80bf24b7f2617ff8a452c2aa016cf8369a183f5fc31a48e9dfd9df1ef9894feb",
+    "scripts/run_scientific_agent_v3.py": "1b1733a46c409a48c87bc8ac0172b33f2150843b1e1e1e5eb887b58c89335840",
+    "src/pur_new/actions.py": "a9127237c56f5eae29e56df102f15b90e23379b6074ee971316351ef438638c3",
+    "src/pur_new/agent_v3.py": "c6400174f824295e794173686cdf8f90ea0e33e0467efb52a4df22905fd0d29b",
+    "src/pur_new/evidence_firewall.py": "a27992695b3015b1cbf29224b409bc208c5d72e9231f8cce19de52b221a3145b",
+    "src/pur_new/scientific_tools.py": "24ba8d0ed8f28c94a3812acbc0f260b9f18a9a0f46a787e8451bff0b673390ca"
+  },
+  "frozen_utc": "2026-09-18T08:43:14Z",
+  "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+  "strategy_id": "STAGE1_PREEXPERIMENTAL_V2"
+}

@@ -1,0 +1,9 @@
+{
+  "status": "preserved_pre_fix_failure",
+  "runs_attempted": 1,
+  "runs_with_frozen_recommendation": 0,
+  "failure": "ValueError: selected_candidate_id must be present in candidate set. Judge returned decision_mode=uncertainty_probe with selected_candidate_id=null.",
+  "classification": "internal contract inconsistency, not an Agent error. prompts/agent_v3_judge.txt declares \"selected_candidate_id\": \"string or null\" for every decision mode, while freeze_recommendation accepts null only for abstain.",
+  "fix": "normalize_judge_output maps a null selection to decision_mode=abstain and logs the original mode. No selection is invented. A selected_candidate_id that names a candidate outside the set is STILL rejected (verified).",
+  "freeze_impact": "None. Zero valid frozen recommendations existed under the superseded freeze."
+}

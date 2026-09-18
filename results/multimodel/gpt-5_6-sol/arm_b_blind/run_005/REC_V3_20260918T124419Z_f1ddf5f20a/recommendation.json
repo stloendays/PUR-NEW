@@ -1,0 +1,128 @@
+{
+  "acceptance_criterion": {
+    "claim": "The uncertainty probe establishes whether a subsequent S1C41 performance-mitigation experiment can be executed and interpreted without unsupported stoichiometric or process-state assumptions.",
+    "criterion": "Before any candidate performance result is inspected, obtain measured or supplier-supported functionality, equivalent-weight, moisture, and reactive-classification information for both AC1920 and TK100; calculate and document S1C41 reactive equivalents, NCO/OH index, MDI fraction, and complete mass balance without unverified substitutions; freeze all mixing, reaction, preheat, residence, loading, sampling, storage, age, and moisture conditions; require a contemporaneous matched E2 control and independently prepared realizations; and preregister numerical limits for acceptable 15-minute viscosity, repeat-to-repeat spread, delayed acceleration, nonmonotonicity, and temperature-shape failure. Only after every item is satisfied may S1C41 advance to a 120 \u00b0C, 15-90 minute hold test with measurements at least at 15, 60, and 90 minutes and a full 80-130 \u00b0C sweep unless state-calibration transferability is demonstrated.",
+    "failure_condition": "Fail the readiness probe and do not interpret a candidate performance test if any modifier property needed for reactive-equivalent accounting remains unknown, candidate-specific NCO/OH or mass balance requires an unsupported assumption, the matched E2 control or independent preparations are omitted, process history is not frozen, or any numerical operational and adjudication limit remains undefined when physical candidate measurements begin.",
+    "measurement_window": "Pre-execution material and process characterization, followed conditionally by the matched 120 \u00b0C hold window from 15 through 90 minutes"
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C41",
+      "relative_reason": "Preferred subsequent performance candidate because 15 wt% AC1920 and 5 wt% TK100 cover both independently supported axes within the documented regions, but execution is deferred until modifier stoichiometry, moisture, process control, and prospective adjudication limits are resolved."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Lower total modifier burden, but 2.5 wt% TK100 is below the documented 3-10 wt% broad tackifier region and repeated 4.8-6.4 wt% cluster; it is therefore a lower-dose uncertainty or robustness point, not the default full-mitigation experiment."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C46",
+      "relative_reason": "Provides interior-region coverage with 17.5 wt% acrylic and 5 wt% tackifier, but its 22.5 wt% total modifier burden is not justified before the lower-burden S1C41 can be interpreted."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C49",
+      "relative_reason": "Acrylic-only control with cleaner single-axis attribution, but it zeroes the independently supported tackifier axis and would be appropriate only if the intent were changed from performance mitigation to causal isolation."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The demonstrated target is viscosity rise during a 120 \u00b0C hold over 15-90 minutes; any later performance test must measure the matched trajectory and SI15-60/SI15-90 rather than use static viscosity as a proxy.",
+      "name": "physical_failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C41 activates both independently supported axes at 15 wt% acrylic-like modifier and 5 wt% tackifier-like modifier; single-axis candidates remain mechanistic controls.",
+      "name": "performance_mitigation_axis_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "AC1920 and TK100 functionality, equivalent weights, moisture contents, and reactive classifications are unavailable, so candidate-specific reactive equivalents and NCO/OH cannot yet be established without unsupported assumptions.",
+      "name": "modifier_stoichiometry",
+      "status": "fail"
+    },
+    {
+      "detail": "All candidate process histories omit six major fields, while historical E2 viscosity levels differed by approximately 2.8-3.6-fold. A contemporaneous matched E2 control and independently prepared realizations are required.",
+      "name": "matched_process_state_control",
+      "status": "fail"
+    },
+    {
+      "detail": "One-point state calibration is supported only within the measured local chemistry family. It cannot be assumed transferable to acrylic-plus-tackifier formulations; a full 80-130 \u00b0C sweep is required unless transferability is demonstrated.",
+      "name": "state_calibration_transferability",
+      "status": "unknown"
+    },
+    {
+      "detail": "The numerical acceptable range for 15-minute viscosity, repeatability suspension threshold, and quantitative trajectory-instability rules have not been frozen.",
+      "name": "prospective_operational_limits",
+      "status": "fail"
+    },
+    {
+      "detail": "No held-out identity or result is present, but the exact fine grid was formalized after the validation experiment and no contemporaneous freeze artifact is available.",
+      "name": "candidate_space_provenance",
+      "status": "unknown"
+    },
+    {
+      "detail": "The conditionally preferred S1C41 remains within the pre-result acrylic and tackifier bounds and preserves the relative E2 reactive-core proportions.",
+      "name": "composition_bounds",
+      "status": "pass"
+    }
+  ],
+  "created_utc": "2026-09-18T12:44:19Z",
+  "decision_mode": "abstain",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "600856382b0e2c33d0bf81079858e31a1613794b5ce6de1677e582b45f43e469",
+    "model": "gpt-5.6-sol",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T124419Z_f1ddf5f20a",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T124419Z_f1ddf5f20a",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": null,
+  "selection_rationale": "The local experiments establish the failure mode: under the same 120 \u00b0C schedule, E5 had SI15-60 = 0.515 and SI15-90 = 0.931 versus 0.095 and 0.168 for E1, while E2 showed approximately 2.8-3.6-fold realization-level shifts. Paper-derived rheological rules from the audited local analysis indicate a shared temperature-response shape with realization-specific scale shifts inside the measured chemistry family, but they also require hold stability, initial viscosity, temperature response, and process state to be adjudicated separately. Curated PUR literature/database priors support an acrylic-like region around 15-25 wt% and a minor tackifier region broadly around 3-10 wt%, with repeated tackifier examples near 5 wt%; these priors guide the formulation family but do not predict the held-out local result or establish a molecular mechanism. Conservative experimental-design constraints introduce the matched E2 control, independent preparations, moisture and stoichiometry review, bounded 80-130 \u00b0C characterization, and prospectively frozen operational and repeatability limits. The Skeptic's objections are upheld: S1C40's 2.5 wt% tackifier dose is not adequately supported, minimum-burden reasoning was applied before sufficiency was established, and unresolved stoichiometry and process state prevent interpretation. The Robustness Adjudicator's conditional preference for S1C41 is accepted, but only as the subsequent performance candidate after uncertainty resolution. Immediate selection of S1C41 is withheld because unknown modifier reactivity and moisture could confound the formulation intervention with NCO/OH changes, and missing matched controls could confound it with realization state. Exact analogue distance is treated only as audit metadata. This decision therefore freezes an uncertainty probe rather than making an exact-property prediction.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Independent-axis coverage audit",
+      "note": "S1C41 covers the acrylic-like lower supported region and the repeated approximately 5 wt% tackifier region; S1C40 does not robustly cover the tackifier region.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Qualitative comparison of local chemistry support and external analogue regions",
+      "note": "The combined modifier family lies outside the locally measured reactive-core-only chemistry; external evidence supports a region and direction, not an exact property prediction.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": null,
+      "note": "Candidate measurement uncertainty is unavailable; the supplied viscosity unit must remain unknown.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Mixing, reaction, preheat, residence, loading, sampling, storage, age, and moisture conditions are not specified for the candidates.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": null,
+      "note": "No modified-formulation repeats exist, and no prospective threshold for suspending formulation ranking has been frozen.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

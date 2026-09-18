@@ -1,0 +1,148 @@
+{
+  "acceptance_criterion": {
+    "claim": "S1C41 mitigates the established thermal-hold viscosity-drift failure while preserving an interpretable viscosity level and monotonic 80\u2013130 \u00b0C temperature response under matched process and measurement conditions.",
+    "criterion": "Accept only if replicate-level SI for S1C41 is lower than the original E5 reference over both 15\u201360 min and 15\u201390 min, the improvement exceeds the observed matched-process replicate/state spread, the result remains improved after the state-specific 120 \u00b0C anchor calibration, and the 80\u2013130 \u00b0C sweep remains monotonic and interpretable with no pre-specified usability-bound violation.",
+    "failure_condition": "Reject or defer if either hold-window SI is not lower than E5, the apparent improvement is no larger than replicate/process-state spread, calibration removes the improvement, the response is non-monotonic or uninterpretable, verified functionality changes the required stoichiometry without correction, or viscosity usability bounds defined before testing are violated.",
+    "measurement_window": "Separate 80\u2013130 \u00b0C temperature sweep and 120 \u00b0C thermal hold for at least 15\u201360 min and preferably 15\u201390 min; record initial and time-resolved viscosity, state anchor, replicates, and complete process history."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Rejected as primary because its 2.5% tackifier level is below the stated broad supported region and repeated 4.8\u20136.4% cluster; its lower modifier burden cannot justify selection before intervention sufficiency is established."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C45",
+      "relative_reason": "Useful acrylic-loading robustness comparator, but it combines a less-supported 2.5% tackifier level with a higher total modifier burden than S1C41."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C10",
+      "relative_reason": "Cleaner tackifier-axis attribution, but inappropriate as the primary performance-mitigation experiment because it zeroes an independently supported acrylic-like axis."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The experiment directly targets thermal-hold viscosity drift at 120 \u00b0C rather than optimizing static viscosity alone.",
+      "name": "Failure-mode alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C41 covers both independently supported acrylic-like and minor-tackifier-like intervention axes.",
+      "name": "Performance-mitigation axis coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "The 15% acrylic level is within the supported coarse acrylic region, and the 5% tackifier level lies within the repeatedly documented minor-resin cluster.",
+      "name": "Evidence-supported modifier region",
+      "status": "pass"
+    },
+    {
+      "detail": "The candidate preserves the E2 reactive-core proportions nominally.",
+      "name": "Reactive-core preservation",
+      "status": "pass"
+    },
+    {
+      "detail": "AC1920 and TK100 reactive-group contributions must be verified and NCO:OH recalculated before interpretation.",
+      "name": "Modifier functionality and stoichiometry",
+      "status": "unknown"
+    },
+    {
+      "detail": "Preparation, mixing, reaction, residence, preheating, sample-age, and measurement history are not supplied and must be matched and recorded.",
+      "name": "Process-history control",
+      "status": "unknown"
+    },
+    {
+      "detail": "The local rheology evidence supports a state-specific 120 \u00b0C anchor because state-aware calibration materially reduces held-temperature error.",
+      "name": "State calibration",
+      "status": "pass"
+    },
+    {
+      "detail": "The required 80\u2013130 \u00b0C sweep and 120 \u00b0C 15\u201360 min, preferably 15\u201390 min, hold are within the measured local support.",
+      "name": "Measurement-window support",
+      "status": "pass"
+    },
+    {
+      "detail": "E2 repeatability is poor, with sample CV approximately 0.46\u20130.58 and max/min ratios approximately 2.8\u20133.6; replicate preparations are mandatory.",
+      "name": "Repeatability risk",
+      "status": "fail"
+    }
+  ],
+  "created_utc": "2026-09-18T09:19:41Z",
+  "decision_mode": "performance_candidate",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "ee5b0be9560810e27d87041ca6606c86535e8b1c9ee8cce03cc936ae6562796c",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T091941Z_cd5e1e9295",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T091941Z_cd5e1e9295",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C41",
+    "formulation_state": {
+      "AC1920": 15.0,
+      "MDI": 16.1525384179,
+      "PDP70": 31.923730791,
+      "PPG2000": 31.923730791,
+      "TK100": 5.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "The established physical failure mode is thermal-hold viscosity drift: local E5 drift is substantially larger than E1 drift over both 15\u201360 and 15\u201390 min. Local temperature sweeps show a monotonic 80\u2013130 \u00b0C response, while the state-aware rheology analysis shows that realization/process state largely shifts viscosity scale and that a 120 \u00b0C anchor improves transferability; therefore the experiment must measure both the hold trajectory and the temperature response under matched process history. The local experiments support retaining the E2 reactive core and require state-controlled replicate testing, but they do not directly establish which modifier will mitigate drift. Paper-derived rheological rules require separating static viscosity, thermal response, and temporal hold stability. Curated PUR literature/database priors support an acrylic-like formulation family around a broad 15\u201325% region and a minor tackifier-like region broadly around 3\u201310%, with repeated examples near 5%; these priors guide the formulation region only and are not predictors of the held-out wet-lab result. S1C41 is selected because it covers both independently supported intervention axes, uses the 5% tackifier level supported by the repeated external cluster, preserves the E2 core nominally, and remains inside the bounded candidate space. The Skeptic's objection is resolved by rejecting S1C40 as rank 1: its 2.5% tackifier level is not comparably supported, and lower modifier burden is not a valid tie-break before sufficiency. The Robustness Adjudicator's reranking is therefore accepted. The remaining conservative constraints are verified modifier functionality, recalculated stoichiometry, matched process history, replicate preparation, state-specific calibration, and direct 120 \u00b0C hold measurement. This decision supports testing a formulation region and mitigation direction, not predicting an exact property or molecular mechanism.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "deterministic intervention-coverage diagnostics",
+      "note": "Exact-property prediction remains unsupported.; model value text: full coverage of both independently supported intervention axes",
+      "status": "known",
+      "unit_or_scale": "candidate coverage class",
+      "value": null
+    },
+    "extrapolation": {
+      "method": "external analogue evidence combined with the E2 local core",
+      "note": "External evidence supports a formulation region and direction, not an exact local property.; model value text: bounded formulation-family extrapolation",
+      "status": "estimated",
+      "unit_or_scale": "qualitative",
+      "value": null
+    },
+    "measurement": {
+      "method": "temperature sweep plus thermal-hold trajectory",
+      "note": "Thermal response and temporal hold drift must be measured separately.; model value text: 80\u2013130 \u00b0C sweep and 120 \u00b0C hold with time-resolved viscosity",
+      "status": "known",
+      "unit_or_scale": "measurement window",
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Matched process history must be established prospectively.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "three-run repeatability assessment",
+      "note": "Observed realization/process-state spread may obscure small formulation effects.",
+      "status": "known",
+      "unit_or_scale": "E2 sample CV at 80 \u00b0C; approximately 0.46\u20130.58 across 80\u2013130 \u00b0C",
+      "value": 0.4828000144760181
+    }
+  }
+}

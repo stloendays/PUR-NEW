@@ -1,0 +1,62 @@
+{
+  "api_base_host": "127.0.0.1:8788",
+  "arm": "B",
+  "arm_role": "target-blind independent pre-result recovery",
+  "candidate_set": "D:\\Research\\PUR-NEW\\derived\\stage1_blind_candidate_space_v1.json",
+  "candidate_set_sha256": "2b92e5d976e76b674a05f9b8fc17f4c78cc873b42641fbe67b35a37beeec4346",
+  "deterministic_ranking_hidden": true,
+  "evidence_state_sha256": "8ca085b1529f94b2fc6ed3bfdd0f5fb938a4580159ed04ece39fac42c023bc81",
+  "finished_utc": "2026-09-18T13:04:36Z",
+  "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+  "model": "gpt-5.5",
+  "n_runs_requested": 5,
+  "runs": [
+    {
+      "finished_utc": "2026-09-18T12:48:23Z",
+      "returncode": 0,
+      "run_dir": "results\\multimodel\\gpt-5_5\\arm_b_blind\\run_001",
+      "run_index": 1,
+      "started_utc": "2026-09-18T12:44:20Z",
+      "status": "ok",
+      "wall_seconds": 243.21
+    },
+    {
+      "finished_utc": "2026-09-18T12:52:31Z",
+      "returncode": 1,
+      "run_dir": "results\\multimodel\\gpt-5_5\\arm_b_blind\\run_002",
+      "run_index": 2,
+      "started_utc": "2026-09-18T12:48:23Z",
+      "status": "error",
+      "wall_seconds": 247.56
+    },
+    {
+      "finished_utc": "2026-09-18T12:56:37Z",
+      "returncode": 0,
+      "run_dir": "results\\multimodel\\gpt-5_5\\arm_b_blind\\run_003",
+      "run_index": 3,
+      "started_utc": "2026-09-18T12:52:31Z",
+      "status": "ok",
+      "wall_seconds": 245.98
+    },
+    {
+      "finished_utc": "2026-09-18T13:00:31Z",
+      "returncode": 0,
+      "run_dir": "results\\multimodel\\gpt-5_5\\arm_b_blind\\run_004",
+      "run_index": 4,
+      "started_utc": "2026-09-18T12:56:37Z",
+      "status": "ok",
+      "wall_seconds": 233.79
+    },
+    {
+      "finished_utc": "2026-09-18T13:04:36Z",
+      "returncode": 0,
+      "run_dir": "results\\multimodel\\gpt-5_5\\arm_b_blind\\run_005",
+      "run_index": 5,
+      "started_utc": "2026-09-18T13:00:31Z",
+      "status": "ok",
+      "wall_seconds": 245.77
+    }
+  ],
+  "started_utc": "2026-09-18T12:44:20Z",
+  "temperature": "not sent; endpoint rejects the temperature parameter (verified). Model default sampling retained; stochasticity comes from repeated independent calls."
+}

@@ -1,0 +1,10 @@
+{
+  "finished_utc": "2026-09-18T12:44:20Z",
+  "returncode": 0,
+  "run_index": 5,
+  "started_utc": "2026-09-18T12:39:12Z",
+  "status": "ok",
+  "stderr": "",
+  "stdout": "results\\multimodel\\gpt-5_6-sol\\arm_b_blind\\run_005\\REC_V3_20260918T124419Z_f1ddf5f20a",
+  "wall_seconds": 308.25
+}

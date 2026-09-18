@@ -1,0 +1,10 @@
+{
+  "finished_utc": "2026-09-18T07:30:45Z",
+  "returncode": 0,
+  "run_index": 4,
+  "started_utc": "2026-09-18T07:26:54Z",
+  "status": "ok",
+  "stderr": "",
+  "stdout": "D:\\Research\\PUR-NEW\\results\\stage1_blind_replay_v1\\arm_b_blind\\run_004\\REC_V3_20260918T073045Z_ef6c462a52",
+  "wall_seconds": 231.51
+}

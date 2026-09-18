@@ -1,0 +1,128 @@
+{
+  "acceptance_criterion": {
+    "claim": "The uncertainty probe is successful only if a subsequent performance experiment can be interpreted as a formulation comparison rather than an unresolved stoichiometric, process-state, or measurement artifact.",
+    "criterion": "Before selecting S1C40 or S1C41, verify modifier identities and reactive-group inventories, recalculate the complete NCO:OH balance, document the missing process-history fields, obtain a same-protocol E2-core 120 C hold over 15-90 min, prespecify independent preparations and replicate-based uncertainty and effect-margin rules, and verify the modified formulation's 80-130 C response and post-hold behavior.",
+    "failure_condition": "Do not advance to a performance-candidate decision if chemistry or stoichiometry remains unverified, the matched E2 comparator is unavailable, process history cannot be reproduced, the modified formulation is outside the supported measurement domain, or the observed candidate-control difference cannot be distinguished from repeatability and process-state spread.",
+    "measurement_window": "Temperature sweep over 80-130 C and matched 120 C hold with measurements through 90 min, including SI for 15-60 min and 15-90 min."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Best provisional low-burden dual-axis performance candidate, but tackifier support is weaker, stoichiometry is unverified, and state-calibration validity outside the local chemistry family is unresolved."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C41",
+      "relative_reason": "More strongly supported tackifier loading and preferred robustness alternative, but it has a larger modifier burden and the same unresolved chemistry, process-history, comparator, and calibration uncertainties."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C39",
+      "relative_reason": "Useful acrylic-only causal comparator with lower burden, but it does not test the permitted combined performance-mitigation intervention."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C01",
+      "relative_reason": "Local reactive-core control option for matched state and hold characterization, but it is not itself a mitigation candidate."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The established failure is thermal-hold viscosity drift, distinct from static viscosity and monotonic 80-130 C temperature response.",
+      "name": "Physical failure mode is directly addressed",
+      "status": "pass"
+    },
+    {
+      "detail": "Acrylic functionality, tackifier identity, reactive-group content, moisture specifications, and the complete recalculated NCO:OH balance are unavailable.",
+      "name": "Chemistry and stoichiometry are interpretable",
+      "status": "fail"
+    },
+    {
+      "detail": "A same-protocol E2-core hold trajectory at 120 C over 15-90 min has not been established.",
+      "name": "Matched local comparator is available",
+      "status": "fail"
+    },
+    {
+      "detail": "All candidates have six missing process-history fields and high process-history uncertainty.",
+      "name": "Process and realization history is controlled",
+      "status": "fail"
+    },
+    {
+      "detail": "One-point calibration is supported within the original local chemistry family but is not validated for substantially modified formulations.",
+      "name": "State-anchor validity for modified chemistry",
+      "status": "unknown"
+    },
+    {
+      "detail": "Local E2 spread is large, including CV approximately 0.46-0.58, but replicate structure, uncertainty estimator, and minimum effect margin are not prespecified.",
+      "name": "Repeatability and effect-size decision rule is operational",
+      "status": "fail"
+    },
+    {
+      "detail": "Acrylic evidence is directional or noncommensurate for this system; the external tackifier query returned no records.",
+      "name": "External evidence coverage",
+      "status": "unknown"
+    },
+    {
+      "detail": "The supported 80-130 C sweep and 120 C, 15-90 min hold provide an appropriate future adjudication window, provided matched measurements are completed.",
+      "name": "Measurement window and domain",
+      "status": "pass"
+    }
+  ],
+  "created_utc": "2026-09-18T08:52:41Z",
+  "decision_mode": "abstain",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "66844790d91b6839a46e68bbfb4ad8814e5f7d101060f64bf94490e7247a27fe",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "5694614ed696814505273dda22e8d107fa3a0cc23e69078ef3f96be2ffeaebd6",
+    "run_id": "REC_V3_20260918T085241Z_929646442e",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T085241Z_929646442e",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": null,
+  "selection_rationale": "Freeze an uncertainty probe rather than a performance candidate because the Skeptic's high-severity objections and the Robustness Adjudicator's conditional recommendation identify critical barriers to an interpretable result: unresolved stoichiometric consequences, missing process history, no matched E2 hold baseline, and unvalidated state calibration for modified chemistry. The local experiments establish that hold drift is formulation-dependent and that E2 repeatability is poor. The rheology analysis supplies the rule that static viscosity, temperature response, and hold drift must be measured separately and that one-point state calibration is useful only within the characterized local chemistry family. Curated PUR literature supports a broad acrylic-like region and minor-tackifier direction, but it does not predict the held-out wet-lab result; the absence of returned tackifier records further limits support. The conservative design constraint is to preserve the E2 reactive-core proportions, verify full stoichiometry and process history, use the supported 80-130 C range and matched 120 C hold, and compare against a same-protocol local control. S1C40 remains the provisional performance candidate and S1C41 the robustness alternative, but neither should be frozen until these uncertainties are resolved. This also resolves the objection that a combined candidate cannot attribute tackifier benefit: any later claim must be limited to combined mitigation unless S1C39 or an equivalent acrylic-only comparator is included. The proposed SI limits are retained only as prospective design criteria, not as measured facts or guaranteed thresholds.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Source-level analogue audit",
+      "note": "Acrylic support defines a broad directional region; tackifier support is bounded by curated prior guidance but lacks returned source-level evidence for local hold mitigation.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": null,
+      "note": "State-calibration transfer from the local chemistry family to modifier-containing formulations is unresolved.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": "Original local temperature sweeps and E1/E5 hold measurements",
+      "note": "The supported temperature interval is 80-130 C; E1 and E5 hold SI values are available, but the matched E2 hold trajectory is not.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Preparation, conditioning, moisture exposure, thermal history, sample age, and related fields are incomplete.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "Three E2 runs across 80-130 C",
+      "note": "This spread can mask a small candidate-control effect.; model value text: CV approximately 0.46-0.58; 120 C max/min ratio approximately 3.57",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

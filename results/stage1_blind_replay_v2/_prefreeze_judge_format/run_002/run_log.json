@@ -1,0 +1,10 @@
+{
+  "finished_utc": "2026-09-18T08:29:46Z",
+  "returncode": 1,
+  "run_index": 2,
+  "started_utc": "2026-09-18T08:25:49Z",
+  "status": "error",
+  "stderr": "Traceback (most recent call last):\n  File \"D:\\Research\\PUR-NEW\\scripts\\run_scientific_agent_v3.py\", line 550, in <module>\n    main()\n  File \"D:\\Research\\PUR-NEW\\scripts\\run_scientific_agent_v3.py\", line 512, in main\n    validate(recommendation, recommendation_schema)\n  File \"D:\\Tools\\pur_bridge_env\\Lib\\site-packages\\jsonschema\\validators.py\", line 1332, in validate\n    raise error\njsonschema.exceptions.ValidationError: 'qualified' is not one of ['pass', 'fail', 'unknown']\n\nFailed validating 'enum' in schema['properties']['constraints']['items']['properties']['status']:\n    {'enum': ['pass', 'fail', 'unknown']}\n\nOn instance['constraints'][3]['status']:\n    'qualified'",
+  "stdout": "",
+  "wall_seconds": 237.2
+}

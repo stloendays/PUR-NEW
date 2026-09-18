@@ -1,0 +1,9 @@
+{
+  "status": "preserved_pre_fix_failure",
+  "runs_attempted": 10,
+  "runs_with_frozen_recommendation": 0,
+  "what_happened": "All 10 runs aborted in ~5 s before any LLM call. evidence_firewall.find_blind_payload_violations did node.get(\"formulation_id\") and tested membership without a type guard; the new per-action JSON-Schema fragments in the planner payload contain formulation_id as a PROPERTY NAME whose value is a dict, raising TypeError: unhashable type.",
+  "classification": "pre-existing bug in main 662297b, exposed by its own new action parameter schemas; not an Agent scientific decision",
+  "fix": "isinstance(fid, str) guard in src/pur_new/evidence_firewall.py. Verified to still detect scalar F1 ids and stage=follow_up.",
+  "freeze_impact": "None. Zero valid frozen recommendations existed, so the frozen scientific rules were never applied to a real decision. Strategy re-frozen after the fix."
+}

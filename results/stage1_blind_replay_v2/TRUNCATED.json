@@ -1,0 +1,12 @@
+{
+  "status": "truncated_by_user_instruction",
+  "n_planned": 10,
+  "n_frozen": 2,
+  "frozen_runs": {
+    "run_001": "S1C10 (AC 0.0 / TK 2.5), uncertainty_probe",
+    "run_002": "abstain (Judge returned null selection)"
+  },
+  "why_truncated": "Run 1 showed minimum-sufficient-intervention being applied ahead of intervention sufficiency: an independently supported acrylic axis was zeroed to obtain a lower modifier burden. Strategy revised as V3 before completing the series.",
+  "retained_as": "diagnostic baseline for the over-minimization failure mode; NOT a completed N=10 series and not to be reported as one",
+  "do_not_overwrite": true
+}

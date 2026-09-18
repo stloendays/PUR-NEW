@@ -1,0 +1,61 @@
+{
+  "api_base_host": "127.0.0.1:8788",
+  "arm": "B",
+  "arm_role": "target-blind independent pre-result recovery",
+  "candidate_set": "D:\\Research\\PUR-NEW\\derived\\stage1_blind_candidate_space_v1.json",
+  "candidate_set_sha256": "2b92e5d976e76b674a05f9b8fc17f4c78cc873b42641fbe67b35a37beeec4346",
+  "evidence_state_sha256": "8ca085b1529f94b2fc6ed3bfdd0f5fb938a4580159ed04ece39fac42c023bc81",
+  "finished_utc": "2026-09-18T09:19:42Z",
+  "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+  "model": "gpt-5.6-luna",
+  "n_runs_requested": 5,
+  "runs": [
+    {
+      "finished_utc": "2026-09-18T09:00:55Z",
+      "returncode": 0,
+      "run_dir": "results\\stage1_blind_replay_v3\\arm_b_blind\\run_001",
+      "run_index": 1,
+      "started_utc": "2026-09-18T08:57:04Z",
+      "status": "ok",
+      "wall_seconds": 230.47
+    },
+    {
+      "finished_utc": "2026-09-18T09:05:26Z",
+      "returncode": 0,
+      "run_dir": "results\\stage1_blind_replay_v3\\arm_b_blind\\run_002",
+      "run_index": 2,
+      "started_utc": "2026-09-18T09:00:55Z",
+      "status": "ok",
+      "wall_seconds": 270.84
+    },
+    {
+      "finished_utc": "2026-09-18T09:09:51Z",
+      "returncode": 0,
+      "run_dir": "results\\stage1_blind_replay_v3\\arm_b_blind\\run_003",
+      "run_index": 3,
+      "started_utc": "2026-09-18T09:05:26Z",
+      "status": "ok",
+      "wall_seconds": 265.05
+    },
+    {
+      "finished_utc": "2026-09-18T09:15:15Z",
+      "returncode": 0,
+      "run_dir": "results\\stage1_blind_replay_v3\\arm_b_blind\\run_004",
+      "run_index": 4,
+      "started_utc": "2026-09-18T09:09:51Z",
+      "status": "ok",
+      "wall_seconds": 324.11
+    },
+    {
+      "finished_utc": "2026-09-18T09:19:42Z",
+      "returncode": 0,
+      "run_dir": "results\\stage1_blind_replay_v3\\arm_b_blind\\run_005",
+      "run_index": 5,
+      "started_utc": "2026-09-18T09:15:15Z",
+      "status": "ok",
+      "wall_seconds": 266.89
+    }
+  ],
+  "started_utc": "2026-09-18T08:57:04Z",
+  "temperature": "not sent; endpoint rejects the temperature parameter (verified). Model default sampling retained; stochasticity comes from repeated independent calls."
+}

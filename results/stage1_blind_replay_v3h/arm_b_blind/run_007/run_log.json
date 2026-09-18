@@ -1,0 +1,10 @@
+{
+  "finished_utc": "2026-09-18T10:13:51Z",
+  "returncode": 0,
+  "run_index": 7,
+  "started_utc": "2026-09-18T10:09:29Z",
+  "status": "ok",
+  "stderr": "",
+  "stdout": "results\\stage1_blind_replay_v3h\\arm_b_blind\\run_007\\REC_V3_20260918T101350Z_45a3929662",
+  "wall_seconds": 261.81
+}

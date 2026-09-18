@@ -1,0 +1,3989 @@
+{
+  "architecture": {
+    "architecture_principles": [
+      "physical discovery comes before candidate ranking",
+      "the Agent uses measured rheological regularities as scientific tools rather than optimizing benchmark recovery",
+      "state-aware rheology, external chemistry evidence and process uncertainty serve distinct scientific roles",
+      "candidate selection should maximize usefulness and interpretability for the observed material failure mode",
+      "deterministic calculations are separated from language-model judgment",
+      "the Skeptic and Robustness Adjudicator are decision-quality controls, not components that need ablation to justify their existence",
+      "held-out result data are structurally removed before blind replay payloads are assembled",
+      "the final recommendation is frozen before physical adjudication",
+      "only concise auditable outputs are stored; hidden chain-of-thought is not scientific evidence"
+    ],
+    "blinded_target_formulation_ids": [
+      "F1"
+    ],
+    "canonical_flow": "planner -> evidence/tool layer -> proposer -> skeptic -> robustness adjudicator -> judge -> freeze",
+    "claim_boundary": "V3.3.1 is the current discovery-to-experiment implementation. It operationalizes the physical/model findings and improves scientific decision support, but it must not be described as the exact historical code that generated the earlier validation formulation unless matching archived runtime provenance is recovered.",
+    "core_scientific_tool": {
+      "name": "get_state_aware_rheology_summary",
+      "required_before_candidate_ranking": true,
+      "returns": [
+        "formulation-only versus state-aware model comparison",
+        "state-shift master-curve structure",
+        "one-point state calibration evidence",
+        "local apparent temperature-sensitivity coordinate",
+        "E1/E5 thermal-hold drift contrast",
+        "experiment-design implications and claim boundaries"
+      ],
+      "role": "Convert the paper's upstream findings into machine-usable design rules without exposing the validation formulation or its outcome."
+    },
+    "default_evidence_profile": "blind_pre_result",
+    "evaluation_priority": [
+      "physical wet-lab adjudication of the selected point",
+      "scientific usefulness of the experiment",
+      "traceable use of measured local regularities",
+      "reproducibility of the recommendation under the same evidence contract",
+      "scientific-boundary and leakage compliance"
+    ],
+    "name": "PUR_NEW_DISCOVERY_TO_EXPERIMENT_AGENT_V3",
+    "non_goals": [
+      "proving that every internal Agent module is individually necessary through ablation",
+      "making architecture benchmarking the main scientific contribution",
+      "optimizing held-out-region recovery as the main objective",
+      "claiming that literature-prior proximity predicts the wet-lab outcome",
+      "replacing the material-science result with an LLM-systems paper"
+    ],
+    "primary_agent_outputs": [
+      "identified physical failure mode",
+      "material regularities used in the decision",
+      "design implication derived from each regularity",
+      "selected formulation-process experiment point",
+      "ranked alternatives",
+      "measurement plan tied to the discovered failure mode",
+      "skeptic audit",
+      "robustness adjudication",
+      "decomposed uncertainty",
+      "falsifiable acceptance criterion"
+    ],
+    "purpose": "Scientific decision Agent that first extracts material-response regularities from measured PUR rheology, then uses those regularities, external evidence and uncertainty-aware tools to select one useful formulation-process experiment point.",
+    "required_scientific_sequence": [
+      "understand the measured rheological structure",
+      "state the positive material regularities and their boundaries",
+      "translate those regularities into a design objective",
+      "use external evidence to identify chemically plausible intervention directions",
+      "compare admissible formulation-process experiment points",
+      "challenge the provisional point scientifically",
+      "adjudicate robustness to reasonable alternative evidence interpretations",
+      "freeze one useful experiment point and a falsifiable measurement criterion"
+    ],
+    "secondary_replay_role": "Repeated held-out replay may be used only as a reproducibility/consistency check. It is not the main scientific contribution and does not require component ablations.",
+    "stages": [
+      {
+        "id": "planner",
+        "prompt": "prompts/agent_v3_planner.txt",
+        "role": "identify the physical failure mode, upstream rheological regularities, evidence needs and measurement objective before candidate ranking"
+      },
+      {
+        "id": "evidence_tool_layer",
+        "role": "execute read-only scientific tools, including the paper-derived state-aware rheology tool, external evidence retrieval, formulation inspection and process-state audits"
+      },
+      {
+        "id": "proposer",
+        "prompt": "prompts/agent_v3_proposer.txt",
+        "role": "rank experiment points according to scientific usefulness for the discovered material problem"
+      },
+      {
+        "id": "skeptic",
+        "prompt": "prompts/agent_v3_skeptic.txt",
+        "role": "try to falsify the provisional recommendation and test scientific interpretability, leakage and claim boundaries"
+      },
+      {
+        "id": "robustness_adjudicator",
+        "prompt": "prompts/agent_v3_robustness.txt",
+        "role": "adjudicate whether the proposed point remains useful under alternative evidence priorities, process-state uncertainty and the skeptic's strongest objections"
+      },
+      {
+        "id": "judge",
+        "prompt": "prompts/agent_v3_judge.txt",
+        "role": "resolve proposer, skeptic and robustness records and make the final pre-result decision"
+      },
+      {
+        "id": "freeze",
+        "role": "programmatically validate and freeze the recommendation with timestamp, hashes, model, candidate state, uncertainty and falsifiable acceptance criterion"
+      }
+    ],
+    "version": "3.3.1"
+  },
+  "candidate_scorecards": [
+    {
+      "active_axis_distance_pct_points": 0.0,
+      "analogue_support": "baseline_control",
+      "candidate_id": "S1C01",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 19.2866666667,
+          "pdp70": 40.3566666667,
+          "ppg2000": 40.3566666667,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C01",
+        "mdi_fraction": 0.19286666666680713,
+        "modifier_fraction": 0.0,
+        "polyol_fraction": 0.8071333333331928,
+        "resin_modified": false,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0000000001
+      },
+      "resin_modified": false,
+      "stress_reasons": [
+        "major process-history fields are missing",
+        "baseline control does not test the resin-modification hypothesis"
+      ],
+      "support_value": 0
+    },
+    {
+      "active_axis_distance_pct_points": 0.0,
+      "analogue_support": "baseline_control",
+      "candidate_id": "S1C02",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 20.1906730224,
+          "pdp70": 39.9046634888,
+          "ppg2000": 39.9046634888,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C02",
+        "mdi_fraction": 0.201906730224,
+        "modifier_fraction": 0.0,
+        "polyol_fraction": 0.7980932697759999,
+        "resin_modified": false,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": false,
+      "stress_reasons": [
+        "major process-history fields are missing",
+        "baseline control does not test the resin-modification hypothesis"
+      ],
+      "support_value": 0
+    },
+    {
+      "active_axis_distance_pct_points": 0.0,
+      "analogue_support": "baseline_control",
+      "candidate_id": "S1C03",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 21.0759641345,
+          "pdp70": 39.4620179327,
+          "ppg2000": 39.4620179327,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C03",
+        "mdi_fraction": 0.21075964134521077,
+        "modifier_fraction": 0.0,
+        "polyol_fraction": 0.7892403586547893,
+        "resin_modified": false,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": false,
+      "stress_reasons": [
+        "major process-history fields are missing",
+        "baseline control does not test the resin-modification hypothesis"
+      ],
+      "support_value": 0
+    },
+    {
+      "active_axis_distance_pct_points": 0.0,
+      "analogue_support": "baseline_control",
+      "candidate_id": "S1C04",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 19.8333333333,
+          "pdp70": 32.0666666667,
+          "ppg2000": 48.1,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C04",
+        "mdi_fraction": 0.19833333333300002,
+        "modifier_fraction": 0.0,
+        "polyol_fraction": 0.8016666666669999,
+        "resin_modified": false,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": false,
+      "stress_reasons": [
+        "major process-history fields are missing",
+        "baseline control does not test the resin-modification hypothesis"
+      ],
+      "support_value": 0
+    },
+    {
+      "active_axis_distance_pct_points": 0.0,
+      "analogue_support": "baseline_control",
+      "candidate_id": "S1C05",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 20.5433333333,
+          "pdp70": 47.6733333333,
+          "ppg2000": 31.7833333333,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C05",
+        "mdi_fraction": 0.20543333333320546,
+        "modifier_fraction": 0.0,
+        "polyol_fraction": 0.7945666666667945,
+        "resin_modified": false,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": false,
+      "stress_reasons": [
+        "major process-history fields are missing",
+        "baseline control does not test the resin-modification hypothesis"
+      ],
+      "support_value": 0
+    },
+    {
+      "active_axis_distance_pct_points": 0.0,
+      "analogue_support": "baseline_control",
+      "candidate_id": "S1C06",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 19.7386698446,
+          "pdp70": 40.1306650777,
+          "ppg2000": 40.1306650777,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C06",
+        "mdi_fraction": 0.19738669844600001,
+        "modifier_fraction": 0.0,
+        "polyol_fraction": 0.802613301554,
+        "resin_modified": false,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": false,
+      "stress_reasons": [
+        "major process-history fields are missing",
+        "baseline control does not test the resin-modification hypothesis"
+      ],
+      "support_value": 0
+    },
+    {
+      "active_axis_distance_pct_points": 0.0,
+      "analogue_support": "baseline_control",
+      "candidate_id": "S1C07",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 20.6333185785,
+          "pdp70": 39.6833407108,
+          "ppg2000": 39.6833407108,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C07",
+        "mdi_fraction": 0.20633318578479365,
+        "modifier_fraction": 0.0,
+        "polyol_fraction": 0.7936668142152064,
+        "resin_modified": false,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0000000001
+      },
+      "resin_modified": false,
+      "stress_reasons": [
+        "major process-history fields are missing",
+        "baseline control does not test the resin-modification hypothesis"
+      ],
+      "support_value": 0
+    },
+    {
+      "active_axis_distance_pct_points": 0.0,
+      "analogue_support": "baseline_control",
+      "candidate_id": "S1C08",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 20.0120031779,
+          "pdp70": 35.9856650777,
+          "ppg2000": 44.0023317444,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C08",
+        "mdi_fraction": 0.20012003177899998,
+        "modifier_fraction": 0.0,
+        "polyol_fraction": 0.799879968221,
+        "resin_modified": false,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": false,
+      "stress_reasons": [
+        "major process-history fields are missing",
+        "baseline control does not test the resin-modification hypothesis"
+      ],
+      "support_value": 0
+    },
+    {
+      "active_axis_distance_pct_points": 0.0,
+      "analogue_support": "baseline_control",
+      "candidate_id": "S1C09",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 20.3670031779,
+          "pdp70": 43.7889984111,
+          "ppg2000": 35.8439984111,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C09",
+        "mdi_fraction": 0.2036700317787963,
+        "modifier_fraction": 0.0,
+        "polyol_fraction": 0.7963299682212036,
+        "resin_modified": false,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0000000001
+      },
+      "resin_modified": false,
+      "stress_reasons": [
+        "major process-history fields are missing",
+        "baseline control does not test the resin-modification hypothesis"
+      ],
+      "support_value": 0
+    },
+    {
+      "active_axis_distance_pct_points": 2.3000000000024996,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C10",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 19.6859061969,
+          "pdp70": 38.9070469016,
+          "ppg2000": 38.9070469016,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C10",
+        "mdi_fraction": 0.19685906196880315,
+        "modifier_fraction": 0.024999999999975004,
+        "polyol_fraction": 0.7781409380312219,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.024999999999975004,
+        "total_reported_amount": 100.00000000009999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 0.20000000000499885,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C11",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 19.1811393713,
+          "pdp70": 37.9094303143,
+          "ppg2000": 37.9094303143,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C11",
+        "mdi_fraction": 0.19181139371319178,
+        "modifier_fraction": 0.05000000000004999,
+        "polyol_fraction": 0.7581886062867582,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.05000000000004999,
+        "total_reported_amount": 99.99999999990001
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 1.0999999999999996,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C12",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 18.6763725458,
+          "pdp70": 36.9118137271,
+          "ppg2000": 36.9118137271,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C12",
+        "mdi_fraction": 0.186763725458,
+        "modifier_fraction": 0.075,
+        "polyol_fraction": 0.7382362745419999,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.075,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 3.5999999999999996,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C13",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.0,
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 18.1716057202,
+          "pdp70": 35.9141971399,
+          "ppg2000": 35.9141971399,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C13",
+        "mdi_fraction": 0.181716057202,
+        "modifier_fraction": 0.1,
+        "polyol_fraction": 0.7182839427979999,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.1,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 16.870000000002502,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C14",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.024999999999975004,
+        "amounts": {
+          "ac1920": 2.5,
+          "mdi": 19.6859061969,
+          "pdp70": 38.9070469016,
+          "ppg2000": 38.9070469016,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C14",
+        "mdi_fraction": 0.19685906196880315,
+        "modifier_fraction": 0.024999999999975004,
+        "polyol_fraction": 0.7781409380312219,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.00000000009999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 19.169999999995003,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C15",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.025000000000024995,
+        "amounts": {
+          "ac1920": 2.5,
+          "mdi": 19.1811393713,
+          "pdp70": 37.9094303143,
+          "ppg2000": 37.9094303143,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C15",
+        "mdi_fraction": 0.19181139371319178,
+        "modifier_fraction": 0.05000000000004999,
+        "polyol_fraction": 0.7581886062867582,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.025000000000024995,
+        "total_reported_amount": 99.99999999990001
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 17.07,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C16",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.025,
+        "amounts": {
+          "ac1920": 2.5,
+          "mdi": 18.6763725458,
+          "pdp70": 36.9118137271,
+          "ppg2000": 36.9118137271,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C16",
+        "mdi_fraction": 0.186763725458,
+        "modifier_fraction": 0.075,
+        "polyol_fraction": 0.7382362745419999,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.05,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 17.97,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C17",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.025,
+        "amounts": {
+          "ac1920": 2.5,
+          "mdi": 18.1716057202,
+          "pdp70": 35.9141971399,
+          "ppg2000": 35.9141971399,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C17",
+        "mdi_fraction": 0.181716057202,
+        "modifier_fraction": 0.1,
+        "polyol_fraction": 0.7182839427979999,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.075,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 20.47,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C18",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.025,
+        "amounts": {
+          "ac1920": 2.5,
+          "mdi": 17.6668388946,
+          "pdp70": 34.9165805527,
+          "ppg2000": 34.9165805527,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C18",
+        "mdi_fraction": 0.176668388946,
+        "modifier_fraction": 0.125,
+        "polyol_fraction": 0.698331611054,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.1,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 14.369999999995002,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C19",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.05000000000004999,
+        "amounts": {
+          "ac1920": 5.0,
+          "mdi": 19.1811393713,
+          "pdp70": 37.9094303143,
+          "ppg2000": 37.9094303143,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C19",
+        "mdi_fraction": 0.19181139371319178,
+        "modifier_fraction": 0.05000000000004999,
+        "polyol_fraction": 0.7581886062867582,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 99.99999999990001
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 16.67,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C20",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.05,
+        "amounts": {
+          "ac1920": 5.0,
+          "mdi": 18.6763725458,
+          "pdp70": 36.9118137271,
+          "ppg2000": 36.9118137271,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C20",
+        "mdi_fraction": 0.186763725458,
+        "modifier_fraction": 0.075,
+        "polyol_fraction": 0.7382362745419999,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.025,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 14.57,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C21",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.05,
+        "amounts": {
+          "ac1920": 5.0,
+          "mdi": 18.1716057202,
+          "pdp70": 35.9141971399,
+          "ppg2000": 35.9141971399,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C21",
+        "mdi_fraction": 0.181716057202,
+        "modifier_fraction": 0.1,
+        "polyol_fraction": 0.7182839427979999,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.05,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 15.47,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C22",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.05,
+        "amounts": {
+          "ac1920": 5.0,
+          "mdi": 17.6668388946,
+          "pdp70": 34.9165805527,
+          "ppg2000": 34.9165805527,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C22",
+        "mdi_fraction": 0.176668388946,
+        "modifier_fraction": 0.125,
+        "polyol_fraction": 0.698331611054,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.075,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 17.969999999995,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C23",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.04999999999995001,
+        "amounts": {
+          "ac1920": 5.0,
+          "mdi": 17.1620720691,
+          "pdp70": 33.9189639655,
+          "ppg2000": 33.9189639655,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C23",
+        "mdi_fraction": 0.1716207206908284,
+        "modifier_fraction": 0.14999999999985003,
+        "polyol_fraction": 0.6783792793093216,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.09999999999990002,
+        "total_reported_amount": 100.00000000009999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 11.870000000000001,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C24",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.075,
+        "amounts": {
+          "ac1920": 7.5,
+          "mdi": 18.6763725458,
+          "pdp70": 36.9118137271,
+          "ppg2000": 36.9118137271,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C24",
+        "mdi_fraction": 0.186763725458,
+        "modifier_fraction": 0.075,
+        "polyol_fraction": 0.7382362745419999,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 14.170000000000002,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C25",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.075,
+        "amounts": {
+          "ac1920": 7.5,
+          "mdi": 18.1716057202,
+          "pdp70": 35.9141971399,
+          "ppg2000": 35.9141971399,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C25",
+        "mdi_fraction": 0.181716057202,
+        "modifier_fraction": 0.1,
+        "polyol_fraction": 0.7182839427979999,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.025,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 12.07,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C26",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.075,
+        "amounts": {
+          "ac1920": 7.5,
+          "mdi": 17.6668388946,
+          "pdp70": 34.9165805527,
+          "ppg2000": 34.9165805527,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C26",
+        "mdi_fraction": 0.176668388946,
+        "modifier_fraction": 0.125,
+        "polyol_fraction": 0.698331611054,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.05,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 12.97,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C27",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.07499999999992502,
+        "amounts": {
+          "ac1920": 7.5,
+          "mdi": 17.1620720691,
+          "pdp70": 33.9189639655,
+          "ppg2000": 33.9189639655,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C27",
+        "mdi_fraction": 0.1716207206908284,
+        "modifier_fraction": 0.14999999999985003,
+        "polyol_fraction": 0.6783792793093216,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.07499999999992502,
+        "total_reported_amount": 100.00000000009999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 15.4700000000025,
+      "analogue_support": "weak_analogue_region",
+      "candidate_id": "S1C28",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.075000000000075,
+        "amounts": {
+          "ac1920": 7.5,
+          "mdi": 16.6573052435,
+          "pdp70": 32.9213473782,
+          "ppg2000": 32.9213473782,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C28",
+        "mdi_fraction": 0.1665730524351666,
+        "modifier_fraction": 0.17500000000017502,
+        "polyol_fraction": 0.6584269475646584,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.1000000000001,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "one or more active modifier axes are far from the independent evidence anchors",
+        "major process-history fields are missing"
+      ],
+      "support_value": 1
+    },
+    {
+      "active_axis_distance_pct_points": 9.370000000000001,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C29",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.1,
+        "amounts": {
+          "ac1920": 10.0,
+          "mdi": 18.1716057202,
+          "pdp70": 35.9141971399,
+          "ppg2000": 35.9141971399,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C29",
+        "mdi_fraction": 0.181716057202,
+        "modifier_fraction": 0.1,
+        "polyol_fraction": 0.7182839427979999,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 11.670000000000002,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C30",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.1,
+        "amounts": {
+          "ac1920": 10.0,
+          "mdi": 17.6668388946,
+          "pdp70": 34.9165805527,
+          "ppg2000": 34.9165805527,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C30",
+        "mdi_fraction": 0.176668388946,
+        "modifier_fraction": 0.125,
+        "polyol_fraction": 0.698331611054,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.025,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 9.570000000005,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C31",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.09999999999990002,
+        "amounts": {
+          "ac1920": 10.0,
+          "mdi": 17.1620720691,
+          "pdp70": 33.9189639655,
+          "ppg2000": 33.9189639655,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C31",
+        "mdi_fraction": 0.1716207206908284,
+        "modifier_fraction": 0.14999999999985003,
+        "polyol_fraction": 0.6783792793093216,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.04999999999995001,
+        "total_reported_amount": 100.00000000009999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 10.469999999997501,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C32",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.1000000000001,
+        "amounts": {
+          "ac1920": 10.0,
+          "mdi": 16.6573052435,
+          "pdp70": 32.9213473782,
+          "ppg2000": 32.9213473782,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C32",
+        "mdi_fraction": 0.1665730524351666,
+        "modifier_fraction": 0.17500000000017502,
+        "polyol_fraction": 0.6584269475646584,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.075000000000075,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 12.97,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C33",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.1000000000001,
+        "amounts": {
+          "ac1920": 10.0,
+          "mdi": 16.1525384179,
+          "pdp70": 31.923730791,
+          "ppg2000": 31.923730791,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C33",
+        "mdi_fraction": 0.16152538417916154,
+        "modifier_fraction": 0.2000000000002,
+        "polyol_fraction": 0.6384746158206385,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.1000000000001,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 6.870000000000001,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C34",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.125,
+        "amounts": {
+          "ac1920": 12.5,
+          "mdi": 17.6668388946,
+          "pdp70": 34.9165805527,
+          "ppg2000": 34.9165805527,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C34",
+        "mdi_fraction": 0.176668388946,
+        "modifier_fraction": 0.125,
+        "polyol_fraction": 0.698331611054,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 9.170000000015,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C35",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.12499999999987502,
+        "amounts": {
+          "ac1920": 12.5,
+          "mdi": 17.1620720691,
+          "pdp70": 33.9189639655,
+          "ppg2000": 33.9189639655,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C35",
+        "mdi_fraction": 0.1716207206908284,
+        "modifier_fraction": 0.14999999999985003,
+        "polyol_fraction": 0.6783792793093216,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.024999999999975004,
+        "total_reported_amount": 100.00000000009999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 7.069999999992499,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C36",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.125000000000125,
+        "amounts": {
+          "ac1920": 12.5,
+          "mdi": 16.6573052435,
+          "pdp70": 32.9213473782,
+          "ppg2000": 32.9213473782,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C36",
+        "mdi_fraction": 0.1665730524351666,
+        "modifier_fraction": 0.17500000000017502,
+        "polyol_fraction": 0.6584269475646584,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.05000000000005,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 7.969999999994999,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C37",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.125000000000125,
+        "amounts": {
+          "ac1920": 12.5,
+          "mdi": 16.1525384179,
+          "pdp70": 31.923730791,
+          "ppg2000": 31.923730791,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C37",
+        "mdi_fraction": 0.16152538417916154,
+        "modifier_fraction": 0.2000000000002,
+        "polyol_fraction": 0.6384746158206385,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.075000000000075,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 10.47,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C38",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.125,
+        "amounts": {
+          "ac1920": 12.5,
+          "mdi": 15.6477715924,
+          "pdp70": 30.9261142038,
+          "ppg2000": 30.9261142038,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C38",
+        "mdi_fraction": 0.156477715924,
+        "modifier_fraction": 0.225,
+        "polyol_fraction": 0.6185222840760001,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.1,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 4.370000000014997,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C39",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.14999999999985003,
+        "amounts": {
+          "ac1920": 15.0,
+          "mdi": 17.1620720691,
+          "pdp70": 33.9189639655,
+          "ppg2000": 33.9189639655,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C39",
+        "mdi_fraction": 0.1716207206908284,
+        "modifier_fraction": 0.14999999999985003,
+        "polyol_fraction": 0.6783792793093216,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.00000000009999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 6.669999999982499,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C40",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.15000000000015,
+        "amounts": {
+          "ac1920": 15.0,
+          "mdi": 16.6573052435,
+          "pdp70": 32.9213473782,
+          "ppg2000": 32.9213473782,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C40",
+        "mdi_fraction": 0.1665730524351666,
+        "modifier_fraction": 0.17500000000017502,
+        "polyol_fraction": 0.6584269475646584,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.025000000000025,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 4.569999999989999,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C41",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.15000000000015,
+        "amounts": {
+          "ac1920": 15.0,
+          "mdi": 16.1525384179,
+          "pdp70": 31.923730791,
+          "ppg2000": 31.923730791,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C41",
+        "mdi_fraction": 0.16152538417916154,
+        "modifier_fraction": 0.2000000000002,
+        "polyol_fraction": 0.6384746158206385,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.05000000000005,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 5.470000000000001,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C42",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.15,
+        "amounts": {
+          "ac1920": 15.0,
+          "mdi": 15.6477715924,
+          "pdp70": 30.9261142038,
+          "ppg2000": 30.9261142038,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C42",
+        "mdi_fraction": 0.156477715924,
+        "modifier_fraction": 0.225,
+        "polyol_fraction": 0.6185222840760001,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.075,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 7.970000000000001,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C43",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.15,
+        "amounts": {
+          "ac1920": 15.0,
+          "mdi": 15.1430047668,
+          "pdp70": 29.9284976166,
+          "ppg2000": 29.9284976166,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C43",
+        "mdi_fraction": 0.151430047668,
+        "modifier_fraction": 0.25,
+        "polyol_fraction": 0.598569952332,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.1,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 1.8699999999825003,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C44",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.17500000000017502,
+        "amounts": {
+          "ac1920": 17.5,
+          "mdi": 16.6573052435,
+          "pdp70": 32.9213473782,
+          "ppg2000": 32.9213473782,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C44",
+        "mdi_fraction": 0.1665730524351666,
+        "modifier_fraction": 0.17500000000017502,
+        "polyol_fraction": 0.6584269475646584,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 4.16999999998,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C45",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.17500000000017502,
+        "amounts": {
+          "ac1920": 17.5,
+          "mdi": 16.1525384179,
+          "pdp70": 31.923730791,
+          "ppg2000": 31.923730791,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C45",
+        "mdi_fraction": 0.16152538417916154,
+        "modifier_fraction": 0.2000000000002,
+        "polyol_fraction": 0.6384746158206385,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.025000000000025,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 2.070000000000001,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C46",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.175,
+        "amounts": {
+          "ac1920": 17.5,
+          "mdi": 15.6477715924,
+          "pdp70": 30.9261142038,
+          "ppg2000": 30.9261142038,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C46",
+        "mdi_fraction": 0.156477715924,
+        "modifier_fraction": 0.225,
+        "polyol_fraction": 0.6185222840760001,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.05,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 2.9700000000000006,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C47",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.175,
+        "amounts": {
+          "ac1920": 17.5,
+          "mdi": 15.1430047668,
+          "pdp70": 29.9284976166,
+          "ppg2000": 29.9284976166,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C47",
+        "mdi_fraction": 0.151430047668,
+        "modifier_fraction": 0.25,
+        "polyol_fraction": 0.598569952332,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.075,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 5.470000000007502,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C48",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.174999999999825,
+        "amounts": {
+          "ac1920": 17.5,
+          "mdi": 14.6382379413,
+          "pdp70": 28.9308810294,
+          "ppg2000": 28.9308810294,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C48",
+        "mdi_fraction": 0.14638237941285362,
+        "modifier_fraction": 0.274999999999725,
+        "polyol_fraction": 0.5786176205874214,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0999999999999,
+        "total_reported_amount": 100.0000000001
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 0.0200000000199978,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C49",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.2000000000002,
+        "amounts": {
+          "ac1920": 20.0,
+          "mdi": 16.1525384179,
+          "pdp70": 31.923730791,
+          "ppg2000": 31.923730791,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C49",
+        "mdi_fraction": 0.16152538417916154,
+        "modifier_fraction": 0.2000000000002,
+        "polyol_fraction": 0.6384746158206385,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 2.3199999999999994,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C50",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.2,
+        "amounts": {
+          "ac1920": 20.0,
+          "mdi": 15.6477715924,
+          "pdp70": 30.9261142038,
+          "ppg2000": 30.9261142038,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C50",
+        "mdi_fraction": 0.156477715924,
+        "modifier_fraction": 0.225,
+        "polyol_fraction": 0.6185222840760001,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.025,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 0.21999999999999975,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C51",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.2,
+        "amounts": {
+          "ac1920": 20.0,
+          "mdi": 15.1430047668,
+          "pdp70": 29.9284976166,
+          "ppg2000": 29.9284976166,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C51",
+        "mdi_fraction": 0.151430047668,
+        "modifier_fraction": 0.25,
+        "polyol_fraction": 0.598569952332,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.05,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 1.1199999999725012,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C52",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.1999999999998,
+        "amounts": {
+          "ac1920": 20.0,
+          "mdi": 14.6382379413,
+          "pdp70": 28.9308810294,
+          "ppg2000": 28.9308810294,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C52",
+        "mdi_fraction": 0.14638237941285362,
+        "modifier_fraction": 0.274999999999725,
+        "polyol_fraction": 0.5786176205874214,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.074999999999925,
+        "total_reported_amount": 100.0000000001
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 3.6200000000299966,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C53",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.2000000000002,
+        "amounts": {
+          "ac1920": 20.0,
+          "mdi": 14.1334711157,
+          "pdp70": 27.9332644421,
+          "ppg2000": 27.9332644421,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C53",
+        "mdi_fraction": 0.14133471115714136,
+        "modifier_fraction": 0.3000000000003,
+        "polyol_fraction": 0.5586652888425587,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.1000000000001,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 2.5,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C54",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.225,
+        "amounts": {
+          "ac1920": 22.5,
+          "mdi": 15.6477715924,
+          "pdp70": 30.9261142038,
+          "ppg2000": 30.9261142038,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C54",
+        "mdi_fraction": 0.156477715924,
+        "modifier_fraction": 0.225,
+        "polyol_fraction": 0.6185222840760001,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 4.8,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C55",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.225,
+        "amounts": {
+          "ac1920": 22.5,
+          "mdi": 15.1430047668,
+          "pdp70": 29.9284976166,
+          "ppg2000": 29.9284976166,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C55",
+        "mdi_fraction": 0.151430047668,
+        "modifier_fraction": 0.25,
+        "polyol_fraction": 0.598569952332,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.025,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 2.7000000000175,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C56",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.224999999999775,
+        "amounts": {
+          "ac1920": 22.5,
+          "mdi": 14.6382379413,
+          "pdp70": 28.9308810294,
+          "ppg2000": 28.9308810294,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C56",
+        "mdi_fraction": 0.14638237941285362,
+        "modifier_fraction": 0.274999999999725,
+        "polyol_fraction": 0.5786176205874214,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.04999999999995,
+        "total_reported_amount": 100.0000000001
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 3.599999999985001,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C57",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.225000000000225,
+        "amounts": {
+          "ac1920": 22.5,
+          "mdi": 14.1334711157,
+          "pdp70": 27.9332644421,
+          "ppg2000": 27.9332644421,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C57",
+        "mdi_fraction": 0.14133471115714136,
+        "modifier_fraction": 0.3000000000003,
+        "polyol_fraction": 0.5586652888425587,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.075000000000075,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 6.099999999987499,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C58",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.225000000000225,
+        "amounts": {
+          "ac1920": 22.5,
+          "mdi": 13.6287042901,
+          "pdp70": 26.9356478549,
+          "ppg2000": 26.9356478549,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C58",
+        "mdi_fraction": 0.1362870429011363,
+        "modifier_fraction": 0.32500000000032503,
+        "polyol_fraction": 0.5387129570985387,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.1000000000001,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 0.0,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C59",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.25,
+        "amounts": {
+          "ac1920": 25.0,
+          "mdi": 15.1430047668,
+          "pdp70": 29.9284976166,
+          "ppg2000": 29.9284976166,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C59",
+        "mdi_fraction": 0.151430047668,
+        "modifier_fraction": 0.25,
+        "polyol_fraction": 0.598569952332,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 2.3000000000275,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C60",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.24999999999975,
+        "amounts": {
+          "ac1920": 25.0,
+          "mdi": 14.6382379413,
+          "pdp70": 28.9308810294,
+          "ppg2000": 28.9308810294,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C60",
+        "mdi_fraction": 0.14638237941285362,
+        "modifier_fraction": 0.274999999999725,
+        "polyol_fraction": 0.5786176205874214,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.024999999999975,
+        "total_reported_amount": 100.0000000001
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 0.20000000003000373,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C61",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.25000000000025,
+        "amounts": {
+          "ac1920": 25.0,
+          "mdi": 14.1334711157,
+          "pdp70": 27.9332644421,
+          "ppg2000": 27.9332644421,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C61",
+        "mdi_fraction": 0.14133471115714136,
+        "modifier_fraction": 0.3000000000003,
+        "polyol_fraction": 0.5586652888425587,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.05000000000005,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 1.1000000000325043,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C62",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.25000000000025,
+        "amounts": {
+          "ac1920": 25.0,
+          "mdi": 13.6287042901,
+          "pdp70": 26.9356478549,
+          "ppg2000": 26.9356478549,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C62",
+        "mdi_fraction": 0.1362870429011363,
+        "modifier_fraction": 0.32500000000032503,
+        "polyol_fraction": 0.5387129570985387,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.075000000000075,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 3.5999999999999996,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C63",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.25,
+        "amounts": {
+          "ac1920": 25.0,
+          "mdi": 13.1239374646,
+          "pdp70": 25.9380312677,
+          "ppg2000": 25.9380312677,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C63",
+        "mdi_fraction": 0.131239374646,
+        "modifier_fraction": 0.35,
+        "polyol_fraction": 0.518760625354,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.1,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 2.499999999972502,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C64",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.274999999999725,
+        "amounts": {
+          "ac1920": 27.5,
+          "mdi": 14.6382379413,
+          "pdp70": 28.9308810294,
+          "ppg2000": 28.9308810294,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C64",
+        "mdi_fraction": 0.14638237941285362,
+        "modifier_fraction": 0.274999999999725,
+        "polyol_fraction": 0.5786176205874214,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 100.0000000001
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 4.800000000025001,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C65",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.275000000000275,
+        "amounts": {
+          "ac1920": 27.5,
+          "mdi": 14.1334711157,
+          "pdp70": 27.9332644421,
+          "ppg2000": 27.9332644421,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C65",
+        "mdi_fraction": 0.14133471115714136,
+        "modifier_fraction": 0.3000000000003,
+        "polyol_fraction": 0.5586652888425587,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.025000000000025,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 2.7000000000325013,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C66",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.275000000000275,
+        "amounts": {
+          "ac1920": 27.5,
+          "mdi": 13.6287042901,
+          "pdp70": 26.9356478549,
+          "ppg2000": 26.9356478549,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C66",
+        "mdi_fraction": 0.1362870429011363,
+        "modifier_fraction": 0.32500000000032503,
+        "polyol_fraction": 0.5387129570985387,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.05000000000005,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 3.600000000000003,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C67",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.275,
+        "amounts": {
+          "ac1920": 27.5,
+          "mdi": 13.1239374646,
+          "pdp70": 25.9380312677,
+          "ppg2000": 25.9380312677,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C67",
+        "mdi_fraction": 0.131239374646,
+        "modifier_fraction": 0.35,
+        "polyol_fraction": 0.518760625354,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.075,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 6.100000000000003,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C68",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 2,
+      "profile": {
+        "acrylic_like_fraction": 0.275,
+        "amounts": {
+          "ac1920": 27.5,
+          "mdi": 12.619170639,
+          "pdp70": 24.9404146805,
+          "ppg2000": 24.9404146805,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C68",
+        "mdi_fraction": 0.12619170639,
+        "modifier_fraction": 0.375,
+        "polyol_fraction": 0.49880829361,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.1,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "combined modifier fraction is outside the frozen V2 hypothesis grid",
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 5.000000000030003,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C69",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.3000000000003,
+        "amounts": {
+          "ac1920": 30.0,
+          "mdi": 14.1334711157,
+          "pdp70": 27.9332644421,
+          "ppg2000": 27.9332644421,
+          "tk100": 0.0
+        },
+        "candidate_id": "S1C69",
+        "mdi_fraction": 0.14133471115714136,
+        "modifier_fraction": 0.3000000000003,
+        "polyol_fraction": 0.5586652888425587,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 7.300000000027502,
+      "analogue_support": "moderate_analogue_region",
+      "candidate_id": "S1C70",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.3000000000003,
+        "amounts": {
+          "ac1920": 30.0,
+          "mdi": 13.6287042901,
+          "pdp70": 26.9356478549,
+          "ppg2000": 26.9356478549,
+          "tk100": 2.5
+        },
+        "candidate_id": "S1C70",
+        "mdi_fraction": 0.1362870429011363,
+        "modifier_fraction": 0.32500000000032503,
+        "polyol_fraction": 0.5387129570985387,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.025000000000025,
+        "total_reported_amount": 99.9999999999
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 2
+    },
+    {
+      "active_axis_distance_pct_points": 5.2,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C71",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 1,
+      "profile": {
+        "acrylic_like_fraction": 0.3,
+        "amounts": {
+          "ac1920": 30.0,
+          "mdi": 13.1239374646,
+          "pdp70": 25.9380312677,
+          "ppg2000": 25.9380312677,
+          "tk100": 5.0
+        },
+        "candidate_id": "S1C71",
+        "mdi_fraction": 0.131239374646,
+        "modifier_fraction": 0.35,
+        "polyol_fraction": 0.518760625354,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.05,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 6.1,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C72",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 2,
+      "profile": {
+        "acrylic_like_fraction": 0.3,
+        "amounts": {
+          "ac1920": 30.0,
+          "mdi": 12.619170639,
+          "pdp70": 24.9404146805,
+          "ppg2000": 24.9404146805,
+          "tk100": 7.5
+        },
+        "candidate_id": "S1C72",
+        "mdi_fraction": 0.12619170639,
+        "modifier_fraction": 0.375,
+        "polyol_fraction": 0.49880829361,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.075,
+        "total_reported_amount": 100.0
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "combined modifier fraction is outside the frozen V2 hypothesis grid",
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    },
+    {
+      "active_axis_distance_pct_points": 8.599999999960001,
+      "analogue_support": "strong_analogue_region",
+      "candidate_id": "S1C73",
+      "missing_process_field_count": 6,
+      "process_history_uncertainty": "high",
+      "process_risk_value": 2,
+      "profile": {
+        "acrylic_like_fraction": 0.2999999999997,
+        "amounts": {
+          "ac1920": 30.0,
+          "mdi": 12.1144038135,
+          "pdp70": 23.9427980933,
+          "ppg2000": 23.9427980933,
+          "tk100": 10.0
+        },
+        "candidate_id": "S1C73",
+        "mdi_fraction": 0.12114403813487884,
+        "modifier_fraction": 0.3999999999996,
+        "polyol_fraction": 0.4788559618655211,
+        "resin_modified": true,
+        "tackifier_like_fraction": 0.0999999999999,
+        "total_reported_amount": 100.0000000001
+      },
+      "resin_modified": true,
+      "stress_reasons": [
+        "combined modifier fraction is outside the frozen V2 hypothesis grid",
+        "major process-history fields are missing"
+      ],
+      "support_value": 3
+    }
+  ],
+  "candidate_set_hash": "54f825939d05a159b93eb39e98ccdd4d3a658b4a31fc8a5fff722770aadd24a1",
+  "deterministic_decision_diagnostics": {
+    "note": "These are transparent decision diagnostics, not fitted property predictions. They are used to avoid selecting a point from one arbitrary scalar score.",
+    "pareto_front": [
+      "S1C59"
+    ],
+    "scenario_rankings": {
+      "evidence_first": [
+        "S1C59",
+        "S1C49",
+        "S1C11",
+        "S1C61",
+        "S1C51",
+        "S1C12",
+        "S1C62",
+        "S1C52",
+        "S1C44",
+        "S1C46",
+        "S1C10",
+        "S1C60",
+        "S1C50",
+        "S1C64",
+        "S1C54",
+        "S1C56",
+        "S1C66",
+        "S1C47",
+        "S1C57",
+        "S1C13",
+        "S1C63",
+        "S1C67",
+        "S1C53",
+        "S1C45",
+        "S1C39",
+        "S1C41",
+        "S1C55",
+        "S1C65",
+        "S1C71",
+        "S1C42",
+        "S1C48",
+        "S1C58",
+        "S1C72",
+        "S1C68",
+        "S1C40",
+        "S1C43",
+        "S1C73",
+        "S1C69",
+        "S1C34",
+        "S1C36",
+        "S1C70",
+        "S1C37",
+        "S1C35",
+        "S1C29",
+        "S1C31",
+        "S1C32",
+        "S1C38",
+        "S1C30",
+        "S1C33",
+        "S1C24",
+        "S1C26",
+        "S1C27",
+        "S1C25",
+        "S1C19",
+        "S1C21",
+        "S1C22",
+        "S1C28",
+        "S1C20",
+        "S1C14",
+        "S1C16",
+        "S1C23",
+        "S1C17",
+        "S1C15",
+        "S1C18",
+        "S1C01",
+        "S1C02",
+        "S1C03",
+        "S1C04",
+        "S1C05",
+        "S1C06",
+        "S1C07",
+        "S1C08",
+        "S1C09"
+      ],
+      "hypothesis_test_first": [
+        "S1C59",
+        "S1C49",
+        "S1C11",
+        "S1C61",
+        "S1C51",
+        "S1C12",
+        "S1C62",
+        "S1C52",
+        "S1C44",
+        "S1C46",
+        "S1C10",
+        "S1C60",
+        "S1C50",
+        "S1C64",
+        "S1C54",
+        "S1C56",
+        "S1C66",
+        "S1C47",
+        "S1C57",
+        "S1C13",
+        "S1C63",
+        "S1C67",
+        "S1C53",
+        "S1C45",
+        "S1C39",
+        "S1C41",
+        "S1C55",
+        "S1C65",
+        "S1C71",
+        "S1C42",
+        "S1C48",
+        "S1C58",
+        "S1C40",
+        "S1C43",
+        "S1C72",
+        "S1C68",
+        "S1C73",
+        "S1C69",
+        "S1C34",
+        "S1C36",
+        "S1C70",
+        "S1C37",
+        "S1C35",
+        "S1C29",
+        "S1C31",
+        "S1C32",
+        "S1C38",
+        "S1C30",
+        "S1C33",
+        "S1C24",
+        "S1C26",
+        "S1C27",
+        "S1C25",
+        "S1C19",
+        "S1C21",
+        "S1C22",
+        "S1C28",
+        "S1C20",
+        "S1C14",
+        "S1C16",
+        "S1C23",
+        "S1C17",
+        "S1C15",
+        "S1C18",
+        "S1C01",
+        "S1C02",
+        "S1C03",
+        "S1C04",
+        "S1C05",
+        "S1C06",
+        "S1C07",
+        "S1C08",
+        "S1C09"
+      ],
+      "robustness_first": [
+        "S1C10",
+        "S1C11",
+        "S1C12",
+        "S1C13",
+        "S1C39",
+        "S1C40",
+        "S1C41",
+        "S1C42",
+        "S1C43",
+        "S1C44",
+        "S1C45",
+        "S1C46",
+        "S1C47",
+        "S1C48",
+        "S1C49",
+        "S1C50",
+        "S1C51",
+        "S1C52",
+        "S1C53",
+        "S1C54",
+        "S1C55",
+        "S1C56",
+        "S1C57",
+        "S1C58",
+        "S1C59",
+        "S1C60",
+        "S1C61",
+        "S1C62",
+        "S1C63",
+        "S1C64",
+        "S1C65",
+        "S1C66",
+        "S1C67",
+        "S1C71",
+        "S1C29",
+        "S1C30",
+        "S1C31",
+        "S1C32",
+        "S1C33",
+        "S1C34",
+        "S1C35",
+        "S1C36",
+        "S1C37",
+        "S1C38",
+        "S1C69",
+        "S1C70",
+        "S1C14",
+        "S1C15",
+        "S1C16",
+        "S1C17",
+        "S1C18",
+        "S1C19",
+        "S1C20",
+        "S1C21",
+        "S1C22",
+        "S1C23",
+        "S1C24",
+        "S1C25",
+        "S1C26",
+        "S1C27",
+        "S1C28",
+        "S1C01",
+        "S1C02",
+        "S1C03",
+        "S1C04",
+        "S1C05",
+        "S1C06",
+        "S1C07",
+        "S1C08",
+        "S1C09",
+        "S1C68",
+        "S1C72",
+        "S1C73"
+      ]
+    },
+    "scenario_stability": [
+      {
+        "candidate_id": "S1C59",
+        "rank1_fraction": 0.6666666666666666,
+        "top3_fraction": 0.6666666666666666
+      },
+      {
+        "candidate_id": "S1C10",
+        "rank1_fraction": 0.3333333333333333,
+        "top3_fraction": 0.3333333333333333
+      },
+      {
+        "candidate_id": "S1C11",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 1.0
+      },
+      {
+        "candidate_id": "S1C49",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.6666666666666666
+      },
+      {
+        "candidate_id": "S1C12",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.3333333333333333
+      },
+      {
+        "candidate_id": "S1C01",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C02",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C03",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C04",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C05",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C06",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C07",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C08",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C09",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C13",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C14",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C15",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C16",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C17",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C18",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C19",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C20",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C21",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C22",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C23",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C24",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C25",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C26",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C27",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C28",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C29",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C30",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C31",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C32",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C33",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C34",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C35",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C36",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C37",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C38",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C39",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C40",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C41",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C42",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C43",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C44",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C45",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C46",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C47",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C48",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C50",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C51",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C52",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C53",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C54",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C55",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C56",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C57",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C58",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C60",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C61",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C62",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C63",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C64",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C65",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C66",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C67",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C68",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C69",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C70",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C71",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C72",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      },
+      {
+        "candidate_id": "S1C73",
+        "rank1_fraction": 0.0,
+        "top3_fraction": 0.0
+      }
+    ]
+  },
+  "evidence_policy": {
+    "allow_external_evidence_hints": true,
+    "allow_follow_up_formulation_identity": false,
+    "allow_follow_up_hold_results": false,
+    "allow_original_hold_data": true,
+    "allow_original_temperature_sweeps": true,
+    "allow_post_result_adjudication": false,
+    "description": "For prospective/blind Agent evaluation. The Agent may see original-system measurements and external analogue evidence, but not the target validation formulation identity, its wet-lab outcome, or any outcome-derived labels."
+  },
+  "evidence_profile": "blind_pre_result",
+  "filtered_evidence_hash": "f6211d435a2e59cfc62cbe5bb1d0619cdbb19a4977ef4f0ec440d72111963cb4",
+  "judge_normalized": {
+    "acceptance_criterion": {
+      "claim": "Under matched process and state-calibrated conditions, S1C49 provides interpretable evidence about whether a 20% acrylic-like replacement changes 120 C hold stability without unacceptable temperature-response or realization effects.",
+      "criterion": "Before physical adjudication, specify replicate count, variance or confidence rule, source-unit-relative viscosity bounds, response-shape and monotonicity bounds, and the minimum effect exceeding matched E2 realization uncertainty. S1C49 may support a performance claim only if its 120 C SI at both 60 and 90 min is no worse than the matched E2 comparator and preferably meets the conservative local comparators SI_60 <= 0.095 and SI_90 <= 0.168, while retaining an acceptable prespecified 80-130 C response and reproducible state calibration.",
+      "failure_condition": "Fail or remain unresolved if identity or stoichiometry is unverified, process history or state calibration is not reproducible, S1C49 drift exceeds the matched E2 comparator, the apparent viscosity benefit is only a scale shift, the temperature response violates prespecified usability or monotonicity bounds, or the candidate effect does not exceed replicate-based realization uncertainty.",
+      "measurement_window": "120 C hold at 15, 60, and 90 min; replicated 80-130 C sweeps; at least one independent realization per formulation and one defined storage or conditioning retest; matched E2 comparator measured in the same controlled process block."
+    },
+    "alternatives_considered": [
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C59",
+        "relative_reason": "Higher-loading acrylic-like point and provisional diagnostic leader, but it is boundary-oriented and its expected effect may be confounded with E2 realization variability and unvalidated state-calibration transfer."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C51",
+        "relative_reason": "Tests acrylic-like and tackifier-like interaction, but adds interaction uncertainty before the single-modifier acrylic direction is calibrated."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C11",
+        "relative_reason": "Useful tackifier-only attribution control, but it does not directly test the externally supported acrylic-like stability direction and lacks local evidence for improving hold drift."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C01",
+        "relative_reason": "Measured reactive-core control, required as a matched comparator, but not sufficient alone to test the external acrylic-like intervention family."
+      }
+    ],
+    "constraints": [
+      {
+        "detail": "Prepare S1C49 and an E2 reactive-core comparator in the same controlled process block with matched conditioning, equilibration, measurement order, and hold protocol.",
+        "name": "matched_reactive_core_comparator",
+        "status": "unknown"
+      },
+      {
+        "detail": "Verify AC1920 identity, composition basis, reactive-group content, and recalculate total NCO:OH if the modifier is NCO-reactive.",
+        "name": "modifier_identity_and_stoichiometry",
+        "status": "unknown"
+      },
+      {
+        "detail": "The local state-shift/master-curve rule is supported for the measured reactive-only family but not established for acrylic-modified S1C49; collect a state-specific 120 C anchor for each realization.",
+        "name": "state_anchor_and_transferability",
+        "status": "unknown"
+      },
+      {
+        "detail": "Record mixing history, reaction temperature and time, equilibration, sample age, storage or conditioning, instrument settings, and measurement order.",
+        "name": "process_history_control",
+        "status": "unknown"
+      },
+      {
+        "detail": "Require a matched 120 C hold with absolute viscosity and signed SI at 15, 60, and 90 min; static viscosity alone is insufficient.",
+        "name": "thermal_hold_measurement",
+        "status": "pass"
+      },
+      {
+        "detail": "Require replicated 80-130 C viscosity sweeps with source units preserved and quantitative source-unit-relative level, slope or shape, monotonicity, and uncertainty rules specified before testing.",
+        "name": "temperature_response_measurement",
+        "status": "pass"
+      },
+      {
+        "detail": "Use defined independent realizations and at least one specified storage or conditioning retest; decide effects against a prespecified replicate-based uncertainty rule.",
+        "name": "replication_and_conditioning_retest",
+        "status": "unknown"
+      },
+      {
+        "detail": "Interpret results only within 80-130 C and the 15-90 min hold window; do not infer an exact optimum from external anchors.",
+        "name": "extrapolation_boundary",
+        "status": "pass"
+      }
+    ],
+    "decision_mode": "uncertainty_probe",
+    "selected_candidate_id": "S1C49",
+    "selection_rationale": "Select S1C49 as an uncertainty probe, not as a predicted optimum. Local experiments establish monotonic viscosity decrease over 80-130 C, formulation-dependent 120 C drift, severe E2 realization spread, and the need to separate viscosity scale from thermal-response shape and hold stability. The rheology-derived rule supports one-point state calibration only within the measured reactive-only chemistry family, so transfer to S1C49 must be tested rather than assumed. Curated PUR literature supports the acrylic-like intervention direction and a broad approximately 20% region, but it is an analogue prior and cannot predict the held-out wet-lab result; the 20% choice is therefore preferred over S1C59 as the less boundary-oriented, cleaner single-modifier probe, not because it is closest to literature. The conservative acceptance thresholds SI_60 <= 0.095 and SI_90 <= 0.168 are reconstructed local E1 comparators and must not be treated as universal or mechanistic facts. The Skeptic's objections are resolved by requiring a matched E2 comparator, verified modifier identity and stoichiometry, prospective state anchors, defined independent realizations, controlled process history, and quantitative source-unit-relative response criteria. The Robustness Adjudicator's fragility finding is resolved by downgrading the action from performance selection to uncertainty probing. The experiment therefore tests whether any apparent acrylic benefit exceeds state, process-history, and realization uncertainty while directly measuring the required thermal-hold response.",
+    "uncertainty": {
+      "aggregate_penalty": null,
+      "aggregation_rule": "scientific multi-stage adjudication",
+      "decision_margin": null,
+      "evidence_coverage": {
+        "method": "provenance-separated evidence audit",
+        "note": "Coverage is adequate for an uncertainty probe but not for an unqualified performance claim. [value-as-reported: local reactive-only hold and state evidence; external acrylic-like region evidence; no local modified-formulation hold evidence]",
+        "status": "estimated",
+        "unit_or_scale": "qualitative",
+        "value": null
+      },
+      "extrapolation": {
+        "method": "local chemistry audit and curated analogue comparison",
+        "note": "External evidence supports a formulation region and direction, not an exact property prediction. [value-as-reported: S1C49 lies in an externally supported acrylic-like region but outside the chemistry family for which state calibration was demonstrated]",
+        "status": "estimated",
+        "unit_or_scale": "qualitative",
+        "value": null
+      },
+      "measurement": {
+        "method": "120 C hold at 15, 60, and 90 min plus replicated 80-130 C sweep",
+        "note": "Local evidence distinguishes hold drift from static temperature response, but modified-formulation measurement uncertainty must be established prospectively.",
+        "status": "known",
+        "unit_or_scale": "source viscosity units unknown; SI dimensionless",
+        "value": null
+      },
+      "process_history": {
+        "method": "prospective process-history recording and matched-block comparison",
+        "note": "Six process-history fields are missing or uncontrolled in the candidate records.",
+        "status": "unknown",
+        "unit_or_scale": null,
+        "value": null
+      },
+      "repeatability": {
+        "method": "local E2 realization comparison",
+        "note": "The candidate effect must exceed independently measured realization uncertainty; no effect-size uncertainty is assumed. [value-as-reported: E2 sample CV approximately 0.46-0.58 across reported temperature-range realizations]",
+        "status": "estimated",
+        "unit_or_scale": "relative",
+        "value": null
+      }
+    }
+  },
+  "judge_raw": {
+    "acceptance_criterion": {
+      "claim": "Under matched process and state-calibrated conditions, S1C49 provides interpretable evidence about whether a 20% acrylic-like replacement changes 120 C hold stability without unacceptable temperature-response or realization effects.",
+      "criterion": "Before physical adjudication, specify replicate count, variance or confidence rule, source-unit-relative viscosity bounds, response-shape and monotonicity bounds, and the minimum effect exceeding matched E2 realization uncertainty. S1C49 may support a performance claim only if its 120 C SI at both 60 and 90 min is no worse than the matched E2 comparator and preferably meets the conservative local comparators SI_60 <= 0.095 and SI_90 <= 0.168, while retaining an acceptable prespecified 80-130 C response and reproducible state calibration.",
+      "failure_condition": "Fail or remain unresolved if identity or stoichiometry is unverified, process history or state calibration is not reproducible, S1C49 drift exceeds the matched E2 comparator, the apparent viscosity benefit is only a scale shift, the temperature response violates prespecified usability or monotonicity bounds, or the candidate effect does not exceed replicate-based realization uncertainty.",
+      "measurement_window": "120 C hold at 15, 60, and 90 min; replicated 80-130 C sweeps; at least one independent realization per formulation and one defined storage or conditioning retest; matched E2 comparator measured in the same controlled process block."
+    },
+    "alternatives_considered": [
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C59",
+        "relative_reason": "Higher-loading acrylic-like point and provisional diagnostic leader, but it is boundary-oriented and its expected effect may be confounded with E2 realization variability and unvalidated state-calibration transfer."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C51",
+        "relative_reason": "Tests acrylic-like and tackifier-like interaction, but adds interaction uncertainty before the single-modifier acrylic direction is calibrated."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C11",
+        "relative_reason": "Useful tackifier-only attribution control, but it does not directly test the externally supported acrylic-like stability direction and lacks local evidence for improving hold drift."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C01",
+        "relative_reason": "Measured reactive-core control, required as a matched comparator, but not sufficient alone to test the external acrylic-like intervention family."
+      }
+    ],
+    "constraints": [
+      {
+        "detail": "Prepare S1C49 and an E2 reactive-core comparator in the same controlled process block with matched conditioning, equilibration, measurement order, and hold protocol.",
+        "name": "matched_reactive_core_comparator",
+        "status": "unknown"
+      },
+      {
+        "detail": "Verify AC1920 identity, composition basis, reactive-group content, and recalculate total NCO:OH if the modifier is NCO-reactive.",
+        "name": "modifier_identity_and_stoichiometry",
+        "status": "unknown"
+      },
+      {
+        "detail": "The local state-shift/master-curve rule is supported for the measured reactive-only family but not established for acrylic-modified S1C49; collect a state-specific 120 C anchor for each realization.",
+        "name": "state_anchor_and_transferability",
+        "status": "unknown"
+      },
+      {
+        "detail": "Record mixing history, reaction temperature and time, equilibration, sample age, storage or conditioning, instrument settings, and measurement order.",
+        "name": "process_history_control",
+        "status": "unknown"
+      },
+      {
+        "detail": "Require a matched 120 C hold with absolute viscosity and signed SI at 15, 60, and 90 min; static viscosity alone is insufficient.",
+        "name": "thermal_hold_measurement",
+        "status": "pass"
+      },
+      {
+        "detail": "Require replicated 80-130 C viscosity sweeps with source units preserved and quantitative source-unit-relative level, slope or shape, monotonicity, and uncertainty rules specified before testing.",
+        "name": "temperature_response_measurement",
+        "status": "pass"
+      },
+      {
+        "detail": "Use defined independent realizations and at least one specified storage or conditioning retest; decide effects against a prespecified replicate-based uncertainty rule.",
+        "name": "replication_and_conditioning_retest",
+        "status": "unknown"
+      },
+      {
+        "detail": "Interpret results only within 80-130 C and the 15-90 min hold window; do not infer an exact optimum from external anchors.",
+        "name": "extrapolation_boundary",
+        "status": "pass"
+      }
+    ],
+    "decision_mode": "uncertainty_probe",
+    "selected_candidate_id": "S1C49",
+    "selection_rationale": "Select S1C49 as an uncertainty probe, not as a predicted optimum. Local experiments establish monotonic viscosity decrease over 80-130 C, formulation-dependent 120 C drift, severe E2 realization spread, and the need to separate viscosity scale from thermal-response shape and hold stability. The rheology-derived rule supports one-point state calibration only within the measured reactive-only chemistry family, so transfer to S1C49 must be tested rather than assumed. Curated PUR literature supports the acrylic-like intervention direction and a broad approximately 20% region, but it is an analogue prior and cannot predict the held-out wet-lab result; the 20% choice is therefore preferred over S1C59 as the less boundary-oriented, cleaner single-modifier probe, not because it is closest to literature. The conservative acceptance thresholds SI_60 <= 0.095 and SI_90 <= 0.168 are reconstructed local E1 comparators and must not be treated as universal or mechanistic facts. The Skeptic's objections are resolved by requiring a matched E2 comparator, verified modifier identity and stoichiometry, prospective state anchors, defined independent realizations, controlled process history, and quantitative source-unit-relative response criteria. The Robustness Adjudicator's fragility finding is resolved by downgrading the action from performance selection to uncertainty probing. The experiment therefore tests whether any apparent acrylic benefit exceeds state, process-history, and realization uncertainty while directly measuring the required thermal-hold response.",
+    "uncertainty": {
+      "aggregate_penalty": null,
+      "aggregation_rule": "scientific multi-stage adjudication",
+      "decision_margin": null,
+      "evidence_coverage": {
+        "method": "provenance-separated evidence audit",
+        "note": "Coverage is adequate for an uncertainty probe but not for an unqualified performance claim.",
+        "status": "estimated",
+        "unit_or_scale": "qualitative",
+        "value": "local reactive-only hold and state evidence; external acrylic-like region evidence; no local modified-formulation hold evidence"
+      },
+      "extrapolation": {
+        "method": "local chemistry audit and curated analogue comparison",
+        "note": "External evidence supports a formulation region and direction, not an exact property prediction.",
+        "status": "estimated",
+        "unit_or_scale": "qualitative",
+        "value": "S1C49 lies in an externally supported acrylic-like region but outside the chemistry family for which state calibration was demonstrated"
+      },
+      "measurement": {
+        "method": "120 C hold at 15, 60, and 90 min plus replicated 80-130 C sweep",
+        "note": "Local evidence distinguishes hold drift from static temperature response, but modified-formulation measurement uncertainty must be established prospectively.",
+        "status": "known",
+        "unit_or_scale": "source viscosity units unknown; SI dimensionless",
+        "value": null
+      },
+      "process_history": {
+        "method": "prospective process-history recording and matched-block comparison",
+        "note": "Six process-history fields are missing or uncontrolled in the candidate records.",
+        "status": "unknown",
+        "unit_or_scale": null,
+        "value": null
+      },
+      "repeatability": {
+        "method": "local E2 realization comparison",
+        "note": "The candidate effect must exceed independently measured realization uncertainty; no effect-size uncertainty is assumed.",
+        "status": "estimated",
+        "unit_or_scale": "relative",
+        "value": "E2 sample CV approximately 0.46-0.58 across reported temperature-range realizations"
+      }
+    }
+  },
+  "judge_schema_normalizations": [
+    "uncertainty.repeatability.value: non-numeric text moved to note",
+    "uncertainty.extrapolation.value: non-numeric text moved to note",
+    "uncertainty.evidence_coverage.value: non-numeric text moved to note"
+  ],
+  "llm_usage_by_stage": {
+    "judge": {
+      "completion_tokens": 1942,
+      "latency_s": 45.003871099994285,
+      "model": "gpt-5.6-luna",
+      "prompt_tokens": 54286,
+      "total_tokens": 56228
+    },
+    "planner": {
+      "completion_tokens": 2759,
+      "latency_s": 52.5507202000008,
+      "model": "gpt-5.6-luna",
+      "prompt_tokens": 3781,
+      "total_tokens": 6540
+    },
+    "proposer": {
+      "completion_tokens": 3085,
+      "latency_s": 57.47126489999937,
+      "model": "gpt-5.6-luna",
+      "prompt_tokens": 49545,
+      "total_tokens": 52630
+    },
+    "robustness_adjudicator": {
+      "completion_tokens": 1255,
+      "latency_s": 25.912522400001762,
+      "model": "gpt-5.6-luna",
+      "prompt_tokens": 53051,
+      "total_tokens": 54306
+    },
+    "skeptic": {
+      "completion_tokens": 1966,
+      "latency_s": 37.59066899999743,
+      "model": "gpt-5.6-luna",
+      "prompt_tokens": 30462,
+      "total_tokens": 32428
+    }
+  },
+  "llm_usage_total": {
+    "completion_tokens": 11007,
+    "llm_calls": 5,
+    "llm_latency_s": 218.52904759999365,
+    "prompt_tokens": 191125,
+    "total_tokens": 202132
+  },
+  "planner": {
+    "action_requests": [
+      {
+        "args": {
+          "formulation_ids": [
+            "E1",
+            "E2",
+            "E3",
+            "E5"
+          ]
+        },
+        "name": "get_state_aware_rheology_summary",
+        "reason": "This is the required bridge from upstream rheological analysis. It must establish whether state shifts collapse onto a master curve, quantify state calibration needs, and determine whether process-history uncertainty materially changes the design objective before candidate ranking."
+      },
+      {
+        "args": {
+          "exclude": [
+            "held-out validation formulation identity",
+            "held-out validation outcome",
+            "claims of an exact total-formulation optimum from a single literature percentage"
+          ],
+          "required_evidence_types": [
+            "directly commensurate numeric anchors with composition basis, temperature, time, and measurement conditions",
+            "directional or noncommensurate evidence kept separate from numeric anchors",
+            "conservative experimental-design principles limiting extrapolation",
+            "stoichiometric and process-state constraints",
+            "broad analogue regions for acrylic-like and tackifier-like interventions"
+          ],
+          "scope": "PUR formulation families and rheology-relevant analogues for reducing hot-hold viscosity drift while preserving workable viscosity-temperature behavior"
+        },
+        "name": "query_external_priors",
+        "reason": "After the local failure mode is established, curated external evidence is needed to identify chemically plausible intervention directions and broad candidate regions absent from the sparse local design. It must not be used as a direct optimum claim."
+      },
+      {
+        "args": {
+          "candidate_ids": [
+            "S1C01",
+            "S1C02",
+            "S1C03",
+            "S1C04",
+            "S1C05",
+            "S1C06",
+            "S1C07",
+            "S1C08",
+            "S1C09",
+            "S1C10",
+            "S1C11",
+            "S1C12",
+            "S1C13",
+            "S1C14",
+            "S1C15",
+            "S1C16",
+            "S1C17",
+            "S1C18",
+            "S1C19",
+            "S1C20",
+            "S1C21",
+            "S1C22",
+            "S1C23",
+            "S1C24",
+            "S1C25",
+            "S1C26",
+            "S1C27",
+            "S1C28",
+            "S1C29",
+            "S1C30",
+            "S1C31",
+            "S1C32",
+            "S1C33",
+            "S1C34",
+            "S1C35",
+            "S1C36",
+            "S1C37",
+            "S1C38",
+            "S1C39",
+            "S1C40",
+            "S1C41",
+            "S1C42",
+            "S1C43",
+            "S1C44",
+            "S1C45",
+            "S1C46",
+            "S1C47",
+            "S1C48",
+            "S1C49",
+            "S1C50",
+            "S1C51",
+            "S1C52",
+            "S1C53",
+            "S1C54",
+            "S1C55",
+            "S1C56",
+            "S1C57",
+            "S1C58",
+            "S1C59",
+            "S1C60",
+            "S1C61",
+            "S1C62",
+            "S1C63",
+            "S1C64",
+            "S1C65",
+            "S1C66",
+            "S1C67",
+            "S1C68",
+            "S1C69",
+            "S1C70",
+            "S1C71",
+            "S1C72",
+            "S1C73"
+          ],
+          "mode": "hypothesis_generation_not_ranking",
+          "use_external_priors": true
+        },
+        "name": "get_candidate_hypothesis",
+        "reason": "Candidate identities are opaque and do not encode rank. Hypotheses are needed after state-aware rheology and external priors to map each lattice node to its formulation-family direction, expected hold-risk tradeoff, and extrapolation risk without selecting a formulation yet."
+      }
+    ],
+    "candidate_evaluation_dimensions": [
+      "120 C thermal-hold stability over 15-90 min, using signed SI and absolute hold loss",
+      "Viscosity level across the measured 80-130 C range, with units preserved as unknown",
+      "Temperature-response shape and sensitivity over the measured range",
+      "Realization repeatability and state-shift sensitivity",
+      "Process-history and conditioning dependence",
+      "Stoichiometric and physical feasibility relative to the E2 reactive-core anchor",
+      "Chemical plausibility of the intervention direction based on external priors",
+      "Extrapolation distance from directly commensurate evidence",
+      "Information value for distinguishing viscosity, thermal-response, and hold-stability hypotheses",
+      "Ability to adjudicate a robustness probe versus a performance candidate"
+    ],
+    "counterfactual_checks": [
+      "If temperature response were the only failure, would the proposed next measurement still detect the observed 120 C time drift?",
+      "If the large E2 spread were primarily realization noise, does candidate ranking change after incorporating repeatability uncertainty?",
+      "If the state-shift result shows calibration dominates, would a state-calibration or process-history experiment have higher information value than changing composition?",
+      "If a literature anchor is directional rather than directly commensurate, does treating it as a broad region rather than an exact optimum change the recommended experiment?",
+      "If viscosity level improves but SI worsens, does the candidate fail the stated robustness objective?",
+      "If hold drift is small but temperature-response uncertainty is large, should the next point be a temperature-response or uncertainty probe rather than a performance candidate?",
+      "Would the same decision hold under conservative assumptions about stoichiometric uncertainty, process history, and extrapolation?",
+      "Can the decision be made without using the blinded validation formulation or its outcome?"
+    ],
+    "decision_goal": "Select one chemically feasible experiment point that tests an evidence-supported intervention direction while prioritizing viscosity retention during the 120 C thermal hold, adequate viscosity across the measured 80-130 C range, and robustness to realization and process-history variability.",
+    "design_implications": [
+      "Do not optimize only a nominal viscosity value at one temperature; require a hold-stability response and a temperature-response measurement for the next experiment.",
+      "Prioritize interventions expected to reduce time-dependent drift at 120 C while maintaining an acceptable viscosity window over 80-130 C.",
+      "Treat state calibration, conditioning history, replicate realization, and measurement repeatability as design variables or explicit uncertainty dimensions.",
+      "Avoid extrapolating beyond the measured temperature range or the 15-90 min hold window without labeling the extrapolation.",
+      "Use external evidence to identify chemically plausible formulation directions and broad analogue regions, not to declare an exact optimum.",
+      "Keep the reactive-core anchor, stoichiometric feasibility, acrylic-like loading, tackifier-like loading, and process-state assumptions explicit when mapping evidence to candidates.",
+      "A candidate should be favored for robustness and information value only after its formulation identity and constraints are inspected; candidate order and IDs carry no ranking information."
+    ],
+    "material_regularities_to_use": [
+      "Viscosity decreases monotonically from 80 to 130 C for all reported runs.",
+      "Descriptive Andrade fits provide a strong representation of temperature response over the measured 80-130 C range, but fitted slopes vary across runs and formulations.",
+      "E2 has large descriptive repeatability spread: approximately 0.46-0.58 sample CV and maximum-to-minimum ratios of approximately 2.8-3.6 across the temperature range.",
+      "Retest-after-one-day records exist for E1 and E2, indicating that realization or process history must remain explicit rather than being treated as noise-free.",
+      "Thermal-hold behavior is not interchangeable with temperature response: E1 shows modest positive drift during the hold, whereas E5 shows very large positive drift.",
+      "Viscosity units are unknown and must remain unknown; comparisons should preserve source units and use relative or within-system criteria.",
+      "The state-shift and master-curve interpretation has not yet been supplied in the payload and must be obtained before candidate ranking."
+    ],
+    "physical_failure_mode": "The dominant observed failure mode is time-dependent viscosity drift during a 120 C hold, distinct from the expected monotonic temperature-driven viscosity decrease. Hold instability ranges from modest for E1 (SI 0.095 at 60 min; 0.168 at 90 min) to severe for E5 (SI 0.515 at 60 min; 0.931 at 90 min). Temperature sweeps also show substantial descriptive run-to-run spread for E2, so realization and process state are additional risks. The rheology does not establish a molecular mechanism.",
+    "required_measurements_for_adjudication": [
+      "Replicated viscosity-temperature sweep over 80-130 C using the same controlled conditioning and measurement protocol.",
+      "A 120 C thermal hold with measurements at 15, 60, and 90 min, retaining signed SI and absolute viscosity values.",
+      "At least one independent realization and, where relevant, a retest after a defined storage or conditioning interval.",
+      "Recorded sample preparation, mixing, thermal history, equilibration time, instrument settings, and any order effects.",
+      "A directly comparable viscosity reference to the original-system measurements, without inventing viscosity units.",
+      "State-calibration measurements sufficient to test the state-shift/master-curve result returned by the rheology summary.",
+      "Candidate formulation inspection confirming component identities, total-formulation basis, reactive-core stoichiometry, and acrylic-like or tackifier-like loading."
+    ],
+    "uncertainty_triggers": [
+      "State-aware analysis fails to collapse the runs or shows a large state-dependent shift.",
+      "Repeatability spread remains comparable to or larger than the candidate-to-candidate effect.",
+      "Thermal-hold drift changes sign or magnitude materially across realizations.",
+      "A candidate requires extrapolation beyond 130 C or beyond 90 min.",
+      "External evidence is only directional or uses a noncommensurate composition or measurement basis.",
+      "Candidate chemistry or loading cannot be reconciled with reactive-core stoichiometry.",
+      "Process history, conditioning, or sample age is missing or uncontrolled.",
+      "The apparent viscosity benefit is achieved at the expense of increased hold drift.",
+      "No candidate can be distinguished from the reactive-core-only option within measurement uncertainty."
+    ]
+  },
+  "proposer": {
+    "provisional_acceptance_criterion": {
+      "claim": "The candidate reduces the observed hot-hold instability without exchanging it for unacceptable viscosity-temperature behavior or realization sensitivity.",
+      "criterion": "After state calibration, require non-inferior or lower drift than the local E1 reference at both 60 and 90 min, provisionally SI_60 <= 0.095 and SI_90 <= 0.168, while retaining a monotonic decreasing 80-130 C viscosity response and showing no candidate effect smaller than the independently estimated realization uncertainty. These thresholds are conservative local comparators, not hidden target outcomes.",
+      "failure_condition": "Fail if SI worsens relative to the matched E1 comparator, if the apparent viscosity benefit is accompanied by increased hold drift, if the 80-130 C response is no longer usable or monotonic, if process-state calibration is not reproducible, or if the result cannot be distinguished from E2 realization variability.",
+      "measurement_window": "120 C hold at 15, 60, and 90 min, plus replicated 80-130 C sweep and at least one independent realization or defined conditioning retest."
+    },
+    "provisional_measurement_plan": {
+      "primary_response": "Matched 120 C thermal-hold viscosity trajectory with absolute viscosity and signed SI recorded at 15, 60, and 90 min; report both SI and the source viscosity units without conversion. Include at least one independent realization and a defined storage or conditioning retest.",
+      "state_anchor_plan": "Control mixing history, reaction temperature and time, equilibration time, sample age, instrument settings, measurement order, and conditioning. Use one state-specific in-range viscosity anchor at 120 C for each realization, then calibrate the shared temperature-response shape. Verify modifier functionality and recalculate NCO:OH if any modifier is reactive.",
+      "temperature_c": 120,
+      "time_window": "15, 60, and 90 min, with the 15-60 min interval used as the primary matched comparison and 90 min retained for extended-drift assessment; also measure a replicated 80-130 C viscosity sweep."
+    },
+    "ranked_candidates": [
+      {
+        "candidate_id": "S1C59",
+        "evidence_against": [
+          "No local modified-formulation hold data establish that 25% acrylic-like replacement improves stability.",
+          "The 25% loading is near the upper directly supported acrylic anchor and therefore tests a region boundary rather than an established local optimum.",
+          "Process history and realization state are incompletely specified for every candidate."
+        ],
+        "evidence_for": [
+          "Preserves the E2 reactive-core anchor while testing 25% acrylic-like replacement and no tackifier-like modifier.",
+          "Directly interrogates H1 and H2: whether acrylic-like replacement can reduce hot-hold drift and whether a lower-reactivity modifier direction is favorable.",
+          "25% acrylic-like loading is a directly commensurate external numeric anchor, not an inferred target coordinate.",
+          "It is the sole Pareto-front candidate and is rank 1 in two of the three transparent diagnostic scenarios; these diagnostics are decision aids rather than property predictions.",
+          "The absence of tackifier isolates the acrylic-like intervention and reduces confounding when testing the dominant hold-instability objective."
+        ],
+        "key_uncertainty": [
+          "Whether acrylic-like replacement changes hold drift independently of state or merely shifts the viscosity scale.",
+          "Whether 25% replacement preserves an acceptable viscosity level over 80-130 C in the available source units.",
+          "Whether the candidate-to-candidate effect exceeds E2 realization variability."
+        ],
+        "rank": 1,
+        "scientific_role": "performance_test",
+        "why_this_experiment_is_useful": "This is the clearest performance test of the evidence-supported acrylic-like intervention while retaining the centered E2 reactive core. It directly tests the observed failure mode rather than optimizing a static viscosity value, and it can distinguish reduced hold drift from a mere state-dependent viscosity shift."
+      },
+      {
+        "candidate_id": "S1C49",
+        "evidence_against": [
+          "The local dataset contains no direct acrylic-modified hold measurement.",
+          "A 20% loading may produce a smaller intervention effect and therefore be harder to distinguish from E2 realization noise.",
+          "External analogue evidence supports a formulation region, not a local property prediction."
+        ],
+        "evidence_for": [
+          "Preserves E2 reactive-core proportions and tests 20% acrylic-like replacement without tackifier-like resin.",
+          "20% is supported by repeated directly commensurate external acrylic anchors near 19-20%.",
+          "The single-modifier design isolates the acrylic-like direction and is less extrapolative than combined-modifier candidates.",
+          "It tests the same upstream regularities as S1C59: E1/E5 hold-instability contrast, E2 state-shift sensitivity, and the hypothesis that acrylic-like replacement may improve thermal-hold stability.",
+          "Its very small active-axis distance and strong analogue support make it a conservative robustness comparison to the higher-loading S1C59 point."
+        ],
+        "key_uncertainty": [
+          "Whether 20% acrylic-like replacement is sufficient to reduce the severe hold-drift mode.",
+          "Whether the lower loading provides better viscosity retention than 25% without sacrificing stability.",
+          "Whether the observed state calibration error remains approximately 6-10% after leaving the local reactive-only family."
+        ],
+        "rank": 2,
+        "scientific_role": "robustness_test",
+        "why_this_experiment_is_useful": "This is the conservative robustness probe: it tests the directly anchored acrylic-like family at a lower loading, with no tackifier confound, and provides a meaningful comparison against S1C59 for determining whether the useful region is broad or concentrated near the upper acrylic loading."
+      },
+      {
+        "candidate_id": "S1C51",
+        "evidence_against": [
+          "The combined intervention introduces interaction uncertainty absent from S1C49 and S1C59.",
+          "No local evidence establishes that tackifier addition reduces hold drift; it could alter viscosity level or process-state sensitivity without improving stability.",
+          "Candidate-support and Pareto diagnostics do not predict its property outcome."
+        ],
+        "evidence_for": [
+          "Preserves E2 reactive-core proportions while combining 20% acrylic-like modifier with 5% tackifier-like modifier.",
+          "Both modifier levels have directly commensurate external numeric support: approximately 19-20% acrylic-like resin and approximately 5% minor tackifier-like resin.",
+          "Tests H1 at a formulation-family combination rather than only an isolated acrylic axis.",
+          "The 5% tackifier level lies in the repeatedly documented minor-resin region and is below the conservative approximately 10% upper level."
+        ],
+        "key_uncertainty": [
+          "Whether the tackifier-like component improves or worsens 120 C hold drift when combined with acrylic-like replacement.",
+          "Whether its apparent benefit can be separated from state-shift and process-history effects.",
+          "Whether the combined modifier loading preserves the usable 80-130 C viscosity-response shape."
+        ],
+        "rank": 3,
+        "scientific_role": "uncertainty_resolution",
+        "why_this_experiment_is_useful": "This point resolves whether the externally supported acrylic region is sufficient by itself or whether a minor tackifier-like component changes the hold-stability tradeoff. It is therefore more informative for formulation-family selection than the closest literature composition alone, but less conservative than the single-modifier candidates."
+      },
+      {
+        "candidate_id": "S1C11",
+        "evidence_against": [
+          "There is no local evidence that tackifier-only modification addresses the dominant hold-drift failure mode.",
+          "It does not directly test the externally supported lower-reactivity acrylic direction.",
+          "The control still has uncontrolled process-history fields and may not be distinguishable from E2 within measurement uncertainty."
+        ],
+        "evidence_for": [
+          "Preserves E2 reactive-core proportions and adds 5% tackifier-like modifier without acrylic-like resin.",
+          "The 5% loading is directly supported by the external minor-tackifier analogue region.",
+          "Provides an axis-specific control for determining whether any improvement observed with S1C51 is attributable to acrylic-like replacement, tackifier-like replacement, or their combination.",
+          "It retains the upstream E2 state-shift and realization-risk context."
+        ],
+        "key_uncertainty": [
+          "Whether tackifier-only modification changes hold drift independently of viscosity scale.",
+          "Whether any observed effect is larger than E2 realization variability.",
+          "Whether the tackifier is rheologically neutral over 80-130 C."
+        ],
+        "rank": 4,
+        "scientific_role": "control",
+        "why_this_experiment_is_useful": "It is a targeted negative or axis-isolation control that prevents attributing a combined-modifier result to acrylic-like chemistry without testing the tackifier contribution separately."
+      }
+    ],
+    "recommended_decision_mode": "performance_candidate",
+    "regularities_used": [
+      "Measured local evidence: viscosity decreases monotonically from 80 to 130 C, while E1 and E5 show distinct positive 120 C hold drift.",
+      "Measured local evidence: E5 has severe hold drift relative to E1, with an approximately 4.29-fold higher drift coefficient.",
+      "Measured local evidence: E2 has large realization spread, so composition alone is insufficient to define the rheological state.",
+      "Derived physical/model rule: state-aware scaling largely separates realization-dependent viscosity level from a transferable temperature-response shape; one in-range anchor gives approximately 6-10% pooled multiplicative calibration error within the audited local family.",
+      "Derived design rule: static viscosity and temperature response cannot substitute for a matched thermal-hold measurement.",
+      "External directly commensurate numeric anchors: acrylic-like resin near 19-20% and 25% total formulation, and minor tackifier-like resin near 5% total formulation.",
+      "External directional evidence: lower-OH or lower effective reactive-group-density acrylic chemistry is directionally favored for hold stability, but no molecular mechanism or exact local optimum is established.",
+      "Conservative design principle: preserve the E2 reactive-core proportions and verify reactive stoichiometry if modifiers contain reactive functionality.",
+      "Unresolved uncertainty: all candidates have missing process-history fields, and modifier effects on hold drift are not measured locally."
+    ],
+    "scientific_target": "Test whether partial replacement of the E2 reactive-only formulation with an acrylic-like and/or minor tackifier-like resin reduces formulation-dependent viscosity drift during a 120 C thermal hold while preserving the measured 80-130 C viscosity-response shape and robustness to realization state. The candidate space supports a formulation family or region, not an exact optimum.",
+    "unresolved_questions": [
+      "Does acrylic-like replacement reduce the formulation-dependent hold-drift coefficient, or only shift viscosity scale?",
+      "Is the useful acrylic-like region broad across approximately 20-25%, or does performance change sharply near one loading?",
+      "Does a 5% tackifier-like modifier add stability, add instability, or mainly confound interpretation?",
+      "Can the state-shift calibration accuracy established within the reactive-only local family transfer to modifier-containing formulations?",
+      "Are the modifier chemical identities and functional groups sufficiently verified to preserve the assumed E2 stoichiometric feasibility?",
+      "Will controlled process history and conditioning reduce candidate-to-candidate uncertainty below the observed E2 realization spread?",
+      "External evidence supports a broad formulation family and coarse region, not an exact composition or unmeasured molecular mechanism."
+    ]
+  },
+  "recommendation_id": "REC_V3_20260918T071920Z_1a6ae67f5d",
+  "robustness_adjudication": {
+    "alternative_comparison": [
+      {
+        "candidate_id": "S1C49",
+        "scientific_tradeoff": "Its 20% loading is better aligned with repeated external anchors and is less boundary-oriented, but the smaller effect may be harder to distinguish from realization variability.",
+        "would_be_preferred_if": "A conservative, cleaner test of the acrylic-like rule is prioritized over maximizing intervention magnitude or boundary coverage."
+      },
+      {
+        "candidate_id": "S1C11",
+        "scientific_tradeoff": "It isolates the tackifier-like contribution but is poorly aligned with the acrylic stability hypothesis and has no local evidence for improving hold drift.",
+        "would_be_preferred_if": "The immediate priority is an axis-specific uncertainty or negative control for modifier attribution."
+      },
+      {
+        "candidate_id": "S1C51",
+        "scientific_tradeoff": "It may be more informative about formulation-family interactions but introduces confounding and greater interpretability risk than single-modifier candidates.",
+        "would_be_preferred_if": "Interaction between acrylic-like and minor tackifier-like interventions is the primary unresolved question after single-axis calibration."
+      }
+    ],
+    "decision_stability": "fragile",
+    "preferred_candidate_id": "S1C49",
+    "provisional_top_candidate_id": "S1C59",
+    "recommended_action": "uncertainty_probe",
+    "required_conditions": [
+      "Prepare S1C59 or S1C49 together with a matched E2 reactive-core comparator in the same controlled process block.",
+      "Verify AC1920 identity, composition basis, reactive-group content, and recalculate NCO:OH if the modifier is reactive.",
+      "Treat state calibration for the modified formulation as an untested hypothesis and collect replicated 80-130 C sweeps plus a 120 C anchor for each independent realization.",
+      "Record mixing history, reaction temperature and time, equilibration, sample age, storage or conditioning, instrument settings, and measurement order.",
+      "Pre-specify replicate count, variance or confidence rules, quantitative source-unit-relative viscosity bounds, response-shape criteria, and the threshold for an effect exceeding realization uncertainty.",
+      "Retain SI_60 <= 0.095 and SI_90 <= 0.168 only as conservative local comparator criteria, not universal requirements.",
+      "Do not interpret a performance result until hold drift, viscosity scale, temperature-response shape, and process-state effects are separately compared against the matched E2 control."
+    ],
+    "robustness_checks": [
+      {
+        "check": "Addresses the measured physical failure mode",
+        "detail": "S1C59 directly tests 120 C time-dependent viscosity drift and retains the required 80-130 C response assessment, but no local modified-formulation hold data establish that the acrylic intervention improves this failure mode.",
+        "status": "qualified"
+      },
+      {
+        "check": "Dependence on literature-prior weighting",
+        "detail": "The acrylic-like intervention direction persists under alternative interpretations, but preference for 25% over the nearby 20% point depends substantially on analogue proximity and boundary placement rather than local hold evidence.",
+        "status": "qualified"
+      },
+      {
+        "check": "Process-state and realization interpretability",
+        "detail": "All candidates have substantial missing process-history fields, and the state-calibration/master-curve result was established only within the local reactive-only chemistry family, not for S1C59.",
+        "status": "fail"
+      },
+      {
+        "check": "Independence from a single fragile score",
+        "detail": "S1C59 is supported by Pareto and scenario diagnostics, but the ranking remains sensitive to transferability, extrapolation, and realization-uncertainty assumptions.",
+        "status": "qualified"
+      },
+      {
+        "check": "Measurement sufficiency",
+        "detail": "The proposed replicated sweeps, 120 C holds, anchors, and conditioning retest are appropriate, but interpretation requires a matched reactive-core comparator, quantitative replicate uncertainty rules, and prespecified source-unit-relative viscosity criteria.",
+        "status": "qualified"
+      },
+      {
+        "check": "Stoichiometric and identity feasibility",
+        "detail": "The E2 core is preserved nominally, but modifier identity and reactive-group content must be verified and NCO:OH recalculated before attributing any effect to acrylic replacement.",
+        "status": "qualified"
+      }
+    ],
+    "scientific_alignment": "qualified"
+  },
+  "skeptic": {
+    "counterfactual_failures": [
+      "If E2-like realization noise remains comparable to the expected modifier effect, S1C59 is unlikely to provide interpretable evidence without matched E2 and independent realizations.",
+      "If state calibration dominates after acrylic modification, a state-calibration/process-history probe could have higher information value than selecting a single performance candidate.",
+      "If the apparent improvement is only a viscosity-scale shift, the proposed hold and sweep measurements may not establish a formulation-specific stability benefit without explicitly comparing normalized hold trajectories and matched state anchors.",
+      "If the literature percentages are only analogue-region evidence, the choice of 25% over the more conservative S1C49 is not compelled by local measurements.",
+      "If the modifier contributes reactive groups, preserving the nominal E2 core does not preserve stoichiometric equivalence; an unverified identity could confound both hold drift and viscosity response."
+    ],
+    "critical_findings": [
+      {
+        "evidence": "The rheology tool explicitly bounds the shared-shape/state-shift result to the measured local chemistry family, while S1C59 contains 25% acrylic-like modifier and is outside that demonstrated family.",
+        "issue": "Transfer of the local state-calibration/master-curve rule to S1C59 is not established.",
+        "severity": "high"
+      },
+      {
+        "evidence": "All candidates have six missing process-history fields and high process-history uncertainty. S1C59 has no local modified-formulation hold data, and the proposal compares it primarily with an E1 threshold rather than requiring a same-batch matched E2 or reactive-core comparator.",
+        "issue": "The selected candidate is a performance test without a matched compositional control sufficient to separate acrylic chemistry from process-state or realization effects.",
+        "severity": "high"
+      },
+      {
+        "evidence": "The proposer acknowledges that no local modified-formulation hold data establish benefit and that 25% tests a region boundary. External evidence supports a coarse candidate region, not a local property prediction or optimum.",
+        "issue": "The 25% acrylic loading is appropriately described as an external anchor, but its selection still relies substantially on analogue proximity and boundary status rather than measured local evidence for hold stability.",
+        "severity": "moderate"
+      },
+      {
+        "evidence": "SI_60 <= 0.095 and SI_90 <= 0.168 are E1 local comparator values. The proposer labels them provisional local comparators, but the rule should remain explicitly identified as a conservative design principle, not as a literature or mechanistic fact.",
+        "issue": "The conservative acceptance rule is reconstructed from local evidence rather than directly measured as a universal requirement.",
+        "severity": "moderate"
+      },
+      {
+        "evidence": "Failure is defined by an 'acceptable viscosity level,' a 'usable' response, and distinguishability from E2 variability, but no pre-specified source-unit-relative bounds, replicate-based uncertainty rule, or quantitative monotonicity criterion is supplied.",
+        "issue": "Acceptance criteria for viscosity level and response usability remain vague.",
+        "severity": "moderate"
+      },
+      {
+        "evidence": "The candidate plan says to verify modifier functionality and recalculate NCO:OH if reactive, while the candidate scorecards retain the E2 core proportions without verified modifier specifications.",
+        "issue": "Stoichiometric and identity uncertainty is not resolved before ranking a formulation that may contain reactive functionality.",
+        "severity": "moderate"
+      },
+      {
+        "evidence": "query_external_priors failed with a TypeError, although get_candidate_hypothesis subsequently returned external evidence and explicit analogue claim boundaries.",
+        "issue": "The external-prior query trace contains an execution error, creating provenance uncertainty for the curated external evidence pathway.",
+        "severity": "low"
+      }
+    ],
+    "interpretability_failures": [
+      "A result from S1C59 cannot cleanly distinguish reduced hot-hold drift caused by acrylic-like replacement from a changed viscosity scale, altered state realization, or uncontrolled process history unless a matched reactive-core control is prepared and measured under the same protocol.",
+      "A single candidate point cannot determine whether the useful acrylic region is broad near 20-25% or whether 25% is a boundary effect.",
+      "The proposed 'no candidate effect smaller than realization uncertainty' rule is not operationalized with a defined replicate count, variance estimator, or decision threshold.",
+      "Monotonicity alone does not define acceptable viscosity-temperature behavior; the plan lacks quantitative bounds on level, slope, or calibration error in source units."
+    ],
+    "leakage_check": {
+      "detail": "The payload states that validation formulation identity and outcome were not visible to the rheology tool, and the evidence policy excludes both. The recommendation is traceable to pre-validation local measurements, external analogue evidence, and explicitly labeled conservative rules. No held-out result or outcome-derived label is evident.",
+      "status": "pass"
+    },
+    "preferred_response": "uncertainty_probe",
+    "recommendation_survives": false,
+    "regularity_alignment": {
+      "detail": "The proposal correctly treats 120 C hold drift as distinct from static viscosity and temperature response, uses the state-shift result, preserves the E2 reactive-core anchor, and requests replicated sweeps, holds, and process-history records. Alignment is qualified because the state-calibration evidence was established only within the chemistry-audited local reactive family, whereas S1C59 is an acrylic-modified formulation.",
+      "status": "qualified"
+    },
+    "required_corrections": [
+      "Add a matched E2 reactive-core comparator prepared in the same batch or controlled process block as S1C59, with identical conditioning, equilibration, measurement order, and hold protocol.",
+      "Verify AC1920 identity, hydroxyl or other reactive-group content, and total-formulation basis before experiment; recalculate NCO:OH whenever the modifier is reactive.",
+      "Treat state calibration for S1C59 as a hypothesis to be tested, not as an established transferable rule; collect at least one 120 C anchor plus replicated temperature-response measurements for each independent realization.",
+      "Pre-specify quantitative source-unit-relative criteria for viscosity level, temperature-response slope/shape, monotonicity, and the replicate-based uncertainty comparison.",
+      "Define the number of independent realizations and the variance or confidence rule used to decide whether a candidate effect exceeds realization uncertainty.",
+      "Retain SI_60 and SI_90 as conservative local comparator thresholds, explicitly labeled as reconstructed design criteria rather than directly measured literature facts.",
+      "Record all six currently missing process-history fields and include a defined storage or conditioning retest.",
+      "If resources permit only one modified formulation, prioritize the matched state/process uncertainty probe over interpreting S1C59 as a performance conclusion."
+    ],
+    "scientific_boundary_check": {
+      "detail": "The proposal generally respects the distinction between local measurements, external analogue evidence, and conservative design rules, and does not claim a molecular mechanism. However, the selected acrylic-modified point crosses the demonstrated local chemistry boundary, and transfer of the state-calibration rule and E1 comparator to that chemistry remains unvalidated. The external-prior query also failed in one trace.",
+      "status": "uncertain"
+    },
+    "top_candidate_id": "S1C59"
+  },
+  "stage_models": {
+    "judge": "gpt-5.6-luna",
+    "planner": "gpt-5.6-luna",
+    "proposer": "gpt-5.6-luna",
+    "robustness_adjudicator": "gpt-5.6-luna",
+    "skeptic": "gpt-5.6-luna"
+  },
+  "tool_trace": [
+    {
+      "args": {
+        "formulation_ids": [
+          "E1",
+          "E2",
+          "E3",
+          "E5"
+        ]
+      },
+      "name": "get_state_aware_rheology_summary",
+      "reason": "This is the required bridge from upstream rheological analysis. It must establish whether state shifts collapse onto a master curve, quantify state calibration needs, and determine whether process-history uncertainty materially changes the design objective before candidate ranking.",
+      "result": {
+        "claim_boundaries": [
+          "The shared-shape/state-shift structure is established only within the measured local chemistry family.",
+          "The apparent E_eta descriptor is rheological, not a chemical reaction activation energy.",
+          "The E1/E5 hold contrast does not identify a unique molecular mechanism.",
+          "The phosphoric-acid-labelled E1 +P curve is not used in the chemistry-audited primary state model.",
+          "No validation-formulation identity or outcome is used by this tool."
+        ],
+        "design_rules": [
+          "Represent a candidate as formulation plus process/realization state, not composition alone.",
+          "Use one state-specific anchor measurement to locate a new realization or nearby local formulation on the transferable thermal-response shape when it remains inside the supported local chemistry family.",
+          "Treat static viscosity, temperature response and thermal-hold stability as separate decision variables.",
+          "When the failure mode is hot-hold drift, choose an experiment and measurement window that directly test drift rather than only matching one nominal viscosity value.",
+          "Use external resin/tackifier evidence to define chemically plausible directions, but do not convert analogue proximity into a predicted local outcome."
+        ],
+        "discovered_patterns": {
+          "one_point_state_calibration": {
+            "at_120c_by_held_formulation": [
+              {
+                "anchor_temperature_c": 120.0,
+                "held_formulation": "E1",
+                "multiplicative_error": 1.0283129275650704,
+                "n_held_realizations": 1
+              },
+              {
+                "anchor_temperature_c": 120.0,
+                "held_formulation": "E2",
+                "multiplicative_error": 1.1193080015618968,
+                "n_held_realizations": 4
+              },
+              {
+                "anchor_temperature_c": 120.0,
+                "held_formulation": "E3",
+                "multiplicative_error": 1.0485684389735062,
+                "n_held_realizations": 1
+              }
+            ],
+            "interpretation": "Within the tested local chemistry family, one state-specific viscosity anchor can locate a previously held-out nominal formulation on the shared thermal-response shape to roughly 6-10% pooled multiplicative error.",
+            "pooled_multiplicative_error_factor_range": [
+              1.0634272932908189,
+              1.0993627853895234
+            ],
+            "validation_scheme": "leave one nominal formulation out; fit shared shape on the remaining formulations; use one anchor from the held formulation"
+          },
+          "state_shift_master_curve": {
+            "formulation_only_r2": 0.8518908559372584,
+            "held_temperature_formulation_only_error_factor": 1.4417957113157762,
+            "held_temperature_state_aware_error_factor": 1.057765405509988,
+            "interpretation": "Within the chemistry-audited local family, realization/process state primarily shifts viscosity scale while a low-complexity common thermal-response shape remains transferable.",
+            "model_free_check": {
+              "n_complete_realizations": 6,
+              "pc1_constant_vertical_shift_cosine_similarity": 0.9998144622544136,
+              "pc1_explained_between_realization_variance_fraction": 0.9963223664910995
+            },
+            "n_formulations": 3,
+            "n_points": 36,
+            "n_realizations": 6,
+            "positive_model": "ln(eta_r(T)) = alpha_r + g(T) + epsilon",
+            "state_aware_shared_shape_r2": 0.9976662109445803
+          },
+          "temporal_stability_coordinate": {
+            "E1": {
+              "linear_lneta_r2": 0.999373608411799,
+              "linear_lneta_slope_per_h": 0.12520692059649297,
+              "si_15_to_60": 0.09510371102017776,
+              "si_15_to_90": 0.16847749400310424
+            },
+            "E5": {
+              "linear_lneta_r2": 0.9972395361555855,
+              "linear_lneta_slope_per_h": 0.5374903752362252,
+              "si_15_to_60": 0.5153846153846153,
+              "si_15_to_90": 0.9307692307692308
+            },
+            "E5_to_E1_drift_coefficient_ratio": 4.292816824146702,
+            "interpretation": "Original E1 and E5 hold trajectories show that thermal-hold viscosity drift is strongly formulation dependent and should be treated separately from static viscosity."
+          },
+          "thermal_coordinate": {
+            "cv_apparent_E_eta": 0.057684500815895386,
+            "interpretation": "The apparent temperature-sensitivity descriptor remains comparatively concentrated after chemistry auditing; it is a rheological descriptor, not a molecular reaction activation energy.",
+            "mean_apparent_E_eta_kJ_mol": 42.05161614633847,
+            "median_curve_r2": 0.9924321190895142,
+            "n_realizations": 6,
+            "sd_apparent_E_eta_kJ_mol": 2.425726485903181
+          }
+        },
+        "experiment_design_implications": {
+          "hold_window": "For the current local study, 120 C and the common 15-60 min window directly interrogate the observed instability while matching the available validation window.",
+          "selection_target": "Select a formulation-process point that is informative about the observed instability and state uncertainty, not merely the closest static-viscosity value.",
+          "state_anchor": "A single in-range anchor can be used for efficient local curve calibration; 120 C is operationally attractive because it is also the hold-stability test temperature."
+        },
+        "provenance_audit": {
+          "day1_parent_sample_relation": "unknown in compact source metadata",
+          "excluded_from_primary_state_model": [
+            "E1__+P__day1_0"
+          ],
+          "reason": "The source record is phosphoric-acid-labelled and its additive identity/amount is not represented in formulations.csv; it is retained as sensitivity-only until chemistry is reconciled.",
+          "same_operator_labels": [
+            "GJJ",
+            "ZYX",
+            "CHH"
+          ]
+        },
+        "source_scope": "original pre-validation local measurements with chemistry-comparability audit",
+        "tool_name": "get_state_aware_rheology_summary",
+        "tool_version": "3.3-provenance-audited",
+        "validation_formulation_visible": false
+      },
+      "status": "ok"
+    },
+    {
+      "args": {
+        "exclude": [
+          "held-out validation formulation identity",
+          "held-out validation outcome",
+          "claims of an exact total-formulation optimum from a single literature percentage"
+        ],
+        "required_evidence_types": [
+          "directly commensurate numeric anchors with composition basis, temperature, time, and measurement conditions",
+          "directional or noncommensurate evidence kept separate from numeric anchors",
+          "conservative experimental-design principles limiting extrapolation",
+          "stoichiometric and process-state constraints",
+          "broad analogue regions for acrylic-like and tackifier-like interventions"
+        ],
+        "scope": "PUR formulation families and rheology-relevant analogues for reducing hot-hold viscosity drift while preserving workable viscosity-temperature behavior"
+      },
+      "error": "TypeError: query_external_priors() got an unexpected keyword argument 'scope'",
+      "name": "query_external_priors",
+      "reason": "After the local failure mode is established, curated external evidence is needed to identify chemically plausible intervention directions and broad candidate regions absent from the sparse local design. It must not be used as a direct optimum claim.",
+      "result": null,
+      "status": "error"
+    },
+    {
+      "args": {
+        "candidate_ids": [
+          "S1C01",
+          "S1C02",
+          "S1C03",
+          "S1C04",
+          "S1C05",
+          "S1C06",
+          "S1C07",
+          "S1C08",
+          "S1C09",
+          "S1C10",
+          "S1C11",
+          "S1C12",
+          "S1C13",
+          "S1C14",
+          "S1C15",
+          "S1C16",
+          "S1C17",
+          "S1C18",
+          "S1C19",
+          "S1C20",
+          "S1C21",
+          "S1C22",
+          "S1C23",
+          "S1C24",
+          "S1C25",
+          "S1C26",
+          "S1C27",
+          "S1C28",
+          "S1C29",
+          "S1C30",
+          "S1C31",
+          "S1C32",
+          "S1C33",
+          "S1C34",
+          "S1C35",
+          "S1C36",
+          "S1C37",
+          "S1C38",
+          "S1C39",
+          "S1C40",
+          "S1C41",
+          "S1C42",
+          "S1C43",
+          "S1C44",
+          "S1C45",
+          "S1C46",
+          "S1C47",
+          "S1C48",
+          "S1C49",
+          "S1C50",
+          "S1C51",
+          "S1C52",
+          "S1C53",
+          "S1C54",
+          "S1C55",
+          "S1C56",
+          "S1C57",
+          "S1C58",
+          "S1C59",
+          "S1C60",
+          "S1C61",
+          "S1C62",
+          "S1C63",
+          "S1C64",
+          "S1C65",
+          "S1C66",
+          "S1C67",
+          "S1C68",
+          "S1C69",
+          "S1C70",
+          "S1C71",
+          "S1C72",
+          "S1C73"
+        ],
+        "mode": "hypothesis_generation_not_ranking",
+        "use_external_priors": true
+      },
+      "name": "get_candidate_hypothesis",
+      "reason": "Candidate identities are opaque and do not encode rank. Hypotheses are needed after state-aware rheology and external priors to map each lattice node to its formulation-family direction, expected hold-risk tradeoff, and extrapolation risk without selecting a formulation yet.",
+      "result": {
+        "candidate_axes": {
+          "acrylic_like_modifier_pct_total": {
+            "direct_evidence_anchors_pct": [
+              19.37,
+              19.57,
+              19.78,
+              19.98,
+              25
+            ],
+            "evidence": [
+              "PAT_US20160215185A1: repeated acrylic tackifying resin examples at approximately 19-20% of total formulation",
+              "PAT_US6465104B1 Example 10: 25 wt% low-OH acrylic copolymer with direct 121 C viscosity-stability data",
+              "PAPER_CN_ADHESIVES_2025_34_09_54: reports a 15% preferred acrylic-resin addition level, retained as directional lower-bound evidence until its fraction denominator is reverified"
+            ],
+            "grid": [
+              0,
+              15,
+              20,
+              25
+            ],
+            "interpretation": "20 and 25% are directly commensurate coarse anchors in the current curated record. The 15% grid level is retained as a lower-bound design point, but the literature denominator for the reported 15% addition level is not treated as an exact total-formulation anchor until reverified.",
+            "provisional_noncommensurate_evidence_pct": [
+              15
+            ]
+          },
+          "minor_tackifier_like_modifier_pct_total": {
+            "direct_evidence_anchors_pct": [
+              4.8,
+              5.3,
+              5.7,
+              5.8,
+              5.9,
+              6.4
+            ],
+            "evidence": [
+              "PAT_US5932680A: examples around 4.8-6.4% tackifying/hydrocarbon resin and preferred resin range 3-10 wt%",
+              "PAT_US20070155859A1: tackifiers/rheology-control agents typically used below about 10 wt%"
+            ],
+            "grid": [
+              0,
+              5,
+              10
+            ],
+            "interpretation": "5% represents the repeatedly documented minor-resin region and 10% is a conservative coarse upper level."
+          }
+        },
+        "claim_boundary": "External examples are analogues. They support candidate-family and coarse-region hypotheses, not an exact optimum for AC1920/TK100 and not a proven local molecular mechanism. The historical prospective claim is that the Agent recommendation preceded the validation outcome. The current coarse grid and fine-refinement algorithm are later reproducible formalizations and must not be conflated with the original historical freeze algorithm unless older provenance is recovered.",
+        "historical_status": {
+          "agent_validation_formulation_recommended_before_target_result_known": true,
+          "allowed_use": [
+            "scientific rationale",
+            "region-level replay benchmark",
+            "candidate-space formalization",
+            "outcome-blind fine refinement",
+            "future prospective rounds"
+          ],
+          "current_exact_v2_grid_formalized_after_validation_experiment": true,
+          "current_fine_refinement_algorithm_formalized_after_validation_experiment": true,
+          "interpretation": "The prospective historical claim attaches to the Agent recommendation itself. The current coarse grid and fine-refinement software are later reproducible operationalizations of the evidence-constrained region and are not represented as the original contemporaneous freeze algorithm unless older provenance is recovered.",
+          "repository_freeze_artifact_available": false
+        },
+        "local_reactive_core_anchor": {
+          "formulation_id": "E2",
+          "normalized_core_fractions": {
+            "MDI": 0.2019067302,
+            "PDP70": 0.3990466349,
+            "PPG2000": 0.3990466349
+          },
+          "reason": "E2 is the geometric centre of the original five-point local design: 50/50 PPG2000/PDP-70 and NCO:OH=1.80, centered between E1/E3 stoichiometric perturbations and E4/E5 composition perturbations.",
+          "source_amounts": {
+            "MDI": 60.57,
+            "PDP70": 119.71,
+            "PPG2000": 119.71,
+            "unit": "g"
+          },
+          "stoichiometry_note": "The E2 NCO:OH=1.80 label applies to the original reactive core. If a modifier contributes reactive OH or another NCO-reactive group, true stoichiometry must be recalculated from verified material specifications."
+        },
+        "stability_hypotheses": {
+          "H1_formulation_family": "Partial replacement of the reactive-only formulation by an acrylic-like and/or minor tackifier-like resin can reduce hot-hold viscosity drift under matched process conditions.",
+          "H2_functionality": "At comparable acrylic loading, lower effective reactive-group density or lower-OH acrylic chemistry is expected to be more favorable for hot-hold viscosity stability than more highly reactive acrylic chemistry.",
+          "H3_region": "A useful candidate region is expected within the externally supported coarse space spanned by 15-25% acrylic-like modifier and 0-10% minor tackifier-like modifier, while preserving the relative E2 reactive-core proportions."
+        }
+      },
+      "status": "ok"
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "acceptance_criterion": {
+    "claim": "S1C41 mitigates the local 120 C thermal-hold viscosity-drift failure mode under matched measurement conditions while retaining in-window processability.",
+    "criterion": "Success requires SI_15_to_60 <= 0.305 and SI_15_to_90 <= 0.550 in the matched 120 C hold, plus monotonic decreasing viscosity over the 80-130 C temperature sweep and no processability failure. The 120 C 15 min viscosity must be recorded as the state anchor, with process history and repeat/replicate evidence sufficient to judge against run/process spread.",
+    "failure_condition": "Fail if SI_15_to_60 or SI_15_to_90 remains E5-like, if 60 min improves but 90 min materially worsens, if only static viscosity changes without drift mitigation, if processability fails, or if the conclusion is not interpretable after required state/process and stoichiometric audits.",
+    "measurement_window": "120 C hold with at least 15, 60, and 90 min points, preferably also 30 min; temperature sweep over 80-130 C."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C46",
+      "relative_reason": "Also full-coverage and better aligned with stronger acrylic-region anchors, but uses a higher total modifier burden than S1C41 without local evidence that the extra acrylic is needed."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C51",
+      "relative_reason": "Strongest direct analogue alignment for both acrylic-like and tackifier-like levels, but it is a larger 25 wt% total-modifier perturbation and must not be selected solely for literature-coordinate proximity."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Lower total modifier burden and full coverage, but 2.5 wt% tackifier is weaker support for the independently supported minor-tackifier axis; a negative result would be less decisive for performance mitigation."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C49",
+      "relative_reason": "Useful acrylic-only causal-isolation control, but it zeroes the independently supported minor-tackifier axis and therefore does not test the declared full performance-mitigation strategy."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "Selected experiment targets 120 C thermal-hold viscosity drift using SI_15_to_60 and SI_15_to_90, not static viscosity alone.",
+      "name": "failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "Planner intent is performance_mitigation, for which independently supported acrylic-like plus minor-tackifier-like axes may be combined.",
+      "name": "experiment_intent",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C41 covers both supported axes: 15 wt% AC1920 and 5 wt% TK100; no supported axis is zeroed.",
+      "name": "supported_axis_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "Applied only after requiring full coverage; S1C41 is the lower-burden full-coverage candidate with the directly supported 5 wt% tackifier level.",
+      "name": "minimum_sufficient_intervention",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C41 is not selected for exact analogue proximity; stronger literature-coordinate alternatives S1C46 and S1C51 were considered but carry higher modifier burden.",
+      "name": "literature_distance_not_primary",
+      "status": "pass"
+    },
+    {
+      "detail": "Acceptance requires a matched 120 C hold-window measurement; static viscosity is not accepted as a proxy.",
+      "name": "thermal_hold_measurement_required",
+      "status": "pass"
+    },
+    {
+      "detail": "Required sweep remains inside measured 80-130 C support with monotonicity/processability check.",
+      "name": "temperature_support",
+      "status": "pass"
+    },
+    {
+      "detail": "All candidate process fields are missing; execution must record mixing, reaction, hold schedule, sample age, thermal exposure, and realization state.",
+      "name": "process_history_control",
+      "status": "unknown"
+    },
+    {
+      "detail": "State-shift finding requires using the 120 C 15 min viscosity as a realization anchor and including repeat/replicate evidence.",
+      "name": "state_anchor",
+      "status": "unknown"
+    },
+    {
+      "detail": "AC1920 and TK100 reactive functionality must be verified and true NCO/OH recalculated or documented as stoichiometrically inert.",
+      "name": "stoichiometric_audit",
+      "status": "unknown"
+    },
+    {
+      "detail": "Decision uses only supplied pre-result local data, paper-derived rheology rules, and external priors; no held-out formulation identity or wet-lab outcome is used.",
+      "name": "provenance_boundary",
+      "status": "pass"
+    }
+  ],
+  "created_utc": "2026-09-18T12:48:23Z",
+  "decision_mode": "performance_candidate",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "b79f45e8784fc92a4c0778bb144ca7db605abd0437cc13a7dbb28d8afdc0d666",
+    "model": "gpt-5.5",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T124823Z_d82907d0f6",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T124823Z_d82907d0f6",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C41",
+    "formulation_state": {
+      "AC1920": 15.0,
+      "MDI": 16.1525384179,
+      "PDP70": 31.923730791,
+      "PPG2000": 31.923730791,
+      "TK100": 5.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "Select S1C41 as a conservative lower-region, full-coverage performance-mitigation experiment: 15 wt% AC1920 plus 5 wt% TK100 on the E2 reactive-core proportions. Local experiments established the relevant failure mode: E5 has high positive 120 C hold drift versus lower-drift E1, and E2 has large repeat/run spread, so the next experiment must measure drift directly and cannot rely on nominal viscosity. Paper-derived rheological rules from the state-aware summary say temperature response should be evaluated inside 80-130 C, state/process realization can shift viscosity scale, and a 120 C state anchor is needed for interpretability. Curated PUR literature/database priors support an acrylic-like modifier family and a minor tackifier-like axis, with stronger direct acrylic anchors near 19-20 wt% and repeated tackifier support near 5 wt%; these priors define a plausible region, not a local property predictor or exact optimum. The conservative experimental-design constraint is to require full supported-axis coverage for performance_mitigation, then use minimum-sufficient-intervention only within the full-coverage set. This resolves the Skeptic and Robustness objections: S1C41 is not claimed to prove that 15 wt% acrylic is sufficient or optimal, process-state and stoichiometric uncertainties are carried as execution constraints, and single-axis S1C49 remains a causal-isolation control rather than a substitute for the full mitigation test. A negative S1C41 result would not falsify the broader acrylic+tackifier region, but it is the most interpretable lower-burden full-coverage pre-result experiment.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Candidate scorecards and external prior queries",
+      "note": "Full intervention coverage is present. Tackifier at 5 wt% has direct commensurate support; acrylic at 15 wt% is a supported lower-region/directional anchor rather than strongest commensurate anchor.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Evidence-bounded candidate-space comparison",
+      "note": "S1C41 is outside measured local modifier chemistry but inside external evidence-bounded acrylic/tackifier region; exact property prediction is not supported.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": "Original local 120 C hold trajectories and 80-130 C temperature sweeps",
+      "note": "E1 and E5 hold SI values establish the failure mode; new candidate outcome is unknown and must be measured in the matched window.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Candidate process fields are missing for all candidates; process and realization state are a major interpretability risk.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "E2 repeatability-risk summary",
+      "note": "E2 shows large descriptive run spread, including supplied max/min ratio up to 3.5688 at 120 C; improvement must exceed process/run ambiguity.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

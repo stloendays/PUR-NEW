@@ -1,0 +1,1596 @@
+{
+  "candidate_ids": [
+    "S1C01",
+    "S1C02",
+    "S1C03",
+    "S1C04",
+    "S1C05",
+    "S1C06",
+    "S1C07",
+    "S1C08",
+    "S1C09",
+    "S1C10",
+    "S1C11",
+    "S1C12",
+    "S1C13",
+    "S1C14",
+    "S1C15",
+    "S1C16",
+    "S1C17",
+    "S1C18",
+    "S1C19",
+    "S1C20",
+    "S1C21",
+    "S1C22",
+    "S1C23",
+    "S1C24",
+    "S1C25",
+    "S1C26",
+    "S1C27",
+    "S1C28",
+    "S1C29",
+    "S1C30",
+    "S1C31",
+    "S1C32",
+    "S1C33",
+    "S1C34",
+    "S1C35",
+    "S1C36",
+    "S1C37",
+    "S1C38",
+    "S1C39",
+    "S1C40",
+    "S1C41",
+    "S1C42",
+    "S1C43",
+    "S1C44",
+    "S1C45",
+    "S1C46",
+    "S1C47",
+    "S1C48",
+    "S1C49",
+    "S1C50",
+    "S1C51",
+    "S1C52",
+    "S1C53",
+    "S1C54",
+    "S1C55",
+    "S1C56",
+    "S1C57",
+    "S1C58",
+    "S1C59",
+    "S1C60",
+    "S1C61",
+    "S1C62",
+    "S1C63",
+    "S1C64",
+    "S1C65",
+    "S1C66",
+    "S1C67",
+    "S1C68",
+    "S1C69",
+    "S1C70",
+    "S1C71",
+    "S1C72",
+    "S1C73"
+  ],
+  "judge_normalization": [],
+  "judge_normalized": {
+    "acceptance_criterion": {
+      "claim": "S1C41 mitigates the locally observed 120 C thermal-hold viscosity-rise failure mode under matched process conditions.",
+      "criterion": "Compute SI_15_to_60 and SI_15_to_90 from a matched 120 C hold. The mitigation claim is provisionally accepted only if SI_15_to_60 < 0.305 and SI_15_to_90 < 0.550, the improvement is larger than repeat/state uncertainty as judged against a repeat or matched E2 reference, and the sample remains processable across the 80-130 C sweep.",
+      "failure_condition": "Fail if either SI threshold is not met, if the apparent improvement is comparable to process/repeatability scatter, if process history or units are missing, if the material is unprocessable in the measured temperature range, or if interpretation requires unverified AC1920/TK100 stoichiometric functionality.",
+      "measurement_window": "120 C hold with at least 15, 30, 60, and 90 min points; primary adjudication on 15-60 min and 15-90 min SI windows, plus an 80-130 C temperature sweep and 120 C state anchor."
+    },
+    "alternatives_considered": [
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C40",
+        "relative_reason": "Full-coverage and lower modifier burden, but its 2.5 wt% tackifier-like dose is below the repeatedly documented 4.8-6.4 wt% minor-resin cluster; for a performance-mitigation experiment this under-dosing risk is more important than the small burden reduction."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C50",
+        "relative_reason": "Full-coverage with acrylic near the directly commensurate 19-20 wt% external region, but higher total modifier burden and the same low 2.5 wt% tackifier-like under-dose concern relative to S1C41."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C51",
+        "relative_reason": "Full-coverage and well aligned with both 20 wt% acrylic-like and 5 wt% tackifier-like external regions, but 25 wt% total modifier burden is a larger departure from the E2 core than needed for the first mitigation test."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C49",
+        "relative_reason": "Useful acrylic-only causal-isolation control, but it zeroes the independently supported minor_tackifier_like axis and therefore does not test the full performance-mitigation strategy."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C01-S1C09",
+        "relative_reason": "Reactive-core-only controls remain scientifically useful baselines, but they do not test the resin-modification mitigation hypothesis supported by the external acrylic-like and tackifier-like axes."
+      }
+    ],
+    "constraints": [
+      {
+        "detail": "Selected experiment must adjudicate 120 C thermal-hold viscosity rise, not only static viscosity; S1C41 is selected with a matched 120 C hold-window measurement.",
+        "name": "failure_mode_alignment",
+        "status": "pass"
+      },
+      {
+        "detail": "Planner intent is performance_mitigation, so a dual-axis formulation is appropriate when both axes are independently supported.",
+        "name": "experiment_intent",
+        "status": "pass"
+      },
+      {
+        "detail": "S1C41 covers both supported axes: acrylic_like = 15 wt% and minor_tackifier_like = 5 wt%; no independently supported axis is zeroed.",
+        "name": "required_intervention_axis_coverage",
+        "status": "pass"
+      },
+      {
+        "detail": "15 wt% acrylic-like is a supported lower-region analogue point, while 5 wt% tackifier-like lies in the repeated 4.8-6.4 wt% minor-resin cluster.",
+        "name": "evidence_supported_region",
+        "status": "pass"
+      },
+      {
+        "detail": "Total modifier burden is 20 wt%, below the larger 22.5-25 wt% alternatives and within the frozen candidate-space bounds.",
+        "name": "modifier_burden",
+        "status": "pass"
+      },
+      {
+        "detail": "TK100 is 5 wt%, within the conservative below-about-10 wt% tackifier-like design bound.",
+        "name": "tackifier_upper_bound",
+        "status": "pass"
+      },
+      {
+        "detail": "Adjudication is constrained to the measured 80-130 C support, with primary hold at 120 C.",
+        "name": "temperature_support",
+        "status": "pass"
+      },
+      {
+        "detail": "The experiment must include a 120 C state anchor because local rheology shows process/realization state shifts affect viscosity scale.",
+        "name": "state_anchor_required",
+        "status": "pass"
+      },
+      {
+        "detail": "Thermal-hold stability must be measured over the local 15-60 and 15-90 min windows; static-viscosity proxy alone is insufficient.",
+        "name": "matched_hold_window_required",
+        "status": "pass"
+      },
+      {
+        "detail": "Candidate process fields are missing; process history, mixing/reaction schedule, hold schedule, sample age, units, and retest status must be recorded before interpretation.",
+        "name": "process_history",
+        "status": "unknown"
+      },
+      {
+        "detail": "AC1920 and TK100 functionality must be verified before making chemistry-specific NCO:OH or mechanism claims.",
+        "name": "stoichiometric_interpretability",
+        "status": "unknown"
+      },
+      {
+        "detail": "Decision uses only supplied pre-result local measurements, state-aware rules, and external priors; no validation outcome or target coordinate is used.",
+        "name": "no_held_out_outcome_use",
+        "status": "pass"
+      }
+    ],
+    "decision_mode": "performance_candidate",
+    "selected_candidate_id": "S1C41",
+    "selection_rationale": "Failure mode: the local problem is 120 C thermal-hold viscosity rise, shown by the E1/E5 contrast: E1 has low drift while E5 has much larger SI over 15-60 and 15-90 min. Experiment intent: the Planner declared performance_mitigation, so the experiment should test the full evidence-supported mitigation strategy rather than a single-axis attribution control. Required axis coverage: supplied diagnostics identify two independently supported axes, acrylic_like and minor_tackifier_like; S1C41 covers both, while controls such as S1C49 or reactive-core-only candidates do not. Local experiments contributed the E1/E5 drift contrast, the E2 reactive-core anchor, monotonic 80-130 C temperature-response support, and the large E2 repeatability/process-state risk. Paper-derived rheological rules contributed the state-shift interpretation, the need for a one-point 120 C state anchor, and the rule that static viscosity, temperature response, and hold drift are separate responses. Curated PUR literature/database priors contributed only coarse formulation-family support: acrylic-like modifiers in a broad 15-25 wt% region and minor tackifier-like additions clustered near 4.8-6.4 wt%, with broader guidance below about 10 wt%; these priors are not treated as direct predictors of the held-out wet-lab result or exact-property optima. Conservative experimental-design constraints introduced here are matched 120 C hold-window measurement, process-history recording, repeat or matched E2 reference, staying within 80-130 C, and avoiding excessive modifier burden. The Skeptic objection to S1C40 is accepted: minimum burden cannot establish sufficiency when the tackifier-like dose is below the main evidence cluster, so S1C41 is preferred. The Robustness Adjudicator's rerank recommendation is also accepted: S1C41 is a stronger performance-mitigation test than S1C40, with only a modest burden increase and better tackifier-dose support. Exact analogue distance is not the optimization target; S1C51 is not chosen despite stronger numerical alignment because its 25 wt% total modifier burden is less minimum-sufficient than S1C41.",
+    "uncertainty": {
+      "aggregate_penalty": null,
+      "aggregation_rule": "scientific multi-stage adjudication",
+      "decision_margin": null,
+      "evidence_coverage": {
+        "method": "candidate scorecards and curated priors",
+        "note": "Full intervention coverage; acrylic-like support is lower-region/directional at 15 wt%, tackifier-like support is directly in the repeated minor-resin cluster near 5 wt%.",
+        "status": "known",
+        "unit_or_scale": null,
+        "value": null
+      },
+      "extrapolation": {
+        "method": "comparison to candidate scorecards and external-prior directness",
+        "note": "S1C41 is within bounded analogue-supported modifier regions but remains an external-family extrapolation from the measured reactive-core-only local design.",
+        "status": "estimated",
+        "unit_or_scale": "qualitative",
+        "value": null
+      },
+      "measurement": {
+        "method": "original local 120 C hold benchmarks and temperature sweeps",
+        "note": "E1 and E5 hold SI values define the local mitigation benchmark; selected candidate has not yet been measured.",
+        "status": "known",
+        "unit_or_scale": null,
+        "value": null
+      },
+      "process_history": {
+        "method": null,
+        "note": "All candidate process-history fields are missing; this is a major interpretability risk.",
+        "status": "unknown",
+        "unit_or_scale": null,
+        "value": null
+      },
+      "repeatability": {
+        "method": "E2 repeatability risk tool",
+        "note": "E2 shows large run spread at 120 C, including max/min ratio 3.57 and sample CV 0.585; repeat or matched E2 reference is required.",
+        "status": "known",
+        "unit_or_scale": null,
+        "value": null
+      }
+    }
+  },
+  "judge_raw": {
+    "acceptance_criterion": {
+      "claim": "S1C41 mitigates the locally observed 120 C thermal-hold viscosity-rise failure mode under matched process conditions.",
+      "criterion": "Compute SI_15_to_60 and SI_15_to_90 from a matched 120 C hold. The mitigation claim is provisionally accepted only if SI_15_to_60 < 0.305 and SI_15_to_90 < 0.550, the improvement is larger than repeat/state uncertainty as judged against a repeat or matched E2 reference, and the sample remains processable across the 80-130 C sweep.",
+      "failure_condition": "Fail if either SI threshold is not met, if the apparent improvement is comparable to process/repeatability scatter, if process history or units are missing, if the material is unprocessable in the measured temperature range, or if interpretation requires unverified AC1920/TK100 stoichiometric functionality.",
+      "measurement_window": "120 C hold with at least 15, 30, 60, and 90 min points; primary adjudication on 15-60 min and 15-90 min SI windows, plus an 80-130 C temperature sweep and 120 C state anchor."
+    },
+    "alternatives_considered": [
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C40",
+        "relative_reason": "Full-coverage and lower modifier burden, but its 2.5 wt% tackifier-like dose is below the repeatedly documented 4.8-6.4 wt% minor-resin cluster; for a performance-mitigation experiment this under-dosing risk is more important than the small burden reduction."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C50",
+        "relative_reason": "Full-coverage with acrylic near the directly commensurate 19-20 wt% external region, but higher total modifier burden and the same low 2.5 wt% tackifier-like under-dose concern relative to S1C41."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C51",
+        "relative_reason": "Full-coverage and well aligned with both 20 wt% acrylic-like and 5 wt% tackifier-like external regions, but 25 wt% total modifier burden is a larger departure from the E2 core than needed for the first mitigation test."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C49",
+        "relative_reason": "Useful acrylic-only causal-isolation control, but it zeroes the independently supported minor_tackifier_like axis and therefore does not test the full performance-mitigation strategy."
+      },
+      {
+        "acquisition_value": null,
+        "candidate_id": "S1C01-S1C09",
+        "relative_reason": "Reactive-core-only controls remain scientifically useful baselines, but they do not test the resin-modification mitigation hypothesis supported by the external acrylic-like and tackifier-like axes."
+      }
+    ],
+    "constraints": [
+      {
+        "detail": "Selected experiment must adjudicate 120 C thermal-hold viscosity rise, not only static viscosity; S1C41 is selected with a matched 120 C hold-window measurement.",
+        "name": "failure_mode_alignment",
+        "status": "pass"
+      },
+      {
+        "detail": "Planner intent is performance_mitigation, so a dual-axis formulation is appropriate when both axes are independently supported.",
+        "name": "experiment_intent",
+        "status": "pass"
+      },
+      {
+        "detail": "S1C41 covers both supported axes: acrylic_like = 15 wt% and minor_tackifier_like = 5 wt%; no independently supported axis is zeroed.",
+        "name": "required_intervention_axis_coverage",
+        "status": "pass"
+      },
+      {
+        "detail": "15 wt% acrylic-like is a supported lower-region analogue point, while 5 wt% tackifier-like lies in the repeated 4.8-6.4 wt% minor-resin cluster.",
+        "name": "evidence_supported_region",
+        "status": "pass"
+      },
+      {
+        "detail": "Total modifier burden is 20 wt%, below the larger 22.5-25 wt% alternatives and within the frozen candidate-space bounds.",
+        "name": "modifier_burden",
+        "status": "pass"
+      },
+      {
+        "detail": "TK100 is 5 wt%, within the conservative below-about-10 wt% tackifier-like design bound.",
+        "name": "tackifier_upper_bound",
+        "status": "pass"
+      },
+      {
+        "detail": "Adjudication is constrained to the measured 80-130 C support, with primary hold at 120 C.",
+        "name": "temperature_support",
+        "status": "pass"
+      },
+      {
+        "detail": "The experiment must include a 120 C state anchor because local rheology shows process/realization state shifts affect viscosity scale.",
+        "name": "state_anchor_required",
+        "status": "pass"
+      },
+      {
+        "detail": "Thermal-hold stability must be measured over the local 15-60 and 15-90 min windows; static-viscosity proxy alone is insufficient.",
+        "name": "matched_hold_window_required",
+        "status": "pass"
+      },
+      {
+        "detail": "Candidate process fields are missing; process history, mixing/reaction schedule, hold schedule, sample age, units, and retest status must be recorded before interpretation.",
+        "name": "process_history",
+        "status": "unknown"
+      },
+      {
+        "detail": "AC1920 and TK100 functionality must be verified before making chemistry-specific NCO:OH or mechanism claims.",
+        "name": "stoichiometric_interpretability",
+        "status": "unknown"
+      },
+      {
+        "detail": "Decision uses only supplied pre-result local measurements, state-aware rules, and external priors; no validation outcome or target coordinate is used.",
+        "name": "no_held_out_outcome_use",
+        "status": "pass"
+      }
+    ],
+    "decision_mode": "performance_candidate",
+    "selected_candidate_id": "S1C41",
+    "selection_rationale": "Failure mode: the local problem is 120 C thermal-hold viscosity rise, shown by the E1/E5 contrast: E1 has low drift while E5 has much larger SI over 15-60 and 15-90 min. Experiment intent: the Planner declared performance_mitigation, so the experiment should test the full evidence-supported mitigation strategy rather than a single-axis attribution control. Required axis coverage: supplied diagnostics identify two independently supported axes, acrylic_like and minor_tackifier_like; S1C41 covers both, while controls such as S1C49 or reactive-core-only candidates do not. Local experiments contributed the E1/E5 drift contrast, the E2 reactive-core anchor, monotonic 80-130 C temperature-response support, and the large E2 repeatability/process-state risk. Paper-derived rheological rules contributed the state-shift interpretation, the need for a one-point 120 C state anchor, and the rule that static viscosity, temperature response, and hold drift are separate responses. Curated PUR literature/database priors contributed only coarse formulation-family support: acrylic-like modifiers in a broad 15-25 wt% region and minor tackifier-like additions clustered near 4.8-6.4 wt%, with broader guidance below about 10 wt%; these priors are not treated as direct predictors of the held-out wet-lab result or exact-property optima. Conservative experimental-design constraints introduced here are matched 120 C hold-window measurement, process-history recording, repeat or matched E2 reference, staying within 80-130 C, and avoiding excessive modifier burden. The Skeptic objection to S1C40 is accepted: minimum burden cannot establish sufficiency when the tackifier-like dose is below the main evidence cluster, so S1C41 is preferred. The Robustness Adjudicator's rerank recommendation is also accepted: S1C41 is a stronger performance-mitigation test than S1C40, with only a modest burden increase and better tackifier-dose support. Exact analogue distance is not the optimization target; S1C51 is not chosen despite stronger numerical alignment because its 25 wt% total modifier burden is less minimum-sufficient than S1C41.",
+    "uncertainty": {
+      "aggregate_penalty": null,
+      "aggregation_rule": "scientific multi-stage adjudication",
+      "decision_margin": null,
+      "evidence_coverage": {
+        "method": "candidate scorecards and curated priors",
+        "note": "Full intervention coverage; acrylic-like support is lower-region/directional at 15 wt%, tackifier-like support is directly in the repeated minor-resin cluster near 5 wt%.",
+        "status": "known",
+        "unit_or_scale": null,
+        "value": null
+      },
+      "extrapolation": {
+        "method": "comparison to candidate scorecards and external-prior directness",
+        "note": "S1C41 is within bounded analogue-supported modifier regions but remains an external-family extrapolation from the measured reactive-core-only local design.",
+        "status": "estimated",
+        "unit_or_scale": "qualitative",
+        "value": null
+      },
+      "measurement": {
+        "method": "original local 120 C hold benchmarks and temperature sweeps",
+        "note": "E1 and E5 hold SI values define the local mitigation benchmark; selected candidate has not yet been measured.",
+        "status": "known",
+        "unit_or_scale": null,
+        "value": null
+      },
+      "process_history": {
+        "method": null,
+        "note": "All candidate process-history fields are missing; this is a major interpretability risk.",
+        "status": "unknown",
+        "unit_or_scale": null,
+        "value": null
+      },
+      "repeatability": {
+        "method": "E2 repeatability risk tool",
+        "note": "E2 shows large run spread at 120 C, including max/min ratio 3.57 and sample CV 0.585; repeat or matched E2 reference is required.",
+        "status": "known",
+        "unit_or_scale": null,
+        "value": null
+      }
+    }
+  },
+  "planner": {
+    "action_requests": [
+      {
+        "args": {},
+        "name": "get_state_aware_rheology_summary",
+        "reason": "Canonical pre-ranking bridge from the paper's local rheological analysis; needed to decide how state-shift master-curve behavior, one-point calibration, local temperature sensitivity, and E1/E5 hold-drift contrast should constrain candidate selection."
+      },
+      {
+        "args": {
+          "formulation_id": "E1"
+        },
+        "name": "get_hold_stability",
+        "reason": "Retrieve the low-drift original reference trajectory and deterministic SI descriptors for the measured hot-hold stability benchmark."
+      },
+      {
+        "args": {
+          "formulation_id": "E5"
+        },
+        "name": "get_hold_stability",
+        "reason": "Retrieve the high-drift original reference trajectory and SI descriptors to quantify the local failure mode that the next candidate should mitigate."
+      },
+      {
+        "args": {
+          "formulation_id": "E2"
+        },
+        "name": "get_repeatability_risk",
+        "reason": "Assess whether E2 nominal viscosity is dominated by realization/process-state spread before using it as the reactive-core anchor for candidate comparison."
+      },
+      {
+        "args": {
+          "formulation_id": "E2"
+        },
+        "name": "inspect_formulation",
+        "reason": "Make the reactive-core composition, MDI fraction, polyol fraction, and modifier-zero reference explicit before comparing acrylic-like and tackifier-like candidate axes."
+      },
+      {
+        "args": {},
+        "name": "get_candidate_hypothesis",
+        "reason": "After establishing the local design objective, retrieve the evidence-derived candidate-space hypothesis, E2 anchor, independent acrylic/tackifier axes, and historical/claim boundary before ranking any candidate IDs."
+      },
+      {
+        "args": {
+          "candidate_space_role": "stability_support",
+          "max_rows": 20,
+          "modifier_type": null
+        },
+        "name": "query_external_priors",
+        "reason": "Check source-level stability-support evidence and limitations for modifier-family directions; use as directional/noncommensurate evidence, not as a local numerical optimum."
+      }
+    ],
+    "candidate_evaluation_dimensions": [
+      "Hot-hold stability at 120 C using SI=(eta_t1-eta_t0)/eta_t0 over 15-60 min and 15-90 min",
+      "Initial and hot-held viscosity level at an anchor temperature within measured support, preferably 120 C for consistency with hold data",
+      "Temperature-response shape and local apparent temperature sensitivity over 80-130 C without extrapolation",
+      "Realization/process-state repeatability risk and need for one-point state calibration",
+      "Distance from E2 reactive-core anchor and preservation of plausible stoichiometry/MDI balance",
+      "Acrylic-like modifier fraction relative to directly commensurate and analogue anchors",
+      "Tackifier-like modifier fraction relative to conservative below-about-10 wt% guidance",
+      "Combined modifier burden and feasibility penalties for excessive dilution or unsupported formulation-family change",
+      "Evidence class for each support item: directly commensurate numeric anchor, directional/noncommensurate prior, or conservative extrapolation-limiting rule"
+    ],
+    "counterfactual_checks": [
+      "Would the same candidate still be preferred if the objective were hold-stability mitigation rather than matching one nominal viscosity value?",
+      "Would a single-axis acrylic-only or tackifier-only perturbation be scientifically preferable if the stated intent changed to causal isolation?",
+      "Does the selected candidate remain inside the acrylic 0-30 wt% and tackifier 0-10 wt% candidate-space bounds and avoid treating literature percentages as exact optima?",
+      "Does the ranking change if E2 nominal viscosity is state-shifted by the observed repeat/run spread?",
+      "Does the candidate rely on the held-out validation formulation or outcome? If yes, reject the reasoning.",
+      "Could an apparent improvement be explained by process-state realization rather than formulation chemistry? If yes, require repeat/state-calibrated adjudication."
+    ],
+    "decision_goal": "Select one prospective candidate-space experiment that mitigates the locally observed hot-hold viscosity drift while remaining within measured temperature support, bounded modifier ranges, and explicit process-state/stoichiometric uncertainty.",
+    "design_implications": [
+      "The design objective is to reduce hot-hold SI over the measured 15-60 and 15-90 min windows at 120 C while maintaining processable viscosity within the 80-130 C measured range.",
+      "Because the intent is performance mitigation of an established failure mode, a bounded multi-component modifier intervention is admissible if each active axis is independently supported and the combined modifier level remains within the candidate-space evidence bounds.",
+      "Acrylic-like modifier levels near 15-25 wt% are evidence-supported coarse regions from external analogues, but should not be converted into an exact optimum.",
+      "Minor tackifier-like additions up to about 10 wt% are supported as conservative formulation-family bounds, not as a precise stability optimum.",
+      "Candidate evaluation must penalize unsupported extrapolation, excessive departure from the E2 reactive-core anchor, and unknown stoichiometric/process-state effects.",
+      "The new experiment must include a thermal-hold measurement, not only a temperature sweep, because hot-hold drift is the observed failure mode."
+    ],
+    "experiment_intent": "performance_mitigation",
+    "material_regularities_to_use": [
+      "Measured temperature sweeps are monotonic decreasing with temperature over 80-130 C and are well described locally by Andrade-like temperature response, so candidate checks should stay inside this temperature support.",
+      "Nominal viscosity level, temperature sensitivity, thermal-hold drift, and realization/process state must be treated as separate response dimensions.",
+      "E2 shows large nominal repeat/run spread across temperature, so one nominal viscosity value should not be treated as a unique material property without state/repeatability qualification.",
+      "The paper-derived state-aware rheology summary is required before candidate ranking because it determines whether one-point state calibration and state-shift master-curve behavior should control comparison.",
+      "Thermal-hold response is distinct from temperature-sweep response; a candidate with acceptable temperature-sweep viscosity can still fail by hot-hold drift.",
+      "External evidence supports acrylic-like and tackifier-like modifier directions as formulation-family priors, but these are not local optima and must be separated into directly commensurate numeric anchors, directional/noncommensurate evidence, and conservative bounds."
+    ],
+    "physical_failure_mode": "Thermal-hold instability at 120 C, expressed as time-dependent viscosity rise during hot hold, is the established failure mode. The next experiment should not optimize only a nominal viscosity level because the local hold data show a large E1/E5 stability contrast over 15-90 min.",
+    "required_measurements_for_adjudication": [
+      "Thermal-hold viscosity trajectory at 120 C with time points covering at least the local 15-60 min and 15-90 min windows",
+      "Temperature sweep across the measured 80-130 C support for the selected candidate",
+      "At least one state-calibration viscosity point if the state-aware summary indicates state shifts dominate nominal formulation-only prediction",
+      "Repeat or process-state replicate sufficient to detect whether apparent improvement is smaller than realization/run spread",
+      "Recorded process history, hold schedule, sample age/retest status, and units without imputation"
+    ],
+    "uncertainty_triggers": [
+      "If the state-aware rheology summary shows state calibration is essential, do not rank candidates using nominal viscosity alone.",
+      "If E2 repeatability risk remains comparable to or larger than candidate-predicted differences, choose an uncertainty-resolution or robustness-probe experiment instead of a performance candidate.",
+      "If external evidence is only directional and lacks commensurate hold-stability data, restrict candidate choice to bounded coarse regions rather than exact percentage targets.",
+      "If candidate composition causes large stoichiometric or MDI-fraction departure from the E2 anchor, treat the prediction as extrapolative.",
+      "If a candidate has no planned hot-hold measurement, it cannot adjudicate the observed failure mode.",
+      "If viscosity units or process history are unknown, preserve them as unknown rather than normalizing silently."
+    ]
+  },
+  "proposer": {
+    "provisional_acceptance_criterion": {
+      "claim": "The candidate mitigates the locally observed 120 C hot-hold instability if drift is reduced relative to the high-drift E5 benchmark under a matched hold protocol and the effect is larger than plausible realization/process-state scatter.",
+      "criterion": "Primary: SI_15_to_60 and SI_15_to_90 must both fall below the midpoint between the original E1 and E5 benchmarks, i.e. SI_15_to_60 < 0.305 and SI_15_to_90 < 0.550. Stronger claim: approach the E1 low-drift region, SI_15_to_60 near 0.095 and SI_15_to_90 near 0.168, without unacceptable viscosity/processability loss across 80-130 C.",
+      "failure_condition": "Fail the mitigation claim if SI_15_to_60 or SI_15_to_90 is comparable to E5, if the apparent improvement is smaller than repeat/state uncertainty, if the sample becomes unprocessable in the measured 80-130 C range, or if missing process history prevents matched interpretation.",
+      "measurement_window": "120 C hold from 15 to 90 min, with explicit 15-60 and 15-90 min SI calculations"
+    },
+    "provisional_measurement_plan": {
+      "primary_response": "Thermal-hold viscosity trajectory at 120 C, reporting SI_15_to_60 and SI_15_to_90 from matched time points; also collect an 80-130 C temperature sweep for processability and state-shift context.",
+      "state_anchor_plan": "Record full process history, sample age, mixing/reaction/hold schedule, and units. Use the 120 C initial/15 min viscosity as the state anchor for the temperature-response scale, and include at least one repeat or matched E2 reference realization because E2 run spread is large.",
+      "temperature_c": 120,
+      "time_window": "15, 30, 60, and 90 min hold points; primary adjudication on 15-60 min and 15-90 min windows"
+    },
+    "ranked_candidates": [
+      {
+        "candidate_id": "S1C40",
+        "evidence_against": [
+          "The 2.5 wt% tackifier level is below the repeatedly documented 4.8-6.4 wt% minor-resin cluster, so it may be a conservative under-dose of that axis.",
+          "The 15 wt% acrylic anchor is partly directional/noncommensurate; the most directly commensurate acrylic examples cluster closer to 19-20 wt% and 25 wt%.",
+          "All candidate process-history fields are missing, so apparent improvement could be confounded by realization/process state.",
+          "External analogues do not provide directly commensurate local 15-90 min 120 C hold-stability data for AC1920/TK100."
+        ],
+        "evidence_for": [
+          "Directly tests the physical failure mode because it is a full-coverage performance candidate for a matched 120 C hot-hold measurement, not merely a static-viscosity match.",
+          "Covers both independently supported intervention axes: acrylic_like = 15 wt% and minor_tackifier_like = 2.5 wt%, while preserving scaled E2 reactive-core proportions.",
+          "Local diagnosis supports moving beyond reactive-core-only tuning because hot-hold drift is formulation dependent and distinct from temperature-sweep viscosity.",
+          "External formulation knowledge supports the acrylic-like axis as a broad 15-25 wt% region; 15 wt% is a directional lower-region anchor and 19-20 wt% examples provide nearby directly commensurate support.",
+          "External formulation knowledge supports including a minor tackifier-like axis; 2.5 wt% is a low-burden active perturbation within the conservative below-10 wt% design bound.",
+          "Among strong full-coverage candidates, it is the minimum sufficient perturbation: total modifier burden is 17.5 wt%, lower than otherwise comparable full-coverage alternatives."
+        ],
+        "key_uncertainty": [
+          "Whether the low tackifier dose is sufficient to express the tackifier-like intervention axis in the local hold-drift response.",
+          "Whether AC1920 functionality changes true NCO:OH stoichiometry relative to the scaled E2 core.",
+          "Whether measured drift reduction exceeds E2-scale run/state variability."
+        ],
+        "rank": 1,
+        "scientific_role": "performance_test",
+        "why_this_experiment_is_useful": "It directly interrogates the mitigation objective with both supported modifier axes active, stays within bounded external formulation-family priors, and uses the smallest full-coverage modifier burden rather than dropping a supported axis for cleaner attribution."
+      },
+      {
+        "candidate_id": "S1C41",
+        "evidence_against": [
+          "Higher total modifier burden than S1C40 at 20 wt%, so it is a larger departure from the characterized E2 chemistry.",
+          "The acrylic level is still supported partly by directional/noncommensurate evidence rather than the most directly commensurate 19-20 wt% anchors.",
+          "External tackifier evidence is mostly processability/formulation-family guidance, not a direct local hold-stability proof."
+        ],
+        "evidence_for": [
+          "Full-coverage candidate with acrylic_like = 15 wt% and minor_tackifier_like = 5 wt%, preserving scaled E2 core.",
+          "The 5 wt% tackifier level is directly commensurate with the repeated 4.8-6.4 wt% tackifier/hydrocarbon resin cluster.",
+          "The 15 wt% acrylic level remains in the externally supported lower acrylic region and is less disruptive than 20-25 wt% acrylic candidates.",
+          "Useful robustness comparison to S1C40: same acrylic lower-region intervention but stronger, better-anchored tackifier-like axis."
+        ],
+        "key_uncertainty": [
+          "Whether increasing tackifier-like content from 2.5 to 5 wt% improves, worsens, or leaves unchanged the 120 C hold-drift trajectory.",
+          "Whether a 20 wt% total modifier burden creates viscosity or stoichiometric side effects unrelated to the intended mitigation."
+        ],
+        "rank": 2,
+        "scientific_role": "robustness_test",
+        "why_this_experiment_is_useful": "It probes whether the rank-1 minimum-sufficient tackifier perturbation is too conservative while still remaining in the low acrylic region and covering both supported axes."
+      },
+      {
+        "candidate_id": "S1C50",
+        "evidence_against": [
+          "Total modifier burden is 22.5 wt%, a larger departure from E2 than S1C40 or S1C41.",
+          "The 2.5 wt% tackifier level remains below the repeated 4.8-6.4 wt% tackifier cluster.",
+          "Most 19-20 wt% acrylic external anchors report single-temperature viscosity/processability, not matched 15-90 min local thermal-hold stability."
+        ],
+        "evidence_for": [
+          "Full-coverage candidate with acrylic_like = 20 wt% and minor_tackifier_like = 2.5 wt%, preserving scaled E2 core.",
+          "The acrylic level lies in the directly commensurate external acrylic-resin anchor region around 19-20 wt%.",
+          "Maintains a low tackifier-like dose, so it tests a stronger acrylic-region intervention without simultaneously maximizing total modifier burden.",
+          "Useful comparison to S1C40: raises acrylic-like loading into the directly commensurate anchor region while keeping the minor tackifier axis active."
+        ],
+        "key_uncertainty": [
+          "Whether the directly commensurate 20 wt% acrylic-region prior translates to reduced local hot-hold drift.",
+          "Whether the larger modifier burden changes processability or effective stoichiometry enough to complicate interpretation."
+        ],
+        "rank": 3,
+        "scientific_role": "performance_test",
+        "why_this_experiment_is_useful": "It tests the more directly commensurate acrylic-region prior while still covering the tackifier-like axis; it is not ranked above S1C40 because exact analogue proximity is audit metadata and the burden is higher."
+      },
+      {
+        "candidate_id": "S1C51",
+        "evidence_against": [
+          "Total modifier burden is 25 wt%, larger than needed for a first performance-mitigation experiment if S1C40/S1C41 are admissible.",
+          "Larger dilution of the E2 reactive core increases stoichiometric and processability uncertainty.",
+          "Being numerically close to external percentages does not make it a predicted local optimum."
+        ],
+        "evidence_for": [
+          "Full-coverage candidate with acrylic_like = 20 wt% and minor_tackifier_like = 5 wt%.",
+          "Both axes align with strong external regions: acrylic near directly commensurate 19-20 wt% examples and tackifier near repeated 4.8-6.4 wt% examples.",
+          "Useful as an upper-confidence formulation-family probe if lower-burden full-coverage candidates underperform."
+        ],
+        "key_uncertainty": [
+          "Whether stronger external-anchor matching compensates for the larger departure from the local E2 chemistry.",
+          "Whether viscosity level after modification remains processable across 80-130 C."
+        ],
+        "rank": 4,
+        "scientific_role": "robustness_test",
+        "why_this_experiment_is_useful": "It is a strong-region robustness point, but the recommendation treats it as secondary because minimum sufficient intervention should break ties only after full axis coverage is achieved."
+      },
+      {
+        "candidate_id": "S1C49",
+        "evidence_against": [
+          "Zeros the independently supported minor_tackifier_like axis, so it is partial coverage and should not be the default rank-1 performance candidate.",
+          "Does not test the full evidence-supported mitigation strategy for the measured hot-hold failure mode.",
+          "Still carries missing process-history and stoichiometric uncertainty."
+        ],
+        "evidence_for": [
+          "Acrylic-only partial-coverage control with acrylic_like = 20 wt%, aligned with directly commensurate acrylic external anchors.",
+          "Useful for causal isolation of the acrylic-like axis if the experiment intent changes from performance mitigation to attribution.",
+          "Preserves the E2 reactive-core proportions except for modifier dilution."
+        ],
+        "key_uncertainty": [
+          "Whether acrylic-like modification alone can mitigate hold drift without the tackifier-like axis.",
+          "Whether any difference from full-coverage candidates is causal or process-state driven."
+        ],
+        "rank": 5,
+        "scientific_role": "control",
+        "why_this_experiment_is_useful": "It is a mechanistic control, not the preferred performance experiment; it would help separate axis contributions after or alongside a full-coverage performance test."
+      }
+    ],
+    "recommended_decision_mode": "performance_candidate",
+    "regularities_used": [
+      "Measured local failure mode: E5 shows much larger 120 C hot-hold drift than E1, with SI_15_to_60 = 0.515 and SI_15_to_90 = 0.931 versus E1 SI_15_to_60 = 0.095 and SI_15_to_90 = 0.168.",
+      "Measured local rheology: temperature sweeps are monotonic decreasing over 80-130 C and locally Andrade-like, so adjudication should remain inside this temperature range.",
+      "Derived state/model rule: local viscosity is formulation plus realization/process state; one in-range state anchor at 120 C can calibrate the thermal-response scale within the measured local chemistry family, but hold drift remains a separate response.",
+      "Measured repeatability risk: E2 nominal viscosity has large run spread, including max/min ratio 3.57 and sample CV 0.585 at 120 C, so a single static viscosity value is not sufficient evidence.",
+      "External directly commensurate numeric anchors: acrylic-like modifier examples around 19-20 wt% and 25 wt% support a broad acrylic-like region, not an exact optimum.",
+      "External directional/noncommensurate evidence: 15 wt% acrylic resin is supported as a lower-region design point from a different application and denominator context; it is not an exact local total-formulation optimum.",
+      "External directly commensurate/minor-resin anchors: tackifying or hydrocarbon resin examples around 4.8-6.4 wt% support a minor tackifier-like axis.",
+      "Conservative design principle: tackifier-like additions should remain below about 10 wt%, and among full-coverage performance candidates the minimum sufficient modifier burden is preferred.",
+      "Unresolved uncertainty: external evidence supports a region/family, not a molecular mechanism or exact composition for AC1920/TK100 in this local PUR system."
+    ],
+    "scientific_target": "Mitigate the locally observed 120 C thermal-hold viscosity rise by testing a bounded resin-modified PUR formulation that covers both independently supported intervention axes while preserving the E2 reactive-core proportions as much as practical.",
+    "unresolved_questions": [
+      "The evidence supports a formulation region/family, not an exact composition or a measured molecular mechanism.",
+      "AC1920 and TK100 reactive functionality and their effect on true NCO:OH stoichiometry must be verified before interpreting chemistry-specific causes.",
+      "Candidate process histories are absent; realization state must be controlled or calibrated rather than inferred.",
+      "External thermal-stability anchors are mostly longer-window or noncommensurate systems, so they justify candidate-family selection but not a local numerical optimum.",
+      "A lower-burden full-coverage point may under-dose the tackifier-like axis; S1C41 is the planned robustness alternative for that uncertainty."
+    ]
+  },
+  "rejection_reason": "ValueError: alternative not in candidate set: 'S1C01-S1C09'",
+  "robustness_adjudication": {
+    "alternative_comparison": [
+      {
+        "candidate_id": "S1C41",
+        "scientific_tradeoff": "Better anchored tackifier-like dose at 5 wt% with same 15 wt% acrylic; modestly higher total modifier burden and departure from E2 than S1C40.",
+        "would_be_preferred_if": "The priority is the strongest interpretable performance-mitigation test that covers both supported axes without an unnecessarily large burden."
+      },
+      {
+        "candidate_id": "S1C40",
+        "scientific_tradeoff": "Lower total modifier burden but weaker tackifier-dose support; may under-test the minor_tackifier_like intervention.",
+        "would_be_preferred_if": "The priority is the lowest-burden full-coverage perturbation and a negative result is allowed to be interpreted only as inconclusive for the tackifier axis."
+      },
+      {
+        "candidate_id": "S1C51",
+        "scientific_tradeoff": "Strong evidence-region alignment for both axes but larger 25 wt% total modifier burden and more stoichiometric/processability uncertainty.",
+        "would_be_preferred_if": "The decision rule shifted toward strongest alignment with directly commensurate acrylic around 20 wt% and tackifier around 5 wt%."
+      },
+      {
+        "candidate_id": "S1C49",
+        "scientific_tradeoff": "Cleaner single-axis attribution but partial coverage; does not test the full evidence-supported mitigation strategy.",
+        "would_be_preferred_if": "The experiment intent changed from performance mitigation to causal isolation of the acrylic-like axis."
+      }
+    ],
+    "decision_stability": "conditional",
+    "preferred_candidate_id": "S1C41",
+    "provisional_top_candidate_id": "S1C40",
+    "recommended_action": "rerank",
+    "required_conditions": [
+      "Treat S1C41 as the preferred performance-mitigation candidate unless minimizing modifier burden is explicitly prioritized over tackifier-dose support.",
+      "Run a matched 120 C thermal-hold trajectory with time points covering 15, 30, 60, and 90 min and compute SI_15_to_60 and SI_15_to_90.",
+      "Collect an 80-130 C temperature sweep for processability and state-shift context.",
+      "Record process history, mixing/reaction/hold schedule, sample age, units, and retest status without imputation.",
+      "Include a 120 C state anchor and at least one repeat or matched E2 reference because E2 run spread is large.",
+      "Verify AC1920 and TK100 functionality and recalculate true stoichiometric implications before making chemistry-specific causal claims.",
+      "Keep midpoint SI thresholds provisional and local to the E1/E5 benchmark contrast.",
+      "If S1C40 is retained instead of S1C41, interpret a negative result as inconclusive for the tackifier-like axis."
+    ],
+    "robustness_checks": [
+      {
+        "check": "Physical failure mode alignment",
+        "detail": "The proposed experiment targets the measured 120 C hot-hold viscosity-rise failure mode and includes SI_15_to_60 and SI_15_to_90 adjudication rather than optimizing nominal viscosity alone.",
+        "status": "pass"
+      },
+      {
+        "check": "Experiment intent and modifier-axis complexity",
+        "detail": "Planner intent is performance_mitigation, so a dual-axis formulation is appropriate; single-axis candidates are controls rather than default rank-1 choices.",
+        "status": "pass"
+      },
+      {
+        "check": "Coverage of independently supported intervention axes",
+        "detail": "S1C40 covers both supported axes, acrylic_like and minor_tackifier_like; it is not a partial-coverage candidate promoted solely for lower burden.",
+        "status": "pass"
+      },
+      {
+        "check": "Evidence-region robustness without exact analogue-distance scoring",
+        "detail": "S1C40 remains inside supported regions, but its 2.5 wt% tackifier dose is below the repeated 4.8-6.4 wt% tackifier evidence cluster, so sufficiency of the tackifier axis is not established.",
+        "status": "qualified"
+      },
+      {
+        "check": "Performance mitigation versus stronger dual-axis alternative",
+        "detail": "S1C41 uses the same 15 wt% acrylic level but a better-anchored 5 wt% tackifier level with only a modest total burden increase from 17.5 wt% to 20 wt%, making it a stronger pre-result performance test.",
+        "status": "qualified"
+      },
+      {
+        "check": "Process-state interpretability",
+        "detail": "All candidates have high process-history uncertainty and E2 repeatability risk is large; interpretation requires matched process history, state anchoring, and at least one repeat or matched E2 reference.",
+        "status": "qualified"
+      },
+      {
+        "check": "Dependence on fragile score or unsupported assumption",
+        "detail": "S1C40 depends on the assumption that any active tackifier dose is sufficient for performance mitigation; this is weaker than the direct support for a 5 wt% tackifier region.",
+        "status": "qualified"
+      },
+      {
+        "check": "Measurement plan sufficiency",
+        "detail": "The proposed 120 C hold trajectory, SI windows, 80-130 C sweep, state anchor, and repeat/reference requirement are sufficient if executed with recorded process history and units.",
+        "status": "pass"
+      },
+      {
+        "check": "Skeptic audit severity",
+        "detail": "The Skeptic identified a moderate under-dosing concern serious enough to prefer S1C41 for a stronger performance-mitigation test, though not serious enough to abstain.",
+        "status": "qualified"
+      }
+    ],
+    "scientific_alignment": "qualified"
+  },
+  "skeptic": {
+    "counterfactual_failures": [
+      "If the requirement is to test the full evidence-supported mitigation strategy with a dose close to both independently supported axes, S1C41 is a stronger counterfactual than S1C40 because it uses 5 wt% tackifier while keeping the same 15 wt% acrylic level.",
+      "If the objective were causal isolation, S1C49 or another single-axis control would be appropriate, but the proposer correctly does not treat partial coverage as the performance rank-1.",
+      "If exact analogue proximity were treated as the objective, S1C51 or nearby 20 wt% acrylic / 5 wt% tackifier candidates could be favored, but the supplied decision rule explicitly rejects exact analogue distance as a primary ranking objective."
+    ],
+    "critical_findings": [
+      {
+        "evidence": "S1C40 is full coverage but uses tackifier_like_fraction = 2.5 wt%. The candidate hypothesis identifies direct tackifier anchors at 4.8, 5.3, 5.7, 5.8, 5.9, and 6.4 wt% and a grid of [0, 5, 10]. The proposer itself states that S1C40's 2.5 wt% tackifier level is below the repeatedly documented 4.8-6.4 wt% cluster and may be a conservative under-dose.",
+        "issue": "Rank-1 selection may apply minimum-burden logic before intervention sufficiency is established for the tackifier-like axis.",
+        "severity": "moderate"
+      },
+      {
+        "evidence": "S1C41 retains the same 15 wt% acrylic lower-region intervention as S1C40 but uses 5 wt% tackifier, matching the repeated minor-resin cluster. Its total modifier burden is 20 wt% versus 17.5 wt% for S1C40. The proposal ranks S1C40 above S1C41 primarily on lower burden, but the evidence coverage for the tackifier dose is stronger for S1C41.",
+        "issue": "S1C41 may be more directly evidence-anchored for the tackifier axis with only a small additional modifier burden.",
+        "severity": "moderate"
+      },
+      {
+        "evidence": "The candidate hypothesis states that 15 wt% acrylic is directional lower-bound evidence with denominator uncertainty, while directly commensurate acrylic anchors cluster near 19-20 wt% and 25 wt%. The proposer labels this correctly, but the rank-1 choice still depends on the lower-region acrylic point.",
+        "issue": "The 15 wt% acrylic level is supported but not a directly commensurate total-formulation optimum.",
+        "severity": "low"
+      },
+      {
+        "evidence": "All candidate scorecards list missing_process_field_count = 6 and process_history_uncertainty = high. The proposer also notes AC1920 functionality may change true NCO:OH stoichiometry relative to the scaled E2 core.",
+        "issue": "Process-history and stoichiometric uncertainty remain large enough to limit causal interpretation from a single performance experiment.",
+        "severity": "moderate"
+      },
+      {
+        "evidence": "The midpoint thresholds SI_15_to_60 < 0.305 and SI_15_to_90 < 0.550 are derived from E1 and E5 local benchmarks, not from an external standard. The proposer labels them as provisional mitigation criteria, which is acceptable, but they should remain explicitly provisional.",
+        "issue": "Acceptance criterion is reasonable but partly reconstructed rather than directly literature-derived.",
+        "severity": "low"
+      }
+    ],
+    "interpretability_failures": [
+      "S1C40 can test a full-coverage performance intervention, but if it fails, the result will be ambiguous between an ineffective acrylic axis, an under-dosed tackifier axis, stoichiometric effects, or process-state realization.",
+      "Because all process-history fields are missing and E2 repeatability risk is high, a single unreplicated result could be smaller than realization/process-state scatter.",
+      "The 2.5 wt% tackifier level is active but below the main independently documented tackifier cluster, so a negative result would not cleanly falsify the tackifier-like axis."
+    ],
+    "leakage_check": {
+      "detail": "No direct use of held-out validation formulation identity, held-out hold results, or post-result outcome labels is evident in the proposer rationale. The payload explicitly states that exact validation coordinates and outcomes are excluded. However, the candidate space includes a later formalized V2 grid, so continued provenance labeling is necessary.",
+      "status": "pass"
+    },
+    "preferred_response": "accept_provisional",
+    "recommendation_survives": true,
+    "regularity_alignment": {
+      "detail": "The proposal correctly treats hot-hold drift at 120 C as the physical failure mode, separates thermal-hold stability from static viscosity, includes a 120 C hold measurement, preserves the need for a state anchor/repeat due to E2 run spread, and avoids ranking purely by exact analogue distance. The qualification is that the rank-1 choice relies on a 2.5 wt% tackifier-like dose even though the supplied independent tackifier evidence is concentrated near 4.8-6.4 wt% and the candidate-hypothesis grid lists 0/5/10 wt%, making the 'minimum sufficient' claim not fully established pre-result.",
+      "status": "qualified"
+    },
+    "required_corrections": [
+      "Do not state that 2.5 wt% tackifier is 'sufficient'; state only that it is a low-burden active perturbation whose sufficiency is uncertain.",
+      "Explicitly justify why S1C40 is preferred over S1C41 despite S1C41's stronger tackifier-dose anchoring, or label S1C41 as the preferred robustness alternative if under-dosing risk is unacceptable.",
+      "Keep acceptance criteria explicitly provisional and local: midpoint SI thresholds are reconstructed from E1/E5 benchmarks, not literature facts.",
+      "Require matched process history, verified AC1920/TK100 functionality for stoichiometry, a 120 C state anchor, and at least one repeat or matched E2 reference before making a mitigation claim.",
+      "Interpret a negative S1C40 result as inconclusive for the tackifier-like axis unless a better-anchored 5 wt% tackifier candidate is also tested or subsequently prioritized."
+    ],
+    "scientific_boundary_check": {
+      "detail": "The proposal stays inside measured temperature support for adjudication, requires a thermal-hold measurement rather than static viscosity alone, treats external priors as analogue/coarse-region evidence, and acknowledges process-state and stoichiometric uncertainty. It does not claim a proven molecular mechanism or local optimum.",
+      "status": "pass"
+    },
+    "top_candidate_id": "S1C40"
+  },
+  "tool_trace": [
+    {
+      "args": {
+        "modifier_type": "acrylic"
+      },
+      "name": "query_external_priors",
+      "reason": "Independent external evidence for the acrylic-like modifier axis.",
+      "result": [
+        {
+          "agent_hint": "Acrylic-tackifying-resin-modified PUR around 20% of the total formulation is externally documented; 20% is therefore a defensible coarse candidate level, not a value inferred from the local follow-up result.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 1 and Table 1",
+          "hint_id": "H03",
+          "limitation": "Different molecular weights, catalysts and application; viscosity is a single-temperature observation, not a hold-stability measurement.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.98",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "5675"
+        },
+        {
+          "agent_hint": "Repeated examples independently anchor an acrylic-resin design level near 20% while preserving melt processability.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 2 and Table 1",
+          "hint_id": "H04",
+          "limitation": "Different chemistry and process history; no causal stability proof.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.37",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "4650"
+        },
+        {
+          "agent_hint": "The external database supports an acrylic-modified formulation family and provides a reproducible anchor around 20% for coarse candidate generation.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 3 and Table 1",
+          "hint_id": "H05",
+          "limitation": "External analogue only; not evidence for the current formulation's exact optimum.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.57",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "5217"
+        },
+        {
+          "agent_hint": "Multiple neighboring examples reduce the chance that the ~20% acrylic-resin level is a one-off literature artifact.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 4 and Table 1",
+          "hint_id": "H06",
+          "limitation": "No thermal-hold curve and no direct match to AC1920/TK100.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.78",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "4767"
+        },
+        {
+          "agent_hint": "A peer-reviewed PUR study reported 15% acrylic resin as the overall preferred addition level in its system; this independently supports 15% as a coarse acrylic-axis candidate level.",
+          "application": "electronic high-temperature bonding",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Abstract and formulation summary",
+          "hint_id": "H08",
+          "limitation": "Optimization target was overall high-temperature adhesive performance, not thermal-hold viscosity; chemistry differs from the local system.",
+          "pattern": "polyether polyol + polyphenylene-ether polyol + acrylic resin + crystalline polyester polyol + MDI",
+          "resin_modifier_fraction_pct": "15",
+          "resin_modifier_type": "acrylic resin",
+          "source_id": "PAPER_CN_ADHESIVES_2025_34_09_54",
+          "source_url": "https://gxlj.cbpt.cnki.net/portal/journal/portal/client/paper/e77f0e8a3233d57ef7cd8bf2c89f3450",
+          "thermal_stability_metric": "high-temperature aging shear-strength retention",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "85",
+          "viscosity_temperature_c": "110",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "7400"
+        },
+        {
+          "agent_hint": "A 25 wt% low-OH acrylic copolymer formulation showed substantially slower viscosity rise than the equal-loading higher-OH acrylic comparator; this supports both a 25% acrylic candidate level and the hypothesis that lower reactive-group density can improve hot-hold stability.",
+          "application": "moisture-curing PUR hot melt",
+          "candidate_space_role": "primary_range;stability_support",
+          "directness": "comparative_stability",
+          "evidence_locator": "Example 10 and Table 3",
+          "hint_id": "H09",
+          "limitation": "Different acrylic chemistry and much longer hold window; does not establish the local mechanism.",
+          "pattern": "PPG1000 + PPG2000 + polyester polyol + low-OH acrylic copolymer + MDI",
+          "resin_modifier_fraction_pct": "25",
+          "resin_modifier_type": "low-OH acrylic copolymer",
+          "source_id": "PAT_US6465104B1",
+          "source_url": "https://patents.google.com/patent/US6465104B1/en",
+          "thermal_stability_metric": "viscosity increase from 0.5 to 8 h",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "37",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "5125->7000"
+        },
+        {
+          "agent_hint": "At the same 25 wt% acrylic loading, the higher-OH acrylic analogue exhibited roughly twice the reported 8 h viscosity increase of the low-OH example, making modifier functionality a plausible stability variable rather than loading alone.",
+          "application": "moisture-curing PUR hot melt",
+          "candidate_space_role": "stability_support",
+          "directness": "comparative_stability",
+          "evidence_locator": "Example 11 and Table 3",
+          "hint_id": "H10",
+          "limitation": "Patent comparison; acrylic materials are not AC1920 and the result is not a direct local-system measurement.",
+          "pattern": "same formulation as Example 10 but higher-OH acrylic copolymer",
+          "resin_modifier_fraction_pct": "25",
+          "resin_modifier_type": "higher-OH acrylic copolymer",
+          "source_id": "PAT_US6465104B1",
+          "source_url": "https://patents.google.com/patent/US6465104B1/en",
+          "thermal_stability_metric": "viscosity increase from 0.5 to 8 h",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "76",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "9375->16500"
+        },
+        {
+          "agent_hint": "A functional-tackifier-containing formulation had lower reported stability rise than the no-acrylic/no-functional-tackifier comparator in the same example set, supporting the idea that modifier identity can change hot-melt stability.",
+          "application": "reactive PUR hot melt",
+          "candidate_space_role": "stability_support",
+          "directness": "comparative_context",
+          "evidence_locator": "Table 11 Sample 10C",
+          "hint_id": "H11",
+          "limitation": "Other formulation variables including MDI differ; not an isolated causal comparison.",
+          "pattern": "PPG2025 + PPG4025 + polyester polyol + functional tackifier + MDI",
+          "resin_modifier_fraction_pct": "19.8",
+          "resin_modifier_type": "functional tackifier",
+          "source_id": "PAT_US20030022973A1",
+          "source_url": "https://patents.google.com/patent/US20030022973A1/en",
+          "thermal_stability_metric": "reported stability",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "9.5",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "1820"
+        },
+        {
+          "agent_hint": "The no-acrylic/no-functional-tackifier comparator reported a larger stability value than several modifier-containing examples, providing directional support for a modifier-family hypothesis rather than proof of one optimum.",
+          "application": "reactive PUR hot melt",
+          "candidate_space_role": "stability_comparator",
+          "directness": "comparative_context",
+          "evidence_locator": "Table 11 Sample 10E",
+          "hint_id": "H12",
+          "limitation": "MDI and other variables differ across the table; use only as directional evidence.",
+          "pattern": "PPG2025 + PPG4025 + polyester polyol + MDI; no acrylic polymer or functional tackifier",
+          "resin_modifier_fraction_pct": "0",
+          "resin_modifier_type": "none",
+          "source_id": "PAT_US20030022973A1",
+          "source_url": "https://patents.google.com/patent/US20030022973A1/en",
+          "thermal_stability_metric": "reported stability",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "15",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "600"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "args": {
+        "modifier_type": "tackifier"
+      },
+      "name": "query_external_priors",
+      "reason": "Independent external evidence for the minor tackifier-like modifier axis.",
+      "result": [
+        {
+          "agent_hint": "Tackifying-resin-modified PUR is an externally documented formulation family; do not restrict the search to fully reactive polyol/isocyanate mixtures.",
+          "application": "shoe and general assembly bonding",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 1",
+          "hint_id": "H01",
+          "limitation": "Single patent example; does not report thermal-hold drift.",
+          "pattern": "polyester polyol + PPG425 + tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "4.8",
+          "resin_modifier_type": "tackifying resin",
+          "source_id": "PAT_US5932680A",
+          "source_url": "https://patents.google.com/patent/US5932680A/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "130",
+          "viscosity_unit": "Pa.s",
+          "viscosity_value": "22"
+        },
+        {
+          "agent_hint": "Hydrocarbon resin can coexist with reactive PUR while retaining measurable melt-processability; include a minor tackifier/hydrocarbon-resin axis rather than fixing the modifier at zero.",
+          "application": "shoe and general assembly bonding",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 4",
+          "hint_id": "H02",
+          "limitation": "Different polyols and application; no thermal-hold stability trajectory.",
+          "pattern": "multiple polyester polyols + PPG425 + hydrocarbon resin + MDI",
+          "resin_modifier_fraction_pct": "5.3",
+          "resin_modifier_type": "hydrocarbon resin",
+          "source_id": "PAT_US5932680A",
+          "source_url": "https://patents.google.com/patent/US5932680A/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "110",
+          "viscosity_unit": "Pa.s",
+          "viscosity_value": "60"
+        },
+        {
+          "agent_hint": "Acrylic-tackifying-resin-modified PUR around 20% of the total formulation is externally documented; 20% is therefore a defensible coarse candidate level, not a value inferred from the local follow-up result.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 1 and Table 1",
+          "hint_id": "H03",
+          "limitation": "Different molecular weights, catalysts and application; viscosity is a single-temperature observation, not a hold-stability measurement.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.98",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "5675"
+        },
+        {
+          "agent_hint": "Repeated examples independently anchor an acrylic-resin design level near 20% while preserving melt processability.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 2 and Table 1",
+          "hint_id": "H04",
+          "limitation": "Different chemistry and process history; no causal stability proof.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.37",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "4650"
+        },
+        {
+          "agent_hint": "The external database supports an acrylic-modified formulation family and provides a reproducible anchor around 20% for coarse candidate generation.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 3 and Table 1",
+          "hint_id": "H05",
+          "limitation": "External analogue only; not evidence for the current formulation's exact optimum.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.57",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "5217"
+        },
+        {
+          "agent_hint": "Multiple neighboring examples reduce the chance that the ~20% acrylic-resin level is a one-off literature artifact.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 4 and Table 1",
+          "hint_id": "H06",
+          "limitation": "No thermal-hold curve and no direct match to AC1920/TK100.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.78",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "4767"
+        },
+        {
+          "agent_hint": "A functional-tackifier-containing formulation had lower reported stability rise than the no-acrylic/no-functional-tackifier comparator in the same example set, supporting the idea that modifier identity can change hot-melt stability.",
+          "application": "reactive PUR hot melt",
+          "candidate_space_role": "stability_support",
+          "directness": "comparative_context",
+          "evidence_locator": "Table 11 Sample 10C",
+          "hint_id": "H11",
+          "limitation": "Other formulation variables including MDI differ; not an isolated causal comparison.",
+          "pattern": "PPG2025 + PPG4025 + polyester polyol + functional tackifier + MDI",
+          "resin_modifier_fraction_pct": "19.8",
+          "resin_modifier_type": "functional tackifier",
+          "source_id": "PAT_US20030022973A1",
+          "source_url": "https://patents.google.com/patent/US20030022973A1/en",
+          "thermal_stability_metric": "reported stability",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "9.5",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "1820"
+        },
+        {
+          "agent_hint": "The no-acrylic/no-functional-tackifier comparator reported a larger stability value than several modifier-containing examples, providing directional support for a modifier-family hypothesis rather than proof of one optimum.",
+          "application": "reactive PUR hot melt",
+          "candidate_space_role": "stability_comparator",
+          "directness": "comparative_context",
+          "evidence_locator": "Table 11 Sample 10E",
+          "hint_id": "H12",
+          "limitation": "MDI and other variables differ across the table; use only as directional evidence.",
+          "pattern": "PPG2025 + PPG4025 + polyester polyol + MDI; no acrylic polymer or functional tackifier",
+          "resin_modifier_fraction_pct": "0",
+          "resin_modifier_type": "none",
+          "source_id": "PAT_US20030022973A1",
+          "source_url": "https://patents.google.com/patent/US20030022973A1/en",
+          "thermal_stability_metric": "reported stability",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "15",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "600"
+        },
+        {
+          "agent_hint": "The patent states that tackifiers and rheology-control agents may be used in small amounts, typically below about 10 wt%, supporting 10% as a conservative upper coarse level for the minor-tackifier axis.",
+          "application": "reactive PUR hot melt",
+          "candidate_space_role": "primary_range",
+          "directness": "general_guidance",
+          "evidence_locator": "General formulation guidance",
+          "hint_id": "H13",
+          "limitation": "No specific thermal-hold comparison and no exact match to TK100.",
+          "pattern": "polyurethane hot melt with optional tackifiers/plasticizers/rheology-control agents",
+          "resin_modifier_fraction_pct": "",
+          "resin_modifier_type": "tackifier or rheology modifier",
+          "source_id": "PAT_US20070155859A1",
+          "source_url": "https://patents.google.com/patent/US20070155859A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "2000-50000"
+        },
+        {
+          "agent_hint": "Published formulation art explicitly treats viscosity rise during prolonged hot holding as a design failure mode and cites a preferred stability level of no more than about 25% increase over 4-10 h; this supports thermal-hold stability as an independent design objective.",
+          "application": "reactive hot-melt urethane",
+          "candidate_space_role": "objective_support",
+          "directness": "context",
+          "evidence_locator": "Background and stability objective",
+          "hint_id": "H14",
+          "limitation": "The time scale is much longer than the local 15-60 min test and should not be converted into a local numerical threshold.",
+          "pattern": "thermally stable reactive hot melt urethane composition",
+          "resin_modifier_fraction_pct": "",
+          "resin_modifier_type": "tackifying agent",
+          "source_id": "EP0293602A2",
+          "source_url": "https://patents.google.com/patent/EP0293602A2",
+          "thermal_stability_metric": "viscosity increase during elevated-temperature hold",
+          "thermal_stability_unit": "% over 4-10 h",
+          "thermal_stability_value": "25",
+          "viscosity_temperature_c": "",
+          "viscosity_unit": "",
+          "viscosity_value": ""
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "args": {},
+      "name": "get_state_aware_rheology_summary",
+      "reason": "Canonical pre-ranking bridge from the paper's local rheological analysis; needed to decide how state-shift master-curve behavior, one-point calibration, local temperature sensitivity, and E1/E5 hold-drift contrast should constrain candidate selection.",
+      "result": {
+        "claim_boundaries": [
+          "The shared-shape/state-shift structure is established only within the measured local chemistry family.",
+          "The apparent E_eta descriptor is rheological, not a chemical reaction activation energy.",
+          "The E1/E5 hold contrast does not identify a unique molecular mechanism.",
+          "The phosphoric-acid-labelled E1 +P curve is not used in the chemistry-audited primary state model.",
+          "No validation-formulation identity or outcome is used by this tool."
+        ],
+        "design_rules": [
+          "Represent a candidate as formulation plus process/realization state, not composition alone.",
+          "Use one state-specific anchor measurement to locate a new realization or nearby local formulation on the transferable thermal-response shape when it remains inside the supported local chemistry family.",
+          "Treat static viscosity, temperature response and thermal-hold stability as separate decision variables.",
+          "When the failure mode is hot-hold drift, choose an experiment and measurement window that directly test drift rather than only matching one nominal viscosity value.",
+          "Use external resin/tackifier evidence to define chemically plausible directions, but do not convert analogue proximity into a predicted local outcome."
+        ],
+        "discovered_patterns": {
+          "one_point_state_calibration": {
+            "at_120c_by_held_formulation": [
+              {
+                "anchor_temperature_c": 120.0,
+                "held_formulation": "E1",
+                "multiplicative_error": 1.0283129275650704,
+                "n_held_realizations": 1
+              },
+              {
+                "anchor_temperature_c": 120.0,
+                "held_formulation": "E2",
+                "multiplicative_error": 1.1193080015618968,
+                "n_held_realizations": 4
+              },
+              {
+                "anchor_temperature_c": 120.0,
+                "held_formulation": "E3",
+                "multiplicative_error": 1.0485684389735062,
+                "n_held_realizations": 1
+              }
+            ],
+            "interpretation": "Within the tested local chemistry family, one state-specific viscosity anchor can locate a previously held-out nominal formulation on the shared thermal-response shape to roughly 6-10% pooled multiplicative error.",
+            "pooled_multiplicative_error_factor_range": [
+              1.0634272932908189,
+              1.0993627853895234
+            ],
+            "validation_scheme": "leave one nominal formulation out; fit shared shape on the remaining formulations; use one anchor from the held formulation"
+          },
+          "state_shift_master_curve": {
+            "formulation_only_r2": 0.8518908559372584,
+            "held_temperature_formulation_only_error_factor": 1.4417957113157762,
+            "held_temperature_state_aware_error_factor": 1.057765405509988,
+            "interpretation": "Within the chemistry-audited local family, realization/process state primarily shifts viscosity scale while a low-complexity common thermal-response shape remains transferable.",
+            "model_free_check": {
+              "n_complete_realizations": 6,
+              "pc1_constant_vertical_shift_cosine_similarity": 0.9998144622544136,
+              "pc1_explained_between_realization_variance_fraction": 0.9963223664910995
+            },
+            "n_formulations": 3,
+            "n_points": 36,
+            "n_realizations": 6,
+            "positive_model": "ln(eta_r(T)) = alpha_r + g(T) + epsilon",
+            "state_aware_shared_shape_r2": 0.9976662109445803
+          },
+          "temporal_stability_coordinate": {
+            "E1": {
+              "linear_lneta_r2": 0.999373608411799,
+              "linear_lneta_slope_per_h": 0.12520692059649297,
+              "si_15_to_60": 0.09510371102017776,
+              "si_15_to_90": 0.16847749400310424
+            },
+            "E5": {
+              "linear_lneta_r2": 0.9972395361555855,
+              "linear_lneta_slope_per_h": 0.5374903752362252,
+              "si_15_to_60": 0.5153846153846153,
+              "si_15_to_90": 0.9307692307692308
+            },
+            "E5_to_E1_drift_coefficient_ratio": 4.292816824146702,
+            "interpretation": "Original E1 and E5 hold trajectories show that thermal-hold viscosity drift is strongly formulation dependent and should be treated separately from static viscosity."
+          },
+          "thermal_coordinate": {
+            "cv_apparent_E_eta": 0.057684500815895386,
+            "interpretation": "The apparent temperature-sensitivity descriptor remains comparatively concentrated after chemistry auditing; it is a rheological descriptor, not a molecular reaction activation energy.",
+            "mean_apparent_E_eta_kJ_mol": 42.05161614633847,
+            "median_curve_r2": 0.9924321190895142,
+            "n_realizations": 6,
+            "sd_apparent_E_eta_kJ_mol": 2.425726485903181
+          }
+        },
+        "experiment_design_implications": {
+          "hold_window": "For the current local study, 120 C and the common 15-60 min window directly interrogate the observed instability while matching the available validation window.",
+          "selection_target": "Select a formulation-process point that is informative about the observed instability and state uncertainty, not merely the closest static-viscosity value.",
+          "state_anchor": "A single in-range anchor can be used for efficient local curve calibration; 120 C is operationally attractive because it is also the hold-stability test temperature."
+        },
+        "provenance_audit": {
+          "day1_parent_sample_relation": "unknown in compact source metadata",
+          "excluded_from_primary_state_model": [
+            "E1__+P__day1_0"
+          ],
+          "reason": "The source record is phosphoric-acid-labelled and its additive identity/amount is not represented in formulations.csv; it is retained as sensitivity-only until chemistry is reconciled.",
+          "same_operator_labels": [
+            "GJJ",
+            "ZYX",
+            "CHH"
+          ]
+        },
+        "source_scope": "original pre-validation local measurements with chemistry-comparability audit",
+        "tool_name": "get_state_aware_rheology_summary",
+        "tool_version": "3.3-provenance-audited",
+        "validation_formulation_visible": false
+      },
+      "status": "ok"
+    },
+    {
+      "args": {
+        "formulation_id": "E1"
+      },
+      "name": "get_hold_stability",
+      "reason": "Retrieve the low-drift original reference trajectory and deterministic SI descriptors for the measured hot-hold stability benchmark.",
+      "result": {
+        "formulation_id": "E1",
+        "result_visibility": "original_only",
+        "runs": [
+          {
+            "measurements": {
+              "15.0": 708.7,
+              "30.0": 728.6,
+              "60.0": 776.1,
+              "90.0": 828.1
+            },
+            "run_label": "GJJ",
+            "si_15_to_60": 0.09510371102017776,
+            "si_15_to_90": 0.16847749400310424
+          }
+        ]
+      },
+      "status": "ok"
+    },
+    {
+      "args": {
+        "formulation_id": "E5"
+      },
+      "name": "get_hold_stability",
+      "reason": "Retrieve the high-drift original reference trajectory and SI descriptors to quantify the local failure mode that the next candidate should mitigate.",
+      "result": {
+        "formulation_id": "E5",
+        "result_visibility": "original_only",
+        "runs": [
+          {
+            "measurements": {
+              "15.0": 2210.0,
+              "30.0": 2470.0,
+              "60.0": 3349.0,
+              "90.0": 4267.0
+            },
+            "run_label": "ZYX",
+            "si_15_to_60": 0.5153846153846153,
+            "si_15_to_90": 0.9307692307692308
+          }
+        ]
+      },
+      "status": "ok"
+    },
+    {
+      "args": {
+        "formulation_id": "E2"
+      },
+      "name": "get_repeatability_risk",
+      "reason": "Assess whether E2 nominal viscosity is dominated by realization/process-state spread before using it as the reactive-core anchor for candidate comparison.",
+      "result": [
+        {
+          "max_min_ratio": 2.8905094060452337,
+          "n_runs": 3,
+          "sample_cv": 0.4828000144760181,
+          "temperature_c": 80.0
+        },
+        {
+          "max_min_ratio": 2.815270490320246,
+          "n_runs": 3,
+          "sample_cv": 0.464282688366698,
+          "temperature_c": 90.0
+        },
+        {
+          "max_min_ratio": 2.796221322537112,
+          "n_runs": 3,
+          "sample_cv": 0.46377604360088387,
+          "temperature_c": 100.0
+        },
+        {
+          "max_min_ratio": 3.011060259344012,
+          "n_runs": 3,
+          "sample_cv": 0.48980499252604354,
+          "temperature_c": 110.0
+        },
+        {
+          "max_min_ratio": 3.5687979539641943,
+          "n_runs": 3,
+          "sample_cv": 0.5848356762251301,
+          "temperature_c": 120.0
+        },
+        {
+          "max_min_ratio": 3.3385416666666665,
+          "n_runs": 3,
+          "sample_cv": 0.540663310351932,
+          "temperature_c": 130.0
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "args": {
+        "formulation_id": "E2"
+      },
+      "name": "inspect_formulation",
+      "reason": "Make the reactive-core composition, MDI fraction, polyol fraction, and modifier-zero reference explicit before comparing acrylic-like and tackifier-like candidate axes.",
+      "result": {
+        "acrylic_like_fraction": 0.0,
+        "amount_basis": "g",
+        "amounts": {
+          "ac1920": 0.0,
+          "mdi": 60.57,
+          "pdp70": 119.71,
+          "ppg2000": 119.71,
+          "tk100": 0.0
+        },
+        "formulation_id": "E2",
+        "mdi_fraction": 0.2019067302243408,
+        "modifier_fraction": 0.0,
+        "nco_oh": 1.8,
+        "polyol_fraction": 0.7980932697756591,
+        "resin_modified": false,
+        "stage": "original",
+        "tackifier_like_fraction": 0.0,
+        "total_reported_amount": 299.99
+      },
+      "status": "ok"
+    },
+    {
+      "args": {},
+      "name": "get_candidate_hypothesis",
+      "reason": "After establishing the local design objective, retrieve the evidence-derived candidate-space hypothesis, E2 anchor, independent acrylic/tackifier axes, and historical/claim boundary before ranking any candidate IDs.",
+      "result": {
+        "candidate_axes": {
+          "acrylic_like_modifier_pct_total": {
+            "direct_evidence_anchors_pct": [
+              19.37,
+              19.57,
+              19.78,
+              19.98,
+              25
+            ],
+            "evidence": [
+              "PAT_US20160215185A1: repeated acrylic tackifying resin examples at approximately 19-20% of total formulation",
+              "PAT_US6465104B1 Example 10: 25 wt% low-OH acrylic copolymer with direct 121 C viscosity-stability data",
+              "PAPER_CN_ADHESIVES_2025_34_09_54: reports a 15% preferred acrylic-resin addition level, retained as directional lower-bound evidence until its fraction denominator is reverified"
+            ],
+            "grid": [
+              0,
+              15,
+              20,
+              25
+            ],
+            "interpretation": "20 and 25% are directly commensurate coarse anchors in the current curated record. The 15% grid level is retained as a lower-bound design point, but the literature denominator for the reported 15% addition level is not treated as an exact total-formulation anchor until reverified.",
+            "provisional_noncommensurate_evidence_pct": [
+              15
+            ]
+          },
+          "minor_tackifier_like_modifier_pct_total": {
+            "direct_evidence_anchors_pct": [
+              4.8,
+              5.3,
+              5.7,
+              5.8,
+              5.9,
+              6.4
+            ],
+            "evidence": [
+              "PAT_US5932680A: examples around 4.8-6.4% tackifying/hydrocarbon resin and preferred resin range 3-10 wt%",
+              "PAT_US20070155859A1: tackifiers/rheology-control agents typically used below about 10 wt%"
+            ],
+            "grid": [
+              0,
+              5,
+              10
+            ],
+            "interpretation": "5% represents the repeatedly documented minor-resin region and 10% is a conservative coarse upper level."
+          }
+        },
+        "claim_boundary": "External examples are analogues. They support candidate-family and coarse-region hypotheses, not an exact optimum for AC1920/TK100 and not a proven local molecular mechanism. The current reconstruction uses only pre-result evidence at runtime; the exact validation coordinates and outcome are excluded from candidate construction, ranking and tie-breaking.",
+        "decision_policy": {
+          "claim_boundary": "This policy can recover an evidence-supported formulation neighborhood, but it is not a predictor of the exact wet-lab optimum.",
+          "evidence_region_policy": {
+            "acrylic_like": {
+              "basis": "15% directional lower-region evidence plus directly commensurate ~19-20% examples; 25% remains directly supported but is a larger perturbation.",
+              "broad_supported_region_pct_total": [
+                15,
+                25
+              ],
+              "conservative_initial_test_band_pct_total": [
+                15,
+                20
+              ]
+            },
+            "minor_tackifier_like": {
+              "basis": "Curated PUR examples repeatedly place tackifying/hydrocarbon resin near 5%, with broader guidance below about 10%.",
+              "broad_supported_region_pct_total": [
+                3,
+                10
+              ],
+              "repeated_minor_resin_cluster_pct_total": [
+                4.8,
+                6.4
+              ]
+            }
+          },
+          "experiment_intents": {
+            "causal_isolation": "Use when the primary objective is attribution of one formulation axis. Prefer a single active modifier axis only in this mode.",
+            "performance_mitigation": "Use when a measured failure mode is already established and the next experiment is intended to reduce that failure. Independently supported multi-modifier interventions are admissible.",
+            "uncertainty_resolution": "Use when missing process, stoichiometric or evidence information prevents an interpretable performance test."
+          },
+          "policy_id": "MINIMUM_SUFFICIENT_INTERVENTION_V1",
+          "purpose": "Select an experimentally informative intervention from pre-result evidence without treating a literature composition as the hidden optimum.",
+          "ranking_rules": [
+            "Exact distance to an external analogue anchor is audit metadata, not a primary optimization objective.",
+            "Candidates in the same evidence-support class are not rewarded merely for being numerically closer to a literature percentage.",
+            "For performance mitigation, two modifier axes may be combined when each is independently supported and the combination stays inside bounded evidence regions.",
+            "Among candidates with comparable evidence coverage and interpretability, prefer the smallest sufficient total modifier burden and the smallest justified departure from the characterized local chemistry.",
+            "A single-variable design is preferred only when causal attribution is the stated experiment intent; it is not a universal default.",
+            "Held-out validation coordinates and outcomes must never enter candidate construction, ranking or tie-breaking."
+          ]
+        },
+        "historical_status": {
+          "agent_validation_formulation_recommended_before_target_result_known": true,
+          "allowed_use": [
+            "outcome-blind preexperimental reconstruction",
+            "scientific rationale",
+            "candidate-space formalization",
+            "outcome-blind fine refinement",
+            "future prospective rounds"
+          ],
+          "current_exact_v2_grid_formalized_after_validation_experiment": true,
+          "current_fine_refinement_algorithm_formalized_after_validation_experiment": true,
+          "interpretation": "The prospective historical claim attaches to the Agent recommendation itself. The current coarse grid and fine-refinement software are later reproducible operationalizations of the evidence-constrained region and are not represented as the original contemporaneous freeze algorithm unless older provenance is recovered.",
+          "repository_freeze_artifact_available": false
+        },
+        "local_reactive_core_anchor": {
+          "formulation_id": "E2",
+          "normalized_core_fractions": {
+            "MDI": 0.2019067302,
+            "PDP70": 0.3990466349,
+            "PPG2000": 0.3990466349
+          },
+          "reason": "E2 is the geometric centre of the original five-point local design: 50/50 PPG2000/PDP-70 and NCO:OH=1.80, centered between E1/E3 stoichiometric perturbations and E4/E5 composition perturbations.",
+          "source_amounts": {
+            "MDI": 60.57,
+            "PDP70": 119.71,
+            "PPG2000": 119.71,
+            "unit": "g"
+          },
+          "stoichiometry_note": "The E2 NCO:OH=1.80 label applies to the original reactive core. If a modifier contributes reactive OH or another NCO-reactive group, true stoichiometry must be recalculated from verified material specifications."
+        },
+        "stability_hypotheses": {
+          "H1_formulation_family": "Partial replacement of the reactive-only formulation by an acrylic-like and/or minor tackifier-like resin can reduce hot-hold viscosity drift under matched process conditions.",
+          "H2_functionality": "At comparable acrylic loading, lower effective reactive-group density or lower-OH acrylic chemistry is expected to be more favorable for hot-hold viscosity stability than more highly reactive acrylic chemistry.",
+          "H3_region": "A useful candidate region is expected within the externally supported coarse space spanned by 15-25% acrylic-like modifier and 0-10% minor tackifier-like modifier, while preserving the relative E2 reactive-core proportions."
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "args": {
+        "candidate_space_role": "stability_support",
+        "max_rows": 20,
+        "modifier_type": null
+      },
+      "name": "query_external_priors",
+      "reason": "Check source-level stability-support evidence and limitations for modifier-family directions; use as directional/noncommensurate evidence, not as a local numerical optimum.",
+      "result": [
+        {
+          "agent_hint": "A 25 wt% low-OH acrylic copolymer formulation showed substantially slower viscosity rise than the equal-loading higher-OH acrylic comparator; this supports both a 25% acrylic candidate level and the hypothesis that lower reactive-group density can improve hot-hold stability.",
+          "application": "moisture-curing PUR hot melt",
+          "candidate_space_role": "primary_range;stability_support",
+          "directness": "comparative_stability",
+          "evidence_locator": "Example 10 and Table 3",
+          "hint_id": "H09",
+          "limitation": "Different acrylic chemistry and much longer hold window; does not establish the local mechanism.",
+          "pattern": "PPG1000 + PPG2000 + polyester polyol + low-OH acrylic copolymer + MDI",
+          "resin_modifier_fraction_pct": "25",
+          "resin_modifier_type": "low-OH acrylic copolymer",
+          "source_id": "PAT_US6465104B1",
+          "source_url": "https://patents.google.com/patent/US6465104B1/en",
+          "thermal_stability_metric": "viscosity increase from 0.5 to 8 h",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "37",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "5125->7000"
+        },
+        {
+          "agent_hint": "At the same 25 wt% acrylic loading, the higher-OH acrylic analogue exhibited roughly twice the reported 8 h viscosity increase of the low-OH example, making modifier functionality a plausible stability variable rather than loading alone.",
+          "application": "moisture-curing PUR hot melt",
+          "candidate_space_role": "stability_support",
+          "directness": "comparative_stability",
+          "evidence_locator": "Example 11 and Table 3",
+          "hint_id": "H10",
+          "limitation": "Patent comparison; acrylic materials are not AC1920 and the result is not a direct local-system measurement.",
+          "pattern": "same formulation as Example 10 but higher-OH acrylic copolymer",
+          "resin_modifier_fraction_pct": "25",
+          "resin_modifier_type": "higher-OH acrylic copolymer",
+          "source_id": "PAT_US6465104B1",
+          "source_url": "https://patents.google.com/patent/US6465104B1/en",
+          "thermal_stability_metric": "viscosity increase from 0.5 to 8 h",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "76",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "9375->16500"
+        },
+        {
+          "agent_hint": "A functional-tackifier-containing formulation had lower reported stability rise than the no-acrylic/no-functional-tackifier comparator in the same example set, supporting the idea that modifier identity can change hot-melt stability.",
+          "application": "reactive PUR hot melt",
+          "candidate_space_role": "stability_support",
+          "directness": "comparative_context",
+          "evidence_locator": "Table 11 Sample 10C",
+          "hint_id": "H11",
+          "limitation": "Other formulation variables including MDI differ; not an isolated causal comparison.",
+          "pattern": "PPG2025 + PPG4025 + polyester polyol + functional tackifier + MDI",
+          "resin_modifier_fraction_pct": "19.8",
+          "resin_modifier_type": "functional tackifier",
+          "source_id": "PAT_US20030022973A1",
+          "source_url": "https://patents.google.com/patent/US20030022973A1/en",
+          "thermal_stability_metric": "reported stability",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "9.5",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "1820"
+        }
+      ],
+      "status": "ok"
+    }
+  ]
+}

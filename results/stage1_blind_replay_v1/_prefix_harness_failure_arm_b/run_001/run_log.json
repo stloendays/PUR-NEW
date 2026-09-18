@@ -1,0 +1,10 @@
+{
+  "finished_utc": "2026-09-18T07:12:57Z",
+  "returncode": 1,
+  "run_index": 1,
+  "started_utc": "2026-09-18T07:09:06Z",
+  "status": "error",
+  "stderr": "Traceback (most recent call last):\n  File \"D:\\Research\\PUR-NEW\\scripts\\run_scientific_agent_v3.py\", line 458, in <module>\n    main()\n  File \"D:\\Research\\PUR-NEW\\scripts\\run_scientific_agent_v3.py\", line 422, in main\n    validate(recommendation, recommendation_schema)\n  File \"D:\\Tools\\pur_bridge_env\\Lib\\site-packages\\jsonschema\\validators.py\", line 1332, in validate\n    raise error\njsonschema.exceptions.ValidationError: 'E2 apparent sample CV approximately 0.46-0.58' is not of type 'number', 'null'\n\nFailed validating 'type' in schema['properties']['uncertainty']['properties']['repeatability']['properties']['value']:\n    {'type': ['number', 'null']}\n\nOn instance['uncertainty']['repeatability']['value']:\n    'E2 apparent sample CV approximately 0.46-0.58'",
+  "stdout": "",
+  "wall_seconds": 230.94
+}

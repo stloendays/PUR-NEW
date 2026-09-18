@@ -1,0 +1,41 @@
+{
+  "condition": "--hide-deterministic-ranking ON. scenario_rankings, scenario_stability and pareto_front are withheld from the model; the coverage gate, sufficiency rule and per-candidate evidence attributes remain.",
+  "falsifiable_prediction": "S1C41 remains the modal selection among non-abstaining runs. The V3 agent already OVERRODE the deterministic rank-1 (S1C40, rank1_fraction 0.75; S1C41 rank1_fraction 0.00, absent from pareto_front), so removing the ranking should not move the selection. A shift to S1C40 or a collapse of convergence falsifies the evidence-driven-override reading.",
+  "file_sha256": {
+    "configs/action_catalog.json": "20c763a128fe9ea9a79b83eea4a8763b0eaaeb3e25c7ac47e836d9cb53a4f3cd",
+    "configs/agent_v3.json": "c1391a68e4a994eaf9e7d2193e305966d760193e9d2145b958aaf7fd66f28a2c",
+    "configs/evidence_access_profiles.json": "0906341975695613a02614ab867a5c906baa4b0503116afa67ffb9e973c9ee17",
+    "configs/formulation_priors.json": "7be699d8705910ac1fd85d56dd9976506f9867c20926c59eaee69c29ae82beea",
+    "configs/workflow.json": "6c3aa2e9d7d7ddb42525f5ec28ccc89a48549b05ba7a8417ebc0b4f6dc32d282",
+    "data/external_evidence_hints.csv": "9419cb5006ca72457aebed77676dfed94f62ecd9795e820f3d4db3cce4621560",
+    "derived/evidence_state.json": "8ca085b1529f94b2fc6ed3bfdd0f5fb938a4580159ed04ece39fac42c023bc81",
+    "derived/stage1_blind_candidate_space_v1.json": "2b92e5d976e76b674a05f9b8fc17f4c78cc873b42641fbe67b35a37beeec4346",
+    "prompts/agent_v3_judge.txt": "81e462ee8252fb59fe615f9574a8a2173f017c085eb9fdaea2858a27d38ef36d",
+    "prompts/agent_v3_planner.txt": "7644203f19b3076fcb165be6226e876bad1bfdf3abc462b95001e8947bcec805",
+    "prompts/agent_v3_proposer.txt": "b6800b762998c6f992d3afb6b7ae0c627df569dd03441402c07f7475f84df40f",
+    "prompts/agent_v3_robustness.txt": "bea49b51d88c851525466fe7a3ac5245cf1dfdaa93d83e08f4b826c0e3fd3fb4",
+    "prompts/agent_v3_skeptic.txt": "96e0327c195efa60a18f4fb7fd6be8f352cb9717c7767766ebef4814a058191d",
+    "scripts/run_scientific_agent_v3.py": "723f71ea48122ba50d03bacaaf46328ed4b95867dd941c8286422275f0c7a09d",
+    "src/pur_new/actions.py": "a9127237c56f5eae29e56df102f15b90e23379b6074ee971316351ef438638c3",
+    "src/pur_new/agent_v3.py": "112c9c992c9572fa00c990288f53ed649c7d491e3510cafdc09647bda1e86f6b",
+    "src/pur_new/evidence_firewall.py": "a27992695b3015b1cbf29224b409bc208c5d72e9231f8cce19de52b221a3145b",
+    "src/pur_new/scientific_tools.py": "24ba8d0ed8f28c94a3812acbc0f260b9f18a9a0f46a787e8451bff0b673390ca"
+  },
+  "files_differing_from_v3_freeze": [
+    "scripts/run_scientific_agent_v3.py"
+  ],
+  "frozen_utc": "2026-09-18T09:40:15Z",
+  "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+  "n_runs_declared_before_any_run": 10,
+  "note_on_difference": "scripts/run_scientific_agent_v3.py was edited at 2026-09-18T09:11:17Z, after the V3 freeze. Empirically it changed none of the five V3 runs: all five recorded scenario_rankings + pareto_front present, ranking_disclosure absent, and both evidence axes retrieved. The V3 N=5 series is therefore a single condition. This series re-freezes on the current file set.",
+  "relation_to_v3": "Separate series. NOT pooled with V3 N=5. V3 remains reported as its own pre-specified series.",
+  "reporting_rule": "All 10 runs are reported, including abstentions and failures. No run is dropped and the series is not stopped early.",
+  "strategy_id": "STAGE1_PREEXPERIMENTAL_V3H",
+  "strategy_name": "V3_WITH_DETERMINISTIC_RANKING_WITHHELD",
+  "unchanged": [
+    "candidate lattice (73 nodes, identical to v1/v2/v3)",
+    "evidence snapshot",
+    "no target coordinate in any candidate, prompt, config, prior, threshold or tie-break"
+  ],
+  "why": "All five V3 runs were shown the deterministic precomputed ranking. Agreement with a shown ranking cannot be separated from reading it off. This series removes that channel."
+}

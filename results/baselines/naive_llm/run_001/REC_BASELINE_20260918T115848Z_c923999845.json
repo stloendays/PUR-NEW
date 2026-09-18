@@ -1,0 +1,102 @@
+{
+  "acceptance_criterion": {
+    "claim": "selected candidate is worth experimental validation",
+    "criterion": "compare its measured 120 C hold behavior with the original references",
+    "failure_condition": "candidate shows clearly worse hold drift than the original reference formulations",
+    "measurement_window": "15-60 min at 120 C"
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C05",
+      "relative_reason": "Composition corresponds to the E5 reference, whose observed 120 C hold viscosity increased more strongly than E1 from 15 to 90 minutes."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C02",
+      "relative_reason": "Composition corresponds to the E2 reference, which has local temperature measurements but no supplied 120 C thermal-hold series."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C04",
+      "relative_reason": "Composition corresponds to the E4 reference, but no 120 C thermal-hold measurements are supplied for it."
+    }
+  ],
+  "constraints": [],
+  "created_utc": "2026-09-18T11:58:48Z",
+  "decision_mode": "performance_candidate",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "5a9d595f90408d52c69f0c828acca9ad840c04b4aac511172dc28faac2e56ccb",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "c6c1f454ae2745d31add6b43287f9fdb8c44a88e37c4ea4f495f604d92726a42",
+    "run_id": "REC_BASELINE_20260918T115848Z_c923999845",
+    "workflow_version": "naive_direct_llm_baseline_v1"
+  },
+  "recommendation_id": "REC_BASELINE_20260918T115848Z_c923999845",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C01",
+    "formulation_state": {
+      "AC1920": 0.0,
+      "MDI": 19.2866666667,
+      "PDP70": 40.3566666667,
+      "PPG2000": 40.3566666667,
+      "TK100": 0.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "measured_reactive_core_only"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "S1C01 is the normalized composition corresponding to E1. E1 showed the smaller supplied 120 C hold increase, from 708.7 at 15 minutes to 828.1 at 90 minutes, compared with E5's increase from 2210 to 4267. This makes S1C01 the most reasonable validation candidate, while acknowledging that its candidate-level hold behavior is unmeasured.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": null,
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": null,
+      "note": "Only E1 and E5 have supplied 120 C thermal-hold series.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": null,
+      "note": "Candidate hold behavior is not directly observed.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": null,
+      "note": "No direct candidate measurements are supplied; selection uses the corresponding original reference measurements.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Run labels and retest indicators vary among the original measurements.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": null,
+      "note": "The supplied hold data do not provide replicated candidate measurements.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

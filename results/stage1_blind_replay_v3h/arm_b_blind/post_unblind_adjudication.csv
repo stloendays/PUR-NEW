@@ -1,0 +1,11 @@
+abs_acrylic_diff,abs_tackifier_diff,agent_chose_120c,agent_chose_15_60_window,decision_mode,level1_thermal_hold_objective,level2_acrylic_like,level2_minor_tackifier,level2_resin_modified,modifier_plane_l1_pct_points,modifier_plane_l2_pct_points,near_region_hit,overall_l1_pct_points,overall_l2_pct_points,recommendation_id,run_index,selected_candidate_id
+0.9956,0.881,True,True,performance_candidate,True,True,True,True,1.8766,1.3294,True,3.7532,1.7243,REC_V3_20260918T094424Z_5e0679a872,1,S1C41
+,,True,True,abstain,True,,,,,,,,,REC_V3_20260918T094915Z_0f3663a258,2,
+3.4956,0.881,True,True,uncertainty_probe,True,True,True,True,4.3766,3.6049,True,8.7532,4.4404,REC_V3_20260918T095512Z_37cc609497,3,S1C46
+0.9956,0.881,True,True,uncertainty_probe,True,True,True,True,1.8766,1.3294,True,3.7532,1.7243,REC_V3_20260918T100039Z_13f905998c,4,S1C41
+0.9956,0.881,True,True,performance_candidate,True,True,True,True,1.8766,1.3294,True,3.7532,1.7243,REC_V3_20260918T100445Z_587a61fb3d,5,S1C41
+0.9956,0.881,True,True,performance_candidate,True,True,True,True,1.8766,1.3294,True,3.7532,1.7243,REC_V3_20260918T100929Z_a7b796ecd9,6,S1C41
+0.9956,0.881,True,False,performance_candidate,True,True,True,True,1.8766,1.3294,True,3.7532,1.7243,REC_V3_20260918T101350Z_45a3929662,7,S1C41
+,,True,True,abstain,True,,,,,,,,,REC_V3_20260918T101916Z_b1c870a535,8,
+0.9956,0.881,True,True,performance_candidate,True,True,True,True,1.8766,1.3294,True,3.7532,1.7243,REC_V3_20260918T102354Z_1f98f6b4e7,9,S1C41
+0.9956,1.619,True,True,performance_candidate,True,True,True,True,2.6145,1.9006,True,3.2379,1.9473,REC_V3_20260918T102806Z_216fb3bbe6,10,S1C40

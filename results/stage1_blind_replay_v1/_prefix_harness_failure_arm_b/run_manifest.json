@@ -1,0 +1,25 @@
+{
+  "api_base_host": "127.0.0.1:8788",
+  "arm": "B",
+  "arm_role": "target-blind independent pre-result recovery",
+  "candidate_set": "D:\\Research\\PUR-NEW\\derived\\stage1_blind_candidate_space_v1.json",
+  "candidate_set_sha256": "2b92e5d976e76b674a05f9b8fc17f4c78cc873b42641fbe67b35a37beeec4346",
+  "evidence_state_sha256": "8ca085b1529f94b2fc6ed3bfdd0f5fb938a4580159ed04ece39fac42c023bc81",
+  "finished_utc": "2026-09-18T07:12:57Z",
+  "git_commit": "a6f61f54a2d577452fa865e18ef6b60cf08364ec",
+  "model": "gpt-5.6-luna",
+  "n_runs_requested": 10,
+  "runs": [
+    {
+      "finished_utc": "2026-09-18T07:12:57Z",
+      "returncode": 1,
+      "run_dir": "D:\\Research\\PUR-NEW\\results\\stage1_blind_replay_v1\\arm_b_blind\\run_001",
+      "run_index": 1,
+      "started_utc": "2026-09-18T07:09:06Z",
+      "status": "error",
+      "wall_seconds": 230.94
+    }
+  ],
+  "started_utc": "2026-09-18T07:09:06Z",
+  "temperature": "not sent; endpoint rejects the temperature parameter (verified). Model default sampling retained; stochasticity comes from repeated independent calls."
+}

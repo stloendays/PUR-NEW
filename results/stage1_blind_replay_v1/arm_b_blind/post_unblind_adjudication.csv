@@ -1,0 +1,6 @@
+abs_acrylic_diff,abs_tackifier_diff,agent_chose_120c,agent_chose_15_60_window,decision_mode,level1_thermal_hold_objective,level2_acrylic_like,level2_minor_tackifier,level2_resin_modified,modifier_plane_l1_pct_points,modifier_plane_l2_pct_points,near_region_hit,overall_l1_pct_points,overall_l2_pct_points,recommendation_id,run_index,selected_candidate_id
+5.9956,4.119,True,True,uncertainty_probe,True,True,False,True,10.1145,7.2741,False,11.9911,7.3565,REC_V3_20260918T071920Z_1a6ae67f5d,1,S1C49
+5.9956,4.119,True,True,uncertainty_probe,True,True,False,True,10.1145,7.2741,False,11.9911,7.3565,REC_V3_20260918T072316Z_8ff38aa27a,2,S1C49
+10.9956,4.119,True,False,uncertainty_probe,True,True,False,True,15.1145,11.7417,False,21.9911,12.4337,REC_V3_20260918T072653Z_25b2d5f5fa,3,S1C59
+5.9956,4.119,True,True,uncertainty_probe,True,True,False,True,10.1145,7.2741,False,11.9911,7.3565,REC_V3_20260918T073045Z_ef6c462a52,4,S1C49
+10.9956,4.119,True,True,uncertainty_probe,True,True,False,True,15.1145,11.7417,False,21.9911,12.4337,REC_V3_20260918T073431Z_40dd2efcd5,5,S1C59

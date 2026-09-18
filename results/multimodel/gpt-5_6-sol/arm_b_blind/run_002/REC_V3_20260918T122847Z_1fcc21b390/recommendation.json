@@ -1,0 +1,138 @@
+{
+  "acceptance_criterion": {
+    "claim": "The uncertainty probe establishes whether a subsequent dual-axis 120 \u00b0C performance-mitigation experiment can be interpreted as a formulation effect rather than an uncontrolled stoichiometric or realization-state change.",
+    "criterion": "Proceed to a modifier-containing candidate only if all of the following are completed before observing modifier performance: verified AC1920 and TK100 reactive-group content, moisture specification, and reactive-solids basis; one explicit and reproducible choice between E2-core dilution and MDI adjustment, with resulting candidate NCO/OH calculated; all preparation and measurement-history fields frozen; a numerical initial-viscosity handling range and quantitative replicate-disagreement and trajectory-acceleration rules preregistered; and at least two independently prepared E2-anchor controls plus a contemporaneous qualified reference successfully measured under those frozen rules. Any reconstructed SI midpoint thresholds must be labeled conservative decision rules rather than validated performance limits. If these conditions pass, S1C41 is the leading performance candidate unless new independent pre-result evidence changes tackifier-dose support.",
+    "failure_condition": "Do not proceed to a performance claim if any modifier functionality, moisture, reactive-solids, stoichiometric-treatment, process-history, handling-range, repeatability-rule, or mandatory-control requirement remains unknown; if independent controls fail the preregistered repeatability or state-control limits; or if the modified-chemistry calibration would be assumed without verification.",
+    "measurement_window": "Uncertainty qualification before any modifier result, including a 120 \u00b0C E2/control hold at 15, 30, 60, and 90 min and an in-range 80-130 \u00b0C calibration check or justified subset"
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C41",
+      "relative_reason": "Leading performance-mitigation candidate after uncertainty resolution: it activates both supported axes, uses 15 wt% acrylic-like modifier within the broad supported region, and places TK100 at 5 wt% within the repeatedly documented 4.8-6.4 wt% tackifier cluster. It is not run now because modifier reactivity, stoichiometric treatment, and process-state controls are unresolved."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Lower total modifier burden than S1C41, but its 2.5 wt% TK100 dose is below the supplied 3-10 wt% broad region and repeated 4.8-6.4 wt% cluster. Minimum modifier burden cannot break the tie before tackifier-dose sufficiency and comparable evidence coverage are established."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C39",
+      "relative_reason": "Useful acrylic-only mechanistic control, but it zeroes the independently supported tackifier-like axis. It would be appropriate for causal isolation, not as a replacement for the declared full performance-mitigation experiment."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C02",
+      "relative_reason": "The E2 reactive-core control is suitable for process-repeatability and state-control qualification within the uncertainty probe, but it does not test either supported modifier axis and therefore is not a performance candidate."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The probe and any subsequent candidate test must address time-dependent viscosity growth at 120 \u00b0C using the matched 15-60 and 15-90 min hold windows; static viscosity or a temperature sweep alone is insufficient.",
+      "name": "physical_failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "The declared intent is performance mitigation, so the eventual performance candidate must activate both acrylic-like and minor-tackifier-like axes. The formulation run is deferred rather than replaced by a partial-coverage control.",
+      "name": "experiment_intent_and_axis_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "AC1920 and TK100 reactive-group content, moisture contribution, reactive-solids basis, and the choice between simple core dilution and MDI adjustment are unresolved; the true NCO/OH ratio of a modified candidate cannot yet be calculated.",
+      "name": "reactive_stoichiometry",
+      "status": "fail"
+    },
+    {
+      "detail": "Mixing, reaction, moisture, heating, equilibration, geometry, sample mass, batch age, and preparation-to-measurement fields are missing despite large measured E2 realization variability.",
+      "name": "process_history_control",
+      "status": "fail"
+    },
+    {
+      "detail": "A contemporaneous qualified original control or equivalent state-control measurement must be mandatory, not optional, before composition effects can be interpreted.",
+      "name": "mandatory_state_control",
+      "status": "fail"
+    },
+    {
+      "detail": "One-point calibration is supported within the original chemistry family, but transfer of the shared temperature-response shape to AC1920/TK100-modified chemistry has not been demonstrated. The 15 min hold value must not automatically be treated as an independent thermal-curve calibration anchor.",
+      "name": "state_calibration_transfer",
+      "status": "unknown"
+    },
+    {
+      "detail": "No numerical application or instrument handling range in preserved source units has been frozen.",
+      "name": "initial_viscosity_guardrail",
+      "status": "fail"
+    },
+    {
+      "detail": "Quantitative rules for replicate disagreement and continuing acceleration have not been preregistered.",
+      "name": "repeatability_and_trajectory_rules",
+      "status": "fail"
+    },
+    {
+      "detail": "The required design is a replicated 120 \u00b0C trajectory at 15, 30, 60, and 90 min, with SI15-60 and SI15-90 evaluated separately and all intermediate observations retained.",
+      "name": "matched_hold_measurement",
+      "status": "pass"
+    },
+    {
+      "detail": "No held-out outcome is exposed, but the exact refined grid and ranking implementation were formalized after the validation experiment and lack a contemporaneous repository freeze artifact.",
+      "name": "candidate_provenance",
+      "status": "unknown"
+    }
+  ],
+  "created_utc": "2026-09-18T12:28:47Z",
+  "decision_mode": "abstain",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "7d24c53b0c4628f003253c4c89b145e6bae8f69c3cf090db00e0fb90663cf602",
+    "model": "gpt-5.6-sol",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T122847Z_1fcc21b390",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T122847Z_1fcc21b390",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": null,
+  "selection_rationale": "The measured local failure mode is continuing viscosity growth during a 120 \u00b0C hold: E1 gave SI15-60 approximately 0.095 and SI15-90 approximately 0.168, whereas E5 gave approximately 0.515 and 0.931. Local temperature sweeps showed ordinary monotonic thermal thinning, and E2 showed large run-to-run viscosity-scale variation; therefore static viscosity, temperature response, hold drift, and realization state must be adjudicated separately. The locally derived rheological rule is that an in-range state anchor can locate realizations on a shared thermal-response shape within the original chemistry family, but this rule has not been shown transferable to modified chemistry and cannot replace a matched hold measurement. The supplied paper and patent evidence supports only directional formulation rules: acrylic-like modification is plausible over a broad 15-25 wt% region, minor tackifier use is plausible over about 3-10 wt% with repeated examples near 5 wt%, and longer-window stability literature confirms that hot-hold drift is a distinct objective. Those sources do not predict the held-out local result, establish an exact optimum, validate the proposed local SI thresholds, or identify a molecular mechanism. Conservative experimental-design constraints introduced here are mandatory contemporaneous state control, frozen preparation history, verified reactive-group and moisture data, an explicit stoichiometric treatment, preregistered handling and repeatability rules, and a replicated 120 \u00b0C matched-window hold. These resolve the Skeptic's objections concerning unsupported 2.5 wt% tackifier coverage, premature minimum-burden tie-breaking, unknown NCO/OH, optional controls, unverified calibration transfer, and post-hoc criteria. They also resolve the Robustness Adjudicator's fragile-ranking objection: S1C40 is not selected merely for lower burden, while S1C41 remains the leading full-coverage performance candidate only after interpretability conditions are met. The no-intervention E2 control may be used inside the uncertainty probe, explicitly instead of\u2014not as\u2014the full mitigation experiment. Because the unresolved stoichiometric and process-state uncertainties could make a modifier result uninterpretable, the scientifically useful decision is to freeze an uncertainty-resolution package before selecting a formulation candidate.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Qualitative evidence-region audit",
+      "note": "External evidence supports a broad acrylic-like region of 15-25 wt% and a minor-tackifier region of 3-10 wt%, with repeated tackifier examples near 5 wt%. These regions support candidate-family selection, not an exact property prediction.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Check modified-chemistry transfer within the measured 80-130 \u00b0C range",
+      "note": "The state-shift model is established only for the chemistry-audited original family and is not yet validated for AC1920/TK100-containing formulations.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": null,
+      "note": "The local viscosity unit is unknown and must remain in preserved source units; instrument repeatability and a numerical handling range have not been supplied.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": "Freeze and record preparation, moisture, reaction, heating, equilibration, geometry, sample-mass, age, and timing fields",
+      "note": "All six major candidate process-history fields are currently missing.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "At least two independently prepared batches with a mandatory contemporaneous qualified control",
+      "note": "E2 previously showed CV approximately 0.46-0.58 and max/min ratios approximately 2.80-3.57, so repeatability must be qualified before interpreting a modifier effect.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

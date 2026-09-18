@@ -1,0 +1,9 @@
+{
+  "status": "preserved_pre_fix_failure",
+  "what_happened": "Arm B run 1 executed all five LLM stages successfully, then failed at the freeze step because the Judge wrote prose into uncertainty.repeatability.value, which schemas/agent_recommendation.schema.json requires to be number|null.",
+  "classification": "harness/schema-contract bug, not an Agent scientific decision",
+  "fix": "scripts/run_scientific_agent_v3.py::normalize_judge_output() moves non-numeric content into the adjacent note/detail field and nulls the numeric slot. No prompt, evidence, candidate or selection logic was changed.",
+  "why_the_series_was_restarted": "The fix was applied BEFORE any blind recommendation was successfully frozen, so no recommendation existed that could have been tuned against. This directory is retained as evidence of that sequence.",
+  "runs_preserved": 1,
+  "runs_with_frozen_recommendation": 0
+}

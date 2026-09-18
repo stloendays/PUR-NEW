@@ -1,0 +1,138 @@
+{
+  "acceptance_criterion": {
+    "claim": "S1C49 improves thermal-hold stability relative to a matched E2 control without being explained solely by a static-viscosity shift or by an unmatched realization state.",
+    "criterion": "Before measurement, predeclare the replicate count, uncertainty-combination rule, minimum SI improvement, maximum acceptable SI worsening, viscosity and temperature-response limits, and the rule for results within realization or instrument uncertainty. Accept only if replicated S1C49 SI is lower than matched E2 at both 60 and 90 minutes by more than that predeclared uncertainty margin, the 90 minute result does not worsen, the complete 80-130 C response remains monotonic within the predeclared limits, stoichiometry and process history are resolved, and state-anchor residuals do not indicate out-of-family transfer. Static-viscosity improvement alone is insufficient.",
+    "failure_condition": "Reject or classify as unresolved if stoichiometry or process state remains unknown, state-transfer residuals are out of family, either 60 or 90 minute SI fails the predeclared uncertainty margin, 90 minute SI worsens, temperature-response limits fail, or the apparent benefit is explainable by static viscosity or realization-state differences.",
+    "measurement_window": "Matched E2 and S1C49 measurements: temperature sweep over 80-130 C; 120 C hold with observations at 15, 60, and 90 minutes; replicated under identical mixing, reaction, conditioning, sample-age, and measurement procedures."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C59",
+      "relative_reason": "Stronger direct test of the acrylic-like direction at 25 wt%, but the larger reactive-core replacement is not locally discriminated from 20 wt% and is more vulnerable to unresolved stoichiometric and out-of-family state effects."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C10",
+      "relative_reason": "A conservative, chemically distinct 2.5 wt% tackifier-like probe, but it tests a less-supported stability direction than the acrylic-like region and may produce a signal too small to separate from E2 realization spread."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "S1C49 preserves the E2 PPG2000/PDP70 relative proportions and provides a direct matched-control comparison.",
+      "name": "Matched E2 reactive-core control",
+      "status": "pass"
+    },
+    {
+      "detail": "The 20 wt% AC1920-like level is supported by curated directly commensurate analogue anchors, but is treated only as a regional hypothesis.",
+      "name": "Acrylic modifier region rather than exact optimum",
+      "status": "pass"
+    },
+    {
+      "detail": "AC1920 functionality and any NCO-reactive contribution must be verified and the actual NCO:OH balance recalculated before testing.",
+      "name": "Stoichiometric accounting",
+      "status": "unknown"
+    },
+    {
+      "detail": "Candidate process fields are missing; mixing, reaction, conditioning, sample age, measurement history, and initial state must be matched and recorded.",
+      "name": "Process history and initial realization state",
+      "status": "unknown"
+    },
+    {
+      "detail": "One-point state calibration is supported within the measured local chemistry family but is not established for acrylic-modified chemistry; residuals must be assessed and out-of-family transfer flagged.",
+      "name": "State-anchor transfer",
+      "status": "unknown"
+    },
+    {
+      "detail": "Candidate hold behavior is unmeasured and must be obtained directly at 120 C at 15, 60, and 90 minutes rather than inferred from static viscosity.",
+      "name": "Direct thermal-hold measurement",
+      "status": "unknown"
+    },
+    {
+      "detail": "Required temperature-response claims remain within 80-130 C and hold claims within the measured 15-90 minute window.",
+      "name": "Supported temperature and time domains",
+      "status": "pass"
+    },
+    {
+      "detail": "E2 shows substantial realization spread; replicate count and the uncertainty decision rule must be predeclared before adjudication.",
+      "name": "Replicate distinguishability",
+      "status": "unknown"
+    }
+  ],
+  "created_utc": "2026-09-18T07:23:16Z",
+  "decision_mode": "uncertainty_probe",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "a6f61f54a2d577452fa865e18ef6b60cf08364ec",
+    "input_hash": "2846fc1bc711dd7c5ed12c1e4e5b67dfd0601b65fcf145308384dff38e60997e",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "69fedc5433bead6d260facdbd838e5f1750824f0776724c8736aebc123dbfaa4",
+    "run_id": "REC_V3_20260918T072316Z_8ff38aa27a",
+    "workflow_version": "1.2.0;agent_v3=3.3.1"
+  },
+  "recommendation_id": "REC_V3_20260918T072316Z_8ff38aa27a",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C49",
+    "formulation_state": {
+      "AC1920": 20.0,
+      "MDI": 16.1525384179,
+      "PDP70": 31.923730791,
+      "PPG2000": 31.923730791,
+      "TK100": 0.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "Select S1C49 as an uncertainty probe rather than as a predicted optimum. Local experiments show monotonic viscosity decrease from 80-130 C, strong realization-state shifts, and formulation-dependent 120 C hold drift: E1 has low 90 minute SI while E5 has much larger drift. The paper-derived rheological rule supports separating viscosity scale, temperature response, and hold stability, and permits state anchoring only within the audited local chemistry family. Curated PUR literature/database priors support an acrylic-like intervention region near 20-25 wt%, but do not predict the held-out result; the 20 wt% point is chosen as the lower-perturbation, more interpretable regional probe, not because it is closest to a literature number. Conservative design constraints require preserving the E2 reactive-core proportions, verifying AC1920 functionality and recalculating stoichiometry, matching process history and initial state, and measuring a complete 80-130 C sweep plus a direct 120 C hold. This resolves the Skeptic's concern about static-viscosity confounding only by requiring direct hold data and residual checks; it does not assume that one state anchor transfers across acrylic chemistry. It addresses the Robustness Adjudicator's preference for a lower-loading acrylic point and its finding that S1C59 is fragile, while retaining S1C59 as a nearby alternative if a larger intervention is specifically required. The result must be interpreted as evidence for or against an acrylic-like formulation region, not as an exact-property prediction.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Separate audit of local experiments, rheological rules, and curated PUR analogue evidence",
+      "note": "Local evidence covers temperature response, state shifts, and E1/E5 hold contrast, but not acrylic-modified E2 hold behavior.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Evidence-domain audit",
+      "note": "The 20 wt% acrylic-like level is externally supported but is unmeasured in the local chemistry; state-transfer and hold behavior therefore remain extrapolative.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": "Direct viscosity measurements with recorded source units, instrument conditions, shear protocol, and sample handling",
+      "note": "Units and candidate-specific measurement error are not supplied.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": "Complete prospective process-history record and matched conditioning protocol",
+      "note": "All candidate scorecards have missing process-history fields.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "Matched replicate E2 and S1C49 runs with a predeclared uncertainty rule",
+      "note": "Local E2 repeatability is materially variable, with reported max-to-min ratios of approximately 2.8-3.6 and sample CV values of approximately 0.46-0.58.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

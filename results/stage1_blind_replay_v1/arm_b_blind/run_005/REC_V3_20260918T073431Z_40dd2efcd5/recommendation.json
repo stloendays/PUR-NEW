@@ -1,0 +1,138 @@
+{
+  "acceptance_criterion": {
+    "claim": "Under matched state and process conditions, the acrylic-containing region represented by S1C59 reduces 120 C temporal viscosity drift without an unacceptable shift in initial viscosity or supported temperature response.",
+    "criterion": "Before execution, freeze the replicate design, state-initialization procedure, control-relative initial-viscosity and 80-130 C response bounds, and uncertainty method. Accept the probe only if the matched-candidate median SI from 15 to 90 minutes is no greater than 0.17, is not worse than the matched E2/reference control under the frozen comparison rule, and the initial viscosity and 80-130 C response remain within the frozen control-relative bounds. Report all replicate results and preserve source units.",
+    "failure_condition": "Fail or defer if AC1920 functionality or full stoichiometry cannot be verified, process/state matching cannot be reproduced, SI exceeds 0.17 or is not distinguishable from the control under the frozen uncertainty rule, initial viscosity or the supported temperature response violates the frozen bounds, or replicate drift is inconsistent enough to prevent attribution to formulation.",
+    "measurement_window": "Initial viscosity at 120 C; temperature sweep from 80-130 C; matched isothermal 120 C hold with measurements at approximately 15, 60, and 90 minutes; matched E2 or local-reference replicates."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C49",
+      "relative_reason": "Nearby 20% acrylic-like region with lower formulation perturbation; useful for regional comparison but may produce an effect smaller than the observed repeatability spread."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C11",
+      "relative_reason": "Distinct 5% tackifier-like intervention, but it has weaker direct support for the acrylic replacement hypothesis and may primarily shift initial viscosity."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "A 120 C isothermal hold with measurements at approximately 15, 60, and 90 minutes is required; static viscosity alone is insufficient.",
+      "name": "matched_120C_hold",
+      "status": "pass"
+    },
+    {
+      "detail": "State-aware local rheology shows that realization state primarily shifts viscosity scale, but candidate process history, moisture, mixing, preconditioning, thermal history, sample age, and instrument equilibration are unspecified.",
+      "name": "state_and_process_control",
+      "status": "unknown"
+    },
+    {
+      "detail": "E2 repeat CV is approximately 0.46-0.58 and candidate-specific repeatability queries failed; matched replicates and a prespecified uncertainty method are mandatory.",
+      "name": "replicate_interpretability",
+      "status": "fail"
+    },
+    {
+      "detail": "AC1920 functionality and reactive-group contribution are unknown. The complete NCO:OH balance must be recalculated from verified specifications before execution.",
+      "name": "stoichiometric_feasibility",
+      "status": "fail"
+    },
+    {
+      "detail": "Any temperature-response comparison must remain within the measured 80-130 C range.",
+      "name": "supported_temperature_range",
+      "status": "pass"
+    },
+    {
+      "detail": "The 25% acrylic-like level is treated only as a directly commensurate external region anchor; it is not treated as a local property predictor or optimum.",
+      "name": "external_evidence_use",
+      "status": "pass"
+    },
+    {
+      "detail": "Later-formalized V2 grid, Pareto, scenario, and refinement diagnostics are excluded from prospective justification because contemporaneous provenance is unavailable.",
+      "name": "prospective_ranking_provenance",
+      "status": "fail"
+    },
+    {
+      "detail": "Use an in-range 120 C anchor for viscosity-scale calibration, while recognizing that this does not establish matched hold kinetics or eliminate process-history confounding.",
+      "name": "state_anchor",
+      "status": "pass"
+    }
+  ],
+  "created_utc": "2026-09-18T07:34:31Z",
+  "decision_mode": "uncertainty_probe",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "a6f61f54a2d577452fa865e18ef6b60cf08364ec",
+    "input_hash": "97e56b1ecc2710d31f7c44c9a6e568d09ee5d7414c7973eadaf9f3262dc4cd91",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "69fedc5433bead6d260facdbd838e5f1750824f0776724c8736aebc123dbfaa4",
+    "run_id": "REC_V3_20260918T073431Z_40dd2efcd5",
+    "workflow_version": "1.2.0;agent_v3=3.3.1"
+  },
+  "recommendation_id": "REC_V3_20260918T073431Z_40dd2efcd5",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C59",
+    "formulation_state": {
+      "AC1920": 25.0,
+      "MDI": 15.1430047668,
+      "PDP70": 29.9284976166,
+      "PPG2000": 29.9284976166,
+      "TK100": 0.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "S1C59 is selected as a bounded uncertainty/robustness probe, not as a predicted optimum. Local experiments establish monotonic viscosity decrease over 80-130 C, large E2 realization spread, and a formulation-dependent 120 C hold contrast between approximately SI 0.17 and 0.93. The state-aware rheology result further shows that realization state largely shifts viscosity scale, so matched preparation, a 120 C state anchor, and replicates are required. Paper-derived rheological rules support separating temperature response from temporal hold stability and prohibit extrapolation beyond the measured temperature and hold windows. Curated PUR literature/database evidence supports a directly commensurate acrylic-like region around 20-25% total formulation, including the 25% S1C59 region, but does not predict S1C59 properties or establish an optimum. The conservative design constraint is therefore to preserve the relative E2 reactive-core proportions only after verifying AC1920 functionality and recalculating full stoichiometry, and to judge the candidate against a matched E2 or local-reference control. The Skeptic's objections are resolved by reclassifying the point from performance candidate to uncertainty probe, excluding later-formalized ranking diagnostics, requiring explicit state/process control, and making the control comparison prospective. The Robustness Adjudicator's objections are resolved by treating stoichiometry as a pre-execution gate, requiring replicate and minimum-effect planning, and using the 120 C hold\u2014not static viscosity\u2014as the primary adjudication measurement. The result will support only a formulation region or direction, not an exact-property prediction.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "local rheology plus curated PUR formulation-family evidence",
+      "note": "Local evidence supports the failure mode and state-control requirement; external evidence supports only an acrylic-containing region.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": "comparison with local E2 and bounded external acrylic-like region",
+      "note": "The candidate is outside the measured local chemistry and external evidence is analogue evidence, not a direct predictor.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": "matched rheological measurements at 120 C and over 80-130 C",
+      "note": "One local state-specific anchor located held-out local realizations to roughly 6-10% pooled multiplicative error, but candidate-specific measurement uncertainty is unresolved.",
+      "status": "estimated",
+      "unit_or_scale": "source units unknown",
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Mixing, moisture, storage, preconditioning, thermal history, sample age, and related fields are missing.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "local replicate measurements",
+      "note": "This spread may exceed the expected formulation effect; replicate preparation is required. [value-as-reported: CV approximately 0.46-0.58 for E2]",
+      "status": "known",
+      "unit_or_scale": "relative spread",
+      "value": null
+    }
+  }
+}

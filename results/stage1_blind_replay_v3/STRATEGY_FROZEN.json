@@ -1,0 +1,53 @@
+{
+  "combined_strategy_hash": "1c61215603670606e3edd755e4c3dddc1ac70cdf689829652858a16de1cf5a7a",
+  "decision_order": [
+    "failure mode",
+    "experiment intent",
+    "required intervention-axis coverage",
+    "evidence-supported candidates",
+    "minimum sufficient intervention"
+  ],
+  "declaration": "Frozen as of this timestamp. No rule, prior, threshold, tie-break, prompt or candidate coordinate may change after the first valid frozen recommendation.",
+  "file_sha256": {
+    "configs/action_catalog.json": "20c763a128fe9ea9a79b83eea4a8763b0eaaeb3e25c7ac47e836d9cb53a4f3cd",
+    "configs/agent_v3.json": "c1391a68e4a994eaf9e7d2193e305966d760193e9d2145b958aaf7fd66f28a2c",
+    "configs/evidence_access_profiles.json": "0906341975695613a02614ab867a5c906baa4b0503116afa67ffb9e973c9ee17",
+    "configs/formulation_priors.json": "7be699d8705910ac1fd85d56dd9976506f9867c20926c59eaee69c29ae82beea",
+    "configs/workflow.json": "6c3aa2e9d7d7ddb42525f5ec28ccc89a48549b05ba7a8417ebc0b4f6dc32d282",
+    "data/external_evidence_hints.csv": "9419cb5006ca72457aebed77676dfed94f62ecd9795e820f3d4db3cce4621560",
+    "derived/evidence_state.json": "8ca085b1529f94b2fc6ed3bfdd0f5fb938a4580159ed04ece39fac42c023bc81",
+    "derived/stage1_blind_candidate_space_v1.json": "2b92e5d976e76b674a05f9b8fc17f4c78cc873b42641fbe67b35a37beeec4346",
+    "prompts/agent_v3_judge.txt": "81e462ee8252fb59fe615f9574a8a2173f017c085eb9fdaea2858a27d38ef36d",
+    "prompts/agent_v3_planner.txt": "7644203f19b3076fcb165be6226e876bad1bfdf3abc462b95001e8947bcec805",
+    "prompts/agent_v3_proposer.txt": "b6800b762998c6f992d3afb6b7ae0c627df569dd03441402c07f7475f84df40f",
+    "prompts/agent_v3_robustness.txt": "bea49b51d88c851525466fe7a3ac5245cf1dfdaa93d83e08f4b826c0e3fd3fb4",
+    "prompts/agent_v3_skeptic.txt": "96e0327c195efa60a18f4fb7fd6be8f352cb9717c7767766ebef4814a058191d",
+    "scripts/run_scientific_agent_v3.py": "1b1733a46c409a48c87bc8ac0172b33f2150843b1e1e1e5eb887b58c89335840",
+    "src/pur_new/actions.py": "a9127237c56f5eae29e56df102f15b90e23379b6074ee971316351ef438638c3",
+    "src/pur_new/agent_v3.py": "112c9c992c9572fa00c990288f53ed649c7d491e3510cafdc09647bda1e86f6b",
+    "src/pur_new/evidence_firewall.py": "a27992695b3015b1cbf29224b409bc208c5d72e9231f8cce19de52b221a3145b",
+    "src/pur_new/scientific_tools.py": "24ba8d0ed8f28c94a3812acbc0f260b9f18a9a0f46a787e8451bff0b673390ca"
+  },
+  "frozen_utc": "2026-09-18T08:57:04Z",
+  "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+  "scientific_changes": [
+    "classify_intervention_coverage(): each candidate labelled full_coverage / partial_coverage / no_intervention against the axes that independently carry pre-result evidence, read from formulation_priors rather than hard-coded.",
+    "performance_mitigation scenario now sorts by coverage_rank FIRST; total_modifier_pct is a tie-break within full-coverage candidates only.",
+    "robustness_summary exposes independently_supported_intervention_axes, intervention_coverage_groups and an explicit intervention_sufficiency_rule.",
+    "Proposer / Skeptic / Robustness / Judge prompts: sufficiency before perturbation; a candidate zeroing a supported axis is a partial-coverage / mechanistic control, not the default performance rank-1."
+  ],
+  "strategy_id": "STAGE1_PREEXPERIMENTAL_V3",
+  "strategy_name": "INTERVENTION_SUFFICIENCY_BEFORE_MINIMUM_PERTURBATION",
+  "supersedes_strategy": {
+    "frozen_utc": "2026-09-18T08:43:14Z",
+    "hash": "6bce55c2ccea0c401e8cee429b342f02b279aba7de38b9aa6a551ab89345ec26",
+    "strategy_id": "STAGE1_PREEXPERIMENTAL_V2"
+  },
+  "unchanged": [
+    "candidate lattice (73 nodes, identical to v1/v2)",
+    "evidence snapshot",
+    "exact analogue distance remains audit-only",
+    "no proximity reward to any literature percentage restored",
+    "no target coordinate in any candidate, prompt, config, prior, threshold or tie-break"
+  ]
+}

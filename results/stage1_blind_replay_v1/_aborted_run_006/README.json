@@ -1,0 +1,7 @@
+{
+  "status": "aborted_by_operator_not_a_result",
+  "reason": "Series reduced from N=10 to N=5 by user instruction (protocol amendment A-01). Run 6 had started and was terminated in flight.",
+  "frozen_recommendation_produced": false,
+  "excluded_from_all_statistics": true,
+  "blind_status_at_abort": "still blind; no summary computed and held-out truth not loaded"
+}

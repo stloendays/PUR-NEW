@@ -1,0 +1,148 @@
+{
+  "acceptance_criterion": {
+    "claim": "A frozen preparation and measurement protocol can produce an E2 reactive-core baseline reproducible enough to support a later modifier-performance comparison.",
+    "criterion": "For at least three independently prepared S1C02 realizations, obtain complete matched 80-130 \u00b0C rheology and 120 \u00b0C hold measurements at 15, 30, 60, and 90 min. The probe passes only if the consistently timed 120 \u00b0C state-anchor viscosity has sample CV below 0.46 and max/min ratio below 2.8, both stricter than the lower bounds of the historical E2 dispersion, while all preparations remain homogeneous and free of phase separation, gelation, skinning, nonuniform sampling, or loading inconsistency. Report each run's starting viscosity, absolute viscosity changes, SI15-60, and SI15-90 without converting them into a modifier-performance claim.",
+    "failure_condition": "If either repeatability limit is not met, any required measurement is missing, process histories differ, or a processability failure occurs, process/realization uncertainty remains unresolved and no acrylic-plus-tackifier performance candidate may be adjudicated from a nominal viscosity comparison.",
+    "measurement_window": "Full temperature response within 80-130 \u00b0C plus a matched 120 \u00b0C hold at 15, 30, 60, and 90 min"
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C41",
+      "relative_reason": "Preferred subsequent performance-mitigation candidate because 15 wt% AC1920 and 5 wt% TK100 cover both supported axes and place the tackifier dose in the repeatedly documented minor-resin region. It is deferred until modifier specifications, reactive-equivalent balance, process history, and the contemporaneous E2 baseline are resolved."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Not selected as the default performance experiment because its 2.5 wt% TK100 dose is below the supplied 3-10 wt% broad supported region, its minimum-sufficient status is unproven, and the fine-grid provenance is not fully auditable. It would be interpretable only as a lower-dose uncertainty probe after material and stoichiometric verification."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C30",
+      "relative_reason": "Covers both intervention axes with lower total burden, but 10 wt% acrylic lies below the principal 15-25 wt% analogue-supported region, making a null result ambiguous between inadequate dose and failure of the formulation-family hypothesis."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The experiment directly measures time-dependent viscosity increase at 120 \u00b0C through the matched 15, 30, 60, and 90 min hold rather than using static viscosity as a proxy.",
+      "name": "physical_failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C02 intentionally covers neither modifier axis because this run is an uncertainty-resolution control, not the full mitigation experiment. Critical process-state and modifier-stoichiometry uncertainties currently prevent an interpretable dual-axis performance claim.",
+      "name": "partial_coverage_control_instead_of_full_mitigation",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C02 is the measured E2 reactive-core composition with the documented 50/50 polyol ratio and NCO:OH label of 1.80; no modifier-functionality assumption is needed.",
+      "name": "local_chemistry_and_stoichiometry",
+      "status": "pass"
+    },
+    {
+      "detail": "Drying, mixing, reaction, aging, loading, sample age, and thermal history must be specified and held identical across independent preparations before execution.",
+      "name": "frozen_process_history",
+      "status": "unknown"
+    },
+    {
+      "detail": "Use at least three independently prepared S1C02 realizations, matching the historical E2 repeatability basis, rather than technical rereads of one preparation.",
+      "name": "independent_preparation_replication",
+      "status": "unknown"
+    },
+    {
+      "detail": "The design requires a consistently timed 120 \u00b0C state anchor and measurements confined to the locally supported 80-130 \u00b0C interval.",
+      "name": "state_anchor_and_temperature_support",
+      "status": "pass"
+    },
+    {
+      "detail": "The frozen design requires the original 120 \u00b0C hold schedule at 15, 30, 60, and 90 min, with SI15-60 and SI15-90 calculated from measured viscosities.",
+      "name": "matched_hold_window",
+      "status": "pass"
+    },
+    {
+      "detail": "Any phase separation, gelation, skinning, nonuniform sampling, or inconsistent instrument loading invalidates the repeatability assessment.",
+      "name": "homogeneity_and_processability",
+      "status": "unknown"
+    },
+    {
+      "detail": "Before advancing to S1C41, freeze AC1920 and TK100 lot identity, solids basis, moisture, compatibility, OH value or other NCO-reactive functionality, and recalculate true NCO:OH.",
+      "name": "modifier_material_specifications_for_later_performance_test",
+      "status": "unknown"
+    }
+  ],
+  "created_utc": "2026-09-18T12:13:00Z",
+  "decision_mode": "uncertainty_probe",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "9dda3a7dd5fa37789f7b54ab4b726cebd121fddf7deedb4867c150589dd8d9fb",
+    "model": "gpt-5.6-sol",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T121300Z_929a0c11c5",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T121300Z_929a0c11c5",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C02",
+    "formulation_state": {
+      "AC1920": 0.0,
+      "MDI": 20.1906730224,
+      "PDP70": 39.9046634888,
+      "PPG2000": 39.9046634888,
+      "TK100": 0.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "measured_reactive_core_only"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "Failure mode first: local experiments establish a formulation-dependent viscosity rise during a 120 \u00b0C hold, with E1 showing SI15-60 about 0.095 and SI15-90 about 0.168 and E5 showing about 0.515 and 0.931. They also show unusually large E2 run dispersion, so nominal viscosity cannot be treated as a state-independent formulation property. Experiment intent is nominally performance mitigation, which would ordinarily require both independently supported modifier axes. However, an interpretable performance experiment is presently blocked by unknown AC1920/TK100 solids, moisture, reactive functionality, compatibility, true NCO:OH, and missing process history; therefore this decision explicitly substitutes a partial-coverage process-state control for the full mitigation experiment. The paper-derived rheological rules used here are that realization state mainly shifts viscosity level within the audited local family, that a consistently timed state anchor is required, and that thermal-hold stability must be measured over the matched hold window rather than inferred from static viscosity. Curated PUR literature/database priors support an acrylic-like region around 15-25 wt% and a minor tackifier region around 3-10 wt%, repeatedly near 5 wt%; these priors identify S1C41 as the eventual bounded dual-axis performance candidate but are not treated as predictors of its wet-lab outcome. Conservative experimental-design constraints introduced here are at least three independent preparations, frozen process history, a contemporaneous S1C02 hold baseline, and repeatability limits referenced to the observed historical E2 dispersion. This resolves the Skeptic and Robustness-Adjudicator objections: S1C40 is not promoted by minimum modifier burden because its 2.5 wt% tackifier dose has unproven sufficiency and uncertain refinement provenance; S1C41 is deferred rather than rejected and becomes the preferred performance test after the required material, stoichiometric, and process controls pass. Exact analogue distance is not used as an objective, and no exact property prediction is made.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Intervention-axis coverage audit",
+      "note": "S1C02 is a no-intervention baseline control. It is sufficient for process-state uncertainty resolution but not for testing the acrylic-plus-minor-tackifier mitigation hypothesis.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Composition and temperature-domain audit",
+      "note": "S1C02 exactly reproduces the measured E2 reactive-core composition and remains inside the measured 80-130 \u00b0C domain; no modifier-family extrapolation is made.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": null,
+      "note": "Instrument-level measurement uncertainty and an uncertainty-interval method were not supplied; raw viscosity, absolute change, fractional drift, and run-level results must be retained.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Six major process-history fields are absent from the candidate record, so process freezing is mandatory.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "Historical E2 independent-run dispersion over 80-130 \u00b0C",
+      "note": "Historical E2 sample CV was approximately 0.46-0.58 and max/min ratio approximately 2.8-3.6. The probe tests whether a frozen process reduces this realization-state dispersion.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "acceptance_criterion": {
+    "claim": "The uncertainty probe resolves the stoichiometric and process-state ambiguities sufficiently to permit an interpretable full-coverage performance-mitigation experiment.",
+    "criterion": "Pass only if material-specific documentation or analytical confirmation establishes AC1920 and TK100 identity, hydroxyl value or equivalent weight, relevant NCO-reactive functionality, and moisture specification; an effective as-made NCO/OH assessment can then be completed for S1C41 and nearby full-coverage alternatives; and, before reranking, the protocol freezes addition order, mixing endpoint, reaction and thermal history, moisture handling, sample age and storage, measurement geometry, source-unit processing window, E1/E5 reproduction tolerances, replicate-aware effect-size rule for both SI endpoints, thermal-shape transfer test, permitted state-calibration action, and numerical late-acceleration rule.",
+    "failure_condition": "Fail the probe and abstain from candidate performance adjudication if either modifier's reactive or moisture contribution remains insufficient to calculate effective stoichiometry, if the preparation and measurement protocol cannot be frozen, or if any required success or state-calibration rule remains open to post-hoc definition.",
+    "measurement_window": "Complete before selecting or preparing the primary modifier candidate; subsequent performance testing must use the matched 120 C, 15-90 minute hold window."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C41",
+      "relative_reason": "Provisional leading full-coverage performance candidate at 15 wt% AC1920 and 5 wt% TK100, but not selectable until modifier functionality, moisture, effective NCO/OH, and process history are resolved."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C46",
+      "relative_reason": "Full-coverage regional robustness alternative with 17.5 wt% AC1920 and 5 wt% TK100; it has higher modifier burden and remains subject to the same stoichiometric and process uncertainties."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C51",
+      "relative_reason": "Full-coverage alternative with stronger approximately 20 wt% acrylic analogue support, but 25 wt% total modifier burden and greater departure from the characterized E2 chemistry."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Lower-burden full-coverage candidate, but its 2.5 wt% tackifier level lies below the repeatedly documented minor-tackifier cluster, so sufficiency is less well supported."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C39",
+      "relative_reason": "Acrylic-only partial-coverage control; appropriate for causal isolation but not as the primary performance-mitigation experiment because it zeroes the independently supported tackifier axis."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The intended endpoint is the measured viscosity increase during a 120 C hold, assessed separately over 15-60 and 15-90 minutes rather than by static viscosity or temperature-sweep slope.",
+      "name": "physical_failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "Any eventual primary performance candidate must cover both independently supported acrylic-like and minor-tackifier-like axes; S1C41, S1C46, S1C51, and S1C40 satisfy this coverage requirement.",
+      "name": "performance_mitigation_axis_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "AC1920 and TK100 hydroxyl values, equivalent weights, reactive-group functionality, moisture specifications, and resulting effective NCO/OH are unresolved, preventing interpretable candidate ranking.",
+      "name": "modifier_identity_and_effective_stoichiometry",
+      "status": "fail"
+    },
+    {
+      "detail": "Addition order, mixing conditions and endpoint, reaction temperature and time, moisture handling, sample age, storage, and imposed thermal history are not frozen; all candidates have six missing process fields.",
+      "name": "process_history_control",
+      "status": "fail"
+    },
+    {
+      "detail": "A standardized early 120 C anchor is required, but vertical-shift calibration may be used only if the shared thermal-response shape transfers to the modified chemistry under a predeclared test.",
+      "name": "state_anchor_and_transfer_test",
+      "status": "unknown"
+    },
+    {
+      "detail": "Future performance adjudication must use matched E1, E5, and candidate trajectories at 120 C with observations at 15, 30, 60, and 90 minutes.",
+      "name": "matched_hold_window",
+      "status": "pass"
+    },
+    {
+      "detail": "The current merely-lower-than-E5 rule lacks a frozen effect-size requirement, replicate-aware decision rule, E1/E5 reproduction tolerance, processing-viscosity window, and numerical late-acceleration rule.",
+      "name": "predeclared_performance_rule",
+      "status": "fail"
+    },
+    {
+      "detail": "External evidence supports a broad acrylic-plus-minor-tackifier formulation region only; it is not treated as a predictor of an exact local composition, hold result, optimum, mechanism, or synergy.",
+      "name": "external_evidence_claim_boundary",
+      "status": "pass"
+    }
+  ],
+  "created_utc": "2026-09-18T12:33:36Z",
+  "decision_mode": "abstain",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "02e348ba404d1c945cbaf73160173d9b8e46e8c59737eab247a390bb9f3d63bd",
+    "model": "gpt-5.6-sol",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T123336Z_2fa11c65a7",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T123336Z_2fa11c65a7",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": null,
+  "selection_rationale": "Failure mode first: local experiments establish that temporal viscosity growth at 120 C is the relevant failure, with E5 SI approximately 0.515 over 15-60 minutes and 0.931 over 15-90 minutes versus approximately 0.095 and 0.168 for E1. Local E2 repeats also establish large realization-level variation. Experiment intent is performance mitigation, so the eventual primary candidate must cover both independently supported acrylic-like and minor-tackifier-like axes; partial-coverage candidates such as S1C39 are controls, not substitutes for the full mitigation experiment. The supplied state-aware rheological analysis, derived from local measurements, supports a possible vertical state calibration within the measured local chemistry but requires transfer testing for modified chemistry; no separate paper-derived rheological rule is used as a direct candidate-property predictor, and static viscosity or a longer external hold is not accepted as a proxy for the matched local hold. Curated PUR literature/database priors support a broad acrylic region around 15-25 wt% and a minor-tackifier region around 5 wt% and below about 10 wt%, but these chemically and procedurally noncommensurate analogues do not predict the held-out result or establish an exact optimum. Minimum modifier burden, preservation of E2 core proportions, bounded lattice levels, matched references, and prospective state/process controls are conservative experimental-design constraints rather than measured performance facts. Under those constraints S1C41 is the provisional lowest-burden full-coverage candidate with a documented approximately 5 wt% tackifier level, but it is not frozen for testing because both the Skeptic and Robustness Adjudicator identify the same critical blocker: unknown modifier functionality and effective NCO/OH violate the Planner's interpretability trigger. Their additional objection to the permissive success rule is also sustained; effect size, replicate handling, reference reproduction, processing window, thermal-shape transfer, and late acceleration must be frozen before candidate testing. Therefore the scientifically useful pre-result decision is an uncertainty probe, followed by reranking only among full-coverage candidates if the probe passes.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Local rheology and hold data plus curated PUR literature/database priors",
+      "note": "Local evidence defines the failure and state uncertainty. External evidence supports broad modifier families and loading regions, but tackifier evidence is primarily formulation plausibility rather than direct local hold-stability evidence.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Comparison of the E2-anchored modifier lattice with supplied noncommensurate PUR analogues",
+      "note": "Modifier candidates extrapolate beyond the locally measured reactive-core-only chemistry; the shared state-shift model has not been validated for AC1920/TK100 formulations.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": null,
+      "note": "Local viscosity units and the acceptable processing window are not defined, and no candidate hold measurement exists.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "All six major candidate process-history fields are missing and no executable preparation protocol is frozen.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "Original E2 temperature-sweep repeats from 80 to 130 C",
+      "note": "E2 showed sample CV approximately 0.46-0.58 and max/min ratios approximately 2.8-3.6, requiring independent preparations and state-aware adjudication.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

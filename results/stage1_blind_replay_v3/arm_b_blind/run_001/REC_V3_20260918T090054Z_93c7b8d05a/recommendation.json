@@ -1,0 +1,128 @@
+{
+  "acceptance_criterion": {
+    "claim": "The uncertainty probe is complete only when a subsequent full-coverage performance experiment can distinguish temporal hold-drift mitigation from viscosity-scale or process-state change.",
+    "criterion": "Pass the pre-experiment gate only if AC1920 and TK100 reactive contributions are documented, true NCO:OH stoichiometry is recalculated, conditioning/loading/reaction history/sample age and state-anchor timing are frozen, matched E5 reference replicates are defined, and quantitative pre-result bounds are recorded for initial viscosity, state-calibrated viscosity, 80-130 C response deviation, and replicate/process-state variability. Otherwise do not adjudicate S1C40 or any alternative as an interpretable performance result.",
+    "failure_condition": "The probe fails if functionality or stoichiometry cannot be verified, process/state controls cannot be frozen, the E5 reference distribution cannot be defined, or quantitative acceptance bounds cannot be specified before physical adjudication.",
+    "measurement_window": "After the gate: 80-130 C temperature sweeps with replicates and an in-range 120 C state anchor, plus matched 120 C hold measurements at 15, 60, and 90 min."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Provisional full-coverage performance candidate: 15 wt% acrylic-like modifier plus 2.5 wt% minor-tackifier-like modifier on the E2 core. It is not frozen because reactive functionality, true stoichiometry, process history, state-anchor definition, and quantitative viscosity acceptance bounds remain unresolved."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C41",
+      "relative_reason": "Full-coverage robustness alternative with 5 wt% tackifier-like modifier; higher justified modifier burden and greater risk of viscosity-scale or processability shifts than S1C40."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C35",
+      "relative_reason": "Lower-burden full-coverage alternative, but its 12.5 wt% acrylic-like level has weaker support and may produce an effect too small to distinguish from E2 state variation."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C10",
+      "relative_reason": "Low-burden tackifier-only mechanistic control; inappropriate as the default performance-mitigation experiment because it zeroes an independently supported acrylic-like axis."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "E5 shows substantial 120 C hold drift, with SI 0.515 from 15 to 60 min and 0.931 from 15 to 90 min; hold drift is distinct from static temperature response.",
+      "name": "Established failure mode",
+      "status": "pass"
+    },
+    {
+      "detail": "The declared intent is performance_mitigation, so independently supported acrylic-like and minor-tackifier-like axes may be combined.",
+      "name": "Experiment intent",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C40, S1C41, and S1C35 cover both independently supported axes; S1C10 is retained only as a mechanistic control.",
+      "name": "Required intervention-axis coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "A one-point in-range anchor is required because local realization state primarily shifts viscosity scale, but its timing and normalization procedure are not yet frozen.",
+      "name": "State calibration",
+      "status": "unknown"
+    },
+    {
+      "detail": "AC1920 and TK100 reactive-group contributions are unverified, so preservation of the E2 NCO:OH condition cannot yet be assumed.",
+      "name": "Reactive functionality and stoichiometry",
+      "status": "unknown"
+    },
+    {
+      "detail": "Major process-history fields are missing; conditioning, loading, reaction history, sample age, and matched E5 reference realization must be specified before interpretation.",
+      "name": "Process-history control",
+      "status": "unknown"
+    },
+    {
+      "detail": "Usable viscosity, allowable state-calibrated scale shift, temperature-response fidelity, and replicate/process-state variability lack quantitative pre-result bounds.",
+      "name": "Acceptance bounds",
+      "status": "unknown"
+    },
+    {
+      "detail": "The required matched measurement is a 120 C hold at 15, 60, and 90 min, supplemented by 80-130 C sweeps and replicate/state-anchor measurements.",
+      "name": "Thermal-hold measurement",
+      "status": "pass"
+    }
+  ],
+  "created_utc": "2026-09-18T09:00:54Z",
+  "decision_mode": "abstain",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "bc977df545f34945014508a274e34422ec8deb9d9672843582941733f29987eb",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T090054Z_93c7b8d05a",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T090054Z_93c7b8d05a",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": null,
+  "selection_rationale": "The primary failure mode is thermal-hold viscosity drift, so the next performance experiment must directly measure the matched 120 C hold rather than optimize nominal viscosity. The local experiments establish the E5-versus-E1 hold contrast, monotonic 80-130 C thermal response, and large E2 realization-state spread. The state-aware rheology rules indicate that a new realization requires an in-range state anchor and that static viscosity, thermal response, and temporal drift are separate coordinates. Curated PUR literature supports acrylic-like and minor-tackifier-like formulation families and broad regions, but it is analogue guidance rather than a predictor of the held-out wet-lab result; the approximately 15 wt% acrylic evidence is directional/noncommensurate, while approximately 20-25 wt% are the more directly commensurate coarse anchors and approximately 5 wt% is the repeated minor-tackifier region. Conservative design constraints require full coverage of both independently supported axes for performance mitigation, bounded modifier loading, matched process history, and a falsifiable hold-window test. S1C40 remains the provisional performance candidate, with S1C41 as the nearby higher-tackifier robustness alternative, but the Skeptic's objections remain material: SI thresholds are not evidence-derived, usable viscosity and temperature-response fidelity are undefined, and a single-realization E5 comparison is underspecified. The Robustness Adjudicator therefore correctly changes the immediate decision to an uncertainty probe. Before freezing a candidate, verify AC1920 and TK100 functionality and recalculate true NCO:OH stoichiometry, freeze process and state-anchor procedures, define quantitative viscosity and response bounds, and establish the matched E5 reference distribution. This does not remove the supported secondary modifier axis; it gates the full mitigation experiment until it can be interpreted.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Coverage against independently supported acrylic-like and minor-tackifier-like axes",
+      "note": "Full-coverage candidates are available, but local functionality and combined-axis interpretability remain unresolved.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Evidence-bounded candidate lattice and measured 80-130 C, 15-90 min windows",
+      "note": "External evidence supports a formulation family and broad region, not an exact local-property prediction.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": "120 C hold at 15, 60, and 90 min; SI=(eta_t1-eta_t0)/eta_t0; 80-130 C temperature sweep",
+      "note": "The measurement window is established, but acceptable viscosity and response bounds are not yet frozen.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Conditioning, loading, reaction history, sample age, and related fields are not sufficiently specified.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "Replicate sweeps and matched E5 reference replicates",
+      "note": "E2 shows substantial realization spread, with CV approximately 0.46-0.58 across the supplied temperature-sweep data.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

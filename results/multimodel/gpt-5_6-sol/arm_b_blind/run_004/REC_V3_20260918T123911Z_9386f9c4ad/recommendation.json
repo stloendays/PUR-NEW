@@ -1,0 +1,168 @@
+{
+  "acceptance_criterion": {
+    "claim": "The uncertainty probe establishes whether an interpretable, prospectively frozen S1C41 performance-mitigation experiment can proceed.",
+    "criterion": "Pass only if verified specifications or measurements establish AC1920 and TK100 reactive functionality, equivalent weights, and water contents; the resulting reactive-group accounting and MDI/NCO:OH treatment are documented and frozen; component conditioning, moisture control, mixing order and duration, heating and conditioning history, sample age, hold-start definition, measurement sequence, homogeneity inspections, and failed-run rules are frozen; a numerical usable-viscosity interval and the uncertainty estimator, confidence level, independent-preparation unit, and decision rule for both SI endpoints are fixed; and a process-matched reference or state-control plan is established. The subsequent performance test must use at least three independent S1C41 preparations, directly measure the 120 C hold trajectory, and treat any one-point state normalization as secondary and conditional on demonstrated shared-shape compatibility.",
+    "failure_condition": "Do not execute or interpret S1C41 as a performance test if reactive-group balance remains unauditable, any required process or statistical field remains unfrozen, no process-matched reference strategy is available, or homogeneity and measurement procedures cannot distinguish formulation effects from realization-state artifacts.",
+    "measurement_window": "Uncertainty characterization before S1C41 preparation, followed only after a pass by a matched 120 C hold from 15 through 90 min with at least 15, 30, 60, and 90 min measurements."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Lower total modifier burden and full nominal axis coverage, but its 2.5 wt% tackifier level is below the predeclared 3-10 wt% broad evidence region. It becomes preferable only if 2.5 wt% is prospectively accepted as adequate minor-axis coverage."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C46",
+      "relative_reason": "Full coverage with 5 wt% tackifier and a more interior 17.5 wt% acrylic level, but it adds modifier burden without direct evidence of superior local mitigation."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C51",
+      "relative_reason": "Uses stronger approximately 20 wt% acrylic composition anchors, but exact analogue proximity does not predict local hold stability and its 25 wt% modifier burden is higher."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C39",
+      "relative_reason": "Useful acrylic-only mechanistic control, but it omits the independently supported minor-tackifier axis and therefore does not satisfy the declared performance-mitigation intent."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C11",
+      "relative_reason": "Useful tackifier-only mechanistic control with low burden, but it omits the acrylic-like axis and cannot test the full mitigation strategy."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The downstream S1C41 experiment is directed at excessive time-dependent viscosity increase during a matched 120 C hold, not at static viscosity alone.",
+      "name": "failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C41 contains both independently supported intervention axes: 15 wt% AC1920 and 5 wt% TK100.",
+      "name": "performance_mitigation_axis_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "The acrylic level is at the directional lower edge of the 15-25 wt% region and the tackifier level is within the repeated 4.8-6.4 wt% minor-resin cluster.",
+      "name": "evidence_bounded_modifier_region",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C41 is treated only as the lowest-burden full-coverage candidate within the selected 15-20 wt% acrylic and approximately 5 wt% tackifier region, not as a proven sufficient or optimal intervention.",
+      "name": "minimum_burden_interpretation",
+      "status": "pass"
+    },
+    {
+      "detail": "AC1920 and TK100 reactive functionality, equivalent weights, and water contents are unresolved, so the true NCO/OH balance after core displacement cannot yet be audited.",
+      "name": "reactive_stoichiometry_audit",
+      "status": "fail"
+    },
+    {
+      "detail": "Mixing order and duration, conditioning, moisture control, heating history, sample age, hold-start definition, and measurement sequence are not frozen.",
+      "name": "process_history_control",
+      "status": "fail"
+    },
+    {
+      "detail": "One-point state calibration worked within the original chemistry family but has not been validated for S1C41; direct hold trajectories must remain primary.",
+      "name": "state_anchor_transfer",
+      "status": "unknown"
+    },
+    {
+      "detail": "The numerical process- and instrument-feasibility interval at 120 C has not been prospectively defined.",
+      "name": "usable_viscosity_interval",
+      "status": "unknown"
+    },
+    {
+      "detail": "A process-matched reference, uncertainty estimator, confidence level, replicate unit, exclusion rules, and failed-run handling remain to be frozen.",
+      "name": "matched_reference_and_statistics",
+      "status": "unknown"
+    },
+    {
+      "detail": "The required downstream protocol specifies direct measurements over 15-90 min at 120 C, including SI15-60 and SI15-90.",
+      "name": "matched_hold_window",
+      "status": "pass"
+    },
+    {
+      "detail": "No held-out outcome is present in the supplied ranking, but the exact grid lacks an independently verifiable contemporaneous freeze artifact.",
+      "name": "prospective_provenance",
+      "status": "unknown"
+    }
+  ],
+  "created_utc": "2026-09-18T12:39:11Z",
+  "decision_mode": "uncertainty_probe",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "f60ed998a049ccb55be062941befe2e9e6e19923119961fc84afb61f3bbb66f4",
+    "model": "gpt-5.6-sol",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T123911Z_9386f9c4ad",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T123911Z_9386f9c4ad",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C41",
+    "formulation_state": {
+      "AC1920": 15.0,
+      "MDI": 16.1525384179,
+      "PDP70": 31.923730791,
+      "PPG2000": 31.923730791,
+      "TK100": 5.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "The demonstrated local failure is excessive 120 C hold drift: E5 had SI15-60=0.515 and SI15-90=0.931 versus E1 values of 0.095 and 0.168. Local E2 measurements also established large realization spread, so formulation effects cannot be interpreted without process and state control. Paper-derived rheological analysis showed that realization state primarily shifts viscosity scale within the original chemistry family and that a 120 C anchor can support conditional calibration, while also establishing that temperature-sweep behavior and temporal hold drift are separate observables. Curated PUR literature/database priors support an acrylic-like formulation region around 15-25 wt% and a minor tackifier region near 5 wt%, but these analogues define a candidate family only and do not predict S1C41 viscosity or stability. The conservative experimental-design rule is therefore to retain both supported axes for the declared performance-mitigation intent and, among full-coverage candidates in the selected region, provisionally freeze the lower-burden S1C41. This is not based on exact analogue distance and is not an exact-property prediction. The Skeptic's stoichiometry, process-history, statistical, and unmatched-reference objections are decisive for immediate execution, so the present decision is an uncertainty probe rather than a performance claim. The Robustness Adjudicator's conditional preference is adopted: S1C41 remains the downstream target, but it must not be prepared or interpreted until modifier reactivity and water content are verified, true NCO/OH treatment is frozen, process fields and statistical rules are predefined, and a process-matched reference strategy is established. S1C40 is not rejected because it is farther from an exact literature point; it is secondary because 2.5 wt% lies below the predeclared 3 wt% lower boundary of the broad tackifier evidence region. S1C39 and S1C11 remain mechanistic controls and are not substituted for the full mitigation experiment.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Intervention-axis and source-directness audit",
+      "note": "Both axes have analogue support, but local hold-stability efficacy is unmeasured and tackifier support is mainly directional or processability-based.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Comparison with the original E2 chemistry and curated analogue regions",
+      "note": "S1C41 remains inside bounded external modifier regions but is outside the locally measured modifier-free chemistry family.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": null,
+      "note": "No S1C41 measurement exists. The instrument-feasibility interval and statistical procedure must be frozen before testing.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Six major process-history fields are absent, creating a critical attribution risk.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "Original E2 independent-run spread across 80-130 C",
+      "note": "E2 showed high realization variability, including CV 0.585 and max/min 3.57 at 120 C; transfer of that spread to S1C41 is unknown.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

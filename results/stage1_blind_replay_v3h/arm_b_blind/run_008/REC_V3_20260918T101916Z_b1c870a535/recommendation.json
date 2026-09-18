@@ -1,0 +1,123 @@
+{
+  "acceptance_criterion": {
+    "claim": "The uncertainty probe is successful only if the subsequent performance experiment can make an interpretable two-axis thermal-hold mitigation comparison.",
+    "criterion": "Proceed to the full performance experiment only after the candidate's verified reactive-group accounting and true NCO:OH are documented, a concurrent replicated process-matched E2 reference is specified, complete process-history metadata are captured, one-point 120 C state calibration is defined without normalizing away temporal drift, and quantitative limits for usable initial viscosity, replicate spread, monotonic 80-130 C response, and minimum meaningful reductions in both SI15-60 and SI15-90 are fixed before measurement.",
+    "failure_condition": "Fail the probe and do not interpret a candidate performance result if reactive functionality or NCO:OH is unresolved, the concurrent E2 reference or process history is missing, state calibration would replace raw hold trajectories, or quantitative acceptance limits cannot be fixed prospectively.",
+    "measurement_window": "Pre-experiment verification; then, if passed, replicated 80-130 C temperature sweeps and matched 120 C holds at 15, 60, and 90 minutes."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C41",
+      "relative_reason": "Provisional full-coverage performance candidate: 15 wt% acrylic-like modifier plus 5 wt% tackifier-like modifier, but tied with S1C45 and not stoichiometrically verified."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C45",
+      "relative_reason": "Full-coverage alternative with comparable total modifier burden; its 2.5 wt% tackifier level is below the repeatedly supported minor-tackifier cluster, so it does not resolve the ranking uncertainty."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C51",
+      "relative_reason": "Full-coverage higher-burden robustness candidate supported by coarse analogue regions, but its 25 wt% modifier burden increases viscosity and temperature-response confounding."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The established failure mode is thermal-hold viscosity drift, distinct from static viscosity and temperature response.",
+      "name": "failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "Performance mitigation permits the independently supported acrylic-like and minor-tackifier-like axes to remain active; full coverage is required before minimum burden is used as a tie-break.",
+      "name": "experiment_intent_axis_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C41 and S1C45 have comparable full coverage, support, and total modifier burden; the supplied evidence does not uniquely rank them.",
+      "name": "candidate_rank_identifiability",
+      "status": "fail"
+    },
+    {
+      "detail": "Modifier functionality and the resulting total reactive-group balance and true NCO:OH ratio are not supplied.",
+      "name": "stoichiometric_feasibility",
+      "status": "unknown"
+    },
+    {
+      "detail": "E2 shows large realization spread, so a concurrent replicated process-matched E2 reference with complete history metadata is required.",
+      "name": "process_state_interpretability",
+      "status": "fail"
+    },
+    {
+      "detail": "The local rheology supports one-point in-range calibration for viscosity-scale and temperature-response comparison, but calibration must not replace raw hold trajectories or SI values.",
+      "name": "state_calibration",
+      "status": "pass"
+    },
+    {
+      "detail": "The required adjudication window is 120 C with measurements at 15, 60, and 90 minutes, reporting SI15-60 and SI15-90 separately.",
+      "name": "matched_hold_measurement",
+      "status": "pass"
+    },
+    {
+      "detail": "Usable initial-viscosity limits, acceptable replicate spread, monotonicity tolerance, and minimum meaningful SI reductions have not been predeclared.",
+      "name": "quantitative_acceptance_bounds",
+      "status": "unknown"
+    }
+  ],
+  "created_utc": "2026-09-18T10:19:16Z",
+  "decision_mode": "abstain",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "b90a3cfc3ac03298056244b7403c4ef4669e8337c389509abc1dcb7a9419777a",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T101916Z_b1c870a535",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T101916Z_b1c870a535",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": null,
+  "selection_rationale": "The local experiments establish thermal-hold drift as the primary failure mode: E1 is low-drift while E5 is high-drift, and E2 has substantial realization/process-state spread. The paper-derived rheological rule supports one-point in-range state calibration for viscosity scale and temperature-response shape, but explicitly does not replace direct temporal hold measurements. Curated PUR literature supports an acrylic-like formulation family and a minor tackifier-like region near 5 wt%, with a conservative upper bound near 10 wt%; these priors support a bounded candidate region rather than an exact property prediction or optimum. The conservative design constraint for performance mitigation requires coverage of both independently supported axes, so an acrylic-only or tackifier-only candidate cannot replace the full mitigation experiment. However, the Skeptic and Robustness Adjudicator correctly identify an unresolved S1C41-versus-S1C45 tie, unverified modifier stoichiometry, inadequate separation from E2 realization variation, and unspecified quantitative acceptance bounds. Therefore, the scientifically useful pre-result decision is an uncertainty probe before freezing either performance candidate: verify modifier functionality and true NCO:OH, run a concurrent replicated process-matched E2 reference, preserve complete process history, and predeclare quantitative acceptance limits. This resolves the objections without treating analogue proximity as a predictor or removing a supported secondary modifier axis.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Candidate diagnostics and curated prior audit.",
+      "note": "S1C41 and S1C45 provide full coverage of the two independently supported intervention axes; their rank remains unresolved.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": "Candidate regions are bounded by local E2 chemistry and external analogue evidence.",
+      "note": "External evidence supports formulation families and coarse regions, not exact local-property prediction.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": "Original local data include temperature sweeps and 120 C hold measurements at 15, 60, and 90 minutes.",
+      "note": "A candidate performance result is not available; static viscosity cannot substitute for matched hold stability.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": "Requires complete preparation, conditioning, measurement-order, sample-age, and hold-history metadata.",
+      "note": "Missing process history prevents an interpretable formulation-effect comparison.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "E2 replicate assessment across 80-130 C.",
+      "note": "E2 descriptive CV is approximately 0.46-0.58, with the largest reported spread near 120 C.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

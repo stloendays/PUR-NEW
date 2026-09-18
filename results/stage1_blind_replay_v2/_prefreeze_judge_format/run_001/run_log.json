@@ -1,0 +1,10 @@
+{
+  "finished_utc": "2026-09-18T08:25:49Z",
+  "returncode": 1,
+  "run_index": 1,
+  "started_utc": "2026-09-18T08:21:43Z",
+  "status": "error",
+  "stderr": "Traceback (most recent call last):\n  File \"D:\\Research\\PUR-NEW\\scripts\\run_scientific_agent_v3.py\", line 550, in <module>\n    main()\n  File \"D:\\Research\\PUR-NEW\\scripts\\run_scientific_agent_v3.py\", line 502, in main\n    recommendation = freeze_recommendation(\n                     ^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Research\\PUR-NEW\\scripts\\run_scientific_agent_v3.py\", line 163, in freeze_recommendation\n    raise ValueError(\"selected candidate repeated in alternatives\")\nValueError: selected candidate repeated in alternatives",
+  "stdout": "",
+  "wall_seconds": 246.06
+}

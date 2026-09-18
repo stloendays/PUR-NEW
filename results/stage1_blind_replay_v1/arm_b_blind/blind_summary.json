@@ -1,0 +1,29 @@
+{
+  "abstention_rate": 0.0,
+  "agent_independently_chose_120c_rate": 1.0,
+  "agent_independently_chose_15_60_window_rate": 0.8,
+  "arm_dir": "results\\stage1_blind_replay_v1\\arm_b_blind",
+  "held_out_truth_loaded": false,
+  "invalid_rate": 0.0,
+  "level1_thermal_hold_objective_recovery_rate": 1.0,
+  "level2_acrylic_like_rate": 1.0,
+  "level2_both_axes_rate": 0.0,
+  "level2_minor_tackifier_rate": 0.0,
+  "level2_resin_modified_rate": 1.0,
+  "n_abstain": 0,
+  "n_invalid": 0,
+  "n_runs_attempted": 5,
+  "n_valid": 5,
+  "note": "Computed with no access to the wet-lab outcome.",
+  "objective_category_distribution": {
+    "realization_state": 5,
+    "temperature_response": 3,
+    "thermal_hold_stability": 5,
+    "viscosity_level": 2
+  },
+  "selection_distribution": {
+    "S1C49": 3,
+    "S1C59": 2
+  },
+  "selection_entropy_bits": 0.971
+}

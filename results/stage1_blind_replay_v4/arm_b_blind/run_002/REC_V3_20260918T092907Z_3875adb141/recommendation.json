@@ -1,0 +1,158 @@
+{
+  "acceptance_criterion": {
+    "claim": "S1C40 is interpretable for a subsequent thermal-hold performance decision rather than being confounded by stoichiometry, process state, or an invalid state-shape transfer.",
+    "criterion": "Before declaring performance success, verify AC1920 and TK100 functionality and recalculate true NCO:OH; run S1C40 with a concurrent matched-process E2 control and at least one prespecified axis control using identical state anchoring, 80\u2013130 \u00b0C sweep, 120 \u00b0C hold, replication, and randomized realization structure; require the modified-candidate calibration residual to be reported against the local state-aware shape, require SI15\u201360 and SI15\u201390 to be lower than the corresponding E5 references in independent realizations and to exceed a predeclared effect-size margin relative to matched E2 variability, and require nominal viscosity, temperature-response slope, monotonicity, and absolute application viscosity limits to meet values registered before physical adjudication.",
+    "failure_condition": "Fail or defer interpretation if functionality or stoichiometry cannot be verified, matched controls or required replication are absent, calibration residuals indicate invalid shared-shape transfer, either hold SI fails the prespecified E5 and matched-E2 effect-size criteria, or nominal viscosity, temperature sensitivity, monotonicity, or the preregistered absolute viscosity limit is unacceptable.",
+    "measurement_window": "Temperature sweep 80\u2013130 \u00b0C; one-point state anchor at 120 \u00b0C; matched 120 \u00b0C hold from 15 to 90 min with SI15\u201360 and SI15\u201390; independent realization and hold replicates."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C41",
+      "relative_reason": "Full dual-axis coverage and stronger support for the approximately 5 wt% tackifier region, but higher total modifier burden and greater risk of viscosity or process-state confounding."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C30",
+      "relative_reason": "Lower-burden full-coverage alternative, but its 10 wt% acrylic-like loading is below the conservative supported acrylic band and may be too weak to exceed E2-like realization variability."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C39",
+      "relative_reason": "Useful acrylic-only mechanistic control, but it omits the independently supported tackifier-like axis and therefore cannot replace the performance-mitigation intervention."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C11",
+      "relative_reason": "Useful tackifier-only axis control, but it omits the independently supported acrylic-like axis and is not sufficient as the full mitigation experiment."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The experiment directly probes the established 120 \u00b0C thermal-hold viscosity-drift failure over the measured 15\u201390 min window.",
+      "name": "failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C40 covers both independently supported acrylic-like and minor-tackifier-like intervention axes; zeroing either axis is not used as the performance decision.",
+      "name": "performance_mitigation_axis_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "The candidate preserves the E2 50/50 PDP70/PPG2000 reactive-core proportions.",
+      "name": "local_reactive_core_preservation",
+      "status": "pass"
+    },
+    {
+      "detail": "AC1920 and TK100 functionality and any NCO-reactive contribution are unresolved; true NCO:OH must be recalculated before formulation.",
+      "name": "true_stoichiometry",
+      "status": "unknown"
+    },
+    {
+      "detail": "A 120 \u00b0C one-point anchor is required, but applicability of the local shared-shape model to the modified chemistry must be tested with a prespecified calibration-residual check.",
+      "name": "state_calibration",
+      "status": "unknown"
+    },
+    {
+      "detail": "A concurrent matched-process E2 control, and preferably acrylic-only and tackifier-only controls, must use the same state anchor, sweep, hold, replication, and process-history protocol.",
+      "name": "matched_process_control",
+      "status": "unknown"
+    },
+    {
+      "detail": "The local E2 repeatability risk is high, with 120 \u00b0C CV approximately 0.585 and max/min ratio approximately 3.57; independent realizations, controlled history, randomization, and a prespecified effect-size margin are required.",
+      "name": "process_history_and_repeatability",
+      "status": "unknown"
+    },
+    {
+      "detail": "The 15 wt% acrylic-like and 2.5 wt% tackifier-like levels lie within the bounded candidate lattice and are used as coarse directional design choices, not exact literature-derived optima.",
+      "name": "evidence_supported_region",
+      "status": "pass"
+    },
+    {
+      "detail": "Among full-coverage candidates, S1C40 provides lower justified total modifier burden than S1C41 while retaining both supported axes; this is a tie-break after coverage, not a reason to remove an axis.",
+      "name": "minimum_sufficient_intervention",
+      "status": "pass"
+    },
+    {
+      "detail": "Adjudication will use the matched 120 \u00b0C hold trajectory and SI15\u201360 and SI15\u201390, rather than static-viscosity proxy data.",
+      "name": "direct_hold_measurement",
+      "status": "pass"
+    }
+  ],
+  "created_utc": "2026-09-18T09:29:07Z",
+  "decision_mode": "uncertainty_probe",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "7518755c10fff45130b1eba9a55112183da961578814c54a2c81d94e1f4fc45b",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T092907Z_3875adb141",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T092907Z_3875adb141",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C40",
+    "formulation_state": {
+      "AC1920": 15.0,
+      "MDI": 16.6573052435,
+      "PDP70": 32.9213473782,
+      "PPG2000": 32.9213473782,
+      "TK100": 2.5,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "The measured failure mode is formulation-dependent 120 \u00b0C thermal-hold viscosity drift: E5 has SI15\u201360 of 0.515 and SI15\u201390 of 0.931 versus E1 values of 0.095 and 0.168, while E2 shows large realization spread. The experiment intent is performance_mitigation, so both independently supported acrylic-like and minor-tackifier-like axes must remain covered. S1C40 is selected as an uncertainty probe because it preserves the measured E2 reactive-core balance while testing both supported intervention families at 15 wt% acrylic-like and 2.5 wt% tackifier-like modifier. The local experiments establish the failure mode, the need for direct hold measurement, the monotonic 80\u2013130 \u00b0C temperature-response domain, and the need to control state. The paper-derived rheology rules establish that state shifts primarily change viscosity scale within the local chemistry family and motivate a 120 \u00b0C one-point anchor, but they do not establish transferable shape for S1C40. Curated PUR literature/database evidence supports acrylic-like and minor-tackifier-like formulation families and bounded coarse regions, not an exact S1C40 property prediction or optimum. The conservative design constraint is full intervention-axis coverage for performance mitigation, followed by minimum justified modifier burden; this favors S1C40 over S1C41 but does not justify removing either supported axis. The Skeptic's objections are resolved by making this an uncertainty probe rather than an unconditional performance claim: true NCO:OH must be recalculated, matched E2 and axis controls must be run, replication and effect-size rules must be fixed in advance, and calibration residuals must test whether modified chemistry follows the local shared shape. The Robustness Adjudicator's objections are likewise retained as gating constraints rather than ignored.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "deterministic candidate diagnostics",
+      "note": "Both independently supported axes are active, but combined-intervention performance is not directly established pre-result.",
+      "status": "known",
+      "unit_or_scale": "full intervention-axis coverage",
+      "value": null
+    },
+    "extrapolation": {
+      "method": "comparison with measured E2 chemistry and curated PUR analogue evidence",
+      "note": "S1C40 lies outside the measured reactive-core-only local chemistry; external evidence supports modifier families and coarse regions, not exact local properties.",
+      "status": "estimated",
+      "unit_or_scale": "qualitative",
+      "value": null
+    },
+    "measurement": {
+      "method": "120 \u00b0C thermal-hold viscosity trajectory with 80\u2013130 \u00b0C temperature sweep and 120 \u00b0C state anchor",
+      "note": "The local failure mode is directly measurable; an absolute acceptable viscosity limit must be pre-registered from the application requirement because no such limit is supplied.",
+      "status": "known",
+      "unit_or_scale": "SI over 15\u201360 min and 15\u201390 min",
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Candidate process-history fields are missing; water exposure, mixing, reaction and hold history, sample age, loading, and timing must be controlled and recorded.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "E2 repeatability assessment at 120 \u00b0C",
+      "note": "This is the measured local E2 risk and motivates independent realizations and matched controls.",
+      "status": "known",
+      "unit_or_scale": "coefficient of variation",
+      "value": 0.5848356762251301
+    }
+  }
+}

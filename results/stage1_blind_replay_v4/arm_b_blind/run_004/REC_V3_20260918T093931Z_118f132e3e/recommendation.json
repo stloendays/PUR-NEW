@@ -1,0 +1,148 @@
+{
+  "acceptance_criterion": {
+    "claim": "The uncertainty probe establishes whether a modifier-containing candidate can be compared interpretabl\u200by with E2 before making a thermal-hold mitigation claim.",
+    "criterion": "Before physical adjudication, AC1920 and TK100 functionality and equivalent weights must be verified, true NCO:OH must be recalculated, the complete preparation and measurement history must be frozen, independently prepared blocked replicates and an uncertainty rule must be specified, and matched initial-viscosity and 120 C state-anchor procedures must be defined. State calibration must meet its prespecified allowable error or a candidate-specific multi-point calibration must be triggered.",
+    "failure_condition": "Do not freeze a performance candidate if functionality or stoichiometry cannot be verified, process history or replicate blocking cannot be controlled, usable viscosity and processability cannot be operationalized, or state calibration fails without a prespecified valid replacement procedure.",
+    "measurement_window": "120 C state anchor and thermal hold over 15-90 min, with SI evaluated separately at 15-60 and 15-90 min, plus an 80-130 C instantaneous temperature sweep."
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C41",
+      "relative_reason": "Preferred conditional full-coverage performance candidate: 15% acrylic-like modifier plus 5% minor tackifier-like modifier, retaining both independently supported axes and placing the tackifier in the repeatedly supported minor-resin region. Not frozen because stoichiometry, process history, and state-calibration transfer remain unresolved."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C40",
+      "relative_reason": "Lower-burden full-coverage performance candidate with 15% acrylic-like modifier and 2.5% minor tackifier-like modifier. Its lower burden is a conservative design constraint, not evidence of an optimum, and its weaker tackifier-region support makes it less robust than S1C41."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C45",
+      "relative_reason": "Full-coverage alternative with 17.5% acrylic-like modifier and 2.5% minor tackifier-like modifier; useful for later acrylic-axis uncertainty resolution but adds burden without resolving the current stoichiometric and state-transfer gaps."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C39",
+      "relative_reason": "Single-axis acrylic-like control could support causal isolation, but it is not adequate for the declared performance_mitigation intent because it zeroes an independently supported tackifier-like intervention axis."
+    }
+  ],
+  "constraints": [
+    {
+      "detail": "The established failure mode is thermal-hold viscosity drift at 120 C, distinct from instantaneous temperature response and static viscosity.",
+      "name": "failure_mode_alignment",
+      "status": "pass"
+    },
+    {
+      "detail": "The declared intent is performance_mitigation, for which a bounded dual-axis intervention is permissible.",
+      "name": "experiment_intent",
+      "status": "pass"
+    },
+    {
+      "detail": "S1C40 and S1C41 cover both independently supported acrylic-like and minor-tackifier-like axes; single-axis candidates are retained only as causal controls.",
+      "name": "required_intervention_axis_coverage",
+      "status": "pass"
+    },
+    {
+      "detail": "Local measurements show formulation-dependent hold drift, substantial E2 realization-state spread, and smooth monotonic 80-130 C temperature response.",
+      "name": "local_material_regularities",
+      "status": "pass"
+    },
+    {
+      "detail": "Hold stability must be measured as a time-dependent trajectory and compared separately from instantaneous temperature response; state-aware calibration is required within its demonstrated chemistry boundary.",
+      "name": "paper_derived_rheological_rule",
+      "status": "pass"
+    },
+    {
+      "detail": "External PUR literature supports a broad acrylic-like region of approximately 15-25% and a minor-tackifier region of approximately 3-10%, but provides no direct predictor of the held-out local result or exact optimum.",
+      "name": "curated_PUR_prior_boundary",
+      "status": "pass"
+    },
+    {
+      "detail": "AC1920 and TK100 functionality and equivalent weights are not verified; true NCO:OH may differ from the original E2 basis.",
+      "name": "stoichiometric_functionality",
+      "status": "unknown"
+    },
+    {
+      "detail": "Candidate process history is unspecified and the local E2 spread is large enough that an unblocked formulation comparison may be non-interpretable.",
+      "name": "process_history_and_repeatability",
+      "status": "fail"
+    },
+    {
+      "detail": "One-point state calibration was supported only within the local reactive-only chemistry family, not for modifier-containing candidates.",
+      "name": "state_calibration_transfer",
+      "status": "unknown"
+    },
+    {
+      "detail": "A valid test requires matched E2 control, matched initial viscosity and 120 C state anchor, replicate blocking, and SI at both 15-60 and 15-90 min.",
+      "name": "matched_hold_measurement",
+      "status": "unknown"
+    },
+    {
+      "detail": "No operational pre-result criterion for usable initial viscosity or handling/processability has been frozen.",
+      "name": "usable_viscosity_and_processability",
+      "status": "unknown"
+    },
+    {
+      "detail": "Minimum burden may break ties only after full axis coverage and interpretability are established; it does not justify selecting S1C40 now.",
+      "name": "minimum_sufficient_intervention",
+      "status": "pass"
+    }
+  ],
+  "created_utc": "2026-09-18T09:39:31Z",
+  "decision_mode": "abstain",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "488de81642bf1e39d4d807339cef3b47bfacc3e2e8b17bcf8bcc9145720f3e4a",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "2081d3bfbf0571474c95e3d65834eea23cff2942b99c1aa6e76aaa57f3cea04c",
+    "run_id": "REC_V3_20260918T093931Z_118f132e3e",
+    "workflow_version": "1.2.0;agent_v3=3.4.0"
+  },
+  "recommendation_id": "REC_V3_20260918T093931Z_118f132e3e",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": null,
+  "selection_rationale": "The physical failure mode is thermal-hold instability, supported locally by the E5-to-E1 drift contrast, while large E2 realization-state spread shows that nominal viscosity alone is not interpretable. The declared performance_mitigation intent permits a dual-axis intervention, so S1C41 and S1C40 are scientifically preferable to single-axis candidates for the eventual mitigation test. Local experiments establish the failure mode, monotonic temperature response, and state dependence. The rheological analysis establishes the separate hold-trajectory requirement and the conditional value of a 120 C state anchor. Curated PUR literature supports acrylic-like and minor-tackifier-like formulation families and broad regions, but not an exact local optimum or wet-lab outcome. The lower-burden preference for S1C40 is therefore only a conservative experimental-design tie-break. The Skeptic objection is upheld: functionality and equivalent weights are unresolved, the complete process history and blocking scheme are unspecified, replicate uncertainty rules are not operationalized, and usable viscosity criteria are vague. The Robustness Adjudicator's objection is also upheld: state-aware calibration has not been validated for modifier-containing chemistry, so the provisional performance recommendation is conditionally unstable. Freeze an uncertainty probe first: verify functionality and stoichiometry, define the complete process and replicate design, predefine matched initial-viscosity and 120 C state-anchor comparisons, specify calibration-transfer failure handling, and operationalize processability. Only if those gates pass should S1C41 be used as the primary full-coverage performance candidate, with S1C40 as the lower-burden alternative.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "scientific multi-stage adjudication",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "Local measurements plus curated PUR literature priors",
+      "note": "The evidence supports a formulation region and intervention directions, not an exact-property prediction.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": null,
+      "note": "Modifier-containing chemistry lies outside the demonstrated state-calibration family.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": "State-aware local rheology summary",
+      "note": "Within the measured local chemistry family, one-point calibration pooled multiplicative error was approximately 1.06-1.10.",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Preparation, reaction, aging, preconditioning, loading, and measurement sequence are not frozen for the candidate.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": "Local E2 replicate diagnostics",
+      "note": "E2 showed CV approximately 0.46-0.58 and max/min ratios approximately 2.8-3.6.",
+      "status": "known",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

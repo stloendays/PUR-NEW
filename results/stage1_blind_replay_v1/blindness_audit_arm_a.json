@@ -1,0 +1,190 @@
+{
+  "action_layer_probe": [
+    {
+      "action": "get_state_aware_rheology_summary",
+      "formulation_id": null,
+      "status": "ok"
+    },
+    {
+      "action": "get_candidate_hypothesis",
+      "formulation_id": null,
+      "status": "ok"
+    },
+    {
+      "action": "query_external_priors",
+      "formulation_id": null,
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "E1",
+      "status": "ok"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "E1",
+      "status": "ok"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "E1",
+      "status": "ok"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "E1",
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "E2",
+      "status": "ok"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "E2",
+      "status": "ok"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "E2",
+      "status": "ok"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "E2",
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "E3",
+      "status": "ok"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "E3",
+      "status": "ok"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "E3",
+      "status": "ok"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "E3",
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "E4",
+      "status": "ok"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "E4",
+      "status": "ok"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "E4",
+      "status": "ok"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "E4",
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "E5",
+      "status": "ok"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "E5",
+      "status": "ok"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "E5",
+      "status": "ok"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "E5",
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "F1",
+      "status": "blocked_by_evidence_firewall"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "F1",
+      "status": "blocked_by_evidence_firewall"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "F1",
+      "status": "blocked_by_evidence_firewall"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "F1",
+      "status": "blocked_by_evidence_firewall"
+    }
+  ],
+  "audit_id": "STAGE1_BLINDNESS_AUDIT__ARM_A_REPLAY",
+  "candidate_set": "configs\\historical_replay_candidate_set.json",
+  "candidate_set_summary": {
+    "candidate_set_id": "PUR_NEW_HISTORICAL_REPLAY_SHORTLIST_R1",
+    "candidates_with_hold_schedule": 7,
+    "candidates_with_measurement_plan": [
+      "RPL_C04"
+    ],
+    "exact_heldout_coordinate_candidates": [
+      "RPL_C04"
+    ],
+    "n_candidates": 7,
+    "reactive_core_only_options": 1,
+    "resin_modified_options": 6,
+    "sha256": "b80e1797ada48320f71e742e1fd3505dc115d7e08f68439456a1bf3471d66770"
+  },
+  "evidence_firewall": {
+    "follow_up_mean_profiles": [],
+    "hold_formulations_visible": [
+      "E1",
+      "E5"
+    ],
+    "hold_stages_visible": [
+      "original"
+    ],
+    "profile": "blind_pre_result",
+    "residual_metadata_disclosure": [
+      "F1"
+    ]
+  },
+  "findings": [
+    {
+      "issue": "candidate(s) ['RPL_C04'] encode the exact held-out normalized coordinates (AC=14.00444847, TK=4.11895543); selection cannot be called independent discovery",
+      "severity": "critical",
+      "where": "configs\\historical_replay_candidate_set.json"
+    },
+    {
+      "issue": "candidate(s) ['RPL_C04'] carry a pre-specified measurement_plan, which encodes the intended experiment",
+      "severity": "high",
+      "where": "configs\\historical_replay_candidate_set.json"
+    },
+    {
+      "issue": "7 candidate(s) carry a pre-specified hold temperature/time; this tells the Agent the experiment is a thermal-hold test and weakens Level-1 (failure-mode) recovery",
+      "severity": "moderate",
+      "where": "configs\\historical_replay_candidate_set.json"
+    }
+  ],
+  "interpretation": "Post-result knowledge is reachable; results must not be reported as independent discovery.",
+  "n_critical": 1,
+  "n_high": 1,
+  "verdict": "FAIL"
+}

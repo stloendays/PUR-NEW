@@ -1,0 +1,170 @@
+{
+  "action_layer_probe": [
+    {
+      "action": "get_state_aware_rheology_summary",
+      "formulation_id": null,
+      "status": "ok"
+    },
+    {
+      "action": "get_candidate_hypothesis",
+      "formulation_id": null,
+      "status": "ok"
+    },
+    {
+      "action": "query_external_priors",
+      "formulation_id": null,
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "E1",
+      "status": "ok"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "E1",
+      "status": "ok"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "E1",
+      "status": "ok"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "E1",
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "E2",
+      "status": "ok"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "E2",
+      "status": "ok"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "E2",
+      "status": "ok"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "E2",
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "E3",
+      "status": "ok"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "E3",
+      "status": "ok"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "E3",
+      "status": "ok"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "E3",
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "E4",
+      "status": "ok"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "E4",
+      "status": "ok"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "E4",
+      "status": "ok"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "E4",
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "E5",
+      "status": "ok"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "E5",
+      "status": "ok"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "E5",
+      "status": "ok"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "E5",
+      "status": "ok"
+    },
+    {
+      "action": "inspect_formulation",
+      "formulation_id": "F1",
+      "status": "blocked_by_evidence_firewall"
+    },
+    {
+      "action": "get_hold_stability",
+      "formulation_id": "F1",
+      "status": "blocked_by_evidence_firewall"
+    },
+    {
+      "action": "get_repeatability_risk",
+      "formulation_id": "F1",
+      "status": "blocked_by_evidence_firewall"
+    },
+    {
+      "action": "get_temperature_support",
+      "formulation_id": "F1",
+      "status": "blocked_by_evidence_firewall"
+    }
+  ],
+  "audit_id": "STAGE1_BLINDNESS_AUDIT__ARM_B_V3",
+  "candidate_set": "derived\\stage1_blind_candidate_space_v1.json",
+  "candidate_set_summary": {
+    "candidate_set_id": "PUR_NEW_STAGE1_BLIND_CANDIDATE_SPACE_V1",
+    "candidates_with_hold_schedule": 0,
+    "candidates_with_measurement_plan": [],
+    "exact_heldout_coordinate_candidates": [],
+    "n_candidates": 73,
+    "reactive_core_only_options": 9,
+    "resin_modified_options": 64,
+    "sha256": "2b92e5d976e76b674a05f9b8fc17f4c78cc873b42641fbe67b35a37beeec4346"
+  },
+  "evidence_firewall": {
+    "follow_up_mean_profiles": [],
+    "hold_formulations_visible": [
+      "E1",
+      "E5"
+    ],
+    "hold_stages_visible": [
+      "original"
+    ],
+    "profile": "blind_pre_result",
+    "residual_metadata_disclosure": [
+      "F1"
+    ]
+  },
+  "findings": [],
+  "interpretation": "No post-result knowledge reachable; independent-discovery scoring is admissible.",
+  "n_critical": 0,
+  "n_high": 0,
+  "verdict": "PASS"
+}

@@ -1,0 +1,102 @@
+{
+  "acceptance_criterion": {
+    "claim": "selected candidate is worth experimental validation",
+    "criterion": "compare its measured 120 C hold behavior with the original references",
+    "failure_condition": "candidate shows clearly worse hold drift than the original reference formulations",
+    "measurement_window": "15-60 min at 120 C"
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C05",
+      "relative_reason": "Compositionally matches the normalized E5 reference, whose measured 120 C hold drift was substantially higher than E1 over 15-60 min."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C02",
+      "relative_reason": "Compositionally matches the normalized E2 reference, but no corresponding thermal-hold measurements are supplied."
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C03",
+      "relative_reason": "Compositionally matches the normalized E3 reference, but no corresponding thermal-hold measurements are supplied."
+    }
+  ],
+  "constraints": [],
+  "created_utc": "2026-09-18T12:01:02Z",
+  "decision_mode": "performance_candidate",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "5a9d595f90408d52c69f0c828acca9ad840c04b4aac511172dc28faac2e56ccb",
+    "model": "gpt-5.6-luna",
+    "prompt_hash": "c6c1f454ae2745d31add6b43287f9fdb8c44a88e37c4ea4f495f604d92726a42",
+    "run_id": "REC_BASELINE_20260918T120102Z_e1ca95eacd",
+    "workflow_version": "naive_direct_llm_baseline_v1"
+  },
+  "recommendation_id": "REC_BASELINE_20260918T120102Z_e1ca95eacd",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C01",
+    "formulation_state": {
+      "AC1920": 0.0,
+      "MDI": 19.2866666667,
+      "PDP70": 40.3566666667,
+      "PPG2000": 40.3566666667,
+      "TK100": 0.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "measured_reactive_core_only"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "S1C01 is the normalized composition of E1, the reference with the lower observed 120 C hold drift among the hold-tested references: 708.7 to 776.1 viscosity units from 15 to 60 min, versus 2210 to 3349 for E5. This supports selecting S1C01 for direct validation without assuming an unmeasured candidate result.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": null,
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": null,
+      "note": "Thermal-hold data are available for E1 and E5 only; candidate outcomes are unmeasured.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": null,
+      "note": "Selection relies on composition correspondence to the measured E1 reference, not a validated candidate model.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": null,
+      "note": "No thermal-hold measurement is supplied for any candidate.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "Candidate process history is not supplied.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": null,
+      "note": "Candidate repeatability is not measured.",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}

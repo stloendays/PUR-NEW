@@ -1,0 +1,97 @@
+{
+  "acceptance_criterion": {
+    "claim": "Deterministic evidence-prior baseline selection for architecture comparison.",
+    "criterion": "This baseline is not used to define a wet-lab success threshold; it supplies a transparent non-LLM ranking comparator.",
+    "failure_condition": null,
+    "measurement_window": null
+  },
+  "alternatives_considered": [
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C11",
+      "relative_reason": "transparent support_score=2.0"
+    },
+    {
+      "acquisition_value": null,
+      "candidate_id": "S1C12",
+      "relative_reason": "transparent support_score=2.0"
+    }
+  ],
+  "constraints": [],
+  "created_utc": "2026-09-18T09:42:38Z",
+  "decision_mode": "performance_candidate",
+  "provenance": {
+    "generated_by": "agent",
+    "git_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+    "input_hash": "ad5da7a9a7",
+    "model": "deterministic_evidence_ranker",
+    "prompt_hash": null,
+    "run_id": "REC_DET_20260918T094238Z_ad5da7a9a7",
+    "workflow_version": "deterministic_evidence_ranker_v1"
+  },
+  "recommendation_id": "REC_DET_20260918T094238Z_ad5da7a9a7",
+  "record_status": "frozen",
+  "result_inspection_status_at_creation": "no_results_inspected",
+  "selected_candidate": {
+    "candidate_id": "S1C10",
+    "formulation_state": {
+      "AC1920": 0.0,
+      "MDI": 19.6859061969,
+      "PDP70": 38.9070469016,
+      "PPG2000": 38.9070469016,
+      "TK100": 2.5,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "measurement_plan": null,
+    "process_state": {
+      "hold_temperature_c": null,
+      "hold_time_min": null,
+      "mixing_history": null,
+      "reaction_temperature_c": null,
+      "reaction_time_min": null,
+      "sample_age": null
+    }
+  },
+  "selection_rationale": "Selected by the deterministic evidence-support baseline using only frozen candidate priors and transparent stress-test penalties; no LLM reasoning or held-out outcome is used.",
+  "uncertainty": {
+    "aggregate_penalty": null,
+    "aggregation_rule": "rank_candidate_support transparent heuristic",
+    "decision_margin": null,
+    "evidence_coverage": {
+      "method": "transparent support ranker",
+      "note": "ranking uses the frozen evidence-anchor and stress-test heuristics",
+      "status": "estimated",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "extrapolation": {
+      "method": null,
+      "note": "analogue distance is used only as support, not as a property prediction",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "measurement": {
+      "method": null,
+      "note": "deterministic ranker does not estimate measurement uncertainty",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "process_history": {
+      "method": null,
+      "note": "process missingness contributes to the transparent stress-test penalty",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    },
+    "repeatability": {
+      "method": null,
+      "note": "deterministic ranker does not estimate repeatability uncertainty",
+      "status": "unknown",
+      "unit_or_scale": null,
+      "value": null
+    }
+  }
+}
