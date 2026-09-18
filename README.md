@@ -276,7 +276,7 @@ local E1-E5 evidence
 
 The intended interpretation is not that the LLM independently guessed the later successful formulation from sparse data alone. Instead, the Agent uses pre-result scientific knowledge to redirect the decision from further reactive-core micro-tuning toward an externally supported resin-modified formulation family. The later wet-lab result then physically adjudicates that evidence-guided decision.
 
-A separate replay protocol preserves the distinction between (i) reproducing the reconstructed historical pre-result decision logic and (ii) independently recovering the experimentally supported region under a target-blind benchmark. See `docs/PRE_RESULT_REPLAY_PROTOCOL.md`.
+The active Stage-1 evaluation is a single outcome-blind reconstruction of the preexperimental decision state. It tests problem recovery, intervention-family recovery, and only after freeze, quantitative neighborhood agreement. See `docs/STAGE1_PREEXPERIMENTAL_RECONSTRUCTION.md`.
 
 The Skeptic and Robustness Adjudicator are decision-quality controls. The central materials paper does **not** require component-wise ablation to prove that each internal stage is individually necessary.
 
