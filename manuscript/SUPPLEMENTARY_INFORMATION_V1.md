@@ -63,42 +63,42 @@ The analysis distinguishes nominal formulation identity from the experimentally 
 
 The formulation-only representation is written generically as
 
-[
-ln eta = f(x_{mathrm{chem}},T)+arepsilon,
-]
+$$
+\ln \eta = f(x_{\mathrm{chem}},T)+\varepsilon,
+$$
 
 where nominal chemistry and temperature define the expected viscosity.
 
 The state-conditioned representation introduces a realization-specific log-viscosity scale,
 
-[
-ln eta_r(T)=alpha_r+g(T)+arepsilon,
-]
+$$
+\ln \eta_r(T)=\alpha_r+g(T)+\varepsilon,
+$$
 
-where (alpha_r) is a latent realization-specific offset and (g(T)) is a shared local thermal-response function.
+where $\alpha_r$ is a latent realization-specific offset and $g(T)$ is a shared local thermal-response function.
 
 The primary fitted representation used in the manuscript is
 
-[
-ln eta
+$$
+\ln \eta
 =
-alpha_r
+\alpha_r
 +
-eta_1Delta(1/T)
+\beta_1\Delta(1/T)
 +
-eta_2[Delta(1/T)]^2
+\beta_2[\Delta(1/T)]^2
 +
-arepsilon .
-]
+\varepsilon .
+$$
 
-The coordinate (alpha_r) is deliberately treated as latent. The present dataset does not identify one unique physical cause for this displacement, and the manuscript does not assign it to a specific molecular mechanism.
+The coordinate $\alpha_r$ is deliberately treated as latent. The present dataset does not identify one unique physical cause for this displacement, and the manuscript does not assign it to a specific molecular mechanism.
 
 ## Supplementary Table S3 | State-model comparison
 
 | Representation | Interpretation | Variance explained / predictive summary |
 |---|---|---:|
-| formulation-only temperature model | nominal chemistry + temperature | (R^2 = 0.852) |
-| realization-specific scale + shared thermal response | realized state + shared thermal shape | (R^2 = 0.9977) |
+| formulation-only temperature model | nominal chemistry + temperature | $R^2 = 0.852$ |
+| realization-specific scale + shared thermal response | realized state + shared thermal shape | $R^2 = 0.9977$ |
 | held-temperature multiplicative error, formulation-only | held-temperature prediction | 1.442× |
 | held-temperature multiplicative error, state-conditioned | held-temperature prediction | 1.058× |
 
@@ -116,13 +116,13 @@ Thus, within the present local chemistry family, the dominant realization effect
 
 To test whether the shared thermal-response shape transfers beyond the formulation used to fit it, all realizations of one nominal formulation were excluded from fitting in each fold.
 
-For each held realization, one measured viscosity value at anchor temperature (T_0) was used to estimate
+For each held realization, one measured viscosity value at anchor temperature $T_0$ was used to estimate
 
-[
-alpha_r=ln eta_r(T_0)-g(T_0),
-]
+$
+\alpha_r=\ln \eta_r(T_0)-g(T_0),
+$
 
-after which all remaining temperatures were reconstructed from (alpha_r+g(T)).
+after which all remaining temperatures were reconstructed from $\alpha_r+g(T)$.
 
 ## Supplementary Table S4 | Pooled leave-one-formulation transfer by anchor temperature
 
@@ -161,7 +161,7 @@ A stricter stress test withheld both formulation identity and the high-temperatu
 For each fold:
 
 1. one nominal formulation was removed completely from thermal-shape fitting;
-2. the shared thermal response was fitted only to the other formulations at temperatures (leq110 ^circmathrm{C});
+2. the shared thermal response was fitted only to the other formulations at temperatures $\leq110~^\circ\mathrm{C}$;
 3. one measured 110 °C viscosity value from the unseen realization was supplied to determine the state offset;
 4. viscosity was predicted at 120 and 130 °C, neither of which contributed to fitting the shared shape.
 
@@ -200,15 +200,15 @@ The supported claim is therefore limited to **10–20 °C short-range extrapolat
 
 # Supplementary Note 5 | Apparent local temperature-response descriptor
 
-For each chemistry-audited complete realization, (lneta) was regressed against (1/T). The fitted slope was converted to an apparent (E_eta) using the gas constant.
+For each chemistry-audited complete realization, $\ln\eta$ was regressed against $1/T$. The fitted slope was converted to an apparent $E_\eta$ using the gas constant.
 
 This descriptor is used only to summarize the local temperature dependence of viscosity and is not interpreted as a reaction activation energy.
 
 Across the six chemistry-audited realizations:
 
-[
-E_eta approx 42.05pm2.43 mathrm{kJ,mol^{-1}},
-]
+$$
+E_\eta \approx 42.05\pm2.43~\mathrm{kJ\,mol^{-1}},
+$$
 
 corresponding to a coefficient of variation of approximately 5.77%.
 
@@ -220,15 +220,15 @@ The important result is not exact equality of slopes, but the comparatively narr
 
 Original E1 and E5 formulations were measured during isothermal holding at 120 °C at 15, 30, 60 and 90 min.
 
-The follow-up resin-modified formulation F1 was measured in two independent repeats at 15, 30, 45 and 60 min.
+The follow-up resin-modified formulation F1 was measured in two repeat runs at 15, 30, 45 and 60 min.
 
 The matched-window stability index used for direct comparison is
 
-[
-SI_{15ightarrow60}
+$$
+SI_{15\rightarrow60}
 =
-rac{eta_{60}-eta_{15}}{eta_{15}}.
-]
+\frac{\eta_{60}-\eta_{15}}{\eta_{15}}.
+$$
 
 ## Supplementary Table S7 | Raw 120 °C thermal-hold measurements
 
@@ -241,18 +241,18 @@ SI_{15ightarrow60}
 
 ## Supplementary Table S8 | Thermal-hold response descriptors
 
-| Formulation / repeat | Measured window | 15→60 min change | 15→90 min change | Descriptive (mathrm{d}lneta/mathrm{d}t) |
+| Formulation / repeat | Measured window | 15→60 min change | 15→90 min change | Descriptive $\mathrm{d}\ln\eta/\mathrm{d}t$ |
 |---|---|---:|---:|---:|
-| E1 | 15–90 min | +9.51% | +16.85% | 0.125 h(^{-1}) |
-| E5 | 15–90 min | +51.54% | +93.08% | 0.537 h(^{-1}) |
+| E1 | 15–90 min | +9.51% | +16.85% | 0.125 h$^{-1}$ |
+| E5 | 15–90 min | +51.54% | +93.08% | 0.537 h$^{-1}$ |
 | F1 repeat 1 | 15–60 min | −0.16% | — | not used as headline kinetic descriptor |
 | F1 repeat 2 | 15–60 min | +3.04% | — | not used as headline kinetic descriptor |
 
 The E5/E1 ratio of fitted descriptive log-viscosity slopes is
 
-[
-0.537/0.125 approx 4.29.
-]
+$
+0.537/0.125 \approx 4.29.
+$
 
 For F1, the matched-window physical validation is more informative than fitting a kinetic coefficient because the observed 15–60 min profiles are nearly flat.
 
@@ -281,16 +281,16 @@ The curated HMPUR database integrates public papers, patents, open datasets and 
 
 The dense external polyurethane-prepolymer set contains 39 temperature-viscosity curves and 4559 individual measurements.
 
-Reanalysis of these external curves shows that (lneta) versus (1/T) is generally well represented locally:
+Reanalysis of these external curves shows that $\ln\eta$ versus $1/T$ is generally well represented locally:
 
-- median (R^2 approx 0.9967);
-- 37 of 39 curves have (R^2ge0.98).
+- median $R^2 \approx 0.9967$;
+- 37 of 39 curves have $R^2\ge0.98$.
 
 However, the apparent temperature-response descriptor spans approximately
 
-[
-34.7	ext{--}94.2 mathrm{kJ,mol^{-1}},
-]
+$
+34.7\text{--}94.2~\mathrm{kJ\,mol^{-1}},
+$
 
 which is much broader than the local E1–E3 range.
 
@@ -324,12 +324,12 @@ The true F1 validation formulation is deliberately not one of the 73 nodes.
 
 After unblinding, the normalized modifier coordinates of F1 are:
 
-[
-mathrm{AC1920}=14.004%,qquad
-mathrm{TK100}=4.119%.
-]
+$
+\mathrm{AC1920}=14.004\%,\qquad
+\mathrm{TK100}=4.119\%.
+$
 
-The predeclared near region is defined by an (L_1) modifier-plane distance threshold of 7.5 percentage points.
+The predeclared near region is defined by an $L_1$ modifier-plane distance threshold of 7.5 percentage points.
 
 Eighteen of 73 candidate nodes fall inside this region.
 
@@ -355,7 +355,7 @@ The eight committed decisions comprise:
 - S1C46: 1 selection;
 - S1C40: 1 selection.
 
-The mean modifier-plane (L_1) distance of the eight committed decisions to the held-out F1 composition is 2.281 percentage points, with median 1.877 percentage points and maximum 4.377 percentage points.
+The mean modifier-plane $L_1$ distance of the eight committed decisions to the held-out F1 composition is 2.281 percentage points, with median 1.877 percentage points and maximum 4.377 percentage points.
 
 ## Supplementary Table S9 | Run-level outcome-blind decisions
 
@@ -396,9 +396,9 @@ Using modifier-plane distance to the later held-out formulation as the quantitat
 - best final rule-only candidate: 2.615 percentage points;
 - best attainable / selected Agent-region distance: approximately 1.877 percentage points.
 
-The reduction generated before the final model-level choice therefore accounts for approximately 94.4% of the total closed distance in the reported attribution analysis.
+Along the reported strategy ladder, the deterministic-policy stage accounts for approximately 94.4% of the observed best-case distance reduction before the final model-level choice.
 
-The remaining approximately 5.6% is associated with selection within the already constrained scientific decision geometry.
+The remaining approximately 5.6% corresponds to the additional best-case reduction between the final rule-only candidate and the final Agent-region floor.
 
 This decomposition is used to support the conclusion that explicit scientific structure, not unconstrained language-model generation, supplies most of the quantitative decision improvement.
 
