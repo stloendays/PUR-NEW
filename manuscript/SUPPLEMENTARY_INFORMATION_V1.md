@@ -178,15 +178,15 @@ For each fold:
 
 A 10,000-replicate bootstrap that resampled complete held realizations produced:
 
-[
-mathrm{multiplicative RMSE}_{50%}=1.087,
-]
+$$
+\mathrm{multiplicative\ RMSE}_{50\%}=1.087,
+$$
 
 with a 95% interval of
 
-[
-1.043	ext{--}1.126	imes .
-]
+$$
+1.043\text{--}1.126\times .
+$$
 
 The maximum individual multiplicative error in this test was approximately 1.189×.
 
