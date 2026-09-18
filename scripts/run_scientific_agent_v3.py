@@ -203,8 +203,38 @@ def freeze_recommendation(
     }
 
 
+# One retrieval per modifier axis, identical in form. Symmetry is the point: if only
+# one axis's external rows reach the Proposer, the decision is biased toward that axis
+# regardless of what the evidence says.
+EXTERNAL_EVIDENCE_AXES = [
+    ("acrylic", "Independent external evidence for the acrylic-like modifier axis."),
+    ("tackifier", "Independent external evidence for the minor tackifier-like modifier axis."),
+]
+
+
 def ensure_core_scientific_action(action_requests: Any) -> list[dict[str, Any]]:
+    """Guarantee the evidence layer the architecture declares as required.
+
+    The Planner requests actions but never sees their results, so a Planner that
+    omits or misnames an external-evidence call silently removes that axis from the
+    Proposer's evidence. Both modifier axes are therefore retrieved unconditionally.
+    """
     requests = list(action_requests) if isinstance(action_requests, list) else []
+
+    for modifier_type, reason in reversed(EXTERNAL_EVIDENCE_AXES):
+        already = any(
+            isinstance(req, dict)
+            and req.get("name") == "query_external_priors"
+            and str((req.get("args") or {}).get("modifier_type") or "").lower() == modifier_type
+            for req in requests
+        )
+        if not already:
+            requests.insert(0, {
+                "name": "query_external_priors",
+                "args": {"modifier_type": modifier_type},
+                "reason": reason,
+            })
+
     if not any(isinstance(req, dict) and req.get("name") == "get_state_aware_rheology_summary" for req in requests):
         requests.insert(
             0,
@@ -217,6 +247,36 @@ def ensure_core_scientific_action(action_requests: Any) -> list[dict[str, Any]]:
     return requests
 
 
+def withhold_deterministic_ranking(diagnostics: dict[str, Any]) -> dict[str, Any]:
+    """Keep the admissibility gate, remove the precomputed answer.
+
+    The coverage gate, the sufficiency rule and the per-candidate evidence attributes
+    are decision INPUT and stay. The scenario orderings and rank-1 stability counts are
+    a precomputed ranking: if they are shown, agreement with them cannot be separated
+    from the model reading them off. They are withheld here and retained in full in the
+    deliberation record for post-hoc attribution.
+    """
+    out = json.loads(json.dumps(diagnostics))
+    rankings = out.pop("scenario_rankings", {})
+    out.pop("scenario_stability", None)
+    out["admissible_candidates_by_scenario"] = {
+        scenario: sorted(ids) for scenario, ids in rankings.items()
+    }
+    # The Pareto front is a set rather than an order, but on this candidate space its
+    # intersection with the full-coverage group is only two candidates, one of which is
+    # the deterministic rank-1. Shown alongside the coverage gate it would narrow 36
+    # admissible candidates to 2, which is the precomputed answer in another form.
+    out.pop("pareto_front", None)
+    out["ranking_disclosure"] = (
+        "Scenario orderings and rank-1 stability are deliberately withheld. Candidate "
+        "identifiers are listed in lexicographic order, which carries no preference. "
+        "Select within the evidence-supported admissible set by reasoning from the "
+        "candidate evidence attributes and the intervention sufficiency rule; there is "
+        "no precomputed best candidate to defer to."
+    )
+    return out
+
+
 def normalize_judge_output(raw: dict[str, Any]) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Preserve prose while coercing schema-designated numeric slots to number/null.
 
@@ -227,6 +287,62 @@ def normalize_judge_output(raw: dict[str, Any]) -> tuple[dict[str, Any], list[di
     """
     out = json.loads(json.dumps(raw))
     changes: list[dict[str, Any]] = []
+
+    # --- null selection is an abstention ---------------------------------------
+    # The Judge prompt declares "selected_candidate_id": "string or null" for every
+    # decision mode, while freeze_recommendation accepts null only for "abstain".
+    # A probe that names no candidate IS a refusal to choose one, so it is recorded
+    # as an abstention. No selection is invented; the original mode is logged and the
+    # untouched judge_raw is retained in the deliberation record.
+    if out.get("selected_candidate_id") is None and out.get("decision_mode") not in (None, "abstain"):
+        changes.append({
+            "path": "decision_mode",
+            "original": out.get("decision_mode"),
+            "coerced_to": "abstain",
+            "basis": "selected_candidate_id was null; a decision naming no candidate is an abstention",
+        })
+        out["decision_mode"] = "abstain"
+
+    # --- constraint status enum -------------------------------------------------
+    # The model reports audit-style verdicts ("qualified", "satisfied") where the
+    # record schema allows only pass/fail/unknown. The original wording is preserved
+    # in `detail` so no assessment is lost.
+    constraints = out.get("constraints")
+    if isinstance(constraints, list):
+        for item in constraints:
+            if not isinstance(item, dict):
+                continue
+            status = item.get("status")
+            if status not in {"pass", "fail", "unknown"}:
+                item["detail"] = (
+                    f"{item.get('detail')}; model status text: {status}"
+                    if item.get("detail")
+                    else f"model status text: {status}"
+                )
+                item["status"] = "unknown"
+                changes.append({"path": "constraints[].status", "original": status, "coerced_to": "unknown"})
+
+    # --- alternatives hygiene ---------------------------------------------------
+    # Echoing the selected candidate inside alternatives, or repeating one, is a
+    # redundancy rather than a different decision. The selection itself is untouched.
+    alternatives = out.get("alternatives_considered")
+    if isinstance(alternatives, list):
+        selected_id = out.get("selected_candidate_id")
+        deduped, seen = [], set()
+        for alt in alternatives:
+            if not isinstance(alt, dict):
+                continue
+            alt_id = alt.get("candidate_id")
+            if selected_id is not None and alt_id == selected_id:
+                changes.append({"path": "alternatives_considered", "original": alt_id, "coerced_to": "dropped_selected_echo"})
+                continue
+            if alt_id in seen:
+                changes.append({"path": "alternatives_considered", "original": alt_id, "coerced_to": "dropped_duplicate"})
+                continue
+            seen.add(alt_id)
+            deduped.append(alt)
+        out["alternatives_considered"] = deduped
+
     uncertainty = out.get("uncertainty")
     if not isinstance(uncertainty, dict):
         return out, changes
@@ -265,6 +381,15 @@ def main() -> None:
         choices=["no_results_inspected", "some_results_inspected", "unknown"],
     )
     parser.add_argument("--output-dir", type=Path, default=ROOT / "records" / "agent_v3")
+    parser.add_argument(
+        "--hide-deterministic-ranking",
+        action="store_true",
+        help=(
+            "Withhold scenario orderings and rank-1 stability from the model payloads so the "
+            "Agent must select within the admissible set itself. The full diagnostics are still "
+            "stored in deliberation.json for attribution."
+        ),
+    )
     args = parser.parse_args()
 
     architecture = read_json(ROOT / "configs" / "agent_v3.json")
@@ -339,12 +464,23 @@ def main() -> None:
     ]
     planner_action_specs.sort(key=lambda item: item["name"])
     planner_action_schemas = {item["name"]: item["parameters"] for item in planner_action_specs}
+    # The Planner classifies experiment intent but never sees the tool trace, so the
+    # external rows for BOTH modifier axes are supplied directly and symmetrically.
+    # Retrieval is deterministic and outcome-blind (data/external_evidence_hints.csv).
+    from pur_new.actions import query_external_priors as _query_external_priors  # noqa: E402
+
+    external_evidence_digest = {
+        modifier_type: _query_external_priors(modifier_type=modifier_type)
+        for modifier_type, _reason in EXTERNAL_EVIDENCE_AXES
+    }
+
     planner_payload = {
         "architecture_version": architecture["version"],
         "workflow_policy": workflow,
         "evidence_profile": profile_name,
         "evidence_policy": policy,
         "allowed_planner_actions": planner_action_specs,
+        "external_evidence_digest": external_evidence_digest,
         "filtered_evidence_state": evidence,
         "candidate_space_summary": candidate_set.get("provenance", {}),
         "candidate_ids": [c["candidate_id"] for c in candidate_set["candidates"]],
@@ -368,13 +504,18 @@ def main() -> None:
     )
     cards = build_candidate_cards(candidate_set["candidates"])
     deterministic_robustness = robustness_summary(cards)
+    deterministic_for_model = (
+        withhold_deterministic_ranking(deterministic_robustness)
+        if args.hide_deterministic_ranking
+        else deterministic_robustness
+    )
 
     proposer_payload = {
         "planner": planner,
         "tool_trace": tool_trace,
         "candidate_set": candidate_set,
         "candidate_scorecards": cards,
-        "deterministic_decision_diagnostics": deterministic_robustness,
+        "deterministic_decision_diagnostics": deterministic_for_model,
         "evidence_policy": policy,
     }
     if blind_mode:
@@ -390,7 +531,7 @@ def main() -> None:
         "planner": planner,
         "tool_trace": tool_trace,
         "candidate_scorecards": cards,
-        "deterministic_decision_diagnostics": deterministic_robustness,
+        "deterministic_decision_diagnostics": deterministic_for_model,
         "proposer": proposer,
         "evidence_policy": policy,
     }
@@ -408,7 +549,7 @@ def main() -> None:
         "tool_trace": tool_trace,
         "candidate_set": candidate_set,
         "candidate_scorecards": cards,
-        "deterministic_decision_diagnostics": deterministic_robustness,
+        "deterministic_decision_diagnostics": deterministic_for_model,
         "proposer": proposer,
         "skeptic": skeptic,
         "evidence_policy": policy,
@@ -427,7 +568,7 @@ def main() -> None:
         "tool_trace": tool_trace,
         "candidate_set": candidate_set,
         "candidate_scorecards": cards,
-        "deterministic_decision_diagnostics": deterministic_robustness,
+        "deterministic_decision_diagnostics": deterministic_for_model,
         "proposer": proposer,
         "skeptic": skeptic,
         "robustness_adjudication": robustness_adjudication,
@@ -451,24 +592,52 @@ def main() -> None:
         "planner": planner,
         "tool_trace": tool_trace,
         "candidate_scorecards": cards,
-        "deterministic_decision_diagnostics": deterministic_robustness,
+        "deterministic_decision_diagnostics": deterministic_for_model,
         "proposer": proposer,
         "skeptic": skeptic,
         "robustness_adjudication": robustness_adjudication,
     }
     input_hash = sha256_bytes(canonical_json_bytes(input_payload))
 
-    recommendation = freeze_recommendation(
-        judge,
-        candidate_set=candidate_set,
-        inspection_status=args.inspection_status,
-        model=stage_models["judge"],
-        prompt_hash=prompt_hash,
-        input_hash=input_hash,
-        workflow_version=workflow["workflow_version"],
-        architecture_version=architecture["version"],
-    )
-    validate(recommendation, recommendation_schema)
+    try:
+        recommendation = freeze_recommendation(
+            judge,
+            candidate_set=candidate_set,
+            inspection_status=args.inspection_status,
+            model=stage_models["judge"],
+            prompt_hash=prompt_hash,
+            input_hash=input_hash,
+            workflow_version=workflow["workflow_version"],
+            architecture_version=architecture["version"],
+        )
+        validate(recommendation, recommendation_schema)
+    except Exception as exc:
+        # An unfreezable Judge output is a real invalid decision and must stay a
+        # failure. Its deliberation is still written, so the run can be audited
+        # rather than vanishing from the record.
+        reject_dir = args.output_dir / "REJECTED"
+        reject_dir.mkdir(parents=True, exist_ok=True)
+        (reject_dir / "rejected_deliberation.json").write_text(
+            json.dumps(
+                {
+                    "rejection_reason": f"{type(exc).__name__}: {exc}",
+                    "planner": planner,
+                    "tool_trace": tool_trace,
+                    "proposer": proposer,
+                    "skeptic": skeptic,
+                    "robustness_adjudication": robustness_adjudication,
+                    "judge_raw": judge_raw,
+                    "judge_normalized": judge,
+                    "judge_normalization": judge_normalization,
+                    "candidate_ids": [c["candidate_id"] for c in candidate_set["candidates"]],
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        raise
 
     run_dir = args.output_dir / recommendation["recommendation_id"]
     if run_dir.exists():
@@ -488,6 +657,8 @@ def main() -> None:
         "tool_trace": tool_trace,
         "candidate_scorecards": cards,
         "deterministic_decision_diagnostics": deterministic_robustness,
+        "deterministic_diagnostics_sent_to_model": deterministic_for_model,
+        "deterministic_ranking_hidden": bool(args.hide_deterministic_ranking),
         "proposer": proposer,
         "skeptic": skeptic,
         "robustness_adjudication": robustness_adjudication,

@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import json
 import math
+import re
 import statistics
 from collections import defaultdict
 from pathlib import Path
@@ -42,6 +43,28 @@ def load_formulation_priors() -> dict[str, Any]:
     return _read_json(ROOT / "configs" / "formulation_priors.json")
 
 
+_MORPHOLOGICAL_SUFFIXES = ("ying", "ied", "ier", "ing", "ers", "er", "es", "s", "y")
+
+
+def _evidence_stem(text: str) -> str:
+    """Collapse common English morphology so curated rows are not silently dropped.
+
+    A literal substring match loses whole source rows: "tackifier" does not occur in
+    "tackifying resin" or "tackifying agent". Dropping a documented example biases the
+    decision toward whichever modifier axis happens to survive retrieval, so the match
+    is done on stems instead.
+    """
+    out = []
+    for token in re.split(r"([^a-z0-9]+)", text.lower()):
+        if token.isalnum() and len(token) > 4:
+            for suffix in _MORPHOLOGICAL_SUFFIXES:
+                if token.endswith(suffix) and len(token) - len(suffix) >= 4:
+                    token = token[: -len(suffix)]
+                    break
+        out.append(token)
+    return "".join(out)
+
+
 def query_external_priors(
     *,
     modifier_type: str | None = None,
@@ -50,12 +73,12 @@ def query_external_priors(
 ) -> list[dict[str, str]]:
     rows = _read_csv(ROOT / "data" / "external_evidence_hints.csv")
     if modifier_type:
-        key = modifier_type.lower()
+        key = _evidence_stem(modifier_type)
         rows = [
             r for r in rows
-            if key in r.get("resin_modifier_type", "").lower()
-            or key in r.get("pattern", "").lower()
-            or key in r.get("agent_hint", "").lower()
+            if key in _evidence_stem(r.get("resin_modifier_type", ""))
+            or key in _evidence_stem(r.get("pattern", ""))
+            or key in _evidence_stem(r.get("agent_hint", ""))
         ]
     if candidate_space_role:
         key = candidate_space_role.lower()

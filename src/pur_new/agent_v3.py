@@ -11,6 +11,7 @@ from .actions import (
     candidate_profile,
     compare_candidate_to_priors,
     execute_action,
+    load_formulation_priors,
     stress_test_candidate,
 )
 from .scientific_tools import get_state_aware_rheology_summary_v3
@@ -60,9 +61,72 @@ def _supported_active_axis_count(prior: dict[str, Any]) -> int:
     )
 
 
+AXIS_PRIOR_KEYS = {
+    "acrylic_like": ("acrylic_axis_support", "acrylic_like_modifier_pct_total"),
+    "minor_tackifier_like": ("tackifier_axis_support", "minor_tackifier_like_modifier_pct_total"),
+}
+
+
+def independently_supported_axes() -> list[str]:
+    """Modifier axes carrying their own pre-result external evidence.
+
+    Read from the curated priors rather than hard-coded, so the set of axes that a
+    mitigation experiment is expected to cover follows the evidence base.
+    """
+    axes_cfg = load_formulation_priors().get("candidate_axes", {})
+    out = []
+    for axis, (_prior_key, cfg_key) in AXIS_PRIOR_KEYS.items():
+        anchors = (axes_cfg.get(cfg_key) or {}).get("direct_evidence_anchors_pct") or []
+        if anchors:
+            out.append(axis)
+    return out
+
+
+def classify_intervention_coverage(prior: dict[str, Any], supported_axes: list[str]) -> dict[str, Any]:
+    """Does this candidate cover every independently supported intervention axis?
+
+    Intervention sufficiency is assessed BEFORE perturbation size. Zeroing an axis
+    that pre-result evidence independently supports does not make a candidate a
+    cheaper version of the same experiment; it makes it a different, partial one.
+    """
+    supported_status = {"strong_analogue_region", "moderate_analogue_region"}
+    covered, zeroed, unsupported = [], [], []
+    for axis in supported_axes:
+        status = prior[AXIS_PRIOR_KEYS[axis][0]].get("status")
+        if status == "control_zero":
+            zeroed.append(axis)
+        elif status in supported_status:
+            covered.append(axis)
+        else:
+            unsupported.append(axis)
+
+    if not covered and not unsupported:
+        coverage_class = "no_intervention"
+    elif zeroed or unsupported:
+        coverage_class = "partial_coverage"
+    else:
+        coverage_class = "full_coverage"
+
+    rank = {"full_coverage": 0, "partial_coverage": 1, "no_intervention": 2}[coverage_class]
+    return {
+        "coverage_class": coverage_class,
+        "coverage_rank": rank,
+        "covered_supported_axes": covered,
+        "zeroed_supported_axes": zeroed,
+        "active_but_unsupported_axes": unsupported,
+        "role_if_partial": (
+            "partial-coverage / mechanistic control: informative about one axis, but it does not "
+            "test the full evidence-supported mitigation strategy"
+            if coverage_class != "full_coverage"
+            else None
+        ),
+    }
+
+
 def build_candidate_cards(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Build deterministic, outcome-blind scorecards for every admissible candidate."""
     cards: list[dict[str, Any]] = []
+    supported_axes = independently_supported_axes()
     for candidate in candidates:
         profile = candidate_profile(candidate)
         prior = compare_candidate_to_priors(candidate)
@@ -85,7 +149,10 @@ def build_candidate_cards(candidates: list[dict[str, Any]]) -> list[dict[str, An
             "missing_process_field_count": missing_count,
             "resin_modified": bool(profile["resin_modified"]),
             "stress_reasons": stress["reasons"],
+            "intervention_coverage": classify_intervention_coverage(prior, supported_axes),
         }
+        card["coverage_rank"] = card["intervention_coverage"]["coverage_rank"]
+        card["coverage_class"] = card["intervention_coverage"]["coverage_class"]
         cards.append(card)
     return cards
 
@@ -145,7 +212,12 @@ def _scenario_key(card: dict[str, Any], scenario: str) -> tuple[Any, ...]:
             card["candidate_id"],
         )
     if scenario == "performance_mitigation":
+        # Intervention sufficiency FIRST, perturbation size only as a tie-break among
+        # candidates that already cover every independently supported axis. A lower
+        # modifier burden obtained by zeroing a supported axis is a different (partial)
+        # experiment, not a cheaper version of the same one.
         return (
+            card.get("coverage_rank", 0),
             -int(card["resin_modified"]),
             -card["supported_active_axis_count"],
             -card["support_value"],
@@ -166,6 +238,7 @@ def _scenario_key(card: dict[str, Any], scenario: str) -> tuple[Any, ...]:
 
 def robustness_summary(cards: list[dict[str, Any]]) -> dict[str, Any]:
     """Rank candidates under several transparent priorities and report stability."""
+    supported_axes = independently_supported_axes()
     scenarios = ["evidence_first", "robustness_first", "performance_mitigation", "causal_isolation"]
     rankings: dict[str, list[str]] = {}
     rank1 = Counter()
@@ -192,10 +265,25 @@ def robustness_summary(cards: list[dict[str, Any]]) -> dict[str, Any]:
         )
     stability.sort(key=lambda x: (-x["rank1_fraction"], -x["top3_fraction"], x["candidate_id"]))
 
+    coverage_groups: dict[str, list[str]] = {}
+    for card in sorted(cards, key=lambda c: c["candidate_id"]):
+        coverage_groups.setdefault(card.get("coverage_class", "unclassified"), []).append(card["candidate_id"])
+
     return {
         "pareto_front": pareto_front(cards),
         "scenario_rankings": rankings,
         "scenario_stability": stability,
+        "independently_supported_intervention_axes": supported_axes,
+        "intervention_coverage_groups": coverage_groups,
+        "intervention_sufficiency_rule": (
+            "Decision order is: failure mode -> experiment intent -> required intervention-axis "
+            "coverage -> evidence-supported candidates -> minimum sufficient intervention. "
+            "For performance_mitigation, candidates covering EVERY independently supported axis "
+            f"({', '.join(supported_axes)}) are compared first. Minimum sufficient intervention is a "
+            "tie-break WITHIN that group only. A candidate that zeroes an independently supported "
+            "axis is a partial-coverage / mechanistic control, not the default performance rank-1; "
+            "it must not become rank-1 merely because zeroing that axis lowers modifier burden."
+        ),
         "note": (
             "These are transparent decision diagnostics, not fitted property predictions. "
             "Exact literature-anchor distance is retained only for audit and is not a primary ranking objective. "
@@ -241,10 +329,30 @@ def execute_planned_actions(
     blind_target_formulation_ids: set[str] | None = None,
     action_schemas: dict[str, dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
-    """Execute a planner-selected scientific evidence trace behind the firewall."""
+    """Execute a planner-selected scientific evidence trace behind the firewall.
+
+    A single malformed action request degrades that one request only. It must not
+    abort the whole evidence trace, because losing the external-evidence rows
+    silently biases the decision toward whichever axis happens to survive.
+    """
     blind_target_formulation_ids = blind_target_formulation_ids or set()
     results: list[dict[str, Any]] = []
-    for req in validate_planner_actions(requests, action_schemas=action_schemas):
+    raw_requests = requests if isinstance(requests, list) else []
+    for raw_req in raw_requests:
+        try:
+            req = validate_planner_actions([raw_req], action_schemas=action_schemas)[0]
+        except Exception as exc:
+            results.append(
+                {
+                    "name": raw_req.get("name") if isinstance(raw_req, dict) else None,
+                    "args": raw_req.get("args") if isinstance(raw_req, dict) else None,
+                    "reason": raw_req.get("reason") if isinstance(raw_req, dict) else None,
+                    "status": "invalid_arguments",
+                    "error": f"{type(exc).__name__}: {exc}",
+                    "result": None,
+                }
+            )
+            continue
         name = req["name"]
         args = dict(req["args"])
         formulation_id = args.get("formulation_id")

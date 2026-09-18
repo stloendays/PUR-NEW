@@ -64,8 +64,11 @@ def find_blind_payload_violations(
             stage = node.get("stage")
             if forbid_follow_up_stage and stage == "follow_up":
                 findings.append(f"{path or '$'} contains stage=follow_up")
+            # A JSON-Schema fragment can carry "formulation_id" as a PROPERTY NAME whose
+            # value is a schema object, so the value is not necessarily a hashable id.
+            # Only a scalar identifier can expose a blinded formulation.
             fid = node.get("formulation_id")
-            if fid in blinded_formulation_ids:
+            if isinstance(fid, str) and fid in blinded_formulation_ids:
                 findings.append(f"{path or '$'} exposes blinded formulation_id={fid}")
             for key, child in node.items():
                 walk(child, f"{path}.{key}" if path else str(key))
