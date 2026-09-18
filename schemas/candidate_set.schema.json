@@ -5,23 +5,65 @@
   "description": "Candidate states supplied to the Agent. The Agent may select only from this set or abstain.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["candidate_set_id", "candidates", "provenance"],
+  "required": [
+    "candidate_set_id",
+    "candidates",
+    "provenance"
+  ],
   "properties": {
-    "candidate_set_id": {"type": "string", "minLength": 1},
-    "decision_context": {"type": ["string", "null"]},
+    "candidate_set_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decision_context": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "candidates": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["candidate_id", "formulation_state", "process_state"],
+        "required": [
+          "candidate_id",
+          "formulation_state",
+          "process_state"
+        ],
         "properties": {
-          "candidate_id": {"type": "string", "minLength": 1},
-          "formulation_state": {"type": "object", "additionalProperties": true},
-          "process_state": {"type": "object", "additionalProperties": true},
-          "evidence_references": {"type": "array", "items": {"type": "string"}},
-          "constraint_notes": {"type": "array", "items": {"type": "string"}}
+          "candidate_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "formulation_state": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "process_state": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "evidence_references": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "constraint_notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "measurement_plan": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": true
+          }
         }
       }
     },
