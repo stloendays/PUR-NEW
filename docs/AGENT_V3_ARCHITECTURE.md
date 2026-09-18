@@ -2,7 +2,7 @@
 
 ## 1. Role in the paper
 
-The Agent is a scientific decision layer downstream of the physical/model findings. Its job is to convert measured rheological structure into one useful, interpretable formulation-process experiment.
+The Agent is a scientific decision layer downstream of the physical/model findings. Its job is to convert measured rheological structure into one useful, interpretable formulation-process experiment by combining sparse local evidence with paper-derived material rules and curated PUR literature/database knowledge.
 
 The scientific chain is:
 
@@ -189,7 +189,19 @@ Temperature response and thermal-hold stability are treated as distinct, differe
 
 ### External-evidence rule
 
-Database/literature evidence identifies plausible formulation directions. It does not provide a guaranteed optimum and is not allowed to override contradictory local physical evidence.
+Database/literature evidence is converted into **machine-actionable scientific priors**. This layer is needed because the sparse E1-E5 local design can diagnose the thermal-hold failure but cannot by itself uniquely imply an acrylic/tackifier intervention outside the original reactive-core axes.
+
+The evidence hierarchy is:
+
+```text
+local experiment -> diagnose failure and state uncertainty
+paper-derived rheological rules -> define what response must be optimized
+literature / PUR database -> define plausible intervention families and broad analogue regions
+physical / uncertainty constraints -> control extrapolation
+Agent judgment -> choose a testable next experiment
+```
+
+External evidence does not provide a guaranteed optimum and is not allowed to override contradictory local physical evidence. Directly commensurate numeric anchors, directional/noncommensurate evidence, and reconstructed conservative design principles must remain explicitly distinguished. No guidance rule may be derived from the held-out validation recipe or its later wet-lab outcome.
 
 ---
 
