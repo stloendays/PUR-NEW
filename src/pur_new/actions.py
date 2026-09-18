@@ -70,6 +70,7 @@ def get_candidate_hypothesis() -> dict[str, Any]:
         "local_reactive_core_anchor": priors["local_reactive_core_anchor"],
         "candidate_axes": priors["candidate_axes"],
         "stability_hypotheses": priors["stability_hypotheses"],
+        "decision_policy": priors.get("decision_policy", {}),
         "claim_boundary": priors["claim_boundary"],
     }
 
