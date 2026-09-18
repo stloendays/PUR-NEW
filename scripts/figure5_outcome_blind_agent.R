@@ -146,7 +146,7 @@ wilson <- function(k, n, z = 1.959964) {
   c(max(0, ctr - half), min(1, ctr + half))
 }
 
-agent_ci <- wilson(8, 8)
+agent_ci <- wilson(8, 10)
 naive_ci <- wilson(0, 7)
 
 bench <- data.frame(
@@ -154,7 +154,7 @@ bench <- data.frame(
     c("Agent (v3h)", "Uniform random", "Naive single-pass LLM"),
     levels = rev(c("Agent (v3h)", "Uniform random", "Naive single-pass LLM"))
   ),
-  rate = c(1.0, 18/73, 0),
+  rate = c(8/10, 18/73, 0),
   lo = c(agent_ci[1], 18/73, naive_ci[1]),
   hi = c(agent_ci[2], 18/73, naive_ci[2]),
   type = c("agent", "random", "naive")
@@ -164,7 +164,7 @@ pB <- ggplot(bench, aes(y = arm, x = rate, colour = type)) +
   geom_errorbarh(aes(xmin = lo, xmax = hi), height = 0, linewidth = 0.9) +
   geom_point(size = 3.5) +
   geom_text(
-    aes(label = c("8/8", "18/73", "0/7")),
+    aes(label = c("8/10 runs", "18/73", "0/7")),
     nudge_x = c(-0.08, 0.05, 0.05),
     hjust = c(1, 0, 0), size = 2.65, colour = pal[["dark"]]
   ) +
@@ -172,7 +172,7 @@ pB <- ggplot(bench, aes(y = arm, x = rate, colour = type)) +
   scale_x_continuous(limits = c(0, 1.05), breaks = c(0, 0.25, 0.5, 0.75, 1), labels = percent_format(accuracy = 1)) +
   labs(
     title = "B  Near-region recovery",
-    subtitle = "Wilson 95% intervals for finite-run arms; random is the exact lattice fraction",
+    subtitle = "Run-level recovery: Agent made 8 near-region commits and 2 abstentions; random is the exact lattice fraction",
     x = "Near-region rate",
     y = NULL
   ) +
@@ -255,7 +255,7 @@ pD <- ggplot(attrib, aes(x = stage, y = distance, group = 1)) +
   scale_y_continuous(limits = c(0, 17), breaks = c(0, 5, 10, 15)) +
   labs(
     title = "D  Attribution of improvement",
-    subtitle = "Most of the closed distance comes from explicit deterministic science rules",
+    subtitle = "Best-case strategy-ladder decomposition; descriptive rather than causal attribution",
     x = NULL,
     y = "Distance to held-out formulation (pp)"
   ) +
