@@ -1,11 +1,34 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "contract_id": "PUR_NEW_PRE_RESULT_REPLAY_R1",
-  "mode": "historical_pre_result_replay",
+  "mode": "evidence_guided_historical_pre_result_replay",
   "status": "retrospective_reconstruction_outcome_excluded",
-  "purpose": "Constrain a real API-driven Design Agent to reproduce the author-confirmed pre-result formulation decision logic from reconstructed pre-result evidence, without exposing the later wet-lab outcome. This is a replay-fidelity contract, not an independent blind-discovery benchmark.",
+  "purpose": "Operationalize an evidence-guided pre-result Design Agent in which sparse local PUR experiments diagnose the failure mode, paper-derived rheological findings define the relevant design objective, and curated literature/database evidence supplies machine-actionable formulation priors. The later wet-lab outcome and validation target coordinates remain excluded. This is a replay-fidelity contract, not an independent blind-discovery benchmark.",
   "required_evidence_profile": "blind_pre_result",
-  "selection_authority": "hybrid_contract_constrained",
+  "selection_authority": "knowledge_guided_contract_constrained",
+  "knowledge_guidance": {
+    "interpretation": "The recommendation is not treated as an unguided LLM guess. The scientific Agent is deliberately grounded in pre-result local measurements, paper-derived rheological rules, curated PUR literature/database evidence, and explicit physical/uncertainty constraints. These sources guide the model from diagnosis of thermal-hold instability toward an evidence-supported formulation family.",
+    "local_experimental_role": [
+      "Use E1-E5 and original thermal-hold measurements to identify thermal-hold viscosity drift as the failure mode.",
+      "Use the local data to establish that nominal composition alone does not uniquely locate the realized viscosity level."
+    ],
+    "paper_derived_rule_role": [
+      "Use the state-aware rheological representation to retain realization/process-state uncertainty.",
+      "Treat temperature response and thermal-hold stability as distinct design coordinates, so the next experiment must directly measure hold drift rather than use static viscosity as a proxy."
+    ],
+    "literature_database_role": [
+      "Use PAT_US5932680A examples around 4.8-6.4% tackifying/hydrocarbon resin as evidence that a minor tackifier axis is chemically plausible.",
+      "Use PAT_US20160215185A1 repeated examples around 19-20% acrylic tackifying resin as directly commensurate coarse acrylic anchors.",
+      "Use PAT_US6465104B1 as comparative hot-hold-stability evidence that acrylic functionality/reactive-group density can matter, without transferring its exact optimum to the local system.",
+      "Use PAPER_CN_ADHESIVES_2025_34_09_54 only as directional evidence for a lower acrylic intervention level because the reported 15% denominator is not yet verified as directly commensurate total-formulation wt%.",
+      "Use EP0293602A2 and related curated evidence to support thermal-hold viscosity rise as a legitimate reactive-hot-melt formulation failure mode, without importing its longer-time numerical threshold into the local 15-60 min test."
+    ],
+    "decision_principles": [
+      "External evidence defines plausible intervention families and broad regions; it does not predict the local wet-lab outcome.",
+      "When several pre-result-supported interventions are admissible, prefer a conservative first test with lower modifier burden to limit extrapolation away from the local E1-E5 chemistry.",
+      "Preserve the E2-centered reactive-core proportions so the intervention tests the resin-modification hypothesis rather than changing multiple reactive-core axes simultaneously."
+    ]
+  },
   "scientific_objective": {
     "primary_property": "thermal-hold rheological stability",
     "temperature_c": 120,
@@ -17,12 +40,12 @@
     "interpretation": "The next experiment is selected to reduce thermal-hold viscosity drift, not to optimize static viscosity or all adhesive properties."
   },
   "required_design_logic": [
-    "Treat thermal-hold viscosity build-up as the target failure mode.",
+    "Treat thermal-hold viscosity build-up as the target failure mode identified from the original local measurements.",
     "Retain realization/process-state uncertainty explicitly; do not infer a single deterministic viscosity level from nominal composition.",
-    "Move beyond reactive-core-only micro-tuning and test the externally supported resin-modified formulation family.",
+    "Use curated literature/database evidence to move beyond reactive-core-only micro-tuning and test an externally supported resin-modified formulation family.",
     "Preserve the E2-centered 50/50 PPG2000/PDP70 reactive-core proportions unless a candidate-specific chemical constraint requires otherwise.",
-    "Use both the acrylic-like and minor-tackifier intervention axes in the replay performance candidate because both directions had independent pre-result analogue support.",
-    "Prefer the smallest modifier intervention that still satisfies the reconstructed evidence-supported lower acrylic region and minor-tackifier region; this is a conservative first-test rule to limit extrapolation from E1-E5 chemistry.",
+    "Use both the acrylic-like and minor-tackifier intervention axes in the reconstructed replay performance candidate because both directions had independent pre-result analogue support.",
+    "Prefer the smallest modifier intervention that remains consistent with the reconstructed lower-acrylic direction and minor-tackifier evidence; this is a conservative minimum-intervention rule rather than a claim that the literature establishes a unique optimum.",
     "Require matched 120 C, 15-60 min hold measurements with two independent repeats for physical adjudication."
   ],
   "hard_candidate_constraints": {
@@ -33,6 +56,38 @@
     "tackifier_pct_total_min": 3.0,
     "tackifier_pct_total_max": 7.0,
     "total_modifier_pct_total_max": 20.0
+  },
+  "constraint_provenance": {
+    "require_resin_modified": {
+      "basis": "pre_result_scientific_inference",
+      "support": ["LOCAL_HOLD", "H01-H06", "H09-H14"],
+      "note": "Local data identify the failure; external evidence supports resin modification as a plausible intervention family."
+    },
+    "require_acrylic_like_modifier": {
+      "basis": "pre_result_external_analogue",
+      "support": ["H03-H06", "H08-H10"],
+      "note": "Acrylic modification is externally supported, but no source establishes the local exact optimum."
+    },
+    "require_minor_tackifier_like_modifier": {
+      "basis": "reconstructed_decision_rule_with_external_support",
+      "support": ["H01-H02", "H13"],
+      "note": "Minor tackifier use is externally supported. Requiring both axes simultaneously is part of the reconstructed historical decision logic, not a universal chemical law."
+    },
+    "acrylic_pct_total_max_15": {
+      "basis": "reconstructed_conservative_lower_intervention_rule",
+      "support": ["H08", "minimum_intervention_principle"],
+      "note": "H08 reports a 15% preferred addition level but its denominator is not yet verified as directly commensurate total-formulation wt%. Therefore 15% is used only as a directional lower-region replay boundary combined with the conservative minimum-intervention principle, not as a directly proven local optimum."
+    },
+    "tackifier_pct_total_3_to_7": {
+      "basis": "pre_result_external_analogue_region",
+      "support": ["H01", "H02", "H13"],
+      "note": "Curated examples cluster around 4.8-6.4%, while general formulation guidance places minor tackifier/rheology modifiers below about 10 wt%."
+    },
+    "total_modifier_pct_total_max_20": {
+      "basis": "reconstructed_conservative_extrapolation_control",
+      "support": ["local_E1_E5_chemistry", "minimum_intervention_principle"],
+      "note": "This is an explicit replay/design-risk control used to limit departure from the sparse local chemistry, not a literature-derived universal threshold."
+    }
   },
   "deterministic_tie_break": [
     "minimum_total_modifier_pct",
@@ -56,5 +111,6 @@
     "post-result success/failure language",
     "controller-only benchmark target coordinates"
   ],
-  "claim_boundary": "This contract is a later, explicit reconstruction of the pre-result decision logic requested for replay fidelity. It may be used to test whether a real API can reproduce the historical recommendation under the reconstructed rules. It must not be presented as the contemporaneous original freeze algorithm, and it must not replace the separate target-blind benchmark used to assess independent recovery."
+  "anti_posthoc_rule": "Every item used to guide the pre-result Agent must be traceable either to original local measurements, a paper-derived rule computed only from those measurements, curated external literature/database evidence available before the validation outcome, or an explicitly labeled conservative experimental-design principle. The validation formulation coordinates or later wet-lab result may not be used to create, tune, or justify a guidance rule.",
+  "claim_boundary": "This contract is a later, explicit reconstruction of an evidence-guided pre-result decision process. It may be used to test whether a real API can reproduce the historical recommendation when grounded in reconstructed pre-result local evidence, paper-derived scientific rules, and curated literature/database priors. It must not be presented as the contemporaneous original freeze algorithm, as proof that literature uniquely determines the exact recipe, or as a substitute for the separate target-blind benchmark used to assess independent recovery."
 }
