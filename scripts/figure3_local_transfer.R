@@ -47,7 +47,7 @@ pA <- ggplot(pooled, aes(x = anchor_temperature_c, y = pooled_multiplicative_err
   ) +
   labs(
     title = "A  One-point transfer",
-    x = expression("Anchor temperature ("*degree*C*")"),
+    x = "Anchor temperature (°C)",
     y = "Pooled multiplicative RMSE"
   ) +
   theme_pur()
