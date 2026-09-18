@@ -1,0 +1,1141 @@
+{
+  "baseline_id": "NAIVE_LOCAL_ONLY_V1",
+  "candidates": [
+    {
+      "candidate_id": "S1C01",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 19.2866666667,
+        "PDP70": 40.3566666667,
+        "PPG2000": 40.3566666667,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C02",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 20.1906730224,
+        "PDP70": 39.9046634888,
+        "PPG2000": 39.9046634888,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C03",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 21.0759641345,
+        "PDP70": 39.4620179327,
+        "PPG2000": 39.4620179327,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C04",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 19.8333333333,
+        "PDP70": 32.0666666667,
+        "PPG2000": 48.1,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C05",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 20.5433333333,
+        "PDP70": 47.6733333333,
+        "PPG2000": 31.7833333333,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C06",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 19.7386698446,
+        "PDP70": 40.1306650777,
+        "PPG2000": 40.1306650777,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C07",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 20.6333185785,
+        "PDP70": 39.6833407108,
+        "PPG2000": 39.6833407108,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C08",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 20.0120031779,
+        "PDP70": 35.9856650777,
+        "PPG2000": 44.0023317444,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C09",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 20.3670031779,
+        "PDP70": 43.7889984111,
+        "PPG2000": 35.8439984111,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C10",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 19.6859061969,
+        "PDP70": 38.9070469016,
+        "PPG2000": 38.9070469016,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C11",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 19.1811393713,
+        "PDP70": 37.9094303143,
+        "PPG2000": 37.9094303143,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C12",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 18.6763725458,
+        "PDP70": 36.9118137271,
+        "PPG2000": 36.9118137271,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C13",
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 18.1716057202,
+        "PDP70": 35.9141971399,
+        "PPG2000": 35.9141971399,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C14",
+      "formulation_state": {
+        "AC1920": 2.5,
+        "MDI": 19.6859061969,
+        "PDP70": 38.9070469016,
+        "PPG2000": 38.9070469016,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C15",
+      "formulation_state": {
+        "AC1920": 2.5,
+        "MDI": 19.1811393713,
+        "PDP70": 37.9094303143,
+        "PPG2000": 37.9094303143,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C16",
+      "formulation_state": {
+        "AC1920": 2.5,
+        "MDI": 18.6763725458,
+        "PDP70": 36.9118137271,
+        "PPG2000": 36.9118137271,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C17",
+      "formulation_state": {
+        "AC1920": 2.5,
+        "MDI": 18.1716057202,
+        "PDP70": 35.9141971399,
+        "PPG2000": 35.9141971399,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C18",
+      "formulation_state": {
+        "AC1920": 2.5,
+        "MDI": 17.6668388946,
+        "PDP70": 34.9165805527,
+        "PPG2000": 34.9165805527,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C19",
+      "formulation_state": {
+        "AC1920": 5.0,
+        "MDI": 19.1811393713,
+        "PDP70": 37.9094303143,
+        "PPG2000": 37.9094303143,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C20",
+      "formulation_state": {
+        "AC1920": 5.0,
+        "MDI": 18.6763725458,
+        "PDP70": 36.9118137271,
+        "PPG2000": 36.9118137271,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C21",
+      "formulation_state": {
+        "AC1920": 5.0,
+        "MDI": 18.1716057202,
+        "PDP70": 35.9141971399,
+        "PPG2000": 35.9141971399,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C22",
+      "formulation_state": {
+        "AC1920": 5.0,
+        "MDI": 17.6668388946,
+        "PDP70": 34.9165805527,
+        "PPG2000": 34.9165805527,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C23",
+      "formulation_state": {
+        "AC1920": 5.0,
+        "MDI": 17.1620720691,
+        "PDP70": 33.9189639655,
+        "PPG2000": 33.9189639655,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C24",
+      "formulation_state": {
+        "AC1920": 7.5,
+        "MDI": 18.6763725458,
+        "PDP70": 36.9118137271,
+        "PPG2000": 36.9118137271,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C25",
+      "formulation_state": {
+        "AC1920": 7.5,
+        "MDI": 18.1716057202,
+        "PDP70": 35.9141971399,
+        "PPG2000": 35.9141971399,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C26",
+      "formulation_state": {
+        "AC1920": 7.5,
+        "MDI": 17.6668388946,
+        "PDP70": 34.9165805527,
+        "PPG2000": 34.9165805527,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C27",
+      "formulation_state": {
+        "AC1920": 7.5,
+        "MDI": 17.1620720691,
+        "PDP70": 33.9189639655,
+        "PPG2000": 33.9189639655,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C28",
+      "formulation_state": {
+        "AC1920": 7.5,
+        "MDI": 16.6573052435,
+        "PDP70": 32.9213473782,
+        "PPG2000": 32.9213473782,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C29",
+      "formulation_state": {
+        "AC1920": 10.0,
+        "MDI": 18.1716057202,
+        "PDP70": 35.9141971399,
+        "PPG2000": 35.9141971399,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C30",
+      "formulation_state": {
+        "AC1920": 10.0,
+        "MDI": 17.6668388946,
+        "PDP70": 34.9165805527,
+        "PPG2000": 34.9165805527,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C31",
+      "formulation_state": {
+        "AC1920": 10.0,
+        "MDI": 17.1620720691,
+        "PDP70": 33.9189639655,
+        "PPG2000": 33.9189639655,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C32",
+      "formulation_state": {
+        "AC1920": 10.0,
+        "MDI": 16.6573052435,
+        "PDP70": 32.9213473782,
+        "PPG2000": 32.9213473782,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C33",
+      "formulation_state": {
+        "AC1920": 10.0,
+        "MDI": 16.1525384179,
+        "PDP70": 31.923730791,
+        "PPG2000": 31.923730791,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C34",
+      "formulation_state": {
+        "AC1920": 12.5,
+        "MDI": 17.6668388946,
+        "PDP70": 34.9165805527,
+        "PPG2000": 34.9165805527,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C35",
+      "formulation_state": {
+        "AC1920": 12.5,
+        "MDI": 17.1620720691,
+        "PDP70": 33.9189639655,
+        "PPG2000": 33.9189639655,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C36",
+      "formulation_state": {
+        "AC1920": 12.5,
+        "MDI": 16.6573052435,
+        "PDP70": 32.9213473782,
+        "PPG2000": 32.9213473782,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C37",
+      "formulation_state": {
+        "AC1920": 12.5,
+        "MDI": 16.1525384179,
+        "PDP70": 31.923730791,
+        "PPG2000": 31.923730791,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C38",
+      "formulation_state": {
+        "AC1920": 12.5,
+        "MDI": 15.6477715924,
+        "PDP70": 30.9261142038,
+        "PPG2000": 30.9261142038,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C39",
+      "formulation_state": {
+        "AC1920": 15.0,
+        "MDI": 17.1620720691,
+        "PDP70": 33.9189639655,
+        "PPG2000": 33.9189639655,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C40",
+      "formulation_state": {
+        "AC1920": 15.0,
+        "MDI": 16.6573052435,
+        "PDP70": 32.9213473782,
+        "PPG2000": 32.9213473782,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C41",
+      "formulation_state": {
+        "AC1920": 15.0,
+        "MDI": 16.1525384179,
+        "PDP70": 31.923730791,
+        "PPG2000": 31.923730791,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C42",
+      "formulation_state": {
+        "AC1920": 15.0,
+        "MDI": 15.6477715924,
+        "PDP70": 30.9261142038,
+        "PPG2000": 30.9261142038,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C43",
+      "formulation_state": {
+        "AC1920": 15.0,
+        "MDI": 15.1430047668,
+        "PDP70": 29.9284976166,
+        "PPG2000": 29.9284976166,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C44",
+      "formulation_state": {
+        "AC1920": 17.5,
+        "MDI": 16.6573052435,
+        "PDP70": 32.9213473782,
+        "PPG2000": 32.9213473782,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C45",
+      "formulation_state": {
+        "AC1920": 17.5,
+        "MDI": 16.1525384179,
+        "PDP70": 31.923730791,
+        "PPG2000": 31.923730791,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C46",
+      "formulation_state": {
+        "AC1920": 17.5,
+        "MDI": 15.6477715924,
+        "PDP70": 30.9261142038,
+        "PPG2000": 30.9261142038,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C47",
+      "formulation_state": {
+        "AC1920": 17.5,
+        "MDI": 15.1430047668,
+        "PDP70": 29.9284976166,
+        "PPG2000": 29.9284976166,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C48",
+      "formulation_state": {
+        "AC1920": 17.5,
+        "MDI": 14.6382379413,
+        "PDP70": 28.9308810294,
+        "PPG2000": 28.9308810294,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C49",
+      "formulation_state": {
+        "AC1920": 20.0,
+        "MDI": 16.1525384179,
+        "PDP70": 31.923730791,
+        "PPG2000": 31.923730791,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C50",
+      "formulation_state": {
+        "AC1920": 20.0,
+        "MDI": 15.6477715924,
+        "PDP70": 30.9261142038,
+        "PPG2000": 30.9261142038,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C51",
+      "formulation_state": {
+        "AC1920": 20.0,
+        "MDI": 15.1430047668,
+        "PDP70": 29.9284976166,
+        "PPG2000": 29.9284976166,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C52",
+      "formulation_state": {
+        "AC1920": 20.0,
+        "MDI": 14.6382379413,
+        "PDP70": 28.9308810294,
+        "PPG2000": 28.9308810294,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C53",
+      "formulation_state": {
+        "AC1920": 20.0,
+        "MDI": 14.1334711157,
+        "PDP70": 27.9332644421,
+        "PPG2000": 27.9332644421,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C54",
+      "formulation_state": {
+        "AC1920": 22.5,
+        "MDI": 15.6477715924,
+        "PDP70": 30.9261142038,
+        "PPG2000": 30.9261142038,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C55",
+      "formulation_state": {
+        "AC1920": 22.5,
+        "MDI": 15.1430047668,
+        "PDP70": 29.9284976166,
+        "PPG2000": 29.9284976166,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C56",
+      "formulation_state": {
+        "AC1920": 22.5,
+        "MDI": 14.6382379413,
+        "PDP70": 28.9308810294,
+        "PPG2000": 28.9308810294,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C57",
+      "formulation_state": {
+        "AC1920": 22.5,
+        "MDI": 14.1334711157,
+        "PDP70": 27.9332644421,
+        "PPG2000": 27.9332644421,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C58",
+      "formulation_state": {
+        "AC1920": 22.5,
+        "MDI": 13.6287042901,
+        "PDP70": 26.9356478549,
+        "PPG2000": 26.9356478549,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C59",
+      "formulation_state": {
+        "AC1920": 25.0,
+        "MDI": 15.1430047668,
+        "PDP70": 29.9284976166,
+        "PPG2000": 29.9284976166,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C60",
+      "formulation_state": {
+        "AC1920": 25.0,
+        "MDI": 14.6382379413,
+        "PDP70": 28.9308810294,
+        "PPG2000": 28.9308810294,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C61",
+      "formulation_state": {
+        "AC1920": 25.0,
+        "MDI": 14.1334711157,
+        "PDP70": 27.9332644421,
+        "PPG2000": 27.9332644421,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C62",
+      "formulation_state": {
+        "AC1920": 25.0,
+        "MDI": 13.6287042901,
+        "PDP70": 26.9356478549,
+        "PPG2000": 26.9356478549,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C63",
+      "formulation_state": {
+        "AC1920": 25.0,
+        "MDI": 13.1239374646,
+        "PDP70": 25.9380312677,
+        "PPG2000": 25.9380312677,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C64",
+      "formulation_state": {
+        "AC1920": 27.5,
+        "MDI": 14.6382379413,
+        "PDP70": 28.9308810294,
+        "PPG2000": 28.9308810294,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C65",
+      "formulation_state": {
+        "AC1920": 27.5,
+        "MDI": 14.1334711157,
+        "PDP70": 27.9332644421,
+        "PPG2000": 27.9332644421,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C66",
+      "formulation_state": {
+        "AC1920": 27.5,
+        "MDI": 13.6287042901,
+        "PDP70": 26.9356478549,
+        "PPG2000": 26.9356478549,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C67",
+      "formulation_state": {
+        "AC1920": 27.5,
+        "MDI": 13.1239374646,
+        "PDP70": 25.9380312677,
+        "PPG2000": 25.9380312677,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C68",
+      "formulation_state": {
+        "AC1920": 27.5,
+        "MDI": 12.619170639,
+        "PDP70": 24.9404146805,
+        "PPG2000": 24.9404146805,
+        "TK100": 10.0
+      }
+    },
+    {
+      "candidate_id": "S1C69",
+      "formulation_state": {
+        "AC1920": 30.0,
+        "MDI": 14.1334711157,
+        "PDP70": 27.9332644421,
+        "PPG2000": 27.9332644421,
+        "TK100": 0.0
+      }
+    },
+    {
+      "candidate_id": "S1C70",
+      "formulation_state": {
+        "AC1920": 30.0,
+        "MDI": 13.6287042901,
+        "PDP70": 26.9356478549,
+        "PPG2000": 26.9356478549,
+        "TK100": 2.5
+      }
+    },
+    {
+      "candidate_id": "S1C71",
+      "formulation_state": {
+        "AC1920": 30.0,
+        "MDI": 13.1239374646,
+        "PDP70": 25.9380312677,
+        "PPG2000": 25.9380312677,
+        "TK100": 5.0
+      }
+    },
+    {
+      "candidate_id": "S1C72",
+      "formulation_state": {
+        "AC1920": 30.0,
+        "MDI": 12.619170639,
+        "PDP70": 24.9404146805,
+        "PPG2000": 24.9404146805,
+        "TK100": 7.5
+      }
+    },
+    {
+      "candidate_id": "S1C73",
+      "formulation_state": {
+        "AC1920": 30.0,
+        "MDI": 12.1144038135,
+        "PDP70": 23.9427980933,
+        "PPG2000": 23.9427980933,
+        "TK100": 10.0
+      }
+    }
+  ],
+  "information_budget": {
+    "candidate_space_rationale": false,
+    "external_database_or_literature": false,
+    "hidden_validation_identity_or_outcome": false,
+    "planner_or_skeptic": false,
+    "raw_original_local_measurements_only": true,
+    "scientific_actions": false,
+    "state_aware_theory_summary": false
+  },
+  "original_formulations": [
+    {
+      "formulation_id": "E1",
+      "mdi": 57.86,
+      "nco_oh": 1.7,
+      "pdp70": 121.07,
+      "ppg2000": 121.07
+    },
+    {
+      "formulation_id": "E2",
+      "mdi": 60.57,
+      "nco_oh": 1.8,
+      "pdp70": 119.71,
+      "ppg2000": 119.71
+    },
+    {
+      "formulation_id": "E3",
+      "mdi": 63.23,
+      "nco_oh": 1.9,
+      "pdp70": 118.39,
+      "ppg2000": 118.39
+    },
+    {
+      "formulation_id": "E4",
+      "mdi": 59.5,
+      "nco_oh": 1.8,
+      "pdp70": 96.2,
+      "ppg2000": 144.3
+    },
+    {
+      "formulation_id": "E5",
+      "mdi": 61.63,
+      "nco_oh": 1.8,
+      "pdp70": 143.02,
+      "ppg2000": 95.35
+    }
+  ],
+  "raw_temperature_measurements": [
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "false",
+      "run_label": "+P",
+      "temperature_c": 80.0,
+      "viscosity_reported": 3015.0
+    },
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "false",
+      "run_label": "+P",
+      "temperature_c": 90.0,
+      "viscosity_reported": 1964.0
+    },
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "false",
+      "run_label": "+P",
+      "temperature_c": 100.0,
+      "viscosity_reported": 1349.0
+    },
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "false",
+      "run_label": "+P",
+      "temperature_c": 110.0,
+      "viscosity_reported": 958.0
+    },
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "false",
+      "run_label": "+P",
+      "temperature_c": 120.0,
+      "viscosity_reported": 699.0
+    },
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "false",
+      "run_label": "+P",
+      "temperature_c": 130.0,
+      "viscosity_reported": 542.0
+    },
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "true",
+      "run_label": "GJJ",
+      "temperature_c": 80.0,
+      "viscosity_reported": 3636.0
+    },
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "true",
+      "run_label": "GJJ",
+      "temperature_c": 90.0,
+      "viscosity_reported": 2288.0
+    },
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "true",
+      "run_label": "GJJ",
+      "temperature_c": 100.0,
+      "viscosity_reported": 1512.0
+    },
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "true",
+      "run_label": "GJJ",
+      "temperature_c": 110.0,
+      "viscosity_reported": 1073.0
+    },
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "true",
+      "run_label": "GJJ",
+      "temperature_c": 120.0,
+      "viscosity_reported": 780.0
+    },
+    {
+      "formulation_id": "E1",
+      "retest_after_1d": "true",
+      "run_label": "GJJ",
+      "temperature_c": 130.0,
+      "viscosity_reported": 599.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "GJJ",
+      "temperature_c": 80.0,
+      "viscosity_reported": 9462.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "GJJ",
+      "temperature_c": 90.0,
+      "viscosity_reported": 5527.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "GJJ",
+      "temperature_c": 100.0,
+      "viscosity_reported": 3705.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "GJJ",
+      "temperature_c": 110.0,
+      "viscosity_reported": 2622.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "GJJ",
+      "temperature_c": 120.0,
+      "viscosity_reported": 1955.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "GJJ",
+      "temperature_c": 130.0,
+      "viscosity_reported": 1536.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "ZYX",
+      "temperature_c": 80.0,
+      "viscosity_reported": 18780.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "ZYX",
+      "temperature_c": 90.0,
+      "viscosity_reported": 11540.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "ZYX",
+      "temperature_c": 100.0,
+      "viscosity_reported": 7544.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "ZYX",
+      "temperature_c": 110.0,
+      "viscosity_reported": 5710.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "ZYX",
+      "temperature_c": 120.0,
+      "viscosity_reported": 4017.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "ZYX",
+      "temperature_c": 130.0,
+      "viscosity_reported": 3302.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 80.0,
+      "viscosity_reported": 27350.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 90.0,
+      "viscosity_reported": 15560.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 100.0,
+      "viscosity_reported": 10360.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 110.0,
+      "viscosity_reported": 7895.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 120.0,
+      "viscosity_reported": 6977.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 130.0,
+      "viscosity_reported": 5128.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "true",
+      "run_label": "ZYX",
+      "temperature_c": 80.0,
+      "viscosity_reported": 24470.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "true",
+      "run_label": "ZYX",
+      "temperature_c": 90.0,
+      "viscosity_reported": 15300.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "true",
+      "run_label": "ZYX",
+      "temperature_c": 100.0,
+      "viscosity_reported": 10330.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "true",
+      "run_label": "ZYX",
+      "temperature_c": 110.0,
+      "viscosity_reported": 6671.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "true",
+      "run_label": "ZYX",
+      "temperature_c": 120.0,
+      "viscosity_reported": 4863.0
+    },
+    {
+      "formulation_id": "E2",
+      "retest_after_1d": "true",
+      "run_label": "ZYX",
+      "temperature_c": 130.0,
+      "viscosity_reported": 3845.0
+    },
+    {
+      "formulation_id": "E3",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 80.0,
+      "viscosity_reported": 18570.0
+    },
+    {
+      "formulation_id": "E3",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 90.0,
+      "viscosity_reported": 11550.0
+    },
+    {
+      "formulation_id": "E3",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 100.0,
+      "viscosity_reported": 7546.0
+    },
+    {
+      "formulation_id": "E3",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 110.0,
+      "viscosity_reported": 5376.0
+    },
+    {
+      "formulation_id": "E3",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 120.0,
+      "viscosity_reported": 3839.0
+    },
+    {
+      "formulation_id": "E3",
+      "retest_after_1d": "false",
+      "run_label": "CHH",
+      "temperature_c": 130.0,
+      "viscosity_reported": 2959.0
+    }
+  ],
+  "raw_thermal_hold_measurements": [
+    {
+      "formulation_id": "E1",
+      "run_label": "GJJ",
+      "temperature_c": 120.0,
+      "time_min": 15.0,
+      "viscosity_reported": 708.7
+    },
+    {
+      "formulation_id": "E1",
+      "run_label": "GJJ",
+      "temperature_c": 120.0,
+      "time_min": 30.0,
+      "viscosity_reported": 728.6
+    },
+    {
+      "formulation_id": "E1",
+      "run_label": "GJJ",
+      "temperature_c": 120.0,
+      "time_min": 60.0,
+      "viscosity_reported": 776.1
+    },
+    {
+      "formulation_id": "E1",
+      "run_label": "GJJ",
+      "temperature_c": 120.0,
+      "time_min": 90.0,
+      "viscosity_reported": 828.1
+    },
+    {
+      "formulation_id": "E5",
+      "run_label": "ZYX",
+      "temperature_c": 120.0,
+      "time_min": 15.0,
+      "viscosity_reported": 2210.0
+    },
+    {
+      "formulation_id": "E5",
+      "run_label": "ZYX",
+      "temperature_c": 120.0,
+      "time_min": 30.0,
+      "viscosity_reported": 2470.0
+    },
+    {
+      "formulation_id": "E5",
+      "run_label": "ZYX",
+      "temperature_c": 120.0,
+      "time_min": 60.0,
+      "viscosity_reported": 3349.0
+    },
+    {
+      "formulation_id": "E5",
+      "run_label": "ZYX",
+      "temperature_c": 120.0,
+      "time_min": 90.0,
+      "viscosity_reported": 4267.0
+    }
+  ],
+  "rules": [
+    "Do not assume literature or database knowledge not supplied in this payload.",
+    "Do not infer or invent the hidden validation result.",
+    "This baseline has no tools and no state-aware model summary."
+  ],
+  "task": "Choose one candidate for a 120 C thermal-hold validation experiment. Use only the original local measurements and the candidate compositions shown here."
+}

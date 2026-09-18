@@ -1,0 +1,256 @@
+{
+  "claim_boundary": {
+    "measured_vs_derived_kept_separate": true,
+    "run_labels_not_interpreted": true,
+    "unknown_viscosity_unit_not_invented": true
+  },
+  "source_files": [
+    "data/formulations.csv",
+    "data/temperature_sweeps.csv",
+    "data/thermal_hold.csv"
+  ],
+  "temperature_response": {
+    "nominal_repeat_spread": [
+      {
+        "formulation_id": "E2",
+        "interpretation": "descriptive run spread; run labels are not assigned a meaning here",
+        "max_min_ratio": 2.8905094060452337,
+        "mean": 18530.666666666668,
+        "n_runs": 3,
+        "sample_cv": 0.4828000144760181,
+        "temperature_c": 80.0
+      },
+      {
+        "formulation_id": "E2",
+        "interpretation": "descriptive run spread; run labels are not assigned a meaning here",
+        "max_min_ratio": 2.815270490320246,
+        "mean": 10875.666666666666,
+        "n_runs": 3,
+        "sample_cv": 0.464282688366698,
+        "temperature_c": 90.0
+      },
+      {
+        "formulation_id": "E2",
+        "interpretation": "descriptive run spread; run labels are not assigned a meaning here",
+        "max_min_ratio": 2.796221322537112,
+        "mean": 7203.0,
+        "n_runs": 3,
+        "sample_cv": 0.46377604360088387,
+        "temperature_c": 100.0
+      },
+      {
+        "formulation_id": "E2",
+        "interpretation": "descriptive run spread; run labels are not assigned a meaning here",
+        "max_min_ratio": 3.011060259344012,
+        "mean": 5409.0,
+        "n_runs": 3,
+        "sample_cv": 0.48980499252604354,
+        "temperature_c": 110.0
+      },
+      {
+        "formulation_id": "E2",
+        "interpretation": "descriptive run spread; run labels are not assigned a meaning here",
+        "max_min_ratio": 3.5687979539641943,
+        "mean": 4316.333333333333,
+        "n_runs": 3,
+        "sample_cv": 0.5848356762251301,
+        "temperature_c": 120.0
+      },
+      {
+        "formulation_id": "E2",
+        "interpretation": "descriptive run spread; run labels are not assigned a meaning here",
+        "max_min_ratio": 3.3385416666666665,
+        "mean": 3322.0,
+        "n_runs": 3,
+        "sample_cv": 0.540663310351932,
+        "temperature_c": 130.0
+      }
+    ],
+    "runs": [
+      {
+        "andrade_descriptive_fit": {
+          "intercept": -5.907240340254811,
+          "r2": 0.9978621735596698,
+          "slope_K": 4903.041242099515
+        },
+        "formulation_id": "E1",
+        "monotonic_decrease_with_temperature": true,
+        "n_points": 6,
+        "retest_after_1d": false,
+        "run_label": "+P",
+        "temperature_support_C": [
+          80.0,
+          130.0
+        ]
+      },
+      {
+        "andrade_descriptive_fit": {
+          "intercept": -6.397921655378662,
+          "r2": 0.9962413866465394,
+          "slope_K": 5137.087120026635
+        },
+        "formulation_id": "E1",
+        "monotonic_decrease_with_temperature": true,
+        "n_points": 6,
+        "retest_after_1d": true,
+        "run_label": "GJJ",
+        "temperature_support_C": [
+          80.0,
+          130.0
+        ]
+      },
+      {
+        "andrade_descriptive_fit": {
+          "intercept": -2.7472484856885107,
+          "r2": 0.9650668411884064,
+          "slope_K": 4526.326636878642
+        },
+        "formulation_id": "E2",
+        "monotonic_decrease_with_temperature": true,
+        "n_points": 6,
+        "retest_after_1d": false,
+        "run_label": "CHH",
+        "temperature_support_C": [
+          80.0,
+          130.0
+        ]
+      },
+      {
+        "andrade_descriptive_fit": {
+          "intercept": -5.46672017096931,
+          "r2": 0.9896816581392525,
+          "slope_K": 5130.886402172871
+        },
+        "formulation_id": "E2",
+        "monotonic_decrease_with_temperature": true,
+        "n_points": 6,
+        "retest_after_1d": false,
+        "run_label": "GJJ",
+        "temperature_support_C": [
+          80.0,
+          130.0
+        ]
+      },
+      {
+        "andrade_descriptive_fit": {
+          "intercept": -4.277076190592082,
+          "r2": 0.9900880832011455,
+          "slope_K": 4958.466481505379
+        },
+        "formulation_id": "E2",
+        "monotonic_decrease_with_temperature": true,
+        "n_points": 6,
+        "retest_after_1d": false,
+        "run_label": "ZYX",
+        "temperature_support_C": [
+          80.0,
+          130.0
+        ]
+      },
+      {
+        "andrade_descriptive_fit": {
+          "intercept": -5.109828722782035,
+          "r2": 0.9947761549778829,
+          "slope_K": 5358.261518452813
+        },
+        "formulation_id": "E2",
+        "monotonic_decrease_with_temperature": true,
+        "n_points": 6,
+        "retest_after_1d": true,
+        "run_label": "ZYX",
+        "temperature_support_C": [
+          80.0,
+          130.0
+        ]
+      },
+      {
+        "andrade_descriptive_fit": {
+          "intercept": -5.047029014063892,
+          "r2": 0.9959120938081236,
+          "slope_K": 5234.853285160058
+        },
+        "formulation_id": "E3",
+        "monotonic_decrease_with_temperature": true,
+        "n_points": 6,
+        "retest_after_1d": false,
+        "run_label": "CHH",
+        "temperature_support_C": [
+          80.0,
+          130.0
+        ]
+      }
+    ]
+  },
+  "thermal_hold": {
+    "follow_up_mean_profiles": [
+      {
+        "formulation_id": "F1",
+        "n_runs": 2,
+        "si_15_to_60_mean_profile": 0.014735165272799682,
+        "temperature_c": 120.0
+      }
+    ],
+    "runs": [
+      {
+        "formulation_id": "E1",
+        "n_points": 4,
+        "run_label": "GJJ",
+        "si": {
+          "15_to_60": 0.09510371102017776,
+          "15_to_90": 0.16847749400310424
+        },
+        "stage": "original",
+        "temperature_c": 120.0,
+        "time_support_min": [
+          15.0,
+          90.0
+        ]
+      },
+      {
+        "formulation_id": "E5",
+        "n_points": 4,
+        "run_label": "ZYX",
+        "si": {
+          "15_to_60": 0.5153846153846153,
+          "15_to_90": 0.9307692307692308
+        },
+        "stage": "original",
+        "temperature_c": 120.0,
+        "time_support_min": [
+          15.0,
+          90.0
+        ]
+      },
+      {
+        "formulation_id": "F1",
+        "n_points": 4,
+        "run_label": "repeat_1",
+        "si": {
+          "15_to_60": -0.0016260162601626016
+        },
+        "stage": "follow_up",
+        "temperature_c": 120.0,
+        "time_support_min": [
+          15.0,
+          60.0
+        ]
+      },
+      {
+        "formulation_id": "F1",
+        "n_points": 4,
+        "run_label": "repeat_2",
+        "si": {
+          "15_to_60": 0.03044496487119438
+        },
+        "stage": "follow_up",
+        "temperature_c": 120.0,
+        "time_support_min": [
+          15.0,
+          60.0
+        ]
+      }
+    ]
+  },
+  "viscosity_unit": null,
+  "workflow": "PUR_NEW_CLOSED_LOOP_V1"
+}
