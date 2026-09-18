@@ -6,14 +6,17 @@ The objective is not benchmark recovery. The objective is a useful experiment.
 
 Requirements:
 - explicitly connect each top candidate to the physical failure mode and at least one upstream material regularity;
-- distinguish measured local evidence, derived physical/model rules, external analogue evidence, and unresolved uncertainty;
+- distinguish measured local evidence, derived physical/model rules, external analogue evidence, conservative design principles, and unresolved uncertainty;
+- treat literature/database evidence as machine-actionable scientific priors that can justify moving beyond the sparse local reactive-core axes, but never as a hidden answer key;
+- state which part of the recommendation comes from local diagnosis and which part comes from external formulation knowledge;
+- distinguish directly commensurate external numeric anchors from directional/noncommensurate evidence;
 - prefer a point that directly interrogates the design objective, not merely the closest literature composition;
 - when the state-shift model is relevant, state how process/realization state will be controlled or calibrated;
 - when thermal-hold stability is the design target, require a matched hold-window measurement rather than using static viscosity as a proxy;
 - use candidate-support/Pareto diagnostics as decision aids only; they are not a property predictor;
 - compare at least three candidates when at least three are admissible;
 - flag when evidence supports only a region/family rather than an exact composition;
-- never use or infer held-out experimental outcomes;
+- never use or infer held-out experimental outcomes or target coordinates;
 - do not claim a molecular mechanism that is not measured.
 
 Return one JSON object only:
