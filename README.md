@@ -41,7 +41,11 @@ The compact source data are stored in:
 - `data/thermal_hold.csv`
 - `data/realization_metadata.csv`
 
-The absolute local viscosity unit remains source-unconfirmed and is therefore stored as `viscosity_reported` rather than being invented.
+### Experimental metadata pending integration
+
+The original viscosity-unit and instrument metadata **exist in the project source materials but have not yet been integrated into the repository/manuscript tables**. Before submission, add the verified unit, instrument/model, geometry or spindle/rotation condition as applicable, temperature-control details, and other available measurement metadata to the Methods and data tables.
+
+Do **not** describe the viscosity unit or instrument metadata as unknown, unconfirmed, or unavailable merely because they are not yet present in the compact repository tables.
 
 ### Chemistry-provenance audit
 
@@ -381,3 +385,16 @@ Not claimed:
 - a unique molecular mechanism for AC1920/TK100 stabilization;
 - a universal optimal resin percentage;
 - that current V3 code is necessarily the exact historical runtime that selected the validation formulation.
+
+---
+
+## 11. Manuscript non-negotiables
+
+These are author-level constraints for future manuscript revisions and should not be relaxed by automated rewriting:
+
+- **Do not introduce `n_targets = 1` framing or equivalent language as a manuscript limitation.** Do not foreground the benchmark by reducing it to a target-count disclaimer.
+- **Do not further weaken the current V3 mechanism interpretation.** Preserve the present balance: the resin-modified formulation is consistent with a lower effective concentration of reaction-capable material during thermal holding, while direct molecular-level measurements were not collected. Do not rewrite this into a more defensive or less informative statement unless new evidence requires it.
+- **Do not state that the absolute viscosity unit, rheometer/viscometer information, or related measurement metadata are unknown or unconfirmed.** Those data exist but still need to be incorporated into the repository and manuscript before submission.
+- **Retain and, where appropriate, foreground the rule/model attribution result:** approximately **94% of the numerical distance improvement arose from the transparent deterministic scientific policy**, with the language-model layer performing evidence integration and final selection inside the admissible decision region.
+- Keep the current hierarchy of evidence: local experiment establishes the rheological structure and failure mode; external PUR evidence defines plausible intervention regions; deterministic scientific policy constrains the decision geometry; the language model operates inside that geometry; wet-lab results provide physical adjudication.
+
