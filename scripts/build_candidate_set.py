@@ -123,7 +123,7 @@ def main() -> None:
     out = {
         "candidate_set_id": "EVIDENCE_DERIVED_HYPOTHESIS_GRID_V2",
         "decision_context": (
-            "Formalize the evidence-constrained resin-modification region for reproducible replay, ablation and future design rounds. "
+            "Formalize the evidence-constrained resin-modification region for outcome-blind preexperimental reconstruction and future design rounds. "
             "The grid preserves the original E2 reactive-core proportions and varies only independently supported coarse acrylic-like and minor-tackifier-like modifier levels."
         ),
         "candidates": candidates,
