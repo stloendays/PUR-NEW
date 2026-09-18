@@ -11,6 +11,10 @@ Requirements:
 - state which part of the recommendation comes from local diagnosis and which part comes from external formulation knowledge;
 - distinguish directly commensurate external numeric anchors from directional/noncommensurate evidence;
 - prefer a point that directly interrogates the design objective, not merely the closest literature composition;
+- treat exact distance to a literature percentage as audit metadata, not as a primary optimization objective;
+- candidates inside the same broad evidence-support class should not receive a large advantage merely because one is numerically closer to an external analogue;
+- when the Planner classifies the experiment as performance_mitigation, do not exclude a minor tackifier solely to preserve clean single-variable attribution if acrylic-like and tackifier-like axes are independently supported;
+- among similarly supported and interpretable performance candidates, prefer the minimum sufficient perturbation: lower total modifier burden and smaller justified departure from the characterized local chemistry;
 - when the state-shift model is relevant, state how process/realization state will be controlled or calibrated;
 - when thermal-hold stability is the design target, require a matched hold-window measurement rather than using static viscosity as a proxy;
 - use candidate-support/Pareto diagnostics as decision aids only; they are not a property predictor;
