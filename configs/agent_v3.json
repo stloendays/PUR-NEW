@@ -1,10 +1,12 @@
 {
-  "version": "3.3.1",
-  "name": "PUR_NEW_DISCOVERY_TO_EXPERIMENT_AGENT_V3",
-  "purpose": "Scientific decision Agent that first extracts material-response regularities from measured PUR rheology, then uses those regularities, external evidence and uncertainty-aware tools to select one useful formulation-process experiment point.",
+  "version": "3.4.0",
+  "name": "PUR_NEW_PREEXPERIMENTAL_RECONSTRUCTION_AGENT_V3",
+  "purpose": "Outcome-blind scientific decision Agent that reconstructs the preexperimental decision state: it extracts material-response regularities from measured PUR rheology, selects an intervention strategy, and freezes one useful formulation-process experiment point without access to the later validation formulation or outcome.",
   "default_evidence_profile": "blind_pre_result",
-  "blinded_target_formulation_ids": ["F1"],
-  "canonical_flow": "planner -> evidence/tool layer -> proposer -> skeptic -> robustness adjudicator -> judge -> freeze",
+  "blinded_target_formulation_ids": [
+    "F1"
+  ],
+  "canonical_flow": "planner(intent + failure mode) -> evidence/tool layer -> proposer -> skeptic -> robustness adjudicator -> judge -> freeze",
   "stages": [
     {
       "id": "planner",
@@ -70,9 +72,12 @@
     "candidate selection should maximize usefulness and interpretability for the observed material failure mode",
     "deterministic calculations are separated from language-model judgment",
     "the Skeptic and Robustness Adjudicator are decision-quality controls, not components that need ablation to justify their existence",
-    "held-out result data are structurally removed before blind replay payloads are assembled",
     "the final recommendation is frozen before physical adjudication",
-    "only concise auditable outputs are stored; hidden chain-of-thought is not scientific evidence"
+    "only concise auditable outputs are stored; hidden chain-of-thought is not scientific evidence",
+    "held-out result data are structurally removed before outcome-blind preexperimental reconstruction payloads are assembled",
+    "external analogue percentages define supported regions, not exact local optima",
+    "performance mitigation and causal isolation are distinct experiment intents; single-factor attribution is not the universal default",
+    "among similarly supported candidates, the minimum sufficient intervention is preferred"
   ],
   "primary_agent_outputs": [
     "identified physical failure mode",
@@ -93,7 +98,7 @@
     "reproducibility of the recommendation under the same evidence contract",
     "scientific-boundary and leakage compliance"
   ],
-  "secondary_replay_role": "Repeated held-out replay may be used only as a reproducibility/consistency check. It is not the main scientific contribution and does not require component ablations.",
+  "secondary_replay_role": "Deprecated for the current study narrative. The active Stage-1 evaluation is a single outcome-blind preexperimental reconstruction, not an Arm A/Arm B replay comparison.",
   "non_goals": [
     "proving that every internal Agent module is individually necessary through ablation",
     "making architecture benchmarking the main scientific contribution",
@@ -101,5 +106,5 @@
     "claiming that literature-prior proximity predicts the wet-lab outcome",
     "replacing the material-science result with an LLM-systems paper"
   ],
-  "claim_boundary": "V3.3.1 is the current discovery-to-experiment implementation. It operationalizes the physical/model findings and improves scientific decision support, but it must not be described as the exact historical code that generated the earlier validation formulation unless matching archived runtime provenance is recovered."
+  "claim_boundary": "V3.4.0 is an outcome-blind reconstruction of the preexperimental decision state using only evidence available before the validation result. It may support recovery of the scientific problem, intervention family, and formulation neighborhood, but it must not be described as a recovered contemporaneous machine record or as proof that the exact historical recipe was independently predicted."
 }
