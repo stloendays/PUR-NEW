@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.3.0",
+  "catalog_version": "1.4.0",
   "purpose": "Deterministic scientific actions for a discovery-first PUR Agent: first extract material-response structure from measured evidence, then use that structure to choose informative formulation-process experiments.",
   "actions": [
     {
@@ -9,68 +9,252 @@
         "first, before candidate ranking",
         "to identify which material-response regularities should control experiment selection",
         "to decide whether a new point should target viscosity level, state calibration, thermal response, or hold stability"
-      ]
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      }
     },
     {
       "name": "query_external_priors",
       "description": "Retrieve source-level analogue evidence from the curated external PUR evidence table, including source identifiers, evidence locators, candidate-space role and limitations.",
-      "when_to_use": ["after the local physical failure mode is identified", "when considering a formulation-family change", "when local chemistry coverage is sparse"]
+      "when_to_use": [
+        "after the local physical failure mode is identified",
+        "when considering a formulation-family change",
+        "when local chemistry coverage is sparse"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "modifier_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "candidate_space_role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "max_rows": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 20
+          }
+        }
+      }
     },
     {
       "name": "get_candidate_hypothesis",
       "description": "Return the evidence-derived candidate-space hypothesis, the original E2 reactive-core anchor, independent acrylic/tackifier axes and the historical/claim boundary. This supports experiment selection; it is not itself a discovered optimum.",
-      "when_to_use": ["after establishing the local design objective", "before comparing candidate formulations"]
+      "when_to_use": [
+        "after establishing the local design objective",
+        "before comparing candidate formulations"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      }
     },
     {
       "name": "inspect_formulation",
       "description": "Inspect one measured formulation and compute transparent composition summaries including polyol, acrylic-like, tackifier-like, combined-modifier and MDI fractions.",
-      "when_to_use": ["to understand a measured reference state", "to compare chemistry axes without conflating them with process state"]
+      "when_to_use": [
+        "to understand a measured reference state",
+        "to compare chemistry axes without conflating them with process state"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "formulation_id"
+        ],
+        "properties": {
+          "formulation_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     },
     {
       "name": "get_hold_stability",
       "description": "Return measured thermal-hold trajectories and deterministic SI descriptors for a formulation. No extrapolation is performed.",
-      "when_to_use": ["when thermal stability is the observed failure mode", "to compare candidate design objectives with original high-drift references"]
+      "when_to_use": [
+        "when thermal stability is the observed failure mode",
+        "to compare candidate design objectives with original high-drift references"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "formulation_id"
+        ],
+        "properties": {
+          "formulation_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     },
     {
       "name": "get_repeatability_risk",
       "description": "Return nominal repeat/run spread from measured temperature sweeps, including CV and max/min ratio where available.",
-      "when_to_use": ["before treating one nominal viscosity as a material property", "when realization/process-state uncertainty may dominate"]
+      "when_to_use": [
+        "before treating one nominal viscosity as a material property",
+        "when realization/process-state uncertainty may dominate"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "formulation_id"
+        ],
+        "properties": {
+          "formulation_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     },
     {
       "name": "get_temperature_support",
       "description": "Return measured temperature support and descriptive temperature-response summaries for a formulation.",
-      "when_to_use": ["to avoid unsupported extrapolation", "to choose an anchor temperature inside measured support"]
+      "when_to_use": [
+        "to avoid unsupported extrapolation",
+        "to choose an anchor temperature inside measured support"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "formulation_id"
+        ],
+        "properties": {
+          "formulation_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     },
     {
       "name": "audit_process_unknowns",
       "description": "Audit missing reaction/preparation/hold metadata for a candidate or measured formulation and convert missingness into explicit process-history uncertainty.",
-      "when_to_use": ["before final experiment selection", "when two candidates are compositionally similar but state uncertainty differs"]
+      "when_to_use": [
+        "before final experiment selection",
+        "when two candidates are compositionally similar but state uncertainty differs"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate"
+        ],
+        "properties": {
+          "candidate": {
+            "type": "object"
+          }
+        }
+      }
     },
     {
       "name": "candidate_profile",
       "description": "Compute a candidate profile with separate acrylic-like and tackifier-like fractions instead of collapsing all modifiers into one number.",
-      "when_to_use": ["for every serious candidate", "before comparing a candidate with class-specific external priors"]
+      "when_to_use": [
+        "for every serious candidate",
+        "before comparing a candidate with class-specific external priors"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate"
+        ],
+        "properties": {
+          "candidate": {
+            "type": "object"
+          }
+        }
+      }
     },
     {
       "name": "compare_candidate_to_priors",
       "description": "Compare acrylic-like and tackifier-like axes separately with independent evidence anchors. Returns analogue support, not predicted wet-lab performance.",
-      "when_to_use": ["for resin-modified candidates", "to identify supported versus extrapolative chemistry directions"]
+      "when_to_use": [
+        "for resin-modified candidates",
+        "to identify supported versus extrapolative chemistry directions"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate"
+        ],
+        "properties": {
+          "candidate": {
+            "type": "object"
+          }
+        }
+      }
     },
     {
       "name": "stress_test_candidate",
       "description": "Apply deterministic risk flags using candidate-space support, process-history missingness and grid boundaries. It returns reasons, not a fabricated viscosity prediction.",
-      "when_to_use": ["before freezing an experiment point", "to check whether a chemically plausible point remains interpretable under known uncertainties"]
+      "when_to_use": [
+        "before freezing an experiment point",
+        "to check whether a chemically plausible point remains interpretable under known uncertainties"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate"
+        ],
+        "properties": {
+          "candidate": {
+            "type": "object"
+          }
+        }
+      }
     },
     {
       "name": "rank_candidate_support",
       "description": "Create a transparent support-oriented ordering from the allowed evidence. This is a decision aid, not the scientific objective and not a trained property predictor.",
-      "when_to_use": ["only after the scientific objective has been derived from the measured rheology", "when several candidates remain plausible"]
+      "when_to_use": [
+        "only after the scientific objective has been derived from the measured rheology",
+        "when several candidates remain plausible"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidates"
+        ],
+        "properties": {
+          "candidates": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
     }
   ],
   "invariants": [
     "The Agent must identify the physical/material pattern before ranking formulation candidates.",
     "The state-aware rheology tool may use only original pre-validation measurements and analyses derived from them; it must not expose the validation formulation or its outcome.",
     "Candidate ranking is downstream of scientific pattern extraction and must target the observed failure mode or a high-value uncertainty.",
+    "Planner action arguments must satisfy the declared JSON parameter schema before execution.",
     "Actions may expose only evidence allowed by the active evidence-access profile.",
     "External analogue evidence is directional prior information, not proof of the current formulation's optimum.",
     "Missing process history remains uncertainty rather than being silently set to ideal values.",
