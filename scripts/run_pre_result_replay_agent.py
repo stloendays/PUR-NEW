@@ -93,7 +93,9 @@ def main() -> None:
     constrained_set = {
         "candidate_set_id": f"{full_set['candidate_set_id']}__{args.selection_mode.upper()}",
         "decision_context": (
-            "Contract-constrained historical pre-result replay. Later validation measurements and post-result labels are excluded. "
+            "Evidence-guided historical pre-result replay. Sparse local measurements diagnose the thermal-hold failure mode; "
+            "paper-derived rheological rules and curated PUR literature/database priors guide the formulation intervention. "
+            "Later validation measurements, validation target coordinates and post-result labels are excluded. "
             "Strict mode assesses replay fidelity; audit mode assesses LLM agreement among all contract-admissible candidates."
         ),
         "candidates": constrained_candidates,
@@ -106,6 +108,9 @@ def main() -> None:
             "contract_selected_candidate_id": diagnostics["contract_selected_candidate_id"],
             "target_blind_independent_benchmark": False,
             "validation_outcome_included": False,
+            "knowledge_guidance": contract.get("knowledge_guidance", {}),
+            "constraint_provenance": contract.get("constraint_provenance", {}),
+            "anti_posthoc_rule": contract.get("anti_posthoc_rule"),
             "claim_boundary": contract["claim_boundary"],
         },
     }
@@ -146,9 +151,10 @@ def main() -> None:
         "evidence_profile": "blind_pre_result",
         "later_validation_outcome_available_to_agent": False,
         "interpretation": (
-            "Strict mode tests deterministic replay fidelity under a reconstructed pre-result decision contract. "
-            "Audit mode tests whether the LLM agrees with the contract among all admissible candidates. "
-            "Neither mode is the independent target-blind benchmark."
+            "The pre-result recommendation is interpreted as a knowledge-guided scientific decision rather than an unguided LLM guess: "
+            "original local measurements identify the failure mode, paper-derived rheological rules define the target, and curated PUR literature/database evidence supplies formulation priors. "
+            "Strict mode tests replay fidelity under this reconstructed evidence-guided contract; audit mode tests whether the LLM agrees among all admissible candidates. "
+            "Neither mode is the independent target-blind benchmark, and neither may use the later validation outcome to construct its guidance."
         ),
     }
     (run_root / "replay_manifest.json").write_text(
