@@ -64,7 +64,7 @@ pB <- ggplot(by120, aes(x = held_formulation, y = multiplicative_error)) +
     labels = function(x) sprintf("%.2fx", x)
   ) +
   labs(
-    title = "B  Completely held-out formulation",
+    title = "B  Held-out formulation",
     x = "Held formulation",
     y = "RMSE with a 120 °C anchor"
   ) +
@@ -99,7 +99,7 @@ pC <- ggplot(
   scale_x_log10(labels = label_number(big.mark = ",")) +
   scale_y_log10(labels = label_number(big.mark = ",")) +
   labs(
-    title = "C  Formulation + temperature extrapolation",
+    title = "C  Bounded extrapolation",
     x = "Observed viscosity_reported",
     y = "Predicted viscosity_reported",
     shape = NULL
