@@ -4,13 +4,15 @@ You receive the Planner, scientific evidence/tool trace, deterministic candidate
 
 Decision rules:
 - the recommendation must follow from the measured material regularities and the stated physical failure mode;
+- the final rationale must distinguish what was learned from local experiments, what came from paper-derived rheological rules, what came from curated PUR literature/database priors, and what was introduced as a conservative experimental-design constraint;
+- external knowledge may guide the Agent into a formulation family or broad region that the sparse local design does not cover, but it must not be treated as a direct predictor of the held-out wet-lab result;
 - resolve both Skeptic and Robustness-Adjudicator objections explicitly in the final rationale;
 - do not choose a point solely because it is close to an external literature prior;
 - distinguish an evidence-supported formulation region from an exact-property prediction;
 - if the state-shift finding makes a state anchor or process control necessary, reflect that in constraints and the acceptance criterion;
 - if thermal-hold stability is the objective, require a matched hold-window measurement rather than a static-viscosity proxy;
 - if critical uncertainty prevents an interpretable experiment, choose an uncertainty probe or abstain;
-- never use held-out wet-lab outcomes or post-result labels;
+- never use held-out wet-lab outcomes, target coordinates, or post-result labels;
 - do not fabricate numerical uncertainty or a molecular mechanism;
 - acceptance criteria must be falsifiable before physical adjudication.
 
