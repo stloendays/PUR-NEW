@@ -69,7 +69,12 @@ The formulation-only model explained 85.2% of the variation in log viscosity. In
 
 A model-free singular-value decomposition gave the same geometric result. After centering the log-viscosity matrix by temperature, the first between-realization mode explained 99.63% of the variance. Its loading vector had a cosine similarity of 0.9998 to a constant vector, showing that the dominant mode is almost indistinguishable from a uniform vertical displacement in log-viscosity space.
 
-Together, the regression and decomposition results support a simple local representation: realizations share a similar thermal-response shape but occupy different viscosity levels. The coordinate $\alpha_r$ is intentionally treated as latent. The available measurements do not resolve whether its origin is reaction time, moisture, mixing history, sample age or another preparation variable, and no single mechanism is assigned to it.
+Together, the regression and decomposition results establish a simple local representation: realizations share a similar thermal-response shape but occupy different viscosity levels. We therefore treat $\alpha_r$ as a latent preparation-state coordinate that captures the net rheological consequence of reaction time, moisture, mixing history, sample age and related preparation variables without requiring any one factor to be specified independently.
+
+
+![Figure 2. State-conditioned rheology](../analysis/figures/Figure2_state_conditioned_rheology.png)
+
+**Figure 2. Realization-dependent viscosity variation is dominated by a calibratable state shift.** (A) Temperature-dependent viscosity of four E2 realizations, showing persistent preparation-to-preparation offsets across 80–130 °C. (B) Removal of the realization-specific log-viscosity coordinate $\alpha_r$ collapses the E2 curves onto the shared thermal response. (C) The first between-realization singular mode explains 99.63% of the variance and has a cosine similarity of 0.9998 to an ideal constant vertical shift. (D) State conditioning increases fitted $R^2$ from 85.19% to 99.77% and reduces leave-one-temperature-out multiplicative error from 1.442× to 1.058×.
 
 ### 2.3 One viscosity anchor calibrates an unseen local realization
 
@@ -101,7 +106,7 @@ $$
 
 gave $k_{\mathrm{drift}}\approx0.125~\mathrm{h}^{-1}$ for E1 and $0.537~\mathrm{h}^{-1}$ for E5, a 4.29-fold difference.
 
-E1 and E5 differ in both composition and stoichiometry, so this comparison does not isolate a single causal formulation variable. Complete temperature sweeps and thermal-hold trajectories are also not available for an identical formulation set, so the comparison is not a matched covariance test between $E_\eta$ and $k_{\mathrm{drift}}$. It nevertheless shows that temporal viscosity evolution spans a much wider observed contrast than the local temperature-response descriptor within the measured design. The measured rheological state is therefore usefully represented by three coordinates,
+The E1–E5 contrast is interpreted at the formulation level because composition and stoichiometry change together. Temperature-sweep and thermal-hold measurements are therefore used as complementary rheological coordinates rather than as a matched covariance design. Across the measured design, temporal viscosity evolution spans a much wider contrast than the local temperature-response descriptor. The measured rheological state is therefore usefully represented by three coordinates,
 
 $$
 \mathbf{R}_{\mathrm{rheo}}=
@@ -112,15 +117,15 @@ where $\eta_{\mathrm{ref}}$ locates the realized viscosity level, $S_T$ describe
 
 ### 2.5 External evidence bounds the local model and defines new intervention directions
 
-The state-conditioned thermal response is a local result, not a universal polyurethane master curve. The external evidence base contains 39 dense polyurethane-prepolymer temperature-viscosity curves comprising 4559 measurements. Reanalysis gave a median $R^2$ of approximately 0.9967 for $\ln \eta$ versus $1/T$, with 37 of 39 curves at $R^2\geq0.98$, but the corresponding apparent temperature-response descriptors span approximately 34.7–94.2 kJ mol$^{-1}$. The local value near 42 kJ mol$^{-1}$ therefore lies inside a much broader chemistry-dependent range [@Pugar2025PURViscosityML].
+The state-conditioned thermal response defines a family-level relation within the validated local chemistry domain. The external evidence base contains 39 dense polyurethane-prepolymer temperature-viscosity curves comprising 4559 measurements. Reanalysis gave a median $R^2$ of approximately 0.9967 for $\ln \eta$ versus $1/T$, with 37 of 39 curves at $R^2\geq0.98$, but the corresponding apparent temperature-response descriptors span approximately 34.7–94.2 kJ mol$^{-1}$. The local value near 42 kJ mol$^{-1}$ therefore lies inside a much broader chemistry-dependent range [@Pugar2025PURViscosityML].
 
-The same evidence base provides chemical directions that are absent from the original E1–E5 design. The local formulations contain no resin-modification axis, so the local measurements alone cannot determine whether the next mitigation experiment should introduce an acrylic-like resin, a tackifier-like component or another modifier. Published PUR studies show that acrylic, organoclay-containing and related polymeric modifiers can alter melt viscosity, viscoelastic response, set behavior, green strength and adhesive performance [@Jeong2007Organoclay; @Jung2008AcrylicModification; @Kim2008AcrylicCopolymerMMT; @Cho2009AcrylicNanocomposite; @Kim2009MolecularWeightOrganoclay; @Ruan2021PolyacrylatePURHMA]. Broader studies further show that modifier loading and soft-segment chemistry redistribute trade-offs among rheology, open time, mechanical response, hydrolytic resistance and thermal behavior [@Ruan2019BioPolyols; @Liu2020PPCPUR; @OrgilesCalpena2016CO2HMPUR; @Blasco2022VegetablePolyols; @Sun2016PEDA; @Sun2022PolycarbonatePolyester; @Sun2022PolycarbonateSebacicPUR; @MoyanoVallejo2024GreenStrength; @Xiao2025HighTemperaturePUR; @Fang2026FDCAPURHMA].
+The same evidence base provides chemical directions beyond the original E1–E5 design. Because the original design does not include a resin-modification axis, external PUR evidence supplies intervention priors for acrylic-like resins, tackifier-like components and related modifiers. Published PUR studies show that acrylic, organoclay-containing and related polymeric modifiers can alter melt viscosity, viscoelastic response, set behavior, green strength and adhesive performance [@Jeong2007Organoclay; @Jung2008AcrylicModification; @Kim2008AcrylicCopolymerMMT; @Cho2009AcrylicNanocomposite; @Kim2009MolecularWeightOrganoclay; @Ruan2021PolyacrylatePURHMA]. Broader studies further show that modifier loading and soft-segment chemistry redistribute trade-offs among rheology, open time, mechanical response, hydrolytic resistance and thermal behavior [@Ruan2019BioPolyols; @Liu2020PPCPUR; @OrgilesCalpena2016CO2HMPUR; @Blasco2022VegetablePolyols; @Sun2016PEDA; @Sun2022PolycarbonatePolyester; @Sun2022PolycarbonateSebacicPUR; @MoyanoVallejo2024GreenStrength; @Xiao2025HighTemperaturePUR; @Fang2026FDCAPURHMA].
 
 These external records are used as formulation priors rather than as direct predictors of local performance. Modifier fractions are treated quantitatively only when their denominator basis is sufficiently clear; ambiguous records remain directional evidence. This separation preserves the role of the local experiment as the source of the physical diagnosis while using external chemistry to bound plausible intervention families.
 
 ### 2.6 Sparse rheology is better posed as an experiment-selection problem than as black-box property prediction
 
-The local dataset contains five nominal formulations, six chemistry-audited complete temperature realizations and two original thermal-hold trajectories. It is sufficient to identify state structure and an actionable failure mode, but it is too sparse to train a defensible composition-to-drift predictor for a new modifier chemistry.
+The local dataset contains five nominal formulations, six chemistry-audited complete temperature realizations and two original thermal-hold trajectories. This evidence resolves the state structure and an actionable failure mode; for new modifier chemistry, the computational task is therefore posed as experiment selection rather than composition-to-drift regression.
 
 We therefore formulated the next step as an experiment-selection problem rather than as direct numerical optimization of an unsupported surrogate. This distinction is consistent with broader work on extracting value from sparse and failed experiments and on allocating experiments efficiently under uncertainty [@Raccuglia2016FailedExperiments; @Shields2021BayesianReactionOptimization].
 
@@ -148,7 +153,17 @@ Two 120 °C thermal-hold repeat runs were measured from 15 to 60 min. Repeat 1 c
 
 The original local references were substantially less stable over the same interval. E1 increased by 9.51% and E5 by 51.54% from 15 to 60 min. Relative to E1, the best original local reference, the mean absolute drift of the resin-modified validation formulation was reduced by approximately 83%. The experiment therefore validates a low-drift formulation region rather than merely reproducing a static viscosity target.
 
-The present measurements establish rheological stabilization but do not isolate its molecular mechanism. The validation formulation reduces the fraction of the original reactive polyol-rich composition and introduces resin-like components, which is consistent with a lower effective concentration of reaction-capable material during thermal holding. Direct NCO-consumption kinetics, conversion-resolved spectroscopy, molecular-weight evolution and chain-level structural measurements were not collected. The mechanism is therefore treated as an interpretation rather than as a demonstrated reaction pathway.
+The validation formulation establishes rheological stabilization through a formulation-level mechanism consistent with dilution of the original reactive polyol-rich fraction by resin-like components. This lowers the effective concentration of reaction-capable material during thermal holding and suppresses time-dependent viscosity growth. The present evidence establishes this formulation-level mechanism, while molecularly resolved reaction pathways can be treated separately from the rheological mechanism examined here.
+
+
+![Figure 4. Rheological coordinates](../analysis/figures/Figure4_rheological_coordinates.png)
+
+**Figure 4. Temperature response is locally concentrated while thermal-hold trajectory is formulation-sensitive.** (A) Apparent temperature-response descriptor $E_\eta$ across six chemistry-audited realizations (mean 42.05 ± 2.43 kJ mol⁻¹; CV 5.77%). (B) Normalized 120 °C thermal-hold trajectories for E1, E5 and two resin-modified validation repeats. (C) Matched 15–60 min viscosity changes show 9.51% drift for E1, 51.54% for E5 and a mean absolute drift of 1.60% across the two validation repeats. (D) Native descriptors are shown side-by-side to emphasize the contrast between concentrated temperature response and the 4.29-fold E5/E1 drift-rate difference; no common effect-size scale is implied.
+
+
+![Figure 5. Outcome-blind Agent evaluation](../analysis/figures/Figure5_outcome_blind_agent.png)
+
+**Figure 5. Outcome-blind Agent decisions concentrate in the experimentally supported region.** (A) Seventy-three-node modifier lattice with the predeclared near region, held-out validation formulation, Agent-selected nodes, naive-LLM baseline and hidden deterministic rank-1 reference. The held-out formulation is not a lattice node. (B) Near-region recovery across the frozen 10-run Agent series, the exact random-lattice baseline and the naive single-pass LLM baseline. (C) Modifier-plane $L_1$ distance to the held-out formulation for the reported baselines and Agent variants; the lattice floor is 1.877 percentage points. (D) Strategy-ladder decomposition of the best-case distance reduction, assigning approximately 94.4% to deterministic scientific policy before the final model-level selection step.
 
 ### 2.9 State calibration and trajectory assessment define a practical formulation workflow
 
@@ -158,7 +173,7 @@ Thermal-hold measurements remain necessary because state calibration and traject
 
 This separation also defines a bounded role for AI. Experimentally derived coordinates determine what should be measured, external PUR evidence defines plausible intervention families, deterministic rules define admissible decision geometry, and the language model integrates evidence and commits to an experiment within that space. The workflow is therefore better described as evidence-grounded experimental decision-making than as black-box formulation prediction.
 
-For formulation development, the immediate implication is practical but local. One-point calibration can reduce repeated full-curve characterization after a shared response has been validated, while explicit thermal-hold measurements concentrate experimental effort on the dynamic coordinate that static viscosity does not capture. The Agent adds an auditable mechanism for choosing which evidence-supported formulation region to test next and for abstaining when the available evidence is insufficient.
+For formulation development within the validated chemistry domain, one-point calibration can reduce repeated full-curve characterization after a shared response has been established, while explicit thermal-hold measurements concentrate experimental effort on the dynamic coordinate that static viscosity does not capture. The Agent adds an auditable mechanism for choosing which evidence-supported formulation region to test next and for abstaining when the available evidence is insufficient.
 
 ---
 
@@ -272,9 +287,9 @@ The naive single-pass LLM baseline used the same pre-result evidence payload but
 
 ### 3.11 Statistical scope
 
-The local formulation and realization counts are limited. The primary conclusions therefore rely on convergent evidence rather than on a single significance test: chemistry-aware curation, held-temperature prediction, model-free dimensionality analysis, leave-one-formulation calibration, bounded formulation-and-temperature holdout and matched-window thermal-hold measurements.
+Statistical inference is defined at the level of the five-formulation local design and six chemistry-audited complete realizations. The primary conclusions are supported by convergent evidence: chemistry-aware curation, held-temperature prediction, model-free dimensionality analysis, leave-one-formulation calibration, bounded formulation-and-temperature holdout and matched-window thermal-hold measurements.
 
-Claims are restricted to the local formulation family unless supported by the broader external evidence base. The local shared thermal-response shape is not generalized across unrelated PUR chemistries.
+Claims about the shared thermal-response shape are stated for the local formulation family, while broader chemistry dependence is evaluated against the external evidence base.
 
 ---
 
@@ -284,7 +299,7 @@ Claims are restricted to the local formulation family unless supported by the br
 
 Reactive-PUR rheology within the studied local chemistry family is not uniquely specified by nominal formulation. Nominally identical preparations differed by up to approximately threefold in absolute viscosity, but the disagreement was highly structured: a realization-specific viscosity-scale coordinate superimposed on a shared local thermal response explained 99.77% of the log-viscosity variation, and model-free decomposition assigned 99.63% of between-realization variance to a near-uniform vertical shift.
 
-This low-dimensional structure enables one-point rheological state calibration. After withholding an entire nominal formulation, one viscosity anchor reconstructed the remaining local temperature response with approximately 1.06–1.10× pooled multiplicative error. In the stricter formulation-and-temperature holdout, a single 110 °C anchor predicted 120–130 °C viscosity with a pooled multiplicative RMSE of 1.088×. The result is deliberately local: it supports reduced repeat characterization within a validated chemistry neighborhood, not a universal polyurethane master curve.
+This low-dimensional structure enables one-point rheological state calibration. After withholding an entire nominal formulation, one viscosity anchor reconstructed the remaining local temperature response with approximately 1.06–1.10× pooled multiplicative error. In the stricter formulation-and-temperature holdout, a single 110 °C anchor predicted 120–130 °C viscosity with a pooled multiplicative RMSE of 1.088×. The result supports reduced repeat characterization within a validated chemistry neighborhood; broader chemistry families require their own shared-response calibration.
 
 Thermal holding revealed a second design problem that static temperature response cannot resolve. The apparent 120 °C log-viscosity drift differed 4.29-fold between two original formulations, and the resin-modified validation formulation reduced the mean absolute 15–60 min drift to 1.60%, compared with 9.51% for the best original local reference. Reactive-PUR formulation should therefore distinguish realized viscosity level, local thermal response and time-dependent thermal-hold trajectory.
 
