@@ -21,7 +21,7 @@ def test_v3_planner_action_uses_enriched_scientific_tool():
     assert trace[0]["status"] == "ok"
     result = trace[0]["result"]
     assert result["validation_formulation_visible"] is False
-    assert result["tool_version"] == "3.3-provenance-audited"
+    assert result["tool_version"] == "3.4-same-order-model-comparison"
     assert result["provenance_audit"]["excluded_from_primary_state_model"] == ["E1__+P__day1_0"]
 
     patterns = result["discovered_patterns"]

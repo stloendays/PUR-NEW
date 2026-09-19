@@ -1,0 +1,89 @@
+{
+  "version": "4.0.0",
+  "name": "PUR_NEW_VOI_GUIDED_EXPERIMENT_SELECTION_AGENT_V4",
+  "supersedes_nothing": "V4 is an independent architecture. configs/agent_v3.json, prompts/agent_v3_*.txt, src/pur_new/agent_v3.py and every frozen V3 run record remain unchanged and are not reinterpreted by V4.",
+  "purpose": "Outcome-blind scientific decision Agent that selects the next formulation x measurement EXPERIMENT by transparent value of information, rather than selecting a formulation candidate alone.",
+  "default_evidence_profile": "blind_pre_result",
+  "blinded_target_formulation_ids": ["F1"],
+  "canonical_flow": "planner(intent + failure mode) -> evidence/tool layer (including the deterministic VOI tool) -> proposer -> skeptic -> robustness adjudicator -> judge -> freeze",
+  "unit_of_decision": "experiment_card",
+  "experiment_card_required_fields": [
+    "formulation candidate",
+    "measurement plan",
+    "scientific hypothesis set addressed",
+    "primary observable",
+    "acceptance criterion",
+    "falsification criterion"
+  ],
+  "stages": [
+    {
+      "id": "planner",
+      "prompt": "prompts/agent_v4_planner.txt",
+      "role": "identify the physical failure mode and the scientific question that the next experiment must answer, then request the evidence needed to judge experiments rather than formulations"
+    },
+    {
+      "id": "evidence_tool_layer",
+      "role": "execute read-only scientific tools, including the paper-derived state-aware rheology tool, external evidence retrieval, and the deterministic VOI tool that scores every formulation x measurement experiment card"
+    },
+    {
+      "id": "proposer",
+      "prompt": "prompts/agent_v4_proposer.txt",
+      "role": "propose the experiment with the highest scientific information value, stating the hypotheses it separates and what each possible outcome would establish"
+    },
+    {
+      "id": "skeptic",
+      "prompt": "prompts/agent_v4_skeptic.txt",
+      "role": "attack the proposed experiment on hypothesis coverage, confounding, interpretability of the primary observable, and whether the stated falsification criterion can actually be met by the measurement"
+    },
+    {
+      "id": "robustness_adjudicator",
+      "prompt": "prompts/agent_v4_robustness.txt",
+      "role": "adjudicate whether the proposed experiment survives the reported VOI weight sensitivity and the skeptic's strongest objection"
+    },
+    {
+      "id": "judge",
+      "prompt": "prompts/agent_v4_judge.txt",
+      "role": "commit to one experiment card, or abstain, and state the acceptance and falsification criteria that will adjudicate it"
+    },
+    {
+      "id": "freeze",
+      "role": "programmatically validate and freeze the experiment card with timestamps, model identifiers and cryptographic hashes of every input"
+    }
+  ],
+  "voi_tool": {
+    "name": "score_experiment_cards",
+    "implementation": "src/pur_new/voi.py",
+    "is_deterministic": true,
+    "is_a_language_model": false,
+    "required_before_experiment_ranking": true,
+    "formula": "VOI = w_hyp * hypothesis_discrimination + w_unc * uncertainty_reduction + w_dec * decision_relevance + w_int * measurement_interpretability - w_ext * extrapolation_risk - w_proc * process_state_risk",
+    "components_are_normalized_to_unit_interval": true,
+    "not_a_posterior": "The local design contains six audited realizations and two thermal-hold trajectories. That does not support a calibrated Bayesian expected-information computation, so no posterior probability is fabricated. Weight sensitivity is reported instead.",
+    "explicitly_not": "distance to any held-out formulation. No target coordinate enters any component, weight or tie-break."
+  },
+  "hypothesis_registry": "configs/hypothesis_registry.json",
+  "measurement_catalog": "configs/measurement_catalog.json",
+  "candidate_space": {
+    "reuse": "derived/stage1_blind_candidate_space_v1.json",
+    "n_nodes": 73,
+    "rationale": "V4 deliberately reuses the byte-identical V3 lattice. Continuous-space optimization and any new wet-lab work are out of scope, so that the measured change between V3 and V4 is the decision object and the VOI layer, not the search space."
+  },
+  "architecture_principles": [
+    "the unit of decision is an experiment, not a formulation",
+    "value of information is computed by a deterministic scientific tool, not by an additional language model",
+    "every registered hypothesis carries an explicit pre-result prediction rule and an explicit falsification condition",
+    "a measurement that cannot separate any registered hypothesis scores zero discrimination, and that is a scientific result rather than a defect",
+    "weight sensitivity is reported as decision stability, never as model confidence",
+    "ties in the deterministic layer are reported as ties; the tool must not manufacture a preference it does not have",
+    "held-out result data are structurally removed before any payload is assembled",
+    "the mechanism question and the Agent framework are separate contributions and are reported separately"
+  ],
+  "non_goals": [
+    "continuous-space formulation optimization",
+    "adding a language model to compute value of information",
+    "adding Agent roles beyond planner, tools, proposer, skeptic, robustness adjudicator, judge and freeze",
+    "turning the study into a pure AI benchmark",
+    "weakening or replacing the rheological mechanism result"
+  ],
+  "claim_boundary": "V4.0.0 selects an experiment from pre-result evidence under an outcome-blind runtime. Its adjudication tests whether a registered hypothesis survives contact with the completed measurement. It is not a contemporaneous pre-experimental record and does not claim that the historical decision used this ranking."
+}

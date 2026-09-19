@@ -1,0 +1,125 @@
+{
+  "adjudication_id": "ADJ_EXP_V4_20260919T141726Z_50bdb5870e",
+  "blind_phase_closure": {
+    "blind_phase_closed_utc": "2026-09-19T14:17:48Z",
+    "frozen_recommendation_sha256": "0b2682da5396c967f684bc42643c3f37586de5245d9476d25d1117c24f55b587",
+    "frozen_utc": "2026-09-19T14:17:26Z",
+    "recommendation_id": "EXP_V4_20260919T141726Z_50bdb5870e"
+  },
+  "claim_boundary": "This adjudication tests registered hypotheses against a completed measurement under an outcome-blind freeze. It establishes a formulation-level rheological mechanism only; no chain-level characterization is reported and none is implied.",
+  "frozen_decision": {
+    "acceptance_criterion": "Accept the combined modifier intervention as supporting H-RESIN over H-CORE if the mean SI_15_60 across at least two repeats is <3.80%, with every individual repeat also <7.61%. The 3.80% threshold is below half the H-CORE linear-dilution prediction of 7.61% for reactive mass fraction 0.8000.",
+    "decision_mode": "committed_experiment",
+    "falsification_criterion": "If the mean SI_15_60 is >=7.61%, falsify H-RESIN and contradict the low-drift prediction of H-DUAL for the active dual-axis composition; H-CORE remains consistent with the result. If the mean is <3.80%, falsify H-CORE at the registered resolution. A mean from 3.80% through <7.61% is non-decisive and falsifies neither hypothesis at the prespecified thresholds.",
+    "hypotheses_addressed": [
+      "H-CORE",
+      "H-RESIN",
+      "H-DUAL"
+    ],
+    "hypotheses_left_entangled": [
+      "H-RESIN vs H-DUAL"
+    ],
+    "selected_experiment_id": "S1C41::M-HOLD-120",
+    "selected_is_in_tied_top_set": true,
+    "voi_score": 0.6925,
+    "voi_tied_top_set": [
+      "S1C41::M-HOLD-120",
+      "S1C46::M-HOLD-120",
+      "S1C51::M-HOLD-120",
+      "S1C56::M-HOLD-120",
+      "S1C61::M-HOLD-120"
+    ]
+  },
+  "held_out_composition": {
+    "acrylic_like_pct": 14.004448471867533,
+    "minor_tackifier_like_pct": 4.118955432902216,
+    "reactive_mass_fraction": 0.8187659609523025,
+    "source_reported_parts": {
+      "ac1920": 17.0,
+      "mdi": 20.19,
+      "pdp70": 39.6,
+      "ppg2000": 39.6,
+      "tk100": 5.0
+    }
+  },
+  "held_out_thermal_hold": {
+    "mean_absolute_drift_15_60_pct": 1.6036,
+    "n_repeats": 2,
+    "per_repeat": {
+      "repeat_1": {
+        "drift_15_60_pct": -0.1626,
+        "eta_15": 1230.0,
+        "eta_60": 1228.0,
+        "sampling_times_min": [
+          15.0,
+          30.0,
+          45.0,
+          60.0
+        ]
+      },
+      "repeat_2": {
+        "drift_15_60_pct": 3.0445,
+        "eta_15": 1281.0,
+        "eta_60": 1320.0,
+        "sampling_times_min": [
+          15.0,
+          30.0,
+          45.0,
+          60.0
+        ]
+      }
+    },
+    "temperature_c": 120.0
+  },
+  "hypothesis_adjudication": {
+    "dilution_explained_reduction_pct": 18.12,
+    "drift_reduction_vs_E1_pct": 83.14,
+    "falsified_hypotheses": [
+      "H-CORE"
+    ],
+    "held_out_reactive_mass_fraction": 0.818766,
+    "hypothesis_verdicts": {
+      "H-CORE": {
+        "basis": "linear-dilution prediction 7.79% at phi_r=0.8188; observed 1.60%",
+        "observed_drift_pct": 1.6036,
+        "predicted_drift_pct": 7.7865,
+        "survives": false
+      },
+      "H-DUAL": {
+        "basis": "this composition carries both modifier axes, so the completed measurement cannot separate H-DUAL from H-RESIN; an acrylic-only hold is required",
+        "observed_drift_pct": 1.6036,
+        "predicted_drift_pct": 3.8932,
+        "separable_by_this_measurement": false,
+        "survives": true
+      },
+      "H-RESIN": {
+        "basis": "suppression below half the dilution prediction (3.89%); observed 1.60%",
+        "observed_drift_pct": 1.6036,
+        "predicted_drift_pct": 3.8932,
+        "survives": true
+      }
+    },
+    "linear_dilution_prediction_pct": 7.7865,
+    "observed_mean_absolute_drift_pct": 1.6036,
+    "observed_vs_linear_ratio": 0.2059,
+    "reference_E1_drift_pct": 9.51,
+    "surviving_hypotheses": [
+      "H-DUAL",
+      "H-RESIN"
+    ]
+  },
+  "measurement_plan_match": {
+    "held_out_measurement_actually_performed": "120 C thermal hold, 15/30/45/60 min, two repeats",
+    "matches": true,
+    "note": "A selected measurement plan that does not match the completed measurement cannot be adjudicated by it; that is a reportable outcome, not a failure of the Agent.",
+    "selected_measurement_id": "M-HOLD-120"
+  },
+  "modifier_plane_distance": {
+    "held_out_acrylic_like_pct": 14.0044,
+    "held_out_minor_tackifier_like_pct": 4.119,
+    "modifier_plane_l1_pct_points": 1.8766,
+    "role": "reported for comparability with the V3 series only. Distance to the held-out composition is NOT the V4 objective and enters no VOI component, weight or tie-break.",
+    "selected_acrylic_like_pct": 15.0,
+    "selected_minor_tackifier_like_pct": 5.0
+  }
+}

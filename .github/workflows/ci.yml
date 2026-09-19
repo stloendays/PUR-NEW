@@ -194,3 +194,44 @@ jobs:
         run: python -m json.tool /tmp/master-curve-collapse/master_curve_collapse_summary.json > /dev/null
       - name: Validate manuscript citation integrity
         run: python scripts/check_manuscript_citations.py
+
+      - name: Validate Agent V4 configuration JSON
+        run: |
+          python -m json.tool configs/agent_v4.json > /dev/null
+          python -m json.tool configs/hypothesis_registry.json > /dev/null
+          python -m json.tool configs/measurement_catalog.json > /dev/null
+          python -m json.tool schemas/agent_v4_experiment.schema.json > /dev/null
+      - name: Compile Agent V4 runners
+        run: |
+          python -m py_compile scripts/run_agent_v4.py
+          python -m py_compile scripts/adjudicate_agent_v4.py
+          python -m py_compile scripts/compare_v3_v4.py
+          python -m py_compile scripts/audit_stage1_blindness.py
+      - name: Run the Stage-1 blindness audit
+        run: |
+          python scripts/build_stage1_blind_candidate_space.py --output /tmp/stage1_blind_space.json
+          python scripts/audit_stage1_blindness.py --candidate-set /tmp/stage1_blind_space.json --label ci --output /tmp/blindness_audit.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path('/tmp/blindness_audit.json').read_text())
+          assert report['verdict'] == 'PASS', report
+          assert report['n_critical'] == 0 and report['n_high'] == 0, report
+          PY
+      - name: Audit that the V4 VOI layer carries no held-out coordinate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          forbidden = ('14.004', '4.1189', '4.1190', '1230', '1320', '1281', '1228')
+          sources = [
+              'src/pur_new/voi.py',
+              'configs/hypothesis_registry.json',
+              'configs/measurement_catalog.json',
+              'configs/agent_v4.json',
+          ] + sorted(str(p) for p in Path('prompts').glob('agent_v4_*.txt'))
+          for name in sources:
+              text = Path(name).read_text(encoding='utf-8')
+              for token in forbidden:
+                  assert token not in text, (name, token)
+          print('V4 VOI layer is free of held-out coordinates')
+          PY

@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "registry_id": "PUR_NEW_HYPOTHESIS_REGISTRY_V1",
+  "purpose": "Pre-result, falsifiable mechanistic hypotheses about what controls 120 C thermal-hold viscosity drift in the local reactive-PUR family. Registered before any V4 experiment selection and before the held-out validation outcome is loaded.",
+  "outcome_blind": true,
+  "reference_observations": {
+    "source": "original local E1/E5 120 C thermal-hold measurements",
+    "E1_drift_15_60_pct": 9.51,
+    "E5_drift_15_60_pct": 51.54,
+    "best_original_reference": "E1",
+    "note": "E1 is the least-drifting original formulation and is used as the pre-result reference level. No follow-up formulation or measurement is referenced."
+  },
+  "hypotheses": [
+    {
+      "hypothesis_id": "H-CORE",
+      "name": "reactive-core / stoichiometry-only",
+      "statement": "Thermal-hold drift is set by the reactive prepolymer core alone. Resin-like modifiers are chemically inert at hold temperature and act only as mass dilution of reaction-capable material, so the drift coefficient scales linearly with the reactive mass fraction phi_r.",
+      "prediction_rule": "linear_dilution",
+      "predicts_drift_pct": "E1_drift * phi_r",
+      "falsified_if": "matched-window drift is substantially below the linear-dilution prediction at the same reactive mass fraction, beyond measurement resolution",
+      "supported_if": "matched-window drift agrees with E1_drift * phi_r within measurement resolution",
+      "depends_on_axes": []
+    },
+    {
+      "hypothesis_id": "H-RESIN",
+      "name": "resin-modification / superlinear suppression",
+      "statement": "Resin modification suppresses time-dependent viscosity growth more strongly than mass dilution alone, by lowering the effective concentration and encounter frequency of reaction-capable species within a non-reactive continuum. Drift falls well below the linear-dilution prediction.",
+      "prediction_rule": "superlinear_suppression",
+      "predicts_drift_pct": "substantially below E1_drift * phi_r",
+      "suppression_factor_vs_linear_max": 0.5,
+      "falsified_if": "matched-window drift at a resin-modified composition remains at or above the linear-dilution prediction",
+      "supported_if": "matched-window drift is below half the linear-dilution prediction",
+      "depends_on_axes": ["acrylic_like", "minor_tackifier_like"]
+    },
+    {
+      "hypothesis_id": "H-DUAL",
+      "name": "dual-axis modifier specialization",
+      "statement": "The two modifier axes act on different rheological coordinates. The acrylic-like axis principally relocates the realized viscosity level, whereas the minor tackifier-like axis is required for drift suppression. Acrylic addition alone therefore does not reach the low-drift regime.",
+      "prediction_rule": "tackifier_required",
+      "predicts_drift_pct": "low only when the minor tackifier axis is active; otherwise near the linear-dilution prediction",
+      "falsified_if": "an acrylic-only composition reaches the low-drift regime without any minor tackifier",
+      "supported_if": "low drift is observed only for compositions with a non-zero minor tackifier fraction",
+      "depends_on_axes": ["minor_tackifier_like"]
+    }
+  ],
+  "claim_boundary": "These hypotheses are formulation-level rheological mechanisms. None of them asserts a molecularly resolved reaction pathway, and no chain-level characterization is implied or required by their adjudication."
+}

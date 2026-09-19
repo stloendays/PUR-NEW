@@ -1,0 +1,99 @@
+{
+  "adjudication_type": {
+    "v3": "modifier-plane distance to the held-out composition",
+    "v4": "survival of a registered mechanistic hypothesis against the completed measurement"
+  },
+  "candidate_space": {
+    "identical_for_both_architectures": true,
+    "n_nodes": 73,
+    "path": "derived\\stage1_blind_candidate_space_v1.json"
+  },
+  "decision_object": {
+    "v3": "formulation candidate (73 options)",
+    "v4": "experiment card = formulation x measurement plan (292 options)"
+  },
+  "deterministic_layer": {
+    "v3": {
+      "kind": "scenario rankings with a unique rank-1 per scenario",
+      "pareto_front_size": 12,
+      "rank1_by_scenario": {
+        "causal_isolation": "S1C10",
+        "evidence_first": "S1C40",
+        "performance_mitigation": "S1C40",
+        "robustness_first": "S1C40"
+      },
+      "reports_ties_explicitly": false
+    },
+    "v4": {
+      "formula_weights": {
+        "decision_relevance": 0.25,
+        "extrapolation_risk": 0.1,
+        "hypothesis_discrimination": 0.3,
+        "measurement_interpretability": 0.1,
+        "process_state_risk": 0.05,
+        "uncertainty_reduction": 0.2
+      },
+      "kind": "VOI score over experiments with explicit tie reporting",
+      "margin_to_first_strictly_lower": 0.004583,
+      "n_tied_at_top": 5,
+      "reports_ties_explicitly": true,
+      "tied_top_candidate_ids": [
+        "S1C41",
+        "S1C46",
+        "S1C51",
+        "S1C56",
+        "S1C61"
+      ],
+      "tied_top_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.6925
+    }
+  },
+  "overlap": {
+    "v3_modal_selection": "S1C41",
+    "v3_selection_counts": {
+      "S1C40": 1,
+      "S1C41": 6,
+      "S1C46": 1
+    },
+    "v4_selected_candidate": "S1C41",
+    "v4_selection_would_have_been_available_to_v3": true
+  },
+  "v3_frozen_series": {
+    "n_abstained": 2,
+    "n_named": 8,
+    "n_runs": 10,
+    "selection_counts": {
+      "S1C40": 1,
+      "S1C41": 6,
+      "S1C46": 1
+    },
+    "series": "results\\stage1_blind_replay_v3h\\arm_b_blind"
+  },
+  "v4_frozen_decision": {
+    "decision_mode": "committed_experiment",
+    "hypotheses_addressed": [
+      "H-CORE",
+      "H-RESIN",
+      "H-DUAL"
+    ],
+    "hypotheses_left_entangled": [
+      "H-RESIN vs H-DUAL"
+    ],
+    "recommendation_id": "EXP_V4_20260919T141726Z_50bdb5870e",
+    "run_dir": "results\\agent_v4_voi\\run_001\\EXP_V4_20260919T141726Z_50bdb5870e",
+    "selected_candidate_id": "S1C41",
+    "selected_experiment_id": "S1C41::M-HOLD-120",
+    "selected_is_in_tied_top_set": true,
+    "selected_measurement_id": "M-HOLD-120"
+  },
+  "what_the_model_layer_must_do": {
+    "v3": "may depart from a visible or hidden unique deterministic rank-1",
+    "v4": "must break a genuine tie the deterministic tool cannot break, so a selection inside the tied set provably was not read off the score"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "version": "1.0.0",
+  "catalog_id": "PUR_NEW_MEASUREMENT_CATALOG_V1",
+  "purpose": "Measurement plans an experiment can carry. Every field is declared pre-result and is independent of the held-out validation formulation and its outcome.",
+  "declared_failure_mode": "viscosity growth during prolonged 120 C melt residence (thermal-hold drift)",
+  "measurements": [
+    {
+      "measurement_id": "M-HOLD-120",
+      "name": "matched-window 120 C thermal hold",
+      "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+      "protocol": "Hold the melt at 120 C. Record viscosity at 15, 30, 45 and 60 min. Report the 15-60 min matched-window relative change. Run at least two independent repeats.",
+      "sampling_times_min": [
+        15,
+        30,
+        45,
+        60
+      ],
+      "temperature_c": 120,
+      "min_repeats": 2,
+      "decision_relevance": 1.0,
+      "interpretability": 1.0,
+      "interpretability_basis": "direct matched-window observation; no model fit, no extrapolation and no imputation is required to obtain the primary observable",
+      "discrimination_threshold_pct": 2.0,
+      "discrimination_threshold_basis": "declared pre-result resolution of the matched-window drift estimate under the stated repeat protocol; hypothesis predictions closer than this are not treated as separable",
+      "addresses": [
+        "thermal_hold_drift"
+      ],
+      "resolves_quantity": "isothermal time coordinate S_t",
+      "controls_process_state": false
+    },
+    {
+      "measurement_id": "M-SWEEP",
+      "name": "80-130 C temperature sweep",
+      "primary_observable": "apparent temperature-response descriptor E_eta from ln(eta) versus 1/T",
+      "protocol": "Measure viscosity from 80 to 130 C in 10 C increments on a freshly prepared sample and regress ln(eta) against 1/T.",
+      "sampling_times_min": [],
+      "temperature_c": null,
+      "min_repeats": 1,
+      "decision_relevance": 0.4,
+      "interpretability": 0.7,
+      "interpretability_basis": "the observable is a regression slope rather than a directly read value, so it inherits fit assumptions",
+      "discrimination_threshold_pct": 5.77,
+      "discrimination_threshold_basis": "measured local coefficient of variation of E_eta across six chemistry-audited realizations; a predicted shape change smaller than the observed spread is not separable",
+      "addresses": [
+        "temperature_response"
+      ],
+      "resolves_quantity": "temperature coordinate S_T",
+      "controls_process_state": false
+    },
+    {
+      "measurement_id": "M-ANCHOR",
+      "name": "one-point state calibration check",
+      "primary_observable": "multiplicative reconstruction error of the 120-130 C response from a single 110 C anchor",
+      "protocol": "Measure viscosity at 110 C only, locate the realization on the shared local thermal response, then verify the predicted 120 and 130 C values against direct measurement.",
+      "sampling_times_min": [],
+      "temperature_c": 110,
+      "min_repeats": 1,
+      "decision_relevance": 0.3,
+      "interpretability": 0.7,
+      "interpretability_basis": "requires the previously fitted shared thermal shape, so the observable is conditional on that model holding in the modified chemistry",
+      "discrimination_threshold_pct": 8.8,
+      "discrimination_threshold_basis": "pooled multiplicative RMSE of 1.088x measured in the strict formulation-and-temperature holdout",
+      "addresses": [
+        "state_transferability"
+      ],
+      "resolves_quantity": "realized viscosity level eta_ref",
+      "controls_process_state": false
+    },
+    {
+      "measurement_id": "M-REPEAT",
+      "name": "repeatability / state-control experiment",
+      "primary_observable": "between-preparation spread of the realized viscosity-scale coordinate a_fr at matched temperature",
+      "protocol": "Prepare the same nominal composition three times under a controlled and fully recorded process history, then measure the 80-130 C sweep for each preparation.",
+      "sampling_times_min": [],
+      "temperature_c": null,
+      "min_repeats": 3,
+      "decision_relevance": 0.6,
+      "interpretability": 0.9,
+      "interpretability_basis": "directly observed spread, though it answers a question about process control rather than about formulation mechanism",
+      "discrimination_threshold_pct": 100.0,
+      "discrimination_threshold_basis": "the measured E2 realization spread of 2.80-3.57x sets the scale a state-control experiment must beat to be informative",
+      "addresses": [
+        "realization_state_control"
+      ],
+      "resolves_quantity": "realization displacement delta_fr",
+      "controls_process_state": true
+    }
+  ]
+}
