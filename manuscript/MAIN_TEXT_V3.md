@@ -1,4 +1,4 @@
-# State-Conditioned Rheology Guides Evidence-Grounded Formulation Decisions in Reactive Polyurethane Hot-Melt Adhesives
+# State-Conditioned Rheology Enables Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives
 
 
 **Junbo Tong¹, Jianming Zhao²\***
@@ -11,7 +11,7 @@
 
 ## Abstract
 
-Reactive polyurethane hot-melt adhesives (PURs) are commonly formulated from nominal composition and processing temperature, although practical melt rheology also reflects the state realized during preparation and thermal residence. Here, six chemistry-audited realizations (36 temperature–viscosity measurements) from a local PPG2000/STEPANPOL PDP-70/4,4′-MDI family reveal a low-dimensional, experimentally calibratable state dependence. Nominally identical E2 realizations differed by 2.80–3.57-fold across 80–130 °C, yet a realization-specific viscosity scale combined with a shared thermal response explained 99.77% of log-viscosity variation versus 85.2% for a formulation-only model, reducing held-temperature multiplicative error from 1.442× to 1.058×. In leave-one-formulation-out tests, one 110 °C anchor predicted 120–130 °C viscosity with a pooled multiplicative RMSE of 1.088×. At 120 °C, the apparent log-viscosity drift differed 4.29-fold between two original formulations, while a resin-modified validation formulation reduced mean absolute 15–60 min drift to 1.60% versus 9.51% for the best original local reference. These physical coordinates were combined with curated PUR evidence in a retrospective outcome-blind Agent reconstruction. The held-out formulation was absent from the 73-node candidate lattice; 8 of 10 runs committed to a candidate and all 8 committed decisions fell within the predeclared near region. A strategy-ladder decomposition assigned approximately 94% of the best-case distance reduction to deterministic scientific policy, with the language model operating inside the evidence-bounded decision space. The resulting framework separates viscosity level, thermal response and thermal-hold trajectory, using AI to select bounded experiments rather than replace physical characterization.
+Reactive polyurethane hot-melt adhesives (PURs) are commonly formulated from nominal composition and processing temperature, although practical melt rheology also reflects the state realized during preparation and thermal residence. Here, six chemistry-audited realizations (36 temperature–viscosity measurements) from a local PPG2000/STEPANPOL PDP-70/4,4′-MDI family reveal a low-dimensional, experimentally calibratable state dependence. Nominally identical E2 realizations differed by 2.80–3.57-fold across 80–130 °C, yet a realization-specific viscosity scale combined with a shared quadratic inverse-temperature response explained 99.77% of log-viscosity variation versus 85.53% for a formulation-only model using the same thermal-response form, reducing held-temperature multiplicative error from 1.423× to 1.058×. In leave-one-formulation-out tests, one 110 °C anchor predicted 120–130 °C viscosity with a pooled multiplicative RMSE of 1.088×. At 120 °C, the apparent log-viscosity drift differed 4.29-fold between two original formulations, while a resin-modified validation formulation reduced mean absolute 15–60 min drift to 1.60% versus 9.51% for the best original local reference. These physical coordinates were combined with curated PUR evidence in a retrospective outcome-blind Agent reconstruction. The held-out formulation was absent from the 73-node candidate lattice; 8 of 10 runs committed to a candidate and all 8 committed decisions fell within the predeclared near region. A strategy-ladder decomposition assigned approximately 94% of the best-case distance reduction to deterministic scientific policy, with the language model operating inside the evidence-bounded decision space. The resulting framework separates viscosity level, thermal response and thermal-hold trajectory, using AI to select bounded experiments rather than replace physical characterization.
 
 **Keywords:** reactive polyurethane hot-melt adhesive; rheology; process state; viscosity stability; state-aware modeling; formulation design; scientific Agent
 
@@ -49,32 +49,56 @@ The persistence of this separation across temperature is inconsistent with an is
 
 ### 2.2 A latent viscosity-scale coordinate captures most realization variability
 
-We next tested whether the realization dependence reflected arbitrary curve changes or a lower-dimensional displacement. A formulation-only representation treats nominal chemistry and temperature as the principal predictors,
+We next tested whether the realization dependence reflected arbitrary curve changes or a lower-dimensional displacement. To compare formulation-only and state-conditioned descriptions on the same thermal basis, temperature was represented by the centered inverse-temperature coordinate
 
-$$
-\ln \eta = f(x_{\mathrm{chem}},T)+\varepsilon .
-$$
+$
+z(T)=10^3\left(\frac{1}{T}-\frac{1}{T_{\mathrm{ref}}}\right),
+\qquad
+T_{\mathrm{ref}}=393.15~\mathrm{K},
+$
 
-The state-conditioned representation assigns each realization an independent log-viscosity offset while retaining a shared local thermal-response function,
+with $T$ expressed in kelvin. The formulation-only model used a formulation-specific intercept and a shared quadratic thermal response,
 
-$$
-\ln \eta_r(T)=\alpha_r+g(T)+\varepsilon ,
-$$
+$
+\ln \eta_{fr}(T)
+=
+\mu_f
++
+\beta_1 z(T)
++
+\beta_2 z(T)^2
++
+\varepsilon_{frT},
+$
 
-where $\alpha_r$ is the realization-specific viscosity-scale coordinate.
+whereas the state-conditioned model replaced the formulation intercept with a realization-specific viscosity-scale intercept,
+
+$
+\ln \eta_{fr}(T)
+=
+a_{fr}
++
+\beta_1 z(T)
++
+\beta_2 z(T)^2
++
+\varepsilon_{frT}.
+$
+
+Here $f$ denotes nominal formulation and $r$ a measured realization within that formulation. The fitted $a_{fr}$ locates the realized viscosity level directly; conceptually it contains both the formulation baseline and the realization-specific displacement, $a_{fr}=\mu_f+\delta_{fr}$.
 
 After chemistry-aware curation, the primary dataset contained six complete realizations of E1–E3 measured at six temperatures per realization (80, 90, 100, 110, 120 and 130 °C), giving 36 temperature–viscosity observations in total. One E1 curve carrying phosphoric-acid context was excluded from the primary model because the additive condition was not encoded in the compact formulation definition and was retained only for sensitivity analysis.
 
-The formulation-only model explained 85.2% of the variation in log viscosity. Introducing realization-specific scale terms with a shared low-complexity inverse-temperature response increased the explained variation to 99.77%. The same advantage was observed in prediction: held-temperature multiplicative error decreased from approximately 1.442× for the formulation-only model to 1.058× for the state-conditioned model.
+With the same quadratic inverse-temperature response in both models, the formulation-only representation explained 85.53% of the variation in log viscosity, whereas the state-conditioned representation explained 99.77%. The same advantage was observed in prediction: leave-one-temperature-out multiplicative error decreased from 1.423× to 1.058×. The state effect was not created by the quadratic term: with a linear thermal response in both models, $R^2$ increased from 0.8519 to 0.9943.
 
 A model-free singular-value decomposition gave the same geometric result. After centering the log-viscosity matrix by temperature, the first between-realization mode explained 99.63% of the variance. Its loading vector had a cosine similarity of 0.9998 to a constant vector, showing that the dominant mode is almost indistinguishable from a uniform vertical displacement in log-viscosity space.
 
-Together, the regression and decomposition results establish a simple local representation: realizations share a similar thermal-response shape but occupy different viscosity levels. We therefore treat $\alpha_r$ as a latent preparation-state coordinate that captures the net rheological consequence of reaction time, moisture, mixing history, sample age and related preparation variables without requiring any one factor to be specified independently.
+Together, the regression and decomposition results establish a simple local representation: realizations share a similar thermal-response shape but occupy different viscosity levels. We therefore treat the fitted intercept $a_{fr}$ as a realized viscosity-scale coordinate: it places each measured preparation on the shared thermal-response shape while leaving the underlying contribution of reaction time, moisture, mixing history, sample age and related preparation variables unresolved.
 
 
 ![Figure 2. State-conditioned rheology](../analysis/figures/Figure2_state_conditioned_rheology.png)
 
-**Figure 2. Realization-dependent viscosity variation is dominated by a calibratable state shift.** (A) Temperature-dependent viscosity of four E2 realizations, showing persistent preparation-to-preparation offsets across 80–130 °C. (B) Removal of the realization-specific log-viscosity coordinate $\alpha_r$ collapses the E2 curves onto the shared thermal response. (C) The first between-realization singular mode explains 99.63% of the variance and has a cosine similarity of 0.9998 to an ideal constant vertical shift. (D) State conditioning increases fitted $R^2$ from 85.19% to 99.77% and reduces leave-one-temperature-out multiplicative error from 1.442× to 1.058×.
+**Figure 2. Realization-dependent viscosity variation is dominated by a calibratable state shift.** (A) Temperature-dependent viscosity of four E2 realizations, showing persistent preparation-to-preparation offsets across 80–130 °C. (B) Removal of the realization-specific viscosity-scale intercept $a_{fr}$ collapses the E2 curves onto the shared thermal response. (C) The first between-realization singular mode explains 99.63% of the variance and has a cosine similarity of 0.9998 to an ideal constant vertical shift. (D) Using the same quadratic inverse-temperature response in both models, state conditioning increases fitted $R^2$ from 85.53% to 99.77% and reduces leave-one-temperature-out multiplicative error from 1.423× to 1.058×.
 
 ### 2.3 One viscosity anchor calibrates an unseen local realization
 
@@ -82,11 +106,11 @@ A useful state coordinate should reduce characterization burden. We therefore as
 
 In leave-one-formulation-out analysis, all realizations of one formulation were removed before fitting the shared response $g(T)$. For each held realization, a single viscosity value at anchor temperature $T_0$ was then used to estimate
 
-$$
-\alpha_r=\ln \eta_r(T_0)-g(T_0),
-$$
+$
+\hat a_{fr}=\ln \eta_{fr}(T_0)-\hat g(T_0),
+$
 
-after which the remaining temperatures were reconstructed from $\alpha_r+g(T)$.
+after which the remaining temperatures were reconstructed from $\widehat{\ln\eta}_{fr}(T)=\hat a_{fr}+\hat g(T)$.
 
 Using 120 °C as the anchor, multiplicative reconstruction errors were approximately 1.028× for held E1, 1.119× for held E2 and 1.049× for held E3. The pooled error was 1.099×, and pooled performance across the available anchor temperatures remained approximately 1.06–1.10×.
 
@@ -167,7 +191,7 @@ The validation formulation establishes rheological stabilization through a formu
 
 ### 2.9 State calibration and trajectory assessment define a practical formulation workflow
 
-The combined results suggest a formulation strategy that separates where a sample is in rheological space from how that state evolves. Within the present chemistry family, the realization-specific offset $\alpha_r$ behaves as a calibratable latent state rather than unstructured nuisance variance. Once the shared local thermal response has been established, one viscosity anchor can locate a new realization without repeating a complete temperature sweep.
+The combined results suggest a formulation strategy that separates where a sample is in rheological space from how that state evolves. Within the present chemistry family, the realized viscosity-scale intercept $a_{fr}$ behaves as a calibratable state coordinate rather than unstructured nuisance variance. Once the shared local thermal response has been established, one viscosity anchor can locate a new realization without repeating a complete temperature sweep.
 
 Thermal-hold measurements remain necessary because state calibration and trajectory assessment answer different questions. A sample can be positioned accurately on the local temperature-response surface and still exhibit unacceptable viscosity growth during residence at processing temperature. Reactive-PUR formulation should therefore consider both the instantaneous state and the path followed by that state during processing.
 
@@ -197,25 +221,67 @@ One E1 temperature curve was labelled with phosphoric-acid context. Because the 
 
 ### 3.3 State-conditioned temperature-response models
 
-Viscosity was log-transformed before model fitting. The formulation-only model used nominal formulation identity together with a low-complexity inverse-temperature response. The state-conditioned model replaced the nominal formulation intercept with realization-specific intercepts while retaining a shared thermal-response function.
+Viscosity was log-transformed before model fitting. Temperature was encoded as
 
-The primary shared-shape model was
+$
+z(T)=10^3\left(\frac{1}{T}-\frac{1}{T_{\mathrm{ref}}}\right),
+\qquad
+T_{\mathrm{ref}}=393.15~\mathrm{K},
+$
 
-$$
-\ln \eta
+where $T$ is absolute temperature. The factor $10^3$ is a numerical scaling convention and does not change the fitted thermal shape.
+
+For the primary same-order comparison, the formulation-only model was
+
+$
+\ln \eta_{fr}(T)
 =
-\alpha_r
+\mu_f
 +
-\beta_1\Delta(1/T)
+\beta_1 z(T)
 +
-\beta_2[\Delta(1/T)]^2
+\beta_2 z(T)^2
 +
-\varepsilon ,
-$$
+\varepsilon_{frT},
+$
 
-where $\Delta(1/T)$ denotes centered inverse temperature and $\alpha_r$ is the realization-specific viscosity-scale coordinate.
+and the state-conditioned model was
 
-Model quality was summarized using $R^2$, log-space root-mean-square error and multiplicative error, $\exp(\mathrm{RMSE}_{\log})$. Held-temperature validation removed all observations at one temperature, fitted the model on the remaining temperatures and predicted the held temperature.
+$
+\ln \eta_{fr}(T)
+=
+a_{fr}
++
+\beta_1 z(T)
++
+\beta_2 z(T)^2
++
+\varepsilon_{frT}.
+$
+
+The state-conditioned model estimates one intercept $a_{fr}$ for each measured realization. This intercept is the directly fitted realized viscosity-scale coordinate; conceptually, $a_{fr}=\mu_f+\delta_{fr}$ separates the nominal formulation baseline $\mu_f$ from a realization-specific displacement $\delta_{fr}$ without requiring the two contributions to be estimated separately.
+
+Prediction error was evaluated in log-viscosity space,
+
+$
+\mathrm{RMSE}_{\log}
+=
+\sqrt{
+\frac{1}{N}
+\sum_{i=1}^{N}
+\left(\ln\hat\eta_i-\ln\eta_i\right)^2
+},
+$
+
+and reported as a multiplicative error factor,
+
+$
+\mathrm{RMSE}_{\times}
+=
+\exp\left(\mathrm{RMSE}_{\log}\right).
+$
+
+Held-temperature validation removed all observations at one temperature, fitted the model on the remaining temperatures and predicted the held temperature. The headline formulation-only and state-conditioned comparison used the same quadratic thermal-response basis in both models.
 
 ### 3.4 Model-free dimensionality analysis
 
@@ -227,11 +293,23 @@ The fraction of between-realization variance explained by the first singular mod
 
 Transfer across nominal formulations was evaluated by leave-one-formulation-out analysis. For each fold, all realizations of one formulation were excluded from fitting the shared thermal shape. The remaining formulations were used to estimate $g(T)$. One viscosity value from each held realization at anchor temperature $T_0$ was then used to estimate
 
-$$
-\alpha_r=\ln \eta_r(T_0)-g(T_0).
-$$
+$
+\hat a_{fr}=\ln \eta_{fr}(T_0)-\hat g(T_0).
+$
 
-The remaining temperatures were reconstructed from $\alpha_r+g(T)$ and performance was summarized in multiplicative-error space.
+For the quadratic shared response used here,
+
+$
+\widehat{\ln\eta}_{fr}(T)
+=
+\ln\eta_{fr}(T_0)
++
+\hat\beta_1\left[z(T)-z(T_0)\right]
++
+\hat\beta_2\left[z(T)^2-z(T_0)^2\right].
+$
+
+The remaining temperatures were reconstructed from this calibrated response and performance was summarized in multiplicative-error space.
 
 A stricter formulation-and-temperature holdout removed one formulation entirely and fitted the shared thermal response only on the other formulations at temperatures $\leq110~^\circ\mathrm{C}$. A single 110 °C anchor was provided for each unseen realization, and predictions were generated at 120 and 130 °C. Pooled log-RMSE, multiplicative RMSE, absolute percentage error and a 10,000-replicate realization-level cluster bootstrap were calculated.
 
@@ -257,7 +335,15 @@ This value is an operational rheological descriptor and is not interpreted as a 
 
 ### 3.7 Apparent temperature-response descriptor
 
-For each chemistry-audited complete realization, $\ln \eta$ was regressed against $1/T$. The fitted slope was converted to an apparent $E_\eta$ using the gas constant. $E_\eta$ is reported only as a descriptor of the local temperature-viscosity response.
+For each chemistry-audited complete realization, $\ln \eta$ was regressed against $1/T$ with $T$ in kelvin. The apparent temperature-response descriptor was calculated as
+
+$
+E_\eta
+=
+R\frac{\mathrm{d}\ln\eta}{\mathrm{d}(1/T)},
+$
+
+using $R=8.314462618~\mathrm{J\,mol^{-1}\,K^{-1}}$. $E_\eta$ is reported only as a descriptor of the local temperature-viscosity response and is not interpreted as a chemical reaction activation energy.
 
 ### 3.8 External PUR evidence base
 
