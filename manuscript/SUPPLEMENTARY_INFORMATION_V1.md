@@ -101,10 +101,6 @@ The same-order comparison isolates the effect of replacing formulation-level int
 
 Thus, within the present local chemistry family, the dominant realization effect is almost indistinguishable from a uniform vertical displacement in log-viscosity space.
 
-### Supplementary Figure S1 | Model-free structure of the realization effect
-
-**Suggested content.** Centered log-viscosity residual matrix for the six chemistry-audited realizations, first singular-mode loading across temperature, and the constant-vector comparison used to quantify the vertical-shift geometry. The figure should report PC1 = 99.63% and cosine similarity = 0.9998.
-
 ---
 
 # Supplementary Note 3 | Leave-one-formulation one-point calibration
@@ -142,10 +138,6 @@ Across the full measured temperature range, pooled one-point transfer remains ap
 | pooled | 6 | 1.099 |
 
 The one-point experiment should be interpreted as state calibration inside a validated local chemistry neighborhood. It is not evidence for a universal polyurethane master curve.
-
-### Supplementary Figure S2 | Anchor-temperature dependence of one-point state calibration
-
-**Suggested content.** Pooled multiplicative RMSE versus anchor temperature, with held-formulation-specific values shown as individual points or intervals. The figure should use the same chemistry-audited six-realization population as the main analysis.
 
 ---
 
@@ -186,10 +178,6 @@ $$
 The maximum individual multiplicative error in this test was approximately 1.189×.
 
 The supported claim is therefore limited to **10–20 °C short-range extrapolation inside the chemistry-audited E1–E3 neighborhood after one state-specific anchor**.
-
-### Supplementary Figure S3 | Realization-level uncertainty in strict local extrapolation
-
-**Suggested content.** Bootstrap distribution of pooled multiplicative RMSE for the joint formulation-and-temperature holdout, with the median and 95% interval marked. A second panel may show prediction error by held realization at 120 and 130 °C.
 
 ---
 
@@ -280,10 +268,6 @@ The measured F1 mean absolute drift is 1.60%. Thus the observed reduction from E
 
 The validation therefore supports a low-drift rheological region and shows that the stabilization exceeds simple proportional dilution of the original reactive core.
 
-### Supplementary Figure S4 | Replicate-level thermal-hold validation
-
-**Suggested content.** F1 repeat trajectories plotted individually and normalized to each repeat's own 15 min value, together with the matched E1 and E5 reference changes. The panel should report replicate-level rather than extrapolated 90 min values for F1.
-
 ---
 
 # Supplementary Note 7 | External PUR evidence and generalization boundary
@@ -310,10 +294,6 @@ which is much broader than the local E1–E3 range.
 This broader distribution is important for claim scope. The local shared thermal shape is treated as a **local transferable representation**, not a universal PUR relation.
 
 External formulation records containing acrylic-like and tackifier-like modifiers are used as evidence-bounded intervention priors. Numeric modifier fractions are used as quantitative anchors only when their denominator basis is sufficiently explicit. Records with ambiguous bases remain directional evidence.
-
-### Supplementary Figure S5 | Local versus external temperature-response domain
-
-**Suggested content.** Distribution of the apparent temperature-response descriptor across the 39 external curves with the local E1–E3 interval overlaid. This panel should emphasize that the local result occupies a restricted subdomain of a broader chemistry-dependent landscape.
 
 ---
 
@@ -439,10 +419,6 @@ The remaining approximately 5.6% corresponds to the additional best-case reducti
 
 This decomposition is used to support the conclusion that explicit scientific structure, not unconstrained language-model generation, supplies most of the quantitative decision improvement.
 
-### Supplementary Figure S6 | Run-level decision distribution and attribution
-
-**Suggested content.** Candidate selection frequencies for the 10 confirmatory runs, including abstentions, together with a separate rule-versus-model attribution panel. The figure should preserve the distinction between deterministic candidate geometry and stochastic model selection.
-
 ---
 
 # Supplementary Note 11 | Blindness and provenance controls
@@ -496,7 +472,7 @@ The principal manuscript quantities can be regenerated from the following versio
 | GPT-5.5 transfer runs | `results/multimodel/gpt-5_5/arm_b_blind/` |
 | GPT-5.6-sol transfer runs | `results/multimodel/gpt-5_6-sol/arm_b_blind/` |
 
-The main-text Figures 3–5 are rendered in R from versioned analysis outputs. Supplementary figures should use the same palette, typography and panel conventions as the main figures.
+Main-text Figures 1–5 are generated from versioned scripts and analysis outputs. The SI reports the corresponding numerical robustness checks and run-level tables without duplicating those main-text visualizations.
 
 ---
 
