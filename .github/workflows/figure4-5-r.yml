@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - ".github/workflows/figure4-5-r.yml"
       - "scripts/figure2_state_conditioned_rheology.R"
       - "scripts/figure4_rheological_coordinates.R"
       - "scripts/figure5_outcome_blind_agent.R"
