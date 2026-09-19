@@ -163,7 +163,7 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
     its wet-lab outcome are neither loaded nor returned.
     """
     df = _prepare_audited_temperature_data()
-    formulation = _model_and_cv(df, "ln_eta ~ C(formulation_id) + dx")
+    formulation = _model_and_cv(df, "ln_eta ~ C(formulation_id) + dx + I(dx**2)")
     state = _model_and_cv(df, "ln_eta ~ C(realization_id) + dx + I(dx**2)")
     lofo_rows, pooled_anchor_errors = _leave_one_formulation_one_point(df)
     lofo_120 = [row for row in lofo_rows if row["anchor_temperature_c"] == 120.0]
@@ -173,7 +173,7 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
 
     return {
         "tool_name": "get_state_aware_rheology_summary",
-        "tool_version": "3.3-provenance-audited",
+        "tool_version": "3.4-same-order-model-comparison",
         "source_scope": "original pre-validation local measurements with chemistry-comparability audit",
         "validation_formulation_visible": False,
         "provenance_audit": {
@@ -197,10 +197,10 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
                 "held_temperature_state_aware_error_factor": state[
                     "held_temperature_multiplicative_error"
                 ],
-                "positive_model": "ln(eta_r(T)) = alpha_r + g(T) + epsilon",
+                "positive_model": "ln(eta_fr(T)) = a_fr + beta1*z(T) + beta2*z(T)^2 + epsilon",
                 "model_free_check": pca,
                 "interpretation": (
-                    "Within the chemistry-audited local family, realization/process state primarily shifts viscosity scale while a low-complexity common thermal-response shape remains transferable."
+                    "Within the chemistry-audited local family, a realization-specific viscosity-scale intercept plus a shared quadratic inverse-temperature response closes the data far better than a formulation-level intercept using the same thermal basis."
                 ),
             },
             "one_point_state_calibration": {
