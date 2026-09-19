@@ -21,7 +21,7 @@ joint <- read.csv(file.path(results_dir, "local_joint_formulation_temperature_ex
 joint_summary <- read.csv(file.path(results_dir, "local_joint_formulation_temperature_extrapolation_summary.csv"), check.names = FALSE)
 
 theme_pur <- function() {
-  theme_classic(base_size = 10, base_family = "sans") +
+  theme_classic(base_size = 10, base_family = "serif") +
     theme(
       text = element_text(colour = "black"),
       axis.text = element_text(colour = "black"),
@@ -100,8 +100,8 @@ pC <- ggplot(
   scale_y_log10(labels = label_number(big.mark = ",")) +
   labs(
     title = "C  Bounded extrapolation",
-    x = "Observed viscosity_reported",
-    y = "Predicted viscosity_reported",
+    x = "Observed viscosity",
+    y = "Predicted viscosity",
     shape = NULL
   ) +
   annotate(
@@ -141,3 +141,12 @@ ggsave(
 )
 
 message("Wrote Figure 3 to: ", fig_dir)
+
+ggsave(
+  file.path(fig_dir, "Figure3_local_transfer.png"),
+  fig,
+  width = 7.2,
+  height = 2.7,
+  units = "in",
+  dpi = 600
+)
