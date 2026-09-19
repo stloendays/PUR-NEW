@@ -17,8 +17,6 @@ Reactive polyurethane hot-melt adhesives (PURs) are commonly formulated from nom
 
 ---
 
----
-
 ## 1. Introduction
 
 Reactive polyurethane hot-melt adhesives combine melt processing with subsequent chemical curing, so the rheology experienced during application is inseparable from the material history that precedes it. During melting, pumping, coating or dispensing, the adhesive must remain sufficiently fluid for processing while preserving the reactivity required for later cure and bond development [@Cui2002CrystallineStructure; @Cui2003CureKinetics; @OrgilesCalpena2016CO2HMPUR; @Blasco2022VegetablePolyols; @MoyanoVallejo2024GreenStrength]. A useful processing window is therefore defined not by a single viscosity value, but by how viscosity responds to both temperature and time at temperature.
@@ -33,7 +31,9 @@ The sparse-data regime also changes the appropriate role of artificial intellige
 
 Here we develop a discovery-to-decision framework for a local reactive-PUR chemistry family. We first show that large preparation-to-preparation viscosity differences are dominated by a realization-specific scale superimposed on a shared local thermal response. We then test whether one viscosity measurement is sufficient to calibrate an unseen realization, including a stricter formulation-and-temperature holdout. Thermal-hold measurements identify a separate temporal coordinate that varies much more strongly across the measured formulation contrast, and a resin-modified follow-up formulation substantially suppresses this drift. Finally, we combine the experimentally derived rheological representation with curated external PUR evidence in a retrospective outcome-blind scientific Agent reconstruction. The objective is not to predict an unsupported optimum, but to determine whether physical structure and traceable evidence can constrain the next formulation experiment to a scientifically useful region.
 
----
+![Figure 1. Discovery-to-decision workflow](../analysis/figures/Figure1_workflow.png)
+
+**Figure 1. State-conditioned discovery-to-decision workflow for reactive PUR formulation.** Local experiments resolve realization-dependent viscosity scale, transferable thermal response and thermal-hold trajectory; one-point calibration locates a new realization on the shared thermal profile. Curated external PUR evidence and deterministic scientific policy then define an admissible formulation region in which the scientific Agent selects and freezes the next experiment before outcome-blind physical adjudication.
 
 ---
 
@@ -117,6 +117,10 @@ Using 120 °C as the anchor, multiplicative reconstruction errors were approxima
 We then withheld both the target formulation and the high-temperature prediction region. The shared response was fitted only to the other formulations at temperatures up to 110 °C; one 110 °C measurement located each unseen realization, and the model predicted 120 and 130 °C. Across 12 held predictions from six realizations, pooled multiplicative RMSE was 1.088×, with errors of 1.087× at 120 °C and 1.089× at 130 °C. Median absolute percentage error was 5.68%, and a 10,000-replicate realization-level cluster bootstrap gave a 95% interval of 1.043–1.126× for the pooled multiplicative RMSE.
 
 This test is deliberately local. The extrapolation spans only 10–20 °C beyond the fitting range and remains inside the audited E1–E3 chemistry neighborhood. Within that boundary, however, the result establishes an experimentally useful separation between learning a family-level thermal response and locating the state of a new preparation. Once the local shape has been established, one viscosity measurement can provide the state calibration needed to reconstruct the remaining temperature response.
+
+![Figure 3. One-point transfer and bounded extrapolation](../analysis/figures/Figure3_local_transfer.png)
+
+**Figure 3. One-point rheological state calibration transfers the shared local thermal response.** (A) Pooled leave-one-formulation-out reconstruction error across anchor temperatures. (B) Formulation-specific reconstruction error using a 120 °C anchor, with pooled error of 1.099×. (C) Strict formulation-and-temperature holdout in which the shared response is fitted only to other formulations at temperatures up to 110 °C and one 110 °C measurement is used to predict 120 and 130 °C; pooled multiplicative RMSE is 1.088×, median absolute percentage error is 5.68%, and the 10,000-replicate realization-level cluster bootstrap gives a 95% interval of 1.043–1.126×.
 
 ### 2.4 Thermal response and thermal-hold stability form distinct design coordinates
 
@@ -204,8 +208,6 @@ Thermal-hold measurements remain necessary because state calibration and traject
 This separation also defines a bounded role for AI. Experimentally derived coordinates determine what should be measured, external PUR evidence defines plausible intervention families, deterministic rules define admissible decision geometry, and the language model integrates evidence and commits to an experiment within that space. The workflow is therefore better described as evidence-grounded experimental decision-making than as black-box formulation prediction.
 
 For formulation development within the validated chemistry domain, one-point calibration can reduce repeated full-curve characterization after a shared response has been established, while explicit thermal-hold measurements concentrate experimental effort on the dynamic coordinate that static viscosity does not capture. The Agent adds an auditable mechanism for choosing which evidence-supported formulation region to test next and for abstaining when the available evidence is insufficient.
-
----
 
 ---
 
@@ -387,8 +389,6 @@ Claims about the shared thermal-response shape are stated for the local formulat
 
 ---
 
----
-
 ## 4. Conclusions
 
 Reactive-PUR rheology within the studied local chemistry family is not uniquely specified by nominal formulation. Nominally identical preparations differed by up to approximately threefold in absolute viscosity, but the disagreement was highly structured: a realization-specific viscosity-scale coordinate superimposed on a shared local thermal response explained 99.77% of the log-viscosity variation, and model-free decomposition assigned 99.63% of between-realization variance to a near-uniform vertical shift.
@@ -403,8 +403,6 @@ The resulting workflow links state calibration, trajectory-aware formulation des
 
 ---
 
----
-
 ## 5. Competing Interests
 
 The authors declare no competing interests.
@@ -413,5 +411,5 @@ The authors declare no competing interests.
 
 ## 6. Data and Code Availability
 
-Versioned local formulation tables, chemistry-audited temperature-sweep data, thermal-hold records, statistical analysis scripts, blindness-audit code, candidate-space generation, and scientific-Agent workflows are available in the public project repository at https://github.com/stloendays/PUR-NEW. The manuscript analyses should be associated with a frozen release or archived commit at submission. External data with separate licensing or provenance constraints should be redistributed only in accordance with their source terms.
+Versioned local formulation tables, chemistry-audited temperature-sweep data, thermal-hold records, statistical analysis scripts, blindness-audit code, candidate-space generation, figure-generation scripts and scientific-Agent workflows are available in the public project repository at https://github.com/stloendays/PUR-NEW. The exact manuscript submission snapshot will be preserved as a versioned repository release so that the reported analyses, figures and frozen decision records remain traceable to a single archival state. External data with separate licensing or provenance constraints should be redistributed only in accordance with their source terms.
 
