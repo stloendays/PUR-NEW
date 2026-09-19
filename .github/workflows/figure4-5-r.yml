@@ -76,5 +76,6 @@ jobs:
             echo "No figure changes to commit"
           else
             git commit -m "figures: render main manuscript Figures 2, 4 and 5 [skip ci]"
-            git push
+            git pull --rebase origin main
+            git push origin main
           fi
