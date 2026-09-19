@@ -174,10 +174,10 @@ V3 is designed around the paper's material findings rather than around generic A
 The upstream analysis supports:
 
 ```text
-ln eta_r(T) = alpha_r + g(T) + epsilon
+ln eta_fr(T) = a_fr + g(T) + epsilon
 ```
 
-so a candidate should be treated as a formulation-process state rather than a composition-only point.
+where `a_fr` is the realized viscosity-scale intercept for realization `r` of formulation `f`; a candidate should therefore be treated as a formulation-process state rather than a composition-only point.
 
 ### One-point calibration rule
 
