@@ -412,7 +412,7 @@ Versioned local formulation tables, chemistry-audited temperature-sweep data, th
 ## Author notes for the next revision
 
 - **Main Figure 1:** conceptual state model and discovery-to-decision workflow: nominal chemistry → realized state → (eta_{mathrm{ref}},S_T,S_t) → external evidence → Agent decision → physical adjudication.
-- **Main Figure 2:** E2 same-recipe realization spread; curve collapse after subtracting (alpha_r); SVD mode; formulation-only versus state-conditioned held-temperature error.
+- **Main Figure 2:** E2 same-recipe realization spread; curve collapse after subtracting the realization-specific scale intercept (a_fr); SVD mode; formulation-only versus state-conditioned held-temperature error.
 - **Main Figure 3:** leave-one-formulation one-point calibration and the strict 110 °C anchor → 120/130 °C prediction test.
 - **Main Figure 4:** local apparent (E_eta), E1/E5 thermal-hold trajectories, then validation repeats and matched 15–60 min drift.
 - **Main Figure 5:** 73-node target-blind candidate plane, near region, Agent/direct-LLM/random comparison, and deterministic-rule versus model contribution.
