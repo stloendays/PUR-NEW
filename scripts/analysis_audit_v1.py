@@ -51,6 +51,8 @@ def prepare_local(temperature_csv: Path, metadata_csv: Path) -> tuple[pd.DataFra
 def fit_and_cv(df: pd.DataFrame) -> pd.DataFrame:
     formulas = {
         "formulation_only_linear": "ln_eta ~ C(formulation_id) + dx",
+        "formulation_only_quadratic": "ln_eta ~ C(formulation_id) + dx + I(dx**2)",
+        "state_shared_linear": "ln_eta ~ C(realization_id) + dx",
         "state_shared_quadratic": "ln_eta ~ C(realization_id) + dx + I(dx**2)",
     }
     rows = []
