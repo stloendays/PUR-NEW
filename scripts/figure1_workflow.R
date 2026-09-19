@@ -96,11 +96,11 @@ draw_fig <- function() {
   draw_curve(0.405,0.465,0.11,0.10)
   grid.text("shared thermal shape",0.46,0.425,gp=gpar(fontsize=7.7,col="#4B5563"))
 
-  draw_box(0.565,0.565,0.18,0.075,"Viscosity level\nηref",fill="#EEF2FF",fontsize=8.2)
+  draw_box(0.565,0.565,0.18,0.075,"Reference viscosity\nlevel",fill="#EEF2FF",fontsize=8.2)
   draw_box(0.565,0.455,0.18,0.075,"Thermal response\nST",fill="#EEF2FF",fontsize=8.2)
   draw_box(0.565,0.345,0.18,0.075,"Hold-time trajectory\nSt",fill="#FFF1E6",fontsize=8.2)
   grid.text("separate coordinates",0.515,0.25,gp=gpar(fontsize=8.2,fontface="bold"))
-  grid.text("state ≠ trajectory",0.515,0.205,gp=gpar(fontsize=8.0,col="#4B5563"))
+  grid.text("state and trajectory are distinct",0.515,0.205,gp=gpar(fontsize=8.0,col="#4B5563"))
 
   # C: external evidence + policy + agent + experiment
   draw_database(0.755,0.735,"#D9EEF7")
@@ -128,7 +128,7 @@ draw_fig <- function() {
   grid.text("experiment establishes structure",0.345,0.455,gp=gpar(fontsize=6.8,col="#6B7280",rot=90))
   grid.text("structure constrains the next experiment",0.675,0.455,gp=gpar(fontsize=6.8,col="#6B7280",rot=90))
 
-  grid.text("Physical discovery → state calibration → evidence-constrained decision geometry → auditable experiment selection",
+  grid.text("Physical discovery > state calibration > evidence-constrained decision geometry > auditable experiment selection",
             0.5,0.035,gp=gpar(fontsize=9.2,fontface="bold",col="#0F4C5C"))
 }
 
