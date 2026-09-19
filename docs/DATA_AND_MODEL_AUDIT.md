@@ -31,16 +31,20 @@ The original all-recorded-curves analysis remains reproducible, but the chemistr
 After excluding the chemistry-flagged E1 `+P` curve, the main structural result remains strong:
 
 ```text
-formulation-only linear model:
-  R2 ~= 0.852
-  held-temperature multiplicative error ~= 1.442x
+formulation-only intercept + shared quadratic thermal shape:
+  R2 ~= 0.8553
+  held-temperature multiplicative error ~= 1.423x
 
-state-specific intercept + shared quadratic thermal shape:
+realization-specific intercept + shared quadratic thermal shape:
   R2 ~= 0.9977
   held-temperature multiplicative error ~= 1.058x
+
+linear-basis sensitivity check:
+  formulation-only R2 ~= 0.8519
+  state-conditioned R2 ~= 0.9943
 ```
 
-Thus the state-shift conclusion is not created by the phosphoric-acid-labelled curve.
+Thus the state-shift conclusion is not created by the phosphoric-acid-labelled curve or by comparing different thermal-response orders.
 
 The audited apparent temperature-sensitivity descriptor remains concentrated:
 
