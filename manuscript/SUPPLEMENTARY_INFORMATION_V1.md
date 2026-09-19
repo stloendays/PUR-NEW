@@ -1,6 +1,6 @@
 # Supplementary Information
 
-## State-Conditioned Rheology Guides Evidence-Grounded Formulation Decisions in Reactive Polyurethane Hot-Melt Adhesives
+## State-Conditioned Rheology Enables Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives
 
 ### Scope of this Supplementary Information
 
@@ -61,48 +61,43 @@ The chemistry-audited primary temperature-sweep dataset therefore contains 36 ob
 
 The analysis distinguishes nominal formulation identity from the experimentally realized rheological state.
 
-The formulation-only representation is written generically as
+Temperature is represented by the centered inverse-temperature coordinate
 
-$$
-\ln \eta = f(x_{\mathrm{chem}},T)+\varepsilon,
-$$
+$
+z(T)=10^3\left(\frac{1}{T}-\frac{1}{T_{\mathrm{ref}}}\right),
+\qquad T_{\mathrm{ref}}=393.15~\mathrm{K},
+$
 
-where nominal chemistry and temperature define the expected viscosity.
+with $T$ expressed in kelvin.
 
-The state-conditioned representation introduces a realization-specific log-viscosity scale,
+The formulation-only and state-conditioned models use the same quadratic thermal-response basis:
 
-$$
-\ln \eta_r(T)=\alpha_r+g(T)+\varepsilon,
-$$
-
-where $\alpha_r$ is a latent realization-specific offset and $g(T)$ is a shared local thermal-response function.
-
-The primary fitted representation used in the manuscript is
-
-$$
-\ln \eta
+$
+\ln \eta_{fr}(T)
 =
-\alpha_r
-+
-\beta_1\Delta(1/T)
-+
-\beta_2[\Delta(1/T)]^2
-+
-\varepsilon .
-$$
+\mu_f+\beta_1 z(T)+\beta_2 z(T)^2+\varepsilon_{frT},
+$
 
-The coordinate $\alpha_r$ is deliberately treated as latent. The present dataset does not identify one unique physical cause for this displacement, and the manuscript does not assign it to a specific molecular mechanism.
+and
+
+$
+\ln \eta_{fr}(T)
+=
+a_{fr}+\beta_1 z(T)+\beta_2 z(T)^2+\varepsilon_{frT},
+$
+
+respectively. Here $f$ denotes nominal formulation and $r$ a measured realization. The realization-specific intercept $a_{fr}$ is fitted directly and locates the realized viscosity scale. Conceptually, $a_{fr}=\mu_f+\delta_{fr}$, where $\delta_{fr}$ is the realization-specific displacement from the formulation baseline; the present regression estimates $a_{fr}$ directly rather than attempting to identify these two contributions separately.
 
 ## Supplementary Table S3 | State-model comparison
 
 | Representation | Interpretation | Variance explained / predictive summary |
 |---|---|---:|
-| formulation-only temperature model | nominal chemistry + temperature | $R^2 = 0.852$ |
-| realization-specific scale + shared thermal response | realized state + shared thermal shape | $R^2 = 0.9977$ |
-| held-temperature multiplicative error, formulation-only | held-temperature prediction | 1.442× |
-| held-temperature multiplicative error, state-conditioned | held-temperature prediction | 1.058× |
+| formulation-only, shared quadratic thermal response | nominal formulation + shared thermal shape | $R^2 = 0.8553$ |
+| realization-conditioned, shared quadratic thermal response | realized viscosity scale + shared thermal shape | $R^2 = 0.9977$ |
+| held-temperature multiplicative error, formulation-only quadratic | leave-one-temperature-out prediction | 1.423× |
+| held-temperature multiplicative error, state-conditioned quadratic | leave-one-temperature-out prediction | 1.058× |
 
-The same structural conclusion is recovered without the parametric regression model. Singular-value decomposition of the chemistry-audited log-viscosity matrix after temperature-wise centering assigns 99.63% of between-realization variance to the first singular mode. The corresponding loading vector has cosine similarity 0.9998 to a constant vector.
+The same-order comparison isolates the effect of replacing formulation-level intercepts with realization-specific intercepts rather than changing the thermal basis at the same time. As an additional sensitivity check, restricting both models to a linear thermal response increases $R^2$ from 0.8519 for the formulation-only model to 0.9943 for the state-conditioned model. The same structural conclusion is also recovered without the parametric regression model. Singular-value decomposition of the chemistry-audited log-viscosity matrix after temperature-wise centering assigns 99.63% of between-realization variance to the first singular mode. The corresponding loading vector has cosine similarity 0.9998 to a constant vector.
 
 Thus, within the present local chemistry family, the dominant realization effect is almost indistinguishable from a uniform vertical displacement in log-viscosity space.
 
@@ -119,10 +114,10 @@ To test whether the shared thermal-response shape transfers beyond the formulati
 For each held realization, one measured viscosity value at anchor temperature $T_0$ was used to estimate
 
 $
-\alpha_r=\ln \eta_r(T_0)-g(T_0),
+\hat a_{fr}=\ln \eta_{fr}(T_0)-\hat g(T_0),
 $
 
-after which all remaining temperatures were reconstructed from $\alpha_r+g(T)$.
+after which all remaining temperatures were reconstructed from $\widehat{\ln\eta}_{fr}(T)=\hat a_{fr}+\hat g(T)$.
 
 ## Supplementary Table S4 | Pooled leave-one-formulation transfer by anchor temperature
 
@@ -200,7 +195,7 @@ The supported claim is therefore limited to **10–20 °C short-range extrapolat
 
 # Supplementary Note 5 | Apparent local temperature-response descriptor
 
-For each chemistry-audited complete realization, $\ln\eta$ was regressed against $1/T$. The fitted slope was converted to an apparent $E_\eta$ using the gas constant.
+For each chemistry-audited complete realization, $\ln\eta$ was regressed against $1/T$ with $T$ in kelvin. The descriptor was calculated as $E_\eta=R\,\mathrm{d}\ln\eta/\mathrm{d}(1/T)$ using $R=8.314462618~\mathrm{J\,mol^{-1}\,K^{-1}}$.
 
 This descriptor is used only to summarize the local temperature dependence of viscosity and is not interpreted as a reaction activation energy.
 
