@@ -30,7 +30,7 @@ d$ln_eta <- log(d$viscosity_reported)
 primary <- subset(d, realization_id != "E1__+P__day1_0")
 
 state_model <- lm(ln_eta ~ factor(realization_id) + dx + I(dx^2), data = primary)
-form_model <- lm(ln_eta ~ factor(formulation_id) + dx, data = primary)
+form_model <- lm(ln_eta ~ factor(formulation_id) + dx + I(dx^2), data = primary)
 
 shape_term <- coef(state_model)[["dx"]] * primary$dx +
   coef(state_model)[["I(dx^2)"]] * primary$dx^2
@@ -53,7 +53,7 @@ cv_factor <- function(formula, df) {
   }
   exp(sqrt(mean((obs - pred)^2)))
 }
-err_form <- cv_factor(ln_eta ~ factor(formulation_id) + dx, primary)
+err_form <- cv_factor(ln_eta ~ factor(formulation_id) + dx + I(dx^2), primary)
 err_state <- cv_factor(ln_eta ~ factor(realization_id) + dx + I(dx^2), primary)
 
 # Model-free state geometry.
@@ -139,7 +139,7 @@ pB <- ggplot(e2_adj, aes(x = temperature_c, y = eta_state_adjusted, colour = ser
   scale_x_continuous(breaks = temps) +
   labs(
     title = "B  State-offset correction collapses the curves",
-    subtitle = expression("Realization-specific " * alpha[r] * " removed; shared thermal response retained"),
+    subtitle = expression("Realization-specific " * a[fr] * " removed; shared thermal response retained"),
     x = "Temperature (°C)",
     y = "State-adjusted viscosity"
   ) +
@@ -194,7 +194,7 @@ pD <- ggplot(model_df, aes(y = model, x = held_error)) +
   scale_x_continuous(limits = c(1.0, 1.58), breaks = c(1.0, 1.2, 1.4, 1.6)) +
   labs(
     title = "D  State conditioning restores predictive closure",
-    subtitle = "Leave-one-temperature-out multiplicative error; fitted R² shown at right",
+    subtitle = "Same quadratic thermal basis; leave-one-temperature-out error and fitted R²",
     x = "Held-temperature multiplicative error",
     y = NULL
   ) +
