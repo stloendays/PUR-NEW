@@ -1,0 +1,69 @@
+name: render-main-figures-1-3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/render-main-figures-1-3.yml"
+      - "scripts/figure1_workflow.R"
+      - "scripts/figure3_local_transfer.R"
+      - "analysis/results/local_leave_one_formulation_pooled.csv"
+      - "analysis/results/local_leave_one_formulation_one_point.csv"
+      - "analysis/results/local_joint_formulation_temperature_extrapolation.csv"
+      - "analysis/results/local_joint_formulation_temperature_extrapolation_summary.csv"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::ggplot2
+            any::patchwork
+            any::scales
+            any::svglite
+          cache-version: 1
+
+      - name: Render Figure 1 and Figure 3
+        run: |
+          Rscript scripts/figure1_workflow.R
+          Rscript scripts/figure3_local_transfer.R
+
+      - name: Verify outputs
+        run: |
+          test -s analysis/figures/Figure1_workflow.png
+          test -s analysis/figures/Figure1_workflow.pdf
+          test -s analysis/figures/Figure1_workflow.svg
+          test -s analysis/figures/Figure3_local_transfer.png
+          test -s analysis/figures/Figure3_local_transfer.pdf
+          test -s analysis/figures/Figure3_local_transfer.svg
+
+      - name: Commit rendered figures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add analysis/figures/Figure1_workflow.png \
+                  analysis/figures/Figure1_workflow.pdf \
+                  analysis/figures/Figure1_workflow.svg \
+                  analysis/figures/Figure3_local_transfer.png \
+                  analysis/figures/Figure3_local_transfer.pdf \
+                  analysis/figures/Figure3_local_transfer.svg
+          if git diff --cached --quiet; then
+            echo "No rendered-figure changes to commit."
+          else
+            git commit -m "figures: render main Figures 1 and 3"
+            git push
+          fi
