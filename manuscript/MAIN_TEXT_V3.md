@@ -51,15 +51,15 @@ The persistence of this separation across temperature is inconsistent with an is
 
 We next tested whether the realization dependence reflected arbitrary curve changes or a lower-dimensional displacement. To compare formulation-only and state-conditioned descriptions on the same thermal basis, temperature was represented by the centered inverse-temperature coordinate
 
-$
+$$
 z(T)=10^3\left(\frac{1}{T}-\frac{1}{T_{\mathrm{ref}}}\right),
 \qquad
 T_{\mathrm{ref}}=393.15~\mathrm{K},
-$
+$$
 
 with $T$ expressed in kelvin. The formulation-only model used a formulation-specific intercept and a shared quadratic thermal response,
 
-$
+$$
 \ln \eta_{fr}(T)
 =
 \mu_f
@@ -69,11 +69,11 @@ $
 \beta_2 z(T)^2
 +
 \varepsilon_{frT},
-$
+$$
 
 whereas the state-conditioned model replaced the formulation intercept with a realization-specific viscosity-scale intercept,
 
-$
+$$
 \ln \eta_{fr}(T)
 =
 a_{fr}
@@ -83,7 +83,7 @@ a_{fr}
 \beta_2 z(T)^2
 +
 \varepsilon_{frT}.
-$
+$$
 
 Here $f$ denotes nominal formulation and $r$ a measured realization within that formulation. The fitted $a_{fr}$ locates the realized viscosity level directly; conceptually it contains both the formulation baseline and the realization-specific displacement, $a_{fr}=\mu_f+\delta_{fr}$.
 
@@ -104,11 +104,11 @@ Together, the regression and decomposition results establish a simple local repr
 
 A useful state coordinate should reduce characterization burden. We therefore asked whether a shared thermal-response shape learned from other nominal formulations could be transferred to an unseen formulation using only one viscosity measurement.
 
-In leave-one-formulation-out analysis, all realizations of one formulation were removed before fitting the shared response $g(T)$. For each held realization, a single viscosity value at anchor temperature $T_0$ was then used to estimate
+In leave-one-formulation-out analysis, all realizations of one formulation were removed before fitting the shared response $g(T)=\beta_1z(T)+\beta_2z(T)^2$. For each held realization, a single viscosity value at anchor temperature $T_0$ was then used to estimate
 
-$
+$$
 \hat a_{fr}=\ln \eta_{fr}(T_0)-\hat g(T_0),
-$
+$$
 
 after which the remaining temperatures were reconstructed from $\widehat{\ln\eta}_{fr}(T)=\hat a_{fr}+\hat g(T)$.
 
@@ -223,17 +223,17 @@ One E1 temperature curve was labelled with phosphoric-acid context. Because the 
 
 Viscosity was log-transformed before model fitting. Temperature was encoded as
 
-$
+$$
 z(T)=10^3\left(\frac{1}{T}-\frac{1}{T_{\mathrm{ref}}}\right),
 \qquad
 T_{\mathrm{ref}}=393.15~\mathrm{K},
-$
+$$
 
 where $T$ is absolute temperature. The factor $10^3$ is a numerical scaling convention and does not change the fitted thermal shape.
 
 For the primary same-order comparison, the formulation-only model was
 
-$
+$$
 \ln \eta_{fr}(T)
 =
 \mu_f
@@ -243,11 +243,11 @@ $
 \beta_2 z(T)^2
 +
 \varepsilon_{frT},
-$
+$$
 
 and the state-conditioned model was
 
-$
+$$
 \ln \eta_{fr}(T)
 =
 a_{fr}
@@ -257,13 +257,13 @@ a_{fr}
 \beta_2 z(T)^2
 +
 \varepsilon_{frT}.
-$
+$$
 
 The state-conditioned model estimates one intercept $a_{fr}$ for each measured realization. This intercept is the directly fitted realized viscosity-scale coordinate; conceptually, $a_{fr}=\mu_f+\delta_{fr}$ separates the nominal formulation baseline $\mu_f$ from a realization-specific displacement $\delta_{fr}$ without requiring the two contributions to be estimated separately.
 
 Prediction error was evaluated in log-viscosity space,
 
-$
+$$
 \mathrm{RMSE}_{\log}
 =
 \sqrt{
@@ -271,15 +271,15 @@ $
 \sum_{i=1}^{N}
 \left(\ln\hat\eta_i-\ln\eta_i\right)^2
 },
-$
+$$
 
 and reported as a multiplicative error factor,
 
-$
+$$
 \mathrm{RMSE}_{\times}
 =
 \exp\left(\mathrm{RMSE}_{\log}\right).
-$
+$$
 
 Held-temperature validation removed all observations at one temperature, fitted the model on the remaining temperatures and predicted the held temperature. The headline formulation-only and state-conditioned comparison used the same quadratic thermal-response basis in both models.
 
@@ -293,13 +293,13 @@ The fraction of between-realization variance explained by the first singular mod
 
 Transfer across nominal formulations was evaluated by leave-one-formulation-out analysis. For each fold, all realizations of one formulation were excluded from fitting the shared thermal shape. The remaining formulations were used to estimate $g(T)$. One viscosity value from each held realization at anchor temperature $T_0$ was then used to estimate
 
-$
+$$
 \hat a_{fr}=\ln \eta_{fr}(T_0)-\hat g(T_0).
-$
+$$
 
 For the quadratic shared response used here,
 
-$
+$$
 \widehat{\ln\eta}_{fr}(T)
 =
 \ln\eta_{fr}(T_0)
@@ -307,7 +307,7 @@ $
 \hat\beta_1\left[z(T)-z(T_0)\right]
 +
 \hat\beta_2\left[z(T)^2-z(T_0)^2\right].
-$
+$$
 
 The remaining temperatures were reconstructed from this calibrated response and performance was summarized in multiplicative-error space.
 
@@ -337,11 +337,11 @@ This value is an operational rheological descriptor and is not interpreted as a 
 
 For each chemistry-audited complete realization, $\ln \eta$ was regressed against $1/T$ with $T$ in kelvin. The apparent temperature-response descriptor was calculated as
 
-$
+$$
 E_\eta
 =
 R\frac{\mathrm{d}\ln\eta}{\mathrm{d}(1/T)},
-$
+$$
 
 using $R=8.314462618~\mathrm{J\,mol^{-1}\,K^{-1}}$. $E_\eta$ is reported only as a descriptor of the local temperature-viscosity response and is not interpreted as a chemical reaction activation energy.
 
