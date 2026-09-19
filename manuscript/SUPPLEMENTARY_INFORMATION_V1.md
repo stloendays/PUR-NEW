@@ -260,7 +260,25 @@ The two F1 repeats give:
 
 Relative to E1, the best original local reference over the same 15–60 min interval, the F1 mean absolute drift is reduced by approximately 83%.
 
-The validation therefore supports a low-drift rheological region. It does not by itself identify the molecular origin of the stabilization.
+A proportional-dilution null was evaluated from the source-reported formulation parts. The reactive-core fraction in F1 is
+
+$
+rac{39.60+39.60+20.19}{39.60+39.60+20.19+17.00+5.00}
+=
+rac{99.39}{121.39}
+=
+0.8189.
+$
+
+If the E1 15–60 min drift of 9.51% scaled linearly with this fraction, the dilution-only expectation would be
+
+$
+9.51%	imes0.8189=7.79%.
+$
+
+The measured F1 mean absolute drift is 1.60%. Thus the observed reduction from E1 is 7.91 percentage points, whereas proportional dilution predicts a reduction of only 1.72 percentage points. The measured suppression is approximately 4.6-fold larger than the dilution-only reduction.
+
+The validation therefore supports a low-drift rheological region and shows that the stabilization exceeds simple proportional dilution of the original reactive core.
 
 ### Supplementary Figure S4 | Replicate-level thermal-hold validation
 
@@ -379,6 +397,30 @@ At the run level, the confirmatory Agent recovered the near region in 8 of 10 at
 
 The benchmark should not be interpreted as evidence that the language model independently discovered the formulation. The deterministic scientific policy defines most of the useful geometry of the decision space.
 
+## Supplementary Table S10 | Strategy-ladder comparison
+
+| Strategy | Attempted runs | Named decisions | Abstentions | Dual-axis recovery | Near-region recovery | Mean modifier-plane $L_1$ (pp) |
+|---|---:|---:|---:|---:|---:|---:|
+| initial proximity-reward strategy | 5 | 5 | 0 | 0/5 | 0/5 | 12.115 |
+| minimum-intervention diagnostic | 3 | 1 | 1 | 0/1 | 0/1 | 15.623 |
+| + intervention-coverage gate | 5 | 3 | 2 | 3/3 | 3/3 | 1.877 |
+| + deterministic ordering withheld | 5 | 4 | 1 | 4/4 | 4/4 | 2.061 |
+| confirmatory series | 10 | 8 | 2 | 8/8 | 8/8 | 2.281 |
+
+For named decisions, the 95% Wilson interval for dual-axis/near-region recovery changed from [0.00, 0.43] in the initial 0/5 series to [0.68, 1.00] in the final 8/8 series. These intervals do not overlap. The minimum-intervention series is retained as a diagnostic because its small number of named outputs does not support the headline rate comparison.
+
+The naive single-pass baseline produced 7 named decisions from 10 attempts, with 0/7 near-region and 0/7 dual-axis recovery. All seven named outputs selected the same reactive-core-only candidate. Its mean modifier-plane $L_1$ distance was 18.123 percentage points, compared with 12.074 percentage points under uniform random selection on the frozen lattice. Thus both the observed near-region rate (0/7 versus a 24.66% random-lattice expectation) and mean distance were worse than the corresponding uniform-random baselines.
+
+## Supplementary Table S11 | Cross-model transfer under the same blinded evidence contract
+
+| Model configuration | Attempted runs | Named decisions | Abstentions | Dual-axis recovery | Near-region recovery | Mean modifier-plane $L_1$ (pp) | Named selections |
+|---|---:|---:|---:|---:|---:|---:|---|
+| GPT-5.6-luna | 10 | 8 | 2 | 8/8 | 8/8 | 2.281 | S1C41 ×6, S1C46 ×1, S1C40 ×1 |
+| GPT-5.5 | 5 | 4 | 0 | 4/4 | 4/4 | 1.877 | S1C41 ×4 |
+| GPT-5.6-sol | 5 | 2 | 3 | 1/2 | 1/2 | 10.000 | S1C41 ×1, S1C02 ×1 |
+
+Across the three model configurations, 13 of 14 named decisions retained both supported modifier axes and 13 of 14 entered the near region; S1C41 accounted for 11 of 14 named decisions. The intervention region therefore transferred across model configurations, while commitment reliability remained model dependent.
+
 ---
 
 # Supplementary Note 10 | Attribution of decision improvement
@@ -450,6 +492,9 @@ The principal manuscript quantities can be regenerated from the following versio
 | candidate lattice | `derived/stage1_blind_candidate_space_v1.json` |
 | frozen confirmatory decisions | `results/stage1_blind_replay_v3h/arm_b_blind/frozen_recommendations.csv` |
 | post-closure adjudication summary | `results/stage1_blind_replay_v3h/arm_b_blind/adjudication_summary.json` |
+| strategy-ladder benchmark | `results/STAGE1_AI4SCI_REPORT.md` |
+| GPT-5.5 transfer runs | `results/multimodel/gpt-5_5/arm_b_blind/` |
+| GPT-5.6-sol transfer runs | `results/multimodel/gpt-5_6-sol/arm_b_blind/` |
 
 The main-text Figures 3–5 are rendered in R from versioned analysis outputs. Supplementary figures should use the same palette, typography and panel conventions as the main figures.
 
