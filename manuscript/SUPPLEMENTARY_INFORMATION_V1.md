@@ -63,28 +63,28 @@ The analysis distinguishes nominal formulation identity from the experimentally 
 
 Temperature is represented by the centered inverse-temperature coordinate
 
-$
+$$
 z(T)=10^3\left(\frac{1}{T}-\frac{1}{T_{\mathrm{ref}}}\right),
 \qquad T_{\mathrm{ref}}=393.15~\mathrm{K},
-$
+$$
 
 with $T$ expressed in kelvin.
 
 The formulation-only and state-conditioned models use the same quadratic thermal-response basis:
 
-$
+$$
 \ln \eta_{fr}(T)
 =
 \mu_f+\beta_1 z(T)+\beta_2 z(T)^2+\varepsilon_{frT},
-$
+$$
 
 and
 
-$
+$$
 \ln \eta_{fr}(T)
 =
 a_{fr}+\beta_1 z(T)+\beta_2 z(T)^2+\varepsilon_{frT},
-$
+$$
 
 respectively. Here $f$ denotes nominal formulation and $r$ a measured realization. The realization-specific intercept $a_{fr}$ is fitted directly and locates the realized viscosity scale. Conceptually, $a_{fr}=\mu_f+\delta_{fr}$, where $\delta_{fr}$ is the realization-specific displacement from the formulation baseline; the present regression estimates $a_{fr}$ directly rather than attempting to identify these two contributions separately.
 
@@ -109,13 +109,13 @@ Thus, within the present local chemistry family, the dominant realization effect
 
 # Supplementary Note 3 | Leave-one-formulation one-point calibration
 
-To test whether the shared thermal-response shape transfers beyond the formulation used to fit it, all realizations of one nominal formulation were excluded from fitting in each fold.
+To test whether the shared thermal-response shape transfers beyond the formulation used to fit it, all realizations of one nominal formulation were excluded from fitting in each fold. The shared response was $g(T)=\beta_1z(T)+\beta_2z(T)^2$.
 
 For each held realization, one measured viscosity value at anchor temperature $T_0$ was used to estimate
 
-$
+$$
 \hat a_{fr}=\ln \eta_{fr}(T_0)-\hat g(T_0),
-$
+$$
 
 after which all remaining temperatures were reconstructed from $\widehat{\ln\eta}_{fr}(T)=\hat a_{fr}+\hat g(T)$.
 
@@ -245,9 +245,9 @@ $$
 
 The E5/E1 ratio of fitted descriptive log-viscosity slopes is
 
-$
+$$
 0.537/0.125 \approx 4.29.
-$
+$$
 
 For F1, the matched-window physical validation is more informative than fitting a kinetic coefficient because the observed 15–60 min profiles are nearly flat.
 
@@ -283,9 +283,9 @@ Reanalysis of these external curves shows that $\ln\eta$ versus $1/T$ is general
 
 However, the apparent temperature-response descriptor spans approximately
 
-$
+$$
 34.7\text{--}94.2~\mathrm{kJ\,mol^{-1}},
-$
+$$
 
 which is much broader than the local E1–E3 range.
 
@@ -319,10 +319,10 @@ The true F1 validation formulation is deliberately not one of the 73 nodes.
 
 After unblinding, the normalized modifier coordinates of F1 are:
 
-$
+$$
 \mathrm{AC1920}=14.004\%,\qquad
 \mathrm{TK100}=4.119\%.
-$
+$$
 
 The predeclared near region is defined by an $L_1$ modifier-plane distance threshold of 7.5 percentage points.
 
@@ -371,9 +371,9 @@ The naive single-pass LLM baseline and uniform-random lattice baseline are retai
 
 For a single uniform-random draw from the same candidate lattice, the exact near-region probability is
 
-$
+$$
 18/73 = 24.66\%.
-$
+$$
 
 At the run level, the confirmatory Agent recovered the near region in 8 of 10 attempted runs (80%); the remaining two runs abstained. Conditional on commitment, all 8 of 8 selected candidates were inside the near region.
 
