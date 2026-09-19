@@ -48,6 +48,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc
           python -m pip install python-docx
+          mkdir -p build
+          curl -L --fail --retry 3 \
+            https://raw.githubusercontent.com/citation-style-language/styles/master/royal-society-of-chemistry.csl \
+            -o build/royal-society-of-chemistry.csl
 
       - name: Build Word reference style
         run: |
@@ -73,6 +77,11 @@ jobs:
               st.font.color.rgb = RGBColor(0, 0, 0)
               if bold is not None:
                   st.font.bold = bold
+              ppr = st._element.pPr
+              if ppr is not None:
+                  for child in list(ppr):
+                      if child.tag == qn("w:pBdr"):
+                          ppr.remove(child)
 
           set_font("Normal", 11)
           set_font("Title", 16, True)
@@ -99,7 +108,8 @@ jobs:
           if not lines or not lines[0].startswith("# "):
               raise SystemExit("Expected H1 manuscript title")
           title = lines[0][2:].strip().replace('"', '\\"')
-          body = "\n".join(lines[1:]).lstrip()
+          body_lines = [line for line in lines[1:] if line.strip() != "---"]
+          body = "\n".join(body_lines).lstrip()
           prepared = f'---\ntitle: "{title}"\n---\n\n{body}\n'
           Path("build/MAIN_TEXT_V3_FOR_WORD.md").write_text(prepared, encoding="utf-8")
           PY
@@ -112,6 +122,7 @@ jobs:
             --to=docx \
             --citeproc \
             --bibliography=references.bib \
+            --csl=../build/royal-society-of-chemistry.csl \
             --reference-doc=../build/reference.docx \
             --resource-path=.:..:../analysis/figures \
             -o ../build/PUR_MAIN_TEXT_V3_DIRECT_FROM_GITHUB.docx
