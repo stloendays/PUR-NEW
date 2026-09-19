@@ -81,6 +81,9 @@ def local_model_comparison(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame
         "M0_formulation_only": smf.ols(
             "ln_eta ~ C(formulation_id) + dx", data=df
         ).fit(),
+        "M0q_formulation_shared_quadratic": smf.ols(
+            "ln_eta ~ C(formulation_id) + dx + I(dx**2)", data=df
+        ).fit(),
         "M0b_formulation_specific_slope": smf.ols(
             "ln_eta ~ C(formulation_id) * dx", data=df
         ).fit(),
@@ -164,6 +167,7 @@ def local_model_comparison(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame
 def leave_one_temperature_out(df: pd.DataFrame) -> pd.DataFrame:
     formulas = {
         "M0_formulation_only": "ln_eta ~ C(formulation_id) + dx",
+        "M0q_formulation_shared_quadratic": "ln_eta ~ C(formulation_id) + dx + I(dx**2)",
         "M2_state_intercept_linear": "ln_eta ~ C(realization_id) + dx",
         "M2q_state_intercept_shared_quadratic": "ln_eta ~ C(realization_id) + dx + I(dx**2)",
     }
