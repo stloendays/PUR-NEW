@@ -391,6 +391,10 @@ Not claimed:
 
 ---
 
+### Independent Agent V4 development line
+
+The current manuscript is frozen around the audited outcome-blind candidate-selection evidence described above. A separate Agent V4 development line is upgrading the decision task from **candidate formulation selection** to **value-of-information (VOI)-guided experiment selection**: the Agent should decide which experiment would most reduce decision-relevant uncertainty before choosing a formulation. Until that V4 workflow has its own frozen protocol and results, do not mix V4 outputs, terminology, or performance claims into the canonical V3 manuscript.
+
 ## 11. Manuscript non-negotiables
 
 These are author-level constraints for future manuscript revisions and should not be relaxed by automated rewriting:
