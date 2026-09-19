@@ -42,8 +42,10 @@ draw_curve <- function(x0, y0, w, h, cols=c("#159E9C","#E57C2C","#4C78A8")) {
 
 draw_database <- function(x, y, fill="#D9EEF7") {
   grid.rect(x, y, width=0.055, height=0.09, gp=gpar(fill=fill, col="#374151", lwd=0.8))
-  grid.ellipse(x, y+0.045, width=0.055, height=0.025, gp=gpar(fill=fill, col="#374151", lwd=0.8))
-  grid.ellipse(x, y-0.045, width=0.055, height=0.025, gp=gpar(fill=fill, col="#374151", lwd=0.8))
+  grid.roundrect(x, y+0.045, width=0.055, height=0.025, r=unit(0.5,"snpc"),
+                 gp=gpar(fill=fill, col="#374151", lwd=0.8))
+  grid.roundrect(x, y-0.045, width=0.055, height=0.025, r=unit(0.5,"snpc"),
+                 gp=gpar(fill=fill, col="#374151", lwd=0.8))
 }
 
 draw_agent <- function(x, y) {
