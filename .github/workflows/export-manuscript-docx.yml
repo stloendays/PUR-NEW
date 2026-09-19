@@ -1,0 +1,140 @@
+name: export-manuscript-docx
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/export-manuscript-docx.yml"
+      - "manuscript/MAIN_TEXT_V3.md"
+      - "manuscript/references.bib"
+      - "scripts/figure2_state_conditioned_rheology.R"
+      - "scripts/figure4_rheological_coordinates.R"
+      - "scripts/figure5_outcome_blind_agent.R"
+      - "data/temperature_sweeps.csv"
+      - "data/thermal_hold.csv"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "release"
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::ggplot2
+            any::patchwork
+            any::scales
+            any::jsonlite
+            any::svglite
+          cache-version: 1
+
+      - name: Render current manuscript figures
+        run: |
+          Rscript scripts/figure2_state_conditioned_rheology.R
+          Rscript scripts/figure4_rheological_coordinates.R
+          Rscript scripts/figure5_outcome_blind_agent.R
+
+      - name: Install document dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+          python -m pip install python-docx
+
+      - name: Build Word reference style
+        run: |
+          mkdir -p build
+          python - <<'PY'
+          from docx import Document
+          from docx.shared import Pt, Inches, RGBColor
+          from docx.oxml.ns import qn
+
+          out = "build/reference.docx"
+          doc = Document()
+          sec = doc.sections[0]
+          sec.top_margin = Inches(0.8)
+          sec.bottom_margin = Inches(0.8)
+          sec.left_margin = Inches(0.85)
+          sec.right_margin = Inches(0.85)
+
+          def set_font(style_name, size, bold=None):
+              st = doc.styles[style_name]
+              st.font.name = "Times New Roman"
+              st._element.rPr.rFonts.set(qn("w:eastAsia"), "Times New Roman")
+              st.font.size = Pt(size)
+              st.font.color.rgb = RGBColor(0, 0, 0)
+              if bold is not None:
+                  st.font.bold = bold
+
+          set_font("Normal", 11)
+          set_font("Title", 16, True)
+          set_font("Heading 1", 13, True)
+          set_font("Heading 2", 11.5, True)
+          set_font("Heading 3", 11, True)
+          set_font("Caption", 10)
+
+          p = doc.add_paragraph("Reference")
+          doc.save(out)
+          PY
+
+      - name: Prepare canonical manuscript source
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          src = Path("manuscript/MAIN_TEXT_V3.md").read_text(encoding="utf-8")
+          marker = "\n## Author notes for the next revision"
+          if marker in src:
+              src = src.split(marker, 1)[0].rstrip() + "\n"
+
+          lines = src.splitlines()
+          if not lines or not lines[0].startswith("# "):
+              raise SystemExit("Expected H1 manuscript title")
+          title = lines[0][2:].strip().replace('"', '\\"')
+          body = "\n".join(lines[1:]).lstrip()
+          prepared = f'---\ntitle: "{title}"\n---\n\n{body}\n'
+          Path("build/MAIN_TEXT_V3_FOR_WORD.md").write_text(prepared, encoding="utf-8")
+          PY
+
+      - name: Convert GitHub manuscript directly to DOCX
+        working-directory: manuscript
+        run: |
+          pandoc ../build/MAIN_TEXT_V3_FOR_WORD.md \
+            --from=markdown+tex_math_dollars \
+            --to=docx \
+            --citeproc \
+            --bibliography=references.bib \
+            --reference-doc=../build/reference.docx \
+            --resource-path=.:..:../analysis/figures \
+            -o ../build/PUR_MAIN_TEXT_V3_DIRECT_FROM_GITHUB.docx
+
+      - name: Verify native Word equations
+        run: |
+          python - <<'PY'
+          import re, zipfile
+          p = "build/PUR_MAIN_TEXT_V3_DIRECT_FROM_GITHUB.docx"
+          with zipfile.ZipFile(p) as z:
+              xml = z.read("word/document.xml").decode("utf-8")
+          n_math = xml.count("<m:oMath")
+          leftovers = re.findall(r"\\\\(?:eta|ln|frac|mathbf|mathrm|approx|beta|mu|delta)", xml)
+          print("OMML equation elements:", n_math)
+          print("Literal LaTeX commands remaining:", len(leftovers))
+          if n_math < 10:
+              raise SystemExit("Expected native Word equations were not generated")
+          if leftovers:
+              raise SystemExit("Literal LaTeX commands remain in document XML")
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PUR-main-manuscript-direct-docx
+          path: build/PUR_MAIN_TEXT_V3_DIRECT_FROM_GITHUB.docx
+          if-no-files-found: error
