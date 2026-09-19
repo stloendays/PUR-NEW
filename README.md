@@ -1,6 +1,6 @@
 # PUR-NEW
 
-## State-conditioned rheological design and evidence-grounded Agent guidance for reactive polyurethane hot-melt adhesives
+## State-Conditioned Rheology Enables Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives
 
 PUR-NEW studies a practical formulation problem:
 
@@ -68,22 +68,25 @@ The audited local temperature dataset contains:
 A formulation-only model and a state-aware model are compared using log viscosity.
 
 ```text
-formulation-only:
-ln eta = formulation + g(T)
+temperature coordinate:
+z(T) = 1000 * (1/T - 1/T_ref), T_ref = 393.15 K
 
-state-aware:
-ln eta_r(T) = alpha_r + g(T) + epsilon
+formulation-only:
+ln eta_fr(T) = mu_f + beta1*z + beta2*z^2 + epsilon
+
+state-conditioned:
+ln eta_fr(T) = a_fr + beta1*z + beta2*z^2 + epsilon
 ```
 
-where `alpha_r` is a realization-specific viscosity-scale coordinate.
+where `a_fr` is the directly fitted realization-specific viscosity-scale intercept. Conceptually, `a_fr = mu_f + delta_fr`, separating nominal formulation baseline from realization displacement without estimating those two components separately.
 
-Chemistry-audited results:
+Chemistry-audited same-order results:
 
 ```text
-formulation-only R2                          ~= 0.852
-state-aware shared-shape R2                  ~= 0.9977
-held-temperature formulation-only error      ~= 1.442x
-held-temperature state-aware error           ~= 1.058x
+formulation-only quadratic R2                ~= 0.8553
+state-conditioned quadratic R2               ~= 0.9977
+held-temperature formulation-only error      ~= 1.423x
+held-temperature state-conditioned error     ~= 1.058x
 ```
 
 A model-free singular-value decomposition independently supports the same interpretation:
