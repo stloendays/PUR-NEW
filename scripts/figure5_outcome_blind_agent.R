@@ -43,7 +43,8 @@ frozen <- read.csv(
   check.names = FALSE,
   stringsAsFactors = FALSE
 )
-committed <- subset(frozen, !abstain & nzchar(selected_candidate_id))
+abstain_flag <- tolower(trimws(as.character(frozen$abstain))) %in% c("true", "1", "t", "yes")
+committed <- frozen[!abstain_flag & nzchar(frozen$selected_candidate_id), , drop = FALSE]
 freq <- as.data.frame(table(committed$selected_candidate_id), stringsAsFactors = FALSE)
 colnames(freq) <- c("candidate_id", "agent_n")
 freq$agent_n <- as.numeric(freq$agent_n)
