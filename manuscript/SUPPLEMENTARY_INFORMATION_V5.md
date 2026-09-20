@@ -300,19 +300,19 @@ External formulation records containing acrylic-like and tackifier-like modifier
 
 # Supplementary Note 8 | V3 predecessor benchmark and candidate-space inheritance
 
-V4 inherits the 73-node formulation lattice and the outcome-blind evidence firewall established in V3. The held-out validation formulation is not itself a lattice node. This predecessor benchmark remains useful for provenance because it established that the later validated region could be recovered without exposing the validation formulation or its outcome to the runtime.
+The active experiment-selection analysis inherits the 73-node formulation lattice and the outcome-blind evidence firewall established in the predecessor benchmark. The held-out validation formulation is not itself a lattice node. This predecessor benchmark remains useful for provenance because it established that the later validated region could be recovered without exposing the validation formulation or its outcome to the runtime.
 
 The V3 confirmatory series contained 10 attempts, 8 committed decisions and 2 abstentions. All 8 committed decisions entered the predeclared near region. The strategy-ladder analysis further showed that most of the numerical distance improvement came from explicit deterministic scientific policy rather than unconstrained language-model generation.
 
-These V3 results are not pooled with V4. Their role in the V4 manuscript is architectural: they justify retaining the same blinded evidence boundary and formulation lattice while changing the decision object from a formulation candidate to an experiment card.
+These predecessor results are not pooled with the active experiment-selection analysis. Their role is architectural: they justify retaining the same blinded evidence boundary and formulation lattice while changing the decision object from a formulation candidate to an experiment card.
 
 The full V3 strategy ladder, random-lattice comparison, cross-model transfer and approximately 94.4% distance decomposition remain preserved in `manuscript/SUPPLEMENTARY_INFORMATION_V1.md`, `results/STAGE1_AI4SCI_REPORT.md` and the frozen V3 result directories.
 
 ---
 
-# Supplementary Note 9 | V4 decision object: 292 experiment cards
+# Supplementary Note 9 | Experiment-card decision object: 292 formulation-measurement pairs
 
-V4 crosses the frozen 73-node formulation lattice with four measurement plans:
+The active decision analysis crosses the frozen 73-node formulation lattice with four measurement plans:
 
 1. `M-HOLD-120`: matched-window 120 °C thermal hold;
 2. `M-REPEAT`: repeatability/state-control measurement;
@@ -333,7 +333,7 @@ The change is scientifically important because formulation choice and measuremen
 
 # Supplementary Note 10 | Frozen formulation-level hypothesis registry
 
-Three formulation-level hypotheses were registered before V4 model runs and before post-freeze adjudication loaded the held-out wet-lab outcome.
+Three formulation-level hypotheses were registered before model-mediated experiment-selection runs and before post-freeze adjudication loaded the held-out wet-lab outcome.
 
 ## Supplementary Table S9 | Registered hypotheses
 
@@ -363,7 +363,7 @@ The measured mean absolute matched-window drift is 1.60%, which is used only in 
 
 # Supplementary Note 11 | Deterministic VOI and decision stability
 
-Each V4 experiment card receives a deterministic score
+Each experiment card receives a deterministic score
 
 $$
 \mathrm{VOI}
@@ -386,7 +386,7 @@ Independent perturbation of each VOI weight from 0.5× to 1.5× preserves the sa
 
 ---
 
-# Supplementary Note 12 | Confirmatory V4 series
+# Supplementary Note 12 | Confirmatory experiment-selection series
 
 The the full rule-grounded architecture confirmatory series was declared at $N=10$ before its first run. Model endpoint, prompts, evidence profile, candidate lattice, experiment-card inventory, hypothesis registry, measurement catalog and deterministic VOI implementation were held fixed.
 
@@ -415,7 +415,7 @@ The result should not be interpreted as ten independent discoveries of a formula
 
 The deterministic VOI layer is indifferent among five top-scoring dual-axis cards. A coded baseline then applies the supplied minimum-sufficient-intervention policy: maximize VOI, minimize total modifier burden, and finally break any remaining tie by identifier.
 
-That deterministic baseline selects `S1C41::M-HOLD-120` in 10/10 cases. The frozen V4 series agrees in 9/10 runs and departs once.
+That deterministic baseline selects `S1C41::M-HOLD-120` in 10/10 cases. The frozen confirmatory series agrees in 9/10 runs and departs once.
 
 The single departure, `S1C39::M-HOLD-120`, gives up 0.075 VOI relative to the tied maximum and selects an acrylic-only probe because it separates H-RESIN from H-DUAL, the pair left entangled by the dual-axis experiment.
 
@@ -484,11 +484,11 @@ The important result is therefore structural rather than rhetorical. A critique 
 
 # Supplementary Note 17 | Freeze and post-freeze adjudication
 
-V4 preserves a strict order: pre-result evidence → experiment generation → deterministic VOI and stability diagnostics → Planner/Proposer/Skeptic/Robustness/Judge → Freeze → blind-phase closure → held-out wet-lab adjudication.
+The decision architecture preserves a strict order: pre-result evidence → experiment generation → deterministic VOI and stability diagnostics → Planner/Proposer/Skeptic/Robustness/Judge → Freeze → blind-phase closure → held-out wet-lab adjudication.
 
 The adjudicator verifies the frozen recommendation hash before scoring.
 
-Nine confirmatory V4 runs selected the dual-axis experiment family represented by the completed wet-lab validation. The remaining selection corresponds to a different formulation contrast and is therefore outside the available physical adjudication set.
+Nine confirmatory runs selected the dual-axis experiment family represented by the completed wet-lab validation. The remaining selection corresponds to a different formulation contrast and is therefore outside the available physical adjudication set.
 
 For the dual-axis validation result:
 
@@ -516,14 +516,14 @@ Because the wet-lab result existed before the V4 software architecture was forma
 | strict formulation + temperature holdout | `analysis/results/local_joint_formulation_temperature_extrapolation.csv` |
 | candidate lattice | `derived/stage1_blind_candidate_space_v1.json` |
 | registered hypothesis set | `configs/hypothesis_registry.json` |
-| V4 measurement catalog | `configs/measurement_catalog.json` |
-| V4 configuration | `configs/agent_v4.json` |
+| measurement catalog | `configs/measurement_catalog.json` |
+| decision configuration | `configs/agent_v4.json` |
 | deterministic VOI implementation | `src/pur_new/voi.py` |
 | confirmatory series | `results/agent_v4_voi/series_n10/` |
 | VOI-score-withheld series | `results/agent_v4_voi/series_ablation_voi_withheld_n5/` |
 | rule-order series | `results/agent_v4_voi/series_ablation_rule_order_minimality_first_n5/` |
 | controlled-ablation summary | `results/agent_v4_voi/rule_layer_ablation.json` |
-| V4 report | `results/agent_v4_voi/AGENT_V4_REPORT.md` |
+| decision report | `results/agent_v4_voi/AGENT_V4_REPORT.md` |
 | V3 predecessor SI | `manuscript/SUPPLEMENTARY_INFORMATION_V1.md` |
 
 ---
@@ -532,4 +532,4 @@ Because the wet-lab result existed before the V4 software architecture was forma
 
 This SI reports only evidence needed to reproduce or audit the manuscript claims. Full engineering history, superseded prompt drafts, infrastructure failures and abandoned exploratory strategies remain in repository provenance but are not treated as scientific evidence.
 
-V3 and V4 are intentionally not pooled. V3 establishes outcome-blind candidate-region recoverability and the importance of deterministic policy. The active manuscript asks the narrower and more causal question: under the same evidence contract, what happens when experiment-level rule content or rule order is manipulated while the model and candidate inventory are held fixed?
+The predecessor candidate-recovery benchmark and the active experiment-selection analysis are intentionally not pooled. The predecessor establishes outcome-blind candidate-region recoverability and the importance of deterministic policy. The active manuscript asks the narrower and more causal question: under the same evidence contract, what happens when experiment-level rule content or rule order is manipulated while the model and candidate inventory are held fixed?
