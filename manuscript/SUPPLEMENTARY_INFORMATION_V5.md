@@ -1,6 +1,6 @@
 # Supplementary Information
 
-## Rheological State Identification Enables Hypothesis-Driven Experiment Selection in Reactive Polyurethane Formulation
+## Rheological State Identification Enables Hypothesis-Driven Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives
 
 ### Scope of this Supplementary Information
 
@@ -15,7 +15,7 @@ The principal V5 claims supported here are:
 3. thermal-hold trajectory is a separate and substantially more formulation-sensitive rheological coordinate;
 4. the resin-modified validation formulation exhibits 1.60% mean absolute 15–60 min drift, well below the 7.79% proportional-dilution null;
 5. the experimentally identified failure mode is translated into competing formulation-level hypotheses and 292 formulation-measurement experiment cards;
-6. the full rule-grounded architecture selects the evidence-supported family in 9/10 runs with no zero-discrimination selections, whereas withholding the VOI score yields 0/5 supported-family selections and 3/5 zero-discrimination selections;
+6. the rule-complete architecture selects the evidence-supported family in 9/10 runs with no zero-discrimination selections, whereas withholding the VOI score yields 0/5 supported-family selections and 3/5 zero-discrimination selections;
 7. inverting rule order yields 10/10 zero-discrimination selections, showing that rule order changes scientific decision quality even when the critique stage detects the defect;
 8. the wet-lab result falsifies the reactive-core-only dilution explanation and retains resin-associated stabilization at the formulation level.
 
@@ -388,9 +388,9 @@ Independent perturbation of each VOI weight from 0.5× to 1.5× preserves the sa
 
 # Supplementary Note 12 | Confirmatory experiment-selection series
 
-The the full rule-grounded architecture confirmatory series was declared at $N=10$ before its first run. Model endpoint, prompts, evidence profile, candidate lattice, experiment-card inventory, hypothesis registry, measurement catalog and deterministic VOI implementation were held fixed.
+The rule-complete architecture confirmatory series was declared at $N=10$ before its first run. Model endpoint, prompts, evidence profile, candidate lattice, experiment-card inventory, hypothesis registry, measurement catalog and deterministic VOI implementation were held fixed.
 
-## Supplementary Table S10 | the full rule-grounded architecture confirmatory series
+## Supplementary Table S10 | Rule-complete confirmatory series
 
 | Quantity | Result |
 |---|---:|
@@ -427,9 +427,9 @@ This is the measurable model-layer contribution in the confirmatory series. The 
 
 The score-withheld arm was declared at $N=5$. The model, endpoint, all five stage prompts, hypothesis registry, measurement catalog, evidence profile, structural firewall, 73-node lattice and all 292 experiment cards were held fixed. Only the deterministic VOI score, component vector, ranking/tie set, stability sweep and tool-generated acceptance/falsification criteria were withheld.
 
-## Supplementary Table S11 | the full rule-grounded architecture versus VOI-score-withheld arm
+## Supplementary Table S11 | Rule-complete architecture versus VOI-score-withheld arm
 
-| Quantity | the full rule-grounded architecture | VOI withheld |
+| Quantity | Rule-complete architecture | VOI withheld |
 |---|---:|---:|
 | runs | 10 | 5 |
 | evidence-supported family | 9/10 | 0/5 |
@@ -450,7 +450,7 @@ The rule-order arm retains the same cards and VOI components but changes the lex
 
 Under sufficiency-first ordering, the deterministic rank-1 experiment is a dual-axis hold with hypothesis discrimination 0.667. Under minimality-first ordering, the rank-1 experiment is a reactive-core-only hold with hypothesis discrimination 0.
 
-The rule-order result comprises ten completed runs analyzed as a distinct decision-architecture arm and is not pooled with either the full rule-grounded architecture or the score-withheld arm. Run-level provenance is retained in the versioned repository.
+The rule-order result comprises ten completed runs analyzed as a distinct decision-architecture arm and is not pooled with either the rule-complete architecture or the score-withheld arm. Run-level provenance is retained in the versioned repository.
 
 ## Supplementary Table S12 | Rule-order arm
 
