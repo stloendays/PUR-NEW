@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "scripts/figure1_v4_workflow.R"
+      - "scripts/figure2_state_conditioned_rheology.R"
+      - "scripts/figure3_local_transfer.R"
       - "scripts/figure4_v4_rule_ablation.R"
       - "scripts/figure5_rheological_coordinates.R"
       - "results/agent_v4_voi/rule_layer_ablation.json"
@@ -21,6 +23,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Install serif font fallback
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-liberation
+          fc-cache -f -v
+
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
@@ -36,6 +44,12 @@ jobs:
       - name: Render V4 Figure 1
         run: Rscript scripts/figure1_v4_workflow.R
 
+      - name: Render V4 Figure 2
+        run: Rscript scripts/figure2_state_conditioned_rheology.R
+
+      - name: Render V4 Figure 3
+        run: Rscript scripts/figure3_local_transfer.R
+
       - name: Render V4 Figure 4
         run: Rscript scripts/figure4_v4_rule_ablation.R
 
@@ -49,6 +63,12 @@ jobs:
           git add analysis/figures/Figure1_v4_workflow.pdf \
                   analysis/figures/Figure1_v4_workflow.png \
                   analysis/figures/Figure1_v4_workflow.svg \
+                  analysis/figures/Figure2_state_conditioned_rheology.pdf \
+                  analysis/figures/Figure2_state_conditioned_rheology.png \
+                  analysis/figures/Figure2_state_conditioned_rheology.svg \
+                  analysis/figures/Figure3_local_transfer.pdf \
+                  analysis/figures/Figure3_local_transfer.png \
+                  analysis/figures/Figure3_local_transfer.svg \
                   analysis/figures/Figure4_v4_rule_ablation.pdf \
                   analysis/figures/Figure4_v4_rule_ablation.png \
                   analysis/figures/Figure4_v4_rule_ablation.svg \
@@ -58,5 +78,5 @@ jobs:
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "figures: render V4 manuscript Figures 1, 4 and 5 [skip ci]"
+          git commit -m "figures: render monochrome V4 manuscript Figures 1-5 [skip ci]"
           git push
