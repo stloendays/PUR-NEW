@@ -65,20 +65,20 @@ matched <- rbind(
 
 # Shared visual system.
 pal <- c(
-  core = "#1F3A5F",
-  state = "#2A7F7F",
-  drift = "#C46A3A",
-  evidence = "#D9A441",
-  agent = "#7A5C8E",
-  grey = "#9AA0A6",
-  light = "#E8ECF2",
-  dark = "#222222"
+  core = "#111111",
+  state = "#333333",
+  drift = "#666666",
+  evidence = "#888888",
+  agent = "#999999",
+  grey = "#888888",
+  light = "#E2E2E2",
+  dark = "#111111"
 )
 
 theme_pur <- function() {
-  theme_classic(base_size = 9.2, base_family = "sans") +
+  theme_classic(base_size = 9.2, base_family = "Times New Roman") +
     theme(
-      text = element_text(colour = pal[["dark"]]),
+      text = element_text(family = "Times New Roman", colour = pal[["dark"]]),
       axis.text = element_text(colour = pal[["dark"]], size = 8.0),
       axis.title = element_text(colour = pal[["dark"]], size = 8.6),
       plot.title = element_text(face = "bold", size = 9.6, hjust = 0),
