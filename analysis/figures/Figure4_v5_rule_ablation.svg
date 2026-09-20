@@ -109,7 +109,7 @@
 <polyline points='86.38,185.65 86.38,183.36 ' style='stroke-width: 0.89; stroke-linecap: butt;' />
 <polyline points='151.97,185.65 151.97,183.36 ' style='stroke-width: 0.89; stroke-linecap: butt;' />
 <polyline points='217.55,185.65 217.55,183.36 ' style='stroke-width: 0.89; stroke-linecap: butt;' />
-<text x='86.38' y='192.98' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='24.92px' lengthAdjust='spacingAndGlyphs'>Full architecture</text>
+<text x='86.38' y='192.98' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='24.92px' lengthAdjust='spacingAndGlyphs'>Rule-complete</text>
 <text x='151.97' y='192.98' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='35.58px' lengthAdjust='spacingAndGlyphs'>VOI score</text>
 <text x='151.97' y='201.62' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='29.38px' lengthAdjust='spacingAndGlyphs'>withheld</text>
 <text x='217.55' y='192.98' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='37.39px' lengthAdjust='spacingAndGlyphs'>Rule order</text>
@@ -152,7 +152,7 @@
 <polyline points='335.43,185.65 335.43,183.36 ' style='stroke-width: 0.89; stroke-linecap: butt;' />
 <polyline points='401.02,185.65 401.02,183.36 ' style='stroke-width: 0.89; stroke-linecap: butt;' />
 <polyline points='466.60,185.65 466.60,183.36 ' style='stroke-width: 0.89; stroke-linecap: butt;' />
-<text x='335.43' y='192.98' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='24.92px' lengthAdjust='spacingAndGlyphs'>Full architecture</text>
+<text x='335.43' y='192.98' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='24.92px' lengthAdjust='spacingAndGlyphs'>Rule-complete</text>
 <text x='401.02' y='192.98' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='35.58px' lengthAdjust='spacingAndGlyphs'>VOI score</text>
 <text x='401.02' y='201.62' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='29.38px' lengthAdjust='spacingAndGlyphs'>withheld</text>
 <text x='466.60' y='192.98' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='37.39px' lengthAdjust='spacingAndGlyphs'>Rule order</text>
@@ -233,7 +233,7 @@
 <polyline points='85.51,374.11 85.51,371.81 ' style='stroke-width: 0.89; stroke-linecap: butt;' />
 <polyline points='149.63,374.11 149.63,371.81 ' style='stroke-width: 0.89; stroke-linecap: butt;' />
 <polyline points='213.75,374.11 213.75,371.81 ' style='stroke-width: 0.89; stroke-linecap: butt;' />
-<text x='85.51' y='381.44' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='24.92px' lengthAdjust='spacingAndGlyphs'>Full architecture</text>
+<text x='85.51' y='381.44' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='24.92px' lengthAdjust='spacingAndGlyphs'>Rule-complete</text>
 <text x='149.63' y='381.44' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='35.58px' lengthAdjust='spacingAndGlyphs'>VOI score</text>
 <text x='149.63' y='390.08' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='29.38px' lengthAdjust='spacingAndGlyphs'>withheld</text>
 <text x='213.75' y='381.44' text-anchor='middle' style='font-size: 8.00px;fill: #222222; font-family: "Liberation Sans";' textLength='37.39px' lengthAdjust='spacingAndGlyphs'>Rule order</text>
