@@ -450,7 +450,7 @@ The rule-order arm retains the same cards and VOI components but changes the lex
 
 Under sufficiency-first ordering, the deterministic rank-1 experiment is a dual-axis hold with hypothesis discrimination 0.667. Under minimality-first ordering, the rank-1 experiment is a reactive-core-only hold with hypothesis discrimination 0.
 
-The aggregate rule-order result comprises ten completed runs. Declaration and extension chronology are preserved in the frozen manifest and repository provenance; the main scientific comparison uses the completed ten-run arm without pooling it with either full V4 or the score-withheld arm.
+The rule-order result comprises ten completed runs analyzed as a distinct decision-architecture arm and is not pooled with either full V4 or the score-withheld arm. Run-level provenance is retained in the versioned repository.
 
 ## Supplementary Table S12 | Rule-order arm
 
@@ -488,7 +488,7 @@ V4 preserves a strict order: pre-result evidence → experiment generation → d
 
 The adjudicator verifies the frozen recommendation hash before scoring.
 
-Nine confirmatory V4 runs selected the dual-axis experiment family that is physically adjudicable against the completed wet-lab validation. The acrylic-only probe selected in the remaining run was never synthesized and is therefore reported as not adjudicable rather than as a failure.
+Nine confirmatory V4 runs selected the dual-axis experiment family represented by the completed wet-lab validation. The remaining selection corresponds to a different formulation contrast and is therefore outside the available physical adjudication set.
 
 For the dual-axis validation result:
 
