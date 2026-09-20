@@ -251,19 +251,19 @@ Relative to E1, the best original local reference over the same 15–60 min inte
 
 A proportional-dilution null was evaluated from the source-reported formulation parts. The reactive-core fraction in F1 is
 
-$
+$$
 \frac{39.60+39.60+20.19}{39.60+39.60+20.19+17.00+5.00}
 =
 \frac{99.39}{121.39}
 =
 0.8189.
-$
+$$
 
 If the E1 15–60 min drift of 9.51% scaled linearly with this fraction, the dilution-only expectation would be
 
-$
+$$
 9.51\%\times0.8189=7.79\%.
-$
+$$
 
 The measured F1 mean absolute drift is 1.60%. Thus the observed reduction from E1 is 7.91 percentage points, whereas proportional dilution predicts a reduction of only 1.72 percentage points. The measured suppression is approximately 4.6-fold larger than the dilution-only reduction.
 
