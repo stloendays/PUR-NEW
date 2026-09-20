@@ -1,0 +1,133 @@
+{
+  "coded_baseline": {
+    "baseline_experiment_id": "S1C41::M-HOLD-120",
+    "baseline_total_modifier_pct": 20.0,
+    "rule": "argmax VOI, then lowest total modifier percent, then lexicographic id",
+    "rule_is_supplied_not_inferred": true,
+    "tied_top_experiment_ids": [
+      "S1C41::M-HOLD-120",
+      "S1C46::M-HOLD-120",
+      "S1C51::M-HOLD-120",
+      "S1C56::M-HOLD-120",
+      "S1C61::M-HOLD-120"
+    ],
+    "top_voi": 0.6925
+  },
+  "departures": [
+    {
+      "decision_mode": "discriminating_probe",
+      "intervention_family": "acrylic_only",
+      "matches_coded_baseline": false,
+      "run_index": 3,
+      "selected_experiment_id": "S1C39::M-HOLD-120",
+      "voi_deficit_vs_top": 0.075,
+      "voi_of_selection": 0.6175
+    }
+  ],
+  "interpretation": "Runs matching the coded baseline are consistent with correct application of a supplied policy and are not evidence of independent model reasoning. Only the departing runs require the model layer as an explanation, and they must be reported at that rate.",
+  "model_layer_departure_rate": "1/10",
+  "n_departing_from_coded_baseline": 1,
+  "n_matching_coded_baseline": 9,
+  "n_runs": 10,
+  "per_run": [
+    {
+      "decision_mode": "committed_experiment",
+      "intervention_family": "dual_axis_resin_modified",
+      "matches_coded_baseline": true,
+      "run_index": 1,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "voi_deficit_vs_top": 0.0,
+      "voi_of_selection": 0.6925
+    },
+    {
+      "decision_mode": "committed_experiment",
+      "intervention_family": "dual_axis_resin_modified",
+      "matches_coded_baseline": true,
+      "run_index": 2,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "voi_deficit_vs_top": 0.0,
+      "voi_of_selection": 0.6925
+    },
+    {
+      "decision_mode": "discriminating_probe",
+      "intervention_family": "acrylic_only",
+      "matches_coded_baseline": false,
+      "run_index": 3,
+      "selected_experiment_id": "S1C39::M-HOLD-120",
+      "voi_deficit_vs_top": 0.075,
+      "voi_of_selection": 0.6175
+    },
+    {
+      "decision_mode": "committed_experiment",
+      "intervention_family": "dual_axis_resin_modified",
+      "matches_coded_baseline": true,
+      "run_index": 4,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "voi_deficit_vs_top": 0.0,
+      "voi_of_selection": 0.6925
+    },
+    {
+      "decision_mode": "committed_experiment",
+      "intervention_family": "dual_axis_resin_modified",
+      "matches_coded_baseline": true,
+      "run_index": 5,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "voi_deficit_vs_top": 0.0,
+      "voi_of_selection": 0.6925
+    },
+    {
+      "decision_mode": "committed_experiment",
+      "intervention_family": "dual_axis_resin_modified",
+      "matches_coded_baseline": true,
+      "run_index": 6,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "voi_deficit_vs_top": 0.0,
+      "voi_of_selection": 0.6925
+    },
+    {
+      "decision_mode": "committed_experiment",
+      "intervention_family": "dual_axis_resin_modified",
+      "matches_coded_baseline": true,
+      "run_index": 7,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "voi_deficit_vs_top": 0.0,
+      "voi_of_selection": 0.6925
+    },
+    {
+      "decision_mode": "committed_experiment",
+      "intervention_family": "dual_axis_resin_modified",
+      "matches_coded_baseline": true,
+      "run_index": 8,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "voi_deficit_vs_top": 0.0,
+      "voi_of_selection": 0.6925
+    },
+    {
+      "decision_mode": "committed_experiment",
+      "intervention_family": "dual_axis_resin_modified",
+      "matches_coded_baseline": true,
+      "run_index": 9,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "voi_deficit_vs_top": 0.0,
+      "voi_of_selection": 0.6925
+    },
+    {
+      "decision_mode": "committed_experiment",
+      "intervention_family": "dual_axis_resin_modified",
+      "matches_coded_baseline": true,
+      "run_index": 10,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "voi_deficit_vs_top": 0.0,
+      "voi_of_selection": 0.6925
+    }
+  ],
+  "policy_provenance": {
+    "payload_sections_containing_the_policy": [
+      "tool_trace"
+    ],
+    "policy_id": "MINIMUM_SUFFICIENT_INTERVENTION_V1",
+    "policy_source": "configs/formulation_priors.json",
+    "policy_was_supplied_to_the_model": true
+  },
+  "question": "How much of the frozen series is explained by a coded tie-break using a policy the model was given, and how much requires the model layer?"
+}

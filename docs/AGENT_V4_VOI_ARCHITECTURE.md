@@ -143,11 +143,18 @@ The deterministic layer is genuinely indifferent across five compositions spanni
 AC 15–25 wt%. The held-out composition sits at AC 14.00 / TK 4.12, so a distance-driven
 score would have singled out `S1C41` uniquely. It does not.
 
-Consequently, whatever the Agent selects inside the tied set **cannot have been read off
-the VOI ranking**. The tie-break is a real task performed by the model layer on scientific
-grounds, and it is recorded as such in the frozen artifact
-(`voi.tied_top_set`, `voi.selected_is_in_tied_top_set`, and the Proposer's
-`tie_break_justification`).
+Consequently, a selection inside the tied set **cannot have been read off the VOI ranking**.
+It does not follow that the tie-break is independent model reasoning: the minimum-burden rule
+the Proposer used is supplied in `configs/formulation_priors.json` and reaches the model
+through the tool trace, so applying it is competence, not autonomy.
+
+Coding that supplied policy as a baseline (`scripts/voi_tiebreak_baseline.py`) separates the
+two. Over the N=10 confirmatory series the baseline and the Agent agree in 9 of 10 runs; the
+measurable model-layer contribution is the **1 of 10** that departs, giving up 0.075 of VOI
+to select an acrylic-only probe that closes the hypothesis pair the other nine leave
+entangled. Both numbers are recorded in the frozen artifacts (`voi.tied_top_set`,
+`voi.selected_is_in_tied_top_set`, the Proposer's `tie_break_justification`, and
+`tiebreak_baseline.json`).
 
 ---
 

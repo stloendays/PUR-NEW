@@ -46,7 +46,9 @@ singled out `S1C41` uniquely; `S1C41` and `S1C61` instead carry **identical VOI 
 identical components**, which `tests/test_voi.py` asserts directly. The selection inside
 the tied set therefore cannot have been read off the ranking.
 
-The Proposer broke the tie on minimum supported modifier burden:
+The Proposer broke the tie on minimum supported modifier burden. That rule was supplied to
+the model rather than inferred by it; see section 8 for the provenance and for the measured
+model-layer departure rate:
 
 > "S1C41 is selected because it uses the smallest acrylic loading and therefore the
 > smallest supported total modifier burden while remaining inside the directly supported
@@ -206,7 +208,51 @@ not separable by a dual-axis composition.
 
 ---
 
-## 8. Artifacts
+## 8. What the tie-break does and does not show
+
+The Proposer broke the five-way tie on "smallest supported total modifier burden" in 9 of
+10 runs. That rule is **not** an independent inference by the model. Near-identical wording
+is present in `configs/formulation_priors.json` under `MINIMUM_SUFFICIENT_INTERVENTION_V1`:
+
+> "Among candidates with comparable evidence coverage and interpretability, prefer the
+> smallest sufficient total modifier burden and the smallest justified departure from the
+> characterized local chemistry."
+
+and that text verifiably reaches the model through the tool trace
+(`tiebreak_baseline.json` → `policy_provenance.payload_sections_containing_the_policy`).
+A run applying it is applying a supplied policy correctly. That is a competence result, not
+an autonomy result, and it must not be reported as the latter.
+
+Coding the supplied policy as a deterministic baseline makes the model-layer contribution
+measurable instead of asserted (`scripts/voi_tiebreak_baseline.py`):
+
+```
+coded baseline    argmax VOI, then lowest total modifier percent, then lexicographic id
+                  -> S1C41::M-HOLD-120 in 10/10, and it can never select S1C39
+frozen series     S1C41 x9, S1C39 x1
+matching baseline           9/10
+departing from baseline     1/10          <- the measurable model-layer contribution
+```
+
+**The departure rate is 1/10, not 10/10.** Run 3 gave up 0.075 of VOI (0.6175 against the
+0.6925 tied maximum) to select `S1C39`, an acrylic-only composition that the supplied
+policy explicitly demotes, because zeroing an independently supported axis makes a
+candidate a partial-coverage control rather than a default performance rank-1. It chose it
+anyway, as a `discriminating_probe`, on the stated ground that an acrylic-only hold
+separates H-RESIN from H-DUAL — the pair the other nine runs each declared entangled and
+each nominated as their own `next_experiment_if_falsified`.
+
+No VOI maximum and no minimum-burden rule produces that selection. It is the one result in
+this series that requires the model layer to explain.
+
+The concentration of the other nine runs is still worth reporting, for a different reason:
+it shows the decision is reproducible under a fixed evidence contract, with zero
+abstentions and zero output-contract repairs. Reproducibility and autonomy are separate
+claims and are reported separately here.
+
+---
+
+## 9. Artifacts
 
 ```
 configs/hypothesis_registry.json          3 registered hypotheses with prediction rules
@@ -218,6 +264,7 @@ schemas/agent_v4_experiment.schema.json   frozen-record contract
 scripts/run_agent_v4.py                   runner
 scripts/adjudicate_agent_v4.py            post-freeze adjudication (only reader of held-out data)
 scripts/compare_v3_v4.py                  deterministic V3/V4 comparison
+scripts/voi_tiebreak_baseline.py          coded tie-break baseline and departure rate
 tests/test_voi.py                         13 tests, incl. the not-a-distance proof
 results/agent_v4_voi/run_001/<rec-id>/    deliberation, recommendation, full 292-card
                                           VOI ranking, decision stability, blind-phase
