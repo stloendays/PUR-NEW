@@ -395,11 +395,11 @@ Not claimed:
 
 ### Agent V4 manuscript line
 
-The audited V3 manuscript remains frozen and preserved in `manuscript/MAIN_TEXT_V3.md`. Agent V4 now has a frozen protocol and completed result set and is being integrated as the active manuscript candidate in `manuscript/MAIN_TEXT_V4.md`.
+The audited V3 manuscript remains frozen and preserved in `manuscript/MAIN_TEXT_V3.md`. `manuscript/MAIN_TEXT_V4.md` preserves the completed rule-grounded Agent manuscript line. The active canonical manuscript candidate is now `manuscript/MAIN_TEXT_V5.md`, which fuses the material and Agent sections into one closed scientific loop from rheological-state identification to hypothesis-discriminating experiment selection and wet-lab adjudication.
 
 V4 changes the decision unit from a formulation candidate to an **experiment card = formulation × measurement plan** (73 × 4 = 292 cards) while keeping the same Planner → Evidence/Tool Layer → Proposer → Skeptic → Robustness Adjudicator → Judge → Freeze sequence. The deterministic VOI tool, registered hypotheses and measurement catalog are explicit scientific rules rather than additional language-model stages.
 
-The manuscript-facing V4 evidence is now frozen around three controlled conditions under the same model/evidence contract:
+The manuscript-facing decision evidence inherited by V5 remains frozen around three controlled conditions under the same model/evidence contract:
 
 - full V4 confirmatory series: 10 declared runs, 9/10 evidence-supported family selections, 0/10 zero-discrimination selections;
 - VOI-score-withheld ablation: 5 declared runs, 0/5 evidence-supported family selections, 3/5 zero-discrimination selections;
@@ -407,7 +407,7 @@ The manuscript-facing V4 evidence is now frozen around three controlled conditio
 
 The order-inverted arm is particularly important: the Skeptic identified the zero-discrimination defect at high severity in 10/10 runs, yet all ten frozen decisions still committed. V4 therefore supports a rule-design result rather than an autonomy claim: **rule content and rule order are causal parts of scientific decision quality, while critique without decision authority is diagnostic rather than corrective.**
 
-Do not silently overwrite or retroactively relabel frozen records. V3 remains the provenance-preserving predecessor; V4 is the current manuscript upgrade. If the author explicitly requests a thaw/revision/re-freeze, update the active manifest or protocol as instructed, regenerate dependent hashes/results where needed, and preserve the previous frozen version as provenance.
+Do not silently overwrite or retroactively relabel frozen records. V3 and V4 remain provenance-preserving predecessors; V5 is the active manuscript upgrade. If the author explicitly requests a thaw/revision/re-freeze, update the active manifest or protocol as instructed, regenerate dependent hashes/results where needed, and preserve the previous frozen version as provenance.
 
 ## Reusable scientific-writing skill
 
