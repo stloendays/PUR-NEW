@@ -1,0 +1,17 @@
+{
+  "blind_phase_closed_utc": "2026-09-20T03:14:51Z",
+  "frozen_recommendation_hashes": {
+    "run_001": "78de62005d7d2a4b4bb1945b6d8bde78b6307dcf36b78d15deb0e2358cd0e788",
+    "run_002": "f5fdf673f91bd70e586f22f318cdd041b7cd7c91b61cf6e0c933e7a6107fa982",
+    "run_003": "bbe1880ec0290bb9468437d7fd38392e5f68e2c23571f5f04bef1ca6a0ca3b8f",
+    "run_004": "7767b9a43620bafbd3d90b662d884ea9e15f6828c24c5969c2ec5d77c6c5249a",
+    "run_005": "949ebc3f4186620c99ec7eb85f7e558e1f87cdd9b6670da3d24f0bb6d450740e",
+    "run_006": "fa3ccc6d196c10b7f2f15b38765fc5b64821aaebd80df58c555f24df99a85cf7",
+    "run_007": "8557a9d8f3d3c9a64e63567d3e2503d8b98618acd092f76ad0a05df13935aa4d",
+    "run_008": "b303c26f8e34815d571fdb9c2d01bbe88ffb691a32612283c5f73f322c2bd2e5",
+    "run_009": "08f908f32c5a5a56358b7a7ebc604237ebc8bfc651fc8338cdaa51d92bdc9ebf",
+    "run_010": "4d275a4705c417fe6170912b2b5e37fa46332c7eb72d7c6a583867efaa97f8f2"
+  },
+  "n_runs_declared": 10,
+  "series_label": "agent_v4_voi_n10"
+}

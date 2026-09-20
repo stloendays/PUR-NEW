@@ -1,0 +1,13 @@
+{
+  "status": "aborted_before_any_run_completed",
+  "declared_utc": "2026-09-19T15:17:00Z",
+  "n_runs_declared": 10,
+  "n_runs_completed": 0,
+  "frozen_recommendations_produced": 0,
+  "attempt_index": 2,
+  "previous_attempt": "results/agent_v4_voi/_aborted_series_20260919T1426Z",
+  "cause": "the driver process was terminated when the controlling session ended, before run 1 froze a recommendation. This was not a model, API or agent failure; stderr was empty and no run status line was emitted.",
+  "why_retained": "provenance. N=10 was declared at 14:26:49Z and again at 15:17:00Z, both before any result existed, so the series that finally runs cannot be read as choosing N after seeing results.",
+  "excluded_from_statistics": true,
+  "note": "No recommendation, deliberation or adjudication artifact was produced under this manifest, so nothing was discarded."
+}

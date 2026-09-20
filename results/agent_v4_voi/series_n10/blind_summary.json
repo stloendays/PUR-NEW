@@ -1,0 +1,95 @@
+{
+  "committed_runs_declaring_an_entangled_hypothesis_pair": {
+    "count": 10,
+    "of_committed": 10
+  },
+  "decision_modes": {
+    "committed_experiment": 9,
+    "discriminating_probe": 1
+  },
+  "git_commit": "99373987221e4ee94f782ad821f6ee2e1463da34",
+  "judge_output_contract_repairs": 0,
+  "llm_calls_total": 50,
+  "llm_tokens_total": 1031460,
+  "model": "gpt-5.6-luna",
+  "n_abstained": 0,
+  "n_committed": 10,
+  "n_runs_completed": 10,
+  "n_runs_declared": 10,
+  "no_held_out_data_read_in_this_phase": true,
+  "phase": "blind",
+  "reporting_rule": "Every attempted run is reported. The denominator for any rate is n_runs_declared, not the number of runs that happened to succeed.",
+  "selected_candidate_counts": {
+    "S1C39": 1,
+    "S1C41": 9
+  },
+  "selected_experiment_counts": {
+    "S1C39::M-HOLD-120": 1,
+    "S1C41::M-HOLD-120": 9
+  },
+  "selected_measurement_counts": {
+    "M-HOLD-120": 10
+  },
+  "selection_inside_deterministic_tied_top_set": {
+    "count": 9,
+    "of_committed": 10,
+    "rate_wilson_95": [
+      0.5958,
+      0.9821
+    ]
+  },
+  "series_label": "agent_v4_voi_n10",
+  "summarized_utc": "2026-09-20T03:14:51Z",
+  "tie_break_justifications": [
+    {
+      "justification": "S1C41 uses the smallest supported modifier burden in the tied set: 15% acrylic-like modifier, within the conservative initial acrylic band, plus 5% minor tackifier-like modifier, within the repeatedly documented minor-resin cluster. It retains the same direct hold-drift observability and separates the same two hypothesis pairs as the other tied cards without adding modifier burden.",
+      "run_index": 1,
+      "selected": "S1C41::M-HOLD-120"
+    },
+    {
+      "justification": "S1C41 uses the smallest acrylic loading in the tied, externally supported region while retaining the repeatedly supported 5% minor-tackifier level. It preserves the greatest fraction of the characterized E2 reactive core, minimizes modifier burden, and gives the largest absolute contrast between the H-CORE prediction (7.61%) and the low-drift H-RESIN/H-DUAL prediction (3.80%). The other tied cards provide no additional registered-pair discrimination.",
+      "run_index": 2,
+      "selected": "S1C41::M-HOLD-120"
+    },
+    {
+      "justification": "All five cards are genuinely VOI-indifferent: they directly measure the same hold observable, separate the same two hypothesis pairs, and lie within the supported intervention region. S1C41 uses the lowest acrylic loading in the conservative supported band while retaining the independently supported 5% minor-tackifier axis, minimizing modifier burden and departure from the characterized E2 reactive core. Its 15% acrylic level is directionally supported, whereas higher levels impose greater intervention without increasing hypothesis-pair discrimination.",
+      "run_index": 3,
+      "selected": "S1C39::M-HOLD-120"
+    },
+    {
+      "justification": "S1C41 uses the smallest acrylic loading in the tied set, 15%, together with 5% minor tackifier. Both levels are inside externally supported regions, and 5% lies in the repeatedly documented minor-resin cluster. It therefore provides the same direct matched-window discrimination with the smallest sufficient modifier burden and least departure from the characterized reactive core.",
+      "run_index": 4,
+      "selected": "S1C41::M-HOLD-120"
+    },
+    {
+      "justification": "All five cards are genuinely tied by the deterministic VOI components and directly measure the same supported 120 C drift coordinate. S1C41 uses the lowest acrylic loading in the supported 15-25% region and the repeatedly supported approximately 5% minor-tackifier region, giving the smallest sufficient modifier burden and smallest justified departure from the E2 reactive core while retaining the same two-axis hypothesis discrimination.",
+      "run_index": 5,
+      "selected": "S1C41::M-HOLD-120"
+    },
+    {
+      "justification": "All five cards have identical VOI component vectors and therefore are scientifically tied in the deterministic layer. S1C41 is selected because its 15% acrylic-like and 5% minor-tackifier-like levels both lie in directly supported evidence regions while using the smallest total modifier burden. It preserves the same direct hold-drift discrimination as the higher-acrylic alternatives without adding an unsupported perturbation.",
+      "run_index": 6,
+      "selected": "S1C41::M-HOLD-120"
+    },
+    {
+      "justification": "S1C41 uses the smallest total modifier burden in the tied set while remaining inside the externally supported acrylic and minor-tackifier regions, at 15% acrylic-like modifier and 5% minor tackifier-like modifier. It preserves the same direct drift measurement, matched reactive-mass prediction, and pairwise discrimination as the other tied cards, while minimizing departure from the characterized E2 reactive core. The choice is therefore scientific preference within a genuine VOI indifference set, not a ranking-derived selection.",
+      "run_index": 7,
+      "selected": "S1C41::M-HOLD-120"
+    },
+    {
+      "justification": "S1C41 uses the smallest total modifier burden in the tied set while remaining inside both externally supported intervention regions: 15% acrylic-like modifier is the supported lower-region design point and 5% minor tackifier-like modifier lies in the repeatedly documented 4.8-6.4% cluster. It therefore preserves the same direct discrimination of H-CORE from H-RESIN and H-DUAL with less justified departure from the characterized reactive core.",
+      "run_index": 8,
+      "selected": "S1C41::M-HOLD-120"
+    },
+    {
+      "justification": "S1C41 uses the lowest acrylic loading in the tied set while retaining the independently supported 5% minor-tackifier level. It lies within the conservative supported acrylic band and the repeated minor-resin evidence region, gives the same direct matched-window discrimination as the other tied cards, and imposes the smallest justified modifier burden and departure from the E2 reactive core.",
+      "run_index": 9,
+      "selected": "S1C41::M-HOLD-120"
+    },
+    {
+      "justification": "S1C41 uses the lowest acrylic loading in the externally supported acrylic region and the repeatedly supported 5% minor-tackifier region, giving the smallest supported total modifier burden while retaining full two-axis coverage. It therefore tests the mechanism with less departure from the characterized reactive core than the other tied cards. The primary observable is the directly measured failure coordinate, not a model-derived quantity.",
+      "run_index": 10,
+      "selected": "S1C41::M-HOLD-120"
+    }
+  ]
+}

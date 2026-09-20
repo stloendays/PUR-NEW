@@ -1,0 +1,300 @@
+{
+  "adjudicable_rate": {
+    "count": 9,
+    "note": "A run is adjudicable only when BOTH its measurement plan and its intervention family match the completed experiment. A run that deliberately chose a different composition to close a different hypothesis pair is reported here as not adjudicable, which is a property of the completed experiment, not a failure.",
+    "of_declared": 10,
+    "wilson_95": [
+      0.5958,
+      0.9821
+    ]
+  },
+  "adjudicated_utc": "2026-09-20T03:14:51Z",
+  "adjudication_note": "The hypothesis verdict is a property of the completed measurement and the registered prediction rules, so it is identical for every run that selected the matched-window hold. What varies across runs is which experiment was chosen and what the Agent declared it could not separate.",
+  "blind_phase_closure": {
+    "blind_phase_closed_utc": "2026-09-20T03:14:51Z",
+    "frozen_recommendation_hashes": {
+      "run_001": "78de62005d7d2a4b4bb1945b6d8bde78b6307dcf36b78d15deb0e2358cd0e788",
+      "run_002": "f5fdf673f91bd70e586f22f318cdd041b7cd7c91b61cf6e0c933e7a6107fa982",
+      "run_003": "bbe1880ec0290bb9468437d7fd38392e5f68e2c23571f5f04bef1ca6a0ca3b8f",
+      "run_004": "7767b9a43620bafbd3d90b662d884ea9e15f6828c24c5969c2ec5d77c6c5249a",
+      "run_005": "949ebc3f4186620c99ec7eb85f7e558e1f87cdd9b6670da3d24f0bb6d450740e",
+      "run_006": "fa3ccc6d196c10b7f2f15b38765fc5b64821aaebd80df58c555f24df99a85cf7",
+      "run_007": "8557a9d8f3d3c9a64e63567d3e2503d8b98618acd092f76ad0a05df13935aa4d",
+      "run_008": "b303c26f8e34815d571fdb9c2d01bbe88ffb691a32612283c5f73f322c2bd2e5",
+      "run_009": "08f908f32c5a5a56358b7a7ebc604237ebc8bfc651fc8338cdaa51d92bdc9ebf",
+      "run_010": "4d275a4705c417fe6170912b2b5e37fa46332c7eb72d7c6a583867efaa97f8f2"
+    },
+    "n_runs_declared": 10,
+    "series_label": "agent_v4_voi_n10"
+  },
+  "held_out_composition": {
+    "acrylic_like_pct": 14.004448471867533,
+    "minor_tackifier_like_pct": 4.118955432902216,
+    "reactive_mass_fraction": 0.8187659609523025,
+    "source_reported_parts": {
+      "ac1920": 17.0,
+      "mdi": 20.19,
+      "pdp70": 39.6,
+      "ppg2000": 39.6,
+      "tk100": 5.0
+    }
+  },
+  "held_out_thermal_hold": {
+    "mean_absolute_drift_15_60_pct": 1.6036,
+    "n_repeats": 2,
+    "per_repeat": {
+      "repeat_1": {
+        "drift_15_60_pct": -0.1626,
+        "eta_15": 1230.0,
+        "eta_60": 1228.0,
+        "sampling_times_min": [
+          15.0,
+          30.0,
+          45.0,
+          60.0
+        ]
+      },
+      "repeat_2": {
+        "drift_15_60_pct": 3.0445,
+        "eta_15": 1281.0,
+        "eta_60": 1320.0,
+        "sampling_times_min": [
+          15.0,
+          30.0,
+          45.0,
+          60.0
+        ]
+      }
+    },
+    "temperature_c": 120.0
+  },
+  "hypothesis_adjudication": {
+    "dilution_explained_reduction_pct": 18.12,
+    "drift_reduction_vs_E1_pct": 83.14,
+    "falsified_hypotheses": [
+      "H-CORE"
+    ],
+    "held_out_reactive_mass_fraction": 0.818766,
+    "hypothesis_verdicts": {
+      "H-CORE": {
+        "basis": "linear-dilution prediction 7.79% at phi_r=0.8188; observed 1.60%",
+        "observed_drift_pct": 1.6036,
+        "predicted_drift_pct": 7.7865,
+        "survives": false
+      },
+      "H-DUAL": {
+        "basis": "this composition carries both modifier axes, so the completed measurement cannot separate H-DUAL from H-RESIN; an acrylic-only hold is required",
+        "observed_drift_pct": 1.6036,
+        "predicted_drift_pct": 3.8932,
+        "separable_by_this_measurement": false,
+        "survives": true
+      },
+      "H-RESIN": {
+        "basis": "suppression below half the dilution prediction (3.89%); observed 1.60%",
+        "observed_drift_pct": 1.6036,
+        "predicted_drift_pct": 3.8932,
+        "survives": true
+      }
+    },
+    "linear_dilution_prediction_pct": 7.7865,
+    "observed_mean_absolute_drift_pct": 1.6036,
+    "observed_vs_linear_ratio": 0.2059,
+    "reference_E1_drift_pct": 9.51,
+    "surviving_hypotheses": [
+      "H-DUAL",
+      "H-RESIN"
+    ]
+  },
+  "measurement_plan_match_rate": {
+    "count": 10,
+    "of_declared": 10,
+    "wilson_95": [
+      0.7225,
+      1.0
+    ]
+  },
+  "modifier_plane_l1_pct_points": {
+    "max": 1.8766,
+    "mean": 1.8766,
+    "median": 1.8766,
+    "min": 1.8766,
+    "role": "reported for comparability with the V3 series only. Distance to the held-out composition is not the V4 objective and enters no VOI component, weight or tie-break.",
+    "values": [
+      1.8766,
+      1.8766,
+      1.8766,
+      1.8766,
+      1.8766,
+      1.8766,
+      1.8766,
+      1.8766,
+      1.8766
+    ]
+  },
+  "n_adjudicable": 9,
+  "n_not_adjudicable": 1,
+  "n_runs_declared": 10,
+  "per_run": [
+    {
+      "adjudicable": true,
+      "decision_mode": "committed_experiment",
+      "hypotheses_left_entangled": [
+        "H-RESIN",
+        "H-DUAL"
+      ],
+      "intervention_family_matches_completed_experiment": true,
+      "measurement_plan_matches_completed_measurement": true,
+      "modifier_plane_l1_pct_points": 1.8766,
+      "not_adjudicable_reason": null,
+      "run_index": 1,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "selected_intervention_family": "dual_axis_resin_modified",
+      "status": "ok"
+    },
+    {
+      "adjudicable": true,
+      "decision_mode": "committed_experiment",
+      "hypotheses_left_entangled": [
+        "H-RESIN",
+        "H-DUAL"
+      ],
+      "intervention_family_matches_completed_experiment": true,
+      "measurement_plan_matches_completed_measurement": true,
+      "modifier_plane_l1_pct_points": 1.8766,
+      "not_adjudicable_reason": null,
+      "run_index": 2,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "selected_intervention_family": "dual_axis_resin_modified",
+      "status": "ok"
+    },
+    {
+      "adjudicable": false,
+      "decision_mode": "discriminating_probe",
+      "hypotheses_left_entangled": [
+        "H-CORE versus H-DUAL: both predict approximately linear-dilution drift for an acrylic-only composition, so this experiment cannot distinguish reactive-core dilution from the tackifier-required claim when the acrylic-only result is high."
+      ],
+      "intervention_family_matches_completed_experiment": false,
+      "measurement_plan_matches_completed_measurement": true,
+      "modifier_plane_l1_pct_points": 5.1145,
+      "not_adjudicable_reason": "the selected composition is not the one that was synthesised, so its frozen acceptance and falsification criteria cannot be checked against this measurement",
+      "run_index": 3,
+      "selected_experiment_id": "S1C39::M-HOLD-120",
+      "selected_intervention_family": "acrylic_only",
+      "status": "ok"
+    },
+    {
+      "adjudicable": true,
+      "decision_mode": "committed_experiment",
+      "hypotheses_left_entangled": [
+        "H-RESIN",
+        "H-DUAL"
+      ],
+      "intervention_family_matches_completed_experiment": true,
+      "measurement_plan_matches_completed_measurement": true,
+      "modifier_plane_l1_pct_points": 1.8766,
+      "not_adjudicable_reason": null,
+      "run_index": 4,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "selected_intervention_family": "dual_axis_resin_modified",
+      "status": "ok"
+    },
+    {
+      "adjudicable": true,
+      "decision_mode": "committed_experiment",
+      "hypotheses_left_entangled": [
+        "H-RESIN",
+        "H-DUAL"
+      ],
+      "intervention_family_matches_completed_experiment": true,
+      "measurement_plan_matches_completed_measurement": true,
+      "modifier_plane_l1_pct_points": 1.8766,
+      "not_adjudicable_reason": null,
+      "run_index": 5,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "selected_intervention_family": "dual_axis_resin_modified",
+      "status": "ok"
+    },
+    {
+      "adjudicable": true,
+      "decision_mode": "committed_experiment",
+      "hypotheses_left_entangled": [
+        "H-RESIN",
+        "H-DUAL"
+      ],
+      "intervention_family_matches_completed_experiment": true,
+      "measurement_plan_matches_completed_measurement": true,
+      "modifier_plane_l1_pct_points": 1.8766,
+      "not_adjudicable_reason": null,
+      "run_index": 6,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "selected_intervention_family": "dual_axis_resin_modified",
+      "status": "ok"
+    },
+    {
+      "adjudicable": true,
+      "decision_mode": "committed_experiment",
+      "hypotheses_left_entangled": [
+        "H-RESIN",
+        "H-DUAL"
+      ],
+      "intervention_family_matches_completed_experiment": true,
+      "measurement_plan_matches_completed_measurement": true,
+      "modifier_plane_l1_pct_points": 1.8766,
+      "not_adjudicable_reason": null,
+      "run_index": 7,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "selected_intervention_family": "dual_axis_resin_modified",
+      "status": "ok"
+    },
+    {
+      "adjudicable": true,
+      "decision_mode": "committed_experiment",
+      "hypotheses_left_entangled": [
+        "H-RESIN",
+        "H-DUAL"
+      ],
+      "intervention_family_matches_completed_experiment": true,
+      "measurement_plan_matches_completed_measurement": true,
+      "modifier_plane_l1_pct_points": 1.8766,
+      "not_adjudicable_reason": null,
+      "run_index": 8,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "selected_intervention_family": "dual_axis_resin_modified",
+      "status": "ok"
+    },
+    {
+      "adjudicable": true,
+      "decision_mode": "committed_experiment",
+      "hypotheses_left_entangled": [
+        "H-RESIN",
+        "H-DUAL"
+      ],
+      "intervention_family_matches_completed_experiment": true,
+      "measurement_plan_matches_completed_measurement": true,
+      "modifier_plane_l1_pct_points": 1.8766,
+      "not_adjudicable_reason": null,
+      "run_index": 9,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "selected_intervention_family": "dual_axis_resin_modified",
+      "status": "ok"
+    },
+    {
+      "adjudicable": true,
+      "decision_mode": "committed_experiment",
+      "hypotheses_left_entangled": [
+        "H-RESIN",
+        "H-DUAL"
+      ],
+      "intervention_family_matches_completed_experiment": true,
+      "measurement_plan_matches_completed_measurement": true,
+      "modifier_plane_l1_pct_points": 1.8766,
+      "not_adjudicable_reason": null,
+      "run_index": 10,
+      "selected_experiment_id": "S1C41::M-HOLD-120",
+      "selected_intervention_family": "dual_axis_resin_modified",
+      "status": "ok"
+    }
+  ],
+  "phase": "adjudicated",
+  "series_label": "agent_v4_voi_n10"
+}

@@ -1,0 +1,31 @@
+{
+  "api_base_host": "127.0.0.1:8788",
+  "architecture": "PUR_NEW_VOI_GUIDED_EXPERIMENT_SELECTION_AGENT_V4",
+  "candidate_set": "D:\\Research\\PUR-NEW\\derived\\stage1_blind_candidate_space_v1.json",
+  "candidate_set_sha256": "2b92e5d976e76b674a05f9b8fc17f4c78cc873b42641fbe67b35a37beeec4346",
+  "declared_utc": "2026-09-19T14:26:49Z",
+  "evidence_state_sha256": "8ca085b1529f94b2fc6ed3bfdd0f5fb938a4580159ed04ece39fac42c023bc81",
+  "git_commit": "99373987221e4ee94f782ad821f6ee2e1463da34",
+  "model": "gpt-5.6-luna",
+  "n_runs_declared": 10,
+  "n_runs_declared_before_first_run": true,
+  "reporting_rule": "Every attempted run is reported. The denominator for any rate is n_runs_declared, not the number of runs that happened to succeed.",
+  "runs": [],
+  "series_input_hashes": {
+    "configs/action_catalog.json": "20c763a128fe9ea9a79b83eea4a8763b0eaaeb3e25c7ac47e836d9cb53a4f3cd",
+    "configs/agent_v4.json": "ec9ac5b7f279f4dabd8e7b281396c16056fbd6adc477f97d4eb7d48f4801138c",
+    "configs/evidence_access_profiles.json": "0906341975695613a02614ab867a5c906baa4b0503116afa67ffb9e973c9ee17",
+    "configs/formulation_priors.json": "7be699d8705910ac1fd85d56dd9976506f9867c20926c59eaee69c29ae82beea",
+    "configs/hypothesis_registry.json": "04518bfd054dae7840ae2c7b74c6d03f536957a488776851d4bc732c52c42755",
+    "configs/measurement_catalog.json": "1431d7104f1d738eb3d73d29c94f11c1cd46aae4df2150849a87b8e64996956f",
+    "configs/workflow.json": "6c3aa2e9d7d7ddb42525f5ec28ccc89a48549b05ba7a8417ebc0b4f6dc32d282",
+    "prompts/agent_v4_judge.txt": "b412b8713a076e9611211b159f5d4e74ee48ac6dddf45384e480baafb04f0567",
+    "prompts/agent_v4_planner.txt": "27708a58ceeb958cb5bc7cd944c934f1f50bccb11cfdbaf2a95423791f3c5999",
+    "prompts/agent_v4_proposer.txt": "dab1deb9361e20229983c0ca1fbebcb226c78bddcdee62c4f1b9d1d3d31ca7a5",
+    "prompts/agent_v4_robustness.txt": "fe225af369951bf0f869807249b0504ae40c3a20ba2cc0b947f502e96e8e5b5a",
+    "prompts/agent_v4_skeptic.txt": "e7bd7773c14fc7cbb48f0f777db6404e4d9b728ac6a569c25aa2a7610d6e9826",
+    "scripts/run_agent_v4.py": "12f7bdef28bbe7e9975b9697d898efbe350d38bd8bba2e96497f30ea2861b0c7",
+    "src/pur_new/voi.py": "dfcfb7f5aa08bba8873d8e72a4b17528f4e3134cd9fab033f5939be80de1f1fa"
+  },
+  "series_label": "agent_v4_voi_n10"
+}

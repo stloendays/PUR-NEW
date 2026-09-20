@@ -146,7 +146,67 @@ and enters no component, weight or tie-break.
 
 ---
 
-## 7. Artifacts
+## 7. Confirmatory series, N = 10 declared before the first run
+
+Series `agent_v4_voi_n10`, contract frozen `2026-09-19T15:22:50Z` at commit `9937398`,
+model `gpt-5.6-luna`, 50 LLM calls, 1,031,460 tokens. 10 of 10 runs completed, 0 failed.
+The pilot run in section 1 is reported separately and is **not** pooled with this series.
+
+Two earlier attempts at this same N=10 declaration were terminated by controlling-session
+teardown before run 1 froze anything. Both manifests are retained under
+`_aborted_series_20260919T1426Z` and `_aborted_series_20260919T1517Z`, produced zero
+recommendations, and are excluded from every statistic. N=10 was therefore declared three
+times, always before any result existed.
+
+### Blind phase
+
+```
+committed                 10 / 10      abstained 0 / 10
+decision modes            committed_experiment 9, discriminating_probe 1
+measurement plan          M-HOLD-120  10 / 10      (unanimous)
+experiment selected       S1C41::M-HOLD-120  x9,  S1C39::M-HOLD-120  x1
+inside the tied top set   9 / 10       95% Wilson [0.596, 0.982]
+declared an entangled hypothesis pair   10 / 10
+Judge output-contract repairs           0 / 10
+```
+
+Zero abstentions against 2 of 10 in the V3 confirmatory series, and zero Judge contract
+repairs: the V4 output contract closed the `selected_*: null` slip V3 documented and left
+unfixed.
+
+### The run that left the tied set did so to close a different hypothesis pair
+
+Run 3 selected `S1C39` — **acrylic-only**, AC 15.0 / TK 0 — as a `discriminating_probe`,
+and declared its own entanglement correctly:
+
+> "H-CORE versus H-DUAL: both predict approximately linear-dilution drift for an
+> acrylic-only composition, so this experiment cannot distinguish reactive-core dilution
+> from the tackifier-required claim when the acrylic-only result is high."
+
+That is the mirror image of the entanglement the other nine runs declared, and it is the
+experiment those nine runs each named as their own `next_experiment_if_falsified`. The
+Agent reached that structural fact blind, from the registered prediction rules alone.
+
+### Adjudication
+
+The completed wet-lab experiment used a dual-axis composition. Run 3 chose a composition
+that was never synthesised, so its frozen criteria are **not checkable** against this
+measurement and it is reported as not adjudicable rather than scored.
+
+```
+adjudicable                    9 / 10       95% Wilson [0.596, 0.982]
+measurement plan matched      10 / 10
+modifier-plane L1 (9 runs)    min = median = mean = max = 1.8766 pp, zero variance
+```
+
+All nine adjudicable runs selected `S1C41`, the lattice construction floor. The hypothesis
+verdict is a property of the completed measurement and the registered prediction rules, so
+it is identical for every adjudicable run: **H-CORE falsified**, H-RESIN surviving, H-DUAL
+not separable by a dual-axis composition.
+
+---
+
+## 8. Artifacts
 
 ```
 configs/hypothesis_registry.json          3 registered hypotheses with prediction rules

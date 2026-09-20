@@ -1,0 +1,11 @@
+{
+  "status": "aborted_before_any_run_completed",
+  "declared_utc": "2026-09-19T14:26:49Z",
+  "n_runs_declared": 10,
+  "n_runs_completed": 0,
+  "frozen_recommendations_produced": 0,
+  "cause": "the driver process was terminated when the controlling session ended, before run 1 froze a recommendation",
+  "why_retained": "provenance. The N=10 declaration existed before the relaunch, so the relaunched series cannot be read as choosing N after seeing results.",
+  "excluded_from_statistics": true,
+  "note": "No recommendation, deliberation or adjudication artifact was produced under this manifest, so nothing was discarded."
+}
