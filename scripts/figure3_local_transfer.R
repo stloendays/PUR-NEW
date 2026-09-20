@@ -100,8 +100,8 @@ pC <- ggplot(
   scale_y_log10(labels = label_number(big.mark = ",")) +
   labs(
     title = "C  Bounded extrapolation",
-    x = "Observed viscosity",
-    y = "Predicted viscosity",
+    x = "Observed viscosity (mPa·s)",
+    y = "Predicted viscosity (mPa·s)",
     shape = NULL
   ) +
   annotate(
