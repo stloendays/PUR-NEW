@@ -1,9 +1,10 @@
-name: Render V4 Figure 5
+name: Render V4 manuscript figures
 
 on:
   push:
     branches: [main]
     paths:
+      - "scripts/figure1_v4_workflow.R"
       - "scripts/figure5_v4_rule_ablation.R"
       - "results/agent_v4_voi/rule_layer_ablation.json"
       - ".github/workflows/render_v4_figure5.yml"
@@ -31,6 +32,9 @@ jobs:
             any::scales
             any::jsonlite
 
+      - name: Render V4 Figure 1
+        run: Rscript scripts/figure1_v4_workflow.R
+
       - name: Render V4 Figure 5
         run: Rscript scripts/figure5_v4_rule_ablation.R
 
@@ -44,5 +48,5 @@ jobs:
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "figures: render V4 rule-ablation Figure 5 [skip ci]"
+          git commit -m "figures: render V4 manuscript Figures 1 and 5 [skip ci]"
           git push
