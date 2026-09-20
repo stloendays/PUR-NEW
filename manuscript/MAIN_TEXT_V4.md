@@ -382,42 +382,29 @@ The external evidence layer contains literature, patent, material, formulation, 
 
 External formulation records containing acrylic-like or tackifier-like components were used to define chemically plausible candidate regions. Numeric modifier fractions were treated as anchors only when the denominator basis was sufficiently clear. Records with unresolved fraction definitions were retained as directional evidence. External records were not used as direct predictors of local validation performance.
 
-### 3.9 Scientific Agent V4
+### 3.9 Scientific decision architecture
 
-The V4 scientific Agent operates downstream of the physical analysis and retains the V3 stage sequence: Planner → Evidence/Tool Layer → Proposer → Skeptic → Robustness Adjudicator → Judge → Freeze. No additional language-model role was introduced.
+The computational decision layer operated downstream of the rheological analysis. Its decision object was an experiment card defined as one formulation candidate paired with one measurement plan. Crossing the fixed 73-node formulation lattice with four measurement plans produced 292 cards. The held-out validation formulation and its measured outcome were excluded from the decision-time payload.
 
-The decision object changed from a formulation candidate to an experiment card. The fixed 73-node formulation lattice was crossed with four measurement plans, generating 292 cards. The held-out validation formulation and outcome were excluded from the runtime payload. The Evidence/Tool Layer exposes the local rheological summaries, curated external evidence, the registered hypotheses, the measurement catalog, deterministic VOI components and the resulting weight-sensitivity analysis.
+Three formulation-level hypotheses defined the unresolved scientific question. H-CORE predicts that matched-window viscosity drift scales with the reactive mass fraction of the E1 reference; H-RESIN predicts suppression beyond proportional dilution; and H-DUAL predicts that low drift requires the tackifier-containing dual-axis intervention and is therefore separable from H-RESIN only with an acrylic-only composition. The measurement catalog contained a matched-window 120 °C thermal hold, a repeatability assessment, a one-point anchor and a temperature sweep.
 
-### 3.10 Hypothesis registry, measurement catalog and deterministic VOI
+Each card received a deterministic value-of-information score combining hypothesis discrimination, uncertainty reduction, decision relevance, measurement interpretability, extrapolation risk and process-state risk, with base weights of 0.30, 0.20, 0.25, 0.10, 0.10 and 0.05, respectively. The score is a decision heuristic rather than a calibrated posterior quantity. Decision stability was assessed by independently scaling each weight from 0.5× to 1.5× while holding all other inputs fixed.
 
-Three formulation-level hypotheses were frozen before V4 model runs. H-CORE predicts that matched-window drift scales with reactive mass fraction from the E1 reference. H-RESIN predicts suppression beyond proportional dilution. H-DUAL predicts that low drift requires the tackifier-containing dual-axis intervention and is therefore distinguishable from H-RESIN only with an acrylic-only composition.
+The language-model workflow retained the same five decision stages used in the predecessor architecture: Planner, Proposer, Skeptic, Robustness Adjudicator and Judge, with deterministic tools supplying the candidate inventory, evidence summaries and rule calculations. The final recommendation was frozen before the held-out result was exposed.
 
-The measurement catalog contained four plans: matched-window 120 °C thermal hold, repeatability assessment, one-point anchor and temperature sweep. Each plan carried a declared resolution and an interpretation role.
+### 3.10 Confirmatory series and controlled ablations
 
-For every experiment card, the deterministic VOI score combined normalized hypothesis discrimination, uncertainty reduction, decision relevance, measurement interpretability, extrapolation risk and process-state risk. Base weights were 0.30, 0.20, 0.25, 0.10, 0.10 and 0.05, respectively. The score is not interpreted as a Bayesian posterior or calibrated expected information gain. Decision stability was assessed by independently scaling each component weight from 0.5× to 1.5× while holding all other inputs fixed.
+The full V4 confirmatory series comprised 10 declared runs under one fixed decision contract. Model endpoint, prompts, evidence profile, hypothesis registry, measurement catalog, formulation lattice, experiment-card inventory and deterministic scoring implementation were held fixed across runs. Attempted, completed, abstained and committed outputs were tracked separately.
 
-### 3.11 Frozen confirmatory series and controlled ablations
+Two controlled ablations isolated the effect of the deterministic rule layer. In the score-withheld arm ($N=5$), the model, prompts, evidence contract, hypothesis registry, measurement catalog and all 292 cards were unchanged, while the deterministic score, component vector, ranking, stability analysis and tool-generated acceptance criteria were removed. In the rule-order arm ($N=10$), the same rule components were retained but their lexicographic priority changed from coverage → discrimination → relevance → burden to burden → coverage → discrimination → relevance.
 
-The confirmatory V4 series contained 10 declared runs under one frozen contract. The model endpoint, five stage prompts, hypothesis registry, measurement catalog, evidence profile, structural firewall, formulation lattice, experiment-card inventory and deterministic VOI implementation were fixed before the first run. Attempted, completed, abstained, committed and normalized outputs were recorded separately.
+Two-sided 95% Wilson score intervals were used for reported run proportions. The computational arms are interpreted as controlled decision-architecture experiments rather than as independent material replicates.
 
-The score-withheld ablation contained five declared runs. Relative to full V4, the deterministic VOI score, component vector, ranking, tied top set, decision-stability sweep and tool-generated acceptance/falsification criteria were withheld. The language model, prompts, evidence contract, hypothesis registry, measurement catalog and all 292 cards were unchanged.
+### 3.11 Post-freeze adjudication and statistical scope
 
-The rule-order ablation was evaluated over ten runs with the deterministic score retained. Only the lexicographic ordering of rule components changed from sufficiency-first (coverage → discrimination → relevance → burden) to minimality-first (burden → coverage → discrimination → relevance). Declaration history is retained in frozen repository provenance rather than expanded in the main text.
+Post-freeze adjudication was separated from decision generation. For each committed run, the selected experiment, rationale and decision criteria were serialized before the held-out formulation and wet-lab measurements were loaded. The adjudication step then compared the observed mean absolute 15–60 min drift with the H-CORE proportional-dilution prediction derived from the source-reported reactive mass fraction.
 
-Two-sided 95% Wilson score intervals were used for reported run proportions. The V4 arms are interpreted as controlled decision-architecture experiments, not as pooled replications across different model configurations.
-
-### 3.12 Freeze and post-freeze adjudication
-
-Each committed V4 decision stores the selected experiment card, rationale, identified hypothesis entanglement, uncertainty decomposition, numeric acceptance and falsification criteria, timestamps, model identifiers and cryptographic hashes of decision-defining inputs. After a recommendation is frozen, a blind-phase closure record is written and hashed.
-
-The post-freeze adjudicator is the only V4 stage that reads the held-out formulation and completed validation measurements. It refuses to score a run without a frozen recommendation and re-verifies the recommendation hash before adjudication. For the dual-axis validation experiment, the primary mechanism comparison is the observed mean absolute 15-60 min drift against the H-CORE proportional-dilution prediction computed from the source-reported reactive mass fraction.
-
-### 3.13 Statistical scope
-
-Statistical inference for the rheological analysis is defined at the level of the five-formulation local design and six chemistry-audited complete realizations. The Agent-series intervals quantify run-level decision frequencies under fixed computational contracts rather than material-population frequencies.
-
-The physical and computational evidence are therefore kept distinct: material claims come from the measured rheology and matched-window validation, whereas decision-architecture claims come from frozen confirmatory and ablation series.
-
+Material-level claims are based on the five-formulation local design, six chemistry-audited complete temperature-sweep realizations and the matched thermal-hold validation measurements. Agent-series proportions quantify reproducibility of decisions under fixed computational contracts rather than frequencies in a material population. Full run-level records, manifests, hashes, stability sweeps and adjudication artifacts are reported in the Supplementary Information and versioned repository.
 ---
 
 ## 4. Conclusions
