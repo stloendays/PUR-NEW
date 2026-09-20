@@ -322,7 +322,7 @@
 <polyline points='333.21,280.86 335.50,280.86 ' style='stroke-width: 0.89; stroke-linecap: butt;' />
 <text x='335.50' y='246.47' style='font-size: 7.70px;fill: #555555; font-family: "Liberation Sans";' textLength='285.08px' lengthAdjust='spacingAndGlyphs'>Native descriptors are reported side-by-side; no common effect-size scale is implied</text>
 <text x='335.50' y='234.61' style='font-size: 9.60px; font-weight: bold;fill: #222222; font-family: "Liberation Sans";' textLength='213.16px' lengthAdjust='spacingAndGlyphs'>D  Rheological coordinates respond differently</text>
-<text x='12.45' y='13.05' style='font-size: 11.00px; font-weight: bold;fill: #222222; font-family: "Liberation Sans";' textLength='571.70px' lengthAdjust='spacingAndGlyphs'>Figure 4 | Temperature response is locally concentrated while thermal-hold trajectory is formulation-sensitive</text>
+<text x='12.45' y='13.05' style='font-size: 11.00px; font-weight: bold;fill: #222222; font-family: "Liberation Sans";' textLength='571.70px' lengthAdjust='spacingAndGlyphs'>Figure 5 | Temperature response is locally concentrated while thermal-hold trajectory is formulation-sensitive</text>
 </g>
 </g>
 </svg>
