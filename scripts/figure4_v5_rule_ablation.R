@@ -23,7 +23,7 @@ arms <- obj$arms
 
 arm_keys <- c("full", "ablated", "rule_order_inverted")
 arm_labels <- c(
-  "Full architecture",
+  "Rule-complete",
   "VOI score\nwithheld",
   "Rule order\ninverted"
 )
@@ -82,7 +82,7 @@ pA <- ggplot(support_df, aes(x = arm, y = rate)) +
     nudge_y = c(0.06, 0.06, 0.06), size = 2.8
   ) +
   scale_fill_manual(values = c(
-    "Full architecture" = pal[["agent"]],
+    "Rule-complete" = pal[["agent"]],
     "VOI score\nwithheld" = "white",
     "Rule order\ninverted" = pal[["drift"]]
   )) +
@@ -128,7 +128,7 @@ pB <- ggplot(disc_df, aes(x = arm, y = mean_disc)) +
     y = 0.055, size = 2.55, colour = "#555555"
   ) +
   scale_fill_manual(values = c(
-    "Full architecture" = pal[["agent"]],
+    "Rule-complete" = pal[["agent"]],
     "VOI score\nwithheld" = "white",
     "Rule order\ninverted" = pal[["drift"]]
   )) +
@@ -167,7 +167,7 @@ pC <- ggplot(measure_df, aes(x = arm, y = rate)) +
     nudge_y = c(-0.08, -0.08, 0.06), size = 2.8
   ) +
   scale_fill_manual(values = c(
-    "Full architecture" = pal[["state"]],
+    "Rule-complete" = pal[["state"]],
     "VOI score\nwithheld" = "white",
     "Rule order\ninverted" = pal[["drift"]]
   )) +
