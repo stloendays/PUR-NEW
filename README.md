@@ -393,9 +393,21 @@ Not claimed:
 
 ---
 
-### Independent Agent V4 development line
+### Agent V4 manuscript line
 
-The current manuscript is frozen around the audited outcome-blind candidate-selection evidence described above. A separate Agent V4 development line is upgrading the decision task from **candidate formulation selection** to **value-of-information (VOI)-guided experiment selection**: the Agent should decide which experiment would most reduce decision-relevant uncertainty before choosing a formulation. Until that V4 workflow has its own frozen protocol and results, do not mix V4 outputs, terminology, or performance claims into the canonical V3 manuscript.
+The audited V3 manuscript remains frozen and preserved in `manuscript/MAIN_TEXT_V3.md`. Agent V4 now has a frozen protocol and completed result set and is being integrated as the active manuscript candidate in `manuscript/MAIN_TEXT_V4.md`.
+
+V4 changes the decision unit from a formulation candidate to an **experiment card = formulation × measurement plan** (73 × 4 = 292 cards) while keeping the same Planner → Evidence/Tool Layer → Proposer → Skeptic → Robustness Adjudicator → Judge → Freeze sequence. The deterministic VOI tool, registered hypotheses and measurement catalog are explicit scientific rules rather than additional language-model stages.
+
+The manuscript-facing V4 evidence is now frozen around three controlled conditions under the same model/evidence contract:
+
+- full V4 confirmatory series: 10 declared runs, 9/10 evidence-supported family selections, 0/10 zero-discrimination selections;
+- VOI-score-withheld ablation: 5 declared runs, 0/5 evidence-supported family selections, 3/5 zero-discrimination selections;
+- rule-order-inverted ablation: 5 declared runs, 0/5 evidence-supported family selections, 5/5 zero-discrimination selections.
+
+The order-inverted arm is particularly important: the Skeptic identified the zero-discrimination defect at high severity in 5/5 runs, yet all five frozen decisions still committed. V4 therefore supports a rule-design result rather than an autonomy claim: **rule content and rule order are causal parts of scientific decision quality, while critique without decision authority is diagnostic rather than corrective.**
+
+Do not overwrite or retroactively relabel the V3 frozen records. V3 remains the provenance-preserving predecessor; V4 is the current manuscript upgrade.
 
 ## 11. Manuscript non-negotiables
 
@@ -404,6 +416,6 @@ These are author-level constraints for future manuscript revisions and should no
 - **Do not introduce `n_targets = 1` framing or equivalent language as a manuscript limitation.** Do not foreground the benchmark by reducing it to a target-count disclaimer.
 - **Do not further weaken the current V3 mechanism interpretation.** Preserve the present balance: the resin-modified formulation is consistent with a lower effective concentration of reaction-capable material during thermal holding, while direct molecular-level measurements were not collected. Do not rewrite this into a more defensive or less informative statement unless new evidence requires it.
 - **Preserve the verified experimental metadata consistently across manuscript, figures and repository:** viscosity is reported in mPa·s from the RV-SSR-H/NKY-25 setup with No. 27 spindle, variable speed at approximately 40–60% torque and 15 min equilibration per temperature.
-- **Retain and, where appropriate, foreground the rule/model attribution result:** approximately **94% of the numerical distance improvement arose from the transparent deterministic scientific policy**, with the language-model layer performing evidence integration and final selection inside the admissible decision region.
+- **Retain rule/model attribution without conflation.** Preserve the V3 result that approximately **94% of the numerical distance improvement arose from transparent deterministic scientific policy**, and foreground the stronger V4 controlled-ablation result: removing the VOI score or inverting rule order collapses hypothesis-discriminating composition choice even with the same model, prompts and evidence contract.
 - Keep the current hierarchy of evidence: local experiment establishes the rheological structure and failure mode; external PUR evidence defines plausible intervention regions; deterministic scientific policy constrains the decision geometry; the language model operates inside that geometry; wet-lab results provide physical adjudication.
 
