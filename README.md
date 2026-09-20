@@ -395,7 +395,7 @@ Not claimed:
 
 ### Agent V4 manuscript line
 
-The audited V3 manuscript remains frozen and preserved in `manuscript/MAIN_TEXT_V3.md`. `manuscript/MAIN_TEXT_V4.md` preserves the completed rule-grounded Agent manuscript line. The active canonical manuscript candidate is now `manuscript/MAIN_TEXT_V5.md`, which fuses the material and Agent sections into one closed scientific loop from rheological-state identification to hypothesis-discriminating experiment selection and wet-lab adjudication.
+The audited V3 manuscript remains frozen and preserved in `manuscript/MAIN_TEXT_V3.md`. `manuscript/MAIN_TEXT_V4.md` preserves the completed rule-grounded Agent manuscript line. The active canonical manuscript candidate is now `manuscript/MAIN_TEXT_V5.md`, with its aligned supporting document in `manuscript/SUPPLEMENTARY_INFORMATION_V5.md`. V5 fuses the material and Agent sections into one closed scientific loop from rheological-state identification to hypothesis-discriminating experiment selection and wet-lab adjudication.
 
 V4 changes the decision unit from a formulation candidate to an **experiment card = formulation × measurement plan** (73 × 4 = 292 cards) while keeping the same Planner → Evidence/Tool Layer → Proposer → Skeptic → Robustness Adjudicator → Judge → Freeze sequence. The deterministic VOI tool, registered hypotheses and measurement catalog are explicit scientific rules rather than additional language-model stages.
 
