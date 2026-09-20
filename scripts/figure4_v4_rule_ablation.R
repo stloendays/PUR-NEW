@@ -176,7 +176,7 @@ pC <- ggplot(measure_df, aes(x = arm, y = rate)) +
     labels = percent_format(accuracy = 1)
   ) +
   labs(
-    title = "C  Failure-mode measurement is more robust than composition choice",
+    title = "C  Measurement choice survives score withholding but not order inversion",
     subtitle = "Matched-window 120 °C hold selection",
     x = NULL, y = "Selection rate"
   ) +
