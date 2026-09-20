@@ -83,6 +83,12 @@ def main() -> None:
         help="run the whole series in the ablated arm with the deterministic rule layer withheld",
     )
     parser.add_argument(
+        "--rule-order",
+        choices=["sufficiency_first", "minimality_first"],
+        default=None,
+        help="run the whole series under a named deterministic rule ORDER",
+    )
+    parser.add_argument(
         "--max-new-runs",
         type=int,
         default=None,
@@ -131,7 +137,12 @@ def main() -> None:
         "candidate_set_sha256": sha256_file(args.candidate_set.resolve()),
         "evidence_state_sha256": sha256_file(args.evidence_state.resolve()),
         "series_input_hashes": {name: sha256_file(ROOT / name) for name in SERIES_INPUT_FILES},
-        "arm": "voi_withheld" if args.withhold_voi_scores else "full_v4",
+        "arm": (
+            "voi_withheld"
+            if args.withhold_voi_scores
+            else (f"rule_order_{args.rule_order}" if args.rule_order else "full_v4")
+        ),
+        "rule_order": args.rule_order,
         "voi_scores_withheld_from_model": bool(args.withhold_voi_scores),
         "reporting_rule": (
             "Every attempted run is reported. The denominator for any rate is n_runs_declared, "
@@ -192,6 +203,8 @@ def main() -> None:
         ]
         if args.withhold_voi_scores:
             cmd.append("--withhold-voi-scores")
+        if args.rule_order:
+            cmd.extend(["--rule-order", args.rule_order])
         proc = subprocess.run(cmd, cwd=ROOT, env=full_env, capture_output=True, text=True)
         finished = utc_now()
         frozen = sorted(run_dir.glob("EXP_V4_*/recommendation.json"))

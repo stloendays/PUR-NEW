@@ -1,0 +1,2254 @@
+{
+  "architecture": {
+    "architecture_principles": [
+      "the unit of decision is an experiment, not a formulation",
+      "value of information is computed by a deterministic scientific tool, not by an additional language model",
+      "every registered hypothesis carries an explicit pre-result prediction rule and an explicit falsification condition",
+      "a measurement that cannot separate any registered hypothesis scores zero discrimination, and that is a scientific result rather than a defect",
+      "weight sensitivity is reported as decision stability, never as model confidence",
+      "ties in the deterministic layer are reported as ties; the tool must not manufacture a preference it does not have",
+      "held-out result data are structurally removed before any payload is assembled",
+      "the mechanism question and the Agent framework are separate contributions and are reported separately"
+    ],
+    "blinded_target_formulation_ids": [
+      "F1"
+    ],
+    "candidate_space": {
+      "n_nodes": 73,
+      "rationale": "V4 deliberately reuses the byte-identical V3 lattice. Continuous-space optimization and any new wet-lab work are out of scope, so that the measured change between V3 and V4 is the decision object and the VOI layer, not the search space.",
+      "reuse": "derived/stage1_blind_candidate_space_v1.json"
+    },
+    "canonical_flow": "planner(intent + failure mode) -> evidence/tool layer (including the deterministic VOI tool) -> proposer -> skeptic -> robustness adjudicator -> judge -> freeze",
+    "claim_boundary": "V4.0.0 selects an experiment from pre-result evidence under an outcome-blind runtime. Its adjudication tests whether a registered hypothesis survives contact with the completed measurement. It is not a contemporaneous pre-experimental record and does not claim that the historical decision used this ranking.",
+    "default_evidence_profile": "blind_pre_result",
+    "experiment_card_required_fields": [
+      "formulation candidate",
+      "measurement plan",
+      "scientific hypothesis set addressed",
+      "primary observable",
+      "acceptance criterion",
+      "falsification criterion"
+    ],
+    "hypothesis_registry": "configs/hypothesis_registry.json",
+    "measurement_catalog": "configs/measurement_catalog.json",
+    "name": "PUR_NEW_VOI_GUIDED_EXPERIMENT_SELECTION_AGENT_V4",
+    "non_goals": [
+      "continuous-space formulation optimization",
+      "adding a language model to compute value of information",
+      "adding Agent roles beyond planner, tools, proposer, skeptic, robustness adjudicator, judge and freeze",
+      "turning the study into a pure AI benchmark",
+      "weakening or replacing the rheological mechanism result"
+    ],
+    "purpose": "Outcome-blind scientific decision Agent that selects the next formulation x measurement EXPERIMENT by transparent value of information, rather than selecting a formulation candidate alone.",
+    "stages": [
+      {
+        "id": "planner",
+        "prompt": "prompts/agent_v4_planner.txt",
+        "role": "identify the physical failure mode and the scientific question that the next experiment must answer, then request the evidence needed to judge experiments rather than formulations"
+      },
+      {
+        "id": "evidence_tool_layer",
+        "role": "execute read-only scientific tools, including the paper-derived state-aware rheology tool, external evidence retrieval, and the deterministic VOI tool that scores every formulation x measurement experiment card"
+      },
+      {
+        "id": "proposer",
+        "prompt": "prompts/agent_v4_proposer.txt",
+        "role": "propose the experiment with the highest scientific information value, stating the hypotheses it separates and what each possible outcome would establish"
+      },
+      {
+        "id": "skeptic",
+        "prompt": "prompts/agent_v4_skeptic.txt",
+        "role": "attack the proposed experiment on hypothesis coverage, confounding, interpretability of the primary observable, and whether the stated falsification criterion can actually be met by the measurement"
+      },
+      {
+        "id": "robustness_adjudicator",
+        "prompt": "prompts/agent_v4_robustness.txt",
+        "role": "adjudicate whether the proposed experiment survives the reported VOI weight sensitivity and the skeptic's strongest objection"
+      },
+      {
+        "id": "judge",
+        "prompt": "prompts/agent_v4_judge.txt",
+        "role": "commit to one experiment card, or abstain, and state the acceptance and falsification criteria that will adjudicate it"
+      },
+      {
+        "id": "freeze",
+        "role": "programmatically validate and freeze the experiment card with timestamps, model identifiers and cryptographic hashes of every input"
+      }
+    ],
+    "supersedes_nothing": "V4 is an independent architecture. configs/agent_v3.json, prompts/agent_v3_*.txt, src/pur_new/agent_v3.py and every frozen V3 run record remain unchanged and are not reinterpreted by V4.",
+    "unit_of_decision": "experiment_card",
+    "version": "4.0.0",
+    "voi_tool": {
+      "components_are_normalized_to_unit_interval": true,
+      "explicitly_not": "distance to any held-out formulation. No target coordinate enters any component, weight or tie-break.",
+      "formula": "VOI = w_hyp * hypothesis_discrimination + w_unc * uncertainty_reduction + w_dec * decision_relevance + w_int * measurement_interpretability - w_ext * extrapolation_risk - w_proc * process_state_risk",
+      "implementation": "src/pur_new/voi.py",
+      "is_a_language_model": false,
+      "is_deterministic": true,
+      "name": "score_experiment_cards",
+      "not_a_posterior": "The local design contains six audited realizations and two thermal-hold trajectories. That does not support a calibrated Bayesian expected-information computation, so no posterior probability is fabricated. Weight sensitivity is reported instead.",
+      "required_before_experiment_ranking": true
+    }
+  },
+  "candidate_set_hash": "54f825939d05a159b93eb39e98ccdd4d3a658b4a31fc8a5fff722770aadd24a1",
+  "decision_stability_sent_to_model": {
+    "ablation": "deterministic_rule_layer_withheld",
+    "decision_stability_withheld": true
+  },
+  "evidence_policy": {
+    "allow_external_evidence_hints": true,
+    "allow_follow_up_formulation_identity": false,
+    "allow_follow_up_hold_results": false,
+    "allow_original_hold_data": true,
+    "allow_original_temperature_sweeps": true,
+    "allow_post_result_adjudication": false,
+    "description": "For prospective/blind Agent evaluation. The Agent may see original-system measurements and external analogue evidence, but not the target validation formulation identity, its wet-lab outcome, or any outcome-derived labels."
+  },
+  "evidence_profile": "blind_pre_result",
+  "filtered_evidence_hash": "f6211d435a2e59cfc62cbe5bb1d0619cdbb19a4977ef4f0ec440d72111963cb4",
+  "judge_normalization": {
+    "applied": false,
+    "notes": []
+  },
+  "judge_normalized": {
+    "acceptance_criterion": "With at least two independent preparations and fully recorded process histories, the repeat-mean SI_15_60 is between 7.51% and 11.51% inclusive, corresponding to agreement within \u00b12.00 percentage points of the 9.51% linear-dilution prediction for reactive mass fraction 1.0000. This supports H-CORE at the declared measurement resolution; it does not establish either modifier hypothesis.",
+    "decision_mode": "discriminating_probe",
+    "falsification_criterion": "If the repeat-mean SI_15_60 is below 7.51%, H-CORE is falsified because the drift is more than 2.00 percentage points below its 9.51% prediction. A mean at or above 7.51% does not falsify H-CORE in this core-only experiment. No SI_15_60 outcome from this experiment can falsify H-RESIN or H-DUAL because neither modifier axis is active; repeat-to-repeat spread exceeding 2.00 percentage points instead indicates unresolved realization-state variation rather than hypothesis falsification.",
+    "hypotheses_addressed": [
+      "H-CORE"
+    ],
+    "hypotheses_left_entangled": [
+      "H-RESIN",
+      "H-DUAL"
+    ],
+    "next_experiment_if_falsified": "Run controlled matched-reactive-mass-fraction 120 C holds using the E2 core with independently active acrylic-like and minor-tackifier-like axes, including acrylic-only, tackifier-only, and preferably combined-modifier compositions, with the same 15-60 minute SI_15_60 protocol and start-viscosity and process-history recording.",
+    "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent, reported for each repeat and as the repeat mean",
+    "rationale": "The E2-centre reactive core is the cleanest available baseline for testing whether the observed 9.51% drift reference is reproducible at matched reactive mass fraction. The hold measurement directly observes the declared failure mode, while the amended criteria prevent the invalid modifier attribution identified by the Skeptic. Modifier hypotheses remain deliberately unresolved and require subsequent matched-axis comparisons.",
+    "selected_candidate_id": "S1C02",
+    "selected_experiment_id": "S1C02::M-HOLD-120",
+    "selected_measurement_id": "M-HOLD-120",
+    "stage_disagreements_resolved": "Followed the Robustness Adjudicator and Proposer in selecting the E2-centre baseline S1C02::M-HOLD-120 because it directly measures the least-resolved failure coordinate and is the least compositionally confounded core-only card. Followed the Skeptic's correction on interpretation: the card is treated only as a baseline probe of H-CORE, and no modifier-specific conclusion is assigned to H-RESIN or H-DUAL.",
+    "uncertainty_decomposition": {
+      "evidence_coverage_uncertainty": "High for H-RESIN and H-DUAL because both modifier axes are absent; low for the E2 reactive-core baseline and H-CORE prediction.",
+      "extrapolation_uncertainty": "Low for the primary observable because SI_15_60 is measured directly in the established 120 C, 15-60 minute window without model fitting or time extrapolation; comparison to E1 remains confounded by different reactive-core composition.",
+      "measurement_uncertainty": "The declared discrimination resolution is 2.00 percentage points for SI_15_60; at least two independent repeats are required, with viscosity recorded at 15, 30, 45, and 60 minutes.",
+      "realization_state_uncertainty": "Moderate and unresolved: M-HOLD-120 does not control process state, while prior E2 realizations showed a 2.80-3.57x viscosity-scale spread. Record mixing, thermal history, sample age, handling, and hold-start viscosity."
+    }
+  },
+  "judge_raw": {
+    "acceptance_criterion": "With at least two independent preparations and fully recorded process histories, the repeat-mean SI_15_60 is between 7.51% and 11.51% inclusive, corresponding to agreement within \u00b12.00 percentage points of the 9.51% linear-dilution prediction for reactive mass fraction 1.0000. This supports H-CORE at the declared measurement resolution; it does not establish either modifier hypothesis.",
+    "decision_mode": "discriminating_probe",
+    "falsification_criterion": "If the repeat-mean SI_15_60 is below 7.51%, H-CORE is falsified because the drift is more than 2.00 percentage points below its 9.51% prediction. A mean at or above 7.51% does not falsify H-CORE in this core-only experiment. No SI_15_60 outcome from this experiment can falsify H-RESIN or H-DUAL because neither modifier axis is active; repeat-to-repeat spread exceeding 2.00 percentage points instead indicates unresolved realization-state variation rather than hypothesis falsification.",
+    "hypotheses_addressed": [
+      "H-CORE"
+    ],
+    "hypotheses_left_entangled": [
+      "H-RESIN",
+      "H-DUAL"
+    ],
+    "next_experiment_if_falsified": "Run controlled matched-reactive-mass-fraction 120 C holds using the E2 core with independently active acrylic-like and minor-tackifier-like axes, including acrylic-only, tackifier-only, and preferably combined-modifier compositions, with the same 15-60 minute SI_15_60 protocol and start-viscosity and process-history recording.",
+    "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent, reported for each repeat and as the repeat mean",
+    "rationale": "The E2-centre reactive core is the cleanest available baseline for testing whether the observed 9.51% drift reference is reproducible at matched reactive mass fraction. The hold measurement directly observes the declared failure mode, while the amended criteria prevent the invalid modifier attribution identified by the Skeptic. Modifier hypotheses remain deliberately unresolved and require subsequent matched-axis comparisons.",
+    "selected_candidate_id": "S1C02",
+    "selected_experiment_id": "S1C02::M-HOLD-120",
+    "selected_measurement_id": "M-HOLD-120",
+    "stage_disagreements_resolved": "Followed the Robustness Adjudicator and Proposer in selecting the E2-centre baseline S1C02::M-HOLD-120 because it directly measures the least-resolved failure coordinate and is the least compositionally confounded core-only card. Followed the Skeptic's correction on interpretation: the card is treated only as a baseline probe of H-CORE, and no modifier-specific conclusion is assigned to H-RESIN or H-DUAL.",
+    "uncertainty_decomposition": {
+      "evidence_coverage_uncertainty": "High for H-RESIN and H-DUAL because both modifier axes are absent; low for the E2 reactive-core baseline and H-CORE prediction.",
+      "extrapolation_uncertainty": "Low for the primary observable because SI_15_60 is measured directly in the established 120 C, 15-60 minute window without model fitting or time extrapolation; comparison to E1 remains confounded by different reactive-core composition.",
+      "measurement_uncertainty": "The declared discrimination resolution is 2.00 percentage points for SI_15_60; at least two independent repeats are required, with viscosity recorded at 15, 30, 45, and 60 minutes.",
+      "realization_state_uncertainty": "Moderate and unresolved: M-HOLD-120 does not control process state, while prior E2 realizations showed a 2.80-3.57x viscosity-scale spread. Record mixing, thermal history, sample age, handling, and hold-start viscosity."
+    }
+  },
+  "llm_usage_by_stage": {
+    "judge": {
+      "completion_tokens": 1878,
+      "latency_s": 48.22146499999508,
+      "model": "gpt-5.6-luna",
+      "prompt_tokens": 23921,
+      "total_tokens": 25799
+    },
+    "planner": {
+      "completion_tokens": 1412,
+      "latency_s": 28.23726650000026,
+      "model": "gpt-5.6-luna",
+      "prompt_tokens": 5680,
+      "total_tokens": 7092
+    },
+    "proposer": {
+      "completion_tokens": 1660,
+      "latency_s": 38.23740889999317,
+      "model": "gpt-5.6-luna",
+      "prompt_tokens": 21031,
+      "total_tokens": 22691
+    },
+    "robustness_adjudicator": {
+      "completion_tokens": 1157,
+      "latency_s": 27.002565200004028,
+      "model": "gpt-5.6-luna",
+      "prompt_tokens": 23280,
+      "total_tokens": 24437
+    },
+    "skeptic": {
+      "completion_tokens": 2146,
+      "latency_s": 54.81875169998966,
+      "model": "gpt-5.6-luna",
+      "prompt_tokens": 22043,
+      "total_tokens": 24189
+    }
+  },
+  "llm_usage_total": {
+    "completion_tokens": 8253,
+    "llm_calls": 5,
+    "llm_latency_s": 196.5174572999822,
+    "prompt_tokens": 95955,
+    "total_tokens": 104208
+  },
+  "planner": {
+    "action_requests": [
+      {
+        "args": {},
+        "name": "get_state_aware_rheology_summary",
+        "reason": "Load the upstream formulation-versus-state rheology evidence, state-shift structure, thermal-response regularities, and measurement implications before ranking candidate experiments."
+      },
+      {
+        "args": {},
+        "name": "get_candidate_hypothesis",
+        "reason": "Retrieve the evidence-derived candidate-space axes and E2 reactive-core anchor needed to define a matched reactive-mass-fraction experiment without using the blinded follow-up identity."
+      },
+      {
+        "args": {
+          "formulation_id": "E1"
+        },
+        "name": "get_hold_stability",
+        "reason": "Retrieve the complete original low-drift 120 C trajectory and deterministic descriptors for the local reference baseline."
+      },
+      {
+        "args": {
+          "formulation_id": "E5"
+        },
+        "name": "get_hold_stability",
+        "reason": "Retrieve the complete original high-drift 120 C trajectory for comparison with the low-drift reference and for calibrating the matched-window failure criterion."
+      },
+      {
+        "args": {
+          "candidate_space_role": null,
+          "max_rows": 20,
+          "modifier_type": null
+        },
+        "name": "query_external_priors",
+        "reason": "The local hold evidence is sparse across modifier axes; source-level analogue evidence is needed to determine whether acrylic-like or tackifier-like composition changes provide a defensible mechanistic contrast."
+      }
+    ],
+    "failure_mode": "Thermal-hold viscosity growth during prolonged residence at 120 C",
+    "failure_mode_evidence": "The original E5 formulation increased by 51.54% from 15 to 60 minutes and 93.08% from 15 to 90 minutes, compared with 9.51% and 16.85% for E1 under the same 120 C hold.",
+    "least_resolved_coordinate": "isothermal time trajectory",
+    "least_resolved_justification": "Only one original hold run is available for each of E1 and E5, with four time points over 15-90 minutes and no repeated matched-window trajectory for a modifier-axis comparison. The temperature response has seven measured runs over 80-130 C, while the realized viscosity level has descriptive E2 repeat data showing a large 2.80-3.57x spread.",
+    "measurement_requirements": [
+      "Measure viscosity at 120 C at 15, 30, 45, and 60 minutes and report the matched-window SI_15_60 relative change.",
+      "Run at least two independent preparations under the same fully recorded thermal and mixing history.",
+      "Compare the observed drift with the pre-specified linear-dilution prediction using the measured reactive mass fraction, without extrapolating beyond the measured 15-60 minute window.",
+      "Record the realized viscosity level at the hold start so drift is not conflated with preparation-state displacement."
+    ],
+    "scientific_question": "At a matched reactive mass fraction and 120 C hold window, does a resin-modified composition suppress viscosity drift substantially below the linear mass-dilution prediction, thereby separating the reactive-core/stoichiometry-only hypothesis from the resin-modification/superlinear-suppression hypothesis?"
+  },
+  "proposer": {
+    "candidate_id": "S1C02",
+    "hypotheses_not_separated": [
+      "H-CORE: this reactive-core-only experiment provides no modifier contrast and therefore cannot distinguish stoichiometry-only behavior from modifier effects.",
+      "H-RESIN: no acrylic-like or minor-tackifier-like resin is present, so resin-modification suppression is not directly tested.",
+      "H-DUAL: no minor tackifier axis is active, so this experiment cannot determine whether tackifier addition is required for low drift."
+    ],
+    "hypotheses_separated": [],
+    "intervention_family": "reactive_core_only",
+    "measurement_id": "M-HOLD-120",
+    "outcome_interpretation": {
+      "if_acceptance_criterion_met": "If SI_15_60 remains below 4.75% across at least two repeats, the card's registered rule accepts H-RESIN over H-CORE and indicates drift below the stated linear-dilution reference; however, because this composition contains no modifier, the result would not establish a modifier-specific mechanism and would also falsify the registered H-DUAL condition for acrylic-only/no-tackifier low drift.",
+      "if_falsification_criterion_met": "If SI_15_60 is at or above 9.51%, H-RESIN is falsified for this comparison and the result is consistent with the reactive-core linear-dilution reference; if drift is below 4.75%, H-CORE is falsified under the registered resolution rule.",
+      "if_intermediate": "A drift between 4.75% and 9.51%, or repeat-to-repeat overlap with either boundary, would be nonseparating at the declared 2.00% resolution and would leave H-CORE and H-RESIN unresolved."
+    },
+    "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+    "proposed_experiment_id": "S1C02::M-HOLD-120",
+    "ranked_alternatives": [
+      {
+        "experiment_id": "S1C01::M-HOLD-120",
+        "why_lower_value": "Uses a non-centre local reactive core and is therefore more confounded by stoichiometric or composition variation than the E2 anchor."
+      },
+      {
+        "experiment_id": "S1C03::M-HOLD-120",
+        "why_lower_value": "Uses a stoichiometric perturbation away from the E2 centre without adding modifier-axis information."
+      },
+      {
+        "experiment_id": "S1C04::M-HOLD-120",
+        "why_lower_value": "Changes reactive-core composition while leaving all modifier axes inactive, reducing baseline interpretability for the resin hypotheses."
+      },
+      {
+        "experiment_id": "S1C05::M-HOLD-120",
+        "why_lower_value": "Changes reactive-core composition while leaving all modifier axes inactive, so it cannot separate the registered modifier hypotheses."
+      },
+      {
+        "experiment_id": "S1C06::M-HOLD-120",
+        "why_lower_value": "Interpolated reactive-core composition adds no supported intervention contrast and is less directly anchored than E2."
+      },
+      {
+        "experiment_id": "S1C07::M-HOLD-120",
+        "why_lower_value": "Interpolated reactive-core composition adds no supported intervention contrast and is less directly anchored than E2."
+      },
+      {
+        "experiment_id": "S1C08::M-HOLD-120",
+        "why_lower_value": "Interpolated reactive-core composition adds no supported intervention contrast and is less directly anchored than E2."
+      },
+      {
+        "experiment_id": "S1C09::M-HOLD-120",
+        "why_lower_value": "Interpolated reactive-core composition adds no supported intervention contrast and is less directly anchored than E2."
+      }
+    ],
+    "reasoning": "The deterministic layer reports a genuine tie among these direct matched-window hold experiments. All have identical tool components and separate no registered hypothesis pairs, so the selection is based on scientific interpretability rather than card ordering. E2 is the characterized geometric-centre reactive-core anchor, and M-HOLD-120 directly measures the least-resolved failure coordinate without model fitting or extrapolation. The experiment is therefore best treated as a clean baseline, while explicitly acknowledging that it cannot itself adjudicate the modifier hypotheses.",
+    "tie_break_justification": "S1C02 uses the E2 reactive-core anchor, identified as the geometric centre of the characterized local design. It therefore provides the least compositionally confounded direct 120 C hold baseline among the tied cards and is preferable to the E1/E3 stoichiometric or E4/E5 composition perturbations for interpreting the linear-dilution reference.",
+    "tie_broken_from_set": [
+      "S1C01::M-HOLD-120",
+      "S1C02::M-HOLD-120",
+      "S1C03::M-HOLD-120",
+      "S1C04::M-HOLD-120",
+      "S1C05::M-HOLD-120",
+      "S1C06::M-HOLD-120",
+      "S1C07::M-HOLD-120",
+      "S1C08::M-HOLD-120",
+      "S1C09::M-HOLD-120"
+    ]
+  },
+  "recommendation_id": "EXP_V4_20260920T042242Z_fcc21dacb8",
+  "robustness_adjudication": {
+    "change_from_proposal": null,
+    "departure_from_deterministic_ranking": null,
+    "preferred_candidate_id": "S1C02",
+    "preferred_experiment_id": "S1C02::M-HOLD-120",
+    "preferred_measurement_id": "M-HOLD-120",
+    "proposal_in_deterministic_top_set": true,
+    "residual_decision_risk": [
+      "The experiment cannot discriminate H-RESIN or H-DUAL without matched acrylic-like and minor-tackifier-like modifier comparisons.",
+      "Any comparison with the E1 9.51% drift reference remains confounded by reactive-core formulation differences.",
+      "Uncontrolled realization-state variation may affect the hold trajectory because M-HOLD-120 does not itself control process state.",
+      "The 4.75% and 9.51% thresholds are numerically resolvable but do not repair the missing intervention contrast.",
+      "The decision-stability sweep was withheld, so sensitivity to weight perturbations remains unquantified."
+    ],
+    "skeptic_objection_effect": "changes_only_interpretation",
+    "skeptic_objection_reasoning": "The strongest objection is valid: S1C02 has no acrylic-like or minor-tackifier-like modifier, so its result cannot test H-RESIN or H-DUAL, and drift below 4.75% cannot validly accept H-RESIN or falsify H-DUAL. It also cannot attribute deviation from the E1 9.51% reference to resin modification because the tested E2 core differs from E1. However, the direct 120 C matched-window hold remains an appropriate E2 reactive-core baseline for the stated failure coordinate. The objection therefore changes the permissible interpretation and requires matched modifier-containing comparisons as additional experiments, rather than invalidating this baseline experiment.",
+    "stability_is_not_confidence_acknowledged": true,
+    "weight_sensitivity_assessment": "The proposal is in the tied deterministic top set of S1C01-S1C09 for M-HOLD-120. The supplied payload withholds the decision-stability sweep, so top_experiment_set_stability, base_margin_to_first_strictly_lower, and recommendation_flip_boundary are unavailable. No specific weight perturbation or its scientific defensibility can therefore be identified. The tie reflects equivalent score components among the listed core-only hold cards; the E2 anchor is scientifically defensible as the least compositionally confounded baseline."
+  },
+  "rule_order": "minimality_first",
+  "skeptic": {
+    "falsification_criterion_assessment": "SI_15_60 is directly measurable at 15, 30, 45, and 60 minutes, and the 4.75% versus 9.51% thresholds are separated by more than the declared 2.00% resolution. However, the protocol lacks the required modifier contrast: it measures only the E2 reactive core. Consequently, it can produce a drift value but cannot validly meet the stated hypothesis-level falsification criterion for H-RESIN or H-DUAL.",
+    "falsification_criterion_attainable": false,
+    "leakage_findings": [],
+    "objections": [
+      {
+        "attack_surface": "hypothesis_coverage",
+        "consequence_if_ignored": "A low drift result could be attributed to the unmodified E2 reactive core or realization state rather than resin modification, so acceptance of H-RESIN and falsification of H-DUAL would be invalid.",
+        "objection": "The selected S1C02 formulation is reactive-core-only: AC1920 and TK100 are both 0.0%, with reactive mass fraction 1.0000. Therefore its M-HOLD-120 result cannot compare a resin-modified composition with the H-CORE prediction, cannot test H-RESIN's resin-specific prediction, and cannot test H-DUAL's claim about acrylic-only versus tackifier-containing compositions. The proposer correctly lists all three hypotheses as unseparated, but the outcome_interpretation and acceptance criterion nevertheless state that drift below 4.75% accepts H-RESIN over H-CORE and falsifies H-DUAL. Those claims are not supported by this composition.",
+        "severity": "high"
+      },
+      {
+        "attack_surface": "confounding",
+        "consequence_if_ignored": "Deviation from the 9.51% linear-dilution reference could be incorrectly interpreted as evidence for or against resin suppression when it may instead reflect intrinsic E1/E2 reactive-core differences.",
+        "objection": "Although S1C02 does not move the acrylic_like or minor_tackifier_like axes, its comparison is against E1_drift_15_60 = 9.51% while the tested composition is E2, a different reactive-core formulation. Thus any E2-versus-E1 drift difference is confounded with reactive-core composition or stoichiometric differences, even though both have reactive mass fraction 1.0000. The experiment cannot attribute such a difference to either modifier mechanism because neither modifier is present.",
+        "severity": "moderate"
+      },
+      {
+        "attack_surface": "confounding",
+        "consequence_if_ignored": "A repeat-to-repeat drift difference or a value crossing 4.75% or 9.51% could reflect preparation-state displacement rather than the tested hypothesis.",
+        "objection": "The M-HOLD-120 plan requires at least two independent repeats but does not specify the process controls needed to suppress the documented realization-state variation. The candidate record explicitly gives process_state_risk_detail.controls_process_state = false, missing_process_fields = 6, and risk_level = moderate. The prior E2 data show a 2.80-3.57x realized viscosity-scale spread, which can affect the hold trajectory independently of formulation.",
+        "severity": "moderate"
+      },
+      {
+        "attack_surface": "falsifiability",
+        "consequence_if_ignored": "The experiment may produce a numerically decisive drift value while still failing to provide a valid hypothesis-level falsification.",
+        "objection": "The numerical thresholds are measurable, but the stated falsification logic is not valid for S1C02. Specifically, the card says H-RESIN is falsified if SI_15_60 is at or above 9.51% and H-CORE is falsified if it is below 4.75%, yet H-RESIN is registered as a hypothesis about a resin-modified composition and H-DUAL requires an active acrylic or tackifier axis. A core-only result cannot falsify either modifier hypothesis. The 4.76 percentage-point gap between 4.75% and 9.51% exceeds the declared 2.00% resolution, but resolution does not repair the missing intervention contrast.",
+        "severity": "high"
+      },
+      {
+        "attack_surface": "leakage_and_scope",
+        "consequence_if_ignored": "The principal risk is overclaiming modifier attribution, not contamination by post-result knowledge or an unsupported molecular mechanism.",
+        "objection": "No outcome leakage is evident: the payload states that validation identity and outcome were withheld, and the selection uses the pre-result E2 anchor and original E1/E5 data. The scope is also appropriately formulation-level; the registry explicitly disclaims molecular pathway inference. The remaining issue is internal scope inconsistency, not leakage: the outcome_interpretation assigns modifier-specific conclusions to a formulation with no modifier.",
+        "severity": "low"
+      }
+    ],
+    "recommended_change": "Retain the E2 reactive-core-only hold as a baseline, but add matched-reactive-mass-fraction compositions with independently active modifier axes: at minimum an acrylic-only composition, a minor-tackifier-only composition, and preferably the acrylic-plus-tackifier combination. Preserve the E2 core proportions, recalculate stoichiometry if either modifier is reactive, use the same 120 C 15-60 minute protocol, record all process-history fields and start viscosity, and predefine comparisons against the E2 control. This is required to test H-RESIN and to distinguish the H-DUAL axis claim.",
+    "strongest_objection": "S1C02 contains 0.0% acrylic-like modifier and 0.0% minor tackifier-like modifier, so its M-HOLD-120 result cannot test H-RESIN or H-DUAL. Nevertheless, the registered acceptance and falsification rules claim that values below 4.75% accept H-RESIN over H-CORE and falsify H-DUAL. The experiment therefore cannot deliver the hypothesis discrimination claimed by its own outcome_interpretation.",
+    "unseparated_hypotheses_correctly_declared": true
+  },
+  "stage_models": {
+    "judge": "gpt-5.6-luna",
+    "planner": "gpt-5.6-luna",
+    "proposer": "gpt-5.6-luna",
+    "robustness_adjudicator": "gpt-5.6-luna",
+    "skeptic": "gpt-5.6-luna"
+  },
+  "tool_trace": [
+    {
+      "args": {},
+      "name": "get_state_aware_rheology_summary",
+      "reason": "Load the upstream formulation-versus-state rheology evidence, state-shift structure, thermal-response regularities, and measurement implications before ranking candidate experiments.",
+      "result": {
+        "claim_boundaries": [
+          "The shared-shape/state-shift structure is established only within the measured local chemistry family.",
+          "The apparent E_eta descriptor is rheological, not a chemical reaction activation energy.",
+          "The E1/E5 hold contrast does not identify a unique molecular mechanism.",
+          "The phosphoric-acid-labelled E1 +P curve is not used in the chemistry-audited primary state model.",
+          "No validation-formulation identity or outcome is used by this tool."
+        ],
+        "design_rules": [
+          "Represent a candidate as formulation plus process/realization state, not composition alone.",
+          "Use one state-specific anchor measurement to locate a new realization or nearby local formulation on the transferable thermal-response shape when it remains inside the supported local chemistry family.",
+          "Treat static viscosity, temperature response and thermal-hold stability as separate decision variables.",
+          "When the failure mode is hot-hold drift, choose an experiment and measurement window that directly test drift rather than only matching one nominal viscosity value.",
+          "Use external resin/tackifier evidence to define chemically plausible directions, but do not convert analogue proximity into a predicted local outcome."
+        ],
+        "discovered_patterns": {
+          "one_point_state_calibration": {
+            "at_120c_by_held_formulation": [
+              {
+                "anchor_temperature_c": 120.0,
+                "held_formulation": "E1",
+                "multiplicative_error": 1.0283129275650704,
+                "n_held_realizations": 1
+              },
+              {
+                "anchor_temperature_c": 120.0,
+                "held_formulation": "E2",
+                "multiplicative_error": 1.1193080015618968,
+                "n_held_realizations": 4
+              },
+              {
+                "anchor_temperature_c": 120.0,
+                "held_formulation": "E3",
+                "multiplicative_error": 1.0485684389735062,
+                "n_held_realizations": 1
+              }
+            ],
+            "interpretation": "Within the tested local chemistry family, one state-specific viscosity anchor can locate a previously held-out nominal formulation on the shared thermal-response shape to roughly 6-10% pooled multiplicative error.",
+            "pooled_multiplicative_error_factor_range": [
+              1.0634272932908189,
+              1.0993627853895234
+            ],
+            "validation_scheme": "leave one nominal formulation out; fit shared shape on the remaining formulations; use one anchor from the held formulation"
+          },
+          "state_shift_master_curve": {
+            "formulation_only_r2": 0.8552902504035749,
+            "held_temperature_formulation_only_error_factor": 1.423137407365512,
+            "held_temperature_state_aware_error_factor": 1.057765405509988,
+            "interpretation": "Within the chemistry-audited local family, a realization-specific viscosity-scale intercept plus a shared quadratic inverse-temperature response closes the data far better than a formulation-level intercept using the same thermal basis.",
+            "model_free_check": {
+              "n_complete_realizations": 6,
+              "pc1_constant_vertical_shift_cosine_similarity": 0.9998144622544136,
+              "pc1_explained_between_realization_variance_fraction": 0.9963223664910995
+            },
+            "n_formulations": 3,
+            "n_points": 36,
+            "n_realizations": 6,
+            "positive_model": "ln(eta_fr(T)) = a_fr + beta1*z(T) + beta2*z(T)^2 + epsilon",
+            "state_aware_shared_shape_r2": 0.9976662109445803
+          },
+          "temporal_stability_coordinate": {
+            "E1": {
+              "linear_lneta_r2": 0.999373608411799,
+              "linear_lneta_slope_per_h": 0.12520692059649297,
+              "si_15_to_60": 0.09510371102017776,
+              "si_15_to_90": 0.16847749400310424
+            },
+            "E5": {
+              "linear_lneta_r2": 0.9972395361555855,
+              "linear_lneta_slope_per_h": 0.5374903752362252,
+              "si_15_to_60": 0.5153846153846153,
+              "si_15_to_90": 0.9307692307692308
+            },
+            "E5_to_E1_drift_coefficient_ratio": 4.292816824146702,
+            "interpretation": "Original E1 and E5 hold trajectories show that thermal-hold viscosity drift is strongly formulation dependent and should be treated separately from static viscosity."
+          },
+          "thermal_coordinate": {
+            "cv_apparent_E_eta": 0.057684500815895386,
+            "interpretation": "The apparent temperature-sensitivity descriptor remains comparatively concentrated after chemistry auditing; it is a rheological descriptor, not a molecular reaction activation energy.",
+            "mean_apparent_E_eta_kJ_mol": 42.05161614633847,
+            "median_curve_r2": 0.9924321190895142,
+            "n_realizations": 6,
+            "sd_apparent_E_eta_kJ_mol": 2.425726485903181
+          }
+        },
+        "experiment_design_implications": {
+          "hold_window": "For the current local study, 120 C and the common 15-60 min window directly interrogate the observed instability while matching the available validation window.",
+          "selection_target": "Select a formulation-process point that is informative about the observed instability and state uncertainty, not merely the closest static-viscosity value.",
+          "state_anchor": "A single in-range anchor can be used for efficient local curve calibration; 120 C is operationally attractive because it is also the hold-stability test temperature."
+        },
+        "provenance_audit": {
+          "day1_parent_sample_relation": "unknown in compact source metadata",
+          "excluded_from_primary_state_model": [
+            "E1__+P__day1_0"
+          ],
+          "reason": "The source record is phosphoric-acid-labelled and its additive identity/amount is not represented in formulations.csv; it is retained as sensitivity-only until chemistry is reconciled.",
+          "same_operator_labels": [
+            "GJJ",
+            "ZYX",
+            "CHH"
+          ]
+        },
+        "source_scope": "original pre-validation local measurements with chemistry-comparability audit",
+        "tool_name": "get_state_aware_rheology_summary",
+        "tool_version": "3.4-same-order-model-comparison",
+        "validation_formulation_visible": false
+      },
+      "status": "ok"
+    },
+    {
+      "args": {},
+      "name": "get_candidate_hypothesis",
+      "reason": "Retrieve the evidence-derived candidate-space axes and E2 reactive-core anchor needed to define a matched reactive-mass-fraction experiment without using the blinded follow-up identity.",
+      "result": {
+        "candidate_axes": {
+          "acrylic_like_modifier_pct_total": {
+            "direct_evidence_anchors_pct": [
+              19.37,
+              19.57,
+              19.78,
+              19.98,
+              25
+            ],
+            "evidence": [
+              "PAT_US20160215185A1: repeated acrylic tackifying resin examples at approximately 19-20% of total formulation",
+              "PAT_US6465104B1 Example 10: 25 wt% low-OH acrylic copolymer with direct 121 C viscosity-stability data",
+              "PAPER_CN_ADHESIVES_2025_34_09_54: reports a 15% preferred acrylic-resin addition level, retained as directional lower-bound evidence until its fraction denominator is reverified"
+            ],
+            "grid": [
+              0,
+              15,
+              20,
+              25
+            ],
+            "interpretation": "20 and 25% are directly commensurate coarse anchors in the current curated record. The 15% grid level is retained as a lower-bound design point, but the literature denominator for the reported 15% addition level is not treated as an exact total-formulation anchor until reverified.",
+            "provisional_noncommensurate_evidence_pct": [
+              15
+            ]
+          },
+          "minor_tackifier_like_modifier_pct_total": {
+            "direct_evidence_anchors_pct": [
+              4.8,
+              5.3,
+              5.7,
+              5.8,
+              5.9,
+              6.4
+            ],
+            "evidence": [
+              "PAT_US5932680A: examples around 4.8-6.4% tackifying/hydrocarbon resin and preferred resin range 3-10 wt%",
+              "PAT_US20070155859A1: tackifiers/rheology-control agents typically used below about 10 wt%"
+            ],
+            "grid": [
+              0,
+              5,
+              10
+            ],
+            "interpretation": "5% represents the repeatedly documented minor-resin region and 10% is a conservative coarse upper level."
+          }
+        },
+        "claim_boundary": "External examples are analogues. They support candidate-family and coarse-region hypotheses, not an exact optimum for AC1920/TK100 and not a proven local molecular mechanism. The current reconstruction uses only pre-result evidence at runtime; the exact validation coordinates and outcome are excluded from candidate construction, ranking and tie-breaking.",
+        "decision_policy": {
+          "claim_boundary": "This policy can recover an evidence-supported formulation neighborhood, but it is not a predictor of the exact wet-lab optimum.",
+          "evidence_region_policy": {
+            "acrylic_like": {
+              "basis": "15% directional lower-region evidence plus directly commensurate ~19-20% examples; 25% remains directly supported but is a larger perturbation.",
+              "broad_supported_region_pct_total": [
+                15,
+                25
+              ],
+              "conservative_initial_test_band_pct_total": [
+                15,
+                20
+              ]
+            },
+            "minor_tackifier_like": {
+              "basis": "Curated PUR examples repeatedly place tackifying/hydrocarbon resin near 5%, with broader guidance below about 10%.",
+              "broad_supported_region_pct_total": [
+                3,
+                10
+              ],
+              "repeated_minor_resin_cluster_pct_total": [
+                4.8,
+                6.4
+              ]
+            }
+          },
+          "experiment_intents": {
+            "causal_isolation": "Use when the primary objective is attribution of one formulation axis. Prefer a single active modifier axis only in this mode.",
+            "performance_mitigation": "Use when a measured failure mode is already established and the next experiment is intended to reduce that failure. Independently supported multi-modifier interventions are admissible.",
+            "uncertainty_resolution": "Use when missing process, stoichiometric or evidence information prevents an interpretable performance test."
+          },
+          "policy_id": "MINIMUM_SUFFICIENT_INTERVENTION_V1",
+          "purpose": "Select an experimentally informative intervention from pre-result evidence without treating a literature composition as the hidden optimum.",
+          "ranking_rules": [
+            "Exact distance to an external analogue anchor is audit metadata, not a primary optimization objective.",
+            "Candidates in the same evidence-support class are not rewarded merely for being numerically closer to a literature percentage.",
+            "For performance mitigation, two modifier axes may be combined when each is independently supported and the combination stays inside bounded evidence regions.",
+            "Among candidates with comparable evidence coverage and interpretability, prefer the smallest sufficient total modifier burden and the smallest justified departure from the characterized local chemistry.",
+            "A single-variable design is preferred only when causal attribution is the stated experiment intent; it is not a universal default.",
+            "Held-out validation coordinates and outcomes must never enter candidate construction, ranking or tie-breaking."
+          ]
+        },
+        "historical_status": {
+          "agent_validation_formulation_recommended_before_target_result_known": true,
+          "allowed_use": [
+            "outcome-blind preexperimental reconstruction",
+            "scientific rationale",
+            "candidate-space formalization",
+            "outcome-blind fine refinement",
+            "future prospective rounds"
+          ],
+          "current_exact_v2_grid_formalized_after_validation_experiment": true,
+          "current_fine_refinement_algorithm_formalized_after_validation_experiment": true,
+          "interpretation": "The prospective historical claim attaches to the Agent recommendation itself. The current coarse grid and fine-refinement software are later reproducible operationalizations of the evidence-constrained region and are not represented as the original contemporaneous freeze algorithm unless older provenance is recovered.",
+          "repository_freeze_artifact_available": false
+        },
+        "local_reactive_core_anchor": {
+          "formulation_id": "E2",
+          "normalized_core_fractions": {
+            "MDI": 0.2019067302,
+            "PDP70": 0.3990466349,
+            "PPG2000": 0.3990466349
+          },
+          "reason": "E2 is the geometric centre of the original five-point local design: 50/50 PPG2000/PDP-70 and NCO:OH=1.80, centered between E1/E3 stoichiometric perturbations and E4/E5 composition perturbations.",
+          "source_amounts": {
+            "MDI": 60.57,
+            "PDP70": 119.71,
+            "PPG2000": 119.71,
+            "unit": "g"
+          },
+          "stoichiometry_note": "The E2 NCO:OH=1.80 label applies to the original reactive core. If a modifier contributes reactive OH or another NCO-reactive group, true stoichiometry must be recalculated from verified material specifications."
+        },
+        "stability_hypotheses": {
+          "H1_formulation_family": "Partial replacement of the reactive-only formulation by an acrylic-like and/or minor tackifier-like resin can reduce hot-hold viscosity drift under matched process conditions.",
+          "H2_functionality": "At comparable acrylic loading, lower effective reactive-group density or lower-OH acrylic chemistry is expected to be more favorable for hot-hold viscosity stability than more highly reactive acrylic chemistry.",
+          "H3_region": "A useful candidate region is expected within the externally supported coarse space spanned by 15-25% acrylic-like modifier and 0-10% minor tackifier-like modifier, while preserving the relative E2 reactive-core proportions."
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "args": {
+        "formulation_id": "E1"
+      },
+      "name": "get_hold_stability",
+      "reason": "Retrieve the complete original low-drift 120 C trajectory and deterministic descriptors for the local reference baseline.",
+      "result": {
+        "formulation_id": "E1",
+        "result_visibility": "original_only",
+        "runs": [
+          {
+            "measurements": {
+              "15.0": 708.7,
+              "30.0": 728.6,
+              "60.0": 776.1,
+              "90.0": 828.1
+            },
+            "run_label": "GJJ",
+            "si_15_to_60": 0.09510371102017776,
+            "si_15_to_90": 0.16847749400310424
+          }
+        ]
+      },
+      "status": "ok"
+    },
+    {
+      "args": {
+        "formulation_id": "E5"
+      },
+      "name": "get_hold_stability",
+      "reason": "Retrieve the complete original high-drift 120 C trajectory for comparison with the low-drift reference and for calibrating the matched-window failure criterion.",
+      "result": {
+        "formulation_id": "E5",
+        "result_visibility": "original_only",
+        "runs": [
+          {
+            "measurements": {
+              "15.0": 2210.0,
+              "30.0": 2470.0,
+              "60.0": 3349.0,
+              "90.0": 4267.0
+            },
+            "run_label": "ZYX",
+            "si_15_to_60": 0.5153846153846153,
+            "si_15_to_90": 0.9307692307692308
+          }
+        ]
+      },
+      "status": "ok"
+    },
+    {
+      "args": {
+        "candidate_space_role": null,
+        "max_rows": 20,
+        "modifier_type": null
+      },
+      "name": "query_external_priors",
+      "reason": "The local hold evidence is sparse across modifier axes; source-level analogue evidence is needed to determine whether acrylic-like or tackifier-like composition changes provide a defensible mechanistic contrast.",
+      "result": [
+        {
+          "agent_hint": "Tackifying-resin-modified PUR is an externally documented formulation family; do not restrict the search to fully reactive polyol/isocyanate mixtures.",
+          "application": "shoe and general assembly bonding",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 1",
+          "hint_id": "H01",
+          "limitation": "Single patent example; does not report thermal-hold drift.",
+          "pattern": "polyester polyol + PPG425 + tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "4.8",
+          "resin_modifier_type": "tackifying resin",
+          "source_id": "PAT_US5932680A",
+          "source_url": "https://patents.google.com/patent/US5932680A/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "130",
+          "viscosity_unit": "Pa.s",
+          "viscosity_value": "22"
+        },
+        {
+          "agent_hint": "Hydrocarbon resin can coexist with reactive PUR while retaining measurable melt-processability; include a minor tackifier/hydrocarbon-resin axis rather than fixing the modifier at zero.",
+          "application": "shoe and general assembly bonding",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 4",
+          "hint_id": "H02",
+          "limitation": "Different polyols and application; no thermal-hold stability trajectory.",
+          "pattern": "multiple polyester polyols + PPG425 + hydrocarbon resin + MDI",
+          "resin_modifier_fraction_pct": "5.3",
+          "resin_modifier_type": "hydrocarbon resin",
+          "source_id": "PAT_US5932680A",
+          "source_url": "https://patents.google.com/patent/US5932680A/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "110",
+          "viscosity_unit": "Pa.s",
+          "viscosity_value": "60"
+        },
+        {
+          "agent_hint": "Acrylic-tackifying-resin-modified PUR around 20% of the total formulation is externally documented; 20% is therefore a defensible coarse candidate level, not a value inferred from the local follow-up result.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 1 and Table 1",
+          "hint_id": "H03",
+          "limitation": "Different molecular weights, catalysts and application; viscosity is a single-temperature observation, not a hold-stability measurement.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.98",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "5675"
+        },
+        {
+          "agent_hint": "Repeated examples independently anchor an acrylic-resin design level near 20% while preserving melt processability.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 2 and Table 1",
+          "hint_id": "H04",
+          "limitation": "Different chemistry and process history; no causal stability proof.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.37",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "4650"
+        },
+        {
+          "agent_hint": "The external database supports an acrylic-modified formulation family and provides a reproducible anchor around 20% for coarse candidate generation.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 3 and Table 1",
+          "hint_id": "H05",
+          "limitation": "External analogue only; not evidence for the current formulation's exact optimum.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.57",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "5217"
+        },
+        {
+          "agent_hint": "Multiple neighboring examples reduce the chance that the ~20% acrylic-resin level is a one-off literature artifact.",
+          "application": "textile lamination",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Example 4 and Table 1",
+          "hint_id": "H06",
+          "limitation": "No thermal-hold curve and no direct match to AC1920/TK100.",
+          "pattern": "polyoxypropylene diol + polyester diols + acrylic tackifying resin + MDI",
+          "resin_modifier_fraction_pct": "19.78",
+          "resin_modifier_type": "acrylic tackifying resin",
+          "source_id": "PAT_US20160215185A1",
+          "source_url": "https://patents.google.com/patent/US20160215185A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "4767"
+        },
+        {
+          "agent_hint": "Large viscosity changes across polyol-composition variants show that composition-level changes can strongly alter melt rheology; formulation-family changes are therefore reasonable when the observed failure is large.",
+          "application": "footwear upper-to-sole bonding",
+          "candidate_space_role": "context",
+          "directness": "context",
+          "evidence_locator": "Table 2",
+          "hint_id": "H07",
+          "limitation": "Not a resin-modifier study and not a hold-stability experiment.",
+          "pattern": "PPG-only and PPG/polyester-polyol PUR variants",
+          "resin_modifier_fraction_pct": "",
+          "resin_modifier_type": "polyol-composition prior",
+          "source_id": "PAPER_POLYMERS_2022_284",
+          "source_url": "",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "120",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "10000-52500"
+        },
+        {
+          "agent_hint": "A peer-reviewed PUR study reported 15% acrylic resin as the overall preferred addition level in its system; this independently supports 15% as a coarse acrylic-axis candidate level.",
+          "application": "electronic high-temperature bonding",
+          "candidate_space_role": "primary_range",
+          "directness": "analogy",
+          "evidence_locator": "Abstract and formulation summary",
+          "hint_id": "H08",
+          "limitation": "Optimization target was overall high-temperature adhesive performance, not thermal-hold viscosity; chemistry differs from the local system.",
+          "pattern": "polyether polyol + polyphenylene-ether polyol + acrylic resin + crystalline polyester polyol + MDI",
+          "resin_modifier_fraction_pct": "15",
+          "resin_modifier_type": "acrylic resin",
+          "source_id": "PAPER_CN_ADHESIVES_2025_34_09_54",
+          "source_url": "https://gxlj.cbpt.cnki.net/portal/journal/portal/client/paper/e77f0e8a3233d57ef7cd8bf2c89f3450",
+          "thermal_stability_metric": "high-temperature aging shear-strength retention",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "85",
+          "viscosity_temperature_c": "110",
+          "viscosity_unit": "mPa.s",
+          "viscosity_value": "7400"
+        },
+        {
+          "agent_hint": "A 25 wt% low-OH acrylic copolymer formulation showed substantially slower viscosity rise than the equal-loading higher-OH acrylic comparator; this supports both a 25% acrylic candidate level and the hypothesis that lower reactive-group density can improve hot-hold stability.",
+          "application": "moisture-curing PUR hot melt",
+          "candidate_space_role": "primary_range;stability_support",
+          "directness": "comparative_stability",
+          "evidence_locator": "Example 10 and Table 3",
+          "hint_id": "H09",
+          "limitation": "Different acrylic chemistry and much longer hold window; does not establish the local mechanism.",
+          "pattern": "PPG1000 + PPG2000 + polyester polyol + low-OH acrylic copolymer + MDI",
+          "resin_modifier_fraction_pct": "25",
+          "resin_modifier_type": "low-OH acrylic copolymer",
+          "source_id": "PAT_US6465104B1",
+          "source_url": "https://patents.google.com/patent/US6465104B1/en",
+          "thermal_stability_metric": "viscosity increase from 0.5 to 8 h",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "37",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "5125->7000"
+        },
+        {
+          "agent_hint": "At the same 25 wt% acrylic loading, the higher-OH acrylic analogue exhibited roughly twice the reported 8 h viscosity increase of the low-OH example, making modifier functionality a plausible stability variable rather than loading alone.",
+          "application": "moisture-curing PUR hot melt",
+          "candidate_space_role": "stability_support",
+          "directness": "comparative_stability",
+          "evidence_locator": "Example 11 and Table 3",
+          "hint_id": "H10",
+          "limitation": "Patent comparison; acrylic materials are not AC1920 and the result is not a direct local-system measurement.",
+          "pattern": "same formulation as Example 10 but higher-OH acrylic copolymer",
+          "resin_modifier_fraction_pct": "25",
+          "resin_modifier_type": "higher-OH acrylic copolymer",
+          "source_id": "PAT_US6465104B1",
+          "source_url": "https://patents.google.com/patent/US6465104B1/en",
+          "thermal_stability_metric": "viscosity increase from 0.5 to 8 h",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "76",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "9375->16500"
+        },
+        {
+          "agent_hint": "A functional-tackifier-containing formulation had lower reported stability rise than the no-acrylic/no-functional-tackifier comparator in the same example set, supporting the idea that modifier identity can change hot-melt stability.",
+          "application": "reactive PUR hot melt",
+          "candidate_space_role": "stability_support",
+          "directness": "comparative_context",
+          "evidence_locator": "Table 11 Sample 10C",
+          "hint_id": "H11",
+          "limitation": "Other formulation variables including MDI differ; not an isolated causal comparison.",
+          "pattern": "PPG2025 + PPG4025 + polyester polyol + functional tackifier + MDI",
+          "resin_modifier_fraction_pct": "19.8",
+          "resin_modifier_type": "functional tackifier",
+          "source_id": "PAT_US20030022973A1",
+          "source_url": "https://patents.google.com/patent/US20030022973A1/en",
+          "thermal_stability_metric": "reported stability",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "9.5",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "1820"
+        },
+        {
+          "agent_hint": "The no-acrylic/no-functional-tackifier comparator reported a larger stability value than several modifier-containing examples, providing directional support for a modifier-family hypothesis rather than proof of one optimum.",
+          "application": "reactive PUR hot melt",
+          "candidate_space_role": "stability_comparator",
+          "directness": "comparative_context",
+          "evidence_locator": "Table 11 Sample 10E",
+          "hint_id": "H12",
+          "limitation": "MDI and other variables differ across the table; use only as directional evidence.",
+          "pattern": "PPG2025 + PPG4025 + polyester polyol + MDI; no acrylic polymer or functional tackifier",
+          "resin_modifier_fraction_pct": "0",
+          "resin_modifier_type": "none",
+          "source_id": "PAT_US20030022973A1",
+          "source_url": "https://patents.google.com/patent/US20030022973A1/en",
+          "thermal_stability_metric": "reported stability",
+          "thermal_stability_unit": "%",
+          "thermal_stability_value": "15",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "600"
+        },
+        {
+          "agent_hint": "The patent states that tackifiers and rheology-control agents may be used in small amounts, typically below about 10 wt%, supporting 10% as a conservative upper coarse level for the minor-tackifier axis.",
+          "application": "reactive PUR hot melt",
+          "candidate_space_role": "primary_range",
+          "directness": "general_guidance",
+          "evidence_locator": "General formulation guidance",
+          "hint_id": "H13",
+          "limitation": "No specific thermal-hold comparison and no exact match to TK100.",
+          "pattern": "polyurethane hot melt with optional tackifiers/plasticizers/rheology-control agents",
+          "resin_modifier_fraction_pct": "",
+          "resin_modifier_type": "tackifier or rheology modifier",
+          "source_id": "PAT_US20070155859A1",
+          "source_url": "https://patents.google.com/patent/US20070155859A1/en",
+          "thermal_stability_metric": "",
+          "thermal_stability_unit": "",
+          "thermal_stability_value": "",
+          "viscosity_temperature_c": "121",
+          "viscosity_unit": "cP",
+          "viscosity_value": "2000-50000"
+        },
+        {
+          "agent_hint": "Published formulation art explicitly treats viscosity rise during prolonged hot holding as a design failure mode and cites a preferred stability level of no more than about 25% increase over 4-10 h; this supports thermal-hold stability as an independent design objective.",
+          "application": "reactive hot-melt urethane",
+          "candidate_space_role": "objective_support",
+          "directness": "context",
+          "evidence_locator": "Background and stability objective",
+          "hint_id": "H14",
+          "limitation": "The time scale is much longer than the local 15-60 min test and should not be converted into a local numerical threshold.",
+          "pattern": "thermally stable reactive hot melt urethane composition",
+          "resin_modifier_fraction_pct": "",
+          "resin_modifier_type": "tackifying agent",
+          "source_id": "EP0293602A2",
+          "source_url": "https://patents.google.com/patent/EP0293602A2",
+          "thermal_stability_metric": "viscosity increase during elevated-temperature hold",
+          "thermal_stability_unit": "% over 4-10 h",
+          "thermal_stability_value": "25",
+          "viscosity_temperature_c": "",
+          "viscosity_unit": "",
+          "viscosity_value": ""
+        }
+      ],
+      "status": "ok"
+    }
+  ],
+  "voi_scores_withheld_from_model": false,
+  "voi_sent_to_model": {
+    "decision_policy_is_a_rule_order": true,
+    "n_experiment_cards": 292,
+    "note": "The deterministic decision policy for this run is the stated rule ORDER. Experiments are presented in that order. Component vectors are unchanged facts.",
+    "order_description": "perturbation size is minimized before intervention sufficiency is assessed",
+    "policy_rank_1_experiment_id": "S1C01::M-HOLD-120",
+    "rule_order": "minimality_first",
+    "top_cards_in_policy_order": [
+      {
+        "acceptance_criterion": "Matched 15-60 min drift at 120 C stays below 4.75% across at least two repeats, i.e. below half the linear-dilution prediction of 9.51% implied by a reactive mass fraction of 1.0000. This accepts H-RESIN over H-CORE.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C01",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 1.0,
+          "score": 0.4,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C01::M-HOLD-120",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "H-RESIN is falsified if matched 15-60 min drift is at or above the linear-dilution prediction of 9.51%. H-CORE is falsified if drift falls below 4.75%, a separation larger than the 2.00% resolution threshold. H-DUAL is falsified if this acrylic-only composition reaches the low-drift regime with no minor tackifier present.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 19.2866666667,
+          "PDP70": 40.3566666667,
+          "PPG2000": 40.3566666667,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "measured_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "predictions_pct": {
+            "H-CORE": 9.51,
+            "H-DUAL": 9.51,
+            "H-RESIN": 9.51
+          },
+          "resolution_threshold_pct": 2.0,
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-HOLD-120",
+        "measurement_plan": {
+          "measurement_id": "M-HOLD-120",
+          "min_repeats": 2,
+          "name": "matched-window 120 C thermal hold",
+          "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+          "protocol": "Hold the melt at 120 C. Record viscosity at 15, 30, 45 and 60 min. Report the 15-60 min matched-window relative change. Run at least two independent repeats.",
+          "sampling_times_min": [
+            15,
+            30,
+            45,
+            60
+          ],
+          "temperature_c": 120
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": false,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.75
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "isothermal time coordinate S_t",
+          "score": 0.405,
+          "unresolved_prior": 0.9
+        },
+        "voi_components": {
+          "decision_relevance": 0.4,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 1.0,
+          "process_state_risk": 0.75,
+          "uncertainty_reduction": 0.405
+        },
+        "voi_score": 0.2435
+      },
+      {
+        "acceptance_criterion": "Matched 15-60 min drift at 120 C stays below 4.75% across at least two repeats, i.e. below half the linear-dilution prediction of 9.51% implied by a reactive mass fraction of 1.0000. This accepts H-RESIN over H-CORE.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C02",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 1.0,
+          "score": 0.4,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C02::M-HOLD-120",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "H-RESIN is falsified if matched 15-60 min drift is at or above the linear-dilution prediction of 9.51%. H-CORE is falsified if drift falls below 4.75%, a separation larger than the 2.00% resolution threshold. H-DUAL is falsified if this acrylic-only composition reaches the low-drift regime with no minor tackifier present.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 20.1906730224,
+          "PDP70": 39.9046634888,
+          "PPG2000": 39.9046634888,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "measured_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "predictions_pct": {
+            "H-CORE": 9.51,
+            "H-DUAL": 9.51,
+            "H-RESIN": 9.51
+          },
+          "resolution_threshold_pct": 2.0,
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-HOLD-120",
+        "measurement_plan": {
+          "measurement_id": "M-HOLD-120",
+          "min_repeats": 2,
+          "name": "matched-window 120 C thermal hold",
+          "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+          "protocol": "Hold the melt at 120 C. Record viscosity at 15, 30, 45 and 60 min. Report the 15-60 min matched-window relative change. Run at least two independent repeats.",
+          "sampling_times_min": [
+            15,
+            30,
+            45,
+            60
+          ],
+          "temperature_c": 120
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": false,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.75
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "isothermal time coordinate S_t",
+          "score": 0.405,
+          "unresolved_prior": 0.9
+        },
+        "voi_components": {
+          "decision_relevance": 0.4,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 1.0,
+          "process_state_risk": 0.75,
+          "uncertainty_reduction": 0.405
+        },
+        "voi_score": 0.2435
+      },
+      {
+        "acceptance_criterion": "Matched 15-60 min drift at 120 C stays below 4.75% across at least two repeats, i.e. below half the linear-dilution prediction of 9.51% implied by a reactive mass fraction of 1.0000. This accepts H-RESIN over H-CORE.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C03",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 1.0,
+          "score": 0.4,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C03::M-HOLD-120",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "H-RESIN is falsified if matched 15-60 min drift is at or above the linear-dilution prediction of 9.51%. H-CORE is falsified if drift falls below 4.75%, a separation larger than the 2.00% resolution threshold. H-DUAL is falsified if this acrylic-only composition reaches the low-drift regime with no minor tackifier present.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 21.0759641345,
+          "PDP70": 39.4620179327,
+          "PPG2000": 39.4620179327,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "measured_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "predictions_pct": {
+            "H-CORE": 9.51,
+            "H-DUAL": 9.51,
+            "H-RESIN": 9.51
+          },
+          "resolution_threshold_pct": 2.0,
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-HOLD-120",
+        "measurement_plan": {
+          "measurement_id": "M-HOLD-120",
+          "min_repeats": 2,
+          "name": "matched-window 120 C thermal hold",
+          "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+          "protocol": "Hold the melt at 120 C. Record viscosity at 15, 30, 45 and 60 min. Report the 15-60 min matched-window relative change. Run at least two independent repeats.",
+          "sampling_times_min": [
+            15,
+            30,
+            45,
+            60
+          ],
+          "temperature_c": 120
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": false,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.75
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "isothermal time coordinate S_t",
+          "score": 0.405,
+          "unresolved_prior": 0.9
+        },
+        "voi_components": {
+          "decision_relevance": 0.4,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 1.0,
+          "process_state_risk": 0.75,
+          "uncertainty_reduction": 0.405
+        },
+        "voi_score": 0.2435
+      },
+      {
+        "acceptance_criterion": "Matched 15-60 min drift at 120 C stays below 4.75% across at least two repeats, i.e. below half the linear-dilution prediction of 9.51% implied by a reactive mass fraction of 1.0000. This accepts H-RESIN over H-CORE.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C04",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 1.0,
+          "score": 0.4,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C04::M-HOLD-120",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "H-RESIN is falsified if matched 15-60 min drift is at or above the linear-dilution prediction of 9.51%. H-CORE is falsified if drift falls below 4.75%, a separation larger than the 2.00% resolution threshold. H-DUAL is falsified if this acrylic-only composition reaches the low-drift regime with no minor tackifier present.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 19.8333333333,
+          "PDP70": 32.0666666667,
+          "PPG2000": 48.1,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "measured_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "predictions_pct": {
+            "H-CORE": 9.51,
+            "H-DUAL": 9.51,
+            "H-RESIN": 9.51
+          },
+          "resolution_threshold_pct": 2.0,
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-HOLD-120",
+        "measurement_plan": {
+          "measurement_id": "M-HOLD-120",
+          "min_repeats": 2,
+          "name": "matched-window 120 C thermal hold",
+          "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+          "protocol": "Hold the melt at 120 C. Record viscosity at 15, 30, 45 and 60 min. Report the 15-60 min matched-window relative change. Run at least two independent repeats.",
+          "sampling_times_min": [
+            15,
+            30,
+            45,
+            60
+          ],
+          "temperature_c": 120
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": false,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.75
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "isothermal time coordinate S_t",
+          "score": 0.405,
+          "unresolved_prior": 0.9
+        },
+        "voi_components": {
+          "decision_relevance": 0.4,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 1.0,
+          "process_state_risk": 0.75,
+          "uncertainty_reduction": 0.405
+        },
+        "voi_score": 0.2435
+      },
+      {
+        "acceptance_criterion": "Matched 15-60 min drift at 120 C stays below 4.75% across at least two repeats, i.e. below half the linear-dilution prediction of 9.51% implied by a reactive mass fraction of 1.0000. This accepts H-RESIN over H-CORE.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C05",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 1.0,
+          "score": 0.4,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C05::M-HOLD-120",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "H-RESIN is falsified if matched 15-60 min drift is at or above the linear-dilution prediction of 9.51%. H-CORE is falsified if drift falls below 4.75%, a separation larger than the 2.00% resolution threshold. H-DUAL is falsified if this acrylic-only composition reaches the low-drift regime with no minor tackifier present.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 20.5433333333,
+          "PDP70": 47.6733333333,
+          "PPG2000": 31.7833333333,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "measured_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "predictions_pct": {
+            "H-CORE": 9.51,
+            "H-DUAL": 9.51,
+            "H-RESIN": 9.51
+          },
+          "resolution_threshold_pct": 2.0,
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-HOLD-120",
+        "measurement_plan": {
+          "measurement_id": "M-HOLD-120",
+          "min_repeats": 2,
+          "name": "matched-window 120 C thermal hold",
+          "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+          "protocol": "Hold the melt at 120 C. Record viscosity at 15, 30, 45 and 60 min. Report the 15-60 min matched-window relative change. Run at least two independent repeats.",
+          "sampling_times_min": [
+            15,
+            30,
+            45,
+            60
+          ],
+          "temperature_c": 120
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": false,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.75
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "isothermal time coordinate S_t",
+          "score": 0.405,
+          "unresolved_prior": 0.9
+        },
+        "voi_components": {
+          "decision_relevance": 0.4,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 1.0,
+          "process_state_risk": 0.75,
+          "uncertainty_reduction": 0.405
+        },
+        "voi_score": 0.2435
+      },
+      {
+        "acceptance_criterion": "Matched 15-60 min drift at 120 C stays below 4.75% across at least two repeats, i.e. below half the linear-dilution prediction of 9.51% implied by a reactive mass fraction of 1.0000. This accepts H-RESIN over H-CORE.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C06",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 1.0,
+          "score": 0.4,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C06::M-HOLD-120",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "H-RESIN is falsified if matched 15-60 min drift is at or above the linear-dilution prediction of 9.51%. H-CORE is falsified if drift falls below 4.75%, a separation larger than the 2.00% resolution threshold. H-DUAL is falsified if this acrylic-only composition reaches the low-drift regime with no minor tackifier present.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 19.7386698446,
+          "PDP70": 40.1306650777,
+          "PPG2000": 40.1306650777,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "interpolated_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "predictions_pct": {
+            "H-CORE": 9.51,
+            "H-DUAL": 9.51,
+            "H-RESIN": 9.51
+          },
+          "resolution_threshold_pct": 2.0,
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-HOLD-120",
+        "measurement_plan": {
+          "measurement_id": "M-HOLD-120",
+          "min_repeats": 2,
+          "name": "matched-window 120 C thermal hold",
+          "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+          "protocol": "Hold the melt at 120 C. Record viscosity at 15, 30, 45 and 60 min. Report the 15-60 min matched-window relative change. Run at least two independent repeats.",
+          "sampling_times_min": [
+            15,
+            30,
+            45,
+            60
+          ],
+          "temperature_c": 120
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": false,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.75
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "isothermal time coordinate S_t",
+          "score": 0.405,
+          "unresolved_prior": 0.9
+        },
+        "voi_components": {
+          "decision_relevance": 0.4,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 1.0,
+          "process_state_risk": 0.75,
+          "uncertainty_reduction": 0.405
+        },
+        "voi_score": 0.2435
+      },
+      {
+        "acceptance_criterion": "Matched 15-60 min drift at 120 C stays below 4.75% across at least two repeats, i.e. below half the linear-dilution prediction of 9.51% implied by a reactive mass fraction of 1.0000. This accepts H-RESIN over H-CORE.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C07",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 1.0,
+          "score": 0.4,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C07::M-HOLD-120",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "H-RESIN is falsified if matched 15-60 min drift is at or above the linear-dilution prediction of 9.51%. H-CORE is falsified if drift falls below 4.75%, a separation larger than the 2.00% resolution threshold. H-DUAL is falsified if this acrylic-only composition reaches the low-drift regime with no minor tackifier present.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 20.6333185785,
+          "PDP70": 39.6833407108,
+          "PPG2000": 39.6833407108,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "interpolated_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "predictions_pct": {
+            "H-CORE": 9.51,
+            "H-DUAL": 9.51,
+            "H-RESIN": 9.51
+          },
+          "resolution_threshold_pct": 2.0,
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-HOLD-120",
+        "measurement_plan": {
+          "measurement_id": "M-HOLD-120",
+          "min_repeats": 2,
+          "name": "matched-window 120 C thermal hold",
+          "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+          "protocol": "Hold the melt at 120 C. Record viscosity at 15, 30, 45 and 60 min. Report the 15-60 min matched-window relative change. Run at least two independent repeats.",
+          "sampling_times_min": [
+            15,
+            30,
+            45,
+            60
+          ],
+          "temperature_c": 120
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": false,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.75
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "isothermal time coordinate S_t",
+          "score": 0.405,
+          "unresolved_prior": 0.9
+        },
+        "voi_components": {
+          "decision_relevance": 0.4,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 1.0,
+          "process_state_risk": 0.75,
+          "uncertainty_reduction": 0.405
+        },
+        "voi_score": 0.2435
+      },
+      {
+        "acceptance_criterion": "Matched 15-60 min drift at 120 C stays below 4.75% across at least two repeats, i.e. below half the linear-dilution prediction of 9.51% implied by a reactive mass fraction of 1.0000. This accepts H-RESIN over H-CORE.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C08",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 1.0,
+          "score": 0.4,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C08::M-HOLD-120",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "H-RESIN is falsified if matched 15-60 min drift is at or above the linear-dilution prediction of 9.51%. H-CORE is falsified if drift falls below 4.75%, a separation larger than the 2.00% resolution threshold. H-DUAL is falsified if this acrylic-only composition reaches the low-drift regime with no minor tackifier present.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 20.0120031779,
+          "PDP70": 35.9856650777,
+          "PPG2000": 44.0023317444,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "interpolated_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "predictions_pct": {
+            "H-CORE": 9.51,
+            "H-DUAL": 9.51,
+            "H-RESIN": 9.51
+          },
+          "resolution_threshold_pct": 2.0,
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-HOLD-120",
+        "measurement_plan": {
+          "measurement_id": "M-HOLD-120",
+          "min_repeats": 2,
+          "name": "matched-window 120 C thermal hold",
+          "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+          "protocol": "Hold the melt at 120 C. Record viscosity at 15, 30, 45 and 60 min. Report the 15-60 min matched-window relative change. Run at least two independent repeats.",
+          "sampling_times_min": [
+            15,
+            30,
+            45,
+            60
+          ],
+          "temperature_c": 120
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": false,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.75
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "isothermal time coordinate S_t",
+          "score": 0.405,
+          "unresolved_prior": 0.9
+        },
+        "voi_components": {
+          "decision_relevance": 0.4,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 1.0,
+          "process_state_risk": 0.75,
+          "uncertainty_reduction": 0.405
+        },
+        "voi_score": 0.2435
+      },
+      {
+        "acceptance_criterion": "Matched 15-60 min drift at 120 C stays below 4.75% across at least two repeats, i.e. below half the linear-dilution prediction of 9.51% implied by a reactive mass fraction of 1.0000. This accepts H-RESIN over H-CORE.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C09",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 1.0,
+          "score": 0.4,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C09::M-HOLD-120",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "H-RESIN is falsified if matched 15-60 min drift is at or above the linear-dilution prediction of 9.51%. H-CORE is falsified if drift falls below 4.75%, a separation larger than the 2.00% resolution threshold. H-DUAL is falsified if this acrylic-only composition reaches the low-drift regime with no minor tackifier present.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 20.3670031779,
+          "PDP70": 43.7889984111,
+          "PPG2000": 35.8439984111,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "interpolated_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "predictions_pct": {
+            "H-CORE": 9.51,
+            "H-DUAL": 9.51,
+            "H-RESIN": 9.51
+          },
+          "resolution_threshold_pct": 2.0,
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-HOLD-120",
+        "measurement_plan": {
+          "measurement_id": "M-HOLD-120",
+          "min_repeats": 2,
+          "name": "matched-window 120 C thermal hold",
+          "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+          "protocol": "Hold the melt at 120 C. Record viscosity at 15, 30, 45 and 60 min. Report the 15-60 min matched-window relative change. Run at least two independent repeats.",
+          "sampling_times_min": [
+            15,
+            30,
+            45,
+            60
+          ],
+          "temperature_c": 120
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": false,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.75
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "isothermal time coordinate S_t",
+          "score": 0.405,
+          "unresolved_prior": 0.9
+        },
+        "voi_components": {
+          "decision_relevance": 0.4,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 1.0,
+          "process_state_risk": 0.75,
+          "uncertainty_reduction": 0.405
+        },
+        "voi_score": 0.2435
+      },
+      {
+        "acceptance_criterion": "Three controlled-process preparations of one nominal composition span less than 1.5x in realized viscosity at matched temperature, against the 2.80-3.57x uncontrolled E2 spread.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C01",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 0.6,
+          "score": 0.24,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C01::M-REPEAT",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "The realization-shift reading is falsified if controlled preparations still span more than the uncontrolled 2.80x lower bound.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 19.2866666667,
+          "PDP70": 40.3566666667,
+          "PPG2000": 40.3566666667,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "measured_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "note": "this measurement does not observe the drift coordinate the registry disagrees about",
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-REPEAT",
+        "measurement_plan": {
+          "measurement_id": "M-REPEAT",
+          "min_repeats": 3,
+          "name": "repeatability / state-control experiment",
+          "primary_observable": "between-preparation spread of the realized viscosity-scale coordinate a_fr at matched temperature",
+          "protocol": "Prepare the same nominal composition three times under a controlled and fully recorded process history, then measure the 80-130 C sweep for each preparation.",
+          "sampling_times_min": [],
+          "temperature_c": null
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": true,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.15
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "realization displacement delta_fr",
+          "score": 0.36,
+          "unresolved_prior": 0.8
+        },
+        "voi_components": {
+          "decision_relevance": 0.24,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 0.9,
+          "process_state_risk": 0.15,
+          "uncertainty_reduction": 0.36
+        },
+        "voi_score": 0.2145
+      },
+      {
+        "acceptance_criterion": "Three controlled-process preparations of one nominal composition span less than 1.5x in realized viscosity at matched temperature, against the 2.80-3.57x uncontrolled E2 spread.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C02",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 0.6,
+          "score": 0.24,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C02::M-REPEAT",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "The realization-shift reading is falsified if controlled preparations still span more than the uncontrolled 2.80x lower bound.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 20.1906730224,
+          "PDP70": 39.9046634888,
+          "PPG2000": 39.9046634888,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "measured_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "note": "this measurement does not observe the drift coordinate the registry disagrees about",
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-REPEAT",
+        "measurement_plan": {
+          "measurement_id": "M-REPEAT",
+          "min_repeats": 3,
+          "name": "repeatability / state-control experiment",
+          "primary_observable": "between-preparation spread of the realized viscosity-scale coordinate a_fr at matched temperature",
+          "protocol": "Prepare the same nominal composition three times under a controlled and fully recorded process history, then measure the 80-130 C sweep for each preparation.",
+          "sampling_times_min": [],
+          "temperature_c": null
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": true,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.15
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "realization displacement delta_fr",
+          "score": 0.36,
+          "unresolved_prior": 0.8
+        },
+        "voi_components": {
+          "decision_relevance": 0.24,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 0.9,
+          "process_state_risk": 0.15,
+          "uncertainty_reduction": 0.36
+        },
+        "voi_score": 0.2145
+      },
+      {
+        "acceptance_criterion": "Three controlled-process preparations of one nominal composition span less than 1.5x in realized viscosity at matched temperature, against the 2.80-3.57x uncontrolled E2 spread.",
+        "acrylic_like_pct": 0.0,
+        "candidate_id": "S1C03",
+        "decision_relevance_detail": {
+          "coverage_class": "no_intervention",
+          "coverage_factor": 0.4,
+          "covered_supported_axes": [],
+          "measurement_decision_relevance": 0.6,
+          "score": 0.24,
+          "zeroed_supported_axes": [
+            "acrylic_like",
+            "minor_tackifier_like"
+          ]
+        },
+        "experiment_id": "S1C03::M-REPEAT",
+        "extrapolation_risk_detail": {
+          "mean_distance_pct": 0.0,
+          "normalizer_pct": 12.0,
+          "per_axis": {
+            "acrylic_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                15.0,
+                25.0
+              ],
+              "value_pct": 0.0
+            },
+            "minor_tackifier_like": {
+              "distance_pct": 0.0,
+              "supported_region_pct": [
+                4.8,
+                6.4
+              ],
+              "value_pct": 0.0
+            }
+          },
+          "score": 0.0
+        },
+        "falsification_criterion": "The realization-shift reading is falsified if controlled preparations still span more than the uncontrolled 2.80x lower bound.",
+        "formulation_state": {
+          "AC1920": 0.0,
+          "MDI": 21.0759641345,
+          "PDP70": 39.4620179327,
+          "PPG2000": 39.4620179327,
+          "TK100": 0.0,
+          "amount_basis": "normalized_total_wt_percent",
+          "design_layer": "measured_reactive_core_only"
+        },
+        "hypothesis_discrimination_detail": {
+          "n_pairs": 3,
+          "note": "this measurement does not observe the drift coordinate the registry disagrees about",
+          "score": 0.0,
+          "separated_pairs": []
+        },
+        "intervention_family": "reactive_core_only",
+        "measurement_id": "M-REPEAT",
+        "measurement_plan": {
+          "measurement_id": "M-REPEAT",
+          "min_repeats": 3,
+          "name": "repeatability / state-control experiment",
+          "primary_observable": "between-preparation spread of the realized viscosity-scale coordinate a_fr at matched temperature",
+          "protocol": "Prepare the same nominal composition three times under a controlled and fully recorded process history, then measure the 80-130 C sweep for each preparation.",
+          "sampling_times_min": [],
+          "temperature_c": null
+        },
+        "minor_tackifier_like_pct": 0.0,
+        "process_state_risk_detail": {
+          "base_before_measurement_plan": 0.75,
+          "measurement_controls_process_state": true,
+          "missing_process_fields": 6,
+          "risk_level": "moderate",
+          "score": 0.15
+        },
+        "reactive_mass_fraction": 1.0,
+        "resin_modified": false,
+        "scientific_hypotheses_addressed": [
+          "H-CORE",
+          "H-RESIN",
+          "H-DUAL"
+        ],
+        "uncertainty_reduction_detail": {
+          "novel_chemistry": false,
+          "novel_chemistry_factor": 0.45,
+          "resolves_quantity": "realization displacement delta_fr",
+          "score": 0.36,
+          "unresolved_prior": 0.8
+        },
+        "voi_components": {
+          "decision_relevance": 0.24,
+          "extrapolation_risk": 0.0,
+          "hypothesis_discrimination": 0.0,
+          "measurement_interpretability": 0.9,
+          "process_state_risk": 0.15,
+          "uncertainty_reduction": 0.36
+        },
+        "voi_score": 0.2145
+      }
+    ]
+  }
+}

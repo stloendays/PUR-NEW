@@ -25,6 +25,13 @@
         "n_with_zero_discrimination": 3,
         "of_completed": 5
       },
+      "internal_critique": {
+        "committed_anyway": 5,
+        "high_severity_objection": 5,
+        "note": "A high-severity Skeptic objection that does not change the frozen decision shows the critique stage detecting a defect the decision policy then overrides.",
+        "of_completed": 5,
+        "robustness_said_change_experiment": 4
+      },
       "intervention_family_counts": {
         "acrylic_only": 2,
         "reactive_core_only": 3
@@ -83,6 +90,13 @@
         "n_with_zero_discrimination": 0,
         "of_completed": 10
       },
+      "internal_critique": {
+        "committed_anyway": 10,
+        "high_severity_objection": 10,
+        "note": "A high-severity Skeptic objection that does not change the frozen decision shows the critique stage detecting a defect the decision policy then overrides.",
+        "of_completed": 10,
+        "robustness_said_change_experiment": 1
+      },
       "intervention_family_counts": {
         "acrylic_only": 1,
         "dual_axis_resin_modified": 9
@@ -117,6 +131,70 @@
         ]
       },
       "voi_scores_withheld_from_model": false
+    },
+    "rule_order_inverted": {
+      "arm": "rule_order_minimality_first",
+      "candidate_counts": {
+        "S1C02": 5
+      },
+      "decision_modes": {
+        "discriminating_probe": 4,
+        "state_control_experiment": 1
+      },
+      "failure_mode_measurement_selection": {
+        "count": 4,
+        "of_declared": 5,
+        "wilson_95": [
+          0.3755,
+          0.9638
+        ]
+      },
+      "hypothesis_discrimination_of_selection": {
+        "mean": 0.0,
+        "n_with_zero_discrimination": 5,
+        "of_completed": 5
+      },
+      "internal_critique": {
+        "committed_anyway": 5,
+        "high_severity_objection": 5,
+        "note": "A high-severity Skeptic objection that does not change the frozen decision shows the critique stage detecting a defect the decision policy then overrides.",
+        "of_completed": 5,
+        "robustness_said_change_experiment": 2
+      },
+      "intervention_family_counts": {
+        "reactive_core_only": 5
+      },
+      "label": "rule_order_minimality_first",
+      "measurement_counts": {
+        "M-HOLD-120": 4,
+        "M-REPEAT": 1
+      },
+      "model": "gpt-5.6-luna",
+      "n_runs_completed": 5,
+      "n_runs_declared": 5,
+      "post_hoc_voi_of_selection": {
+        "max": 0.2435,
+        "mean": 0.2377,
+        "min": 0.2145
+      },
+      "selection_inside_deterministic_tied_top_set": {
+        "count": 0,
+        "of_scored": 5,
+        "wilson_95": [
+          0.0,
+          0.4345
+        ]
+      },
+      "series": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5",
+      "supported_family_recovery": {
+        "count": 0,
+        "of_declared": 5,
+        "wilson_95": [
+          0.0,
+          0.4345
+        ]
+      },
+      "voi_scores_withheld_from_model": false
     }
   },
   "controlled": [
@@ -127,6 +205,22 @@
     "evidence access profile and structural firewall",
     "candidate lattice (73 nodes) and the full 292-card experiment inventory"
   ],
+  "deterministic_rule_order_predictions": {
+    "minimality_first": {
+      "top_experiment_id": "S1C01::M-HOLD-120",
+      "top_hypothesis_discrimination": 0.0,
+      "top_intervention_family": "reactive_core_only",
+      "top_total_modifier_pct": 0.0,
+      "top_voi_score": 0.2435
+    },
+    "sufficiency_first": {
+      "top_experiment_id": "S1C30::M-HOLD-120",
+      "top_hypothesis_discrimination": 0.666667,
+      "top_intervention_family": "dual_axis_resin_modified",
+      "top_total_modifier_pct": 12.5,
+      "top_voi_score": 0.662083
+    }
+  },
   "effect_of_the_rule_layer": {
     "failure_mode_measurement_selection": "10/10 -> 5/5",
     "mean_hypothesis_discrimination": 0.4,

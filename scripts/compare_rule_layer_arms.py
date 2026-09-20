@@ -27,6 +27,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from pur_new.voi import (  # noqa: E402
     build_experiment_cards,
+    rank_by_rule_order,
     hypothesis_discrimination,
     load_hypothesis_registry,
     load_measurement_catalog,
@@ -57,6 +58,20 @@ def load_arm(series_dir: Path, label: str, discrimination: dict[str, float]) -> 
         for path in sorted(glob.glob(str(series_dir / "run_*" / "EXP_V4_*" / "recommendation.json")))
     ]
     declared = manifest["n_runs_declared"]
+
+    # Did the internal critique stages see the defect, and did the decision change?
+    critique = {"high_severity_objection": 0, "robustness_said_change_experiment": 0, "committed_anyway": 0}
+    for path in sorted(glob.glob(str(series_dir / "run_*" / "EXP_V4_*" / "deliberation.json"))):
+        deliberation = read_json(Path(path))
+        skeptic = deliberation.get("skeptic") or {}
+        robustness = deliberation.get("robustness_adjudication") or {}
+        judge = deliberation.get("judge_normalized") or {}
+        high = any(item.get("severity") == "high" for item in skeptic.get("objections", []))
+        change = robustness.get("skeptic_objection_effect") == "changes_which_experiment_to_run"
+        critique["high_severity_objection"] += int(high)
+        critique["robustness_said_change_experiment"] += int(change)
+        if high and judge.get("decision_mode") != "abstain":
+            critique["committed_anyway"] += 1
 
     families, measurements, candidates, modes, vois, in_tied, discs = [], [], [], [], [], [], []
     for record in records:
@@ -113,6 +128,14 @@ def load_arm(series_dir: Path, label: str, discrimination: dict[str, float]) -> 
             "n_with_zero_discrimination": n_zero_disc,
             "of_completed": len(discs),
         },
+        "internal_critique": {
+            **critique,
+            "of_completed": len(records),
+            "note": (
+                "A high-severity Skeptic objection that does not change the frozen decision shows "
+                "the critique stage detecting a defect the decision policy then overrides."
+            ),
+        },
     }
 
 
@@ -123,6 +146,11 @@ def main() -> None:
         "--ablated-series",
         type=Path,
         default=ROOT / "results" / "agent_v4_voi" / "series_ablation_voi_withheld_n5",
+    )
+    parser.add_argument(
+        "--order-series",
+        type=Path,
+        default=ROOT / "results" / "agent_v4_voi" / "series_ablation_rule_order_minimality_first_n5",
     )
     parser.add_argument(
         "--candidate-set", type=Path, default=ROOT / "derived" / "stage1_blind_candidate_space_v1.json"
@@ -146,6 +174,14 @@ def main() -> None:
 
     full = load_arm(args.full_series.resolve(), "full_v4_rule_layer_supplied", discrimination)
     ablated = load_arm(args.ablated_series.resolve(), "ablated_voi_scores_withheld", discrimination)
+    order_arm = (
+        load_arm(args.order_series.resolve(), "rule_order_minimality_first", discrimination)
+        if (args.order_series.resolve() / "series_manifest.json").exists()
+        else None
+    )
+    order_predictions = {
+        name: rank_by_rule_order(cards, name) for name in ("sufficiency_first", "minimality_first")
+    }
 
     report = {
         "question": (
@@ -166,7 +202,21 @@ def main() -> None:
             "the decision-stability sweep, which would reveal the tie set",
             "the tool-generated acceptance and falsification criteria",
         ],
-        "arms": {"full": full, "ablated": ablated},
+        "arms": {
+            key: value
+            for key, value in (("full", full), ("ablated", ablated), ("rule_order_inverted", order_arm))
+            if value is not None
+        },
+        "deterministic_rule_order_predictions": {
+            name: {
+                "top_experiment_id": value["top_experiment_id"],
+                "top_intervention_family": value["top_intervention_family"],
+                "top_hypothesis_discrimination": value["top_hypothesis_discrimination"],
+                "top_total_modifier_pct": value["top_total_modifier_pct"],
+                "top_voi_score": value["top_voi_score"],
+            }
+            for name, value in order_predictions.items()
+        },
         "effect_of_the_rule_layer": {
             "supported_family_recovery": (
                 f"{full['supported_family_recovery']['count']}/{full['n_runs_declared']} "
@@ -204,7 +254,7 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(report["effect_of_the_rule_layer"], indent=2))
-    for arm in (full, ablated):
+    for arm in [item for item in (full, ablated, order_arm) if item is not None]:
         print(
             f"\n{arm['label']}: families={arm['intervention_family_counts']} "
             f"zero-discrimination selections={arm['hypothesis_discrimination_of_selection']['n_with_zero_discrimination']}"

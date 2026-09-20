@@ -5,8 +5,10 @@
 > registry, the measurement catalog, the evidence contract and all 292 experiment cards
 > fixed, and withholding only the deterministic value-of-information score, recovery of the
 > evidence-supported intervention family falls from **9/10 to 0/5** (95% Wilson
-> [0.596, 0.982] versus [0.000, 0.435], non-overlapping). Section 9 is the controlled
-> ablation that measures this.
+> [0.596, 0.982] versus [0.000, 0.435], non-overlapping). Inverting the *order* of two
+> correct rules is worse still: every run then commits to an experiment that can separate
+> **no** registered hypothesis, and does so after its own Skeptic has said so at high
+> severity. Sections 9 and 10 are the controlled ablations that measure this.
 
 Run `EXP_V4_20260919T141726Z_50bdb5870e`, model `gpt-5.6-luna`, 5 real LLM stages,
 98,350 tokens, 253 s of model latency. Blindness audit `PASS` (0 critical, 0 high).
@@ -323,7 +325,89 @@ Reproduce with `scripts/compare_rule_layer_arms.py`; the artifact is
 
 ---
 
-## 10. Artifacts
+## 10. Rule ORDER, measured as its own arm
+
+Rule content is not the only lever. The earlier Stage-1 ladder recorded a V2 failure in
+which minimum perturbation was applied *before* intervention sufficiency and the agent
+zeroed an evidence-supported axis. That was a quoted observation from a previous series.
+Here it is reproduced as a V4 arm, with order as the only manipulated variable.
+
+Two lexicographic orders over the *same* cards and the *same* component vectors
+(`src/pur_new/voi.py::rule_order_key`). Nothing else differs; the VOI score itself is
+untouched and every existing frozen result remains reproducible.
+
+```
+sufficiency_first   coverage -> discrimination -> relevance -> burden
+minimality_first    burden   -> coverage       -> discrimination -> relevance
+```
+
+The deterministic consequence is computable before any model runs:
+
+| order | rank-1 | family | hypothesis discrimination | VOI |
+|---|---|---|---:|---:|
+| `sufficiency_first` | `S1C30::M-HOLD-120` | dual-axis resin-modified | **0.667** | 0.6621 |
+| `minimality_first` | `S1C01::M-HOLD-120` | reactive-core-only | **0.000** | 0.2435 |
+
+Inverting the order alone promotes an experiment that by construction separates **no**
+registered hypothesis. Series `agent_v4_ablation_minimality_first_n5`, N=5 declared at
+`2026-09-20T04:06:53Z`, 5/5 completed:
+
+| | full V4 | score withheld | **order inverted** |
+|---|---|---|---|
+| N declared | 10 | 5 | 5 |
+| evidence-supported family | 9/10 | 0/5 | **0/5** |
+| reactive-core-only selections | 0/10 | 3/5 | **5/5** |
+| **zero-discrimination selections** | **0/10** | 3/5 | **5/5** |
+| mean hypothesis discrimination | 0.667 | 0.267 | **0.000** |
+| selected candidate | `S1C41` ×9 | 4 distinct | `S1C02` ×5 |
+
+**A correct score under an inverted order is worse than no score at all**: 5/5
+zero-discrimination against 3/5. Order dominates presence.
+
+### The model diagnosed the defect and followed the rule anyway
+
+This is the part that generalises beyond this chemistry. The Skeptic raised a
+**high-severity objection in 5 of 5 runs**, each time identifying the exact defect:
+
+> "S1C02 is an unmodified E2 reactive-core hold with AC1920 = 0.0, TK100 = 0.0 and
+> reactive_mass_fraction = 1.0000; therefore all three registry predictions collapse to
+> 9.51% and the experiment cannot discriminate."
+
+The Proposer said it too, unprompted, while proposing it:
+
+> "this baseline experiment cannot separate the three mechanism hypotheses;
+> modifier-containing hold experiments would be needed for that adjudication."
+
+The Robustness Adjudicator went further in 2 of 5 runs and returned
+`changes_which_experiment_to_run`. **All 5 runs committed to it regardless.**
+
+| arm | high-severity objection | robustness said change experiment | committed anyway |
+|---|---|---|---|
+| full V4 | 10/10 | 1/10 | 10/10 |
+| score withheld | 5/5 | 4/5 | 5/5 |
+| order inverted | 5/5 | 2/5 | 5/5 |
+
+The scientific judgement was intact throughout: the model correctly identified that the
+experiment could not answer the question. The decision order overrode it.
+
+### What this licenses saying
+
+> A wrong rule order is not rescued by a competent model, and it is not rescued by a
+> working critique stage. Across five runs the Skeptic identified at high severity that the
+> selected experiment could separate no registered hypothesis, and all five runs committed
+> to it. Adding a critic to an agent does not substitute for ordering its decision rules
+> correctly.
+
+For a group building scientific agents, the operational reading is that rule order belongs
+in the same category as rule content: it must be declared, frozen, and ablated, not left
+implicit in the sequence a prompt happens to describe.
+
+Reproduce with `scripts/compare_rule_layer_arms.py`; artifact
+`results/agent_v4_voi/rule_layer_ablation.json`.
+
+---
+
+## 11. Artifacts
 
 ```
 configs/hypothesis_registry.json          3 registered hypotheses with prediction rules

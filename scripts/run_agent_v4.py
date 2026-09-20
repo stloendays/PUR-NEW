@@ -35,6 +35,7 @@ from pur_new.voi import (  # noqa: E402
     build_experiment_cards,
     load_hypothesis_registry,
     load_measurement_catalog,
+    rank_by_rule_order,
     voi_robustness_sweep,
 )
 
@@ -157,7 +158,13 @@ def tied_top_set(cards: list[dict[str, Any]]) -> list[str]:
     return sorted(card["experiment_id"] for card in cards if abs(card["voi_score"] - best) <= TIE_EPSILON)
 
 
-def voi_payload(cards: list[dict[str, Any]], *, top_k: int, withhold_scores: bool = False) -> dict[str, Any]:
+def voi_payload(
+    cards: list[dict[str, Any]],
+    *,
+    top_k: int,
+    withhold_scores: bool = False,
+    rule_order: str | None = None,
+) -> dict[str, Any]:
     """Assemble the VOI evidence given to the model.
 
     The tied top set is reported explicitly so the model cannot mistake an arbitrary
@@ -207,6 +214,25 @@ def voi_payload(cards: list[dict[str, Any]], *, top_k: int, withhold_scores: boo
             ),
             "n_experiment_cards": len(cards),
             "experiment_inventory": inventory,
+        }
+
+    if rule_order is not None:
+        # ORDER arm: the same cards and the same component vectors, presented under a named
+        # decision order instead of the VOI ranking. Only the order is manipulated.
+        ranking = rank_by_rule_order(cards, rule_order)
+        by_id = {card["experiment_id"]: card for card in cards}
+        ordered = [by_id[eid] for eid in ranking["ranked_experiment_ids"][:top_k]]
+        return {
+            "decision_policy_is_a_rule_order": True,
+            "rule_order": ranking["rule_order"],
+            "order_description": ranking["order_description"],
+            "n_experiment_cards": len(cards),
+            "top_cards_in_policy_order": ordered,
+            "policy_rank_1_experiment_id": ranking["top_experiment_id"],
+            "note": (
+                "The deterministic decision policy for this run is the stated rule ORDER. "
+                "Experiments are presented in that order. Component vectors are unchanged facts."
+            ),
         }
 
     tied = tied_top_set(cards)
@@ -362,6 +388,15 @@ def main() -> None:
     parser.add_argument("--top-k", type=int, default=12)
     parser.add_argument("--inspection-status", default="frozen_pre_result")
     parser.add_argument(
+        "--rule-order",
+        choices=["sufficiency_first", "minimality_first"],
+        default=None,
+        help=(
+            "present the deterministic policy as a named rule ORDER instead of the VOI ranking. "
+            "minimality_first reproduces the earlier V2 failure mode as a controlled arm."
+        ),
+    )
+    parser.add_argument(
         "--withhold-voi-scores",
         action="store_true",
         help=(
@@ -494,11 +529,16 @@ def main() -> None:
     tied = tied_top_set(cards)
     sweep = voi_robustness_sweep(candidate_set["candidates"], registry=registry, catalog=catalog)
     sweep_for_model = {key: value for key, value in sweep.items() if key != "scenarios"}
-    voi_for_model = voi_payload(cards, top_k=args.top_k, withhold_scores=args.withhold_voi_scores)
+    voi_for_model = voi_payload(
+        cards,
+        top_k=args.top_k,
+        withhold_scores=args.withhold_voi_scores,
+        rule_order=args.rule_order,
+    )
 
     stability_for_model = (
         {"decision_stability_withheld": True, "ablation": "deterministic_rule_layer_withheld"}
-        if args.withhold_voi_scores
+        if (args.withhold_voi_scores or args.rule_order is not None)
         else sweep_for_model
     )
 
@@ -624,6 +664,7 @@ def main() -> None:
                 "voi_sent_to_model": voi_for_model,
                 "decision_stability_sent_to_model": stability_for_model,
                 "voi_scores_withheld_from_model": bool(args.withhold_voi_scores),
+                "rule_order": args.rule_order,
                 "proposer": proposer,
                 "skeptic": skeptic,
                 "robustness_adjudication": robustness,

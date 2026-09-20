@@ -1,0 +1,164 @@
+{
+  "acceptance_criterion": "The three controlled preparations must have a max/min realized-viscosity spread below 1.50x at each matched temperature in the 80-130 C sweep.",
+  "architecture_version": "4.0.0",
+  "candidate_set_hash": "54f825939d05a159b93eb39e98ccdd4d3a658b4a31fc8a5fff722770aadd24a1",
+  "claim_boundary": "V4.0.0 selects an experiment from pre-result evidence under an outcome-blind runtime. Its adjudication tests whether a registered hypothesis survives contact with the completed measurement. It is not a contemporaneous pre-experimental record and does not claim that the historical decision used this ranking.",
+  "decision_mode": "state_control_experiment",
+  "experiment_card": {
+    "acceptance_criterion": "Three controlled-process preparations of one nominal composition span less than 1.5x in realized viscosity at matched temperature, against the 2.80-3.57x uncontrolled E2 spread.",
+    "acrylic_like_pct": 0.0,
+    "candidate_id": "S1C02",
+    "decision_relevance_detail": {
+      "coverage_class": "no_intervention",
+      "coverage_factor": 0.4,
+      "covered_supported_axes": [],
+      "measurement_decision_relevance": 0.6,
+      "score": 0.24,
+      "zeroed_supported_axes": [
+        "acrylic_like",
+        "minor_tackifier_like"
+      ]
+    },
+    "experiment_id": "S1C02::M-REPEAT",
+    "extrapolation_risk_detail": {
+      "mean_distance_pct": 0.0,
+      "normalizer_pct": 12.0,
+      "per_axis": {
+        "acrylic_like": {
+          "distance_pct": 0.0,
+          "supported_region_pct": [
+            15.0,
+            25.0
+          ],
+          "value_pct": 0.0
+        },
+        "minor_tackifier_like": {
+          "distance_pct": 0.0,
+          "supported_region_pct": [
+            4.8,
+            6.4
+          ],
+          "value_pct": 0.0
+        }
+      },
+      "score": 0.0
+    },
+    "falsification_criterion": "The realization-shift reading is falsified if controlled preparations still span more than the uncontrolled 2.80x lower bound.",
+    "formulation_state": {
+      "AC1920": 0.0,
+      "MDI": 20.1906730224,
+      "PDP70": 39.9046634888,
+      "PPG2000": 39.9046634888,
+      "TK100": 0.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "measured_reactive_core_only"
+    },
+    "hypothesis_discrimination_detail": {
+      "n_pairs": 3,
+      "note": "this measurement does not observe the drift coordinate the registry disagrees about",
+      "score": 0.0,
+      "separated_pairs": []
+    },
+    "intervention_family": "reactive_core_only",
+    "measurement_id": "M-REPEAT",
+    "measurement_plan": {
+      "measurement_id": "M-REPEAT",
+      "min_repeats": 3,
+      "name": "repeatability / state-control experiment",
+      "primary_observable": "between-preparation spread of the realized viscosity-scale coordinate a_fr at matched temperature",
+      "protocol": "Prepare the same nominal composition three times under a controlled and fully recorded process history, then measure the 80-130 C sweep for each preparation.",
+      "sampling_times_min": [],
+      "temperature_c": null
+    },
+    "minor_tackifier_like_pct": 0.0,
+    "process_state_risk_detail": {
+      "base_before_measurement_plan": 0.75,
+      "measurement_controls_process_state": true,
+      "missing_process_fields": 6,
+      "risk_level": "moderate",
+      "score": 0.15
+    },
+    "reactive_mass_fraction": 1.0,
+    "resin_modified": false,
+    "scientific_hypotheses_addressed": [
+      "H-CORE",
+      "H-RESIN",
+      "H-DUAL"
+    ],
+    "uncertainty_reduction_detail": {
+      "novel_chemistry": false,
+      "novel_chemistry_factor": 0.45,
+      "resolves_quantity": "realization displacement delta_fr",
+      "score": 0.36,
+      "unresolved_prior": 0.8
+    },
+    "voi_components": {
+      "decision_relevance": 0.24,
+      "extrapolation_risk": 0.0,
+      "hypothesis_discrimination": 0.0,
+      "measurement_interpretability": 0.9,
+      "process_state_risk": 0.15,
+      "uncertainty_reduction": 0.36
+    },
+    "voi_score": 0.2145
+  },
+  "falsification_criterion": "The state-control objective is falsified if the controlled preparations have a max/min spread greater than 2.80x at any matched temperature, because this fails to beat the documented lower bound of the uncontrolled E2 spread. A spread from 1.50x through 2.80x is inconclusive for the stated control objective and does not falsify H-CORE, H-RESIN, or H-DUAL.",
+  "frozen_utc": "2026-09-20T04:13:19Z",
+  "git_commit": "38d6f638ce44759a5bbfd82fb01f42f931a6bcf6",
+  "hypotheses_addressed": [],
+  "hypotheses_left_entangled": [
+    "H-CORE",
+    "H-RESIN",
+    "H-DUAL"
+  ],
+  "hypothesis_registry_hash": "2117be1a410f050eb8e2f2d000d069907652494eec699005bb4e0b0e67a36175",
+  "input_hash": "ead15491974263663a9d6a89bd72b2e428b6aaaf25454cf7ff1902595b02c325",
+  "inspection_status": "frozen_pre_result",
+  "measurement_catalog_hash": "75c54e09dd8b2a3c9ca231f1caea27b6d93a8628474733a0bf6b907f02dd3a92",
+  "model": "gpt-5.6-luna",
+  "next_experiment_if_falsified": "Run the matched 120 C thermal-hold comparison only with randomized, fully recorded preparation histories, at least three independent preparations per formulation, and explicit stratification or adjustment for the realized viscosity-scale coordinate before interpreting formulation differences.",
+  "primary_observable": "Between-preparation max/min spread of the realized viscosity-scale coordinate a_fr at matched temperature across three controlled preparations.",
+  "prompt_hash": "dc47194bf7ce3750d07e210da66915795069387765d2e21135425989e32b3e59",
+  "rationale": "S1C02 is the centered E2 reactive-core anchor, and M-REPEAT directly addresses the documented realization-state uncertainty that can confound all later drift comparisons. It does not test the modifier hypotheses; it establishes whether the process state is controlled well enough for those tests to be interpretable.",
+  "recommendation_id": "EXP_V4_20260920T041319Z_9c42233ada",
+  "selected_candidate_id": "S1C02",
+  "selected_experiment_id": "S1C02::M-REPEAT",
+  "selected_measurement_id": "M-REPEAT",
+  "stage_disagreements_resolved": "I followed the Skeptic's high-severity objection and the robustness concern over the Proposer's M-HOLD recommendation. The proposer selected a direct drift measurement, but its intervention-free formulation cannot falsify or discriminate any registered modifier hypothesis and leaves substantial process-state confounding. M-REPEAT is therefore selected as a state-control experiment before interpreting subsequent hold comparisons.",
+  "uncertainty_decomposition": {
+    "evidence_coverage_uncertainty": "High for modifier-mechanism inference because this unmodified E2 control contains neither acrylic-like modifier nor minor tackifier-like modifier and cannot separate H-CORE, H-RESIN, or H-DUAL.",
+    "extrapolation_uncertainty": "Low for the E2 realization-control question because the composition is the characterized local reactive-core anchor; high for transferring the result to modified formulations.",
+    "measurement_uncertainty": "Viscosity measurement and extraction of a_fr from the 80-130 C sweep contribute uncertainty; no numerical repeatability estimate for this exact controlled protocol is supplied.",
+    "realization_state_uncertainty": "Initially high: uncontrolled E2 preparations showed 2.80-3.57x max/min spread and approximately 0.46-0.58 CV; this experiment directly measures whether controlled history reduces that spread."
+  },
+  "voi": {
+    "components": {
+      "decision_relevance": 0.24,
+      "extrapolation_risk": 0.0,
+      "hypothesis_discrimination": 0.0,
+      "measurement_interpretability": 0.9,
+      "process_state_risk": 0.15,
+      "uncertainty_reduction": 0.36
+    },
+    "formula": "VOI = w_hyp * hypothesis_discrimination + w_unc * uncertainty_reduction + w_dec * decision_relevance + w_int * measurement_interpretability - w_ext * extrapolation_risk - w_proc * process_state_risk. Every component is normalized to [0, 1] by construction. This is a transparent normalized score with reported weight sensitivity, not a Bayesian posterior.",
+    "score": 0.2145,
+    "scores_withheld_from_model": false,
+    "selected_is_in_tied_top_set": false,
+    "tied_top_set": [
+      "S1C41::M-HOLD-120",
+      "S1C46::M-HOLD-120",
+      "S1C51::M-HOLD-120",
+      "S1C56::M-HOLD-120",
+      "S1C61::M-HOLD-120"
+    ],
+    "weights": {
+      "decision_relevance": 0.25,
+      "extrapolation_risk": 0.1,
+      "hypothesis_discrimination": 0.3,
+      "measurement_interpretability": 0.1,
+      "process_state_risk": 0.05,
+      "uncertainty_reduction": 0.2
+    }
+  },
+  "workflow_version": "1.2.0"
+}

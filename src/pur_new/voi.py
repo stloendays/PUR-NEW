@@ -468,6 +468,68 @@ def _flip_boundary(
     return boundary
 
 
+COVERAGE_ORDER = {"full_coverage": 0, "partial_coverage": 1, "no_intervention": 2}
+
+RULE_ORDERS = (
+    "sufficiency_first",
+    "minimality_first",
+)
+
+
+def perturbation_cost(card: dict[str, Any]) -> float:
+    """Total modifier burden of a card, as a plain magnitude in percentage points."""
+    return card["acrylic_like_pct"] + card["minor_tackifier_like_pct"]
+
+
+def rule_order_key(card: dict[str, Any], order: str) -> tuple[Any, ...]:
+    """Lexicographic decision key under a named rule ORDER.
+
+    The two orders use the same facts, the same candidate space and the same VOI
+    components. They differ only in which consideration is allowed to decide first.
+
+    ``sufficiency_first`` asks whether the experiment can answer the open question before
+    asking what it costs. ``minimality_first`` inverts that: it minimizes intervention
+    burden first and only then looks at whether anything is being tested. The inversion
+    is the V2 failure mode of the earlier Stage-1 ladder, reproduced here as a controlled
+    arm rather than quoted from a previous series.
+    """
+    coverage = COVERAGE_ORDER[card["decision_relevance_detail"]["coverage_class"]]
+    discrimination = card["voi_components"]["hypothesis_discrimination"]
+    relevance = card["voi_components"]["decision_relevance"]
+    burden = perturbation_cost(card)
+    if order == "sufficiency_first":
+        return (coverage, -discrimination, -relevance, burden, card["experiment_id"])
+    if order == "minimality_first":
+        return (burden, coverage, -discrimination, -relevance, card["experiment_id"])
+    raise KeyError(f"unknown rule order: {order!r}")
+
+
+def rank_by_rule_order(cards: list[dict[str, Any]], order: str) -> dict[str, Any]:
+    """Rank experiments under a named rule order and report what it puts first.
+
+    This does not modify the VOI score. It is a separate, explicit statement of decision
+    ORDER, so that order can be manipulated while every underlying quantity is held fixed.
+    """
+    ranked = sorted(cards, key=lambda card: rule_order_key(card, order))
+    top = ranked[0]
+    return {
+        "rule_order": order,
+        "order_description": (
+            "intervention sufficiency is assessed before perturbation size"
+            if order == "sufficiency_first"
+            else "perturbation size is minimized before intervention sufficiency is assessed"
+        ),
+        "ranked_experiment_ids": [card["experiment_id"] for card in ranked],
+        "top_experiment_id": top["experiment_id"],
+        "top_candidate_id": top["candidate_id"],
+        "top_measurement_id": top["measurement_id"],
+        "top_intervention_family": top["intervention_family"],
+        "top_hypothesis_discrimination": top["voi_components"]["hypothesis_discrimination"],
+        "top_total_modifier_pct": perturbation_cost(top),
+        "top_voi_score": top["voi_score"],
+    }
+
+
 def voi_robustness_sweep(
     candidates: list[dict[str, Any]],
     *,
