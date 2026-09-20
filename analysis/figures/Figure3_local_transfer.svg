@@ -179,8 +179,8 @@
 <text x='414.10' y='169.90' text-anchor='middle' style='font-size: 8.00px; font-family: "Nimbus Roman";' textLength='18.00px' lengthAdjust='spacingAndGlyphs'>1,000</text>
 <text x='462.96' y='169.90' text-anchor='middle' style='font-size: 8.00px; font-family: "Nimbus Roman";' textLength='18.00px' lengthAdjust='spacingAndGlyphs'>3,000</text>
 <text x='485.67' y='169.90' text-anchor='middle' style='font-size: 8.00px; font-family: "Nimbus Roman";' textLength='18.00px' lengthAdjust='spacingAndGlyphs'>5,000</text>
-<text x='445.90' y='180.76' text-anchor='middle' style='font-size: 10.00px; font-family: "Nimbus Roman";' textLength='76.14px' lengthAdjust='spacingAndGlyphs'>Observed viscosity</text>
-<text transform='translate(358.70,119.02) rotate(-90)' text-anchor='middle' style='font-size: 10.00px; font-family: "Nimbus Roman";' textLength='75.64px' lengthAdjust='spacingAndGlyphs'>Predicted viscosity</text>
+<text x='445.90' y='180.76' text-anchor='middle' style='font-size: 10.00px; font-family: "Nimbus Roman";' textLength='109.27px' lengthAdjust='spacingAndGlyphs'>Observed viscosity (mPa·s)</text>
+<text transform='translate(358.70,119.02) rotate(-90)' text-anchor='middle' style='font-size: 10.00px; font-family: "Nimbus Roman";' textLength='108.77px' lengthAdjust='spacingAndGlyphs'>Predicted viscosity (mPa·s)</text>
 <rect x='393.62' y='40.71' width='104.56' height='27.24' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
 <rect x='398.60' y='45.69' width='17.28' height='17.28' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
 <circle cx='407.24' cy='54.33' r='3.27' style='stroke-width: 0.99;' />
