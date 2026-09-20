@@ -21,9 +21,9 @@ joint <- read.csv(file.path(results_dir, "local_joint_formulation_temperature_ex
 joint_summary <- read.csv(file.path(results_dir, "local_joint_formulation_temperature_extrapolation_summary.csv"), check.names = FALSE)
 
 theme_pur <- function() {
-  theme_classic(base_size = 10, base_family = "serif") +
+  theme_classic(base_size = 10, base_family = "Times New Roman") +
     theme(
-      text = element_text(colour = "black"),
+      text = element_text(family = "Times New Roman", colour = "black"),
       axis.text = element_text(colour = "black"),
       axis.title = element_text(colour = "black"),
       plot.title = element_text(face = "bold", size = 10, hjust = 0),
