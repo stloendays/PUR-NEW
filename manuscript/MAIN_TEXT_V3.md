@@ -29,7 +29,7 @@ A second challenge is that temperature response does not determine stability dur
 
 The sparse-data regime also changes the appropriate role of artificial intelligence. Five local formulations are sufficient to expose strong physical structure, but not to support a credible black-box predictor for untested modifier chemistry. In this setting, the useful computational task is experiment selection under explicit evidence and uncertainty. Self-driving laboratories and tool-grounded chemistry agents have shown how computation, literature knowledge and algorithmic decision-making can be combined to guide experiments [@Hase2019SelfDrivingLabs; @Roch2018ChemOS; @Burger2020MobileRoboticChemist; @MacLeod2020SelfDrivingLab; @Kusne2020ClosedLoopMaterials; @Stach2021AutonomousExperimentation; @Szymanski2023AutonomousLab; @Boiko2023Coscientist; @Bran2024ChemCrow]. For formulation science, however, the decision layer should remain downstream of experimentally established material structure.
 
-Here we develop a discovery-to-decision framework for a local reactive-PUR chemistry family. We first show that large preparation-to-preparation viscosity differences are dominated by a realization-specific scale superimposed on a shared local thermal response. We then test whether one viscosity measurement is sufficient to calibrate an unseen realization, including a stricter formulation-and-temperature holdout. Thermal-hold measurements identify a separate temporal coordinate that varies much more strongly across the measured formulation contrast, and a resin-modified follow-up formulation substantially suppresses this drift. Finally, we combine the experimentally derived rheological representation with curated external PUR evidence in a retrospective outcome-blind scientific Agent reconstruction. The objective is not to predict an unsupported optimum, but to determine whether physical structure and traceable evidence can constrain the next formulation experiment to a scientifically useful region.
+Here we develop a discovery-to-decision framework for a local reactive-PUR chemistry family. We first show that large realization-to-realization viscosity differences are dominated by a realization-specific scale superimposed on a shared local thermal response. We then test whether one viscosity measurement is sufficient to calibrate an unseen realization, including a stricter formulation-and-temperature holdout. Thermal-hold measurements identify a separate temporal coordinate that varies much more strongly across the measured formulation contrast, and a resin-modified follow-up formulation substantially suppresses this drift. Finally, we combine the experimentally derived rheological representation with curated external PUR evidence in a retrospective outcome-blind scientific Agent reconstruction. The objective is not to predict an unsupported optimum, but to determine whether physical structure and traceable evidence can constrain the next formulation experiment to a scientifically useful region.
 
 ![Figure 1. Discovery-to-decision workflow](../analysis/figures/Figure1_workflow.png)
 
@@ -39,13 +39,13 @@ Here we develop a discovery-to-decision framework for a local reactive-PUR chemi
 
 ## 2. Results and Discussion
 
-### 2.1 Repeated preparations shift viscosity level within the same nominal formulation
+### 2.1 Repeated rheological realizations shift viscosity level within the same nominal formulation
 
 The local design comprised five PUR formulations based on PPG2000, STEPANPOL PDP-70 and 4,4'-MDI. E1–E3 used a 50/50 PPG2000/PDP-70 polyol ratio while varying the reported NCO:OH ratio from 1.70 to 1.90. E4 and E5 retained NCO:OH = 1.80 and changed the PPG2000/PDP-70 ratio to 60/40 and 40/60, respectively. Complete 80–130 °C temperature sweeps were available for E1–E3 across multiple experimental realizations.
 
-Nominal formulation identity did not uniquely determine absolute viscosity. Three E2 realizations gave viscosity values of 9462, 18780 and 27350 at 80 °C, and 1955, 4017 and 6977 at 120 °C. The corresponding maximum-to-minimum ratios were 2.89× and 3.57×, with the spread remaining approximately 2.80–3.57× across the full measured temperature range.
+Nominal formulation identity did not uniquely determine absolute viscosity. Three E2 realizations gave viscosity values of 9462, 18780 and 27350 mPa·s at 80 °C, and 1955, 4017 and 6977 mPa·s at 120 °C. The corresponding maximum-to-minimum ratios were 2.89× and 3.57×, with the spread remaining approximately 2.80–3.57× across the full measured temperature range.
 
-The persistence of this separation across temperature is inconsistent with an isolated measurement outlier. Instead, the E2 curves are displaced systematically in viscosity level. Nominal composition therefore identifies the chemical recipe but does not fully identify the rheological state realized in a particular preparation.
+The persistence of this separation across temperature is inconsistent with an isolated measurement outlier. Instead, the E2 curves are displaced systematically in viscosity level. Nominal composition therefore identifies the chemical recipe but does not fully identify the rheological state represented by a particular measurement realization.
 
 ### 2.2 A latent viscosity-scale coordinate captures most realization variability
 
@@ -93,12 +93,12 @@ With the same quadratic inverse-temperature response in both models, the formula
 
 A model-free singular-value decomposition gave the same geometric result. After centering the log-viscosity matrix by temperature, the first between-realization mode explained 99.63% of the variance. Its loading vector had a cosine similarity of 0.9998 to a constant vector, showing that the dominant mode is almost indistinguishable from a uniform vertical displacement in log-viscosity space.
 
-Together, the regression and decomposition results establish a simple local representation: realizations share a similar thermal-response shape but occupy different viscosity levels. We therefore treat the fitted intercept $a_{fr}$ as a realized viscosity-scale coordinate: it places each measured preparation on the shared thermal-response shape while leaving the underlying contribution of reaction time, moisture, mixing history, sample age and related preparation variables unresolved.
+Together, the regression and decomposition results establish a simple local representation: realizations share a similar thermal-response shape but occupy different viscosity levels. We therefore treat the fitted intercept $a_{fr}$ as a realized viscosity-scale coordinate: it places each measured realization on the shared thermal-response shape while leaving the underlying contribution of reaction time, moisture, mixing history, sample age and related process-state variables unresolved.
 
 
 ![Figure 2. State-conditioned rheology](../analysis/figures/Figure2_state_conditioned_rheology.png)
 
-**Figure 2. Realization-dependent viscosity variation is dominated by a calibratable state shift.** (A) Temperature-dependent viscosity of four E2 realizations, showing persistent preparation-to-preparation offsets across 80–130 °C. (B) Removal of the realization-specific viscosity-scale intercept $a_{fr}$ collapses the E2 curves onto the shared thermal response. (C) The first between-realization singular mode explains 99.63% of the variance and has a cosine similarity of 0.9998 to an ideal constant vertical shift. (D) Using the same quadratic inverse-temperature response in both models, state conditioning increases fitted $R^2$ from 85.53% to 99.77% and reduces leave-one-temperature-out multiplicative error from 1.423× to 1.058×.
+**Figure 2. Realization-dependent viscosity variation is dominated by a calibratable state shift.** (A) Temperature-dependent viscosity of four E2 realizations, showing persistent realization-to-realization offsets across 80–130 °C. (B) Removal of the realization-specific viscosity-scale intercept $a_{fr}$ collapses the E2 curves onto the shared thermal response. (C) The first between-realization singular mode explains 99.63% of the variance and has a cosine similarity of 0.9998 to an ideal constant vertical shift. (D) Using the same quadratic inverse-temperature response in both models, state conditioning increases fitted $R^2$ from 85.53% to 99.77% and reduces leave-one-temperature-out multiplicative error from 1.423× to 1.058×.
 
 ### 2.3 One viscosity anchor calibrates an unseen local realization
 
@@ -116,7 +116,7 @@ Using 120 °C as the anchor, multiplicative reconstruction errors were approxima
 
 We then withheld both the target formulation and the high-temperature prediction region. The shared response was fitted only to the other formulations at temperatures up to 110 °C; one 110 °C measurement located each unseen realization, and the model predicted 120 and 130 °C. Across 12 held predictions from six realizations, pooled multiplicative RMSE was 1.088×, with errors of 1.087× at 120 °C and 1.089× at 130 °C. Median absolute percentage error was 5.68%, and a 10,000-replicate realization-level cluster bootstrap gave a 95% interval of 1.043–1.126× for the pooled multiplicative RMSE.
 
-This test is deliberately local. The extrapolation spans only 10–20 °C beyond the fitting range and remains inside the audited E1–E3 chemistry neighborhood. Within that boundary, however, the result establishes an experimentally useful separation between learning a family-level thermal response and locating the state of a new preparation. Once the local shape has been established, one viscosity measurement can provide the state calibration needed to reconstruct the remaining temperature response.
+This test is deliberately local. The extrapolation spans only 10–20 °C beyond the fitting range and remains inside the audited E1–E3 chemistry neighborhood. Within that boundary, however, the result establishes an experimentally useful separation between learning a family-level thermal response and locating the state of a newly measured realization. Once the local shape has been established, one viscosity measurement can provide the state calibration needed to reconstruct the remaining temperature response.
 
 ![Figure 3. One-point transfer and bounded extrapolation](../analysis/figures/Figure3_local_transfer.png)
 
@@ -126,7 +126,7 @@ This test is deliberately local. The extrapolation spans only 10–20 °C beyond
 
 State calibration does not capture viscosity evolution at fixed temperature. To compare these two responses, we first summarized the local temperature dependence by regressing $\ln \eta$ against $1/T$. The apparent temperature-response descriptor $E_\eta$ had a mean of approximately 42.05 kJ mol$^{-1}$, a standard deviation of 2.43 kJ mol$^{-1}$ and a coefficient of variation of 5.77% across the chemistry-audited sweeps. This quantity is used only as a rheological descriptor and is not interpreted as a chemical reaction activation energy.
 
-The 120 °C thermal-hold response varied much more strongly across the measured formulation contrast. E1 increased from 708.7 at 15 min to 776.1 at 60 min and 828.1 at 90 min, whereas E5 increased from 2210 to 3349 and 4267 over the same times. The directly observed 15–60 min viscosity increases were 9.51% for E1 and 51.54% for E5. A descriptive model,
+The 120 °C thermal-hold response varied much more strongly across the measured formulation contrast. E1 increased from 708.7 mPa·s at 15 min to 776.1 mPa·s at 60 min and 828.1 mPa·s at 90 min, whereas E5 increased from 2210 to 3349 and 4267 mPa·s over the same times. The directly observed 15–60 min viscosity increases were 9.51% for E1 and 51.54% for E5. A descriptive model,
 
 $$
 \ln \eta(t)=\ln \eta_0+k_{\mathrm{drift}}t,
@@ -181,7 +181,7 @@ This intervention geometry also transferred across model configurations. Under t
 
 After the outcome-blind decision series was closed, the completed wet-lab validation was used for physical adjudication. The validation formulation contained PPG2000, PDP-70, AC1920, TK100 and MDI at source-reported parts of 39.60, 39.60, 17.00, 5.00 and 20.19, respectively.
 
-Two 120 °C thermal-hold repeat runs were measured from 15 to 60 min. Repeat 1 changed from 1230 at 15 min to 1228 at 60 min, corresponding to a drift of -0.16%. Repeat 2 changed from 1281 to 1320, corresponding to +3.04%. Across the two repeats, the mean absolute 15–60 min viscosity drift was 1.60%, while the replicate-mean trajectory showed a net change of +1.47%.
+Two 120 °C thermal-hold repeat runs were measured from 15 to 60 min. Repeat 1 changed from 1230 mPa·s at 15 min to 1228 mPa·s at 60 min, corresponding to a drift of -0.16%. Repeat 2 changed from 1281 to 1320 mPa·s, corresponding to +3.04%. Across the two repeats, the mean absolute 15–60 min viscosity drift was 1.60%, while the replicate-mean trajectory showed a net change of +1.47%.
 
 The original local references were substantially less stable over the same interval. E1 increased by 9.51% and E5 by 51.54% from 15 to 60 min. Relative to E1, the best original local reference, the mean absolute drift of the resin-modified validation formulation was reduced by approximately 83%. The experiment therefore validates a low-drift formulation region rather than merely reproducing a static viscosity target.
 
@@ -219,11 +219,15 @@ The original formulation space contained five reactive PUR compositions based on
 
 The validation formulation contained PPG2000, PDP-70, AC1920, TK100 and MDI on a source-reported parts basis. Because the source record did not provide a verified NCO:OH value for this formulation, no stoichiometric ratio was reconstructed.
 
+For sample preparation, the polyol components were charged first, stirred and vacuum-dehydrated at approximately 130 °C for 1 h. 4,4'-MDI was then added, followed by stirring under vacuum at approximately 120 °C for about 1 h 20 min.
+
 ### 3.2 Temperature-sweep data and chemistry audit
 
-Temperature-sweep viscosity was recorded from 80 to 130 °C in 10 °C increments.
+Temperature-sweep viscosity was measured from 80 to 130 °C in 10 °C increments using an RV-SSR-H high-temperature rotational viscometer (Shanghai Fangrui Instrument Co., Ltd.) equipped with an NKY-25 viscosity-heater unit and a No. 27 spindle. The instrument output was recorded in mPa·s. Rotation speed was not fixed; it was adjusted to maintain the instrument torque at approximately 40–60%. At each set temperature, the sample was equilibrated for 15 min before the viscosity value displayed by the instrument was recorded.
 
-Run identifiers were retained for provenance. Project metadata confirms that GJJ, ZYX and CHH are realization labels associated with the same operator rather than different operator identities. Here, a realization denotes a complete measured temperature–viscosity curve/run; day-1 retests are retained as separately observed rheological states but are not assumed to be independent synthesis batches because their parent-sample relationships are not established in the compact source record.
+Viscosity measurements were performed on prepared sample material rather than by an in-reactor sensor. The repeatability protocol used the same mother sample across the temperatures within a sweep, so the temperature points do not represent independent resyntheses.
+
+Run identifiers were retained for provenance. Project metadata confirms that GJJ, ZYX and CHH are realization labels associated with the same operator rather than different operator identities. Here, a realization denotes a complete measured temperature–viscosity curve/run. Distinct run labels are therefore treated as rheological measurement realizations; the available source record does not establish that they are independent synthesis batches. Day-1 retests are retained as separately observed rheological states without assigning an unverified batch relationship.
 
 One E1 temperature curve was labelled with phosphoric-acid context. Because the additive condition was not represented in the compact formulation table and its exact amount was not encoded, this curve was excluded from the chemistry-audited primary state analysis and retained for sensitivity analysis. The primary temperature-sweep dataset therefore contained 36 observations from six complete realizations of three nominal formulations.
 
@@ -323,7 +327,7 @@ A stricter formulation-and-temperature holdout removed one formulation entirely 
 
 ### 3.6 Thermal-hold measurements
 
-Original E1 and E5 samples were held at 120 °C and measured at 15, 30, 60 and 90 min. The validation formulation was measured in two repeat runs at 15, 30, 45 and 60 min.
+Original E1 and E5 samples were held at 120 °C and measured at 15, 30, 60 and 90 min. The validation formulation was measured in two repeat runs at 15, 30, 45 and 60 min. For the thermal-hold protocol, $t=0$ was defined as the time at which the sample reached 120 °C. The material was stirred during the hold and kept sealed under vacuum. Viscosity was determined by sampling the prepared material for viscometer measurement rather than by continuous in-situ sensing.
 
 The primary matched stability comparison used the common 15–60 min interval,
 
@@ -391,7 +395,7 @@ Claims about the shared thermal-response shape are stated for the local formulat
 
 ## 4. Conclusions
 
-Reactive-PUR rheology within the studied local chemistry family is not uniquely specified by nominal formulation. Nominally identical preparations differed by up to approximately threefold in absolute viscosity, but the disagreement was highly structured: a realization-specific viscosity-scale coordinate superimposed on a shared local thermal response explained 99.77% of the log-viscosity variation, and model-free decomposition assigned 99.63% of between-realization variance to a near-uniform vertical shift.
+Reactive-PUR rheology within the studied local chemistry family is not uniquely specified by nominal formulation. Nominally identical rheological realizations differed by up to approximately threefold in absolute viscosity, but the disagreement was highly structured: a realization-specific viscosity-scale coordinate superimposed on a shared local thermal response explained 99.77% of the log-viscosity variation, and model-free decomposition assigned 99.63% of between-realization variance to a near-uniform vertical shift.
 
 This low-dimensional structure enables one-point rheological state calibration. After withholding an entire nominal formulation, one viscosity anchor reconstructed the remaining local temperature response with approximately 1.06–1.10× pooled multiplicative error. In the stricter formulation-and-temperature holdout, a single 110 °C anchor predicted 120–130 °C viscosity with a pooled multiplicative RMSE of 1.088×. The result supports reduced repeat characterization within a validated chemistry neighborhood; broader chemistry families require their own shared-response calibration.
 
