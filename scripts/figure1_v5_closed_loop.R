@@ -74,7 +74,7 @@ draw_fig <- function() {
 
   box(xs[4], y, w, h,
       "4  Discriminating experiment",
-      "Formulation × measurement\n= experiment card\n\nVOI + rule order\n+ Agent selection",
+      "Formulation × measurement\n= experiment card\n\nVOI + rule order\n+ model-mediated selection",
       fill = light)
 
   box(xs[5], y, w, h,
