@@ -407,7 +407,11 @@ The manuscript-facing V4 evidence is now frozen around three controlled conditio
 
 The order-inverted arm is particularly important: the Skeptic identified the zero-discrimination defect at high severity in 10/10 runs, yet all ten frozen decisions still committed. V4 therefore supports a rule-design result rather than an autonomy claim: **rule content and rule order are causal parts of scientific decision quality, while critique without decision authority is diagnostic rather than corrective.**
 
-Do not overwrite or retroactively relabel the V3 frozen records. V3 remains the provenance-preserving predecessor; V4 is the current manuscript upgrade.
+Do not silently overwrite or retroactively relabel frozen records. V3 remains the provenance-preserving predecessor; V4 is the current manuscript upgrade. If the author explicitly requests a thaw/revision/re-freeze, update the active manifest or protocol as instructed, regenerate dependent hashes/results where needed, and preserve the previous frozen version as provenance.
+
+## Reusable scientific-writing skill
+
+The project-specific writing and provenance rules are versioned in `skills/junbo-scientific-writing/`. The skill includes the manuscript audit script, Agent benchmark reporting rules, equation/export checks, and the author-authorized thaw/re-freeze policy for frozen manifests and protocols.
 
 ## 11. Manuscript non-negotiables
 
