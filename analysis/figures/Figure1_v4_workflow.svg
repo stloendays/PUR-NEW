@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720" role="img" aria-label="Figure 1 V4 workflow">
+<style>
+text{font-family:"Times New Roman",Times,serif;fill:#222}
+.title{font-size:25px;font-weight:700}
+.panelTitle{font-size:17px;font-weight:700}
+.body{font-size:14px}
+.small{font-size:12px;fill:#555}
+.bold{font-weight:700}
+.box{stroke:#222;stroke-width:1.4;rx:12;ry:12}
+.panel{fill:#fafafa;stroke:#222;stroke-width:1.4;rx:16;ry:16}
+.arrow{stroke:#333;stroke-width:2;fill:none;marker-end:url(#arrow)}
+.axis{stroke:#333;stroke-width:1.2}
+.grid{stroke:#e5e7eb;stroke-width:1}
+</style>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto"><polygon points="0 0, 8 3.5, 0 7" fill="#333"/></marker></defs>
+<rect width="1400" height="720" fill="white"/>
+<text x="700" y="42" text-anchor="middle" class="title">From rheological state discovery to rule-grounded experiment selection</text>
+
+<rect x="30" y="75" width="315" height="585" class="panel"/>
+<rect x="365" y="75" width="315" height="585" class="panel"/>
+<rect x="700" y="75" width="315" height="585" class="panel"/>
+<rect x="1035" y="75" width="335" height="585" class="panel"/>
+
+<text x="187" y="108" text-anchor="middle" class="panelTitle">A  Physical diagnosis</text>
+<text x="522" y="108" text-anchor="middle" class="panelTitle">B  Registered decision problem</text>
+<text x="857" y="108" text-anchor="middle" class="panelTitle">C  Rule-grounded Agent</text>
+<text x="1202" y="108" text-anchor="middle" class="panelTitle">D  Freeze, ablate, adjudicate</text>
+
+<!-- A -->
+<line x1="78" y1="250" x2="78" y2="142" class="axis"/><line x1="78" y1="250" x2="292" y2="250" class="axis"/>
+<path d="M90 158 C135 185 195 205 280 225" fill="none" stroke="#2A7F7F" stroke-width="3"/>
+<path d="M90 175 C140 202 205 221 280 238" fill="none" stroke="#7A5C8E" stroke-width="3"/>
+<path d="M90 145 C138 169 200 189 280 210" fill="none" stroke="#C46A3A" stroke-width="3"/>
+<text x="187" y="278" text-anchor="middle" class="body bold">Nominally identical realizations</text>
+<text x="187" y="300" text-anchor="middle" class="small">2.80–3.57× viscosity spread</text>
+<line x1="187" y1="318" x2="187" y2="354" class="arrow"/>
+<rect x="93" y="365" width="188" height="70" fill="#EAF5F4" class="box"/>
+<text x="187" y="392" text-anchor="middle" class="body bold">shared thermal shape</text>
+<text x="187" y="414" text-anchor="middle" class="body">+ realized viscosity scale</text>
+<text x="187" y="455" text-anchor="middle" class="small">99.77% log-viscosity variance</text>
+<line x1="187" y1="470" x2="187" y2="506" class="arrow"/>
+<rect x="90" y="517" width="194" height="78" fill="#FFF1E6" class="box"/>
+<text x="187" y="545" text-anchor="middle" class="body bold">120 °C thermal hold</text>
+<text x="187" y="568" text-anchor="middle" class="body">reveals temporal failure mode</text>
+<text x="187" y="622" text-anchor="middle" class="small">E1 9.51%  |  E5 51.54%</text>
+
+<!-- B -->
+<text x="522" y="154" text-anchor="middle" class="body bold">Three formulation-level hypotheses</text>
+<rect x="400" y="177" width="92" height="42" fill="#f3f4f6" class="box"/><text x="446" y="203" text-anchor="middle" class="body bold">H-CORE</text>
+<rect x="476" y="230" width="92" height="42" fill="#EAF5F4" class="box"/><text x="522" y="256" text-anchor="middle" class="body bold">H-RESIN</text>
+<rect x="552" y="177" width="92" height="42" fill="#F2EEF7" class="box"/><text x="598" y="203" text-anchor="middle" class="body bold">H-DUAL</text>
+<line x1="522" y1="285" x2="522" y2="326" class="arrow"/>
+<rect x="430" y="338" width="184" height="76" fill="white" class="box"/>
+<text x="522" y="366" text-anchor="middle" class="body bold">73 formulations × 4 plans</text>
+<text x="522" y="392" text-anchor="middle" class="body bold">= 292 experiment cards</text>
+<line x1="522" y1="426" x2="522" y2="468" class="arrow"/>
+<rect x="416" y="480" width="212" height="93" fill="#FFF1E6" class="box"/>
+<text x="522" y="509" text-anchor="middle" class="body bold">Matched-window hold</text>
+<text x="522" y="532" text-anchor="middle" class="body">is the mechanism-discriminating</text>
+<text x="522" y="553" text-anchor="middle" class="body">measurement</text>
+<text x="522" y="620" text-anchor="middle" class="small">held-out truth/outcome excluded</text>
+
+<!-- C -->
+<rect x="765" y="145" width="184" height="66" fill="#EAF5F4" class="box"/>
+<text x="857" y="172" text-anchor="middle" class="body bold">Deterministic VOI</text>
+<text x="857" y="194" text-anchor="middle" class="small">discrimination · relevance · risk</text>
+<line x1="857" y1="222" x2="857" y2="260" class="arrow"/>
+<rect x="764" y="271" width="186" height="70" fill="#F7F2E6" class="box"/>
+<text x="857" y="299" text-anchor="middle" class="body bold">Sufficiency-first</text>
+<text x="857" y="322" text-anchor="middle" class="body">rule order</text>
+<line x1="857" y1="353" x2="857" y2="393" class="arrow"/>
+<rect x="742" y="405" width="230" height="105" fill="#F2EEF7" class="box"/>
+<text x="857" y="433" text-anchor="middle" class="body bold">Planner → Tools → Proposer</text>
+<text x="857" y="457" text-anchor="middle" class="body bold">→ Skeptic → Robustness</text>
+<text x="857" y="481" text-anchor="middle" class="body bold">→ Judge</text>
+<text x="857" y="535" text-anchor="middle" class="small">same five LLM stages as V3</text>
+<line x1="857" y1="548" x2="857" y2="579" class="arrow"/>
+<rect x="800" y="590" width="114" height="45" fill="#FFF1E6" class="box"/>
+<text x="857" y="618" text-anchor="middle" class="body bold">FREEZE</text>
+
+<!-- D -->
+<rect x="1119" y="143" width="166" height="72" fill="#F2EEF7" class="box"/>
+<text x="1202" y="169" text-anchor="middle" class="body bold">Full V4, N=10</text>
+<text x="1202" y="193" text-anchor="middle" class="small">9/10 supported; 0/10 zero</text>
+<line x1="1202" y1="228" x2="1202" y2="260" class="arrow"/>
+<rect x="1110" y="272" width="184" height="83" fill="white" class="box"/>
+<text x="1202" y="298" text-anchor="middle" class="body bold">Controlled ablations</text>
+<text x="1202" y="323" text-anchor="middle" class="small">VOI withheld: 3/5 zero</text>
+<text x="1202" y="343" text-anchor="middle" class="small">order inverted: 10/10 zero</text>
+<line x1="1202" y1="367" x2="1202" y2="403" class="arrow"/>
+<rect x="1106" y="414" width="192" height="84" fill="#EAF5F4" class="box"/>
+<text x="1202" y="442" text-anchor="middle" class="body bold">Post-freeze wet-lab</text>
+<text x="1202" y="466" text-anchor="middle" class="body bold">adjudication</text>
+<line x1="1202" y1="509" x2="1202" y2="542" class="arrow"/>
+<rect x="1093" y="553" width="218" height="70" fill="#FFF1E6" class="box"/>
+<text x="1202" y="580" text-anchor="middle" class="body bold">1.60% observed vs 7.79% null</text>
+<text x="1202" y="603" text-anchor="middle" class="body bold">H-CORE falsified</text>
+
+<line x1="345" y1="370" x2="365" y2="370" class="arrow"/>
+<line x1="680" y1="370" x2="700" y2="370" class="arrow"/>
+<line x1="1015" y1="370" x2="1035" y2="370" class="arrow"/>
+<text x="700" y="690" text-anchor="middle" class="body bold">Physical evidence defines the question; explicit rules define the decision geometry; the Agent selects inside it; experiment adjudicates it.</text>
+</svg>
