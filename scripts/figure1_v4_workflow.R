@@ -158,7 +158,7 @@ draw_fig <- function() {
   draw_box(0.87, 0.505, 0.155, 0.085,
            "Controlled ablations",
            fill = "white", fontsize = 8.5, fontface = "bold")
-  grid.text("score withheld: 3/5 zero\norder inverted: 5/5 zero",
+  grid.text("score withheld: 3/5 zero\norder inverted: 10/10 zero",
             0.87, 0.435, gp = gpar(fontsize = 7.3, col = drift))
 
   draw_arrow(0.87, 0.385, 0.87, 0.325)
