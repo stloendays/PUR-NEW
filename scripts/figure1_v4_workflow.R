@@ -186,7 +186,7 @@ draw_fig <- function() {
 png(file.path(fig_dir, "Figure1_v4_workflow.png"), width = 3200, height = 1700, res = 300, type = "cairo")
 draw_fig(); dev.off()
 
-pdf(file.path(fig_dir, "Figure1_v4_workflow.pdf"), width = 10.67, height = 5.67, useDingbats = FALSE)
+cairo_pdf(file.path(fig_dir, "Figure1_v4_workflow.pdf"), width = 10.67, height = 5.67, family = font_family)
 draw_fig(); dev.off()
 
 svg(file.path(fig_dir, "Figure1_v4_workflow.svg"), width = 10.67, height = 5.67)
