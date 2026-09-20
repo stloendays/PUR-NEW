@@ -200,7 +200,7 @@ The critique stages did not rescue the inverted policy. In all ten order-inverte
 | VOI score withheld | 5 | 0/5 | 3/5 | 0.267 |
 | Rule order inverted | 10 | 0/10 | 10/10 | 0.000 |
 
-![Figure 4. Decision-rule ablation](../analysis/figures/Figure4_v4_rule_ablation.svg)
+![Figure 4. Decision-rule ablation](../analysis/figures/Figure4_v5_rule_ablation.svg)
 
 **Figure 4. Scientific decision quality depends on both rule content and rule order.** (A) Evidence-supported intervention-family recovery falls from 9/10 in the full rule-grounded architecture to 0/5 when the VOI score is withheld and 0/10 when rule order is inverted; error bars are two-sided 95% Wilson intervals. (B) Mean hypothesis discrimination of the frozen selected experiment decreases from 0.667 to 0.267 and then 0.000, while zero-discrimination selections increase from 0/10 to 3/5 and 10/10. (C) Composition choice and measurement choice are damaged differently by the two manipulations: the matched-window 120 °C hold is selected in 10/10 full-architecture runs and 5/5 score-withheld runs, but in only 7/10 order-inverted runs, so withholding the score leaves the measurement intact whereas inverting the order does not. (D) In the minimality-first arm, the Skeptic raised a high-severity objection in 10/10 runs and the Robustness Adjudicator recommended changing the experiment in 5/10, yet all 10/10 frozen decisions committed and all ten selected zero-discrimination experiments.
 
@@ -414,7 +414,7 @@ This study reframes sparse reactive-PUR formulation as a continuous path from ma
 
 That distinction turns rheology into a decision problem. Once thermal-hold drift is recognized as the actionable failure mode, external chemistry evidence can be used to formulate competing intervention hypotheses rather than to guess a final recipe directly. The resulting experiment-selection problem asks which composition-measurement pair can most strongly distinguish those hypotheses.
 
-The rule-grounded Agent succeeds only within that physically defined problem. Full V4 selected discriminating experiments, whereas withholding the VOI score or inverting rule order produced progressively less informative decisions. The order-inverted system still recognized its own defect through the Skeptic, demonstrating that critique competence does not substitute for correctly ordered scientific decision rules.
+The rule-grounded Agent succeeds only within that physically defined problem. The full architecture selected discriminating experiments, whereas withholding the VOI score or inverting rule order produced progressively less informative decisions. The order-inverted system still recognized its own defect through the Skeptic, demonstrating that critique competence does not substitute for correctly ordered scientific decision rules.
 
 The final wet-lab comparison closes the loop: the resin-modified validation formulation showed 1.60% mean absolute 15–60 min drift, far below the 7.79% proportional-dilution prediction. The result rejects a reactive-core-only explanation and supports resin-associated stabilization at the formulation level. The central contribution is therefore neither a standalone rheology model nor a standalone AI Agent, but a single scientific workflow in which experimentally resolved material states are converted into falsifiable hypotheses, informative experiments and physical adjudication.
 ---
@@ -427,5 +427,5 @@ The authors declare no competing interests.
 
 ## 6. Data and Code Availability
 
-Versioned local formulation tables, chemistry-audited temperature-sweep data, thermal-hold records, statistical analysis scripts, hypothesis registry, measurement catalog, deterministic VOI implementation, frozen V4 confirmatory runs, controlled ablation runs and post-freeze adjudication artifacts are available in the public project repository at https://github.com/stloendays/PUR-NEW. The audited V3 manuscript state remains preserved under the Git ref `manuscript-v3-audited-20260919`; V4 decision artifacts are versioned under `results/agent_v4_voi/` and linked to their frozen input hashes. External data with separate licensing or provenance constraints should be redistributed only in accordance with their source terms.
+Versioned local formulation tables, chemistry-audited temperature-sweep data, thermal-hold records, statistical analysis scripts, hypothesis registry, measurement catalog, deterministic VOI implementation, frozen confirmatory runs, controlled ablation runs and post-freeze adjudication artifacts are available in the public project repository at https://github.com/stloendays/PUR-NEW. The audited V3 manuscript state remains preserved under the Git ref `manuscript-v3-audited-20260919`; Decision artifacts are versioned under `results/agent_v4_voi/` and linked to their frozen input hashes. External data with separate licensing or provenance constraints should be redistributed only in accordance with their source terms.
 
