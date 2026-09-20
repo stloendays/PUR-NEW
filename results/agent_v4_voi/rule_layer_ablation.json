@@ -1,0 +1,143 @@
+{
+  "arms": {
+    "ablated": {
+      "arm": "voi_withheld",
+      "candidate_counts": {
+        "S1C01": 2,
+        "S1C05": 1,
+        "S1C39": 1,
+        "S1C49": 1
+      },
+      "decision_modes": {
+        "committed_experiment": 2,
+        "state_control_experiment": 3
+      },
+      "failure_mode_measurement_selection": {
+        "count": 5,
+        "of_declared": 5,
+        "wilson_95": [
+          0.5655,
+          1.0
+        ]
+      },
+      "hypothesis_discrimination_of_selection": {
+        "mean": 0.266667,
+        "n_with_zero_discrimination": 3,
+        "of_completed": 5
+      },
+      "intervention_family_counts": {
+        "acrylic_only": 2,
+        "reactive_core_only": 3
+      },
+      "label": "ablated_voi_scores_withheld",
+      "measurement_counts": {
+        "M-HOLD-120": 5
+      },
+      "model": "gpt-5.6-luna",
+      "n_runs_completed": 5,
+      "n_runs_declared": 5,
+      "post_hoc_voi_of_selection": {
+        "max": 0.6175,
+        "mean": 0.3931,
+        "min": 0.2435
+      },
+      "selection_inside_deterministic_tied_top_set": {
+        "count": 0,
+        "of_scored": 5,
+        "wilson_95": [
+          0.0,
+          0.4345
+        ]
+      },
+      "series": "results\\agent_v4_voi\\series_ablation_voi_withheld_n5",
+      "supported_family_recovery": {
+        "count": 0,
+        "of_declared": 5,
+        "wilson_95": [
+          0.0,
+          0.4345
+        ]
+      },
+      "voi_scores_withheld_from_model": true
+    },
+    "full": {
+      "arm": null,
+      "candidate_counts": {
+        "S1C39": 1,
+        "S1C41": 9
+      },
+      "decision_modes": {
+        "committed_experiment": 9,
+        "discriminating_probe": 1
+      },
+      "failure_mode_measurement_selection": {
+        "count": 10,
+        "of_declared": 10,
+        "wilson_95": [
+          0.7225,
+          1.0
+        ]
+      },
+      "hypothesis_discrimination_of_selection": {
+        "mean": 0.666667,
+        "n_with_zero_discrimination": 0,
+        "of_completed": 10
+      },
+      "intervention_family_counts": {
+        "acrylic_only": 1,
+        "dual_axis_resin_modified": 9
+      },
+      "label": "full_v4_rule_layer_supplied",
+      "measurement_counts": {
+        "M-HOLD-120": 10
+      },
+      "model": "gpt-5.6-luna",
+      "n_runs_completed": 10,
+      "n_runs_declared": 10,
+      "post_hoc_voi_of_selection": {
+        "max": 0.6925,
+        "mean": 0.685,
+        "min": 0.6175
+      },
+      "selection_inside_deterministic_tied_top_set": {
+        "count": 9,
+        "of_scored": 10,
+        "wilson_95": [
+          0.5958,
+          0.9821
+        ]
+      },
+      "series": "results\\agent_v4_voi\\series_n10",
+      "supported_family_recovery": {
+        "count": 9,
+        "of_declared": 10,
+        "wilson_95": [
+          0.5958,
+          0.9821
+        ]
+      },
+      "voi_scores_withheld_from_model": false
+    }
+  },
+  "controlled": [
+    "model and decoding endpoint",
+    "all five stage prompts",
+    "hypothesis registry and its prediction rules",
+    "measurement catalog and declared resolutions",
+    "evidence access profile and structural firewall",
+    "candidate lattice (73 nodes) and the full 292-card experiment inventory"
+  ],
+  "effect_of_the_rule_layer": {
+    "failure_mode_measurement_selection": "10/10 -> 5/5",
+    "mean_hypothesis_discrimination": 0.4,
+    "mean_post_hoc_voi": 0.2919,
+    "supported_family_recovery": "9/10 -> 0/5"
+  },
+  "manipulated": [
+    "deterministic VOI score, component vector, ranking and tie set",
+    "the decision-stability sweep, which would reveal the tie set",
+    "the tool-generated acceptance and falsification criteria"
+  ],
+  "question": "Same model, same prompts, same hypothesis registry, same measurement catalog, same evidence contract, same 292 experiment cards. Only the deterministic value-of-information score is withheld. What changes?",
+  "reading": "The rule layer does not contribute uniformly across the decision. The measurement plan is recovered in both arms, so that choice follows from the hypothesis registry and the declared failure mode rather than from the score. The composition choice does not survive the ablation: without the score the runs fall back to compositions that cannot separate any registered hypothesis. Specifying the right rule is what converts a capable model into a correct decision."
+}

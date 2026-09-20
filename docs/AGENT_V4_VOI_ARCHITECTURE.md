@@ -1,5 +1,16 @@
 # Agent V4: VOI-guided experiment selection
 
+**Thesis.** Rule design, not model autonomy, is the dominant lever on scientific decision
+quality under a fixed evidence contract. V4 is built so that this can be measured rather
+than argued: every rule is explicit, deterministic and ablatable, and the model layer's
+contribution is reported at whatever rate the evidence supports.
+
+A controlled ablation holding the model, prompts, hypothesis registry, measurement catalog,
+evidence contract and all 292 experiment cards fixed, and withholding only the deterministic
+value-of-information score, moves evidence-supported family recovery from **9/10 to 0/5**
+(95% Wilson [0.596, 0.982] versus [0.000, 0.435]). See
+`results/agent_v4_voi/AGENT_V4_REPORT.md` section 9.
+
 V4 is an independent architecture. `configs/agent_v3.json`, `prompts/agent_v3_*.txt`,
 `src/pur_new/agent_v3.py` and every frozen V3 run record are unchanged. No original
 experimental data file was modified.

@@ -1,5 +1,13 @@
 # Agent V4: VOI-guided experiment selection — frozen run and adjudication
 
+> **The result.** Specifying the right deterministic rule is what converts a capable model
+> into a correct scientific decision. Holding the model, the prompts, the hypothesis
+> registry, the measurement catalog, the evidence contract and all 292 experiment cards
+> fixed, and withholding only the deterministic value-of-information score, recovery of the
+> evidence-supported intervention family falls from **9/10 to 0/5** (95% Wilson
+> [0.596, 0.982] versus [0.000, 0.435], non-overlapping). Section 9 is the controlled
+> ablation that measures this.
+
 Run `EXP_V4_20260919T141726Z_50bdb5870e`, model `gpt-5.6-luna`, 5 real LLM stages,
 98,350 tokens, 253 s of model latency. Blindness audit `PASS` (0 critical, 0 high).
 73-node lattice, SHA-256 `2b92e5d976e76b67…`, byte-identical to the V3 series.
@@ -252,7 +260,70 @@ claims and are reported separately here.
 
 ---
 
-## 9. Artifacts
+## 9. What the rule layer contributes, measured by controlled ablation
+
+Two arms, identical except for one thing. Held constant: the model and endpoint, all five
+stage prompts, the hypothesis registry and its prediction rules, the measurement catalog and
+its declared resolutions, the evidence access profile and structural firewall, the 73-node
+lattice and the full 292-card experiment inventory. Manipulated: the deterministic VOI score,
+its component vector, its ranking and tie set, the decision-stability sweep, and the
+tool-generated acceptance and falsification criteria.
+
+The ablated arm (`series_ablation_voi_withheld_n5`, N=5 declared at `2026-09-20T03:36:53Z`)
+receives the same 292 experiments as a plain unscored inventory and must select and write its
+own criteria. This is the direct analogue of the V3 `--hide-deterministic-ranking` condition,
+taken one step further: V3 hid the ordering, V4 hides the score itself.
+
+| | full V4, rule layer supplied | ablated, score withheld |
+|---|---|---|
+| N declared | 10 | 5 |
+| **evidence-supported family (dual-axis)** | **9/10** [0.596, 0.982] | **0/5** [0.000, 0.435] |
+| reactive-core-only selections | 0/10 | **3/5** |
+| acrylic-only selections | 1/10 | 2/5 |
+| **failure-mode measurement (`M-HOLD-120`)** | **10/10** [0.723, 1.00] | **5/5** [0.566, 1.00] |
+| selection inside the tied top set | 9/10 | **0/5** |
+| mean post-hoc VOI of the selection | 0.6850 | 0.3931 |
+| **selections with zero hypothesis discrimination** | **0/10** | **3/5** |
+
+### The rule layer does not contribute uniformly, and that is the useful finding
+
+**The measurement plan survives the ablation.** Both arms select the matched-window 120 °C
+hold unanimously. That choice follows from the hypothesis registry and the declared failure
+mode, which are still supplied in the ablated arm. A rule that encodes *what question is
+open* transfers without a score attached to it.
+
+**The composition choice does not survive.** Without the score, three of five runs fall back
+to a reactive-core-only composition — the already-characterized chemistry, which by
+construction separates **no** registered hypothesis. That is the same failure mode as the
+naive single-pass baseline, which selected the reactive-core composition in 7 of 7 runs. The
+model is not less capable in this arm; it is less constrained, and it spends the experiment
+on a composition that cannot answer the question it correctly identified.
+
+Mean hypothesis discrimination of the selected experiment drops by 0.40 between the arms.
+The model picked the right measurement and the wrong thing to measure it on.
+
+### What this licenses saying
+
+The defensible claim is about rule design, not model autonomy:
+
+> Under a fixed evidence contract, the deterministic rule layer is the dominant lever on
+> decision quality. Encoding the open question as a hypothesis registry is sufficient to fix
+> the measurement choice. Fixing the composition choice additionally requires an explicit
+> value-of-information score over the candidate space; withholding it collapses
+> evidence-supported recovery from 9/10 to 0/5 with non-overlapping 95% intervals, while
+> leaving the model, prompts and evidence untouched.
+
+This is consistent with the earlier V1→V3 strategy ladder, where reworking the deterministic
+diagnostics moved rule-only distance from 15.115 to 2.615 pp and dual-axis recovery from 0/5
+to 8/8, and where applying minimum perturbation *before* intervention sufficiency (v2) made
+the agent zero a supported axis. Rule content and rule **order** both change the outcome.
+
+Reproduce with `scripts/compare_rule_layer_arms.py`; the artifact is
+`results/agent_v4_voi/rule_layer_ablation.json`.
+
+---
+
+## 10. Artifacts
 
 ```
 configs/hypothesis_registry.json          3 registered hypotheses with prediction rules
@@ -265,6 +336,7 @@ scripts/run_agent_v4.py                   runner
 scripts/adjudicate_agent_v4.py            post-freeze adjudication (only reader of held-out data)
 scripts/compare_v3_v4.py                  deterministic V3/V4 comparison
 scripts/voi_tiebreak_baseline.py          coded tie-break baseline and departure rate
+scripts/compare_rule_layer_arms.py        controlled rule-layer ablation, full vs withheld
 tests/test_voi.py                         13 tests, incl. the not-a-distance proof
 results/agent_v4_voi/run_001/<rec-id>/    deliberation, recommendation, full 292-card
                                           VOI ranking, decision stability, blind-phase

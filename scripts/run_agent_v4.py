@@ -157,12 +157,58 @@ def tied_top_set(cards: list[dict[str, Any]]) -> list[str]:
     return sorted(card["experiment_id"] for card in cards if abs(card["voi_score"] - best) <= TIE_EPSILON)
 
 
-def voi_payload(cards: list[dict[str, Any]], *, top_k: int) -> dict[str, Any]:
+def voi_payload(cards: list[dict[str, Any]], *, top_k: int, withhold_scores: bool = False) -> dict[str, Any]:
     """Assemble the VOI evidence given to the model.
 
     The tied top set is reported explicitly so the model cannot mistake an arbitrary
     alphabetical ordering for a deterministic preference.
+
+    With ``withhold_scores`` the deterministic rule layer is ablated: the model receives
+    the same experiment inventory, the same hypothesis registry, the same measurement
+    catalog and the same tool trace, but no VOI score, no component vector, no ranking and
+    no tie set. This is the controlled arm that measures what the rule layer contributes,
+    and it is the direct analogue of the V3 --hide-deterministic-ranking condition.
     """
+    if withhold_scores:
+        inventory = sorted(
+            (
+                {
+                    "experiment_id": card["experiment_id"],
+                    "candidate_id": card["candidate_id"],
+                    "measurement_id": card["measurement_id"],
+                    "intervention_family": card["intervention_family"],
+                    "acrylic_like_pct": card["acrylic_like_pct"],
+                    "minor_tackifier_like_pct": card["minor_tackifier_like_pct"],
+                    "reactive_mass_fraction": card["reactive_mass_fraction"],
+                    "measurement_plan": card["measurement_plan"],
+                }
+                for card in cards
+            ),
+            key=lambda item: item["experiment_id"],
+        )
+        return {
+            "voi_scoring_withheld": True,
+            "ablation": "deterministic_rule_layer_withheld",
+            "withheld": [
+                "voi_score",
+                "voi_components",
+                "voi ranking",
+                "tied_top_experiment_ids",
+                "best_card_per_measurement_plan",
+                "best_voi_per_intervention_family",
+                "acceptance_criterion",
+                "falsification_criterion",
+            ],
+            "note": (
+                "No deterministic value-of-information score is supplied in this condition. "
+                "Select the experiment yourself from the inventory, the hypothesis registry, "
+                "the measurement catalog and the tool trace, and write your own acceptance and "
+                "falsification criteria."
+            ),
+            "n_experiment_cards": len(cards),
+            "experiment_inventory": inventory,
+        }
+
     tied = tied_top_set(cards)
     best_per_measurement: dict[str, dict[str, Any]] = {}
     for card in cards:
@@ -232,6 +278,7 @@ def freeze_experiment(
     *,
     cards_by_id: dict[str, dict[str, Any]],
     tied: list[str],
+    withheld: bool,
     hashes: dict[str, str],
     model: str,
     workflow_version: str,
@@ -289,6 +336,7 @@ def freeze_experiment(
             "tied_top_set": tied,
             "selected_is_in_tied_top_set": (experiment_id in tied) if experiment_id else None,
             "formula": VOI_FORMULA,
+            "scores_withheld_from_model": withheld,
         },
         "stage_disagreements_resolved": judge.get("stage_disagreements_resolved"),
         "rationale": judge.get("rationale"),
@@ -313,6 +361,15 @@ def main() -> None:
     parser.add_argument("--profile", default=None)
     parser.add_argument("--top-k", type=int, default=12)
     parser.add_argument("--inspection-status", default="frozen_pre_result")
+    parser.add_argument(
+        "--withhold-voi-scores",
+        action="store_true",
+        help=(
+            "ablate the deterministic rule layer: give the model the same experiment inventory, "
+            "hypothesis registry, measurement catalog and tool trace, but no VOI score, ranking "
+            "or tie set. Controlled arm for measuring what the rule layer contributes."
+        ),
+    )
     args = parser.parse_args()
 
     architecture = read_json(ROOT / "configs" / "agent_v4.json")
@@ -437,7 +494,13 @@ def main() -> None:
     tied = tied_top_set(cards)
     sweep = voi_robustness_sweep(candidate_set["candidates"], registry=registry, catalog=catalog)
     sweep_for_model = {key: value for key, value in sweep.items() if key != "scenarios"}
-    voi_for_model = voi_payload(cards, top_k=args.top_k)
+    voi_for_model = voi_payload(cards, top_k=args.top_k, withhold_scores=args.withhold_voi_scores)
+
+    stability_for_model = (
+        {"decision_stability_withheld": True, "ablation": "deterministic_rule_layer_withheld"}
+        if args.withhold_voi_scores
+        else sweep_for_model
+    )
 
     shared = {
         "planner": planner,
@@ -445,7 +508,7 @@ def main() -> None:
         "hypothesis_registry": registry_for_model,
         "measurement_catalog": catalog_for_model,
         "voi": voi_for_model,
-        "decision_stability": sweep_for_model,
+        "decision_stability": stability_for_model,
         "evidence_policy": policy,
     }
 
@@ -507,6 +570,7 @@ def main() -> None:
             judge,
             cards_by_id=cards_by_id,
             tied=tied,
+            withheld=bool(args.withhold_voi_scores),
             hashes=hashes,
             model=stage_models["judge"],
             workflow_version=workflow["workflow_version"],
@@ -558,7 +622,8 @@ def main() -> None:
                 "planner": planner,
                 "tool_trace": tool_trace,
                 "voi_sent_to_model": voi_for_model,
-                "decision_stability_sent_to_model": sweep_for_model,
+                "decision_stability_sent_to_model": stability_for_model,
+                "voi_scores_withheld_from_model": bool(args.withhold_voi_scores),
                 "proposer": proposer,
                 "skeptic": skeptic,
                 "robustness_adjudication": robustness,

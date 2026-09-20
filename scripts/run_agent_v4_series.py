@@ -78,6 +78,11 @@ def main() -> None:
         help="continue an interrupted series under its original contract instead of refusing",
     )
     parser.add_argument(
+        "--withhold-voi-scores",
+        action="store_true",
+        help="run the whole series in the ablated arm with the deterministic rule layer withheld",
+    )
+    parser.add_argument(
         "--max-new-runs",
         type=int,
         default=None,
@@ -126,6 +131,8 @@ def main() -> None:
         "candidate_set_sha256": sha256_file(args.candidate_set.resolve()),
         "evidence_state_sha256": sha256_file(args.evidence_state.resolve()),
         "series_input_hashes": {name: sha256_file(ROOT / name) for name in SERIES_INPUT_FILES},
+        "arm": "voi_withheld" if args.withhold_voi_scores else "full_v4",
+        "voi_scores_withheld_from_model": bool(args.withhold_voi_scores),
         "reporting_rule": (
             "Every attempted run is reported. The denominator for any rate is n_runs_declared, "
             "not the number of runs that happened to succeed."
@@ -183,6 +190,8 @@ def main() -> None:
             "--output-dir",
             str(run_dir),
         ]
+        if args.withhold_voi_scores:
+            cmd.append("--withhold-voi-scores")
         proc = subprocess.run(cmd, cwd=ROOT, env=full_env, capture_output=True, text=True)
         finished = utc_now()
         frozen = sorted(run_dir.glob("EXP_V4_*/recommendation.json"))
