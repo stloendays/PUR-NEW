@@ -289,10 +289,17 @@ taken one step further: V3 hid the ordering, V4 hides the score itself.
 
 ### The rule layer does not contribute uniformly, and that is the useful finding
 
-**The measurement plan survives the ablation.** Both arms select the matched-window 120 °C
-hold unanimously. That choice follows from the hypothesis registry and the declared failure
-mode, which are still supplied in the ablated arm. A rule that encodes *what question is
-open* transfers without a score attached to it.
+**The measurement plan survives this ablation.** The full arm and the score-withheld arm
+both select the matched-window 120 °C hold unanimously, 10/10 and 5/5. That choice follows
+from the hypothesis registry and the declared failure mode, which are still supplied when
+the score is withheld. A rule that encodes *what question is open* transfers without a
+score attached to it.
+
+It does **not** transfer through an inverted decision order. Section 10's order arm selects
+the failure-mode measurement in only 7 of 10 runs, with 3 runs diverting to the
+repeatability plan. So the two manipulations degrade different things: withholding the
+score costs the composition choice and leaves the measurement intact, while inverting the
+order costs the composition choice **and** partially costs the measurement choice.
 
 **The composition choice does not survive.** Without the score, three of five runs fall back
 to a reactive-core-only composition — the already-characterized chemistry, which by
@@ -350,24 +357,39 @@ The deterministic consequence is computable before any model runs:
 
 Inverting the order alone promotes an experiment that by construction separates **no**
 registered hypothesis. Series `agent_v4_ablation_minimality_first_n5`, N=5 declared at
-`2026-09-20T04:06:53Z`, 5/5 completed:
+`2026-09-20T04:06:53Z` and extended on the record to N=10 at `2026-09-20T07:49:23Z`,
+10/10 completed:
 
 | | full V4 | score withheld | **order inverted** |
 |---|---|---|---|
-| N declared | 10 | 5 | 5 |
-| evidence-supported family | 9/10 | 0/5 | **0/5** |
-| reactive-core-only selections | 0/10 | 3/5 | **5/5** |
-| **zero-discrimination selections** | **0/10** | 3/5 | **5/5** |
+| N | 10 | 5 | 10 |
+| evidence-supported family | 9/10 [0.596, 0.982] | 0/5 [0.000, 0.435] | **0/10 [0.000, 0.278]** |
+| reactive-core-only selections | 0/10 | 3/5 | **10/10** |
+| **zero-discrimination selections** | **0/10** | 3/5 | **10/10** |
 | mean hypothesis discrimination | 0.667 | 0.267 | **0.000** |
-| selected candidate | `S1C41` ×9 | 4 distinct | `S1C02` ×5 |
+| failure-mode measurement | 10/10 | 5/5 | **7/10** [0.397, 0.892] |
+| selected candidate | `S1C41` ×9 | 4 distinct | `S1C02` ×10 |
 
-**A correct score under an inverted order is worse than no score at all**: 5/5
-zero-discrimination against 3/5. Order dominates presence.
+**A correct score under an inverted order is worse than no score at all**: 10/10
+zero-discrimination against 3/5. Order dominates presence, and the order arm's interval
+does not overlap the full arm's.
+
+The order arm is also the only arm whose *measurement* choice degrades: 7 of 10 runs keep
+the matched-window hold, while 3 divert to the repeatability plan. Withholding the score
+never did this. An inverted order therefore damages more of the decision than a missing
+score does, not less.
+
+**The extension is reported as an extension.** Runs 1-5 were pre-declared; runs 6-10 were
+added after that block had been observed, and the manifest records this explicitly rather
+than presenting a single pre-declared N=10. The two blocks are identical — 5/5 and 5/5
+zero-discrimination, `reactive_core_only` in both — so the extension confirms the
+pre-declared block rather than rescuing it. Both are reported separately in
+`rule_layer_ablation.json` under `rule_order_blocks`.
 
 ### The model diagnosed the defect and followed the rule anyway
 
 This is the part that generalises beyond this chemistry. The Skeptic raised a
-**high-severity objection in 5 of 5 runs**, each time identifying the exact defect:
+**high-severity objection in 10 of 10 runs**, each time identifying the exact defect:
 
 > "S1C02 is an unmodified E2 reactive-core hold with AC1920 = 0.0, TK100 = 0.0 and
 > reactive_mass_fraction = 1.0000; therefore all three registry predictions collapse to
@@ -378,14 +400,14 @@ The Proposer said it too, unprompted, while proposing it:
 > "this baseline experiment cannot separate the three mechanism hypotheses;
 > modifier-containing hold experiments would be needed for that adjudication."
 
-The Robustness Adjudicator went further in 2 of 5 runs and returned
-`changes_which_experiment_to_run`. **All 5 runs committed to it regardless.**
+The Robustness Adjudicator went further in 5 of 10 runs and returned
+`changes_which_experiment_to_run`. **All 10 runs committed to it regardless.**
 
 | arm | high-severity objection | robustness said change experiment | committed anyway |
 |---|---|---|---|
 | full V4 | 10/10 | 1/10 | 10/10 |
 | score withheld | 5/5 | 4/5 | 5/5 |
-| order inverted | 5/5 | 2/5 | 5/5 |
+| order inverted | **10/10** | 5/10 | **10/10** |
 
 The scientific judgement was intact throughout: the model correctly identified that the
 experiment could not answer the question. The decision order overrode it.
@@ -393,10 +415,10 @@ experiment could not answer the question. The decision order overrode it.
 ### What this licenses saying
 
 > A wrong rule order is not rescued by a competent model, and it is not rescued by a
-> working critique stage. Across five runs the Skeptic identified at high severity that the
-> selected experiment could separate no registered hypothesis, and all five runs committed
-> to it. Adding a critic to an agent does not substitute for ordering its decision rules
-> correctly.
+> working critique stage. Across ten runs the Skeptic identified at high severity that the
+> selected experiment could separate no registered hypothesis, and all ten runs committed
+> to it (0/10 evidence-supported family, 95% Wilson [0.000, 0.278]). Adding a critic to an
+> agent does not substitute for ordering its decision rules correctly.
 
 For a group building scientific agents, the operational reading is that rule order belongs
 in the same category as rule content: it must be declared, frozen, and ablated, not left

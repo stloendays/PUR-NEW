@@ -51,17 +51,38 @@ def wilson(successes: int, total: int, z: float = 1.96) -> list[float] | None:
     return [round(max(0.0, centre - margin), 4), round(min(1.0, centre + margin), 4)]
 
 
-def load_arm(series_dir: Path, label: str, discrimination: dict[str, float]) -> dict[str, Any]:
+def load_arm(
+    series_dir: Path,
+    label: str,
+    discrimination: dict[str, float],
+    *,
+    run_range: tuple[int, int] | None = None,
+) -> dict[str, Any]:
     manifest = read_json(series_dir / "series_manifest.json")
-    records = [
-        read_json(Path(path))
-        for path in sorted(glob.glob(str(series_dir / "run_*" / "EXP_V4_*" / "recommendation.json")))
-    ]
-    declared = manifest["n_runs_declared"]
+    paths = sorted(glob.glob(str(series_dir / "run_*" / "EXP_V4_*" / "recommendation.json")))
+    if run_range is not None:
+        low, high = run_range
+        paths = [
+            path
+            for path in paths
+            if low <= int(Path(path).parent.parent.name.split("_")[-1]) <= high
+        ]
+    records = [read_json(Path(path)) for path in paths]
+    declared = (run_range[1] - run_range[0] + 1) if run_range else manifest.get(
+        "n_runs_after_extension", manifest["n_runs_declared"]
+    )
 
     # Did the internal critique stages see the defect, and did the decision change?
     critique = {"high_severity_objection": 0, "robustness_said_change_experiment": 0, "committed_anyway": 0}
-    for path in sorted(glob.glob(str(series_dir / "run_*" / "EXP_V4_*" / "deliberation.json"))):
+    delib_paths = sorted(glob.glob(str(series_dir / "run_*" / "EXP_V4_*" / "deliberation.json")))
+    if run_range is not None:
+        low, high = run_range
+        delib_paths = [
+            path
+            for path in delib_paths
+            if low <= int(Path(path).parent.parent.name.split("_")[-1]) <= high
+        ]
+    for path in delib_paths:
         deliberation = read_json(Path(path))
         skeptic = deliberation.get("skeptic") or {}
         robustness = deliberation.get("robustness_adjudication") or {}
@@ -99,6 +120,9 @@ def load_arm(series_dir: Path, label: str, discrimination: dict[str, float]) -> 
         "model": manifest["model"],
         "n_runs_declared": declared,
         "n_runs_completed": len(records),
+        "run_range": list(run_range) if run_range else None,
+        "n_runs_declared_originally": manifest.get("n_runs_declared_originally", manifest["n_runs_declared"]),
+        "extensions": manifest.get("extensions"),
         "decision_modes": dict(Counter(modes).most_common()),
         "intervention_family_counts": dict(Counter(families).most_common()),
         "measurement_counts": dict(Counter(measurements).most_common()),
@@ -174,11 +198,29 @@ def main() -> None:
 
     full = load_arm(args.full_series.resolve(), "full_v4_rule_layer_supplied", discrimination)
     ablated = load_arm(args.ablated_series.resolve(), "ablated_voi_scores_withheld", discrimination)
-    order_arm = (
-        load_arm(args.order_series.resolve(), "rule_order_minimality_first", discrimination)
-        if (args.order_series.resolve() / "series_manifest.json").exists()
-        else None
-    )
+    order_dir = args.order_series.resolve()
+    has_order = (order_dir / "series_manifest.json").exists()
+    order_arm = load_arm(order_dir, "rule_order_minimality_first", discrimination) if has_order else None
+    order_manifest = read_json(order_dir / "series_manifest.json") if has_order else {}
+    original_n = order_manifest.get("n_runs_declared_originally", order_manifest.get("n_runs_declared"))
+    order_blocks = None
+    if has_order and order_manifest.get("extensions"):
+        # An extension decided after observing the first block is not the same thing as a
+        # single pre-declared N. Both blocks are reported separately so a reader can check
+        # that the extension did not change the conclusion.
+        order_blocks = {
+            "pre_declared_block": load_arm(
+                order_dir, "rule_order_minimality_first_runs_1_to_%d" % original_n, discrimination,
+                run_range=(1, original_n),
+            ),
+            "extension_block": load_arm(
+                order_dir,
+                "rule_order_minimality_first_extension",
+                discrimination,
+                run_range=(original_n + 1, order_manifest["n_runs_after_extension"]),
+            ),
+            "extension_provenance": order_manifest["extensions"],
+        }
     order_predictions = {
         name: rank_by_rule_order(cards, name) for name in ("sufficiency_first", "minimality_first")
     }
@@ -207,6 +249,7 @@ def main() -> None:
             for key, value in (("full", full), ("ablated", ablated), ("rule_order_inverted", order_arm))
             if value is not None
         },
+        "rule_order_blocks": order_blocks,
         "deterministic_rule_order_predictions": {
             name: {
                 "top_experiment_id": value["top_experiment_id"],

@@ -11,10 +11,15 @@ value-of-information score, moves evidence-supported family recovery from **9/10
 (95% Wilson [0.596, 0.982] versus [0.000, 0.435]).
 
 Inverting the *order* of two correct rules is worse than removing the score. Under
-`minimality_first`, 5/5 runs commit to an experiment that separates no registered
-hypothesis — after their own Skeptic has identified exactly that defect at high severity in
-5/5 runs. A wrong rule order is not rescued by a competent model or by a working critique
-stage. See `results/agent_v4_voi/AGENT_V4_REPORT.md` sections 9 and 10.
+`minimality_first`, **10/10** runs commit to an experiment that separates no registered
+hypothesis (0/10 evidence-supported family, 95% Wilson [0.000, 0.278]) — after their own
+Skeptic has identified exactly that defect at high severity in 10/10 runs. A wrong rule
+order is not rescued by a competent model or by a working critique stage.
+
+The two manipulations damage different parts of the decision. Withholding the score costs
+the composition choice and leaves the measurement choice intact (5/5 correct). Inverting the
+order costs the composition choice and degrades the measurement choice as well (7/10). See
+`results/agent_v4_voi/AGENT_V4_REPORT.md` sections 9 and 10.
 
 V4 is an independent architecture. `configs/agent_v3.json`, `prompts/agent_v3_*.txt`,
 `src/pur_new/agent_v3.py` and every frozen V3 run record are unchanged. No original

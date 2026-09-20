@@ -6,19 +6,50 @@
   "candidate_set_sha256": "2b92e5d976e76b674a05f9b8fc17f4c78cc873b42641fbe67b35a37beeec4346",
   "declared_utc": "2026-09-20T04:06:53Z",
   "evidence_state_sha256": "8ca085b1529f94b2fc6ed3bfdd0f5fb938a4580159ed04ece39fac42c023bc81",
-  "finished_utc": "2026-09-20T04:22:42Z",
+  "extensions": [
+    {
+      "decided_after_observing_the_earlier_block": true,
+      "extended_utc": "2026-09-20T07:49:23Z",
+      "from_n": 5,
+      "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+      "runs_already_observed_at_extension_time": 5,
+      "to_n": 10
+    },
+    {
+      "decided_after_observing_the_earlier_block": true,
+      "extended_utc": "2026-09-20T07:56:30Z",
+      "from_n": 10,
+      "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+      "runs_already_observed_at_extension_time": 7,
+      "to_n": 10
+    },
+    {
+      "decided_after_observing_the_earlier_block": true,
+      "extended_utc": "2026-09-20T08:05:18Z",
+      "from_n": 10,
+      "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+      "runs_already_observed_at_extension_time": 9,
+      "to_n": 10
+    }
+  ],
+  "finished_utc": "2026-09-20T08:09:15Z",
   "git_commit": "38d6f638ce44759a5bbfd82fb01f42f931a6bcf6",
   "model": "gpt-5.6-luna",
   "n_failed": 0,
-  "n_ok": 5,
+  "n_ok": 10,
+  "n_runs_after_extension": 10,
   "n_runs_declared": 5,
   "n_runs_declared_before_first_run": true,
+  "n_runs_declared_originally": 5,
   "reporting_rule": "Every attempted run is reported. The denominator for any rate is n_runs_declared, not the number of runs that happened to succeed.",
   "resumed_utc": [
     "2026-09-20T04:10:26Z",
     "2026-09-20T04:13:20Z",
     "2026-09-20T04:16:34Z",
-    "2026-09-20T04:19:20Z"
+    "2026-09-20T04:19:20Z",
+    "2026-09-20T07:49:23Z",
+    "2026-09-20T07:56:30Z",
+    "2026-09-20T08:05:18Z"
   ],
   "rule_order": "minimality_first",
   "runs": [
@@ -65,6 +96,51 @@
       "run_dir": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5\\run_005",
       "run_index": 5,
       "started_utc": "2026-09-20T04:19:20Z",
+      "status": "ok"
+    },
+    {
+      "finished_utc": "2026-09-20T07:52:38Z",
+      "frozen_recommendation": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5\\run_006\\EXP_V4_20260920T075237Z_495cdc779f",
+      "returncode": 0,
+      "run_dir": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5\\run_006",
+      "run_index": 6,
+      "started_utc": "2026-09-20T07:49:23Z",
+      "status": "ok"
+    },
+    {
+      "finished_utc": "2026-09-20T07:56:19Z",
+      "frozen_recommendation": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5\\run_007\\EXP_V4_20260920T075618Z_f87dde1681",
+      "returncode": 0,
+      "run_dir": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5\\run_007",
+      "run_index": 7,
+      "started_utc": "2026-09-20T07:52:38Z",
+      "status": "ok"
+    },
+    {
+      "finished_utc": "2026-09-20T08:01:03Z",
+      "frozen_recommendation": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5\\run_008\\EXP_V4_20260920T080103Z_b8a868722c",
+      "returncode": 0,
+      "run_dir": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5\\run_008",
+      "run_index": 8,
+      "started_utc": "2026-09-20T07:56:30Z",
+      "status": "ok"
+    },
+    {
+      "finished_utc": "2026-09-20T08:05:12Z",
+      "frozen_recommendation": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5\\run_009\\EXP_V4_20260920T080511Z_ca5e3c17c9",
+      "returncode": 0,
+      "run_dir": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5\\run_009",
+      "run_index": 9,
+      "started_utc": "2026-09-20T08:01:03Z",
+      "status": "ok"
+    },
+    {
+      "finished_utc": "2026-09-20T08:09:15Z",
+      "frozen_recommendation": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5\\run_010\\EXP_V4_20260920T080915Z_f4d3c91ac8",
+      "returncode": 0,
+      "run_dir": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5\\run_010",
+      "run_index": 10,
+      "started_utc": "2026-09-20T08:05:18Z",
       "status": "ok"
     }
   ],

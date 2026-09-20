@@ -89,6 +89,16 @@ def main() -> None:
         help="run the whole series under a named deterministic rule ORDER",
     )
     parser.add_argument(
+        "--extend-to",
+        type=int,
+        default=None,
+        help=(
+            "extend an already-declared series to a larger N. The ORIGINAL declaration is kept "
+            "and an extension record is written stating that the additional runs were decided "
+            "after the first block had been observed. Use this instead of silently re-declaring N."
+        ),
+    )
+    parser.add_argument(
         "--max-new-runs",
         type=int,
         default=None,
@@ -154,9 +164,35 @@ def main() -> None:
         # Continue the ORIGINAL contract. N and the input hashes must be unchanged, or the
         # series is no longer the one that was declared and must not be silently extended.
         existing = json.loads(manifest_path.read_text(encoding="utf-8"))
-        if existing["n_runs_declared"] != args.n_runs:
+        original_n = existing["n_runs_declared"]
+        if args.extend_to is not None:
+            if args.extend_to < original_n:
+                raise SystemExit(f"extend refused: --extend-to {args.extend_to} is below the declared N={original_n}")
+            if args.n_runs != args.extend_to:
+                raise SystemExit("extend refused: --n-runs must equal --extend-to when extending")
+            # The original declaration is never overwritten. The extension is recorded as what
+            # it is: additional runs decided after the first block had been observed.
+            observed = sum(row["status"] == "ok" for row in existing["runs"])
+            existing.setdefault("extensions", []).append(
+                {
+                    "extended_utc": utc_now(),
+                    "from_n": existing.get("n_runs_after_extension", original_n),
+                    "to_n": args.extend_to,
+                    "runs_already_observed_at_extension_time": observed,
+                    "decided_after_observing_the_earlier_block": observed > 0,
+                    "reporting_rule": (
+                        "The original block and the extension must both be reportable separately. "
+                        "An extension decided after observing results is not equivalent to a single "
+                        "pre-declared N and must not be described as one."
+                    ),
+                }
+            )
+            existing["n_runs_after_extension"] = args.extend_to
+            existing["n_runs_declared_originally"] = original_n
+        elif original_n != args.n_runs:
             raise SystemExit(
-                f"resume refused: manifest declares N={existing['n_runs_declared']}, invoked with N={args.n_runs}"
+                f"resume refused: manifest declares N={original_n}, invoked with N={args.n_runs}. "
+                "Pass --extend-to to extend a declared series on the record."
             )
         changed = [
             name

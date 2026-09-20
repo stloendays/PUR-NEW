@@ -12,6 +12,7 @@
         "committed_experiment": 2,
         "state_control_experiment": 3
       },
+      "extensions": null,
       "failure_mode_measurement_selection": {
         "count": 5,
         "of_declared": 5,
@@ -43,11 +44,13 @@
       "model": "gpt-5.6-luna",
       "n_runs_completed": 5,
       "n_runs_declared": 5,
+      "n_runs_declared_originally": 5,
       "post_hoc_voi_of_selection": {
         "max": 0.6175,
         "mean": 0.3931,
         "min": 0.2435
       },
+      "run_range": null,
       "selection_inside_deterministic_tied_top_set": {
         "count": 0,
         "of_scored": 5,
@@ -77,6 +80,7 @@
         "committed_experiment": 9,
         "discriminating_probe": 1
       },
+      "extensions": null,
       "failure_mode_measurement_selection": {
         "count": 10,
         "of_declared": 10,
@@ -108,11 +112,13 @@
       "model": "gpt-5.6-luna",
       "n_runs_completed": 10,
       "n_runs_declared": 10,
+      "n_runs_declared_originally": 10,
       "post_hoc_voi_of_selection": {
         "max": 0.6925,
         "mean": 0.685,
         "min": 0.6175
       },
+      "run_range": null,
       "selection_inside_deterministic_tied_top_set": {
         "count": 9,
         "of_scored": 10,
@@ -135,63 +141,92 @@
     "rule_order_inverted": {
       "arm": "rule_order_minimality_first",
       "candidate_counts": {
-        "S1C02": 5
+        "S1C02": 10
       },
       "decision_modes": {
-        "discriminating_probe": 4,
-        "state_control_experiment": 1
+        "committed_experiment": 2,
+        "discriminating_probe": 5,
+        "state_control_experiment": 3
       },
+      "extensions": [
+        {
+          "decided_after_observing_the_earlier_block": true,
+          "extended_utc": "2026-09-20T07:49:23Z",
+          "from_n": 5,
+          "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+          "runs_already_observed_at_extension_time": 5,
+          "to_n": 10
+        },
+        {
+          "decided_after_observing_the_earlier_block": true,
+          "extended_utc": "2026-09-20T07:56:30Z",
+          "from_n": 10,
+          "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+          "runs_already_observed_at_extension_time": 7,
+          "to_n": 10
+        },
+        {
+          "decided_after_observing_the_earlier_block": true,
+          "extended_utc": "2026-09-20T08:05:18Z",
+          "from_n": 10,
+          "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+          "runs_already_observed_at_extension_time": 9,
+          "to_n": 10
+        }
+      ],
       "failure_mode_measurement_selection": {
-        "count": 4,
-        "of_declared": 5,
+        "count": 7,
+        "of_declared": 10,
         "wilson_95": [
-          0.3755,
-          0.9638
+          0.3968,
+          0.8922
         ]
       },
       "hypothesis_discrimination_of_selection": {
         "mean": 0.0,
-        "n_with_zero_discrimination": 5,
-        "of_completed": 5
+        "n_with_zero_discrimination": 10,
+        "of_completed": 10
       },
       "internal_critique": {
-        "committed_anyway": 5,
-        "high_severity_objection": 5,
+        "committed_anyway": 10,
+        "high_severity_objection": 10,
         "note": "A high-severity Skeptic objection that does not change the frozen decision shows the critique stage detecting a defect the decision policy then overrides.",
-        "of_completed": 5,
-        "robustness_said_change_experiment": 2
+        "of_completed": 10,
+        "robustness_said_change_experiment": 5
       },
       "intervention_family_counts": {
-        "reactive_core_only": 5
+        "reactive_core_only": 10
       },
       "label": "rule_order_minimality_first",
       "measurement_counts": {
-        "M-HOLD-120": 4,
-        "M-REPEAT": 1
+        "M-HOLD-120": 7,
+        "M-REPEAT": 3
       },
       "model": "gpt-5.6-luna",
-      "n_runs_completed": 5,
-      "n_runs_declared": 5,
+      "n_runs_completed": 10,
+      "n_runs_declared": 10,
+      "n_runs_declared_originally": 5,
       "post_hoc_voi_of_selection": {
         "max": 0.2435,
-        "mean": 0.2377,
+        "mean": 0.2348,
         "min": 0.2145
       },
+      "run_range": null,
       "selection_inside_deterministic_tied_top_set": {
         "count": 0,
-        "of_scored": 5,
+        "of_scored": 10,
         "wilson_95": [
           0.0,
-          0.4345
+          0.2775
         ]
       },
       "series": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5",
       "supported_family_recovery": {
         "count": 0,
-        "of_declared": 5,
+        "of_declared": 10,
         "wilson_95": [
           0.0,
-          0.4345
+          0.2775
         ]
       },
       "voi_scores_withheld_from_model": false
@@ -233,5 +268,224 @@
     "the tool-generated acceptance and falsification criteria"
   ],
   "question": "Same model, same prompts, same hypothesis registry, same measurement catalog, same evidence contract, same 292 experiment cards. Only the deterministic value-of-information score is withheld. What changes?",
-  "reading": "The rule layer does not contribute uniformly across the decision. The measurement plan is recovered in both arms, so that choice follows from the hypothesis registry and the declared failure mode rather than from the score. The composition choice does not survive the ablation: without the score the runs fall back to compositions that cannot separate any registered hypothesis. Specifying the right rule is what converts a capable model into a correct decision."
+  "reading": "The rule layer does not contribute uniformly across the decision. The measurement plan is recovered in both arms, so that choice follows from the hypothesis registry and the declared failure mode rather than from the score. The composition choice does not survive the ablation: without the score the runs fall back to compositions that cannot separate any registered hypothesis. Specifying the right rule is what converts a capable model into a correct decision.",
+  "rule_order_blocks": {
+    "extension_block": {
+      "arm": "rule_order_minimality_first",
+      "candidate_counts": {
+        "S1C02": 5
+      },
+      "decision_modes": {
+        "committed_experiment": 2,
+        "discriminating_probe": 1,
+        "state_control_experiment": 2
+      },
+      "extensions": [
+        {
+          "decided_after_observing_the_earlier_block": true,
+          "extended_utc": "2026-09-20T07:49:23Z",
+          "from_n": 5,
+          "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+          "runs_already_observed_at_extension_time": 5,
+          "to_n": 10
+        },
+        {
+          "decided_after_observing_the_earlier_block": true,
+          "extended_utc": "2026-09-20T07:56:30Z",
+          "from_n": 10,
+          "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+          "runs_already_observed_at_extension_time": 7,
+          "to_n": 10
+        },
+        {
+          "decided_after_observing_the_earlier_block": true,
+          "extended_utc": "2026-09-20T08:05:18Z",
+          "from_n": 10,
+          "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+          "runs_already_observed_at_extension_time": 9,
+          "to_n": 10
+        }
+      ],
+      "failure_mode_measurement_selection": {
+        "count": 3,
+        "of_declared": 5,
+        "wilson_95": [
+          0.2307,
+          0.8824
+        ]
+      },
+      "hypothesis_discrimination_of_selection": {
+        "mean": 0.0,
+        "n_with_zero_discrimination": 5,
+        "of_completed": 5
+      },
+      "internal_critique": {
+        "committed_anyway": 5,
+        "high_severity_objection": 5,
+        "note": "A high-severity Skeptic objection that does not change the frozen decision shows the critique stage detecting a defect the decision policy then overrides.",
+        "of_completed": 5,
+        "robustness_said_change_experiment": 3
+      },
+      "intervention_family_counts": {
+        "reactive_core_only": 5
+      },
+      "label": "rule_order_minimality_first_extension",
+      "measurement_counts": {
+        "M-HOLD-120": 3,
+        "M-REPEAT": 2
+      },
+      "model": "gpt-5.6-luna",
+      "n_runs_completed": 5,
+      "n_runs_declared": 5,
+      "n_runs_declared_originally": 5,
+      "post_hoc_voi_of_selection": {
+        "max": 0.2435,
+        "mean": 0.2319,
+        "min": 0.2145
+      },
+      "run_range": [
+        6,
+        10
+      ],
+      "selection_inside_deterministic_tied_top_set": {
+        "count": 0,
+        "of_scored": 5,
+        "wilson_95": [
+          0.0,
+          0.4345
+        ]
+      },
+      "series": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5",
+      "supported_family_recovery": {
+        "count": 0,
+        "of_declared": 5,
+        "wilson_95": [
+          0.0,
+          0.4345
+        ]
+      },
+      "voi_scores_withheld_from_model": false
+    },
+    "extension_provenance": [
+      {
+        "decided_after_observing_the_earlier_block": true,
+        "extended_utc": "2026-09-20T07:49:23Z",
+        "from_n": 5,
+        "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+        "runs_already_observed_at_extension_time": 5,
+        "to_n": 10
+      },
+      {
+        "decided_after_observing_the_earlier_block": true,
+        "extended_utc": "2026-09-20T07:56:30Z",
+        "from_n": 10,
+        "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+        "runs_already_observed_at_extension_time": 7,
+        "to_n": 10
+      },
+      {
+        "decided_after_observing_the_earlier_block": true,
+        "extended_utc": "2026-09-20T08:05:18Z",
+        "from_n": 10,
+        "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+        "runs_already_observed_at_extension_time": 9,
+        "to_n": 10
+      }
+    ],
+    "pre_declared_block": {
+      "arm": "rule_order_minimality_first",
+      "candidate_counts": {
+        "S1C02": 5
+      },
+      "decision_modes": {
+        "discriminating_probe": 4,
+        "state_control_experiment": 1
+      },
+      "extensions": [
+        {
+          "decided_after_observing_the_earlier_block": true,
+          "extended_utc": "2026-09-20T07:49:23Z",
+          "from_n": 5,
+          "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+          "runs_already_observed_at_extension_time": 5,
+          "to_n": 10
+        },
+        {
+          "decided_after_observing_the_earlier_block": true,
+          "extended_utc": "2026-09-20T07:56:30Z",
+          "from_n": 10,
+          "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+          "runs_already_observed_at_extension_time": 7,
+          "to_n": 10
+        },
+        {
+          "decided_after_observing_the_earlier_block": true,
+          "extended_utc": "2026-09-20T08:05:18Z",
+          "from_n": 10,
+          "reporting_rule": "The original block and the extension must both be reportable separately. An extension decided after observing results is not equivalent to a single pre-declared N and must not be described as one.",
+          "runs_already_observed_at_extension_time": 9,
+          "to_n": 10
+        }
+      ],
+      "failure_mode_measurement_selection": {
+        "count": 4,
+        "of_declared": 5,
+        "wilson_95": [
+          0.3755,
+          0.9638
+        ]
+      },
+      "hypothesis_discrimination_of_selection": {
+        "mean": 0.0,
+        "n_with_zero_discrimination": 5,
+        "of_completed": 5
+      },
+      "internal_critique": {
+        "committed_anyway": 5,
+        "high_severity_objection": 5,
+        "note": "A high-severity Skeptic objection that does not change the frozen decision shows the critique stage detecting a defect the decision policy then overrides.",
+        "of_completed": 5,
+        "robustness_said_change_experiment": 2
+      },
+      "intervention_family_counts": {
+        "reactive_core_only": 5
+      },
+      "label": "rule_order_minimality_first_runs_1_to_5",
+      "measurement_counts": {
+        "M-HOLD-120": 4,
+        "M-REPEAT": 1
+      },
+      "model": "gpt-5.6-luna",
+      "n_runs_completed": 5,
+      "n_runs_declared": 5,
+      "n_runs_declared_originally": 5,
+      "post_hoc_voi_of_selection": {
+        "max": 0.2435,
+        "mean": 0.2377,
+        "min": 0.2145
+      },
+      "run_range": [
+        1,
+        5
+      ],
+      "selection_inside_deterministic_tied_top_set": {
+        "count": 0,
+        "of_scored": 5,
+        "wilson_95": [
+          0.0,
+          0.4345
+        ]
+      },
+      "series": "results\\agent_v4_voi\\series_ablation_rule_order_minimality_first_n5",
+      "supported_family_recovery": {
+        "count": 0,
+        "of_declared": 5,
+        "wilson_95": [
+          0.0,
+          0.4345
+        ]
+      },
+      "voi_scores_withheld_from_model": false
+    }
+  }
 }
