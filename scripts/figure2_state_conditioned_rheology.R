@@ -118,9 +118,9 @@ pA <- ggplot(e2, aes(x = temperature_c, y = viscosity_reported, colour = series,
   scale_x_continuous(breaks = temps) +
   labs(
     title = "A  Same recipe, different realized viscosity levels",
-    subtitle = "Nominally identical E2 preparations remain separated across the full temperature sweep",
+    subtitle = "Nominally identical E2 realizations remain separated across the full temperature sweep",
     x = "Temperature (°C)",
-    y = "Viscosity (reported units)"
+    y = "Viscosity (mPa·s)"
   ) +
   theme_pur() +
   theme(legend.position = "bottom")
@@ -141,7 +141,7 @@ pB <- ggplot(e2_adj, aes(x = temperature_c, y = eta_state_adjusted, colour = ser
     title = "B  State-offset correction collapses the curves",
     subtitle = expression("Realization-specific " * a[fr] * " removed; shared thermal response retained"),
     x = "Temperature (°C)",
-    y = "State-adjusted viscosity"
+    y = "State-adjusted viscosity (mPa·s)"
   ) +
   theme_pur() +
   theme(legend.position = "bottom")

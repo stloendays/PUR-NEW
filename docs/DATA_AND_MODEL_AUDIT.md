@@ -10,7 +10,7 @@ The main manuscript should emphasize only analyses that directly answer the pape
 
 GJJ, ZYX and CHH are run labels from the same operator. They are not operator categories. The compact dataset therefore treats them as opaque within-operator experimental realizations.
 
-`data/realization_metadata.csv` now records this explicitly and also records what remains unknown, including parent-sample relations for one-day retests.
+`data/realization_metadata.csv` records the same-operator labels explicitly. Verified measurement metadata further establish that temperature-sweep repeatability used the same mother sample across temperatures within a sweep; distinct run labels are therefore not automatically interpreted as independent synthesis batches.
 
 ## 2. E1 `+P` chemistry flag
 
@@ -102,16 +102,17 @@ This supports a stronger but still local statement:
 
 The result remains interpolation within a narrow chemistry family, not universal extrapolation across PUR chemistry.
 
-## 5. Day-1 retest provenance
+## 5. Repeat-measurement provenance
 
-The compact CSV identifies one-day retests but does not establish whether each retest is the same retained sample, a re-prepared aliquot, or an independent synthesis batch. Therefore:
+Verified laboratory metadata establish that the temperature-sweep repeatability protocol used the same mother sample across temperatures within a sweep rather than independently resynthesizing material for each temperature point. The compact records still do not establish independent synthesis-batch identity across every distinct run label. Therefore:
 
 - `retest_after_1d` is retained as provenance;
-- day-1 rows are not automatically interpreted as independent batches;
+- temperature points within a sweep are treated as repeated rheological measurements on a common mother sample;
+- distinct run labels are described as measurement realizations rather than assumed independent synthesis batches;
 - mixed-effects/hierarchical inference remains supporting rather than headline evidence;
-- the main claims rely more heavily on curve structure, cross-validation and calibration tests.
+- the main claims rely on curve structure, cross-validation and calibration tests rather than an independence assumption that the source record does not establish.
 
-If older notebook or lab records establish `parent_sample_id` or preparation batch identity, those fields should be added without rewriting the raw measurements.
+The verified instrument, unit, equilibration, thermal-hold and sample-preparation conditions are versioned in `data/experimental_methods_metadata.csv`.
 
 ## 6. External-database grouped validation
 

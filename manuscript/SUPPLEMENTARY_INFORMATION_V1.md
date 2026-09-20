@@ -101,10 +101,6 @@ The same-order comparison isolates the effect of replacing formulation-level int
 
 Thus, within the present local chemistry family, the dominant realization effect is almost indistinguishable from a uniform vertical displacement in log-viscosity space.
 
-### Supplementary Figure S1 | Model-free structure of the realization effect
-
-**Suggested content.** Centered log-viscosity residual matrix for the six chemistry-audited realizations, first singular-mode loading across temperature, and the constant-vector comparison used to quantify the vertical-shift geometry. The figure should report PC1 = 99.63% and cosine similarity = 0.9998.
-
 ---
 
 # Supplementary Note 3 | Leave-one-formulation one-point calibration
@@ -142,10 +138,6 @@ Across the full measured temperature range, pooled one-point transfer remains ap
 | pooled | 6 | 1.099 |
 
 The one-point experiment should be interpreted as state calibration inside a validated local chemistry neighborhood. It is not evidence for a universal polyurethane master curve.
-
-### Supplementary Figure S2 | Anchor-temperature dependence of one-point state calibration
-
-**Suggested content.** Pooled multiplicative RMSE versus anchor temperature, with held-formulation-specific values shown as individual points or intervals. The figure should use the same chemistry-audited six-realization population as the main analysis.
 
 ---
 
@@ -186,10 +178,6 @@ $$
 The maximum individual multiplicative error in this test was approximately 1.189×.
 
 The supported claim is therefore limited to **10–20 °C short-range extrapolation inside the chemistry-audited E1–E3 neighborhood after one state-specific anchor**.
-
-### Supplementary Figure S3 | Realization-level uncertainty in strict local extrapolation
-
-**Suggested content.** Bootstrap distribution of pooled multiplicative RMSE for the joint formulation-and-temperature holdout, with the median and 95% interval marked. A second panel may show prediction error by held realization at 120 and 130 °C.
 
 ---
 
@@ -260,11 +248,25 @@ The two F1 repeats give:
 
 Relative to E1, the best original local reference over the same 15–60 min interval, the F1 mean absolute drift is reduced by approximately 83%.
 
-The validation therefore supports a low-drift rheological region. It does not by itself identify the molecular origin of the stabilization.
+A proportional-dilution null was evaluated from the source-reported formulation parts. The reactive-core fraction in F1 is
 
-### Supplementary Figure S4 | Replicate-level thermal-hold validation
+$
+rac{39.60+39.60+20.19}{39.60+39.60+20.19+17.00+5.00}
+=
+rac{99.39}{121.39}
+=
+0.8189.
+$
 
-**Suggested content.** F1 repeat trajectories plotted individually and normalized to each repeat's own 15 min value, together with the matched E1 and E5 reference changes. The panel should report replicate-level rather than extrapolated 90 min values for F1.
+If the E1 15–60 min drift of 9.51% scaled linearly with this fraction, the dilution-only expectation would be
+
+$
+9.51%	imes0.8189=7.79%.
+$
+
+The measured F1 mean absolute drift is 1.60%. Thus the observed reduction from E1 is 7.91 percentage points, whereas proportional dilution predicts a reduction of only 1.72 percentage points. The measured suppression is approximately 4.6-fold larger than the dilution-only reduction.
+
+The validation therefore supports a low-drift rheological region and shows that the stabilization exceeds simple proportional dilution of the original reactive core.
 
 ---
 
@@ -292,10 +294,6 @@ which is much broader than the local E1–E3 range.
 This broader distribution is important for claim scope. The local shared thermal shape is treated as a **local transferable representation**, not a universal PUR relation.
 
 External formulation records containing acrylic-like and tackifier-like modifiers are used as evidence-bounded intervention priors. Numeric modifier fractions are used as quantitative anchors only when their denominator basis is sufficiently explicit. Records with ambiguous bases remain directional evidence.
-
-### Supplementary Figure S5 | Local versus external temperature-response domain
-
-**Suggested content.** Distribution of the apparent temperature-response descriptor across the 39 external curves with the local E1–E3 interval overlaid. This panel should emphasize that the local result occupies a restricted subdomain of a broader chemistry-dependent landscape.
 
 ---
 
@@ -379,6 +377,30 @@ At the run level, the confirmatory Agent recovered the near region in 8 of 10 at
 
 The benchmark should not be interpreted as evidence that the language model independently discovered the formulation. The deterministic scientific policy defines most of the useful geometry of the decision space.
 
+## Supplementary Table S10 | Strategy-ladder comparison
+
+| Strategy | Attempted runs | Named decisions | Abstentions | Dual-axis recovery | Near-region recovery | Mean modifier-plane $L_1$ (pp) |
+|---|---:|---:|---:|---:|---:|---:|
+| initial proximity-reward strategy | 5 | 5 | 0 | 0/5 | 0/5 | 12.115 |
+| minimum-intervention diagnostic | 3 | 1 | 1 | 0/1 | 0/1 | 15.623 |
+| + intervention-coverage gate | 5 | 3 | 2 | 3/3 | 3/3 | 1.877 |
+| + deterministic ordering withheld | 5 | 4 | 1 | 4/4 | 4/4 | 2.061 |
+| confirmatory series | 10 | 8 | 2 | 8/8 | 8/8 | 2.281 |
+
+For named decisions, the 95% Wilson interval for dual-axis/near-region recovery changed from [0.00, 0.43] in the initial 0/5 series to [0.68, 1.00] in the final 8/8 series. These intervals do not overlap. The minimum-intervention series is retained as a diagnostic because its small number of named outputs does not support the headline rate comparison.
+
+The naive single-pass baseline produced 7 named decisions from 10 attempts, with 0/7 near-region and 0/7 dual-axis recovery. All seven named outputs selected the same reactive-core-only candidate. Its mean modifier-plane $L_1$ distance was 18.123 percentage points, compared with 12.074 percentage points under uniform random selection on the frozen lattice. Thus both the observed near-region rate (0/7 versus a 24.66% random-lattice expectation) and mean distance were worse than the corresponding uniform-random baselines.
+
+## Supplementary Table S11 | Cross-model transfer under the same blinded evidence contract
+
+| Model configuration | Attempted runs | Named decisions | Abstentions | Dual-axis recovery | Near-region recovery | Mean modifier-plane $L_1$ (pp) | Named selections |
+|---|---:|---:|---:|---:|---:|---:|---|
+| GPT-5.6-luna | 10 | 8 | 2 | 8/8 | 8/8 | 2.281 | S1C41 ×6, S1C46 ×1, S1C40 ×1 |
+| GPT-5.5 | 5 | 4 | 0 | 4/4 | 4/4 | 1.877 | S1C41 ×4 |
+| GPT-5.6-sol | 5 | 2 | 3 | 1/2 | 1/2 | 10.000 | S1C41 ×1, S1C02 ×1 |
+
+Across the three model configurations, 13 of 14 named decisions retained both supported modifier axes and 13 of 14 entered the near region; S1C41 accounted for 11 of 14 named decisions. The intervention region therefore transferred across model configurations, while commitment reliability remained model dependent.
+
 ---
 
 # Supplementary Note 10 | Attribution of decision improvement
@@ -396,10 +418,6 @@ Along the reported strategy ladder, the deterministic-policy stage accounts for 
 The remaining approximately 5.6% corresponds to the additional best-case reduction between the final rule-only candidate and the final Agent-region floor.
 
 This decomposition is used to support the conclusion that explicit scientific structure, not unconstrained language-model generation, supplies most of the quantitative decision improvement.
-
-### Supplementary Figure S6 | Run-level decision distribution and attribution
-
-**Suggested content.** Candidate selection frequencies for the 10 confirmatory runs, including abstentions, together with a separate rule-versus-model attribution panel. The figure should preserve the distinction between deterministic candidate geometry and stochastic model selection.
 
 ---
 
@@ -450,8 +468,11 @@ The principal manuscript quantities can be regenerated from the following versio
 | candidate lattice | `derived/stage1_blind_candidate_space_v1.json` |
 | frozen confirmatory decisions | `results/stage1_blind_replay_v3h/arm_b_blind/frozen_recommendations.csv` |
 | post-closure adjudication summary | `results/stage1_blind_replay_v3h/arm_b_blind/adjudication_summary.json` |
+| strategy-ladder benchmark | `results/STAGE1_AI4SCI_REPORT.md` |
+| GPT-5.5 transfer runs | `results/multimodel/gpt-5_5/arm_b_blind/` |
+| GPT-5.6-sol transfer runs | `results/multimodel/gpt-5_6-sol/arm_b_blind/` |
 
-The main-text Figures 3–5 are rendered in R from versioned analysis outputs. Supplementary figures should use the same palette, typography and panel conventions as the main figures.
+Main-text Figures 1–5 are generated from versioned scripts and analysis outputs. The SI reports the corresponding numerical robustness checks and run-level tables without duplicating those main-text visualizations.
 
 ---
 

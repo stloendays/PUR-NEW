@@ -41,11 +41,13 @@ The compact source data are stored in:
 - `data/thermal_hold.csv`
 - `data/realization_metadata.csv`
 
-### Experimental metadata pending integration
+### Verified experimental metadata
 
-The original viscosity-unit and instrument metadata **exist in the project source materials but have not yet been integrated into the repository/manuscript tables**. Before submission, add the verified unit, instrument/model, geometry or spindle/rotation condition as applicable, temperature-control details, and other available measurement metadata to the Methods and data tables.
+The viscosity and preparation metadata are now integrated into the repository and manuscript. Viscosity was measured with an **RV-SSR-H high-temperature rotational viscometer** (Shanghai Fangrui Instrument Co., Ltd.) using an **NKY-25 heater** and **No. 27 spindle**. The instrument reports viscosity in **mPa·s**. Rotation speed was adjusted to keep torque at approximately **40–60%**, and each temperature setpoint was equilibrated for **15 min** before the displayed value was recorded.
 
-Do **not** describe the viscosity unit or instrument metadata as unknown, unconfirmed, or unavailable merely because they are not yet present in the compact repository tables.
+For sample preparation, polyols were stirred and vacuum-dehydrated at approximately **130 °C for 1 h**; MDI was then added and the mixture was stirred under vacuum at approximately **120 °C for about 1 h 20 min**. In 120 °C thermal-hold tests, **t = 0** is the point at which the sample reaches 120 °C; the material is stirred and kept sealed under vacuum during the hold. Structured metadata are stored in `data/experimental_methods_metadata.csv`.
+
+The temperature-sweep repeatability protocol uses the same mother sample across temperatures within a sweep. Distinct run labels are therefore treated as rheological measurement realizations rather than automatically as independent synthesis batches.
 
 ### Chemistry-provenance audit
 
@@ -391,13 +393,17 @@ Not claimed:
 
 ---
 
+### Independent Agent V4 development line
+
+The current manuscript is frozen around the audited outcome-blind candidate-selection evidence described above. A separate Agent V4 development line is upgrading the decision task from **candidate formulation selection** to **value-of-information (VOI)-guided experiment selection**: the Agent should decide which experiment would most reduce decision-relevant uncertainty before choosing a formulation. Until that V4 workflow has its own frozen protocol and results, do not mix V4 outputs, terminology, or performance claims into the canonical V3 manuscript.
+
 ## 11. Manuscript non-negotiables
 
 These are author-level constraints for future manuscript revisions and should not be relaxed by automated rewriting:
 
 - **Do not introduce `n_targets = 1` framing or equivalent language as a manuscript limitation.** Do not foreground the benchmark by reducing it to a target-count disclaimer.
 - **Do not further weaken the current V3 mechanism interpretation.** Preserve the present balance: the resin-modified formulation is consistent with a lower effective concentration of reaction-capable material during thermal holding, while direct molecular-level measurements were not collected. Do not rewrite this into a more defensive or less informative statement unless new evidence requires it.
-- **Do not state that the absolute viscosity unit, rheometer/viscometer information, or related measurement metadata are unknown or unconfirmed.** Those data exist but still need to be incorporated into the repository and manuscript before submission.
+- **Preserve the verified experimental metadata consistently across manuscript, figures and repository:** viscosity is reported in mPa·s from the RV-SSR-H/NKY-25 setup with No. 27 spindle, variable speed at approximately 40–60% torque and 15 min equilibration per temperature.
 - **Retain and, where appropriate, foreground the rule/model attribution result:** approximately **94% of the numerical distance improvement arose from the transparent deterministic scientific policy**, with the language-model layer performing evidence integration and final selection inside the admissible decision region.
 - Keep the current hierarchy of evidence: local experiment establishes the rheological structure and failure mode; external PUR evidence defines plausible intervention regions; deterministic scientific policy constrains the decision geometry; the language model operates inside that geometry; wet-lab results provide physical adjudication.
 

@@ -7,11 +7,17 @@ on:
       - ".github/workflows/export-manuscript-docx.yml"
       - "manuscript/MAIN_TEXT_V3.md"
       - "manuscript/references.bib"
+      - "scripts/figure1_workflow.R"
       - "scripts/figure2_state_conditioned_rheology.R"
+      - "scripts/figure3_local_transfer.R"
       - "scripts/figure4_rheological_coordinates.R"
       - "scripts/figure5_outcome_blind_agent.R"
       - "data/temperature_sweeps.csv"
       - "data/thermal_hold.csv"
+      - "analysis/results/local_leave_one_formulation_pooled.csv"
+      - "analysis/results/local_leave_one_formulation_one_point.csv"
+      - "analysis/results/local_joint_formulation_temperature_extrapolation.csv"
+      - "analysis/results/local_joint_formulation_temperature_extrapolation_summary.csv"
   workflow_dispatch:
 
 permissions:
@@ -39,7 +45,9 @@ jobs:
 
       - name: Render current manuscript figures
         run: |
+          Rscript scripts/figure1_workflow.R
           Rscript scripts/figure2_state_conditioned_rheology.R
+          Rscript scripts/figure3_local_transfer.R
           Rscript scripts/figure4_rheological_coordinates.R
           Rscript scripts/figure5_outcome_blind_agent.R
 
