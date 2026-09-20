@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/figure4-5-r.yml"
       - "scripts/figure2_state_conditioned_rheology.R"
+      - "scripts/figure3_local_transfer.R"
       - "scripts/figure4_rheological_coordinates.R"
       - "scripts/figure5_outcome_blind_agent.R"
       - "data/temperature_sweeps.csv"
@@ -38,9 +39,10 @@ jobs:
             any::jsonlite
             any::svglite
           cache-version: 1
-      - name: Render Figure 2, Figure 4 and Figure 5
+      - name: Render Figures 2-5
         run: |
           Rscript scripts/figure2_state_conditioned_rheology.R
+          Rscript scripts/figure3_local_transfer.R
           Rscript scripts/figure4_rheological_coordinates.R
           Rscript scripts/figure5_outcome_blind_agent.R
       - name: Verify outputs
@@ -48,6 +50,9 @@ jobs:
           test -s analysis/figures/Figure2_state_conditioned_rheology.pdf
           test -s analysis/figures/Figure2_state_conditioned_rheology.svg
           test -s analysis/figures/Figure2_state_conditioned_rheology.png
+          test -s analysis/figures/Figure3_local_transfer.pdf
+          test -s analysis/figures/Figure3_local_transfer.svg
+          test -s analysis/figures/Figure3_local_transfer.png
           test -s analysis/figures/Figure4_rheological_coordinates.pdf
           test -s analysis/figures/Figure4_rheological_coordinates.svg
           test -s analysis/figures/Figure4_rheological_coordinates.png
@@ -56,11 +61,14 @@ jobs:
           test -s analysis/figures/Figure5_outcome_blind_agent.png
       - uses: actions/upload-artifact@v4
         with:
-          name: Figure2-4-5-manuscript
+          name: Figure2-5-manuscript
           path: |
             analysis/figures/Figure2_state_conditioned_rheology.pdf
             analysis/figures/Figure2_state_conditioned_rheology.svg
             analysis/figures/Figure2_state_conditioned_rheology.png
+            analysis/figures/Figure3_local_transfer.pdf
+            analysis/figures/Figure3_local_transfer.svg
+            analysis/figures/Figure3_local_transfer.png
             analysis/figures/Figure4_rheological_coordinates.pdf
             analysis/figures/Figure4_rheological_coordinates.svg
             analysis/figures/Figure4_rheological_coordinates.png
@@ -71,11 +79,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add analysis/figures/Figure2_state_conditioned_rheology.* analysis/figures/Figure4_rheological_coordinates.* analysis/figures/Figure5_outcome_blind_agent.*
+          git add analysis/figures/Figure2_state_conditioned_rheology.* analysis/figures/Figure3_local_transfer.* analysis/figures/Figure4_rheological_coordinates.* analysis/figures/Figure5_outcome_blind_agent.*
           if git diff --cached --quiet; then
             echo "No figure changes to commit"
           else
-            git commit -m "figures: render main manuscript Figures 2, 4 and 5 [skip ci]"
+            git commit -m "figures: render main manuscript Figures 2-5 [skip ci]"
             git pull --rebase origin main
             git push origin main
           fi
