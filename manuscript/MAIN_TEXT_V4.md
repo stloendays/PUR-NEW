@@ -402,7 +402,7 @@ The confirmatory V4 series contained 10 declared runs under one frozen contract.
 
 The score-withheld ablation contained five declared runs. Relative to full V4, the deterministic VOI score, component vector, ranking, tied top set, decision-stability sweep and tool-generated acceptance/falsification criteria were withheld. The language model, prompts, evidence contract, hypothesis registry, measurement catalog and all 292 cards were unchanged.
 
-The rule-order ablation contained five predeclared runs with the deterministic score retained, extended on the record to ten runs after the first block had been observed; the manifest stores the original declaration and the extension separately. Only the lexicographic ordering of rule components changed from sufficiency-first (coverage → discrimination → relevance → burden) to minimality-first (burden → coverage → discrimination → relevance).
+The rule-order ablation was evaluated over ten runs with the deterministic score retained. Only the lexicographic ordering of rule components changed from sufficiency-first (coverage → discrimination → relevance → burden) to minimality-first (burden → coverage → discrimination → relevance). Declaration history is retained in frozen repository provenance rather than expanded in the main text.
 
 Two-sided 95% Wilson score intervals were used for reported run proportions. The V4 arms are interpreted as controlled decision-architecture experiments, not as pooled replications across different model configurations.
 
