@@ -46,11 +46,17 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add analysis/figures/Figure4_v4_rule_ablation.pdf \
+          git add analysis/figures/Figure1_v4_workflow.pdf \
+                  analysis/figures/Figure1_v4_workflow.png \
+                  analysis/figures/Figure1_v4_workflow.svg \
+                  analysis/figures/Figure4_v4_rule_ablation.pdf \
                   analysis/figures/Figure4_v4_rule_ablation.png \
-                  analysis/figures/Figure4_v4_rule_ablation.svg                   analysis/figures/Figure5_rheological_coordinates.pdf                   analysis/figures/Figure5_rheological_coordinates.png                   analysis/figures/Figure5_rheological_coordinates.svg
+                  analysis/figures/Figure4_v4_rule_ablation.svg \
+                  analysis/figures/Figure5_rheological_coordinates.pdf \
+                  analysis/figures/Figure5_rheological_coordinates.png \
+                  analysis/figures/Figure5_rheological_coordinates.svg
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "figures: render V4 manuscript Figures 1 and 5 [skip ci]"
+          git commit -m "figures: render V4 manuscript Figures 1, 4 and 5 [skip ci]"
           git push
