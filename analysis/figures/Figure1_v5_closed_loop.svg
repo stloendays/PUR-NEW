@@ -60,7 +60,7 @@ text{font-family:"Times New Roman",Times,serif;fill:#111}
 <text x="1012" y="215" text-anchor="middle" class="body">Formulation × measurement</text>
 <text x="1012" y="238" text-anchor="middle" class="body">= experiment card</text>
 <text x="1012" y="295" text-anchor="middle" class="body bold">VOI + rule order</text>
-<text x="1012" y="318" text-anchor="middle" class="body bold">+ Agent selection</text>
+<text x="1012" y="318" text-anchor="middle" class="body bold">+ model-mediated selection</text>
 <text x="1012" y="405" text-anchor="middle" class="small">informative next experiment</text>
 
 <!-- stage 5 -->
