@@ -1,13 +1,13 @@
-name: Render V4 manuscript figures
+name: Render V5 manuscript figures
 
 on:
   push:
     branches: [main]
     paths:
-      - "scripts/figure1_v4_workflow.R"
+      - "scripts/figure1_v5_closed_loop.R"
       - "scripts/figure2_state_conditioned_rheology.R"
       - "scripts/figure3_local_transfer.R"
-      - "scripts/figure4_v4_rule_ablation.R"
+      - "scripts/figure4_v5_rule_ablation.R"
       - "scripts/figure5_rheological_coordinates.R"
       - "results/agent_v4_voi/rule_layer_ablation.json"
       - ".github/workflows/render_v4_figure5.yml"
@@ -41,42 +41,42 @@ jobs:
             any::scales
             any::jsonlite
 
-      - name: Render V4 Figure 1
-        run: Rscript scripts/figure1_v4_workflow.R
+      - name: Render V5 Figure 1
+        run: Rscript scripts/figure1_v5_closed_loop.R
 
-      - name: Render V4 Figure 2
+      - name: Render V5 Figure 2
         run: Rscript scripts/figure2_state_conditioned_rheology.R
 
-      - name: Render V4 Figure 3
+      - name: Render V5 Figure 3
         run: Rscript scripts/figure3_local_transfer.R
 
-      - name: Render V4 Figure 4
-        run: Rscript scripts/figure4_v4_rule_ablation.R
+      - name: Render V5 Figure 4
+        run: Rscript scripts/figure4_v5_rule_ablation.R
 
-      - name: Render V4 Figure 5
+      - name: Render V5 Figure 5
         run: Rscript scripts/figure5_rheological_coordinates.R
 
       - name: Commit rendered outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add analysis/figures/Figure1_v4_workflow.pdf \
-                  analysis/figures/Figure1_v4_workflow.png \
-                  analysis/figures/Figure1_v4_workflow.svg \
+          git add analysis/figures/Figure1_v5_closed_loop.pdf \
+                  analysis/figures/Figure1_v5_closed_loop.png \
+                  analysis/figures/Figure1_v5_closed_loop.svg \
                   analysis/figures/Figure2_state_conditioned_rheology.pdf \
                   analysis/figures/Figure2_state_conditioned_rheology.png \
                   analysis/figures/Figure2_state_conditioned_rheology.svg \
                   analysis/figures/Figure3_local_transfer.pdf \
                   analysis/figures/Figure3_local_transfer.png \
                   analysis/figures/Figure3_local_transfer.svg \
-                  analysis/figures/Figure4_v4_rule_ablation.pdf \
-                  analysis/figures/Figure4_v4_rule_ablation.png \
-                  analysis/figures/Figure4_v4_rule_ablation.svg \
+                  analysis/figures/Figure4_v5_rule_ablation.pdf \
+                  analysis/figures/Figure4_v5_rule_ablation.png \
+                  analysis/figures/Figure4_v5_rule_ablation.svg \
                   analysis/figures/Figure5_rheological_coordinates.pdf \
                   analysis/figures/Figure5_rheological_coordinates.png \
                   analysis/figures/Figure5_rheological_coordinates.svg
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "figures: render monochrome V4 manuscript Figures 1-5 [skip ci]"
+          git commit -m "figures: render monochrome V5 manuscript Figures 1-5 [skip ci]"
           git push
