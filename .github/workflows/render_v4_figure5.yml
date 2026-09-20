@@ -5,7 +5,8 @@ on:
     branches: [main]
     paths:
       - "scripts/figure1_v4_workflow.R"
-      - "scripts/figure5_v4_rule_ablation.R"
+      - "scripts/figure4_v4_rule_ablation.R"
+      - "scripts/figure5_rheological_coordinates.R"
       - "results/agent_v4_voi/rule_layer_ablation.json"
       - ".github/workflows/render_v4_figure5.yml"
   workflow_dispatch:
@@ -35,16 +36,19 @@ jobs:
       - name: Render V4 Figure 1
         run: Rscript scripts/figure1_v4_workflow.R
 
+      - name: Render V4 Figure 4
+        run: Rscript scripts/figure4_v4_rule_ablation.R
+
       - name: Render V4 Figure 5
-        run: Rscript scripts/figure5_v4_rule_ablation.R
+        run: Rscript scripts/figure5_rheological_coordinates.R
 
       - name: Commit rendered outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add analysis/figures/Figure5_v4_rule_ablation.pdf \
-                  analysis/figures/Figure5_v4_rule_ablation.png \
-                  analysis/figures/Figure5_v4_rule_ablation.svg
+          git add analysis/figures/Figure4_v4_rule_ablation.pdf \
+                  analysis/figures/Figure4_v4_rule_ablation.png \
+                  analysis/figures/Figure4_v4_rule_ablation.svg                   analysis/figures/Figure5_rheological_coordinates.pdf                   analysis/figures/Figure5_rheological_coordinates.png                   analysis/figures/Figure5_rheological_coordinates.svg
           if git diff --cached --quiet; then
             exit 0
           fi
