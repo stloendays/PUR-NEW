@@ -403,9 +403,9 @@ The manuscript-facing V4 evidence is now frozen around three controlled conditio
 
 - full V4 confirmatory series: 10 declared runs, 9/10 evidence-supported family selections, 0/10 zero-discrimination selections;
 - VOI-score-withheld ablation: 5 declared runs, 0/5 evidence-supported family selections, 3/5 zero-discrimination selections;
-- rule-order-inverted ablation: 5 declared runs, 0/5 evidence-supported family selections, 5/5 zero-discrimination selections.
+- rule-order-inverted ablation: 10 runs, 0/10 evidence-supported family selections, 10/10 zero-discrimination selections.
 
-The order-inverted arm is particularly important: the Skeptic identified the zero-discrimination defect at high severity in 5/5 runs, yet all five frozen decisions still committed. V4 therefore supports a rule-design result rather than an autonomy claim: **rule content and rule order are causal parts of scientific decision quality, while critique without decision authority is diagnostic rather than corrective.**
+The order-inverted arm is particularly important: the Skeptic identified the zero-discrimination defect at high severity in 10/10 runs, yet all ten frozen decisions still committed. V4 therefore supports a rule-design result rather than an autonomy claim: **rule content and rule order are causal parts of scientific decision quality, while critique without decision authority is diagnostic rather than corrective.**
 
 Do not overwrite or retroactively relabel the V3 frozen records. V3 remains the provenance-preserving predecessor; V4 is the current manuscript upgrade.
 
