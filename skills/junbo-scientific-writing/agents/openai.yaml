@@ -1,0 +1,12 @@
+interface:
+  display_name: Junbo Scientific Writing
+  short_description: Publication-first manuscript writing, auditing, and export rules
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
