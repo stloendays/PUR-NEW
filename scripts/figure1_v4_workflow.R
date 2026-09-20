@@ -9,14 +9,15 @@ root <- normalizePath(file.path(dirname(script_path), ".."), mustWork = TRUE)
 fig_dir <- file.path(root, "analysis", "figures")
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 
-ink <- "#222222"
-muted <- "#5B6470"
-line <- "#AEB5BF"
+font_family <- "Times New Roman"
+ink <- "#111111"
+muted <- "#555555"
+line <- "#A0A0A0"
 panel <- "#FAFAFA"
-state <- "#2A7F7F"
-drift <- "#C46A3A"
-agent <- "#7A5C8E"
-evidence <- "#D9A441"
+state <- "#222222"
+drift <- "#666666"
+agent <- "#444444"
+evidence <- "#888888"
 
 draw_box <- function(x, y, w, h, label, fill = "white", border = ink,
                      fontsize = 8.4, fontface = "plain") {
@@ -54,6 +55,7 @@ draw_chip <- function(x, y, label, fill) {
 
 draw_fig <- function() {
   grid.newpage()
+  pushViewport(viewport(gp = gpar(fontfamily = font_family)))
   grid.rect(gp = gpar(fill = "white", col = NA))
 
   grid.text(
@@ -91,14 +93,14 @@ draw_fig <- function() {
   draw_arrow(0.13, 0.525, 0.13, 0.46)
   draw_box(0.13, 0.405, 0.155, 0.075,
            "shared thermal shape\n+ realized scale",
-           fill = "#EAF5F4", fontsize = 8.0, fontface = "bold")
+           fill = "#F0F0F0", fontsize = 8.0, fontface = "bold")
   grid.text("99.77% log-viscosity variance", 0.13, 0.345,
             gp = gpar(fontsize = 7.5, col = muted))
 
   draw_arrow(0.13, 0.315, 0.13, 0.255)
   draw_box(0.13, 0.205, 0.155, 0.075,
            "120 °C hold reveals\ntemporal failure mode",
-           fill = "#FFF1E6", fontsize = 8.0, fontface = "bold")
+           fill = "#E6E6E6", fontsize = 8.0, fontface = "bold")
   grid.text("E1 9.51%  |  E5 51.54%", 0.13, 0.145,
             gp = gpar(fontsize = 7.5, col = muted))
 
@@ -119,38 +121,38 @@ draw_fig <- function() {
   draw_arrow(0.38, 0.375, 0.38, 0.315)
   draw_box(0.38, 0.255, 0.17, 0.085,
            "matched-window hold is the\nmechanism-discriminating measurement",
-           fill = "#FFF1E6", fontsize = 7.7)
+           fill = "#E6E6E6", fontsize = 7.7)
   grid.text("truth and outcome excluded", 0.38, 0.185,
             gp = gpar(fontsize = 7.4, col = muted))
 
   # C: rule grounded agent
   draw_box(0.63, 0.755, 0.165, 0.075,
            "deterministic VOI",
-           fill = "#EAF5F4", fontsize = 8.7, fontface = "bold")
+           fill = "#F0F0F0", fontsize = 8.7, fontface = "bold")
   grid.text("discrimination · relevance · risk", 0.63, 0.705,
             gp = gpar(fontsize = 7.2, col = muted))
 
   draw_arrow(0.63, 0.675, 0.63, 0.615)
   draw_box(0.63, 0.555, 0.17, 0.085,
            "sufficiency-first\nrule order",
-           fill = "#F7F2E6", fontsize = 8.4, fontface = "bold")
+           fill = "#E0E0E0", fontsize = 8.4, fontface = "bold")
 
   draw_arrow(0.63, 0.505, 0.63, 0.44)
   draw_box(0.63, 0.365, 0.18, 0.115,
            "Planner → Tools → Proposer\n→ Skeptic → Robustness\n→ Judge",
-           fill = "#F2EEF7", fontsize = 7.7, fontface = "bold")
+           fill = "#ECECEC", fontsize = 7.7, fontface = "bold")
   grid.text("same five LLM stages as V3", 0.63, 0.292,
             gp = gpar(fontsize = 7.3, col = muted))
 
   draw_arrow(0.63, 0.26, 0.63, 0.205)
   draw_box(0.63, 0.155, 0.13, 0.065,
            "FREEZE",
-           fill = "#FFF1E6", fontsize = 9.0, fontface = "bold")
+           fill = "#E6E6E6", fontsize = 9.0, fontface = "bold")
 
   # D: confirm, ablate, adjudicate
   draw_box(0.87, 0.755, 0.145, 0.085,
            "Confirmatory V4\nN = 10",
-           fill = "#F2EEF7", fontsize = 8.3, fontface = "bold")
+           fill = "#ECECEC", fontsize = 8.3, fontface = "bold")
   grid.text("9/10 supported family\n0/10 zero-discrimination",
             0.87, 0.675, gp = gpar(fontsize = 7.5, col = ink))
 
@@ -164,7 +166,7 @@ draw_fig <- function() {
   draw_arrow(0.87, 0.385, 0.87, 0.325)
   draw_box(0.87, 0.265, 0.155, 0.085,
            "post-freeze wet-lab\nadjudication",
-           fill = "#EAF5F4", fontsize = 8.2, fontface = "bold")
+           fill = "#F0F0F0", fontsize = 8.2, fontface = "bold")
   grid.text("1.60% observed vs 7.79%\ndilution prediction → H-CORE falsified",
             0.87, 0.185, gp = gpar(fontsize = 7.3, col = ink))
 
@@ -178,6 +180,7 @@ draw_fig <- function() {
     0.5, 0.045,
     gp = gpar(fontsize = 9.0, fontface = "bold", col = ink)
   )
+  popViewport()
 }
 
 png(file.path(fig_dir, "Figure1_v4_workflow.png"), width = 3200, height = 1700, res = 300, type = "cairo")
