@@ -17,6 +17,20 @@
       }
     },
     {
+      "name": "get_chemistry_audited_rheology_summary",
+      "description": "Return the chemistry-provenance-audited local rheology result from original pre-validation measurements: same-order formulation/state comparison, model-free state-shift check, leave-one-formulation one-point calibration, apparent thermal-response descriptor, and original hold contrast. The phosphoric-acid-labelled sensitivity curve and validation outcome are excluded.",
+      "when_to_use": [
+        "as the preferred local-science summary for new chemistry-first development",
+        "before deciding whether a discovered local rheological regularity can guide a new experiment",
+        "when a new Agent or ML layer needs audited material evidence rather than frozen benchmark compatibility output"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      }
+    },
+    {
       "name": "query_external_priors",
       "description": "Retrieve source-level analogue evidence from the curated external PUR evidence table, including source identifiers, evidence locators, candidate-space role and limitations.",
       "when_to_use": [
@@ -280,6 +294,7 @@
     "External analogue evidence is directional prior information, not proof of the current formulation's optimum.",
     "Missing process history remains uncertainty rather than being silently set to ideal values.",
     "No action may invent a molecular mechanism or an unmeasured viscosity value.",
-    "The local shared thermal-response shape must not be extrapolated into resin-modified chemistry as an established law; modified candidates require direct temperature-response verification before one-point calibration is trusted."
+    "The local shared thermal-response shape must not be extrapolated into resin-modified chemistry as an established law; modified candidates require direct temperature-response verification before one-point calibration is trusted.",
+    "Frozen benchmark actions remain unchanged for provenance; new chemistry-first development should prefer the audited rheology action when it needs the manuscript-facing local regularities."
   ]
 }
