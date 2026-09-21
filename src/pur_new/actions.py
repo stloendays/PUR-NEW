@@ -9,6 +9,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from .chemistry_tools import assess_shared_shape_applicability
 from .metrics import coefficient_of_variation, hold_stability_index, max_min_ratio
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -492,6 +493,8 @@ def execute_action(name: str, args: dict[str, Any], *, include_follow_up: bool) 
         return get_temperature_support(**args)
     if name == "get_state_aware_rheology_summary":
         return get_state_aware_rheology_summary()
+    if name == "assess_shared_shape_applicability":
+        return assess_shared_shape_applicability(**args)
     if name == "candidate_profile":
         return candidate_profile(**args)
     if name == "compare_candidate_to_priors":
