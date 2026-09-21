@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.4.0",
+  "catalog_version": "1.5.0",
   "purpose": "Deterministic scientific actions for a discovery-first PUR Agent: first extract material-response structure from measured evidence, then use that structure to choose informative formulation-process experiments.",
   "actions": [
     {
@@ -9,6 +9,20 @@
         "first, before candidate ranking",
         "to identify which material-response regularities should control experiment selection",
         "to decide whether a new point should target viscosity level, state calibration, thermal response, or hold stability"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      }
+    },
+    {
+      "name": "get_chemistry_audited_rheology_summary",
+      "description": "Return the chemistry-provenance-audited local rheology result from original pre-validation measurements: same-order formulation/state comparison, model-free state-shift check, leave-one-formulation one-point calibration, apparent thermal-response descriptor, and original hold contrast. The phosphoric-acid-labelled sensitivity curve and validation outcome are excluded.",
+      "when_to_use": [
+        "as the preferred local-science summary for new chemistry-first development",
+        "before deciding whether a discovered local rheological regularity can guide a new experiment",
+        "when a new Agent or ML layer needs audited material evidence rather than frozen benchmark compatibility output"
       ],
       "parameters": {
         "type": "object",
@@ -167,6 +181,27 @@
       }
     },
     {
+      "name": "assess_shared_shape_applicability",
+      "description": "Check whether the locally discovered shared thermal-response shape is inside its validated chemistry support for a candidate. Returns a chemistry-family boundary and a measurement recommendation; it does not predict viscosity.",
+      "when_to_use": [
+        "before using one-point state calibration on a new candidate",
+        "whenever AC1920, TK100 or another chemistry-changing modifier is introduced",
+        "to decide whether M-ANCHOR is defensible or a direct M-SWEEP verification is required"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate"
+        ],
+        "properties": {
+          "candidate": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
       "name": "candidate_profile",
       "description": "Compute a candidate profile with separate acrylic-like and tackifier-like fractions instead of collapsing all modifiers into one number.",
       "when_to_use": [
@@ -258,6 +293,8 @@
     "Actions may expose only evidence allowed by the active evidence-access profile.",
     "External analogue evidence is directional prior information, not proof of the current formulation's optimum.",
     "Missing process history remains uncertainty rather than being silently set to ideal values.",
-    "No action may invent a molecular mechanism or an unmeasured viscosity value."
+    "No action may invent a molecular mechanism or an unmeasured viscosity value.",
+    "The local shared thermal-response shape must not be extrapolated into resin-modified chemistry as an established law; modified candidates require direct temperature-response verification before one-point calibration is trusted.",
+    "Frozen benchmark actions remain unchanged for provenance; new chemistry-first development should prefer the audited rheology action when it needs the manuscript-facing local regularities."
   ]
 }
