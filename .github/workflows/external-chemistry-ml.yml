@@ -1,0 +1,83 @@
+name: external-chemistry-ml
+
+on:
+  pull_request:
+    paths:
+      - "src/pur_new/external_ml.py"
+      - "src/pur_new/chemistry_tools.py"
+      - "scripts/run_external_chemistry_ml.py"
+      - "tests/test_external_ml.py"
+      - "tests/test_chemistry_tools.py"
+      - "configs/external_ml_sources.json"
+      - ".github/workflows/external-chemistry-ml.yml"
+      - "pyproject.toml"
+  workflow_dispatch:
+
+jobs:
+  external-chemistry-ml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package and test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e . pytest
+      - name: Unit-test chemistry boundary and external ML code
+        run: pytest tests/test_chemistry_tools.py tests/test_external_ml.py
+      - name: Resolve and download a pinned public Pugar revision
+        run: |
+          mkdir -p /tmp/pugar /tmp/external-chemistry-ml
+          curl --fail --location --retry 3 \
+            -o /tmp/pugar/commit.json \
+            https://api.github.com/repos/joepugar/viscosity-modeling/commits/main
+          UPSTREAM_SHA=$(python -c "import json; print(json.load(open('/tmp/pugar/commit.json'))['sha'])")
+          echo "UPSTREAM_SHA=$UPSTREAM_SHA" >> "$GITHUB_ENV"
+          curl --fail --location --retry 3 \
+            -o /tmp/pugar/source.zip \
+            "https://codeload.github.com/joepugar/viscosity-modeling/zip/$UPSTREAM_SHA"
+          sha256sum /tmp/pugar/source.zip | tee /tmp/pugar/source.sha256
+          unzip -q /tmp/pugar/source.zip -d /tmp/pugar
+      - name: Record external-source provenance
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          cfg = json.loads(Path('configs/external_ml_sources.json').read_text())
+          source = cfg['sources'][0]
+          actual = hashlib.sha256(Path('/tmp/pugar/source.zip').read_bytes()).hexdigest()
+          provenance = {
+              'source_id': source['source_id'],
+              'upstream_repository': source['repository'],
+              'upstream_commit_sha': os.environ['UPSTREAM_SHA'],
+              'downloaded_archive_sha256': actual,
+              'previous_hmpur_ingest_archive_sha256': source.get('previous_hmpur_ingest_archive_sha256'),
+              'archive_hash_matches_previous_ingest': actual == source.get('previous_hmpur_ingest_archive_sha256'),
+              'raw_data_policy': source['raw_data_policy'],
+          }
+          out = Path('/tmp/external-chemistry-ml/source_provenance.json')
+          out.write_text(json.dumps(provenance, indent=2, sort_keys=True) + '\n')
+          print(out.read_text())
+          PY
+      - name: Locate public workbooks
+        run: |
+          CURVE_WORKBOOK=$(find /tmp/pugar -name ViscTempData.xlsx -print -quit)
+          FEATURE_WORKBOOK=$(find /tmp/pugar -name FeatureSpaces.xlsx -print -quit)
+          test -n "$CURVE_WORKBOOK" && test -f "$CURVE_WORKBOOK"
+          test -n "$FEATURE_WORKBOOK" && test -f "$FEATURE_WORKBOOK"
+          echo "CURVE_WORKBOOK=$CURVE_WORKBOOK" >> "$GITHUB_ENV"
+          echo "FEATURE_WORKBOOK=$FEATURE_WORKBOOK" >> "$GITHUB_ENV"
+      - name: Train chemistry-level thermal-response baselines
+        run: |
+          python scripts/run_external_chemistry_ml.py \
+            --curve-workbook "$CURVE_WORKBOOK" \
+            --feature-workbook "$FEATURE_WORKBOOK" \
+            --output-dir /tmp/external-chemistry-ml
+      - name: Upload derived reports only
+        uses: actions/upload-artifact@v4
+        with:
+          name: external-chemistry-ml
+          path: /tmp/external-chemistry-ml
+          retention-days: 30
