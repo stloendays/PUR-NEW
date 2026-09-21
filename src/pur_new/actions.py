@@ -11,6 +11,7 @@ from typing import Any
 
 from .chemistry_tools import assess_shared_shape_applicability
 from .metrics import coefficient_of_variation, hold_stability_index, max_min_ratio
+from .scientific_tools import get_state_aware_rheology_summary_v3
 
 ROOT = Path(__file__).resolve().parents[2]
 R_GAS = 8.31446261815324
@@ -493,6 +494,8 @@ def execute_action(name: str, args: dict[str, Any], *, include_follow_up: bool) 
         return get_temperature_support(**args)
     if name == "get_state_aware_rheology_summary":
         return get_state_aware_rheology_summary()
+    if name == "get_chemistry_audited_rheology_summary":
+        return get_state_aware_rheology_summary_v3()
     if name == "assess_shared_shape_applicability":
         return assess_shared_shape_applicability(**args)
     if name == "candidate_profile":
