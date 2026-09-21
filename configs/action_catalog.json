@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.4.0",
+  "catalog_version": "1.5.0",
   "purpose": "Deterministic scientific actions for a discovery-first PUR Agent: first extract material-response structure from measured evidence, then use that structure to choose informative formulation-process experiments.",
   "actions": [
     {
@@ -167,6 +167,27 @@
       }
     },
     {
+      "name": "assess_shared_shape_applicability",
+      "description": "Check whether the locally discovered shared thermal-response shape is inside its validated chemistry support for a candidate. Returns a chemistry-family boundary and a measurement recommendation; it does not predict viscosity.",
+      "when_to_use": [
+        "before using one-point state calibration on a new candidate",
+        "whenever AC1920, TK100 or another chemistry-changing modifier is introduced",
+        "to decide whether M-ANCHOR is defensible or a direct M-SWEEP verification is required"
+      ],
+      "parameters": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate"
+        ],
+        "properties": {
+          "candidate": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    {
       "name": "candidate_profile",
       "description": "Compute a candidate profile with separate acrylic-like and tackifier-like fractions instead of collapsing all modifiers into one number.",
       "when_to_use": [
@@ -258,6 +279,7 @@
     "Actions may expose only evidence allowed by the active evidence-access profile.",
     "External analogue evidence is directional prior information, not proof of the current formulation's optimum.",
     "Missing process history remains uncertainty rather than being silently set to ideal values.",
-    "No action may invent a molecular mechanism or an unmeasured viscosity value."
+    "No action may invent a molecular mechanism or an unmeasured viscosity value.",
+    "The local shared thermal-response shape must not be extrapolated into resin-modified chemistry as an established law; modified candidates require direct temperature-response verification before one-point calibration is trusted."
   ]
 }
