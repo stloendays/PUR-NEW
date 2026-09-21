@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "purpose": "Public external datasets allowed to inform chemistry-level thermal-response models without mixing incompatible PUR endpoints.",
+  "sources": [
+    {
+      "source_id": "PUGAR_2025_PREPOLYMER_VISCOSITY",
+      "article_title": "Machine learning of polyurethane prepolymer viscosity: a comparison of chemical and physicochemical approaches",
+      "doi": "10.1039/D5DD00287G",
+      "article_license": "CC BY-NC 3.0",
+      "repository": "https://github.com/joepugar/viscosity-modeling",
+      "archive_url": "https://github.com/joepugar/viscosity-modeling/archive/refs/heads/main.zip",
+      "files": [
+        "ViscTempData.xlsx",
+        "FeatureSpaces.xlsx"
+      ],
+      "allowed_scientific_use": [
+        "derive one temperature-response descriptor per complete prepolymer curve",
+        "test which chemistry families preserve or change thermal-response shape",
+        "train formulation-level models with group-held-out validation"
+      ],
+      "forbidden_shortcuts": [
+        "do not randomly split individual temperature points from the same formulation across train and test",
+        "do not use this dataset as a thermal-hold stability label source",
+        "do not treat apparent rheological E_eta as a molecular reaction activation energy"
+      ],
+      "raw_data_policy": "Download at runtime; do not vendor the third-party raw workbooks into this repository. Preserve source URL, archive hash and derived artifact provenance.",
+      "previous_hmpur_ingest_archive_sha256": "e9022c3c47d308db26fdf6e9413bf56dbede4b95f0edbdef9db2bbe2e03652ef",
+      "raw_data_license": "Follow the upstream repository and article terms; this workflow records provenance and does not relicense third-party data."
+    }
+  ]
+}
