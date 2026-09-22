@@ -68,6 +68,7 @@ jobs:
           import json
           from pathlib import Path
           config = json.loads(Path('configs/agent_v5.json').read_text())
+          protocol = json.loads(Path('configs/agent_v5_comparison_protocol.json').read_text())
           assert config['no_new_llm_roles'] is True
           assert config['llm_stages'] == ['planner', 'proposer', 'skeptic', 'robustness_adjudicator', 'judge']
           assert config['chemistry_domain_gate']['is_a_language_model'] is False
@@ -78,7 +79,59 @@ jobs:
           assert len(prompts) == 5
           for prompt in prompts:
               assert Path(prompt).exists(), prompt
-          print('V5 architecture declaration is consistent')
+
+          # protocol v1.1 information parity must be declared, not only implemented
+          assert config['protocol_version'] == protocol['version'] == '1.1.0'
+          assert config['chemistry_domain_gate']['audit_is_arm_independent'] is True
+          assert config['chemistry_domain_gate']['applicability_audit_visible_to_model_in_both_arms'] is True
+          for arm in config['primary_arms']:
+              assert arm['applicability_audit_visible_to_model'] is True, arm['arm_id']
+          enforced = {arm['arm_id']: arm['applicability_gate_enforced'] for arm in config['primary_arms']}
+          assert enforced == {'V5_NO_GATE': False, 'V5_FULL': True}
+          assert protocol['run_design']['same_model_visible_scientific_information_across_primary_arms'] is True
+          assert protocol['run_design']['information_parity_test_required'] is True
+          print('V5 architecture declaration is consistent with protocol v1.1')
+          PY
+
+      - name: Prove pre-enforcement information parity between the primary arms
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          from pur_new.agent_v5 import (
+              ARM_ENFORCES_GATE,
+              audit_experiment_cards,
+              audit_summary,
+              canonical_bytes,
+              build_pre_enforcement_payload,
+              build_voi_payload,
+              load_verified_shape_transfer,
+          )
+          from pur_new.voi import build_experiment_cards
+
+          candidates = json.loads(
+              Path('derived/stage1_blind_candidate_space_v1.json').read_text()
+          )['candidates']
+          audit = audit_experiment_cards(
+              build_experiment_cards(candidates),
+              candidates=candidates,
+              verified=load_verified_shape_transfer(),
+          )
+          serialized = canonical_bytes(build_pre_enforcement_payload(audit, top_k=12))
+          hashes = {
+              arm: audit_summary(audit, enforce=enforce, top_k=12)['pre_enforcement_payload_sha256']
+              for arm, enforce in ARM_ENFORCES_GATE.items()
+          }
+          assert len(set(hashes.values())) == 1, hashes
+          assert b'V5_FULL' not in serialized and b'V5_NO_GATE' not in serialized
+
+          for arm, enforce in ARM_ENFORCES_GATE.items():
+              applicability = build_voi_payload(audit, top_k=12, enforce=enforce)['chemistry_applicability_audit']
+              assert applicability['applicability_audit_visible_to_model'] is True, arm
+              assert applicability['inadmissible_experiment_ids'] == audit['inadmissible_experiment_ids'], arm
+              assert len(applicability['candidate_assessments']) == len(candidates), arm
+          print('pre-enforcement payload parity:', hashes['V5_FULL'])
           PY
 
       - name: Check cross-arm comparison parity on declared series contracts
@@ -99,7 +152,9 @@ jobs:
                   'series_label': f'ci_{arm}',
                   'architecture': 'PUR_NEW_CHEMISTRY_GATED_EXPERIMENT_SELECTION_AGENT_V5',
                   'arm': arm,
-                  'gate_enforced': arm == 'V5_FULL',
+                  'applicability_audit_visible_to_model': True,
+                  'applicability_gate_enforced': arm == 'V5_FULL',
+                  'pre_enforcement_payload_sha256': 'ci-parity-hash',
                   'n_runs_declared': 10,
                   'top_k': 12,
                   'model': 'ci-parity-check',

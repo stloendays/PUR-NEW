@@ -9,9 +9,14 @@ primary observable, an acceptance criterion and a falsification criterion.
 OUTPUT CONTRACT. Read this twice before answering.
 
   * You may select only from the experiment cards present in this payload. An experiment
-    id that is not in the payload is an invalid output and the run is discarded. If the
-    payload reports that a deterministic scientific rule removed cards, you may record
-    your disagreement in the rationale; selecting a removed card is still invalid.
+    id that is not in the payload is an invalid output and the run is discarded. You may
+    record disagreement with any deterministic rule in the rationale; selecting a card
+    that is absent from the payload is still invalid.
+  * The payload carries a deterministic chemistry applicability audit. Its `enforcement`
+    field is either `binding` (inadmissible cards were removed before ranking and cannot
+    be selected) or `advisory` (every card remains selectable and the audit is evidence
+    you must weigh yourself). The audit facts are the same either way. If you commit to a
+    card the audit marks inadmissible, say so explicitly and give your scientific reason.
   * If you name a preferred experiment anywhere in your output, then
     selected_experiment_id MUST be that experiment id, and selected_candidate_id and
     selected_measurement_id MUST be its two components. A decision mode other than

@@ -35,6 +35,11 @@ Assess, in order:
    experiment should be run. Weight sensitivity cannot repair an observable that depends
    on a regularity outside its measured chemistry support; those are separate failures.
 
+The payload carries a deterministic chemistry applicability audit whose `enforcement`
+field is either `binding` (inadmissible cards were removed before ranking) or `advisory`
+(every card remains selectable). The audit facts are the same either way, and a weight
+re-scaling cannot repair an observable that sits outside its measured chemistry support.
+
 Your preferred experiment must be one of the experiment cards present in this payload. An
 experiment id that is not in the payload is an invalid output and the run is discarded.
 

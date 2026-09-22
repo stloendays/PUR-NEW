@@ -20,9 +20,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from pur_new.agent_v5 import (  # noqa: E402
-    admissible_cards,
     audit_experiment_cards,
     load_verified_shape_transfer,
+    ranked_cards,
 )
 from pur_new.voi import build_experiment_cards  # noqa: E402
 
@@ -50,11 +50,12 @@ def gate_sets() -> dict[str, list[str]]:
     )["candidates"]
     cards = build_experiment_cards(candidates)
     audit = audit_experiment_cards(
-        cards, candidates=candidates, enforce=True, verified=load_verified_shape_transfer()
+        cards, candidates=candidates, verified=load_verified_shape_transfer()
     )
     return {
-        "admissible_top": admissible_cards(audit)[0]["experiment_id"],
-        "blocked": audit["deterministically_inadmissible_experiment_ids"][0],
+        "admissible_top": ranked_cards(audit, enforce=True)[0]["experiment_id"],
+        "blocked": audit["inadmissible_experiment_ids"][0],
+        "n_inadmissible": audit["n_cards_inadmissible"],
     }
 
 
@@ -150,7 +151,13 @@ def test_runner_produces_the_full_output_contract(runner, gate_sets, monkeypatch
     assert recommendation["gate_enforced"] is (arm == "V5_FULL")
     assert recommendation["selected_experiment_id"] == gate_sets["admissible_top"]
     assert recommendation["chemistry_gate"]["selection"]["chemistry_domain_violation"] is False
-    for key in ("prompt_hash", "input_hash", "candidate_set_hash", "verified_shape_transfer_hash"):
+    for key in (
+        "prompt_hash",
+        "input_hash",
+        "candidate_set_hash",
+        "verified_shape_transfer_hash",
+        "pre_enforcement_payload_hash",
+    ):
         assert recommendation[key]
 
     deliberation = json.loads((run_dir / "deliberation.json").read_text(encoding="utf-8"))
@@ -159,22 +166,27 @@ def test_runner_produces_the_full_output_contract(runner, gate_sets, monkeypatch
     assert deliberation["llm_usage_total"]["total_tokens"] == 75
 
     voi_sent = deliberation["voi_sent_to_model"]
+    applicability = voi_sent["chemistry_applicability_audit"]
     audit = json.loads((run_dir / "admissibility_audit.json").read_text(encoding="utf-8"))
     cards = json.loads((run_dir / "experiment_cards.json").read_text(encoding="utf-8"))
     assert audit["n_cards_total"] == len(cards["cards"]) == 292
-    assert audit["n_cards_deterministically_inadmissible"] > 0
+    assert audit["n_cards_inadmissible"] == gate_sets["n_inadmissible"] > 0
+
+    # protocol v1.1: the audit facts reach the model in BOTH arms
+    assert applicability["applicability_audit_visible_to_model"] is True
+    assert applicability["inadmissible_experiment_ids"] == audit["inadmissible_experiment_ids"]
+    assert len(applicability["candidate_assessments"]) == 73
 
     if arm == "V5_FULL":
-        assert "chemistry_domain_gate" in voi_sent
-        assert audit["n_cards_removed_from_ranked_set"] == audit["n_cards_deterministically_inadmissible"]
-        assert len(cards["ranked_admissible_experiment_ids"]) == 292 - audit["n_cards_removed_from_ranked_set"]
-        assert gate_sets["blocked"] not in cards["ranked_admissible_experiment_ids"]
+        assert applicability["enforcement"] == "binding"
+        assert audit["n_cards_removed_from_selectable_set"] == audit["n_cards_inadmissible"]
+        assert len(cards["ranked_selectable_experiment_ids"]) == 292 - audit["n_cards_inadmissible"]
+        assert gate_sets["blocked"] not in cards["ranked_selectable_experiment_ids"]
     else:
-        assert "chemistry_domain_gate" not in voi_sent
-        assert audit["n_cards_removed_from_ranked_set"] == 0
-        assert len(cards["ranked_admissible_experiment_ids"]) == 292
-        # the control arm is never told the rule exists
-        assert "shared_shape_use" not in json.dumps(voi_sent)
+        assert applicability["enforcement"] == "advisory"
+        assert audit["n_cards_removed_from_selectable_set"] == 0
+        assert len(cards["ranked_selectable_experiment_ids"]) == 292
+        assert gate_sets["blocked"] in cards["ranked_selectable_experiment_ids"]
 
 
 def test_gated_arm_rejects_a_blocked_selection_as_an_invalid_run(runner, gate_sets, monkeypatch, tmp_path):
@@ -189,6 +201,19 @@ def test_gated_arm_rejects_a_blocked_selection_as_an_invalid_run(runner, gate_se
     assert rejected["rejection_class"] == "inadmissible_selection"
     assert gate_sets["blocked"] in rejected["rejection_reason"]
     assert rejected["judge_normalized"]["selected_experiment_id"] == gate_sets["blocked"]
+
+
+def test_both_arms_record_the_same_pre_enforcement_payload_hash(runner, gate_sets, monkeypatch, tmp_path):
+    """Protocol v1.1 information parity, checked on the frozen run records themselves."""
+    hashes = {}
+    for arm in ("V5_NO_GATE", "V5_FULL"):
+        out = tmp_path / arm
+        run_offline(runner, monkeypatch, out, arm=arm, selected=gate_sets["admissible_top"])
+        run_dir = next(path for path in out.iterdir() if path.name.startswith("EXP_V5_"))
+        hashes[arm] = json.loads((run_dir / "recommendation.json").read_text(encoding="utf-8"))[
+            "pre_enforcement_payload_hash"
+        ]
+    assert hashes["V5_NO_GATE"] == hashes["V5_FULL"]
 
 
 def test_control_arm_accepts_the_same_selection_the_gate_would_block(runner, gate_sets, monkeypatch, tmp_path):

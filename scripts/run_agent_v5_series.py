@@ -32,7 +32,14 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from pur_new.agent_v5 import ARMS  # noqa: E402
+from pur_new.agent_v5 import (  # noqa: E402
+    ARM_ENFORCES_GATE,
+    ARMS,
+    audit_experiment_cards,
+    load_verified_shape_transfer,
+    pre_enforcement_payload_hash,
+)
+from pur_new.voi import build_experiment_cards  # noqa: E402
 
 EXIT_INVALID_MODEL_OUTPUT = 3
 
@@ -134,12 +141,26 @@ def main() -> None:
     except Exception:
         git_commit = None
 
+    # Protocol v1.1 information-parity evidence: the model-visible pre-enforcement payload
+    # is arm-independent by construction, and its hash is frozen into the contract so the
+    # two arms can be compared on the record rather than on a claim.
+    candidates = json.loads(args.candidate_set.read_text(encoding="utf-8"))["candidates"]
+    audit = audit_experiment_cards(
+        build_experiment_cards(candidates), candidates=candidates, verified=load_verified_shape_transfer()
+    )
+    parity_hash = pre_enforcement_payload_hash(audit, top_k=args.top_k)
+
     # The contract is written BEFORE the first run, so N cannot be chosen after seeing results.
     manifest: dict[str, Any] = {
         "series_label": args.series_label or output_dir.name,
         "architecture": "PUR_NEW_CHEMISTRY_GATED_EXPERIMENT_SELECTION_AGENT_V5",
+        "protocol_version": "1.1.0",
         "arm": args.arm,
-        "gate_enforced": args.arm == "V5_FULL",
+        "applicability_audit_visible_to_model": True,
+        "applicability_gate_enforced": ARM_ENFORCES_GATE[args.arm],
+        "pre_enforcement_payload_sha256": parity_hash,
+        "n_cards_total": audit["n_cards_total"],
+        "n_cards_inadmissible": audit["n_cards_inadmissible"],
         "n_runs_declared": args.n_runs,
         "n_runs_declared_before_first_run": True,
         "declared_utc": utc_now(),

@@ -1,6 +1,6 @@
 {
   "baseline_id": "PUR_NEW_V4_INVARIANCE_BASELINE_AT_V5_IMPLEMENTATION",
-  "captured_at_git_commit": "c844e2d20a26116ac1d488d42a11065ade939dc0",
+  "captured_at_git_commit": "63e6476865ecd0286e587b3f53e98b3a8313b77c",
   "frozen_v4_result_files": {
     "results/agent_v4_voi/AGENT_V4_REPORT.md": "2bb0424fb4ab0d8542aa0e9a76c5c40dbb24adefcb451ba60240d942004e4a88",
     "results/agent_v4_voi/_aborted_series_20260919T1426Z/README.json": "f2ca83b5138c249cf5faba231779f1a1215ab952fca59d8b420b075829a55aaa",
@@ -176,12 +176,13 @@
         "src/pur_new/voi.py"
       ]
     },
-    "finding": "Some frozen V4 series manifests already declare input hashes that no longer match the working tree at this commit. The drift predates the V5 implementation and is recorded here rather than repaired, because a frozen manifest must not be rewritten."
+    "finding": "Some frozen V4 series manifests already declare input hashes that no longer match the working tree at this commit. The drift predates the V5 implementation. Frozen manifests are left untouched; if an exact historical V4 source tree is later recovered from Git history it must be recorded separately."
   },
-  "purpose": "Hashes of the V4-defining input files and of every frozen V4 result file, captured at the commit from which Agent V5 was implemented. tests/test_agent_v5.py asserts these hashes still hold, so the V5 implementation cannot edit a V4 input or a frozen V4 record.",
-  "scope_note": "This baseline is a forward guard for the V5 work. It is not a claim that the V4 series inputs were never edited before this commit; see preexisting_series_manifest_drift.",
+  "protocol_reference": "configs/agent_v5_comparison_protocol.json historical_v4_manifest_drift_policy",
+  "purpose": "Hashes of the V4-defining input files and of every frozen V4 result file, captured at the commit Agent V5 was implemented from. tests/test_agent_v5.py asserts these hashes still hold, so the V5 implementation cannot edit a V4 input or a frozen V4 record.",
+  "scope_note": "This baseline proves only that the V5 implementation caused no further drift. It is NOT a reconstruction or replacement of original V4 provenance, and it must not be presented as one. The pre-existing drift below is recorded, not repaired.",
   "v4_input_files": {
-    "configs/action_catalog.json": "d2fa4a2d0182b6010b148f0d1d766b0f5c8b352b58bf12b7d489313d4b48cd1d",
+    "configs/action_catalog.json": "7e240b12f23e3e93603fd4c53e314ae3090c6b8b51a2c9ef96751527200c784f",
     "configs/agent_v4.json": "3ae80a8323c1a8f35f31f2ff923f5d4178c55dbd5f69a890d40142631cac2f21",
     "configs/evidence_access_profiles.json": "0906341975695613a02614ab867a5c906baa4b0503116afa67ffb9e973c9ee17",
     "configs/formulation_priors.json": "7be699d8705910ac1fd85d56dd9976506f9867c20926c59eaee69c29ae82beea",
@@ -196,5 +197,5 @@
     "scripts/run_agent_v4.py": "c9864406959c32fcdc7792a363b56e16e5bac585f7852dff3aca7b2972361a81",
     "src/pur_new/voi.py": "bb173ed86ca36d851573a3fe9eed60a168d2428bb09b2b24fe07fa1c799f14c7"
   },
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

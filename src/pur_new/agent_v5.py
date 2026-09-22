@@ -1,7 +1,7 @@
-"""Agent V5 chemistry-domain admissibility layer.
+"""Agent V5 chemistry-domain admissibility layer (comparison protocol v1.1).
 
 V5 adds no language-model role. It adds one deterministic scientific layer between the
-tool trace and the value-of-information ranking: a *measurement* admissibility gate that
+tool trace and the value-of-information ranking: a *measurement* admissibility audit that
 executes the chemistry boundary of the locally discovered shared thermal-response shape.
 
 The scientific order this module implements is fixed::
@@ -10,24 +10,29 @@ The scientific order this module implements is fixed::
       -> discovered local regularity
       -> external domain test (assess_shared_shape_applicability)
       -> deterministic applicability rule
-      -> experiment-card admissibility
-      -> VOI over the admissible set only
+      -> experiment-card admissibility audit
+      -> [enforcement, in V5_FULL only]
+      -> VOI over the selectable set
       -> model-mediated selection
       -> freeze
 
-Two properties matter and are enforced here rather than requested in a prompt:
+Protocol v1.1 fixes what separates the two primary arms. The audit is **identical and
+fully model-visible in both arms**; only enforcement differs:
 
-* the gate runs BEFORE VOI ranking, so an inadmissible card never acquires a rank;
-* a model stage can criticize the rule but cannot select a card the rule removed, because
-  :func:`freeze_experiment` rejects such a selection instead of repairing it.
+* ``V5_NO_GATE``  advice-only. Every pre-gate card stays selectable and a committed card is
+  never rejected for chemistry-domain inadmissibility alone.
+* ``V5_FULL``     the same audit becomes hard admissibility before VOI and again at freeze.
 
-The module deliberately does not modify ``voi.py``, ``actions.py`` or anything the frozen
-V3/V4 series hashed into its contract. It reads the same deterministic VOI cards and
-annotates them.
+Everything the model can see before the enforcement step is therefore byte-identical
+between arms by construction: :func:`build_pre_enforcement_payload` takes no arm argument.
+
+The module does not modify ``voi.py``, ``actions.py`` or anything the frozen V3/V4 series
+hashed into its contract. It reads the same deterministic VOI cards and annotates them.
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 from collections import Counter
 from pathlib import Path
@@ -46,7 +51,10 @@ CONFIG_DIR = ROOT / "configs"
 
 ARMS = ("V5_NO_GATE", "V5_FULL")
 GATE_ID = "PUR_NEW_CHEMISTRY_DOMAIN_GATE_V1"
-ARCHITECTURE_CONFIG = "configs/agent_v5.json"
+PROTOCOL_VERSION = "1.1.0"
+
+#: Enforcement is the only declared difference between the two primary arms.
+ARM_ENFORCES_GATE = {"V5_NO_GATE": False, "V5_FULL": True}
 
 MANDATORY_LOCAL_SCIENCE_TOOL = "get_chemistry_audited_rheology_summary"
 APPLICABILITY_TOOL = "assess_shared_shape_applicability"
@@ -72,7 +80,6 @@ V5_PLANNER_ACTIONS = frozenset(
 SHAPE_DEPENDENT_MEASUREMENTS = frozenset({"M-ANCHOR"})
 
 SHARED_SHAPE_SUPPORTED = "allowed_with_state_anchor"
-GATE_DISABLED_REASON = "gate_disabled_in_control_arm"
 
 SHAPE_INDEPENDENT_BASIS = {
     "M-HOLD-120": (
@@ -102,17 +109,25 @@ GATE_RULE_TEXT = [
     "Otherwise M-ANCHOR is inadmissible_before_shape_verification: the one-point anchor would "
     "reconstruct 120-130 C viscosity through a shape that has never been measured for that "
     "chemistry.",
-    "The rule is deterministic admissibility. It is not a VOI penalty, not prompt advice, and "
-    "no model stage can override it.",
+    "This audit is a deterministic scientific rule, not a VOI penalty and not a model opinion. "
+    "Whether it is binding in this run is stated by the enforcement field.",
 ]
 
 
 class InadmissibleSelectionError(ValueError):
-    """A model stage named an experiment the deterministic gate had removed."""
+    """A model stage named an experiment the enforced gate had removed."""
 
 
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def canonical_bytes(value: Any) -> bytes:
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+
+
+def canonical_hash(value: Any) -> str:
+    return hashlib.sha256(canonical_bytes(value)).hexdigest()
 
 
 def load_architecture(path: Path | None = None) -> dict[str, Any]:
@@ -230,22 +245,14 @@ def measurement_admissibility(measurement_id: str, assessment: dict[str, Any]) -
     }
 
 
-#: Fields the gate adds for the audit record only. They are never sent to a model stage,
-#: in either arm, so the control arm cannot receive the rule as implicit advice.
-AUDIT_ONLY_CARD_FIELDS = (
-    "deterministic_measurement_admissible",
-    "deterministic_admissibility_reason",
-    "deterministic_admissibility_rule_id",
-    "deterministic_required_precondition",
-    "gate_enforced",
-)
-
-#: Fields the gate adds that a model stage sees only when the gate is enforced.
-GATE_CARD_FIELDS = (
+#: Audit fields added to every experiment card. Under protocol v1.1 all of them are
+#: model-visible in BOTH arms, so none of them can encode which arm is running.
+AUDIT_CARD_FIELDS = (
     "chemistry_family",
     "chemistry_applicability_status",
     "shared_shape_use",
     "measurement_admissible",
+    "admissibility_rule_id",
     "admissibility_reason",
     "required_precondition",
 )
@@ -255,15 +262,13 @@ def audit_experiment_cards(
     cards: list[dict[str, Any]],
     *,
     candidates: list[dict[str, Any]],
-    enforce: bool,
     verified: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Annotate every experiment card with its deterministic admissibility.
 
-    The applicability tool is executed for every candidate in BOTH arms and the rule is
-    evaluated for every card in BOTH arms. ``enforce`` changes only whether the verdict is
-    binding. Keeping the audit arm-independent is what makes the domain-violation and
-    unsupported-shortcut rates comparable between the arms at all.
+    The audit takes no arm argument. That is the protocol v1.1 information-parity
+    requirement expressed in code: the two arms cannot receive different scientific facts,
+    because there is only one audit and it is computed before either arm is mentioned.
     """
     if verified is None:
         verified = load_verified_shape_transfer()
@@ -276,32 +281,26 @@ def audit_experiment_cards(
     for card in cards:
         assessment = assessments[card["candidate_id"]]
         rule = measurement_admissibility(card["measurement_id"], assessment)
-        allowed = bool(rule["measurement_admissible"])
         out = dict(card)
         out.update(
             {
                 "chemistry_family": assessment["chemistry_family"],
                 "chemistry_applicability_status": assessment["chemistry_applicability_status"],
                 "shared_shape_use": assessment["shared_shape_use"],
-                "deterministic_measurement_admissible": allowed,
-                "deterministic_admissibility_rule_id": rule["admissibility_rule_id"],
-                "deterministic_admissibility_reason": rule["admissibility_reason"],
-                "deterministic_required_precondition": rule["required_precondition"],
-                "gate_enforced": bool(enforce),
-                "measurement_admissible": allowed if enforce else True,
-                "admissibility_reason": rule["admissibility_reason"] if enforce else GATE_DISABLED_REASON,
-                "required_precondition": rule["required_precondition"] if enforce else None,
+                "measurement_admissible": bool(rule["measurement_admissible"]),
+                "admissibility_rule_id": rule["admissibility_rule_id"],
+                "admissibility_reason": rule["admissibility_reason"],
+                "required_precondition": rule["required_precondition"],
             }
         )
         audited.append(out)
 
-    blocked = [card for card in audited if not card["deterministic_measurement_admissible"]]
-    removed = [card for card in audited if not card["measurement_admissible"]]
-    by_reason = Counter(card["deterministic_admissibility_rule_id"] for card in blocked)
+    blocked = [card for card in audited if not card["measurement_admissible"]]
     return {
         "gate_id": GATE_ID,
-        "gate_enforced": bool(enforce),
+        "protocol_version": PROTOCOL_VERSION,
         "gate_is_a_language_model": False,
+        "audit_is_arm_independent": True,
         "applied_before_voi_ranking": True,
         "rule_text": GATE_RULE_TEXT,
         "verified_transfer_registry_version": verified.get("version"),
@@ -309,23 +308,28 @@ def audit_experiment_cards(
         "candidate_assessments": [assessments[key] for key in sorted(assessments)],
         "cards": audited,
         "n_cards_total": len(audited),
-        "n_cards_deterministically_inadmissible": len(blocked),
-        "n_cards_removed_from_ranked_set": len(removed),
-        "inadmissible_by_rule_id": dict(sorted(by_reason.items())),
-        "deterministically_inadmissible_experiment_ids": sorted(
-            card["experiment_id"] for card in blocked
+        "n_cards_inadmissible": len(blocked),
+        "inadmissible_by_rule_id": dict(
+            sorted(Counter(card["admissibility_rule_id"] for card in blocked).items())
         ),
+        "inadmissible_experiment_ids": sorted(card["experiment_id"] for card in blocked),
         "admissible_experiment_ids": sorted(
             card["experiment_id"] for card in audited if card["measurement_admissible"]
         ),
     }
 
 
-def admissible_cards(audit: dict[str, Any]) -> list[dict[str, Any]]:
-    """The ranked set the VOI layer is allowed to operate on, best first."""
-    cards = [card for card in audit["cards"] if card["measurement_admissible"]]
-    cards.sort(key=lambda card: (-card["voi_score"], card["experiment_id"]))
-    return cards
+def _sorted_cards(cards: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return sorted(cards, key=lambda card: (-card["voi_score"], card["experiment_id"]))
+
+
+def ranked_cards(audit: dict[str, Any], *, enforce: bool) -> list[dict[str, Any]]:
+    """The set the VOI layer ranks and the model may select from, best first.
+
+    With enforcement off every audited card stays selectable: the audit is advice.
+    """
+    cards = audit["cards"] if not enforce else [c for c in audit["cards"] if c["measurement_admissible"]]
+    return _sorted_cards(cards)
 
 
 def tied_top_set(cards: list[dict[str, Any]]) -> list[str]:
@@ -333,31 +337,7 @@ def tied_top_set(cards: list[dict[str, Any]]) -> list[str]:
     return sorted(card["experiment_id"] for card in cards if abs(card["voi_score"] - best) <= TIE_EPSILON)
 
 
-def card_for_model(card: dict[str, Any], *, enforced: bool) -> dict[str, Any]:
-    """Project an audited card into what a model stage is allowed to see.
-
-    With the gate disabled the projection is byte-identical to the pre-gate VOI card: the
-    control arm receives no chemistry-applicability field anywhere, so it cannot be read as
-    a softened version of the rule.
-    """
-    out = {
-        key: value
-        for key, value in card.items()
-        if key not in AUDIT_ONLY_CARD_FIELDS and key not in GATE_CARD_FIELDS
-    }
-    if enforced:
-        out.update({key: card[key] for key in GATE_CARD_FIELDS})
-    return out
-
-
-def build_voi_payload(
-    cards: list[dict[str, Any]],
-    *,
-    top_k: int,
-    enforced: bool,
-    audit: dict[str, Any] | None = None,
-) -> dict[str, Any]:
-    """Assemble the VOI evidence given to the model, over the admissible set only."""
+def _voi_view(cards: list[dict[str, Any]], *, top_k: int) -> dict[str, Any]:
     tied = tied_top_set(cards)
     best_per_measurement: dict[str, dict[str, Any]] = {}
     for card in cards:
@@ -365,8 +345,7 @@ def build_voi_payload(
     family_best: dict[str, float] = {}
     for card in cards:
         family_best.setdefault(card["intervention_family"], card["voi_score"])
-
-    payload: dict[str, Any] = {
+    return {
         "formula": VOI_FORMULA,
         "weights": BASE_WEIGHTS,
         "is_a_probability": False,
@@ -378,7 +357,7 @@ def build_voi_payload(
             "These experiments share an identical component vector. The deterministic tool is "
             "indifferent among them. Any choice within this set must be justified scientifically."
         ),
-        "top_cards": [card_for_model(card, enforced=enforced) for card in cards[:top_k]],
+        "top_cards": cards[:top_k],
         "best_card_per_measurement_plan": {
             key: {
                 "experiment_id": value["experiment_id"],
@@ -390,21 +369,68 @@ def build_voi_payload(
         "best_voi_per_intervention_family": family_best,
     }
 
-    if enforced and audit is not None:
-        payload["chemistry_domain_gate"] = {
+
+def build_pre_enforcement_payload(audit: dict[str, Any], *, top_k: int) -> dict[str, Any]:
+    """The model-visible scientific payload BEFORE any enforcement step.
+
+    This function deliberately has no arm parameter and reads no enforcement flag, so the
+    payload it returns is byte-identical for ``V5_NO_GATE`` and ``V5_FULL``. Protocol v1.1
+    requires that equality to be provable, and the cleanest proof is that the value cannot
+    depend on the arm in the first place.
+    """
+    return {
+        "voi": _voi_view(_sorted_cards(audit["cards"]), top_k=top_k),
+        "chemistry_applicability_audit": {
             "gate_id": audit["gate_id"],
+            "tool": APPLICABILITY_TOOL,
             "is_a_language_model": False,
             "rule_text": audit["rule_text"],
-            "n_cards_before_gate": audit["n_cards_total"],
-            "n_cards_removed": audit["n_cards_removed_from_ranked_set"],
-            "removed_by_rule_id": audit["inadmissible_by_rule_id"],
-            "removed_experiment_ids": audit["deterministically_inadmissible_experiment_ids"],
-            "note": (
-                "These experiment cards were removed by a deterministic scientific applicability "
-                "rule before ranking. They are not selectable. You may state that you disagree with "
-                "the rule and why; naming one of them as your selection is an invalid output."
-            ),
-        }
+            "verified_transfer_registry_version": audit["verified_transfer_registry_version"],
+            "n_verified_chemistry_families": audit["n_verified_chemistry_families"],
+            "n_cards_total": audit["n_cards_total"],
+            "n_cards_inadmissible": audit["n_cards_inadmissible"],
+            "inadmissible_by_rule_id": audit["inadmissible_by_rule_id"],
+            "inadmissible_experiment_ids": audit["inadmissible_experiment_ids"],
+            "candidate_assessments": audit["candidate_assessments"],
+        },
+    }
+
+
+def pre_enforcement_payload_hash(audit: dict[str, Any], *, top_k: int) -> str:
+    return canonical_hash(build_pre_enforcement_payload(audit, top_k=top_k))
+
+
+ADVISORY_NOTE = (
+    "In this condition the chemistry applicability audit is ADVISORY. Every experiment card "
+    "above remains selectable, including the cards the audit marks inadmissible. Use the audit "
+    "as scientific evidence and justify whatever you select."
+)
+BINDING_NOTE = (
+    "In this condition the chemistry applicability audit is BINDING. The cards it marks "
+    "inadmissible were removed before ranking and are not selectable. You may state that you "
+    "disagree with the rule and why; naming a removed card is an invalid output."
+)
+
+
+def build_voi_payload(audit: dict[str, Any], *, top_k: int, enforce: bool) -> dict[str, Any]:
+    """Assemble the VOI evidence given to the model for one arm.
+
+    Starts from the arm-independent pre-enforcement payload and applies exactly one
+    difference: whether the audit removes cards from the selectable set.
+    """
+    payload = build_pre_enforcement_payload(audit, top_k=top_k)
+    applicability = payload["chemistry_applicability_audit"]
+    applicability["applicability_audit_visible_to_model"] = True
+    applicability["applicability_gate_enforced"] = bool(enforce)
+    applicability["enforcement"] = "binding" if enforce else "advisory"
+    applicability["enforcement_note"] = BINDING_NOTE if enforce else ADVISORY_NOTE
+
+    if enforce:
+        selectable = ranked_cards(audit, enforce=True)
+        payload["voi"] = _voi_view(selectable, top_k=top_k)
+        applicability["n_cards_removed_from_selectable_set"] = audit["n_cards_inadmissible"]
+    else:
+        applicability["n_cards_removed_from_selectable_set"] = 0
     return payload
 
 
@@ -415,10 +441,10 @@ def decision_stability(
     perturbation: float = 0.5,
     steps: int = 5,
 ) -> dict[str, Any]:
-    """Weight-sensitivity stability of the ranking over the admissible set.
+    """Weight-sensitivity stability of the ranking over the selectable set.
 
-    Same construction as the V4 sweep, evaluated on the cards that survived the gate. It is
-    decision stability of a transparent score, not model confidence and not a posterior.
+    Same construction as the V4 sweep. It is decision stability of a transparent score, not
+    model confidence and not a posterior.
     """
     base_weights = base_weights or dict(BASE_WEIGHTS)
     if steps > 1:
@@ -501,7 +527,7 @@ def decision_stability(
     return {
         "metric_name": "decision_stability",
         "metric_is_not": "model confidence; posterior probability; calibrated expected information",
-        "evaluated_over": "the admissible experiment cards only",
+        "evaluated_over": "the selectable experiment cards of this arm",
         "voi_formula": VOI_FORMULA,
         "base_weights": base_weights,
         "perturbation_fraction": perturbation,
@@ -677,8 +703,8 @@ def normalize_judge_output(raw: dict[str, Any]) -> tuple[dict[str, Any], dict[st
 def selection_flags(card: dict[str, Any] | None) -> dict[str, Any]:
     """Arm-independent scientific classification of one committed selection.
 
-    Both flags read the deterministic verdict, never the arm-effective one, so a control-arm
-    selection is judged by exactly the same rule as a gated one.
+    The audit is the same in both arms, so an advice-only violation and an enforced
+    violation are measured by exactly the same rule.
     """
     if not card:
         return {
@@ -687,15 +713,36 @@ def selection_flags(card: dict[str, Any] | None) -> dict[str, Any]:
             "shared_shape_use": None,
             "chemistry_applicability_status": None,
             "admissibility_rule_id": None,
+            "chemistry_family": None,
         }
-    violated = not bool(card.get("deterministic_measurement_admissible", True))
+    violated = not bool(card.get("measurement_admissible", True))
     return {
         "chemistry_domain_violation": violated,
         "unsupported_shortcut": bool(violated and card.get("measurement_id") in SHAPE_DEPENDENT_MEASUREMENTS),
         "shared_shape_use": card.get("shared_shape_use"),
         "chemistry_applicability_status": card.get("chemistry_applicability_status"),
-        "admissibility_rule_id": card.get("deterministic_admissibility_rule_id"),
+        "admissibility_rule_id": card.get("admissibility_rule_id"),
         "chemistry_family": card.get("chemistry_family"),
+    }
+
+
+def audit_summary(audit: dict[str, Any], *, enforce: bool, top_k: int) -> dict[str, Any]:
+    """Compact, serializable statement of what the audit found and whether it bound."""
+    return {
+        "gate_id": audit["gate_id"],
+        "protocol_version": audit["protocol_version"],
+        "gate_is_a_language_model": False,
+        "applied_before_voi_ranking": True,
+        "applicability_audit_visible_to_model": True,
+        "applicability_gate_enforced": bool(enforce),
+        "audit_is_arm_independent": True,
+        "pre_enforcement_payload_sha256": pre_enforcement_payload_hash(audit, top_k=top_k),
+        "n_cards_total": audit["n_cards_total"],
+        "n_cards_inadmissible": audit["n_cards_inadmissible"],
+        "n_cards_removed_from_selectable_set": audit["n_cards_inadmissible"] if enforce else 0,
+        "inadmissible_by_rule_id": audit["inadmissible_by_rule_id"],
+        "verified_transfer_registry_version": audit["verified_transfer_registry_version"],
+        "n_verified_chemistry_families": audit["n_verified_chemistry_families"],
     }
 
 
@@ -703,9 +750,8 @@ def freeze_experiment(
     judge: dict[str, Any],
     *,
     arm: str,
-    gate_enforced: bool,
     cards_by_id: dict[str, dict[str, Any]],
-    admissible_by_id: dict[str, dict[str, Any]],
+    selectable_by_id: dict[str, dict[str, Any]],
     tied: list[str],
     audit_summary: dict[str, Any],
     hashes: dict[str, str],
@@ -720,12 +766,16 @@ def freeze_experiment(
 ) -> dict[str, Any]:
     """Validate and freeze one V5 decision.
 
-    A selection the gate removed is rejected here. It is not repaired, not downgraded to an
-    abstention and not silently re-pointed at an admissible neighbour: a model that names a
-    blocked experiment produced an invalid run, and the run must be recorded as invalid.
+    Under enforcement a selection the gate removed is rejected here. It is not repaired, not
+    downgraded to an abstention and not silently re-pointed at an admissible neighbour: a
+    model that names a blocked experiment produced an invalid run.
+
+    Without enforcement the same selection is accepted and recorded as a chemistry-domain
+    violation, which is exactly the quantity the controlled comparison measures.
     """
     if arm not in ARMS:
         raise ValueError(f"unknown arm: {arm!r}")
+    enforce = ARM_ENFORCES_GATE[arm]
     allowed_modes = {"committed_experiment", "discriminating_probe", "state_control_experiment", "abstain"}
     mode = judge.get("decision_mode")
     if mode not in allowed_modes:
@@ -739,14 +789,14 @@ def freeze_experiment(
     else:
         if not isinstance(experiment_id, str):
             raise ValueError(f"decision_mode={mode!r} requires a selected_experiment_id")
-        card = admissible_by_id.get(experiment_id)
+        card = selectable_by_id.get(experiment_id)
         if card is None:
-            if experiment_id in cards_by_id:
+            if enforce and experiment_id in cards_by_id:
                 blocked = cards_by_id[experiment_id]
                 raise InadmissibleSelectionError(
-                    f"selected_experiment_id {experiment_id!r} was removed by the chemistry-domain gate: "
-                    f"{blocked['deterministic_admissibility_rule_id']}. "
-                    f"{blocked['deterministic_admissibility_reason']}"
+                    f"selected_experiment_id {experiment_id!r} was removed by the enforced "
+                    f"chemistry-domain gate: {blocked['admissibility_rule_id']}. "
+                    f"{blocked['admissibility_reason']}"
                 )
             raise ValueError(f"selected_experiment_id is not an experiment card: {experiment_id!r}")
         if judge.get("selected_candidate_id") != card["candidate_id"]:
@@ -760,7 +810,7 @@ def freeze_experiment(
     return {
         "recommendation_id": f"EXP_V5_{frozen_utc.replace('-', '').replace(':', '')}_{recommendation_digest}",
         "arm": arm,
-        "gate_enforced": bool(gate_enforced),
+        "gate_enforced": enforce,
         "architecture_version": architecture_version,
         "workflow_version": workflow_version,
         "decision_mode": mode,
@@ -786,7 +836,7 @@ def freeze_experiment(
             "tied_top_set": tied,
             "selected_is_in_tied_top_set": (experiment_id in tied) if experiment_id else None,
             "formula": VOI_FORMULA,
-            "ranked_set": "admissible experiment cards only" if gate_enforced else "all experiment cards",
+            "ranked_set": "admissible experiment cards only" if enforce else "all experiment cards",
         },
         "stage_disagreements_resolved": judge.get("stage_disagreements_resolved"),
         "rationale": judge.get("rationale"),
@@ -798,23 +848,8 @@ def freeze_experiment(
         "hypothesis_registry_hash": hashes["hypothesis_registry_hash"],
         "measurement_catalog_hash": hashes["measurement_catalog_hash"],
         "verified_shape_transfer_hash": hashes["verified_shape_transfer_hash"],
+        "pre_enforcement_payload_hash": audit_summary["pre_enforcement_payload_sha256"],
         "git_commit": git_commit,
         "inspection_status": inspection_status,
         "claim_boundary": claim_boundary,
-    }
-
-
-def audit_summary(audit: dict[str, Any]) -> dict[str, Any]:
-    """Compact, serializable statement of what the gate did in this run."""
-    return {
-        "gate_id": audit["gate_id"],
-        "gate_enforced": audit["gate_enforced"],
-        "gate_is_a_language_model": False,
-        "applied_before_voi_ranking": True,
-        "n_cards_total": audit["n_cards_total"],
-        "n_cards_deterministically_inadmissible": audit["n_cards_deterministically_inadmissible"],
-        "n_cards_removed_from_ranked_set": audit["n_cards_removed_from_ranked_set"],
-        "inadmissible_by_rule_id": audit["inadmissible_by_rule_id"],
-        "verified_transfer_registry_version": audit["verified_transfer_registry_version"],
-        "n_verified_chemistry_families": audit["n_verified_chemistry_families"],
     }

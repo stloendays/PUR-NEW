@@ -14,11 +14,22 @@ The payload contains:
   * deterministic VOI scores for experiment cards, computed by a transparent scientific
     tool, together with the component breakdown for each card.
 
+CHEMISTRY APPLICABILITY AUDIT. The payload carries a deterministic, non-model audit of
+whether each experiment card's primary observable stays inside the chemistry family in
+which the local rheological regularity it relies on was actually measured. Its
+`enforcement` field states how the audit acts in this run:
+
+  * `binding`  - the inadmissible cards were removed before ranking and are not selectable;
+  * `advisory` - every card remains selectable and the audit is scientific evidence you
+    must weigh and answer for yourself.
+
+Read that field before you decide. The audit facts themselves are the same either way.
+
 SELECTION CONTRACT. You may select only from the experiment cards present in this
 payload. An experiment id that is not in the payload is an invalid output and the run is
-discarded. If the payload reports that a deterministic scientific rule removed cards, you
-may state that you disagree with the rule and why, but you may not select a removed card
-and you may not restate a removed card as your proposal under another name.
+discarded. You may state that you disagree with the audit and why, but you may not select
+a card that is absent from the payload and you may not restate an absent card as your
+proposal under another name.
 
 The VOI score is a normalized combination of hypothesis discrimination, uncertainty
 reduction, decision relevance and measurement interpretability, minus extrapolation risk

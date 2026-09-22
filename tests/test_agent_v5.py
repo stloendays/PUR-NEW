@@ -1,7 +1,7 @@
-"""Agent V5 chemistry-domain gate: admissibility, parity, blindness and V4 invariance.
+"""Agent V5 chemistry-domain gate: admissibility, information parity, blindness, V4 invariance.
 
-These tests are the acceptance contract of the V5 implementation. They run without any API
-key: every property they check is deterministic.
+These tests are the acceptance contract of the V5 implementation under comparison protocol
+v1.1. They run without any API key: every property they check is deterministic.
 """
 
 from __future__ import annotations
@@ -19,17 +19,18 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from pur_new.agent_v5 import (
+    ARM_ENFORCES_GATE,
     ARMS,
-    GATE_CARD_FIELDS,
+    AUDIT_CARD_FIELDS,
     MANDATORY_LOCAL_SCIENCE_TOOL,
     SHAPE_DEPENDENT_MEASUREMENTS,
     InadmissibleSelectionError,
-    admissible_cards,
     assess_candidate,
     audit_experiment_cards,
     audit_summary,
+    build_pre_enforcement_payload,
     build_voi_payload,
-    card_for_model,
+    canonical_bytes,
     chemistry_family,
     ensure_mandatory_tools,
     execute_planned_actions,
@@ -37,6 +38,8 @@ from pur_new.agent_v5 import (
     load_verified_shape_transfer,
     mandatory_tool_executed,
     measurement_admissibility,
+    pre_enforcement_payload_hash,
+    ranked_cards,
     tied_top_set,
 )
 from pur_new.evidence_firewall import (
@@ -48,6 +51,7 @@ from pur_new.voi import build_experiment_cards, load_hypothesis_registry, load_m
 
 CANDIDATE_SET = ROOT / "derived" / "stage1_blind_candidate_space_v1.json"
 BLINDED_IDS = {"F1"}
+TOP_K = 12
 
 
 def read_json(path: Path):
@@ -80,28 +84,42 @@ def verified() -> dict:
 
 
 @pytest.fixture(scope="module")
-def audits(cards, candidates, verified) -> dict[str, dict]:
-    return {
-        arm: audit_experiment_cards(
-            cards, candidates=candidates, enforce=(arm == "V5_FULL"), verified=verified
-        )
-        for arm in ARMS
-    }
+def audit(cards, candidates, verified) -> dict:
+    """One audit. Protocol v1.1: the audit cannot depend on the arm, so there is only one."""
+    return audit_experiment_cards(cards, candidates=candidates, verified=verified)
 
 
 def local_family_candidate(candidates: list[dict]) -> dict:
-    return next(
-        candidate
-        for candidate in candidates
-        if chemistry_family(candidate) == "unmodified_ppg2000_pdp70_mdi"
-    )
+    return next(c for c in candidates if chemistry_family(c) == "unmodified_ppg2000_pdp70_mdi")
 
 
 def resin_modified_candidate(candidates: list[dict]) -> dict:
-    return next(
-        candidate
-        for candidate in candidates
-        if chemistry_family(candidate).startswith("resin_modified")
+    return next(c for c in candidates if chemistry_family(c).startswith("resin_modified"))
+
+
+def freeze_kwargs(audit: dict, *, arm: str) -> dict:
+    selectable = ranked_cards(audit, enforce=ARM_ENFORCES_GATE[arm])
+    return dict(
+        arm=arm,
+        cards_by_id={card["experiment_id"]: card for card in audit["cards"]},
+        selectable_by_id={card["experiment_id"]: card for card in selectable},
+        tied=tied_top_set(selectable),
+        audit_summary=audit_summary(audit, enforce=ARM_ENFORCES_GATE[arm], top_k=TOP_K),
+        hashes={
+            "prompt_hash": "p",
+            "input_hash": "i",
+            "candidate_set_hash": "c",
+            "hypothesis_registry_hash": "h",
+            "measurement_catalog_hash": "m",
+            "verified_shape_transfer_hash": "v",
+        },
+        model="test-model",
+        workflow_version="test",
+        architecture_version="5.1.0",
+        inspection_status="test",
+        claim_boundary="test",
+        frozen_utc="2026-01-01T00:00:00Z",
+        recommendation_digest="deadbeef01",
     )
 
 
@@ -146,11 +164,7 @@ def test_versioned_prior_sweep_unblocks_the_anchor(candidates):
     verified = {
         "version": "test",
         "verified_chemistry_families": [
-            {
-                "chemistry_family": family,
-                "verified_by_measurement": "M-SWEEP",
-                "record": "test-only fixture",
-            }
+            {"chemistry_family": family, "verified_by_measurement": "M-SWEEP", "record": "test fixture"}
         ],
     }
     rule = measurement_admissibility("M-ANCHOR", assess_candidate(candidate, verified=verified))
@@ -159,50 +173,93 @@ def test_versioned_prior_sweep_unblocks_the_anchor(candidates):
     assert rule["admissibility_rule_id"] == "admissible_prior_verified_shape_transfer"
 
 
-# 4. blocked cards never enter the VOI ranked set
-def test_blocked_cards_never_enter_the_voi_ranked_set(audits):
-    audit = audits["V5_FULL"]
-    blocked = set(audit["deterministically_inadmissible_experiment_ids"])
-    ranked = admissible_cards(audit)
-    ranked_ids = {card["experiment_id"] for card in ranked}
+# 4. blocked cards never enter the VOI ranked set of the enforced arm
+def test_blocked_cards_never_enter_the_enforced_ranked_set(audit):
+    blocked = set(audit["inadmissible_experiment_ids"])
+    selectable = ranked_cards(audit, enforce=True)
+    selectable_ids = {card["experiment_id"] for card in selectable}
 
-    assert blocked, "the gate must block something in this candidate lattice"
-    assert not (blocked & ranked_ids)
-    assert len(ranked) == audit["n_cards_total"] - audit["n_cards_deterministically_inadmissible"]
-    assert all(card["measurement_id"] in SHAPE_DEPENDENT_MEASUREMENTS for card in audit["cards"] if card["experiment_id"] in blocked)
+    assert blocked, "the audit must block something in this candidate lattice"
+    assert not (blocked & selectable_ids)
+    assert len(selectable) == audit["n_cards_total"] - audit["n_cards_inadmissible"]
+    assert all(
+        card["measurement_id"] in SHAPE_DEPENDENT_MEASUREMENTS
+        for card in audit["cards"]
+        if card["experiment_id"] in blocked
+    )
 
-    payload = build_voi_payload(ranked, top_k=12, enforced=True, audit=audit)
-    payload_ids = {card["experiment_id"] for card in payload["top_cards"]}
+    payload = build_voi_payload(audit, top_k=TOP_K, enforce=True)
+    payload_ids = {card["experiment_id"] for card in payload["voi"]["top_cards"]}
     assert not (blocked & payload_ids)
-    assert payload["chemistry_domain_gate"]["n_cards_removed"] == len(blocked)
-    # the ranked set the model sees is the post-gate set, not a re-ranked full set
-    assert payload["n_experiment_cards"] == len(ranked)
+    assert payload["voi"]["n_experiment_cards"] == len(selectable)
+    applicability = payload["chemistry_applicability_audit"]
+    assert applicability["enforcement"] == "binding"
+    assert applicability["n_cards_removed_from_selectable_set"] == len(blocked)
 
 
-def test_control_arm_ranks_every_card_and_sees_no_applicability_field(audits, cards):
-    audit = audits["V5_NO_GATE"]
-    ranked = admissible_cards(audit)
-    assert len(ranked) == len(cards)
+def test_advice_only_arm_keeps_every_card_selectable(audit, cards):
+    selectable = ranked_cards(audit, enforce=False)
+    assert len(selectable) == len(cards)
 
-    payload = build_voi_payload(ranked, top_k=12, enforced=False, audit=audit)
-    assert "chemistry_domain_gate" not in payload
-    serialized = json.dumps(payload, sort_keys=True)
-    for field in GATE_CARD_FIELDS:
-        assert field not in serialized
-    assert "shared_shape" not in serialized
-    assert "admissib" not in serialized
-
-    # With the gate disabled the projection is byte-identical to the pre-gate VOI card.
-    by_id = {card["experiment_id"]: card for card in cards}
-    for card in payload["top_cards"]:
-        assert card == by_id[card["experiment_id"]]
+    payload = build_voi_payload(audit, top_k=TOP_K, enforce=False)
+    applicability = payload["chemistry_applicability_audit"]
+    assert applicability["enforcement"] == "advisory"
+    assert applicability["n_cards_removed_from_selectable_set"] == 0
+    assert payload["voi"]["n_experiment_cards"] == len(cards)
+    # the control arm sees the SAME audit facts, it is simply not bound by them
+    assert applicability["inadmissible_experiment_ids"] == audit["inadmissible_experiment_ids"]
+    assert applicability["candidate_assessments"] == audit["candidate_assessments"]
 
 
-# 5. a model output naming a blocked experiment is rejected at freeze
-def test_freeze_rejects_a_selection_the_gate_removed(audits):
-    audit = audits["V5_FULL"]
-    ranked = admissible_cards(audit)
-    blocked_id = audit["deterministically_inadmissible_experiment_ids"][0]
+# protocol v1.1 required parity test
+def test_pre_enforcement_model_payload_is_byte_identical_across_arms(audit):
+    """Serialize the model-visible pre-enforcement scientific payload and prove equality.
+
+    The payload builder takes no arm argument, so the two arms cannot diverge before the
+    enforcement step. This test freezes that property against future edits.
+    """
+    payloads = {}
+    for arm in ARMS:
+        full = build_voi_payload(audit, top_k=TOP_K, enforce=ARM_ENFORCES_GATE[arm])
+        applicability = dict(full["chemistry_applicability_audit"])
+        # remove only the explicit arm / enforcement identifiers
+        for key in (
+            "enforcement",
+            "enforcement_note",
+            "applicability_gate_enforced",
+            "n_cards_removed_from_selectable_set",
+        ):
+            applicability.pop(key, None)
+        payloads[arm] = canonical_bytes(
+            {"chemistry_applicability_audit": applicability, "voi_pre_enforcement": build_pre_enforcement_payload(audit, top_k=TOP_K)["voi"]}
+        )
+
+    assert payloads["V5_NO_GATE"] == payloads["V5_FULL"]
+    assert (
+        pre_enforcement_payload_hash(audit, top_k=TOP_K)
+        == audit_summary(audit, enforce=False, top_k=TOP_K)["pre_enforcement_payload_sha256"]
+        == audit_summary(audit, enforce=True, top_k=TOP_K)["pre_enforcement_payload_sha256"]
+    )
+    # the applicability facts themselves are visible in both arms
+    for arm in ARMS:
+        applicability = build_voi_payload(audit, top_k=TOP_K, enforce=ARM_ENFORCES_GATE[arm])[
+            "chemistry_applicability_audit"
+        ]
+        assert applicability["applicability_audit_visible_to_model"] is True
+        assert len(applicability["candidate_assessments"]) == 73
+        assert applicability["n_cards_inadmissible"] == audit["n_cards_inadmissible"]
+
+
+def test_no_arm_identifier_leaks_into_the_audit(audit):
+    serialized = json.dumps(audit, sort_keys=True)
+    assert "V5_FULL" not in serialized
+    assert "V5_NO_GATE" not in serialized
+    assert audit["audit_is_arm_independent"] is True
+
+
+# 5. a model output naming a blocked experiment is rejected at freeze in the enforced arm
+def test_freeze_rejects_a_blocked_selection_under_enforcement(audit):
+    blocked_id = audit["inadmissible_experiment_ids"][0]
     candidate_id, measurement_id = blocked_id.split("::")
     judge = {
         "decision_mode": "committed_experiment",
@@ -212,138 +269,66 @@ def test_freeze_rejects_a_selection_the_gate_removed(audits):
         "acceptance_criterion": "x",
         "falsification_criterion": "y",
     }
-    kwargs = dict(
-        arm="V5_FULL",
-        gate_enforced=True,
-        cards_by_id={card["experiment_id"]: card for card in audit["cards"]},
-        admissible_by_id={card["experiment_id"]: card for card in ranked},
-        tied=tied_top_set(ranked),
-        audit_summary=audit_summary(audit),
-        hashes={
-            "prompt_hash": "p",
-            "input_hash": "i",
-            "candidate_set_hash": "c",
-            "hypothesis_registry_hash": "h",
-            "measurement_catalog_hash": "m",
-            "verified_shape_transfer_hash": "v",
-        },
-        model="test-model",
-        workflow_version="test",
-        architecture_version="5.0.0",
-        inspection_status="test",
-        claim_boundary="test",
-        frozen_utc="2026-01-01T00:00:00Z",
-        recommendation_digest="deadbeef01",
-    )
-
     with pytest.raises(InadmissibleSelectionError):
-        freeze_experiment(judge, **kwargs)
+        freeze_experiment(judge, **freeze_kwargs(audit, arm="V5_FULL"))
 
-    # the same judge output is a valid decision when the card was never removed
-    allowed_id = ranked[0]["experiment_id"]
-    allowed_candidate, allowed_measurement = allowed_id.split("::")
+    allowed = ranked_cards(audit, enforce=True)[0]
+    allowed_candidate, allowed_measurement = allowed["experiment_id"].split("::")
     ok = freeze_experiment(
         {
             **judge,
-            "selected_experiment_id": allowed_id,
+            "selected_experiment_id": allowed["experiment_id"],
             "selected_candidate_id": allowed_candidate,
             "selected_measurement_id": allowed_measurement,
         },
-        **kwargs,
+        **freeze_kwargs(audit, arm="V5_FULL"),
     )
-    assert ok["selected_experiment_id"] == allowed_id
+    assert ok["selected_experiment_id"] == allowed["experiment_id"]
     assert ok["chemistry_gate"]["selection"]["chemistry_domain_violation"] is False
+    assert ok["chemistry_gate"]["applicability_gate_enforced"] is True
 
 
-def test_freeze_records_a_control_arm_domain_violation_without_blocking_it(audits):
+def test_advice_only_arm_commits_the_same_selection_and_records_the_violation(audit):
     """The control arm may commit a violating selection; the audit must still name it."""
-    audit = audits["V5_NO_GATE"]
-    ranked = admissible_cards(audit)
-    violating = next(card for card in ranked if not card["deterministic_measurement_admissible"])
-    candidate_id, measurement_id = violating["experiment_id"].split("::")
+    blocked_id = audit["inadmissible_experiment_ids"][0]
+    candidate_id, measurement_id = blocked_id.split("::")
     frozen = freeze_experiment(
         {
             "decision_mode": "committed_experiment",
-            "selected_experiment_id": violating["experiment_id"],
+            "selected_experiment_id": blocked_id,
             "selected_candidate_id": candidate_id,
             "selected_measurement_id": measurement_id,
             "acceptance_criterion": "x",
             "falsification_criterion": "y",
         },
-        arm="V5_NO_GATE",
-        gate_enforced=False,
-        cards_by_id={card["experiment_id"]: card for card in audit["cards"]},
-        admissible_by_id={card["experiment_id"]: card for card in ranked},
-        tied=tied_top_set(ranked),
-        audit_summary=audit_summary(audit),
-        hashes={
-            "prompt_hash": "p",
-            "input_hash": "i",
-            "candidate_set_hash": "c",
-            "hypothesis_registry_hash": "h",
-            "measurement_catalog_hash": "m",
-            "verified_shape_transfer_hash": "v",
-        },
-        model="test-model",
-        workflow_version="test",
-        architecture_version="5.0.0",
-        inspection_status="test",
-        claim_boundary="test",
-        frozen_utc="2026-01-01T00:00:00Z",
-        recommendation_digest="deadbeef02",
+        **freeze_kwargs(audit, arm="V5_NO_GATE"),
     )
     selection = frozen["chemistry_gate"]["selection"]
     assert selection["chemistry_domain_violation"] is True
     assert selection["unsupported_shortcut"] is True
+    assert frozen["chemistry_gate"]["applicability_gate_enforced"] is False
 
 
 # 6. the two arms use byte-identical candidate, hypothesis and measurement inputs
-def test_primary_arms_share_byte_identical_scientific_inputs(audits, cards):
+def test_primary_arms_share_byte_identical_scientific_inputs(audit, cards):
     def canonical(value) -> str:
-        return hashlib.sha256(
-            json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
-        ).hexdigest()
+        return hashlib.sha256(canonical_bytes(value)).hexdigest()
 
-    pre_gate = canonical(cards)
-    for arm in ARMS:
-        audit = audits[arm]
-        stripped = [
-            {
-                key: value
-                for key, value in card.items()
-                if key
-                not in set(GATE_CARD_FIELDS)
-                | {
-                    "deterministic_measurement_admissible",
-                    "deterministic_admissibility_reason",
-                    "deterministic_admissibility_rule_id",
-                    "deterministic_required_precondition",
-                    "gate_enforced",
-                }
-            }
-            for card in audit["cards"]
-        ]
-        assert canonical(stripped) == pre_gate, arm
+    stripped = [
+        {key: value for key, value in card.items() if key not in set(AUDIT_CARD_FIELDS)}
+        for card in audit["cards"]
+    ]
+    assert canonical(stripped) == canonical(cards)
 
-    assert canonical(read_json(CANDIDATE_SET)) == canonical(read_json(CANDIDATE_SET))
-    assert canonical(load_hypothesis_registry()) == canonical(load_hypothesis_registry())
-    assert canonical(load_measurement_catalog()) == canonical(load_measurement_catalog())
-
-    # The deterministic verdict itself is arm-independent: only enforcement differs.
-    verdicts = {
-        arm: {
-            card["experiment_id"]: card["deterministic_measurement_admissible"]
-            for card in audits[arm]["cards"]
-        }
-        for arm in ARMS
-    }
-    assert verdicts["V5_NO_GATE"] == verdicts["V5_FULL"]
-    assert audits["V5_NO_GATE"]["n_cards_removed_from_ranked_set"] == 0
-    assert audits["V5_FULL"]["n_cards_removed_from_ranked_set"] > 0
+    # the selectable sets differ only by the enforced removal
+    no_gate = {c["experiment_id"] for c in ranked_cards(audit, enforce=False)}
+    full = {c["experiment_id"] for c in ranked_cards(audit, enforce=True)}
+    assert no_gate - full == set(audit["inadmissible_experiment_ids"])
+    assert full - no_gate == set()
 
 
 # 7. held-out identity and outcome cannot enter the planner or any downstream payload
-def test_held_out_identity_and_outcome_never_enter_a_model_payload(audits, registry, catalog):
+def test_held_out_identity_and_outcome_never_enter_a_model_payload(audit, registry, catalog):
     profiles = read_json(ROOT / "configs" / "evidence_access_profiles.json")["profiles"]
     evidence = filter_evidence_state(
         read_json(ROOT / "derived" / "evidence_state.json"),
@@ -353,33 +338,27 @@ def test_held_out_identity_and_outcome_never_enter_a_model_payload(audits, regis
     assert_blind_payload_clean(evidence, blinded_formulation_ids=BLINDED_IDS)
 
     for arm in ARMS:
-        audit = audits[arm]
-        ranked = admissible_cards(audit)
+        voi = build_voi_payload(audit, top_k=TOP_K, enforce=ARM_ENFORCES_GATE[arm])
         payload = {
             "filtered_evidence_state": evidence,
             "hypothesis_registry": registry,
             "measurement_catalog": catalog,
-            "voi": build_voi_payload(
-                ranked, top_k=12, enforced=(arm == "V5_FULL"), audit=audit
-            ),
+            **voi,
         }
         assert find_blind_payload_violations(payload, blinded_formulation_ids=BLINDED_IDS) == []
-        # The evidence layer legitimately declares WHICH formulation is blinded; the experiment
-        # and VOI layer must not mention it at all.
+        # The evidence layer legitimately declares WHICH formulation is blinded; the
+        # experiment and VOI layer must not mention it at all.
         decision_layer = json.dumps(
             {key: value for key, value in payload.items() if key != "filtered_evidence_state"},
             sort_keys=True,
         )
         assert "F1" not in decision_layer
         assert "follow_up" not in decision_layer
-        # The access-profile declaration names the follow-up switches; no DATA row may carry
-        # the follow-up stage, which is what the structural check above enforces.
         assert all(
             row.get("stage") != "follow_up"
-            for row in payload["filtered_evidence_state"].get("thermal_hold", {}).get("runs", [])
+            for row in evidence.get("thermal_hold", {}).get("runs", [])
         )
 
-    # every model payload in the runner passes through the blind-payload guard
     source = (ROOT / "scripts" / "run_agent_v5.py").read_text(encoding="utf-8")
     for name in ("planner_payload", "proposer_payload", "skeptic_payload", "robustness_payload", "judge_payload"):
         assert f"guard({name})" in source, name
@@ -418,14 +397,16 @@ def test_predecessor_rheology_tool_is_not_a_v5_planner_action():
 
 # 9. V4 files and frozen result directories remain unchanged
 def test_v4_inputs_and_frozen_results_are_unchanged_by_v5():
-    """Every V4-defining input and every frozen V4 result file still hashes to the baseline.
+    """Every V4-defining input and frozen V4 result still hashes to the V5-start baseline.
 
-    The baseline was captured at the commit V5 was implemented from, so this test fails the
-    moment the V5 work edits a V4 input, a V4 prompt or a frozen V4 record.
+    Protocol v1.1: this baseline proves only that the V5 work caused no further drift. It is
+    not a reconstruction of the original V4 source tree, and the pre-existing drift stays
+    recorded in the baseline file rather than repaired.
     """
     baseline = read_json(ROOT / "configs" / "v4_invariance_baseline.json")
     assert baseline["v4_input_files"], "baseline must list the V4 input files"
     assert len(baseline["frozen_v4_result_files"]) > 100
+    assert baseline["preexisting_series_manifest_drift"]["drifted_inputs_by_manifest"]
 
     changed = [
         name
@@ -450,7 +431,7 @@ def test_v5_run_directories_are_named_apart_from_v4():
     assert "EXP_V5_" in (ROOT / "scripts" / "run_agent_v5_series.py").read_text(encoding="utf-8")
 
 
-def test_gate_output_is_machine_readable_for_every_card(audits):
+def test_gate_output_is_machine_readable_for_every_card(audit):
     required = (
         "candidate_id",
         "measurement_id",
@@ -463,23 +444,20 @@ def test_gate_output_is_machine_readable_for_every_card(audits):
         "voi_components",
         "voi_score",
     )
-    audit = audits["V5_FULL"]
     for card in audit["cards"]:
         for field in required:
             assert field in card, field
-        if not card["deterministic_measurement_admissible"]:
-            assert card["deterministic_required_precondition"]
+        if not card["measurement_admissible"]:
+            assert card["required_precondition"]
     assert audit["inadmissible_by_rule_id"] == {
-        "inadmissible_before_shape_verification": audit["n_cards_deterministically_inadmissible"]
+        "inadmissible_before_shape_verification": audit["n_cards_inadmissible"]
     }
-    assert len(audit["candidate_assessments"]) == len(
-        {card["candidate_id"] for card in audit["cards"]}
-    )
+    assert len(audit["candidate_assessments"]) == len({c["candidate_id"] for c in audit["cards"]})
 
 
-def test_gate_does_not_depend_on_mutating_the_input_cards(cards, candidates, verified):
+def test_gate_does_not_mutate_the_input_cards(cards, candidates, verified):
     before = copy.deepcopy(cards)
-    audit_experiment_cards(cards, candidates=candidates, enforce=True, verified=verified)
+    audit_experiment_cards(cards, candidates=candidates, verified=verified)
     assert cards == before
 
 
@@ -496,14 +474,16 @@ def _load_comparison_module():
 def _manifest(arm: str, **overrides) -> dict:
     manifest = {
         "arm": arm,
-        "gate_enforced": arm == "V5_FULL",
+        "applicability_audit_visible_to_model": True,
+        "applicability_gate_enforced": ARM_ENFORCES_GATE[arm],
         "series_label": f"series_{arm.lower()}",
         "model": "test-model",
         "api_base_host": "example.test",
         "candidate_set_sha256": "abc",
         "evidence_state_sha256": "def",
         "n_runs_declared": 10,
-        "top_k": 12,
+        "top_k": TOP_K,
+        "pre_enforcement_payload_sha256": "parity-hash",
         "series_input_hashes": {name: "same" for name in _load_comparison_module().ARM_PARITY_FILES},
         "runs": [],
     }
@@ -528,13 +508,22 @@ def test_comparison_parity_check_catches_a_drifted_arm():
     assert any("model" in item for item in parity["differences"])
 
 
-def test_comparison_reports_both_denominators(tmp_path):
+def test_comparison_parity_check_catches_unequal_pre_enforcement_payloads():
+    module = _load_comparison_module()
+    drifted = _manifest("V5_FULL", pre_enforcement_payload_sha256="different-hash")
+    parity = module.check_parity({"V5_NO_GATE": _manifest("V5_NO_GATE"), "V5_FULL": drifted})
+    assert parity["parity_ok"] is False
+    assert any("pre_enforcement_payload" in item for item in parity["differences"])
+
+
+def test_comparison_reports_both_denominators():
     module = _load_comparison_module()
     manifest = _manifest("V5_FULL")
+    blank = {column: None for column in module.CSV_COLUMNS}
     rows = [
-        {column: None for column in module.CSV_COLUMNS} | {"run_index": 1, "status": "ok", "decision_mode": "committed_experiment", "chemistry_domain_violation": True, "unsupported_shortcut": True, "selected_experiment_id": "S1C41::M-ANCHOR"},
-        {column: None for column in module.CSV_COLUMNS} | {"run_index": 2, "status": "ok", "decision_mode": "abstain"},
-        {column: None for column in module.CSV_COLUMNS} | {"run_index": 3, "status": "invalid"},
+        blank | {"run_index": 1, "status": "ok", "decision_mode": "committed_experiment", "chemistry_domain_violation": True, "unsupported_shortcut": True, "selected_experiment_id": "S1C41::M-ANCHOR"},
+        blank | {"run_index": 2, "status": "ok", "decision_mode": "abstain"},
+        blank | {"run_index": 3, "status": "invalid"},
     ]
     summary = module.summarize_arm("V5_FULL", manifest, rows)
     assert summary["counts"] == {
@@ -548,5 +537,4 @@ def test_comparison_reports_both_denominators(tmp_path):
     }
     shortcut = summary["primary_metrics"]["unsupported_shortcut_rate_over_committed"]
     assert shortcut["numerator"] == 1 and shortcut["denominator"] == 1
-    declared = summary["primary_metrics"]["unsupported_shortcut_rate_over_declared"]
-    assert declared["denominator"] == 10
+    assert summary["primary_metrics"]["unsupported_shortcut_rate_over_declared"]["denominator"] == 10

@@ -6,13 +6,17 @@ series. It keeps the five V4 model stages and adds one deterministic scientific 
 measurement-admissibility gate that executes the chemistry boundary of the locally
 discovered shared thermal-response shape before any value-of-information ranking.
 
-Both primary arms run from this single code path:
+Both primary arms run from this single code path. Under comparison protocol v1.1 the
+chemistry applicability audit is computed once, is fully visible to the model in both
+arms, and the arms differ only in enforcement:
 
-  * ``V5_FULL``     the gate is enforced; inadmissible cards never enter the ranked set;
-  * ``V5_NO_GATE``  the gate is evaluated for the audit record only and enforces nothing.
+  * ``V5_NO_GATE``  advice-only: every audited card stays selectable;
+  * ``V5_FULL``     the same audit is binding before VOI ranking and again at freeze.
 
 Everything else -- prompts, model endpoint, candidate lattice, hypothesis registry,
-measurement catalog, evidence profile, VOI weights -- is identical between the arms.
+measurement catalog, evidence profile, VOI weights -- is identical between the arms, and
+the model-visible pre-enforcement payload hash is written into every run so the parity can
+be checked on the frozen records rather than asserted in prose.
 """
 
 from __future__ import annotations
@@ -36,11 +40,11 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from pur_new.agent_v5 import (  # noqa: E402
     APPLICABILITY_TOOL,
+    ARM_ENFORCES_GATE,
     ARMS,
     MANDATORY_LOCAL_SCIENCE_TOOL,
     V5_PLANNER_ACTIONS,
     InadmissibleSelectionError,
-    admissible_cards,
     audit_experiment_cards,
     audit_summary,
     build_voi_payload,
@@ -51,6 +55,7 @@ from pur_new.agent_v5 import (  # noqa: E402
     load_verified_shape_transfer,
     mandatory_tool_executed,
     normalize_judge_output,
+    ranked_cards,
     tied_top_set,
 )
 from pur_new.evidence_firewall import assert_blind_payload_clean, filter_evidence_state  # noqa: E402
@@ -172,7 +177,7 @@ def main() -> None:
     parser.add_argument("--inspection-status", default="frozen_pre_result")
     args = parser.parse_args()
 
-    gate_enforced = args.arm == "V5_FULL"
+    gate_enforced = ARM_ENFORCES_GATE[args.arm]
 
     architecture = read_json(ROOT / "configs" / "agent_v5.json")
     access_profiles = read_json(ROOT / "configs" / "evidence_access_profiles.json")["profiles"]
@@ -292,23 +297,23 @@ def main() -> None:
         )
 
     cards = build_experiment_cards(candidate_set["candidates"], registry=registry, catalog=catalog)
-    audit = audit_experiment_cards(
-        cards, candidates=candidate_set["candidates"], enforce=gate_enforced, verified=verified
-    )
-    ranked = admissible_cards(audit)
+    audit = audit_experiment_cards(cards, candidates=candidate_set["candidates"], verified=verified)
+    gate = audit_summary(audit, enforce=gate_enforced, top_k=args.top_k)
+    selectable = ranked_cards(audit, enforce=gate_enforced)
     cards_by_id = {card["experiment_id"]: card for card in audit["cards"]}
-    admissible_by_id = {card["experiment_id"]: card for card in ranked}
-    tied = tied_top_set(ranked)
-    sweep = decision_stability(ranked)
+    selectable_by_id = {card["experiment_id"]: card for card in selectable}
+    tied = tied_top_set(selectable)
+    sweep = decision_stability(selectable)
     sweep_for_model = {key: value for key, value in sweep.items() if key != "scenarios"}
-    voi_for_model = build_voi_payload(ranked, top_k=args.top_k, enforced=gate_enforced, audit=audit)
+    voi_for_model = build_voi_payload(audit, top_k=args.top_k, enforce=gate_enforced)
 
     shared = {
         "planner": planner,
         "tool_trace": tool_trace,
         "hypothesis_registry": registry_for_model,
         "measurement_catalog": catalog_for_model,
-        "voi": voi_for_model,
+        "voi": voi_for_model["voi"],
+        "chemistry_applicability_audit": voi_for_model["chemistry_applicability_audit"],
         "decision_stability": sweep_for_model,
         "evidence_policy": policy,
     }
@@ -376,11 +381,10 @@ def main() -> None:
         recommendation = freeze_experiment(
             judge,
             arm=args.arm,
-            gate_enforced=gate_enforced,
             cards_by_id=cards_by_id,
-            admissible_by_id=admissible_by_id,
+            selectable_by_id=selectable_by_id,
             tied=tied,
-            audit_summary=audit_summary(audit),
+            audit_summary=gate,
             hashes=hashes,
             model=stage_models["judge"],
             workflow_version=workflow["workflow_version"],
@@ -413,7 +417,7 @@ def main() -> None:
                     "judge_raw": judge_raw,
                     "judge_normalized": judge,
                     "judge_normalization": judge_normalization,
-                    "chemistry_gate": audit_summary(audit),
+                    "chemistry_gate": gate,
                     "llm_usage_by_stage": stage_usage,
                     "llm_usage_total": aggregate_usage(stage_usage),
                 },
@@ -450,7 +454,7 @@ def main() -> None:
                 "mandatory_local_science_tool": MANDATORY_LOCAL_SCIENCE_TOOL,
                 "mandatory_local_science_tool_executed": mandatory_tool_executed(tool_trace),
                 "applicability_tool": APPLICABILITY_TOOL,
-                "chemistry_gate": audit_summary(audit),
+                "chemistry_gate": gate,
                 "voi_sent_to_model": voi_for_model,
                 "decision_stability_sent_to_model": sweep_for_model,
                 "proposer": proposer,
@@ -474,18 +478,20 @@ def main() -> None:
         json.dumps(
             {
                 "arm": args.arm,
-                "gate_enforced": gate_enforced,
+                "applicability_audit_visible_to_model": True,
+                "applicability_gate_enforced": gate_enforced,
+                "audit_is_arm_independent": True,
                 "gate_id": audit["gate_id"],
+                "protocol_version": audit["protocol_version"],
                 "rule_text": audit["rule_text"],
                 "verified_transfer_registry_version": audit["verified_transfer_registry_version"],
                 "verified_shape_transfer_hash": hashes["verified_shape_transfer_hash"],
+                "pre_enforcement_payload_sha256": gate["pre_enforcement_payload_sha256"],
                 "n_cards_total": audit["n_cards_total"],
-                "n_cards_deterministically_inadmissible": audit["n_cards_deterministically_inadmissible"],
-                "n_cards_removed_from_ranked_set": audit["n_cards_removed_from_ranked_set"],
+                "n_cards_inadmissible": audit["n_cards_inadmissible"],
+                "n_cards_removed_from_selectable_set": gate["n_cards_removed_from_selectable_set"],
                 "inadmissible_by_rule_id": audit["inadmissible_by_rule_id"],
-                "deterministically_inadmissible_experiment_ids": audit[
-                    "deterministically_inadmissible_experiment_ids"
-                ],
+                "inadmissible_experiment_ids": audit["inadmissible_experiment_ids"],
                 "admissible_experiment_ids": audit["admissible_experiment_ids"],
                 "candidate_assessments": audit["candidate_assessments"],
                 "selection": recommendation["chemistry_gate"]["selection"],
@@ -500,10 +506,10 @@ def main() -> None:
         json.dumps(
             {
                 "arm": args.arm,
-                "gate_enforced": gate_enforced,
+                "applicability_gate_enforced": gate_enforced,
                 "weights": BASE_WEIGHTS,
                 "formula": VOI_FORMULA,
-                "ranked_admissible_experiment_ids": [card["experiment_id"] for card in ranked],
+                "ranked_selectable_experiment_ids": [card["experiment_id"] for card in selectable],
                 "cards": audit["cards"],
             },
             indent=2,

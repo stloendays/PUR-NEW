@@ -3,8 +3,10 @@
 
 The comparison is ``V5_NO_GATE`` versus ``V5_FULL``: same runtime, same prompts, same model
 endpoint, same candidate lattice, same hypothesis registry, same measurement catalog, same
-evidence profile and same VOI weights. The only declared difference is whether the
-deterministic chemistry-domain gate changes experiment-card admissibility.
+evidence profile, same VOI weights and -- under protocol v1.1 -- the same model-visible
+chemistry applicability audit. The only declared difference is whether that identical audit
+is enforced as hard experiment-card admissibility, which the parity check verifies through
+the arm-independent pre-enforcement payload hash.
 
 This script reads two frozen arm series and writes the machine-readable comparison. It
 calls no model and computes no metric that contains held-out wet-lab information. Every
@@ -65,6 +67,7 @@ CSV_COLUMNS = [
     "total_tokens",
     "llm_latency_s",
     "recommendation_id",
+    "pre_enforcement_payload_hash",
     "input_hash",
     "prompt_hash",
     "candidate_set_hash",
@@ -139,7 +142,7 @@ def load_run_row(arm: str, record: dict[str, Any], manifest: dict[str, Any]) -> 
                 "selected_is_in_tied_top_set": (recommendation.get("voi") or {}).get(
                     "selected_is_in_tied_top_set"
                 ),
-                "n_cards_removed_by_gate": gate.get("n_cards_removed_from_ranked_set"),
+                "n_cards_removed_by_gate": gate.get("n_cards_removed_from_selectable_set"),
                 "tool_calls": len(deliberation.get("tool_trace") or []),
                 "mandatory_tool_executed": deliberation.get("mandatory_local_science_tool_executed"),
                 "prompt_tokens": usage.get("prompt_tokens"),
@@ -147,6 +150,7 @@ def load_run_row(arm: str, record: dict[str, Any], manifest: dict[str, Any]) -> 
                 "total_tokens": usage.get("total_tokens"),
                 "llm_latency_s": round(float(usage.get("llm_latency_s") or 0.0), 3),
                 "recommendation_id": recommendation.get("recommendation_id"),
+                "pre_enforcement_payload_hash": recommendation.get("pre_enforcement_payload_hash"),
                 "input_hash": recommendation.get("input_hash"),
                 "prompt_hash": recommendation.get("prompt_hash"),
                 "candidate_set_hash": recommendation.get("candidate_set_hash"),
@@ -195,7 +199,9 @@ def summarize_arm(arm: str, manifest: dict[str, Any], rows: list[dict[str, Any]]
     return {
         "arm": arm,
         "series": manifest.get("series_label"),
-        "gate_enforced": manifest.get("gate_enforced"),
+        "applicability_gate_enforced": manifest.get("applicability_gate_enforced"),
+        "applicability_audit_visible_to_model": manifest.get("applicability_audit_visible_to_model"),
+        "pre_enforcement_payload_sha256": manifest.get("pre_enforcement_payload_sha256"),
         "model": manifest.get("model"),
         "counts": {
             "declared": declared,
@@ -270,20 +276,36 @@ def check_parity(manifests: dict[str, dict[str, Any]]) -> dict[str, Any]:
         "n_runs_declared",
         "top_k",
         "api_base_host",
+        "pre_enforcement_payload_sha256",
     ):
         if no_gate.get(key) != full.get(key):
             differences.append(f"series setting differs between arms: {key}")
 
-    if no_gate.get("gate_enforced") is not False or full.get("gate_enforced") is not True:
-        differences.append("arm gate flags are not the declared control/treatment pair")
+    if (
+        no_gate.get("applicability_gate_enforced") is not False
+        or full.get("applicability_gate_enforced") is not True
+    ):
+        differences.append("arm enforcement flags are not the declared control/treatment pair")
+
+    for arm, manifest in (("V5_NO_GATE", no_gate), ("V5_FULL", full)):
+        if manifest.get("applicability_audit_visible_to_model") is not True:
+            differences.append(f"{arm} did not expose the applicability audit to the model")
 
     return {
         "parity_ok": not differences,
         "differences": differences,
         "checked_files": list(ARM_PARITY_FILES),
+        "information_parity_rule": (
+            "protocol v1.1: both arms must receive the same model-visible applicability facts. "
+            "The pre-enforcement payload hash is the machine-checkable form of that requirement."
+        ),
+        "pre_enforcement_payload_sha256": {
+            "V5_NO_GATE": no_gate.get("pre_enforcement_payload_sha256"),
+            "V5_FULL": full.get("pre_enforcement_payload_sha256"),
+        },
         "only_intended_difference": (
-            "whether the deterministic chemistry-domain gate removes inadmissible experiment cards "
-            "from the ranked set given to the model stages"
+            "whether the identical chemistry-domain applicability audit is enforced as hard "
+            "experiment-card admissibility before VOI and at freeze"
         ),
     }
 

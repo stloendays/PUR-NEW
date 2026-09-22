@@ -1,12 +1,13 @@
 {
-  "version": "5.0.0",
+  "version": "5.1.0",
   "name": "PUR_NEW_CHEMISTRY_GATED_EXPERIMENT_SELECTION_AGENT_V5",
   "protocol": "configs/agent_v5_comparison_protocol.json",
+  "protocol_version": "1.1.0",
   "supersedes_nothing": "V5 is a new prospective runtime. configs/agent_v4.json, scripts/run_agent_v4.py, prompts/agent_v4_*.txt, src/pur_new/voi.py and every frozen V3/V4 run record remain unchanged and are not reinterpreted by V5.",
   "purpose": "Test whether an experimentally discovered material regularity and its chemistry-domain boundary can be executed as a hard scientific constraint on which measurement an outcome-blind Agent is allowed to select.",
   "default_evidence_profile": "blind_pre_result",
   "blinded_target_formulation_ids": ["F1"],
-  "canonical_flow": "planner(intent + failure mode) -> mandatory chemistry-audited local science tool -> deterministic chemistry-domain admissibility gate -> VOI over the admissible set only -> proposer -> skeptic -> robustness adjudicator -> judge -> freeze",
+  "canonical_flow": "planner(intent + failure mode) -> mandatory chemistry-audited local science tool -> deterministic chemistry-domain applicability audit (identical and model-visible in both arms) -> enforcement (V5_FULL only) -> VOI over the selectable set -> proposer -> skeptic -> robustness adjudicator -> judge -> freeze",
   "unit_of_decision": "experiment_card",
   "stages": [
     {
@@ -19,8 +20,13 @@
       "role": "execute read-only scientific tools. The chemistry-audited local rheology summary is mandatory and is forced into the trace whether or not the planner requested it."
     },
     {
-      "id": "chemistry_domain_gate",
-      "role": "deterministic, non-LLM measurement-admissibility layer. Runs before VOI ranking, is serialized in full, and cannot be overridden by any model stage.",
+      "id": "chemistry_domain_audit",
+      "role": "deterministic, non-LLM measurement-applicability audit. Computed once per run without reference to the arm, fully visible to the model in both arms, serialized in full, and never produced by a model stage.",
+      "is_a_language_model": false
+    },
+    {
+      "id": "chemistry_domain_enforcement",
+      "role": "V5_FULL only. Converts the identical audit into hard admissibility before VOI ranking and again at freeze. It cannot be overridden by any model stage.",
       "is_a_language_model": false
     },
     {
@@ -61,6 +67,8 @@
     "applied_before_voi_ranking": true,
     "can_be_overridden_by_a_model_stage": false,
     "verified_transfer_registry": "configs/verified_shape_transfer.json",
+    "audit_is_arm_independent": true,
+    "applicability_audit_visible_to_model_in_both_arms": true,
     "rules": [
       "M-HOLD-120 is admissible: it measures thermal-hold drift directly and does not use the shared thermal-response shape.",
       "M-REPEAT is admissible: it measures realization/state spread directly.",
@@ -90,14 +98,16 @@
     {
       "arm_id": "V5_NO_GATE",
       "chemistry_audited_summary": true,
-      "applicability_gate": false,
-      "role": "same-runtime control isolating the incremental effect of the chemistry-domain gate"
+      "applicability_audit_visible_to_model": true,
+      "applicability_gate_enforced": false,
+      "role": "advice-only control isolating the incremental effect of turning identical scientific applicability information into an executable hard constraint"
     },
     {
       "arm_id": "V5_FULL",
       "chemistry_audited_summary": true,
-      "applicability_gate": true,
-      "role": "prospective chemistry-aware Agent V5"
+      "applicability_audit_visible_to_model": true,
+      "applicability_gate_enforced": true,
+      "role": "prospective chemistry-aware Agent V5 with executable scientific constraints"
     }
   ],
   "arm_difference_declaration": {
@@ -108,12 +118,16 @@
       "hypothesis registry",
       "measurement catalog",
       "evidence access profile and filtered evidence state",
+      "chemistry-audited rheology summary",
+      "raw assess_shared_shape_applicability outputs for every candidate",
+      "the full inadmissible-card list and its machine-readable reasons",
       "VOI implementation, weights and tie epsilon",
       "run settings and declared N"
     ],
-    "only_intended_difference": "whether the deterministic chemistry-domain gate removes inadmissible experiment cards from the ranked set given to the model stages",
-    "payload_consequence": "When the gate is enforced, inadmissible cards are absent from the model payload and the removal is reported with a machine-readable reason. When the gate is disabled, the pre-gate card inventory is passed unchanged and no applicability field is added to any model payload.",
-    "audit_is_arm_independent": "assess_shared_shape_applicability is evaluated for every candidate in BOTH arms and written to admissibility_audit.json. Only enforcement differs, so domain-violation and unsupported-shortcut rates are measured by the same rule in both arms."
+    "only_intended_difference": "whether the identical chemistry-domain applicability audit is enforced as hard experiment-card admissibility before VOI and at freeze",
+    "payload_consequence": "Both arms receive the same audit, the same per-candidate applicability outputs and the same inadmissible-card list. V5_NO_GATE marks the audit advisory and keeps every card selectable; V5_FULL marks it binding and removes the inadmissible cards from the ranked set.",
+    "information_parity_evidence": "build_pre_enforcement_payload() takes no arm argument, and its SHA-256 is written into every run as pre_enforcement_payload_sha256. The two arms must report the same hash.",
+    "forbidden_confound": "Hiding applicability information from V5_NO_GATE while showing it to V5_FULL is prohibited by protocol v1.1."
   },
   "architecture_principles": [
     "a discovered material regularity is only usable inside the chemistry family in which it was measured",
