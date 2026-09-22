@@ -21,7 +21,7 @@ def test_v3_planner_action_uses_enriched_scientific_tool():
     assert trace[0]["status"] == "ok"
     result = trace[0]["result"]
     assert result["validation_formulation_visible"] is False
-    assert result["tool_version"] == "3.4-same-order-model-comparison"
+    assert result["tool_version"] == "3.5-verified-phosphoric-perturbation"
     assert result["provenance_audit"]["excluded_from_primary_state_model"] == ["E1__+P__day1_0"]
 
     patterns = result["discovered_patterns"]
@@ -33,4 +33,15 @@ def test_v3_planner_action_uses_enriched_scientific_tool():
     lo, hi = patterns["one_point_state_calibration"]["pooled_multiplicative_error_factor_range"]
     assert 1.0 < lo <= hi < 1.2
     assert "temporal_stability_coordinate" in patterns
+
+    perturb = patterns["chemical_perturbation_check"]
+    assert perturb["condition"]["additive"] == "H3PO4"
+    assert perturb["condition"]["amount_mmol"] == 0.025
+    assert perturb["condition"]["standard_solution_concentration_mol_L"] == 0.1
+    assert perturb["condition"]["addition_stage"] == "dehydration_stage"
+    assert perturb["shared_shape_intercept_only_multiplicative_error"] < 1.1
+    assert perturb["anchor_120c_predict_remaining_temperatures_multiplicative_error"] < 1.1
+
+    assert state["n_points"] == 36
+    assert state["n_realizations"] == 6
     assert "F1" not in json.dumps(result, sort_keys=True)
