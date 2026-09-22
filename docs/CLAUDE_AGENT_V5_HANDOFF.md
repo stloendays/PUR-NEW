@@ -112,3 +112,29 @@ When finished, report:
 - the command to produce the cross-arm comparison.
 
 Do not claim V5 is better before the comparison runs exist.
+
+
+## Protocol v1.1 clarifications
+
+Before any paid V5 API series is run, update the implementation to match `configs/agent_v5_comparison_protocol.json` v1.1.
+
+### Information parity
+
+`V5_NO_GATE` and `V5_FULL` must receive the same model-visible chemistry applicability facts. Both arms should receive the same chemistry-audited rheology summary and the same raw applicability audit for the same candidates. The only intended difference is enforcement:
+
+- `V5_NO_GATE`: record the audit but do not remove cards or reject a selection solely because of the chemistry-domain rule;
+- `V5_FULL`: enforce the same audit as hard admissibility before VOI and again at freeze.
+
+Add a parity test that serializes the pre-enforcement model-visible scientific payload for both arms and proves equality after removing explicit arm/enforcement identifiers.
+
+Do not implement `V5_NO_GATE` by hiding applicability information while showing it to `V5_FULL`.
+
+### Historical V4 manifest drift
+
+Keep the pre-existing V4 hash drift exactly as provenance. Do not rewrite historical manifests. A `v4_invariance_baseline.json` is acceptable only as evidence that V5 implementation did not cause additional drift; it is not a reconstruction of the original V4 source tree.
+
+### Optional typed tie-break diagnostic
+
+Read `docs/AGENT_V5_TYPED_TIEBREAK_DIAGNOSTIC.md`.
+
+This is secondary and must not block the primary V5 implementation. If implemented, it may operate only on the exact deterministic tied-top set after V5_FULL admissibility and VOI. Do not let it replace the chemistry gate, VOI, Skeptic, Robustness or Judge in the primary comparison.
