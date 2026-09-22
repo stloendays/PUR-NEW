@@ -1,0 +1,7 @@
+temperature_c,e1_plusP_viscosity_mPa_s,e1_GJJ_day1_viscosity_mPa_s,plusP_to_comparator_ratio,percent_difference_vs_comparator
+80,3015,3636,0.829208,-17.0792
+90,1964,2288,0.858392,-14.1608
+100,1349,1512,0.892196,-10.7804
+110,958,1073,0.892824,-10.7176
+120,699,780,0.896154,-10.3846
+130,542,599,0.904841,-9.5159
