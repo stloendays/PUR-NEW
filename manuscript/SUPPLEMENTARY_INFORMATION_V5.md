@@ -284,17 +284,28 @@ Reanalysis of these external curves shows that $\ln\eta$ versus $1/T$ is general
 - median $R^2 \approx 0.9967$;
 - 37 of 39 curves have $R^2\ge0.98$.
 
-However, the apparent temperature-response descriptor spans approximately
+However, the apparent temperature-response descriptor spans approximately 34.7–94.2 kJ mol$^{-1}$, which is much broader than the local E1–E3 range.
 
-$$
-34.7\text{--}94.2~\mathrm{kJ\,mol^{-1}},
-$$
+To test transferability without formulation leakage, each complete curve was treated as one sample and its apparent $E_\eta$ as one target. Individual temperature points from the same formulation were never randomly split between training and test sets. The primary analysis used the 37 curves with $R^2\ge0.98$; the two lower-fit curves were retained as sensitivity-only records.
 
-which is much broader than the local E1–E3 range.
+A five-descriptor ridge model used prepolymer molecular weight, polyol topological polar surface area, an isocyanate structural descriptor, NCO content and polyol $T_g$.
 
-This broader distribution is important for claim scope. The local shared thermal shape is treated as a **local transferable representation**, not a universal PUR relation.
+| Model | Family-held-out validation | $R^2$ | RMSE (kJ mol$^{-1}$) |
+|---|---|---:|---:|
+| five-descriptor ridge | leave-one-isocyanate-family-out | 0.910 | 3.12 |
+| five-descriptor ridge | leave-one-polyol-family-out | -1.456 | 16.33 |
+| $T_g$ + NCO-content ridge | leave-one-isocyanate-family-out | 0.851 | 4.03 |
+| $T_g$ + NCO-content ridge | leave-one-polyol-family-out | 0.033 | 10.25 |
 
-External formulation records containing acrylic-like and tackifier-like modifiers are used as evidence-bounded intervention priors. Numeric modifier fractions are used as quantitative anchors only when their denominator basis is sufficiently explicit. Records with ambiguous bases remain directional evidence.
+Both models therefore show the same directional asymmetry between isocyanate-family and polyol-family transfer.
+
+These grouped tests show that the apparent temperature-response descriptor transfers much more readily across the represented isocyanate variation than across an entirely unseen polyol family. The result is interpreted as a chemistry-domain boundary, not as evidence that any individual descriptor is a unique molecular control variable. Several polyol descriptors co-vary strongly with family identity, so coefficient and rank-correlation summaries remain descriptive.
+
+The public-data workflow resolves a pinned upstream source revision, records the downloaded archive hash, derives formulation-level targets and uploads only derived reports. The external temperature-response set is not used as a thermal-hold stability label source.
+
+This family-level result sharpens the claim scope. The local shared thermal shape is treated as a **chemistry-bounded transferable representation**, not a universal PUR relation. For prospective use, unmodified local-family candidates can use one-point state calibration as an interpolation prior, whereas resin-modified or otherwise chemistry-shifted candidates require a direct temperature-sweep check before that shortcut is accepted.
+
+External formulation records containing acrylic-like and tackifier-like modifiers are separately used as evidence-bounded intervention priors. Numeric modifier fractions are used as quantitative anchors only when their denominator basis is sufficiently explicit. Records with ambiguous bases remain directional evidence.
 
 ---
 

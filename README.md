@@ -176,6 +176,8 @@ apparent E_eta range ~= 34.7-94.2 kJ/mol
 
 This establishes an important boundary: the local ~42 kJ/mol scale is not universal across all PUR chemistries.
 
+A chemistry-family transfer analysis now makes that boundary quantitative. Treating each complete public prepolymer curve as one sample, a five-descriptor ridge model achieved leave-one-isocyanate-family-out R2 ~= 0.910 (RMSE ~= 3.12 kJ/mol) but leave-one-polyol-family-out R2 ~= -1.456 (RMSE ~= 16.33 kJ/mol). The corresponding minimal PolyTg + pNCO model showed the same asymmetry (R2 ~= 0.851 vs 0.033). The practical interpretation is that polyol-family change is a strong empirical boundary for transferring the shared thermal-response prior.
+
 External acrylic-resin and tackifier examples are used to define chemically plausible intervention directions, not as direct property predictors. Modifier fractions are audited for denominator compatibility in:
 
 ```text
@@ -278,13 +280,22 @@ Robustness Adjudicator
  Physical adjudication
 ```
 
-The most important scientific Action is:
+For historical benchmark compatibility, the predecessor Action remains:
 
 ```text
 get_state_aware_rheology_summary()
 ```
 
-It now uses the chemistry-provenance audit and exposes, without the validation outcome:
+For current chemistry-first development, the preferred audited Actions are:
+
+```text
+get_chemistry_audited_rheology_summary()
+assess_shared_shape_applicability(candidate)
+```
+
+The first exposes the chemistry-provenance-audited local rheology findings. The second prevents the local shared thermal-response shape from being silently extrapolated into resin-modified chemistry: unmodified local-family candidates may use one-point calibration as an interpolation prior, whereas chemistry-shifted candidates are routed to direct temperature-sweep verification first.
+
+The audited rheology Action exposes, without the validation outcome:
 
 - audited formulation-only versus state-aware model comparison;
 - model-free state-shift check;
@@ -349,13 +360,14 @@ Repository CI runs the local audit automatically.
 
 ## 9. Manuscript status
 
-The current manuscript master draft is:
+The active canonical manuscript backbone is:
 
 ```text
-manuscript/MAIN_TEXT_V3.md
+manuscript/MAIN_TEXT_V5.md
+manuscript/SUPPLEMENTARY_INFORMATION_V5.md
 ```
 
-The earlier `manuscript/MAIN_TEXT_V2.md` and `manuscript/MAIN_TEXT_DRAFT.md` files are retained as versioned predecessors rather than overwritten.
+The audited V3 and rule-grounded V4 manuscripts remain preserved as provenance predecessors rather than overwritten. The current V5 line now integrates the chemistry-family transfer analysis while retaining frozen historical decision records unchanged.
 
 The intended Results order is:
 
