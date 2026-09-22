@@ -1,0 +1,141 @@
+name: agent-v5-ci
+
+# Structural CI for the Agent V5 chemistry-domain gate. It needs no API key and never
+# makes a paid model call: everything it checks is deterministic.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  agent-v5:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package and test runner
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e . pytest
+
+      - name: Validate V5 configuration and schema JSON
+        run: |
+          python -m json.tool configs/agent_v5.json > /dev/null
+          python -m json.tool configs/agent_v5_comparison_protocol.json > /dev/null
+          python -m json.tool configs/verified_shape_transfer.json > /dev/null
+          python -m json.tool configs/v4_invariance_baseline.json > /dev/null
+          python -m json.tool schemas/agent_v5_experiment.schema.json > /dev/null
+
+      - name: Compile V5 runners
+        run: |
+          python -m py_compile scripts/run_agent_v5.py
+          python -m py_compile scripts/run_agent_v5_series.py
+          python -m py_compile scripts/run_agent_v5_comparison.py
+
+      - name: Run the full unit-test suite
+        run: pytest
+
+      - name: Audit that the V5 layer carries no held-out coordinate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          forbidden = ('14.004', '4.1189', '4.1190', '1230', '1320', '1281', '1228')
+          sources = [
+              'src/pur_new/agent_v5.py',
+              'configs/agent_v5.json',
+              'configs/verified_shape_transfer.json',
+              'scripts/run_agent_v5.py',
+              'scripts/run_agent_v5_series.py',
+              'scripts/run_agent_v5_comparison.py',
+          ] + sorted(str(p) for p in Path('prompts').glob('agent_v5_*.txt'))
+          for name in sources:
+              text = Path(name).read_text(encoding='utf-8')
+              for token in forbidden:
+                  assert token not in text, (name, token)
+          # The prompts never name the blinded formulation. Only the architecture config
+          # declares WHICH id is blinded, and that declaration is what the firewall enforces.
+          for prompt in Path('prompts').glob('agent_v5_*.txt'):
+              assert 'F1' not in prompt.read_text(encoding='utf-8'), prompt.name
+          print('V5 layer is free of held-out coordinates')
+          PY
+
+      - name: Verify the V5 architecture declares no extra model role
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          config = json.loads(Path('configs/agent_v5.json').read_text())
+          assert config['no_new_llm_roles'] is True
+          assert config['llm_stages'] == ['planner', 'proposer', 'skeptic', 'robustness_adjudicator', 'judge']
+          assert config['chemistry_domain_gate']['is_a_language_model'] is False
+          assert config['chemistry_domain_gate']['applied_before_voi_ranking'] is True
+          assert config['chemistry_domain_gate']['can_be_overridden_by_a_model_stage'] is False
+          assert config['voi_tool']['ranks_only_the_admissible_set'] is True
+          prompts = {stage['prompt'] for stage in config['stages'] if 'prompt' in stage}
+          assert len(prompts) == 5
+          for prompt in prompts:
+              assert Path(prompt).exists(), prompt
+          print('V5 architecture declaration is consistent')
+          PY
+
+      - name: Check cross-arm comparison parity on declared series contracts
+        run: |
+          python - <<'PY'
+          import json, subprocess, sys, tempfile
+          from pathlib import Path
+
+          sys.path.insert(0, 'scripts')
+          from run_agent_v5_series import ARM_PARITY_FILES, sha256_file
+
+          tmp = Path(tempfile.mkdtemp())
+          hashes = {name: sha256_file(Path(name)) for name in ARM_PARITY_FILES}
+          for arm in ('V5_NO_GATE', 'V5_FULL'):
+              out = tmp / arm
+              out.mkdir()
+              (out / 'series_manifest.json').write_text(json.dumps({
+                  'series_label': f'ci_{arm}',
+                  'architecture': 'PUR_NEW_CHEMISTRY_GATED_EXPERIMENT_SELECTION_AGENT_V5',
+                  'arm': arm,
+                  'gate_enforced': arm == 'V5_FULL',
+                  'n_runs_declared': 10,
+                  'top_k': 12,
+                  'model': 'ci-parity-check',
+                  'api_base_host': 'ci.invalid',
+                  'candidate_set_sha256': 'ci',
+                  'evidence_state_sha256': 'ci',
+                  'series_input_hashes': hashes,
+                  'runs': [],
+              }, indent=2), encoding='utf-8')
+
+          result = tmp / 'comparison'
+          subprocess.run([
+              sys.executable, 'scripts/run_agent_v5_comparison.py',
+              '--no-gate-series', str(tmp / 'V5_NO_GATE'),
+              '--full-series', str(tmp / 'V5_FULL'),
+              '--output-dir', str(result),
+          ], check=True)
+          for name in ('cross_arm_runs.csv', 'cross_arm_summary.json', 'comparison_manifest.json'):
+              assert (result / name).exists(), name
+          summary = json.loads((result / 'cross_arm_summary.json').read_text())
+          assert summary['parity']['parity_ok'] is True, summary['parity']['differences']
+          assert summary['arms_are_not_pooled'] is True
+          assert summary['comparison_status'] == 'insufficient_runs'
+          print('cross-arm comparison parity check passed')
+          PY
+
+      - name: Confirm V5 results are not in the canonical manuscript
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          for name in ('manuscript/MAIN_TEXT_V5.md', 'manuscript/SUPPLEMENTARY_INFORMATION_V5.md'):
+              path = Path(name)
+              if not path.exists():
+                  continue
+              text = path.read_text(encoding='utf-8')
+              for token in ('V5_NO_GATE', 'V5_FULL', 'cross_arm_runs.csv'):
+                  assert token not in text, (name, token)
+          print('no V5 arm result has entered the canonical manuscript')
+          PY

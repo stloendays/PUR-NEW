@@ -425,6 +425,38 @@ The order-inverted arm is particularly important: the Skeptic identified the zer
 
 Do not silently overwrite or retroactively relabel frozen records. V3 and V4 remain provenance-preserving predecessors; V5 is the active manuscript upgrade. If the author explicitly requests a thaw/revision/re-freeze, update the active manifest or protocol as instructed, regenerate dependent hashes/results where needed, and preserve the previous frozen version as provenance.
 
+### Agent V5 chemistry-domain gate
+
+V5 is a new prospective runtime, not a rewrite of V4. It keeps the same five model stages and adds **one deterministic scientific layer**: a measurement-admissibility gate that executes the chemistry boundary of the discovered shared thermal-response shape before any VOI ranking.
+
+- mandatory upstream tool: `get_chemistry_audited_rheology_summary()`;
+- domain tool: `assess_shared_shape_applicability(candidate)`, evaluated for every candidate;
+- rule: `M-HOLD-120`, `M-REPEAT` and `M-SWEEP` observe their quantity directly and stay admissible. `M-ANCHOR` is admissible only inside the measured unmodified PPG2000/PDP70/MDI family, or when `configs/verified_shape_transfer.json` records a completed direct sweep for that chemistry. Otherwise it is `inadmissible_before_shape_verification`;
+- the rule is deterministic admissibility, not a VOI penalty and not prompt advice. A model stage may criticize it and cannot override it: naming a removed card is rejected at freeze and the run is recorded as invalid.
+
+The primary controlled comparison is `V5_NO_GATE` versus `V5_FULL` from the same code path, with identical prompts, model endpoint, candidate lattice, hypothesis registry, measurement catalog, evidence profile and VOI weights. The only intended difference is whether the gate changes card admissibility. Frozen V4 is historical architecture context and is not a same-condition causal estimate of the gate effect.
+
+```bash
+# one run of either arm
+python scripts/run_agent_v5.py --arm V5_FULL --output-dir results/agent_v5/manual_run
+
+# a declared series per arm (N is frozen into the manifest before the first run)
+python scripts/run_agent_v5_series.py --arm V5_NO_GATE --env-file .env --n-runs 10 \
+  --output-dir results/agent_v5/series_no_gate_n10
+python scripts/run_agent_v5_series.py --arm V5_FULL --env-file .env --n-runs 10 \
+  --output-dir results/agent_v5/series_full_n10
+
+# deterministic cross-arm comparison
+python scripts/run_agent_v5_comparison.py \
+  --no-gate-series results/agent_v5/series_no_gate_n10 \
+  --full-series results/agent_v5/series_full_n10 \
+  --output-dir results/agent_v5/comparison_n10
+```
+
+Every run writes `deliberation.json`, `recommendation.json`, `admissibility_audit.json`, `experiment_cards.json` and `decision_stability.json` with the hashes needed to reproduce it. The comparison writes `cross_arm_runs.csv`, `cross_arm_summary.json` and `comparison_manifest.json`, reports each arm separately, and states both denominators for every rate.
+
+V5 run results must not enter `manuscript/MAIN_TEXT_V5.md` or `manuscript/SUPPLEMENTARY_INFORMATION_V5.md` until the series is audited and explicitly frozen by the author; `.github/workflows/agent-v5.yml` enforces that boundary along with the structural tests.
+
 ## Reusable scientific-writing skill
 
 The project-specific writing and provenance rules are versioned in `skills/junbo-scientific-writing/`. The skill includes the manuscript audit script, Agent benchmark reporting rules, equation/export checks, and the author-authorized thaw/re-freeze policy for frozen manifests and protocols.

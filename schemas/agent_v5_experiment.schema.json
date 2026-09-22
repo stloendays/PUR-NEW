@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PUR-NEW Agent V5 frozen chemistry-gated experiment recommendation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "recommendation_id",
+    "arm",
+    "gate_enforced",
+    "architecture_version",
+    "workflow_version",
+    "decision_mode",
+    "selected_experiment_id",
+    "selected_candidate_id",
+    "selected_measurement_id",
+    "experiment_card",
+    "hypotheses_addressed",
+    "hypotheses_left_entangled",
+    "acceptance_criterion",
+    "falsification_criterion",
+    "uncertainty_decomposition",
+    "chemistry_gate",
+    "voi",
+    "frozen_utc",
+    "model",
+    "prompt_hash",
+    "input_hash",
+    "inspection_status"
+  ],
+  "properties": {
+    "recommendation_id": {"type": "string"},
+    "arm": {"type": "string", "enum": ["V5_NO_GATE", "V5_FULL"]},
+    "gate_enforced": {"type": "boolean"},
+    "architecture_version": {"type": "string"},
+    "workflow_version": {"type": "string"},
+    "decision_mode": {
+      "type": "string",
+      "enum": ["committed_experiment", "discriminating_probe", "state_control_experiment", "abstain"]
+    },
+    "selected_experiment_id": {"type": ["string", "null"]},
+    "selected_candidate_id": {"type": ["string", "null"]},
+    "selected_measurement_id": {"type": ["string", "null"]},
+    "experiment_card": {"type": ["object", "null"]},
+    "primary_observable": {"type": ["string", "null"]},
+    "hypotheses_addressed": {"type": "array", "items": {"type": "string"}},
+    "hypotheses_left_entangled": {"type": "array", "items": {"type": "string"}},
+    "acceptance_criterion": {"type": ["string", "null"]},
+    "falsification_criterion": {"type": ["string", "null"]},
+    "next_experiment_if_falsified": {"type": ["string", "null"]},
+    "uncertainty_decomposition": {"type": "object"},
+    "chemistry_gate": {
+      "type": "object",
+      "required": [
+        "gate_id",
+        "gate_enforced",
+        "gate_is_a_language_model",
+        "applied_before_voi_ranking",
+        "n_cards_total",
+        "n_cards_deterministically_inadmissible",
+        "n_cards_removed_from_ranked_set",
+        "selection"
+      ],
+      "properties": {
+        "gate_id": {"type": "string"},
+        "gate_enforced": {"type": "boolean"},
+        "gate_is_a_language_model": {"type": "boolean", "const": false},
+        "applied_before_voi_ranking": {"type": "boolean", "const": true},
+        "n_cards_total": {"type": "integer"},
+        "n_cards_deterministically_inadmissible": {"type": "integer"},
+        "n_cards_removed_from_ranked_set": {"type": "integer"},
+        "inadmissible_by_rule_id": {"type": "object"},
+        "verified_transfer_registry_version": {"type": ["string", "null"]},
+        "n_verified_chemistry_families": {"type": "integer"},
+        "selection": {
+          "type": "object",
+          "required": ["chemistry_domain_violation", "unsupported_shortcut"],
+          "properties": {
+            "chemistry_domain_violation": {"type": ["boolean", "null"]},
+            "unsupported_shortcut": {"type": ["boolean", "null"]},
+            "shared_shape_use": {"type": ["string", "null"]},
+            "chemistry_applicability_status": {"type": ["string", "null"]},
+            "admissibility_rule_id": {"type": ["string", "null"]},
+            "chemistry_family": {"type": ["string", "null"]}
+          }
+        }
+      }
+    },
+    "voi": {
+      "type": "object",
+      "required": ["score", "components", "weights", "tied_top_set", "formula"],
+      "properties": {
+        "score": {"type": ["number", "null"]},
+        "components": {"type": ["object", "null"]},
+        "weights": {"type": "object"},
+        "tied_top_set": {"type": "array", "items": {"type": "string"}},
+        "selected_is_in_tied_top_set": {"type": ["boolean", "null"]},
+        "formula": {"type": "string"},
+        "ranked_set": {"type": "string"}
+      }
+    },
+    "stage_disagreements_resolved": {"type": ["string", "null"]},
+    "rationale": {"type": ["string", "null"]},
+    "frozen_utc": {"type": "string"},
+    "model": {"type": "string"},
+    "prompt_hash": {"type": "string"},
+    "input_hash": {"type": "string"},
+    "candidate_set_hash": {"type": "string"},
+    "hypothesis_registry_hash": {"type": "string"},
+    "measurement_catalog_hash": {"type": "string"},
+    "verified_shape_transfer_hash": {"type": "string"},
+    "git_commit": {"type": ["string", "null"]},
+    "inspection_status": {"type": "string"},
+    "claim_boundary": {"type": "string"}
+  }
+}

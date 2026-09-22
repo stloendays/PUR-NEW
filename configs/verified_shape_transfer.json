@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "registry_id": "PUR_NEW_VERIFIED_SHARED_SHAPE_TRANSFER_V1",
+  "purpose": "Versioned record of chemistry families for which a completed DIRECT temperature sweep has verified that the local shared thermal-response shape transfers. This registry is the only exemption path for the M-ANCHOR admissibility rule of the Agent V5 chemistry-domain gate.",
+  "admission_rule": [
+    "An entry may be added only after a completed direct M-SWEEP measurement on the same chemistry family.",
+    "The entry must name the measurement record, the verification date and the numeric criterion that was met.",
+    "A model, a planner argument, a prompt or an Agent deliberation can never add an entry.",
+    "Adding an entry is a versioned repository change and must increment this file's version."
+  ],
+  "criterion_for_verified_transfer": "The apparent temperature-response descriptor E_eta of the modified chemistry lies inside the measured local band 42.05 +/- 2.43 kJ/mol, and one-point reconstruction of the 120-130 C response from a 110 C anchor stays within the pooled multiplicative error of 1.088x.",
+  "verified_chemistry_families": [],
+  "state_at_v5_implementation": "No resin-modified chemistry family has a completed direct sweep. Every chemistry-shifted candidate therefore requires M-SWEEP verification before M-ANCHOR becomes admissible."
+}

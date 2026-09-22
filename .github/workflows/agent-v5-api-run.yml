@@ -1,0 +1,105 @@
+name: agent-v5-api-run
+
+# MANUAL ONLY. This workflow spends paid API calls, so it is never triggered by a push or a
+# pull request. It requires repository secrets and refuses to start without them.
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: OpenAI-compatible model name
+        required: true
+        default: gpt-5.6-luna
+      runs_per_arm:
+        description: Declared runs per primary arm (protocol default is 10)
+        required: true
+        default: "10"
+      arms:
+        description: Which primary arms to run
+        required: true
+        type: choice
+        default: both
+        options:
+          - both
+          - V5_NO_GATE
+          - V5_FULL
+
+jobs:
+  v5-series:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
+      - name: Require API secrets
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "${OPENAI_API_KEY}" ]; then
+            echo "OPENAI_API_KEY secret is not configured; refusing to start a paid run." >&2
+            exit 1
+          fi
+
+      - name: Write the local env file
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_MODEL: ${{ inputs.model }}
+        run: |
+          umask 077
+          {
+            printf 'OPENAI_API_KEY=%s\n' "${OPENAI_API_KEY}"
+            printf 'OPENAI_MODEL=%s\n' "${OPENAI_MODEL}"
+            if [ -n "${OPENAI_BASE_URL}" ]; then printf 'OPENAI_BASE_URL=%s\n' "${OPENAI_BASE_URL}"; fi
+          } > "${RUNNER_TEMP}/v5.env"
+
+      - name: Build the deterministic blind inputs
+        run: |
+          mkdir -p "${RUNNER_TEMP}/v5"
+          python scripts/build_evidence_state.py --output "${RUNNER_TEMP}/v5/evidence_state.json"
+
+      - name: Run V5_NO_GATE series
+        if: ${{ inputs.arms == 'both' || inputs.arms == 'V5_NO_GATE' }}
+        run: |
+          python scripts/run_agent_v5_series.py \
+            --arm V5_NO_GATE \
+            --env-file "${RUNNER_TEMP}/v5.env" \
+            --evidence-state "${RUNNER_TEMP}/v5/evidence_state.json" \
+            --n-runs "${{ inputs.runs_per_arm }}" \
+            --output-dir "${RUNNER_TEMP}/v5/series_no_gate"
+
+      - name: Run V5_FULL series
+        if: ${{ inputs.arms == 'both' || inputs.arms == 'V5_FULL' }}
+        run: |
+          python scripts/run_agent_v5_series.py \
+            --arm V5_FULL \
+            --env-file "${RUNNER_TEMP}/v5.env" \
+            --evidence-state "${RUNNER_TEMP}/v5/evidence_state.json" \
+            --n-runs "${{ inputs.runs_per_arm }}" \
+            --output-dir "${RUNNER_TEMP}/v5/series_full"
+
+      - name: Produce the cross-arm comparison
+        if: ${{ inputs.arms == 'both' }}
+        run: |
+          python scripts/run_agent_v5_comparison.py \
+            --no-gate-series "${RUNNER_TEMP}/v5/series_no_gate" \
+            --full-series "${RUNNER_TEMP}/v5/series_full" \
+            --output-dir "${RUNNER_TEMP}/v5/comparison"
+
+      - name: Remove the env file before archiving
+        if: always()
+        run: rm -f "${RUNNER_TEMP}/v5.env"
+
+      - name: Upload the V5 run series
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-v5-series
+          path: ${{ runner.temp }}/v5
+          if-no-files-found: warn
