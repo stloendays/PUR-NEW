@@ -26,6 +26,7 @@ jobs:
           python -m json.tool configs/agent_v3.json > /dev/null
           python -m json.tool configs/evidence_access_profiles.json > /dev/null
           python -m json.tool configs/action_catalog.json > /dev/null
+          python -m json.tool configs/agent_v5_comparison_protocol.json > /dev/null
           python -m json.tool schemas/candidate_set.schema.json > /dev/null
       - name: Compile Agent and benchmark runners
         run: |
