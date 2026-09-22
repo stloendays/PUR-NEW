@@ -1,5 +1,7 @@
 # PUR-NEW
 
+> **Agent handoff:** automated coding/research agents should read [`AGENTS.md`](AGENTS.md) first. Claude Code should also read [`CLAUDE.md`](CLAUDE.md). These files point to the current reconciled experimental facts and canonical V5 sources.
+
 ## State-Conditioned Rheology Enables Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives
 
 PUR-NEW studies a practical formulation problem:
