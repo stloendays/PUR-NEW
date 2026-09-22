@@ -13,3 +13,4 @@ thermal_hold,hold_condition,"Stirred and sealed under vacuum",,"During 120 °C h
 thermal_hold,measurement_mode,"Prepared material sampled for viscometer measurement",,"Not continuous in-situ sensing"
 sample_preparation,polyol_stage,"Charge polyols; stir and vacuum-dehydrate at approximately 130 °C for 1 h",,"Verified laboratory record"
 sample_preparation,mdi_stage,"Add MDI; stir under vacuum at approximately 120 °C for about 1 h 20 min",,"Verified laboratory record"
+E1_plusP_perturbation,additive,H3PO4,,"Verified laboratory record"\nE1_plusP_perturbation,standard_solution_concentration,0.1,mol/L,"Verified laboratory record"\nE1_plusP_perturbation,h3po4_amount,0.025,mmol,"Verified laboratory record"\nE1_plusP_perturbation,calculated_solution_volume,0.25,mL,"Calculated from n/C"\nE1_plusP_perturbation,calculated_h3po4_mass,2.45,mg,"Calculated using 98.00 g/mol"\nE1_plusP_perturbation,addition_stage,dehydration_stage,,"Verified laboratory record"\n
