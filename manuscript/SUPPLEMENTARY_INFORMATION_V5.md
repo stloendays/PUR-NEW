@@ -39,9 +39,9 @@ The NCO:OH equivalent ratio of F1 was 1.82.
 
 ## Primary temperature-sweep analysis population
 
-Seven complete 80–130 °C viscosity curves are present in the raw local table. One E1 curve is explicitly labelled with phosphoric-acid context in the source record. Because that additive condition is not represented in the compact formulation definition used for the state analysis, the primary analysis uses the six chemistry-comparable complete realizations listed below.
+Seven complete 80–130 °C viscosity curves are present in the raw local table. One E1 curve is a defined phosphoric-acid perturbation: 0.025 mmol H3PO4 from a 0.1 mol L−1 standard solution was added during the dehydration stage, corresponding to 0.25 mL of solution and 2.45 mg H3PO4. Because this deliberately changes the chemical condition relative to nominal E1, the primary same-composition analysis uses the six chemistry-comparable complete realizations listed below.
 
-This exclusion is based on chemical comparability rather than on the direction of the statistical result. The excluded curve remains preserved in the versioned raw dataset.
+The E1 +P curve is retained as a separate chemical-perturbation check. Its apparent $E_\eta$ is 40.766 kJ mol−1 with $R^2=0.9979$ for $\ln\eta$ versus $1/T$, compared with 42.052 ± 2.426 kJ mol−1 across the six primary realizations. Holding the primary shared thermal-shape coefficients fixed and fitting only an E1 +P intercept gives a multiplicative RMSE of 1.034×. A single 120 °C anchor predicts the remaining five E1 +P temperatures with a multiplicative RMSE of 1.039×. Relative to the available E1 GJJ day-1 record, the E1 +P viscosities are 9.5–17.1% lower across 80–130 °C; this comparison is treated as an observational reference rather than a paired treatment-control estimate.
 
 ## Supplementary Table S2 | Chemistry-audited temperature-sweep realizations
 
