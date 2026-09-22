@@ -1,9 +1,9 @@
 {
-  "version": "1.0.0",
-  "protocol_id": "PUR_NEW_AGENT_V5_CHEMISTRY_GATE_COMPARISON_V1",
-  "status": "frozen_preimplementation",
+  "version": "1.1.0",
+  "protocol_id": "PUR_NEW_AGENT_V5_CHEMISTRY_GATE_COMPARISON_V1_1",
+  "status": "frozen_preimplementation_v1_1",
   "purpose": "Pre-register the implementation and comparison of a chemistry-aware Agent V5 before any V5 API result is generated. V5 must use experimentally discovered rheological regularities and their applicability domains as executable scientific constraints rather than as prose-only context.",
-  "provenance_rule": "Do not modify or reinterpret frozen V3/V4 run records. V5 is a new prospective runtime. Any protocol change after V5 results exist requires author-authorized thaw -> versioned revision -> re-freeze.",
+  "provenance_rule": "Author-authorized pre-result amendment. Preserve configs/archive/agent_v5_comparison_protocol_v1_0.json verbatim. V5 v1.1 clarifies information parity and V4-manifest drift handling before any V5 API outcome exists. Do not modify or reinterpret frozen V3/V4 run records. Any later protocol change after V5 results exist requires author-authorized thaw -> versioned revision -> re-freeze.",
   "historical_reference": {
     "architecture": "configs/agent_v4.json",
     "runner": "scripts/run_agent_v4.py",
@@ -35,17 +35,19 @@
   "primary_controlled_arms": [
     {
       "arm_id": "V5_NO_GATE",
-      "description": "Chemistry-audited local science tool is active, but the shared-shape applicability gate is disabled. Candidate set, experiment-card inventory, prompts, model endpoint, evidence profile, VOI implementation and random/run settings must match V5_FULL.",
+      "description": "Advice-only control. The chemistry-audited local science summary and the same raw applicability audit facts visible to V5_FULL are available to the model, but applicability does not change card admissibility. All pre-gate experiment cards remain selectable if otherwise valid.",
       "chemistry_audited_summary": true,
-      "applicability_gate": false,
-      "scientific_role": "same-runtime control isolating the incremental effect of the chemistry-domain gate"
+      "applicability_audit_visible_to_model": true,
+      "applicability_gate_enforced": false,
+      "scientific_role": "same-runtime control isolating the incremental effect of turning identical scientific applicability information into an executable hard constraint"
     },
     {
       "arm_id": "V5_FULL",
-      "description": "Chemistry-audited local science tool and deterministic shared-shape applicability gate are both active.",
+      "description": "Hard-gate condition. The model receives the same chemistry-audited local science summary and raw applicability audit facts as V5_NO_GATE; the deterministic applicability rule is additionally enforced before VOI ranking and at freeze.",
       "chemistry_audited_summary": true,
-      "applicability_gate": true,
-      "scientific_role": "prospective chemistry-aware Agent V5"
+      "applicability_audit_visible_to_model": true,
+      "applicability_gate_enforced": true,
+      "scientific_role": "prospective chemistry-aware Agent V5 with executable scientific constraints"
     }
   ],
   "secondary_context_arms": [
@@ -76,7 +78,7 @@
     "must_not_be_overridden_by_llm": true,
     "must_return_machine_readable_reason": true
   },
-  "primary_comparison_question": "Does encoding the discovered chemistry-domain boundary as a hard scientific applicability constraint reduce unsupported experiment choices and redirect the Agent toward measurements that are valid for the candidate chemistry?",
+  "primary_comparison_question": "Given identical model-visible scientific applicability information, does converting the discovered chemistry-domain boundary from advice-only context into a hard executable constraint reduce unsupported experiment choices while preserving or improving hypothesis discrimination?",
   "primary_metrics": [
     {
       "metric": "unsupported_shortcut_rate",
@@ -133,9 +135,11 @@
     "same_measurement_catalog_across_primary_arms": true,
     "same_evidence_profile_across_primary_arms": true,
     "same_voi_weights_across_primary_arms": true,
-    "only_intended_difference_between_primary_arms": "whether the deterministic chemistry-domain applicability gate changes experiment-card admissibility",
+    "only_intended_difference_between_primary_arms": "whether the identical chemistry-domain applicability audit is enforced as hard experiment-card admissibility before VOI/freeze",
     "do_not_pool_arms": true,
-    "report_model_series_separately_if_multiple_models_are_used": true
+    "report_model_series_separately_if_multiple_models_are_used": true,
+    "same_model_visible_scientific_information_across_primary_arms": true,
+    "information_parity_test_required": true
   },
   "required_outputs": [
     "per-run deliberation.json",
@@ -144,8 +148,58 @@
     "full experiment-card inventory with admissible/inadmissible status and reason",
     "arm-level summary.json",
     "cross-arm comparison.csv",
-    "machine-readable manifest with prompt/model/input/config hashes"
+    "machine-readable manifest with prompt/model/input/config hashes",
+    "model-visible pre-enforcement payload hash for each primary arm",
+    "applicability audit visible-to-model flag and enforcement flag"
   ],
   "success_interpretation": "A useful V5 result is not 'the Agent picked the expected formulation'. It is evidence that experimentally discovered material regularities and their chemistry-domain boundaries can be converted into executable constraints that prevent scientifically unsupported measurements while preserving or improving hypothesis discrimination.",
-  "manuscript_boundary": "Do not add V5 run results to MAIN_TEXT_V5.md or its SI until implementation, blindness, parity and result audits are complete and the author explicitly freezes the V5 result series."
+  "manuscript_boundary": "Do not add V5 run results to MAIN_TEXT_V5.md or its SI until implementation, blindness, parity and result audits are complete and the author explicitly freezes the V5 result series.",
+  "information_parity": {
+    "requirement": "V5_NO_GATE and V5_FULL must expose the same scientific facts to the model before the enforcement step.",
+    "same_across_primary_arms": [
+      "chemistry-audited rheology summary",
+      "raw assess_shared_shape_applicability outputs for the same candidate set",
+      "candidate lattice",
+      "hypothesis registry",
+      "measurement catalog",
+      "evidence profile",
+      "prompts",
+      "model endpoint",
+      "VOI implementation and weights",
+      "run count and declared settings"
+    ],
+    "arm_specific_difference": [
+      "V5_NO_GATE records applicability audit but does not remove cards or reject a committed card solely for chemistry-domain inadmissibility.",
+      "V5_FULL converts the same applicability audit into hard measurement admissibility before VOI and rejects any model selection outside the admissible set."
+    ],
+    "forbidden_confounds": [
+      "Do not hide applicability information from V5_NO_GATE while showing it to V5_FULL.",
+      "Do not add extra explanatory text, warnings, examples or prompt language to only one arm.",
+      "Do not change the candidate lattice or hypothesis registry between arms."
+    ],
+    "required_parity_test": "Serialize the model-visible pre-enforcement scientific payload for both arms and assert byte-identical equality after removing only explicit arm/enforcement identifiers."
+  },
+  "historical_v4_manifest_drift_policy": {
+    "observation": "Frozen V4 series manifests may no longer hash-match the current main working tree because later development changed some shared files before V5 implementation began.",
+    "required_handling": [
+      "Do not rewrite historical V4 manifests or frozen run artifacts.",
+      "Record the pre-existing drift explicitly as provenance.",
+      "A V5-start invariance baseline may be used only to prove that V5 implementation did not further modify the chosen V4 reference files/results.",
+      "Do not present the V5-start invariance baseline as a reconstruction or replacement of original V4 provenance.",
+      "If an exact historical V4 source tree is later recovered from Git history, record that separately without altering the frozen manifests."
+    ]
+  },
+  "amendment_history": [
+    {
+      "version": "1.0.0",
+      "status": "archived",
+      "path": "configs/archive/agent_v5_comparison_protocol_v1_0.json",
+      "note": "Initial pre-implementation protocol."
+    },
+    {
+      "version": "1.1.0",
+      "status": "active_frozen_preimplementation",
+      "note": "Clarifies advice-only versus hard-gate information parity and records the policy for pre-existing V4 manifest drift. No V5 API result existed when amended."
+    }
+  ]
 }
