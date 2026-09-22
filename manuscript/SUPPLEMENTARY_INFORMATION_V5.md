@@ -284,29 +284,20 @@ Reanalysis of these external curves shows that $\ln\eta$ versus $1/T$ is general
 - median $R^2 \approx 0.9967$;
 - 37 of 39 curves have $R^2\ge0.98$.
 
-However, the apparent temperature-response descriptor spans approximately
-
-$
-34.7\text{--}94.2~\mathrm{kJ\,mol^{-1}},
-$
-
-which is much broader than the local E1–E3 range.
+However, the apparent temperature-response descriptor spans approximately 34.7–94.2 kJ mol$^{-1}$, which is much broader than the local E1–E3 range.
 
 To test transferability without formulation leakage, each complete curve was treated as one sample and its apparent $E_\eta$ as one target. Individual temperature points from the same formulation were never randomly split between training and test sets. The primary analysis used the 37 curves with $R^2\ge0.98$; the two lower-fit curves were retained as sensitivity-only records.
 
-A five-descriptor ridge model used prepolymer molecular weight, polyol topological polar surface area, an isocyanate structural descriptor, NCO content and polyol $T_g$. With leave-one-isocyanate-family-out validation, the model gave
+A five-descriptor ridge model used prepolymer molecular weight, polyol topological polar surface area, an isocyanate structural descriptor, NCO content and polyol $T_g$.
 
-$
-R^2=0.910,\qquad \mathrm{RMSE}=3.12~\mathrm{kJ\,mol^{-1}},
-$
+| Model | Family-held-out validation | $R^2$ | RMSE (kJ mol$^{-1}$) |
+|---|---|---:|---:|
+| five-descriptor ridge | leave-one-isocyanate-family-out | 0.910 | 3.12 |
+| five-descriptor ridge | leave-one-polyol-family-out | -1.456 | 16.33 |
+| $T_g$ + NCO-content ridge | leave-one-isocyanate-family-out | 0.851 | 4.03 |
+| $T_g$ + NCO-content ridge | leave-one-polyol-family-out | 0.033 | 10.25 |
 
-whereas leave-one-polyol-family-out validation gave
-
-$
-R^2=-1.456,\qquad \mathrm{RMSE}=16.33~\mathrm{kJ\,mol^{-1}}.
-$
-
-A minimal model containing only polyol $T_g$ and NCO content preserved the same directional asymmetry: leave-one-isocyanate-family-out $R^2=0.851$ with RMSE 4.03 kJ mol$^{-1}$, compared with leave-one-polyol-family-out $R^2=0.033$ with RMSE 10.25 kJ mol$^{-1}$.
+Both models therefore show the same directional asymmetry between isocyanate-family and polyol-family transfer.
 
 These grouped tests show that the apparent temperature-response descriptor transfers much more readily across the represented isocyanate variation than across an entirely unseen polyol family. The result is interpreted as a chemistry-domain boundary, not as evidence that any individual descriptor is a unique molecular control variable. Several polyol descriptors co-vary strongly with family identity, so coefficient and rank-correlation summaries remain descriptive.
 
