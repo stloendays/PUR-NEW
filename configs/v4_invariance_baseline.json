@@ -1,6 +1,43 @@
 {
   "baseline_id": "PUR_NEW_V4_INVARIANCE_BASELINE_AT_V5_IMPLEMENTATION",
   "captured_at_git_commit": "63e6476865ecd0286e587b3f53e98b3a8313b77c",
+  "declared_amendments": {
+    "files": {
+      "src/pur_new/voi.py": {
+        "amended_at_utc": "2026-09-22",
+        "amended_sha256": "54d6fdfbfb956f6a90a4f081505585edc7c72b152ae2c0b9f7b3a1a14ced48c0",
+        "authorization_scope": "add the Condition-B decision scenario and the scoring seams it requires; do not alter Condition A configs or results, the chemistry-domain gate, the candidate lattice or the arm-parity requirement",
+        "authorized_by": "author",
+        "baseline_sha256": "bb173ed86ca36d851573a3fe9eed60a168d2428bb09b2b24fe07fa1c799f14c7",
+        "behavioural_invariance_evidence": {
+          "frozen_condition_a_cards_reproduced": "all 292 audited cards of the frozen Condition-A series recompute to equal objects",
+          "frozen_v4_ranking_reproduced": "all 292 cards of results/agent_v4_voi/run_001/EXP_V4_20260919T141726Z_50bdb5870e/voi_full_ranking.json recompute to equal objects under the amended module",
+          "tests": [
+            "tests/test_decision_conditions.py::test_condition_a_scores_match_the_frozen_run_exactly",
+            "tests/test_decision_conditions.py::test_condition_a_cards_are_structurally_identical_to_the_frozen_run",
+            "tests/test_decision_conditions.py::test_condition_a_declares_no_budget_component",
+            "tests/test_agent_v5.py::test_frozen_v4_voi_ranking_is_reproduced_by_the_amended_module"
+          ]
+        },
+        "reason": "Condition A could not measure the chemistry-domain gate: hypothesis_discrimination returned zero for every measurement that does not observe thermal-hold drift, so the gated measurement M-ANCHOR could never enter the tied top set and enforcement could not change any selection. Condition B needs a registry whose hypotheses disagree about a different coordinate, which requires the discrimination rule to read the coordinate from the registry instead of hard-coding drift.",
+        "what_changed": [
+          "score_components iterates the declared weights instead of a fixed term list, so a condition may declare an extra positive term",
+          "hypothesis_discrimination honours a registry-declared discriminating_quantity; a registry without that field takes the original drift path unchanged",
+          "predict_level_change and the level prediction rules were added",
+          "catalog_effort_scale and budget_efficiency were added; a catalog declaring no effort_points produces no budget component and no budget key",
+          "the acceptance and falsification criteria accept an optional registry and candidate and route to level criteria only for a registry that declares discriminating_quantity"
+        ],
+        "what_did_not_change": [
+          "BASE_WEIGHTS",
+          "the drift prediction rules and predict_drift",
+          "every component function used by the drift condition",
+          "the chemistry-domain gate in src/pur_new/agent_v5.py",
+          "configs/hypothesis_registry.json and configs/measurement_catalog.json"
+        ]
+      }
+    },
+    "policy": "A V4-defining input may change only as a declared, hash-pinned amendment carrying evidence that the change is behaviourally inert for V4 and for the frozen Condition-A series. An undeclared change to any listed file still fails tests/test_agent_v5.py::test_v4_inputs_and_frozen_results_are_unchanged_by_v5. The baseline hash is preserved, never overwritten, so the amendment is visible rather than absorbed."
+  },
   "frozen_v4_result_files": {
     "results/agent_v4_voi/AGENT_V4_REPORT.md": "2bb0424fb4ab0d8542aa0e9a76c5c40dbb24adefcb451ba60240d942004e4a88",
     "results/agent_v4_voi/_aborted_series_20260919T1426Z/README.json": "f2ca83b5138c249cf5faba231779f1a1215ab952fca59d8b420b075829a55aaa",
@@ -197,5 +234,5 @@
     "scripts/run_agent_v4.py": "c9864406959c32fcdc7792a363b56e16e5bac585f7852dff3aca7b2972361a81",
     "src/pur_new/voi.py": "bb173ed86ca36d851573a3fe9eed60a168d2428bb09b2b24fe07fa1c799f14c7"
   },
-  "version": "1.1.0"
+  "version": "1.2.0"
 }

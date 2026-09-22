@@ -135,6 +135,57 @@ def predict_drift(
     raise KeyError(f"unknown prediction_rule: {rule!r}")
 
 
+#: Prediction rules whose observable is the realized viscosity LEVEL rather than the
+#: matched-window drift. A registry declaring ``discriminating_quantity`` routes here.
+LEVEL_PREDICTION_RULES = frozenset(
+    {"level_dilution", "level_association", "level_plasticization"}
+)
+
+
+def predict_level_change(
+    hypothesis: dict[str, Any],
+    candidate: dict[str, Any],
+    registry: dict[str, Any],
+) -> float:
+    """Pre-result point prediction of the relative viscosity LEVEL change, in percent.
+
+    The level is expressed against the unmodified reactive-core composition of the same
+    lattice, so an unmodified candidate carries no differential prediction under any of
+    the registered level hypotheses and therefore separates none of them.
+    """
+    reference = registry["reference_observations"]
+    exponent = float(reference["dilution_exponent"])
+    floor = float(registry.get("prediction_floor_pct", -95.0))
+    phi_r = reactive_mass_fraction(candidate)
+    acrylic, tackifier = modifier_axes(candidate)
+    dilution = 100.0 * (phi_r**exponent - 1.0)
+    rule = hypothesis["prediction_rule"]
+    if rule == "level_dilution":
+        value = dilution
+    elif rule == "level_association":
+        value = dilution + float(hypothesis["association_gain_pct_per_pct"]) * acrylic
+    elif rule == "level_plasticization":
+        value = dilution - float(hypothesis["plasticization_drop_pct_per_pct"]) * (
+            acrylic + tackifier
+        )
+    else:
+        raise KeyError(f"unknown level prediction_rule: {rule!r}")
+    return max(floor, value)
+
+
+def _separated_pairs(
+    pairs: list[tuple[dict[str, Any], dict[str, Any]]],
+    predictions: dict[str, float],
+    threshold: float,
+) -> list[list[str]]:
+    separated = []
+    for first, second in pairs:
+        left, right = predictions[first["hypothesis_id"]], predictions[second["hypothesis_id"]]
+        if abs(left - right) >= threshold:
+            separated.append([first["hypothesis_id"], second["hypothesis_id"]])
+    return separated
+
+
 def hypothesis_discrimination(
     candidate: dict[str, Any],
     measurement: dict[str, Any],
@@ -152,6 +203,36 @@ def hypothesis_discrimination(
     pairs = list(combinations(hypotheses, 2))
     if not pairs:
         return {"score": 0.0, "separated_pairs": [], "n_pairs": 0}
+
+    quantity = registry.get("discriminating_quantity")
+    if quantity is not None:
+        # A registry that names the coordinate its hypotheses disagree about is separable
+        # only by a measurement that resolves that coordinate. This is the same rule the
+        # drift branch below applies; declaring it explicitly makes it apply to any
+        # coordinate rather than only to thermal-hold drift.
+        if measurement.get("resolves_quantity") != quantity:
+            return {
+                "score": 0.0,
+                "separated_pairs": [],
+                "n_pairs": len(pairs),
+                "discriminating_quantity": quantity,
+                "measurement_resolves_quantity": measurement.get("resolves_quantity"),
+                "note": "this measurement does not resolve the coordinate the registry disagrees about",
+            }
+        threshold = float(measurement["discrimination_threshold_pct"])
+        predictions = {
+            h["hypothesis_id"]: predict_level_change(h, candidate, registry) for h in hypotheses
+        }
+        separated = _separated_pairs(pairs, predictions, threshold)
+        return {
+            "score": len(separated) / len(pairs),
+            "separated_pairs": separated,
+            "predictions_pct": {key: round(value, 4) for key, value in predictions.items()},
+            "resolution_threshold_pct": threshold,
+            "n_pairs": len(pairs),
+            "discriminating_quantity": quantity,
+            "measurement_resolves_quantity": measurement.get("resolves_quantity"),
+        }
 
     if "thermal_hold_drift" not in measurement.get("addresses", []):
         return {
@@ -176,6 +257,35 @@ def hypothesis_discrimination(
         "predictions_pct": {key: round(value, 4) for key, value in predictions.items()},
         "resolution_threshold_pct": threshold,
         "n_pairs": len(pairs),
+    }
+
+
+def catalog_effort_scale(catalog: dict[str, Any]) -> float | None:
+    """Largest declared experimental effort in the catalog, or None if none is declared.
+
+    A catalog that declares no ``effort_points`` produces no budget component at all, so
+    the drift condition is scored by exactly the terms it was always scored by.
+    """
+    efforts = [m.get("effort_points") for m in catalog["measurements"]]
+    if any(value is None for value in efforts):
+        return None
+    scale = max(float(value) for value in efforts)
+    return scale if scale > 0 else None
+
+
+def budget_efficiency(measurement: dict[str, Any], effort_scale: float) -> dict[str, Any]:
+    """How little of the declared experimental budget this measurement plan consumes.
+
+    Linear in the declared number of viscosity determinations, normalized by the most
+    expensive plan in the same catalog. The most expensive plan scores 0.0; the cheapest
+    scores 1.0 only in the limit of a free experiment.
+    """
+    effort = float(measurement["effort_points"])
+    return {
+        "score": round(max(0.0, 1.0 - effort / effort_scale), 6),
+        "effort_points": effort,
+        "effort_scale_points": effort_scale,
+        "definition": "1 - effort_points / max(effort_points) over the declared catalog",
     }
 
 
@@ -283,9 +393,21 @@ def decision_relevance(
 
 
 def score_components(components: dict[str, float], weights: dict[str, float]) -> float:
-    positive = sum(weights[key] * components[key] for key in POSITIVE_TERMS)
-    penalty = sum(weights[key] * components[key] for key in RISK_TERMS)
-    return positive - penalty
+    """Weighted sum of the scored components, with the risk terms entering negatively.
+
+    Iterating the declared weights rather than a fixed term list lets a decision condition
+    add a positive term of its own - the Condition-B budget term is the only current
+    example - without changing the meaning or the value of any existing term. A weight
+    with no matching component contributes nothing, so the drift condition scores exactly
+    as it did before the budget term existed.
+    """
+    total = 0.0
+    for key, weight in weights.items():
+        if key not in components:
+            continue
+        value = components[key]
+        total += -weight * value if key in RISK_TERMS else weight * value
+    return total
 
 
 def _intervention_family(acrylic: float, tackifier: float) -> str:
@@ -298,7 +420,53 @@ def _intervention_family(acrylic: float, tackifier: float) -> str:
     return "reactive_core_only"
 
 
-def _acceptance_criterion(measurement: dict[str, Any], phi_r: float, reference: float) -> str:
+def _level_criteria(
+    measurement: dict[str, Any],
+    candidate: dict[str, Any],
+    registry: dict[str, Any],
+) -> tuple[str, str]:
+    """Acceptance and falsification text for a registry that adjudicates viscosity level."""
+    quantity = registry["discriminating_quantity"]
+    if measurement.get("resolves_quantity") != quantity:
+        return (
+            f"This plan does not return {quantity}, so it cannot accept or reject any registered "
+            "level hypothesis. Selecting it leaves the processing-window question open.",
+            f"No registered level hypothesis is falsifiable by this plan: it observes "
+            f"{measurement.get('resolves_quantity')} rather than {quantity}.",
+        )
+    predictions = {
+        h["hypothesis_id"]: predict_level_change(h, candidate, registry)
+        for h in registry["hypotheses"]
+    }
+    threshold = float(measurement["discrimination_threshold_pct"])
+    dilute = predictions["H-LEVEL-DILUTE"]
+    assoc = predictions["H-LEVEL-ASSOC"]
+    plastic = predictions["H-LEVEL-PLASTIC"]
+    accept = (
+        f"The measured 120-130 C level change against the unmodified reactive core falls within "
+        f"{threshold:.2f}% of exactly one registered prediction: {dilute:.2f}% for H-LEVEL-DILUTE, "
+        f"{assoc:.2f}% for H-LEVEL-ASSOC or {plastic:.2f}% for H-LEVEL-PLASTIC. That hypothesis is "
+        "accepted for this composition and the processing-window level is reported with it."
+    )
+    falsify = (
+        f"H-LEVEL-ASSOC is falsified if the measured level change is at or below the inert-dilution "
+        f"prediction of {dilute:.2f}%. H-LEVEL-PLASTIC is falsified if it is at or above that same "
+        f"prediction. H-LEVEL-DILUTE is falsified if the measured level change departs from "
+        f"{dilute:.2f}% by more than the {threshold:.2f}% resolution of this plan."
+    )
+    return accept, falsify
+
+
+def _acceptance_criterion(
+    measurement: dict[str, Any],
+    phi_r: float,
+    reference: float,
+    *,
+    registry: dict[str, Any] | None = None,
+    candidate: dict[str, Any] | None = None,
+) -> str:
+    if registry is not None and candidate is not None and registry.get("discriminating_quantity"):
+        return _level_criteria(measurement, candidate, registry)[0]
     if "thermal_hold_drift" in measurement.get("addresses", []):
         linear = reference * phi_r
         return (
@@ -328,7 +496,12 @@ def _falsification_criterion(
     phi_r: float,
     reference: float,
     tackifier: float,
+    *,
+    registry: dict[str, Any] | None = None,
+    candidate: dict[str, Any] | None = None,
 ) -> str:
+    if registry is not None and candidate is not None and registry.get("discriminating_quantity"):
+        return _level_criteria(measurement, candidate, registry)[1]
     if "thermal_hold_drift" in measurement.get("addresses", []):
         linear = reference * phi_r
         threshold = float(measurement["discrimination_threshold_pct"])
@@ -381,6 +554,7 @@ def build_experiment_cards(
     weights = weights or dict(BASE_WEIGHTS)
     supported_axes = independently_supported_axes()
     reference = float(registry["reference_observations"]["E1_drift_15_60_pct"])
+    effort_scale = catalog_effort_scale(catalog)
 
     cards: list[dict[str, Any]] = []
     for candidate in candidates:
@@ -401,40 +575,49 @@ def build_experiment_cards(
                 "extrapolation_risk": ext["score"],
                 "process_state_risk": proc["score"],
             }
-            cards.append(
-                {
-                    "experiment_id": f"{candidate['candidate_id']}::{measurement['measurement_id']}",
-                    "candidate_id": candidate["candidate_id"],
+            budget = budget_efficiency(measurement, effort_scale) if effort_scale else None
+            if budget is not None:
+                components["budget_efficiency"] = budget["score"]
+            card = {
+                "experiment_id": f"{candidate['candidate_id']}::{measurement['measurement_id']}",
+                "candidate_id": candidate["candidate_id"],
+                "measurement_id": measurement["measurement_id"],
+                "intervention_family": _intervention_family(acrylic, tackifier),
+                "formulation_state": candidate["formulation_state"],
+                "acrylic_like_pct": acrylic,
+                "minor_tackifier_like_pct": tackifier,
+                "reactive_mass_fraction": round(phi_r, 6),
+                "resin_modified": bool(profile["resin_modified"]),
+                "measurement_plan": {
                     "measurement_id": measurement["measurement_id"],
-                    "intervention_family": _intervention_family(acrylic, tackifier),
-                    "formulation_state": candidate["formulation_state"],
-                    "acrylic_like_pct": acrylic,
-                    "minor_tackifier_like_pct": tackifier,
-                    "reactive_mass_fraction": round(phi_r, 6),
-                    "resin_modified": bool(profile["resin_modified"]),
-                    "measurement_plan": {
-                        "measurement_id": measurement["measurement_id"],
-                        "name": measurement["name"],
-                        "protocol": measurement["protocol"],
-                        "primary_observable": measurement["primary_observable"],
-                        "sampling_times_min": measurement["sampling_times_min"],
-                        "temperature_c": measurement["temperature_c"],
-                        "min_repeats": measurement["min_repeats"],
-                    },
-                    "scientific_hypotheses_addressed": [h["hypothesis_id"] for h in registry["hypotheses"]],
-                    "hypothesis_discrimination_detail": disc,
-                    "uncertainty_reduction_detail": unc,
-                    "decision_relevance_detail": dec,
-                    "extrapolation_risk_detail": ext,
-                    "process_state_risk_detail": proc,
-                    "voi_components": {key: round(value, 6) for key, value in components.items()},
-                    "voi_score": round(score_components(components, weights), 6),
-                    "acceptance_criterion": _acceptance_criterion(measurement, phi_r, reference),
-                    "falsification_criterion": _falsification_criterion(
-                        measurement, phi_r, reference, tackifier
-                    ),
-                }
-            )
+                    "name": measurement["name"],
+                    "protocol": measurement["protocol"],
+                    "primary_observable": measurement["primary_observable"],
+                    "sampling_times_min": measurement["sampling_times_min"],
+                    "temperature_c": measurement["temperature_c"],
+                    "min_repeats": measurement["min_repeats"],
+                },
+                "scientific_hypotheses_addressed": [h["hypothesis_id"] for h in registry["hypotheses"]],
+                "hypothesis_discrimination_detail": disc,
+                "uncertainty_reduction_detail": unc,
+                "decision_relevance_detail": dec,
+                "extrapolation_risk_detail": ext,
+                "process_state_risk_detail": proc,
+                "voi_components": {key: round(value, 6) for key, value in components.items()},
+                "voi_score": round(score_components(components, weights), 6),
+                "acceptance_criterion": _acceptance_criterion(
+                    measurement, phi_r, reference, registry=registry, candidate=candidate
+                ),
+                "falsification_criterion": _falsification_criterion(
+                    measurement, phi_r, reference, tackifier, registry=registry, candidate=candidate
+                ),
+            }
+            # A catalog that declares no experimental effort produces no budget key at all,
+            # so a drift-condition card is byte-identical to the one the frozen V4 and
+            # Condition-A series recorded.
+            if budget is not None:
+                card["budget_efficiency_detail"] = budget
+            cards.append(card)
     cards.sort(key=lambda card: (-card["voi_score"], card["experiment_id"]))
     return cards
 

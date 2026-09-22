@@ -35,11 +35,10 @@ sys.path.insert(0, str(ROOT / "src"))
 from pur_new.agent_v3 import selection_entropy  # noqa: E402
 from pur_new.agent_v5 import ARMS  # noqa: E402
 
-try:  # the series runner declares which files must be identical across the arms
-    from run_agent_v5_series import ARM_PARITY_FILES  # type: ignore
-except Exception:  # pragma: no cover - script executed outside the scripts/ directory
-    sys.path.insert(0, str(ROOT / "scripts"))
-    from run_agent_v5_series import ARM_PARITY_FILES  # type: ignore
+# The parity file list is read from the series manifests rather than imported from the
+# runner. Each series froze the list it actually hashed, and different decision conditions
+# legitimately hash different registry and catalog files. Comparing against a module
+# constant would silently check the wrong list for any condition but the default.
 
 CSV_COLUMNS = [
     "arm",
@@ -263,10 +262,20 @@ def check_parity(manifests: dict[str, dict[str, Any]]) -> dict[str, Any]:
     no_gate, full = manifests["V5_NO_GATE"], manifests["V5_FULL"]
     differences: list[str] = []
 
-    for name in ARM_PARITY_FILES:
+    declared_left = list(no_gate.get("arm_parity_files") or [])
+    declared_right = list(full.get("arm_parity_files") or [])
+    if declared_left != declared_right:
+        differences.append("arms declared different parity file lists")
+    parity_files = sorted(set(declared_left) | set(declared_right))
+    if not parity_files:
+        differences.append("neither arm declared a parity file list")
+
+    for name in parity_files:
         left = (no_gate.get("series_input_hashes") or {}).get(name)
         right = (full.get("series_input_hashes") or {}).get(name)
-        if left != right:
+        if left is None or right is None:
+            differences.append(f"series input not hashed by both arms: {name}")
+        elif left != right:
             differences.append(f"series input differs between arms: {name}")
 
     for key in (
@@ -277,6 +286,8 @@ def check_parity(manifests: dict[str, dict[str, Any]]) -> dict[str, Any]:
         "top_k",
         "api_base_host",
         "pre_enforcement_payload_sha256",
+        "decision_condition",
+        "voi_weights",
     ):
         if no_gate.get(key) != full.get(key):
             differences.append(f"series setting differs between arms: {key}")
@@ -294,7 +305,8 @@ def check_parity(manifests: dict[str, dict[str, Any]]) -> dict[str, Any]:
     return {
         "parity_ok": not differences,
         "differences": differences,
-        "checked_files": list(ARM_PARITY_FILES),
+        "checked_files": parity_files,
+        "decision_condition": no_gate.get("decision_condition"),
         "information_parity_rule": (
             "protocol v1.1: both arms must receive the same model-visible applicability facts. "
             "The pre-enforcement payload hash is the machine-checkable form of that requirement."

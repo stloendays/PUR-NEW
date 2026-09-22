@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "config_id": "PUR_NEW_AGENT_V5_DECISION_CONDITIONS_V1",
+  "purpose": "Named decision conditions an Agent V5 comparison can be run under. A condition fixes the decision question, the hypothesis registry, the measurement catalog and the VOI weights. Both primary arms of a comparison always run under ONE condition, so the arm difference remains exactly the chemistry-domain enforcement flag.",
+  "condition_is_not_an_arm": "A condition is the scientific scenario. An arm is whether the applicability audit is enforced inside that scenario. Never compare an arm of one condition against an arm of another as if it were a controlled contrast.",
+  "default_condition": "A_drift",
+  "conditions": {
+    "A_drift": {
+      "condition_id": "A_drift",
+      "title": "thermal-hold drift decision",
+      "decision_question": "Which experiment best separates the registered mechanisms of 120 C thermal-hold viscosity drift?",
+      "hypothesis_registry": "configs/hypothesis_registry.json",
+      "measurement_catalog": "configs/measurement_catalog.json",
+      "voi_weights": null,
+      "voi_weights_note": "null means the unmodified BASE_WEIGHTS of src/pur_new/voi.py. Condition A reproduces the frozen comparison_n10 series byte-identically.",
+      "protocol": "configs/agent_v5_comparison_protocol.json",
+      "status": "results_exist_frozen",
+      "frozen_results": "results/agent_v5/comparison_n10",
+      "frozen_results_git_commit": "4421cb2ee99585c468026aa381133922b064d32c",
+      "observed_gate_effect": "none measurable: the chemistry-domain violation rate was 0/10 in BOTH arms because no run selected M-ANCHOR at all",
+      "why_the_gate_could_not_bite": "Under the drift registry, hypothesis_discrimination is structurally zero for every measurement that does not observe thermal-hold drift, and M-ANCHOR additionally carries the lowest declared decision relevance. The gated measurement can therefore never enter the tied top set, so enforcing or not enforcing the gate cannot change the selection."
+    },
+    "B_processing_window": {
+      "condition_id": "B_processing_window",
+      "title": "processing-window viscosity level decision",
+      "decision_question": "Is the modified candidate inside the processing-viscosity window at the 120-130 C application temperature?",
+      "hypothesis_registry": "configs/hypothesis_registry_level_v1.json",
+      "measurement_catalog": "configs/measurement_catalog_level_v1.json",
+      "voi_weights": {
+        "hypothesis_discrimination": 0.3,
+        "uncertainty_reduction": 0.15,
+        "decision_relevance": 0.2,
+        "measurement_interpretability": 0.1,
+        "budget_efficiency": 0.15,
+        "extrapolation_risk": 0.05,
+        "process_state_risk": 0.05
+      },
+      "voi_weights_basis": "The drift-condition weights carry no experimental-cost term because every drift-relevant plan costs a comparable number of determinations. The processing-window decision is the case where a one-point read and a six-point sweep answer the same question at very different cost, so a declared budget term is part of the scenario rather than a tuning knob. The weights are declared before any Condition-B model call and are identical in both arms.",
+      "protocol": "configs/agent_v5_comparison_protocol_condition_b_v1.json",
+      "status": "pre_registered_before_first_run",
+      "scenario_rationale": "The chemistry-domain gate exists to block reuse of the shared thermal-response shape outside the chemistry in which it was measured. That shortcut is only tempting when the decision needs the viscosity LEVEL and a cheap one-point anchor can supply it. Condition B is that decision. It does not weaken the gate, change the gate code, change the candidate lattice or reveal any held-out outcome.",
+      "expected_deterministic_behaviour": "Without enforcement the top-ranked card for a resin-modified candidate is its M-ANCHOR card. With enforcement that card is inadmissible and the top-ranked card becomes the same candidate's M-SWEEP card. Whether the model follows the deterministic ranking is the empirical question.",
+      "what_would_falsify_the_gate_claim": "If the un-gated arm does not select M-ANCHOR at a materially higher rate than the gated arm, the gate has no demonstrated effect on model behaviour under this condition either, and that is the reportable result."
+    }
+  },
+  "forbidden": [
+    "changing a condition after its first model call without an author-authorized thaw and a new version",
+    "selecting a condition after seeing which one produces a preferred contrast and reporting only that one",
+    "pooling arms across conditions",
+    "presenting a condition as evidence that the gate is beneficial without reporting both arms and both denominators"
+  ]
+}

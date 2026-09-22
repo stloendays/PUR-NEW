@@ -35,13 +35,27 @@ def main() -> int:
     parser.add_argument("--n-runs", type=int, default=10)
     parser.add_argument("--output-root", type=Path, default=ROOT / "results" / "agent_v5")
     parser.add_argument("--log", type=Path, default=None)
+    parser.add_argument(
+        "--condition",
+        default=None,
+        help=(
+            "named decision condition from configs/decision_conditions.json. Both arms are "
+            "driven under this one condition, so the arm contrast stays the enforcement flag."
+        ),
+    )
+    parser.add_argument(
+        "--label",
+        default=None,
+        help="suffix for the series and comparison directory names; defaults to the run count",
+    )
     args = parser.parse_args()
 
+    label = args.label or f"n{args.n_runs}"
     arms = {
-        "V5_NO_GATE": args.output_root / f"series_no_gate_n{args.n_runs}",
-        "V5_FULL": args.output_root / f"series_full_n{args.n_runs}",
+        "V5_NO_GATE": args.output_root / f"series_no_gate_{label}",
+        "V5_FULL": args.output_root / f"series_full_{label}",
     }
-    comparison_dir = args.output_root / f"comparison_n{args.n_runs}"
+    comparison_dir = args.output_root / f"comparison_{label}"
     log_path = args.log or (args.output_root / "drive_v5_primary_comparison.log")
     log_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -51,7 +65,10 @@ def main() -> int:
             handle.write(line + "\n")
         print(line, flush=True)
 
-    log(f"driver started: N={args.n_runs} per arm, interleaved")
+    log(
+        f"driver started: N={args.n_runs} per arm, interleaved, "
+        f"condition={args.condition or '<default>'}"
+    )
 
     for index in range(1, args.n_runs + 1):
         for arm, out_dir in arms.items():
@@ -69,6 +86,8 @@ def main() -> int:
                 "--max-new-runs",
                 "1",
             ]
+            if args.condition:
+                cmd += ["--condition", args.condition]
             if (out_dir / "series_manifest.json").exists():
                 cmd.append("--resume")
             proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)

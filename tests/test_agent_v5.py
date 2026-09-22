@@ -47,7 +47,12 @@ from pur_new.evidence_firewall import (
     filter_evidence_state,
     find_blind_payload_violations,
 )
-from pur_new.voi import build_experiment_cards, load_hypothesis_registry, load_measurement_catalog
+from pur_new.voi import (
+    BASE_WEIGHTS,
+    build_experiment_cards,
+    load_hypothesis_registry,
+    load_measurement_catalog,
+)
 
 CANDIDATE_SET = ROOT / "derived" / "stage1_blind_candidate_space_v1.json"
 BLINDED_IDS = {"F1"}
@@ -408,13 +413,52 @@ def test_v4_inputs_and_frozen_results_are_unchanged_by_v5():
     assert len(baseline["frozen_v4_result_files"]) > 100
     assert baseline["preexisting_series_manifest_drift"]["drifted_inputs_by_manifest"]
 
+    amendments = baseline.get("declared_amendments", {}).get("files", {})
     changed = [
         name
         for group in ("v4_input_files", "frozen_v4_result_files")
         for name, digest in baseline[group].items()
         if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != digest
     ]
-    assert changed == [], f"V5 changed frozen V4 material: {changed}"
+    undeclared = [name for name in changed if name not in amendments]
+    assert undeclared == [], f"V5 changed frozen V4 material without declaring it: {undeclared}"
+
+    # A declared amendment is only honoured at the exact hash it was declared at, and only
+    # with its evidence attached. Declaring a file does not licence further edits to it.
+    for name, record in amendments.items():
+        current = hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
+        assert current == record["amended_sha256"], f"{name} drifted past its declared amendment"
+        assert record["baseline_sha256"] == baseline["v4_input_files"][name]
+        assert record["authorized_by"]
+        assert record["reason"]
+        assert record["behavioural_invariance_evidence"]["tests"]
+
+    # No frozen V4 *result* may be amended at all; only V4-defining inputs may be.
+    assert not (set(amendments) & set(baseline["frozen_v4_result_files"]))
+
+
+def test_frozen_v4_voi_ranking_is_reproduced_by_the_amended_module():
+    """The amended VOI module still reproduces every frozen V4 card as an equal object.
+
+    This is the behavioural half of the invariance claim: the file hash changed, so the
+    baseline records an amendment, and the amendment is only admissible because the numbers
+    it produces for V4 are unchanged.
+    """
+    frozen = read_json(
+        ROOT
+        / "results"
+        / "agent_v4_voi"
+        / "run_001"
+        / "EXP_V4_20260919T141726Z_50bdb5870e"
+        / "voi_full_ranking.json"
+    )
+    frozen_by_id = {card["experiment_id"]: card for card in frozen["cards"]}
+    candidates = read_json(ROOT / "derived" / "stage1_blind_candidate_space_v1.json")["candidates"]
+
+    recomputed = build_experiment_cards(candidates)
+    assert len(recomputed) == len(frozen_by_id)
+    for card in recomputed:
+        assert card == frozen_by_id[card["experiment_id"]], card["experiment_id"]
 
 
 def test_v5_never_writes_into_a_frozen_v4_directory():
@@ -471,6 +515,19 @@ def _load_comparison_module():
     return module
 
 
+#: A stand-in for whatever file list a series froze. The comparison reads the list from the
+#: manifests, so the fixture declares one rather than importing a module constant.
+_PARITY_FILES = (
+    "configs/agent_v5.json",
+    "configs/decision_conditions.json",
+    "configs/hypothesis_registry.json",
+    "configs/measurement_catalog.json",
+    "prompts/agent_v5_judge.txt",
+    "src/pur_new/agent_v5.py",
+    "src/pur_new/voi.py",
+)
+
+
 def _manifest(arm: str, **overrides) -> dict:
     manifest = {
         "arm": arm,
@@ -484,11 +541,31 @@ def _manifest(arm: str, **overrides) -> dict:
         "n_runs_declared": 10,
         "top_k": TOP_K,
         "pre_enforcement_payload_sha256": "parity-hash",
-        "series_input_hashes": {name: "same" for name in _load_comparison_module().ARM_PARITY_FILES},
+        "decision_condition": "A_drift",
+        "voi_weights": dict(BASE_WEIGHTS),
+        "arm_parity_files": list(_PARITY_FILES),
+        "series_input_hashes": {name: "same" for name in _PARITY_FILES},
         "runs": [],
     }
     manifest.update(overrides)
     return manifest
+
+
+def test_comparison_parity_check_catches_a_condition_mismatch():
+    """Two arms run under different scenarios are not a controlled contrast."""
+    module = _load_comparison_module()
+    other = _manifest("V5_FULL", decision_condition="B_processing_window")
+    parity = module.check_parity({"V5_NO_GATE": _manifest("V5_NO_GATE"), "V5_FULL": other})
+    assert parity["parity_ok"] is False
+    assert any("decision_condition" in difference for difference in parity["differences"])
+
+
+def test_comparison_parity_check_catches_a_declared_file_list_mismatch():
+    module = _load_comparison_module()
+    other = _manifest("V5_FULL")
+    other["arm_parity_files"] = list(_PARITY_FILES[:-1])
+    parity = module.check_parity({"V5_NO_GATE": _manifest("V5_NO_GATE"), "V5_FULL": other})
+    assert parity["parity_ok"] is False
 
 
 def test_comparison_parity_check_passes_for_a_correctly_declared_pair():

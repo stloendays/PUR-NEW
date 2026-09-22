@@ -1,0 +1,57 @@
+{
+  "version": "1.0.0",
+  "registry_id": "PUR_NEW_HYPOTHESIS_REGISTRY_LEVEL_V1",
+  "purpose": "Pre-result, falsifiable mechanistic hypotheses about what sets the realized melt-viscosity LEVEL of a resin-modified reactive-PUR candidate inside the 120-130 C processing window. Registered before any Condition-B run and before any Condition-B model call.",
+  "outcome_blind": true,
+  "decision_question": "Is the modified candidate inside the processing-viscosity window at the application temperature?",
+  "discriminating_quantity": "realized viscosity level eta_ref",
+  "discriminating_quantity_note": "Only a measurement whose resolves_quantity is the realized viscosity level can separate these hypotheses. A thermal-hold drift measurement observes a different coordinate and makes no differential prediction under this registry.",
+  "prediction_observable": "relative change of the realized viscosity level at matched temperature, percent, against the unmodified reactive-core composition",
+  "reference_observations": {
+    "source": "original local unmodified reactive-core realizations at matched temperature",
+    "E1_drift_15_60_pct": 9.51,
+    "unmodified_reference_level_pct": 0.0,
+    "dilution_exponent": 2.5,
+    "dilution_exponent_basis": "declared pre-result power-law exponent relating melt viscosity level to reaction-capable mass fraction in this local family; the exponent is a declared modelling choice, not a fitted local constant",
+    "note": "Level predictions are expressed relative to the unmodified reactive-core composition of the same lattice, so an unmodified candidate carries no differential prediction and cannot separate these hypotheses."
+  },
+  "hypotheses": [
+    {
+      "hypothesis_id": "H-LEVEL-DILUTE",
+      "name": "inert-diluent level tracking",
+      "statement": "Resin-like modifiers are rheologically inert at processing temperature and act only as dilution of reaction-capable material. The realized viscosity level therefore follows a power law in the reactive mass fraction phi_r with no additional modifier-specific contribution.",
+      "prediction_rule": "level_dilution",
+      "predicts_level_change_pct": "100 * (phi_r ** dilution_exponent - 1)",
+      "falsified_if": "the measured level differs from the dilution prediction by more than the measurement resolution",
+      "supported_if": "the measured level agrees with the dilution prediction within the measurement resolution",
+      "depends_on_axes": []
+    },
+    {
+      "hypothesis_id": "H-LEVEL-ASSOC",
+      "name": "acrylic-associative level elevation",
+      "statement": "The acrylic-like axis associates within the melt and raises the realized viscosity level above the inert-dilution prediction, in proportion to the acrylic-like loading.",
+      "prediction_rule": "level_association",
+      "association_gain_pct_per_pct": 4.0,
+      "association_gain_basis": "declared pre-result elevation rate per percentage point of acrylic-like loading; chosen so the hypothesis makes a separable prediction at the lattice loadings rather than to match any measured outcome",
+      "predicts_level_change_pct": "dilution prediction + association_gain_pct_per_pct * acrylic_like_pct",
+      "falsified_if": "the measured level is at or below the inert-dilution prediction",
+      "supported_if": "the measured level exceeds the inert-dilution prediction beyond measurement resolution",
+      "depends_on_axes": ["acrylic_like"]
+    },
+    {
+      "hypothesis_id": "H-LEVEL-PLASTIC",
+      "name": "plasticizing-continuum level depression",
+      "statement": "Both modifier axes act as a plasticizing non-reactive continuum and depress the realized viscosity level below the inert-dilution prediction, in proportion to the total modifier loading.",
+      "prediction_rule": "level_plasticization",
+      "plasticization_drop_pct_per_pct": 1.5,
+      "plasticization_drop_basis": "declared pre-result depression rate per percentage point of total modifier loading; chosen so the hypothesis makes a separable prediction at the lattice loadings rather than to match any measured outcome",
+      "predicts_level_change_pct": "dilution prediction - plasticization_drop_pct_per_pct * (acrylic_like_pct + minor_tackifier_like_pct)",
+      "falsified_if": "the measured level is at or above the inert-dilution prediction",
+      "supported_if": "the measured level falls below the inert-dilution prediction beyond measurement resolution",
+      "depends_on_axes": ["acrylic_like", "minor_tackifier_like"]
+    }
+  ],
+  "prediction_floor_pct": -95.0,
+  "prediction_floor_basis": "a predicted level change below -95% would imply a non-physical near-total loss of melt viscosity and is clipped rather than extrapolated",
+  "claim_boundary": "These hypotheses are formulation-level statements about the realized viscosity level at matched temperature. None asserts a molecular association mechanism, and none makes any claim about thermal-hold drift, which is the subject of the separate drift registry."
+}

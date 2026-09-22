@@ -337,7 +337,9 @@ def tied_top_set(cards: list[dict[str, Any]]) -> list[str]:
     return sorted(card["experiment_id"] for card in cards if abs(card["voi_score"] - best) <= TIE_EPSILON)
 
 
-def _voi_view(cards: list[dict[str, Any]], *, top_k: int) -> dict[str, Any]:
+def _voi_view(
+    cards: list[dict[str, Any]], *, top_k: int, weights: dict[str, float] | None = None
+) -> dict[str, Any]:
     tied = tied_top_set(cards)
     best_per_measurement: dict[str, dict[str, Any]] = {}
     for card in cards:
@@ -347,7 +349,7 @@ def _voi_view(cards: list[dict[str, Any]], *, top_k: int) -> dict[str, Any]:
         family_best.setdefault(card["intervention_family"], card["voi_score"])
     return {
         "formula": VOI_FORMULA,
-        "weights": BASE_WEIGHTS,
+        "weights": weights or BASE_WEIGHTS,
         "is_a_probability": False,
         "is_a_distance_to_any_known_answer": False,
         "n_experiment_cards": len(cards),
@@ -370,7 +372,9 @@ def _voi_view(cards: list[dict[str, Any]], *, top_k: int) -> dict[str, Any]:
     }
 
 
-def build_pre_enforcement_payload(audit: dict[str, Any], *, top_k: int) -> dict[str, Any]:
+def build_pre_enforcement_payload(
+    audit: dict[str, Any], *, top_k: int, weights: dict[str, float] | None = None
+) -> dict[str, Any]:
     """The model-visible scientific payload BEFORE any enforcement step.
 
     This function deliberately has no arm parameter and reads no enforcement flag, so the
@@ -379,7 +383,7 @@ def build_pre_enforcement_payload(audit: dict[str, Any], *, top_k: int) -> dict[
     depend on the arm in the first place.
     """
     return {
-        "voi": _voi_view(_sorted_cards(audit["cards"]), top_k=top_k),
+        "voi": _voi_view(_sorted_cards(audit["cards"]), top_k=top_k, weights=weights),
         "chemistry_applicability_audit": {
             "gate_id": audit["gate_id"],
             "tool": APPLICABILITY_TOOL,
@@ -396,8 +400,10 @@ def build_pre_enforcement_payload(audit: dict[str, Any], *, top_k: int) -> dict[
     }
 
 
-def pre_enforcement_payload_hash(audit: dict[str, Any], *, top_k: int) -> str:
-    return canonical_hash(build_pre_enforcement_payload(audit, top_k=top_k))
+def pre_enforcement_payload_hash(
+    audit: dict[str, Any], *, top_k: int, weights: dict[str, float] | None = None
+) -> str:
+    return canonical_hash(build_pre_enforcement_payload(audit, top_k=top_k, weights=weights))
 
 
 ADVISORY_NOTE = (
@@ -412,13 +418,19 @@ BINDING_NOTE = (
 )
 
 
-def build_voi_payload(audit: dict[str, Any], *, top_k: int, enforce: bool) -> dict[str, Any]:
+def build_voi_payload(
+    audit: dict[str, Any],
+    *,
+    top_k: int,
+    enforce: bool,
+    weights: dict[str, float] | None = None,
+) -> dict[str, Any]:
     """Assemble the VOI evidence given to the model for one arm.
 
     Starts from the arm-independent pre-enforcement payload and applies exactly one
     difference: whether the audit removes cards from the selectable set.
     """
-    payload = build_pre_enforcement_payload(audit, top_k=top_k)
+    payload = build_pre_enforcement_payload(audit, top_k=top_k, weights=weights)
     applicability = payload["chemistry_applicability_audit"]
     applicability["applicability_audit_visible_to_model"] = True
     applicability["applicability_gate_enforced"] = bool(enforce)
@@ -427,7 +439,7 @@ def build_voi_payload(audit: dict[str, Any], *, top_k: int, enforce: bool) -> di
 
     if enforce:
         selectable = ranked_cards(audit, enforce=True)
-        payload["voi"] = _voi_view(selectable, top_k=top_k)
+        payload["voi"] = _voi_view(selectable, top_k=top_k, weights=weights)
         applicability["n_cards_removed_from_selectable_set"] = audit["n_cards_inadmissible"]
     else:
         applicability["n_cards_removed_from_selectable_set"] = 0
@@ -726,7 +738,13 @@ def selection_flags(card: dict[str, Any] | None) -> dict[str, Any]:
     }
 
 
-def audit_summary(audit: dict[str, Any], *, enforce: bool, top_k: int) -> dict[str, Any]:
+def audit_summary(
+    audit: dict[str, Any],
+    *,
+    enforce: bool,
+    top_k: int,
+    weights: dict[str, float] | None = None,
+) -> dict[str, Any]:
     """Compact, serializable statement of what the audit found and whether it bound."""
     return {
         "gate_id": audit["gate_id"],
@@ -736,7 +754,9 @@ def audit_summary(audit: dict[str, Any], *, enforce: bool, top_k: int) -> dict[s
         "applicability_audit_visible_to_model": True,
         "applicability_gate_enforced": bool(enforce),
         "audit_is_arm_independent": True,
-        "pre_enforcement_payload_sha256": pre_enforcement_payload_hash(audit, top_k=top_k),
+        "pre_enforcement_payload_sha256": pre_enforcement_payload_hash(
+            audit, top_k=top_k, weights=weights
+        ),
         "n_cards_total": audit["n_cards_total"],
         "n_cards_inadmissible": audit["n_cards_inadmissible"],
         "n_cards_removed_from_selectable_set": audit["n_cards_inadmissible"] if enforce else 0,
@@ -763,6 +783,7 @@ def freeze_experiment(
     frozen_utc: str,
     recommendation_digest: str,
     git_commit: str | None = None,
+    weights: dict[str, float] | None = None,
 ) -> dict[str, Any]:
     """Validate and freeze one V5 decision.
 
@@ -832,7 +853,7 @@ def freeze_experiment(
         "voi": {
             "score": card["voi_score"] if card else None,
             "components": card["voi_components"] if card else None,
-            "weights": BASE_WEIGHTS,
+            "weights": weights or BASE_WEIGHTS,
             "tied_top_set": tied,
             "selected_is_in_tied_top_set": (experiment_id in tied) if experiment_id else None,
             "formula": VOI_FORMULA,

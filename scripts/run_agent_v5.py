@@ -59,6 +59,7 @@ from pur_new.agent_v5 import (  # noqa: E402
     tied_top_set,
 )
 from pur_new.evidence_firewall import assert_blind_payload_clean, filter_evidence_state  # noqa: E402
+from pur_new.conditions import load_condition  # noqa: E402
 from pur_new.voi import (  # noqa: E402
     BASE_WEIGHTS,
     VOI_FORMULA,
@@ -175,6 +176,15 @@ def main() -> None:
     parser.add_argument("--profile", default=None)
     parser.add_argument("--top-k", type=int, default=12)
     parser.add_argument("--inspection-status", default="frozen_pre_result")
+    parser.add_argument(
+        "--condition",
+        default=None,
+        help=(
+            "named decision condition from configs/decision_conditions.json. It fixes the "
+            "hypothesis registry, the measurement catalog and the VOI weights. Both arms of a "
+            "comparison must run under the same condition. Defaults to the declared default."
+        ),
+    )
     args = parser.parse_args()
 
     gate_enforced = ARM_ENFORCES_GATE[args.arm]
@@ -187,8 +197,10 @@ def main() -> None:
     action_catalog = read_json(ROOT / "configs" / "action_catalog.json")
     candidate_set = read_json(args.candidate_set)
     raw_evidence = read_json(args.evidence_state)
-    registry = load_hypothesis_registry()
-    catalog = load_measurement_catalog()
+    condition = load_condition(args.condition)
+    registry = condition["registry"]
+    catalog = condition["catalog"]
+    voi_weights = condition["weights"] or dict(BASE_WEIGHTS)
     verified = load_verified_shape_transfer()
     recommendation_schema = read_json(ROOT / "schemas" / "agent_v5_experiment.schema.json")
 
@@ -296,16 +308,20 @@ def main() -> None:
             f"mandatory local science tool {MANDATORY_LOCAL_SCIENCE_TOOL} did not execute successfully"
         )
 
-    cards = build_experiment_cards(candidate_set["candidates"], registry=registry, catalog=catalog)
+    cards = build_experiment_cards(
+        candidate_set["candidates"], registry=registry, catalog=catalog, weights=voi_weights
+    )
     audit = audit_experiment_cards(cards, candidates=candidate_set["candidates"], verified=verified)
-    gate = audit_summary(audit, enforce=gate_enforced, top_k=args.top_k)
+    gate = audit_summary(audit, enforce=gate_enforced, top_k=args.top_k, weights=voi_weights)
     selectable = ranked_cards(audit, enforce=gate_enforced)
     cards_by_id = {card["experiment_id"]: card for card in audit["cards"]}
     selectable_by_id = {card["experiment_id"]: card for card in selectable}
     tied = tied_top_set(selectable)
-    sweep = decision_stability(selectable)
+    sweep = decision_stability(selectable, base_weights=voi_weights)
     sweep_for_model = {key: value for key, value in sweep.items() if key != "scenarios"}
-    voi_for_model = build_voi_payload(audit, top_k=args.top_k, enforce=gate_enforced)
+    voi_for_model = build_voi_payload(
+        audit, top_k=args.top_k, enforce=gate_enforced, weights=voi_weights
+    )
 
     shared = {
         "planner": planner,
@@ -351,6 +367,7 @@ def main() -> None:
         "candidate_set_hash": canonical_hash(candidate_set),
         "hypothesis_registry_hash": canonical_hash(registry),
         "measurement_catalog_hash": canonical_hash(catalog),
+        "decision_condition_hash": canonical_hash(condition["declared"]),
         "verified_shape_transfer_hash": canonical_hash(verified),
         "input_hash": canonical_hash(
             {
@@ -394,6 +411,7 @@ def main() -> None:
             frozen_utc=frozen_utc,
             recommendation_digest=digest,
             git_commit=current_git_commit(),
+            weights=voi_weights,
         )
         validate(recommendation, recommendation_schema)
     except Exception as exc:
@@ -507,7 +525,8 @@ def main() -> None:
             {
                 "arm": args.arm,
                 "applicability_gate_enforced": gate_enforced,
-                "weights": BASE_WEIGHTS,
+                "decision_condition": condition["condition_id"],
+                "weights": voi_weights,
                 "formula": VOI_FORMULA,
                 "ranked_selectable_experiment_ids": [card["experiment_id"] for card in selectable],
                 "cards": audit["cards"],

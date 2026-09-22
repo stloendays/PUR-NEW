@@ -39,16 +39,18 @@ from pur_new.agent_v5 import (  # noqa: E402
     load_verified_shape_transfer,
     pre_enforcement_payload_hash,
 )
-from pur_new.voi import build_experiment_cards  # noqa: E402
+from pur_new.conditions import load_condition  # noqa: E402
+from pur_new.voi import BASE_WEIGHTS, build_experiment_cards  # noqa: E402
 
 EXIT_INVALID_MODEL_OUTPUT = 3
 
+#: Inputs every series hashes regardless of condition. The condition contributes its own
+#: registry, catalog and protocol on top of these, so a Condition-B contract cannot be
+#: satisfied by a Condition-A input set and vice versa.
 SERIES_INPUT_FILES = (
     "configs/agent_v5.json",
-    "configs/agent_v5_comparison_protocol.json",
+    "configs/decision_conditions.json",
     "configs/verified_shape_transfer.json",
-    "configs/hypothesis_registry.json",
-    "configs/measurement_catalog.json",
     "configs/evidence_access_profiles.json",
     "configs/action_catalog.json",
     "configs/formulation_priors.json",
@@ -68,7 +70,14 @@ SERIES_INPUT_FILES = (
 #: Files whose hashes must be IDENTICAL between the two primary arms. The arm flag is the
 #: only declared difference, so anything on this list differing across arms invalidates the
 #: controlled comparison.
-ARM_PARITY_FILES = tuple(name for name in SERIES_INPUT_FILES)
+def series_input_files(condition: dict[str, Any]) -> tuple[str, ...]:
+    """Shared inputs plus the files the chosen condition declares."""
+    declared = condition["declared"]
+    extra = [declared["hypothesis_registry"], declared["measurement_catalog"]]
+    protocol = declared.get("protocol")
+    if protocol:
+        extra.append(protocol)
+    return tuple(SERIES_INPUT_FILES) + tuple(sorted(set(extra)))
 
 
 def utc_now() -> str:
@@ -104,6 +113,11 @@ def main() -> None:
     parser.add_argument("--model", default=None, help="override OPENAI_MODEL for this series")
     parser.add_argument("--series-label", default=None)
     parser.add_argument("--top-k", type=int, default=12)
+    parser.add_argument(
+        "--condition",
+        default=None,
+        help="named decision condition; both arms of a comparison must declare the same one",
+    )
     parser.add_argument(
         "--resume",
         action="store_true",
@@ -144,11 +158,21 @@ def main() -> None:
     # Protocol v1.1 information-parity evidence: the model-visible pre-enforcement payload
     # is arm-independent by construction, and its hash is frozen into the contract so the
     # two arms can be compared on the record rather than on a claim.
+    condition = load_condition(args.condition)
+    voi_weights = condition["weights"] or dict(BASE_WEIGHTS)
+    input_files = series_input_files(condition)
     candidates = json.loads(args.candidate_set.read_text(encoding="utf-8"))["candidates"]
     audit = audit_experiment_cards(
-        build_experiment_cards(candidates), candidates=candidates, verified=load_verified_shape_transfer()
+        build_experiment_cards(
+            candidates,
+            registry=condition["registry"],
+            catalog=condition["catalog"],
+            weights=voi_weights,
+        ),
+        candidates=candidates,
+        verified=load_verified_shape_transfer(),
     )
-    parity_hash = pre_enforcement_payload_hash(audit, top_k=args.top_k)
+    parity_hash = pre_enforcement_payload_hash(audit, top_k=args.top_k, weights=voi_weights)
 
     # The contract is written BEFORE the first run, so N cannot be chosen after seeing results.
     manifest: dict[str, Any] = {
@@ -156,6 +180,10 @@ def main() -> None:
         "architecture": "PUR_NEW_CHEMISTRY_GATED_EXPERIMENT_SELECTION_AGENT_V5",
         "protocol_version": "1.1.0",
         "arm": args.arm,
+        "decision_condition": condition["condition_id"],
+        "decision_condition_protocol": condition["protocol"],
+        "decision_question": condition["decision_question"],
+        "voi_weights": voi_weights,
         "applicability_audit_visible_to_model": True,
         "applicability_gate_enforced": ARM_ENFORCES_GATE[args.arm],
         "pre_enforcement_payload_sha256": parity_hash,
@@ -171,8 +199,8 @@ def main() -> None:
         "candidate_set": str(args.candidate_set),
         "candidate_set_sha256": sha256_file(args.candidate_set.resolve()),
         "evidence_state_sha256": sha256_file(args.evidence_state.resolve()),
-        "series_input_hashes": {name: sha256_file(ROOT / name) for name in SERIES_INPUT_FILES},
-        "arm_parity_files": list(ARM_PARITY_FILES),
+        "series_input_hashes": {name: sha256_file(ROOT / name) for name in input_files},
+        "arm_parity_files": list(input_files),
         "reporting_rule": (
             "Every attempted run is reported with its outcome class. The denominator for any rate "
             "is n_runs_declared, not the number of runs that happened to succeed. A failed or "
@@ -184,6 +212,11 @@ def main() -> None:
         existing = json.loads(manifest_path.read_text(encoding="utf-8"))
         if existing.get("arm") != args.arm:
             raise SystemExit(f"resume refused: manifest declares arm {existing.get('arm')!r}, invoked with {args.arm!r}")
+        if existing.get("decision_condition") != condition["condition_id"]:
+            raise SystemExit(
+                f"resume refused: manifest declares condition {existing.get('decision_condition')!r}, "
+                f"invoked with {condition['condition_id']!r}"
+            )
         if existing["n_runs_declared"] != args.n_runs:
             raise SystemExit(
                 f"resume refused: manifest declares N={existing['n_runs_declared']}, invoked with N={args.n_runs}"
@@ -231,6 +264,8 @@ def main() -> None:
             str(args.evidence_state),
             "--top-k",
             str(args.top_k),
+            "--condition",
+            condition["condition_id"],
             "--output-dir",
             str(run_dir),
         ]
