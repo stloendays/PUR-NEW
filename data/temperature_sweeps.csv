@@ -1,10 +1,10 @@
 formulation_id,run_label,retest_after_1d,temperature_c,viscosity_reported,source_note
-E1,+P,false,80,3015,phosphoric-acid-labelled source run
-E1,+P,false,90,1964,phosphoric-acid-labelled source run
-E1,+P,false,100,1349,phosphoric-acid-labelled source run
-E1,+P,false,110,958,phosphoric-acid-labelled source run
-E1,+P,false,120,699,phosphoric-acid-labelled source run
-E1,+P,false,130,542,phosphoric-acid-labelled source run
+E1,+P,false,80,3015,H3PO4 standard solution 0.1 mol/L; 0.025 mmol H3PO4; added during dehydration
+E1,+P,false,90,1964,H3PO4 standard solution 0.1 mol/L; 0.025 mmol H3PO4; added during dehydration
+E1,+P,false,100,1349,H3PO4 standard solution 0.1 mol/L; 0.025 mmol H3PO4; added during dehydration
+E1,+P,false,110,958,H3PO4 standard solution 0.1 mol/L; 0.025 mmol H3PO4; added during dehydration
+E1,+P,false,120,699,H3PO4 standard solution 0.1 mol/L; 0.025 mmol H3PO4; added during dehydration
+E1,+P,false,130,542,H3PO4 standard solution 0.1 mol/L; 0.025 mmol H3PO4; added during dehydration
 E1,GJJ,true,80,3636,one-day retest
 E1,GJJ,true,90,2288,one-day retest
 E1,GJJ,true,100,1512,one-day retest
