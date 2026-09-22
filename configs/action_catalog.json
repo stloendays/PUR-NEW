@@ -1,10 +1,10 @@
 {
-  "catalog_version": "1.5.0",
+  "catalog_version": "1.5.1",
   "purpose": "Deterministic scientific actions for a discovery-first PUR Agent: first extract material-response structure from measured evidence, then use that structure to choose informative formulation-process experiments.",
   "actions": [
     {
       "name": "get_state_aware_rheology_summary",
-      "description": "Return the paper's upstream rheological findings from pre-validation evidence only: formulation-only versus state-aware model comparison, the state-shift master-curve structure, leave-one-temperature validation, one-point state calibration, the local apparent temperature-sensitivity coordinate, and the E1/E5 thermal-hold drift contrast. Also returns explicit design rules and measurement implications. The validation formulation/outcome is excluded.",
+      "description": "Return the paper's upstream rheological findings from pre-validation evidence only: formulation-only versus state-aware model comparison, the state-shift master-curve structure, one-point state calibration, the local apparent temperature-sensitivity coordinate, the E1/E5 thermal-hold drift contrast, and the verified E1 +P phosphoric-acid perturbation as a separate scale-versus-shape check. The E1 +P condition is 0.025 mmol H3PO4 from a 0.1 mol/L standard solution added during dehydration and is not pooled into the primary same-composition fit. Also returns explicit design rules and measurement implications. The validation formulation/outcome is excluded.",
       "when_to_use": [
         "first, before candidate ranking",
         "to identify which material-response regularities should control experiment selection",
@@ -18,7 +18,7 @@
     },
     {
       "name": "get_chemistry_audited_rheology_summary",
-      "description": "Return the chemistry-provenance-audited local rheology result from original pre-validation measurements: same-order formulation/state comparison, model-free state-shift check, leave-one-formulation one-point calibration, apparent thermal-response descriptor, and original hold contrast. The phosphoric-acid-labelled sensitivity curve and validation outcome are excluded.",
+      "description": "Return the chemistry-provenance-audited local rheology result from original pre-validation measurements: same-order formulation/state comparison, model-free state-shift check, leave-one-formulation one-point calibration, apparent thermal-response descriptor, original hold contrast, and a separate verified E1 +P chemical-perturbation check. E1 +P is 0.025 mmol H3PO4 from a 0.1 mol/L standard solution added during dehydration; it remains outside the primary same-composition fit but its thermal-shape compatibility is returned. The validation formulation/outcome is excluded.",
       "when_to_use": [
         "as the preferred local-science summary for new chemistry-first development",
         "before deciding whether a discovered local rheological regularity can guide a new experiment",
