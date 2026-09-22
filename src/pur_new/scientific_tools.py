@@ -41,7 +41,8 @@ def _prepare_audited_temperature_data() -> pd.DataFrame:
     if df["analysis_role"].isna().any():
         missing = sorted(df.loc[df["analysis_role"].isna(), "realization_id"].unique())
         raise ValueError(f"Missing realization metadata: {missing}")
-    return df[df["analysis_role"] != "sensitivity_only"].copy()
+    primary_roles = {"primary", "primary_with_caveat"}
+    return df[df["analysis_role"].isin(primary_roles)].copy()
 
 
 def _model_and_cv(df: pd.DataFrame, formula: str) -> dict[str, float]:
@@ -130,6 +131,109 @@ def _thermal_descriptor(df: pd.DataFrame) -> dict[str, Any]:
     }
 
 
+def _phosphoric_acid_perturbation(
+    primary_df: pd.DataFrame, thermal_summary: dict[str, Any]
+) -> dict[str, Any]:
+    """Quantify the verified E1 +P perturbation without mixing it into the primary fit."""
+    sweeps = pd.read_csv(ROOT / "data" / "temperature_sweeps.csv")
+    sweeps["temperature_c"] = pd.to_numeric(sweeps["temperature_c"], errors="raise")
+    sweeps["viscosity_reported"] = pd.to_numeric(sweeps["viscosity_reported"], errors="raise")
+    sweeps["retest_after_1d"] = sweeps["retest_after_1d"].astype(str).str.lower().map(
+        {"true": True, "false": False}
+    )
+    sweeps["dx"] = 1000.0 / (sweeps["temperature_c"] + 273.15) - 1000.0 / T_REF_K
+    sweeps["ln_eta"] = np.log(sweeps["viscosity_reported"])
+
+    plus_p = sweeps[
+        (sweeps["formulation_id"] == "E1") & (sweeps["run_label"] == "+P")
+    ].sort_values("temperature_c").copy()
+    if len(plus_p) != 6:
+        raise ValueError("Expected six temperatures for E1 +P perturbation")
+
+    perturb = pd.read_csv(ROOT / "data" / "experimental_perturbations.csv")
+    prow = perturb.loc[perturb["realization_id"] == "E1__+P__day1_0"].iloc[0]
+
+    fit = stats.linregress(
+        1.0 / (plus_p["temperature_c"].to_numpy() + 273.15),
+        plus_p["ln_eta"].to_numpy(),
+    )
+    e_eta = float(fit.slope * R_GAS / 1000.0)
+
+    shape = smf.ols("ln_eta ~ C(realization_id) + dx + I(dx**2)", primary_df).fit()
+    beta1 = float(shape.params["dx"])
+    beta2 = float(shape.params["I(dx ** 2)"])
+
+    intercept = float(
+        np.mean(
+            plus_p["ln_eta"].to_numpy()
+            - beta1 * plus_p["dx"].to_numpy()
+            - beta2 * plus_p["dx"].to_numpy() ** 2
+        )
+    )
+    pred = intercept + beta1 * plus_p["dx"].to_numpy() + beta2 * plus_p["dx"].to_numpy() ** 2
+    intercept_only_error = math.exp(_rmse(plus_p["ln_eta"].to_numpy() - pred))
+
+    anchor = plus_p.loc[plus_p["temperature_c"] == 120.0].iloc[0]
+    test = plus_p.loc[plus_p["temperature_c"] != 120.0]
+    anchor_pred = (
+        anchor["ln_eta"]
+        + beta1 * (test["dx"] - anchor["dx"])
+        + beta2 * (test["dx"] ** 2 - anchor["dx"] ** 2)
+    )
+    anchor_error = math.exp(_rmse(test["ln_eta"].to_numpy() - anchor_pred.to_numpy()))
+
+    comparator = sweeps[
+        (sweeps["formulation_id"] == "E1")
+        & (sweeps["run_label"] == "GJJ")
+        & (sweeps["retest_after_1d"] == True)  # noqa: E712
+    ][["temperature_c", "viscosity_reported"]].rename(
+        columns={"viscosity_reported": "comparator_viscosity"}
+    )
+    comparison = plus_p[["temperature_c", "viscosity_reported"]].merge(
+        comparator, on="temperature_c", how="inner", validate="one_to_one"
+    )
+    ratios = comparison["viscosity_reported"].to_numpy() / comparison[
+        "comparator_viscosity"
+    ].to_numpy()
+    pct = (ratios - 1.0) * 100.0
+
+    return {
+        "condition": {
+            "additive": str(prow["additive"]),
+            "standard_solution_concentration_mol_L": float(prow["solution_concentration_mol_L"]),
+            "amount_mmol": float(prow["amount_mmol"]),
+            "calculated_solution_volume_mL": float(prow["calculated_solution_volume_mL"]),
+            "calculated_neat_additive_mass_mg": float(prow["calculated_neat_additive_mass_mg"]),
+            "addition_stage": str(prow["addition_stage"]),
+        },
+        "apparent_E_eta_kJ_mol": e_eta,
+        "ln_eta_vs_invT_r2": float(fit.rvalue**2),
+        "primary_E_eta_mean_kJ_mol": float(thermal_summary["mean_apparent_E_eta_kJ_mol"]),
+        "primary_E_eta_sd_kJ_mol": float(thermal_summary["sd_apparent_E_eta_kJ_mol"]),
+        "standardized_E_eta_delta_from_primary_mean": float(
+            (e_eta - thermal_summary["mean_apparent_E_eta_kJ_mol"])
+            / thermal_summary["sd_apparent_E_eta_kJ_mol"]
+        ),
+        "shared_shape_intercept_only_multiplicative_error": intercept_only_error,
+        "anchor_120c_predict_remaining_temperatures_multiplicative_error": anchor_error,
+        "observational_E1_GJJ_day1_comparator": {
+            "geometric_mean_viscosity_ratio": float(np.exp(np.mean(np.log(ratios)))),
+            "percent_difference_range": [float(np.min(pct)), float(np.max(pct))],
+            "mean_absolute_percent_difference": float(np.mean(np.abs(pct))),
+            "interpretation_boundary": (
+                "Observational reference only; the compact record does not establish a paired "
+                "parent-batch relationship between E1 +P and E1 GJJ day-1."
+            ),
+        },
+        "interpretation": (
+            "The verified low-dose H3PO4 perturbation shifts the observed viscosity level while "
+            "remaining closely compatible with the local shared thermal-response geometry. "
+            "It is a separate chemical-perturbation check and is not pooled into the primary "
+            "same-composition state model."
+        ),
+    }
+
+
 def _original_hold() -> dict[str, Any]:
     df = pd.read_csv(ROOT / "data" / "thermal_hold.csv")
     df = df[(df["stage"] == "original") & (df["formulation_id"].isin(["E1", "E5"]))].copy()
@@ -170,16 +274,19 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
     pca = _model_free_state_shift(df)
     thermal = _thermal_descriptor(df)
     hold = _original_hold()
+    perturbation = _phosphoric_acid_perturbation(df, thermal)
 
     return {
         "tool_name": "get_state_aware_rheology_summary",
-        "tool_version": "3.4-same-order-model-comparison",
+        "tool_version": "3.5-verified-phosphoric-perturbation",
         "source_scope": "original pre-validation local measurements with chemistry-comparability audit",
         "validation_formulation_visible": False,
         "provenance_audit": {
             "excluded_from_primary_state_model": ["E1__+P__day1_0"],
             "reason": (
-                "The source record is phosphoric-acid-labelled and its additive identity/amount is not represented in formulations.csv; it is retained as sensitivity-only until chemistry is reconciled."
+                "E1 +P is a verified chemical perturbation: 0.025 mmol H3PO4 from a 0.1 mol/L "
+                "standard solution was added during dehydration. It is excluded from the "
+                "same-composition primary state model and exposed separately as a perturbation check."
             ),
             "same_operator_labels": ["GJJ", "ZYX", "CHH"],
             "day1_parent_sample_relation": "unknown in compact source metadata",
@@ -226,6 +333,7 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
                     "Original E1 and E5 hold trajectories show that thermal-hold viscosity drift is strongly formulation dependent and should be treated separately from static viscosity."
                 ),
             },
+            "chemical_perturbation_check": perturbation,
         },
         "design_rules": [
             "Represent a candidate as formulation plus process/realization state, not composition alone.",
@@ -233,6 +341,7 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
             "Treat static viscosity, temperature response and thermal-hold stability as separate decision variables.",
             "When the failure mode is hot-hold drift, choose an experiment and measurement window that directly test drift rather than only matching one nominal viscosity value.",
             "Use external resin/tackifier evidence to define chemically plausible directions, but do not convert analogue proximity into a predicted local outcome.",
+            "Keep deliberately chemistry-perturbed curves outside same-composition fitting, but use them to test whether an intervention shifts viscosity scale, thermal-response shape, or both.",
         ],
         "experiment_design_implications": {
             "state_anchor": (
@@ -244,12 +353,17 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
             "selection_target": (
                 "Select a formulation-process point that is informative about the observed instability and state uncertainty, not merely the closest static-viscosity value."
             ),
+            "verified_acid_perturbation": (
+                "E1 +P received 0.025 mmol H3PO4 from a 0.1 mol/L standard solution during dehydration. "
+                "Its close agreement with the primary shared thermal shape makes it useful as a defined "
+                "scale-versus-shape perturbation check, not as another nominal E1 realization."
+            ),
         },
         "claim_boundaries": [
             "The shared-shape/state-shift structure is established only within the measured local chemistry family.",
             "The apparent E_eta descriptor is rheological, not a chemical reaction activation energy.",
             "The E1/E5 hold contrast does not identify a unique molecular mechanism.",
-            "The phosphoric-acid-labelled E1 +P curve is not used in the chemistry-audited primary state model.",
+            "The verified E1 +P phosphoric-acid perturbation is excluded from the primary same-composition fit and is interpreted separately as a chemical-perturbation check.",
             "No validation-formulation identity or outcome is used by this tool.",
         ],
     }
