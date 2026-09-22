@@ -36,10 +36,30 @@ with a realization/state-specific viscosity scale `alpha_r` and a shared local t
 
 Key model comparisons:
 
+Two conventions exist and must not be mixed. The manuscript reports the
+**same-order** comparison, in which both models carry the shared quadratic
+inverse-temperature response so that the only change is formulation-level
+intercepts becoming realization-specific intercepts (Supplementary Table S3):
+
 ```text
-formulation-only R2 ~= 0.895
-state-shift shared-shape R2 ~= 0.998
-held-temperature error: ~1.406x -> ~1.055x
+formulation-only R2            = 0.8553
+state-conditioned R2           = 0.9977
+held-temperature error         = 1.423x -> 1.058x
+```
+
+`docs/STATISTICAL_ANALYSIS.md` reports the **best-of-each-basis** model table,
+where the formulation-only row is free to use its own thermal basis:
+
+```text
+formulation-only R2            = 0.8952
+state-conditioned R2           = 0.9982
+held-temperature error         = 1.394x -> 1.044x
+```
+
+Both are correct for what they describe; only the first is cited in the paper.
+Cross-validation figures, which are convention-independent:
+
+```text
 strict unseen-realization formulation-only error: ~1.60x
 one-point state calibration error: ~1.065-1.098x
 ```
@@ -47,9 +67,14 @@ one-point state calibration error: ~1.065-1.098x
 ### Distinct rheological coordinates
 
 ```text
-mean local apparent E_eta = 41.87 +/- 2.27 kJ/mol
-CV = 5.4%
+mean local apparent E_eta = 42.05 +/- 2.43 kJ/mol
+CV = 5.77%
+n  = 6 chemistry-audited realizations, E1 +P excluded
 ```
+
+The earlier `41.87 +/- 2.27, CV 5.4%` figure was computed over all seven
+realization groups, before E1 `+P` was resolved as a defined phosphoric-acid
+perturbation. It is superseded and must not be quoted.
 
 while original 120 C hold drift differs strongly:
 

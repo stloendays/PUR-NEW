@@ -137,6 +137,14 @@ CV                  = 5.4%
 median R²            = 0.9948
 ```
 
+> **Superseded for the primary distribution.** This block was computed over all
+> seven realization groups, before the E1 `+P` curve was resolved as a defined
+> phosphoric-acid perturbation rather than a nominal replicate. The primary
+> same-composition distribution now excludes it and is `42.05 ± 2.43 kJ/mol,
+> CV 5.77%` over six chemistry-audited realizations; see
+> `docs/DATA_AND_MODEL_AUDIT.md`. The numbers above are kept as the record of
+> the 2026-09-18 run and are what the manuscript does **not** cite.
+
 This `E_eta` is an **apparent rheological temperature-sensitivity descriptor**, not a molecular reaction activation energy.
 
 The narrow local dispersion is consistent with the master-curve result above: in the present chemistry family, much of the variation appears as a vertical viscosity-state shift rather than a wholesale change in thermal shape.
