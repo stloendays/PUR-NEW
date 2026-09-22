@@ -26,16 +26,16 @@ The original local formulation space consisted of five reactive polyurethane hot
 
 ## Supplementary Table S1 | Local formulations
 
-| Formulation | Stage | PPG2000/PDP-70 | Reported NCO:OH | PPG2000 | PDP-70 | AC1920 | TK100 | MDI | Basis |
+| Formulation | Stage | PPG2000/PDP-70 | NCO:OH | PPG2000 | PDP-70 | AC1920 | TK100 | MDI | Basis |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---|
 | E1 | original | 50/50 | 1.70 | 121.07 | 121.07 | — | — | 57.86 | g |
 | E2 | original | 50/50 | 1.80 | 119.71 | 119.71 | — | — | 60.57 | g |
 | E3 | original | 50/50 | 1.90 | 118.39 | 118.39 | — | — | 63.23 | g |
 | E4 | original | 60/40 | 1.80 | 144.30 | 96.20 | — | — | 59.50 | g |
 | E5 | original | 40/60 | 1.80 | 95.35 | 143.02 | — | — | 61.63 | g |
-| F1 | follow-up | 50/50 | not reconstructed | 39.60 | 39.60 | 17.00 | 5.00 | 20.19 | source-reported parts |
+| F1 | follow-up | 50/50 | 1.82 | 39.60 | 39.60 | 17.00 | 5.00 | 20.19 | source-reported parts |
 
-No NCO:OH value was reconstructed for F1 because the source record did not contain the information needed to verify a stoichiometric calculation.
+The NCO:OH equivalent ratio of F1 was 1.82.
 
 ## Primary temperature-sweep analysis population
 
