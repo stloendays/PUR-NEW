@@ -1,0 +1,2 @@
+realization_id,formulation_id,run_label,additive,solution_concentration_mol_L,amount_mmol,calculated_solution_volume_mL,calculated_neat_additive_mass_mg,addition_stage,analysis_role,notes
+E1__+P__day1_0,E1,+P,H3PO4,0.1,0.025,0.25,2.45,dehydration_stage,perturbation_check,"Exact additive condition verified from laboratory record; retained outside the primary same-composition population and used as a chemical-perturbation check."
