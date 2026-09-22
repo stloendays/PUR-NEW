@@ -226,7 +226,7 @@ The result therefore goes beyond demonstrating stability: it separates a formula
 
 ![Figure 5. Rheological coordinates](../analysis/figures/Figure5_rheological_coordinates.svg)
 
-**Figure 5. Temperature response is locally concentrated while thermal-hold trajectory is formulation-sensitive.** (A) Apparent temperature-response descriptor $E_\eta$ across six chemistry-audited realizations (mean 42.05 ± 2.43 kJ mol⁻¹; CV 5.77%). (B) Normalized 120 °C thermal-hold trajectories for E1, E5 and two resin-modified validation repeats. (C) Matched 15-60 min viscosity changes show 9.51% drift for E1, 51.54% for E5 and a mean absolute drift of 1.60% across the two validation repeats. (D) Native descriptors are shown side-by-side to emphasize the contrast between concentrated temperature response and the 4.29-fold E5/E1 drift-rate difference; no common effect-size scale is implied.
+**Figure 5. Temperature response is locally concentrated while thermal-hold trajectory is formulation-sensitive.** (A) Apparent temperature-response descriptor $E_\eta$ across six chemistry-audited realizations ($n=6$ realizations; mean 42.05 kJ mol⁻¹, s.d. 2.43 kJ mol⁻¹, CV 5.77%; each realization contributes one $E_\eta$ fitted over its six temperatures). (B) Normalized 120 °C thermal-hold trajectories for E1, E5 and two resin-modified validation repeats. (C) Matched 15-60 min viscosity changes show 9.51% drift for E1, 51.54% for E5 and a mean absolute drift of 1.60% across the two validation repeats. (D) Native descriptors are shown side-by-side to emphasize the contrast between concentrated temperature response and the 4.29-fold E5/E1 drift-rate difference; no common effect-size scale is implied.
 
 ### 2.10 Physical-state identification and experiment selection form one closed scientific workflow
 
@@ -420,6 +420,18 @@ Two-sided 95% Wilson score intervals were used for reported run proportions. The
 Post-freeze adjudication was separated from decision generation. For each committed run, the selected experiment, rationale and decision criteria were serialized before the held-out formulation and wet-lab measurements were loaded. The adjudication step then compared the observed mean absolute 15–60 min drift with the H-CORE proportional-dilution prediction derived from the source-reported reactive mass fraction.
 
 Material-level claims are based on the five-formulation local design, six chemistry-audited complete temperature-sweep realizations and the matched thermal-hold validation measurements. Decision-series proportions quantify reproducibility under fixed computational contracts rather than frequencies in a material population. Full run-level records, manifests, hashes, stability sweeps and adjudication artifacts are reported in the Supplementary Information and versioned repository.
+
+### 3.12 Statistical analysis
+
+Throughout, the independent unit for material-level statistics is the experimental realization, not the individual temperature point: the six temperatures of one sweep are repeated measurements on one prepared sample. Dispersion written as mean ± value is one standard deviation unless stated otherwise, and $n$ is given with every such quantity.
+
+Model comparisons in Supplementary Table S3 hold the thermal basis fixed across the compared models, so that the only difference is whether the intercept is formulation-level or realization-level. A model table in which each specification is free to choose its own basis appears in the repository analysis record and is not the comparison reported here; the two must not be quoted interchangeably. Nominal F-test p values from nested fixed-effects comparisons are recorded in the repository but are not used as primary evidence, because temperature points within a realization are repeated measurements rather than independent draws. Error reduction and the cross-validation results carry the argument instead.
+
+The strict formulation-and-temperature holdout interval is a realization-level cluster bootstrap with 10,000 replicates, resampling whole realizations so that within-realization correlation is preserved. Proportions from the decision series are reported with two-sided 95% Wilson score intervals. No multiplicity correction is applied to the arm comparisons, because each arm is a declared, separately frozen reproducibility contract rather than a family of hypothesis tests, and no arm contrast is interpreted as a significance claim. Series sizes were declared before the first run of each arm and are recorded in the run manifests.
+
+Numerical analyses were performed in Python (≥3.11) with NumPy, SciPy, pandas, statsmodels and scikit-learn. The language-model stages used a single fixed model and endpoint, `gpt-5.6-luna`, held constant across every confirmatory and ablation arm so that the arm contrast is the manipulated rule variable alone.
+
+AUTHOR_INPUT_NEEDED — exact package versions, the language-model sampling temperature and any fixed random seeds are not recorded in the run manifests and must be supplied before submission.
 ---
 
 ## 4. Conclusions

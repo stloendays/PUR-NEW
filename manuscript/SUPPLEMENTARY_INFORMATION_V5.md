@@ -188,7 +188,7 @@ For each chemistry-audited complete realization, $\ln\eta$ was regressed against
 
 This descriptor is used only to summarize the local temperature dependence of viscosity and is not interpreted as a reaction activation energy.
 
-Across the six chemistry-audited realizations:
+Across the six chemistry-audited realizations ($n=6$ realizations; the value after $\pm$ is one standard deviation, not a standard error):
 
 $$
 E_\eta \approx 42.05\pm2.43~\mathrm{kJ\,mol^{-1}},
