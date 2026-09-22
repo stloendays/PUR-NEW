@@ -87,11 +87,13 @@ $$
 
 Here $f$ denotes nominal formulation and $r$ a measured realization within that formulation. The fitted $a_{fr}$ locates the realized viscosity level directly; conceptually it contains both the formulation baseline and the realization-specific displacement, $a_{fr}=\mu_f+\delta_{fr}$.
 
-After chemistry-aware curation, the primary dataset contained six complete realizations of E1–E3 measured at six temperatures per realization (80, 90, 100, 110, 120 and 130 °C), giving 36 temperature–viscosity observations in total. One E1 curve carrying phosphoric-acid context was excluded from the primary model because the additive condition was not encoded in the compact formulation definition and was retained only for sensitivity analysis.
+After chemistry-aware curation, the primary dataset contained six complete realizations of E1–E3 measured at six temperatures per realization (80, 90, 100, 110, 120 and 130 °C), giving 36 temperature–viscosity observations in total. A seventh E1 curve was a defined phosphoric-acid perturbation (0.025 mmol H3PO4 from a 0.1 mol L−1 standard solution, added during dehydration) and was therefore kept outside the same-composition primary fit.
 
 With identical quadratic inverse-temperature responses, the formulation-only model explained 85.53% of log-viscosity variation, whereas the state-conditioned model explained 99.77%. Leave-one-temperature-out multiplicative error likewise fell from 1.423× to 1.058×. The improvement was not created by the quadratic basis: with linear thermal responses in both models, $R^2$ increased from 0.8519 to 0.9943.
 
 A model-free singular-value decomposition recovered the same geometry. After temperature-wise centering of the log-viscosity matrix, the first between-realization mode explained 99.63% of the variance. Its loading vector had a cosine similarity of 0.9998 to a constant vector, making the dominant mode nearly indistinguishable from a uniform vertical shift in log-viscosity space.
+
+The defined E1 phosphoric-acid perturbation provided a separate check of this geometry. Its apparent temperature-response descriptor was 40.77 kJ mol−1 (R² = 0.9979), within the 42.05 ± 2.43 kJ mol−1 distribution of the six primary realizations. Holding the primary shared thermal shape fixed and fitting only a curve-specific intercept reproduced the perturbed curve with a multiplicative RMSE of 1.034×; using only the 120 °C perturbed viscosity as an anchor gave 1.039× error over the remaining temperatures. The perturbed chemistry therefore remained closely compatible with the same local thermal-response shape.
 
 Both analyses therefore support a simple local representation: realizations share a common thermal-response shape but occupy different viscosity levels. We use the fitted intercept $a_{fr}$ as a realized viscosity-scale coordinate that locates each measurement on this shared response while leaving the underlying contributions of reaction time, moisture, mixing history, sample age and related process-state variables unresolved.
 
@@ -255,7 +257,7 @@ Viscosity measurements were performed on prepared sample material rather than by
 
 Run identifiers were retained for provenance. Project metadata confirms that GJJ, ZYX and CHH are realization labels associated with the same operator rather than different operator identities. Here, a realization denotes a complete measured temperature–viscosity curve/run. Distinct run labels are therefore treated as rheological measurement realizations; the available source record does not establish that they are independent synthesis batches. Day-1 retests are retained as separately observed rheological states without assigning an unverified batch relationship.
 
-One E1 temperature curve was labelled with phosphoric-acid context. Because the additive condition was not represented in the compact formulation table and its exact amount was not encoded, this curve was excluded from the chemistry-audited primary state analysis and retained for sensitivity analysis. The primary temperature-sweep dataset therefore contained 36 observations from six complete realizations of three nominal formulations.
+One E1 temperature curve was prepared with 0.025 mmol H3PO4 delivered as a 0.1 mol L−1 standard solution (0.25 mL) during the dehydration stage. Because this intentionally changes the chemical condition relative to nominal E1, the curve was excluded from the chemistry-audited primary same-composition state analysis and used as a separate perturbation check. The primary temperature-sweep dataset therefore contained 36 observations from six complete realizations of three nominal formulations.
 
 ### 3.3 State-conditioned temperature-response models
 
