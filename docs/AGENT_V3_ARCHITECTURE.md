@@ -85,6 +85,7 @@ This tool converts the paper's upstream analysis into machine-usable scientific 
 - one-point state calibration;
 - the comparatively concentrated local temperature-sensitivity descriptor;
 - E1/E5 thermal-hold drift contrast;
+- the verified E1 +P phosphoric-acid perturbation as a separate scale-versus-shape check;
 - explicit experiment-design implications and claim boundaries.
 
 The tool is required before candidate ranking. It contains no validation-formulation outcome.
@@ -186,6 +187,10 @@ Within the supported local chemistry family, one state-specific viscosity anchor
 ### Distinct rheological-coordinate rule
 
 Temperature response and thermal-hold stability are treated as distinct, differently tunable responses. If the design failure is thermal drift, the Agent must select a point and measurement window that directly test drift instead of relying on static viscosity.
+
+### Defined chemical-perturbation rule
+
+E1 `+P` is no longer an unresolved provenance flag. The verified condition is 0.025 mmol H3PO4 from a 0.1 mol/L standard solution added during dehydration. It remains outside the nominal same-composition primary fit, but the Agent may use it as a separate perturbation check: the observed viscosity level shifts while the thermal-response geometry remains closely compatible with the local shared shape. This distinction is exposed directly by the audited scientific tool.
 
 ### External-evidence rule
 
