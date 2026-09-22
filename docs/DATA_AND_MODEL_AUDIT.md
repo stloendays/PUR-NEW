@@ -12,11 +12,11 @@ GJJ, ZYX and CHH are run labels from the same operator. They are not operator ca
 
 `data/realization_metadata.csv` records the same-operator labels explicitly. Verified measurement metadata further establish that temperature-sweep repeatability used the same mother sample across temperatures within a sweep; distinct run labels are therefore not automatically interpreted as independent synthesis batches.
 
-## 2. E1 `+P` chemistry flag
+## 2. E1 `+P` verified phosphoric-acid perturbation
 
-The E1 `+P` temperature sweep is explicitly described in the source table as a phosphoric-acid-labelled run. Because the exact additive identity/amount is not represented in `data/formulations.csv`, it is not a clean same-composition realization for a primary state-shift test.
+The chemistry of the E1 `+P` temperature sweep is now resolved from the laboratory record. The sample received **0.025 mmol H3PO4** from a **0.1 mol/L H3PO4 standard solution** during the **dehydration stage**. This corresponds to 0.25 mL of standard solution and 2.45 mg of H3PO4.
 
-The provenance-aware audit therefore treats E1 `+P` as `sensitivity_only` until the source chemistry is fully reconciled. The audited primary temperature dataset contains:
+Because this is a deliberate chemical perturbation rather than nominal E1, it remains outside the primary same-composition state-shift population. It is now treated as a defined **chemical-perturbation check**, not as unresolved provenance. The audited primary temperature dataset remains:
 
 ```text
 36 temperature-viscosity points
@@ -24,7 +24,20 @@ The provenance-aware audit therefore treats E1 `+P` as `sensitivity_only` until 
 3 nominal formulations
 ```
 
-The original all-recorded-curves analysis remains reproducible, but the chemistry-audited result is the more conservative robustness check.
+The perturbation curve itself is informative. Its apparent thermal-response descriptor is:
+
+```text
+E1 +P apparent E_eta = 40.77 kJ/mol
+ln(eta) vs 1/T R2    = 0.9979
+```
+
+The six-realization primary distribution is 42.05 ± 2.43 kJ/mol, placing E1 `+P` only 0.53 SD below the primary mean. When the thermal-shape coefficients learned from the six primary realizations are held fixed and only a curve-specific intercept is fitted to E1 `+P`, the multiplicative RMSE is 1.034×. Anchoring the same shared shape with only the 120 °C E1 `+P` viscosity predicts the other five temperatures with a multiplicative RMSE of 1.039×.
+
+Relative to the available E1 GJJ day-1 record, the `+P` viscosities are 9.5–17.1% lower across 80–130 °C, with a geometric mean ratio of 0.879. This comparator is retained as an observational reference rather than a paired treatment-control estimate because its parent-batch relationship is not established.
+
+The scientific use of E1 `+P` is therefore specific: a defined low-dose acid perturbation leaves the temperature-response geometry compatible with the shared local shape while shifting the observed viscosity level. This strengthens the separation between viscosity scale and thermal-response shape without adding the perturbed curve to the primary same-composition fit.
+
+Detailed records are in `data/experimental_perturbations.csv` and the numerical comparison is stored in `derived/e1_phosphoric_acid_perturbation.csv` and `derived/e1_phosphoric_acid_summary.csv`.
 
 ### Audited state-shift result
 
