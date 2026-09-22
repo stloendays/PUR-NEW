@@ -51,9 +51,11 @@ The temperature-sweep repeatability protocol uses the same mother sample across 
 
 ### Chemistry-provenance audit
 
-One E1 temperature curve is labelled `+P` in the source sheet and is explicitly associated with phosphoric-acid context. Because the additive identity/amount is not represented in the compact E1 formulation row, the chemistry-audited primary state analysis treats this curve as `sensitivity_only` rather than as a clean same-composition realization.
+The E1 `+P` condition is now chemically resolved: **0.025 mmol H3PO4** from a **0.1 mol/L standard solution** was added during the **dehydration stage** (0.25 mL solution; 2.45 mg H3PO4). Because this is a deliberate chemical perturbation rather than nominal E1, it remains outside the 36-point primary same-composition state analysis and is used as a separate perturbation check.
 
-See `docs/DATA_AND_MODEL_AUDIT.md`.
+The E1 `+P` curve has an apparent $E_\eta$ of **40.77 kJ/mol** ($R^2=0.9979$), within the primary 42.05 ± 2.43 kJ/mol distribution. Holding the primary shared thermal shape fixed and fitting only the E1 `+P` intercept gives a **1.034× multiplicative RMSE**, indicating that the perturbation preserves the local thermal-response geometry closely while shifting viscosity level.
+
+See `data/experimental_perturbations.csv`, `derived/e1_phosphoric_acid_summary.csv`, and `docs/DATA_AND_MODEL_AUDIT.md`.
 
 ---
 
