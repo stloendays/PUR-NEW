@@ -44,7 +44,8 @@ def prepare_local(temperature_csv: Path, metadata_csv: Path) -> tuple[pd.DataFra
     if merged["analysis_role"].isna().any():
         missing = sorted(merged.loc[merged["analysis_role"].isna(), "realization_id"].unique())
         raise ValueError(f"Missing realization metadata for: {missing}")
-    audited = merged[merged["analysis_role"] != "sensitivity_only"].copy()
+    primary_roles = {"primary", "primary_with_caveat"}
+    audited = merged[merged["analysis_role"].isin(primary_roles)].copy()
     return merged, audited
 
 
@@ -432,10 +433,14 @@ def main() -> None:
     thermal = thermal_descriptor_summary(audited)
     summary = {
         "excluded_from_audited_primary": sorted(
-            all_rows.loc[all_rows["analysis_role"] == "sensitivity_only", "realization_id"].unique().tolist()
+            all_rows.loc[~all_rows["analysis_role"].isin({"primary", "primary_with_caveat"}), "realization_id"]
+            .unique()
+            .tolist()
         ),
         "exclusion_reason": (
-            "The E1 +P realization is phosphoric-acid-labelled and is therefore treated as chemistry-flagged until its exact additive identity/amount is verified."
+            "E1 +P is a verified chemical perturbation: 0.025 mmol H3PO4 from a 0.1 mol/L standard "
+            "solution was added during dehydration. It is analyzed separately and is not pooled into "
+            "the nominal same-composition primary state model."
         ),
         "audited_primary_n_points": int(len(audited)),
         "audited_primary_n_realizations": int(audited["realization_id"].nunique()),
