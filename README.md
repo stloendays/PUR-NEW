@@ -45,7 +45,7 @@ The compact source data are stored in:
 
 The viscosity and preparation metadata are now integrated into the repository and manuscript. Viscosity was measured with an **RV-SSR-H high-temperature rotational viscometer** (Shanghai Fangrui Instrument Co., Ltd.) using an **NKY-25 heater** and **No. 27 spindle**. The instrument reports viscosity in **mPa·s**. Rotation speed was adjusted to keep torque at approximately **40–60%**, and each temperature setpoint was equilibrated for **15 min** before the displayed value was recorded.
 
-For sample preparation, polyols were stirred and vacuum-dehydrated at approximately **130 °C for 1 h**; MDI was then added and the mixture was stirred under vacuum at approximately **120 °C for about 1 h 20 min**. In 120 °C thermal-hold tests, **t = 0** is the point at which the sample reaches 120 °C; the material is stirred and kept sealed under vacuum during the hold. Structured metadata are stored in `data/experimental_methods_metadata.csv`.
+For sample preparation, polyols were stirred and vacuum-dehydrated at approximately **130 °C for 1 h**; MDI was then added and the mixture was stirred under vacuum at approximately **120 °C for about 1 h 20 min**. In 120 °C thermal-hold tests, **t = 0** is the point at which the sample reaches 120 °C; the material is stirred and kept sealed under vacuum during the hold. The resin-modified validation formulation F1 has an **NCO:OH equivalent ratio of 1.82**. Structured metadata are stored in `data/experimental_methods_metadata.csv`.
 
 The temperature-sweep repeatability protocol uses the same mother sample across temperatures within a sweep. Distinct run labels are therefore treated as rheological measurement realizations rather than automatically as independent synthesis batches.
 
