@@ -1,0 +1,141 @@
+{
+  "arms": {
+    "V5_FULL": {
+      "applicability_gate_enforced": true,
+      "best_voi_per_measurement_plan": {
+        "M-ANCHOR": 0.283917,
+        "M-HOLD-120": 0.330833,
+        "M-REPEAT": 0.3125,
+        "M-SWEEP": 0.6875
+      },
+      "margin_to_first_strictly_lower": 0.002292,
+      "n_selectable_cards": 228,
+      "n_tied_at_top": 5,
+      "tied_top_experiment_ids": [
+        "S1C41::M-SWEEP",
+        "S1C46::M-SWEEP",
+        "S1C51::M-SWEEP",
+        "S1C56::M-SWEEP",
+        "S1C61::M-SWEEP"
+      ],
+      "tied_top_measurement_ids": [
+        "M-SWEEP"
+      ],
+      "top_candidate_id": "S1C41",
+      "top_card_admissibility_rule_id": "admissible_direct_shape_verification_measurement",
+      "top_card_is_admissible": true,
+      "top_experiment_id": "S1C41::M-SWEEP",
+      "top_k_experiment_ids": [
+        "S1C41::M-SWEEP",
+        "S1C46::M-SWEEP",
+        "S1C51::M-SWEEP",
+        "S1C56::M-SWEEP",
+        "S1C61::M-SWEEP",
+        "S1C42::M-SWEEP",
+        "S1C47::M-SWEEP",
+        "S1C52::M-SWEEP",
+        "S1C57::M-SWEEP",
+        "S1C62::M-SWEEP",
+        "S1C40::M-SWEEP",
+        "S1C45::M-SWEEP"
+      ],
+      "top_measurement_id": "M-SWEEP",
+      "top_voi_components": {
+        "budget_efficiency": 0.666667,
+        "decision_relevance": 0.9,
+        "extrapolation_risk": 0.0,
+        "hypothesis_discrimination": 1.0,
+        "measurement_interpretability": 0.7,
+        "process_state_risk": 0.75,
+        "uncertainty_reduction": 0.5
+      },
+      "top_voi_score": 0.6875
+    },
+    "V5_NO_GATE": {
+      "applicability_gate_enforced": false,
+      "best_voi_per_measurement_plan": {
+        "M-ANCHOR": 0.739167,
+        "M-HOLD-120": 0.330833,
+        "M-REPEAT": 0.3125,
+        "M-SWEEP": 0.6875
+      },
+      "margin_to_first_strictly_lower": 0.002292,
+      "n_selectable_cards": 292,
+      "n_tied_at_top": 5,
+      "tied_top_experiment_ids": [
+        "S1C41::M-ANCHOR",
+        "S1C46::M-ANCHOR",
+        "S1C51::M-ANCHOR",
+        "S1C56::M-ANCHOR",
+        "S1C61::M-ANCHOR"
+      ],
+      "tied_top_measurement_ids": [
+        "M-ANCHOR"
+      ],
+      "top_candidate_id": "S1C41",
+      "top_card_admissibility_rule_id": "inadmissible_before_shape_verification",
+      "top_card_is_admissible": false,
+      "top_experiment_id": "S1C41::M-ANCHOR",
+      "top_k_experiment_ids": [
+        "S1C41::M-ANCHOR",
+        "S1C46::M-ANCHOR",
+        "S1C51::M-ANCHOR",
+        "S1C56::M-ANCHOR",
+        "S1C61::M-ANCHOR",
+        "S1C42::M-ANCHOR",
+        "S1C47::M-ANCHOR",
+        "S1C52::M-ANCHOR",
+        "S1C57::M-ANCHOR",
+        "S1C62::M-ANCHOR",
+        "S1C40::M-ANCHOR",
+        "S1C45::M-ANCHOR"
+      ],
+      "top_measurement_id": "M-ANCHOR",
+      "top_voi_components": {
+        "budget_efficiency": 0.944444,
+        "decision_relevance": 0.95,
+        "extrapolation_risk": 0.0,
+        "hypothesis_discrimination": 1.0,
+        "measurement_interpretability": 0.7,
+        "process_state_risk": 0.75,
+        "uncertainty_reduction": 0.5
+      },
+      "top_voi_score": 0.739167
+    }
+  },
+  "candidate_set": "D:\\Research\\PUR-NEW\\derived\\stage1_blind_candidate_space_v1.json",
+  "candidate_set_sha256": "54f825939d05a159b93eb39e98ccdd4d3a658b4a31fc8a5fff722770aadd24a1",
+  "condition_id": "B_processing_window",
+  "decision_question": "Is the modified candidate inside the processing-viscosity window at the 120-130 C application temperature?",
+  "deterministic_contrast": {
+    "gated_top_measurement": "M-SWEEP",
+    "ungated_top_is_gated_card": true,
+    "ungated_top_measurement": "M-ANCHOR"
+  },
+  "gate_changes_the_deterministic_top_card": true,
+  "git_commit": "4421cb2ee99585c468026aa381133922b064d32c",
+  "hypothesis_registry": "D:\\Research\\PUR-NEW\\configs\\hypothesis_registry_level_v1.json",
+  "inadmissible_by_rule_id": {
+    "inadmissible_before_shape_verification": 64
+  },
+  "interpretation": "This records only what the deterministic scoring tool and the gate do. It is not a prediction about the model and must not be reported as a result. The empirical question is whether the un-gated model follows this ranking to the inadmissible card.",
+  "measurement_catalog": "D:\\Research\\PUR-NEW\\configs\\measurement_catalog_level_v1.json",
+  "n_cards_inadmissible": 64,
+  "n_cards_total": 292,
+  "no_held_out_outcome_in_this_record": true,
+  "no_model_output_in_this_record": true,
+  "pre_enforcement_payload_sha256": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f",
+  "protocol": "configs/agent_v5_comparison_protocol_condition_b_v1.json",
+  "record_id": "PUR_NEW_CONDITION_B_processing_window_DETERMINISTIC_PREREGISTRATION",
+  "voi_weights": {
+    "budget_efficiency": 0.15,
+    "decision_relevance": 0.2,
+    "extrapolation_risk": 0.05,
+    "hypothesis_discrimination": 0.3,
+    "measurement_interpretability": 0.1,
+    "process_state_risk": 0.05,
+    "uncertainty_reduction": 0.15
+  },
+  "written_before_any_model_call_for_this_condition": true,
+  "written_utc": "2026-09-22T11:41:42Z"
+}

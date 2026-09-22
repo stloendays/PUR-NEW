@@ -1,0 +1,603 @@
+{
+  "base_margin_to_first_strictly_lower": 0.004583,
+  "base_top_intervention_families": [
+    "dual_axis_resin_modified"
+  ],
+  "base_top_tied_experiment_ids": [
+    "S1C41::M-HOLD-120",
+    "S1C46::M-HOLD-120",
+    "S1C51::M-HOLD-120",
+    "S1C56::M-HOLD-120",
+    "S1C61::M-HOLD-120"
+  ],
+  "base_weights": {
+    "decision_relevance": 0.25,
+    "extrapolation_risk": 0.1,
+    "hypothesis_discrimination": 0.3,
+    "measurement_interpretability": 0.1,
+    "process_state_risk": 0.05,
+    "uncertainty_reduction": 0.2
+  },
+  "evaluated_over": "the selectable experiment cards of this arm",
+  "flipped_scenarios": [],
+  "metric_is_not": "model confidence; posterior probability; calibrated expected information",
+  "metric_name": "decision_stability",
+  "multipliers": [
+    0.5,
+    0.75,
+    1.0,
+    1.25,
+    1.5
+  ],
+  "n_cards": 228,
+  "n_scenarios": 25,
+  "n_tied_at_base_top": 5,
+  "perturbation_fraction": 0.5,
+  "recommendation_flip_boundary": {
+    "decision_relevance": {
+      "flips_when_scaled_above": null,
+      "flips_when_scaled_below": null,
+      "survives_entire_sweep": true
+    },
+    "extrapolation_risk": {
+      "flips_when_scaled_above": null,
+      "flips_when_scaled_below": null,
+      "survives_entire_sweep": true
+    },
+    "hypothesis_discrimination": {
+      "flips_when_scaled_above": null,
+      "flips_when_scaled_below": null,
+      "survives_entire_sweep": true
+    },
+    "measurement_interpretability": {
+      "flips_when_scaled_above": null,
+      "flips_when_scaled_below": null,
+      "survives_entire_sweep": true
+    },
+    "process_state_risk": {
+      "flips_when_scaled_above": null,
+      "flips_when_scaled_below": null,
+      "survives_entire_sweep": true
+    },
+    "uncertainty_reduction": {
+      "flips_when_scaled_above": null,
+      "flips_when_scaled_below": null,
+      "survives_entire_sweep": true
+    }
+  },
+  "scenarios": [
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 1.0,
+      "n_tied_at_top": 5,
+      "perturbed_term": null,
+      "scenario_id": "base",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.6925
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 0.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "hypothesis_discrimination",
+      "scenario_id": "hypothesis_discrimination_x0.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.5925
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 0.75,
+      "n_tied_at_top": 5,
+      "perturbed_term": "hypothesis_discrimination",
+      "scenario_id": "hypothesis_discrimination_x0.75",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.6425
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 1.25,
+      "n_tied_at_top": 5,
+      "perturbed_term": "hypothesis_discrimination",
+      "scenario_id": "hypothesis_discrimination_x1.25",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.7425
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 1.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "hypothesis_discrimination",
+      "scenario_id": "hypothesis_discrimination_x1.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.7925
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 0.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "uncertainty_reduction",
+      "scenario_id": "uncertainty_reduction_x0.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.6025
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 0.75,
+      "n_tied_at_top": 5,
+      "perturbed_term": "uncertainty_reduction",
+      "scenario_id": "uncertainty_reduction_x0.75",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.6475
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 1.25,
+      "n_tied_at_top": 5,
+      "perturbed_term": "uncertainty_reduction",
+      "scenario_id": "uncertainty_reduction_x1.25",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.7375
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 1.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "uncertainty_reduction",
+      "scenario_id": "uncertainty_reduction_x1.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.7825
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 0.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "decision_relevance",
+      "scenario_id": "decision_relevance_x0.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.5675
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 0.75,
+      "n_tied_at_top": 5,
+      "perturbed_term": "decision_relevance",
+      "scenario_id": "decision_relevance_x0.75",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.63
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 1.25,
+      "n_tied_at_top": 5,
+      "perturbed_term": "decision_relevance",
+      "scenario_id": "decision_relevance_x1.25",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.755
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 1.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "decision_relevance",
+      "scenario_id": "decision_relevance_x1.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.8175
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 0.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "measurement_interpretability",
+      "scenario_id": "measurement_interpretability_x0.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.6425
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 0.75,
+      "n_tied_at_top": 5,
+      "perturbed_term": "measurement_interpretability",
+      "scenario_id": "measurement_interpretability_x0.75",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.6675
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 1.25,
+      "n_tied_at_top": 5,
+      "perturbed_term": "measurement_interpretability",
+      "scenario_id": "measurement_interpretability_x1.25",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.7175
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 1.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "measurement_interpretability",
+      "scenario_id": "measurement_interpretability_x1.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.7425
+    },
+    {
+      "margin_to_first_strictly_lower": 0.002292,
+      "multiplier": 0.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "extrapolation_risk",
+      "scenario_id": "extrapolation_risk_x0.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.6925
+    },
+    {
+      "margin_to_first_strictly_lower": 0.003437,
+      "multiplier": 0.75,
+      "n_tied_at_top": 5,
+      "perturbed_term": "extrapolation_risk",
+      "scenario_id": "extrapolation_risk_x0.75",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.6925
+    },
+    {
+      "margin_to_first_strictly_lower": 0.005729,
+      "multiplier": 1.25,
+      "n_tied_at_top": 5,
+      "perturbed_term": "extrapolation_risk",
+      "scenario_id": "extrapolation_risk_x1.25",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.6925
+    },
+    {
+      "margin_to_first_strictly_lower": 0.006875,
+      "multiplier": 1.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "extrapolation_risk",
+      "scenario_id": "extrapolation_risk_x1.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.6925
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 0.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "process_state_risk",
+      "scenario_id": "process_state_risk_x0.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.71125
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 0.75,
+      "n_tied_at_top": 5,
+      "perturbed_term": "process_state_risk",
+      "scenario_id": "process_state_risk_x0.75",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.701875
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 1.25,
+      "n_tied_at_top": 5,
+      "perturbed_term": "process_state_risk",
+      "scenario_id": "process_state_risk_x1.25",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.683125
+    },
+    {
+      "margin_to_first_strictly_lower": 0.004583,
+      "multiplier": 1.5,
+      "n_tied_at_top": 5,
+      "perturbed_term": "process_state_risk",
+      "scenario_id": "process_state_risk_x1.5",
+      "top_intervention_families": [
+        "dual_axis_resin_modified"
+      ],
+      "top_measurement_ids": [
+        "M-HOLD-120"
+      ],
+      "top_tied_experiment_ids": [
+        "S1C41::M-HOLD-120",
+        "S1C46::M-HOLD-120",
+        "S1C51::M-HOLD-120",
+        "S1C56::M-HOLD-120",
+        "S1C61::M-HOLD-120"
+      ],
+      "top_voi": 0.67375
+    }
+  ],
+  "stability": {
+    "intervention_family_stability": 1.0,
+    "measurement_plan_stability": 1.0,
+    "top_experiment_set_mean_jaccard": 1.0,
+    "top_experiment_set_stability": 1.0
+  },
+  "tie_epsilon": 1e-09,
+  "voi_formula": "VOI = w_hyp * hypothesis_discrimination + w_unc * uncertainty_reduction + w_dec * decision_relevance + w_int * measurement_interpretability - w_ext * extrapolation_risk - w_proc * process_state_risk. Every component is normalized to [0, 1] by construction. This is a transparent normalized score with reported weight sensitivity, not a Bayesian posterior."
+}

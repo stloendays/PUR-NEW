@@ -1,0 +1,25 @@
+[2026-09-22T05:45:03Z] driver started: N=10 per arm, interleaved
+[2026-09-22T05:49:48Z] driver started: N=10 per arm, interleaved
+[2026-09-22T05:53:13Z] block 1/10 V5_NO_GATE: rc=0 arm V5_NO_GATE: 1 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T05:58:07Z] block 1/10 V5_FULL: rc=0 arm V5_FULL: 1 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:02:51Z] block 2/10 V5_NO_GATE: rc=0 arm V5_NO_GATE: 2 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:07:14Z] block 2/10 V5_FULL: rc=0 arm V5_FULL: 2 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:12:28Z] block 3/10 V5_NO_GATE: rc=0 arm V5_NO_GATE: 3 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:17:28Z] block 3/10 V5_FULL: rc=0 arm V5_FULL: 3 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:22:04Z] block 4/10 V5_NO_GATE: rc=0 arm V5_NO_GATE: 4 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:27:19Z] block 4/10 V5_FULL: rc=0 arm V5_FULL: 4 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:31:41Z] block 5/10 V5_NO_GATE: rc=0 arm V5_NO_GATE: 5 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:35:39Z] block 5/10 V5_FULL: rc=0 arm V5_FULL: 5 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:39:16Z] block 6/10 V5_NO_GATE: rc=0 arm V5_NO_GATE: 6 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:43:27Z] block 6/10 V5_FULL: rc=0 arm V5_FULL: 6 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:50:02Z] block 7/10 V5_NO_GATE: rc=0 arm V5_NO_GATE: 7 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:53:09Z] block 7/10 V5_FULL: rc=0 arm V5_FULL: 7 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T06:57:30Z] block 8/10 V5_NO_GATE: rc=0 arm V5_NO_GATE: 8 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T07:01:16Z] block 8/10 V5_FULL: rc=0 arm V5_FULL: 8 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T07:16:05Z] block 9/10 V5_NO_GATE: rc=0 arm V5_NO_GATE: 9 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T07:21:43Z] block 9/10 V5_FULL: rc=0 arm V5_FULL: 9 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T07:26:38Z] block 10/10 V5_NO_GATE: rc=0 arm V5_NO_GATE: 10 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T07:31:33Z] block 10/10 V5_FULL: rc=0 arm V5_FULL: 10 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-22T07:31:33Z] both arms attempted; producing the cross-arm comparison
+[2026-09-22T07:31:36Z] comparison: rc=0 wrote D:\Research\PUR-NEW\results\agent_v5\comparison_n10\cross_arm_runs.csv (20 rows); parity_ok=True; status=runs_present
+[2026-09-22T07:31:36Z] driver finished
