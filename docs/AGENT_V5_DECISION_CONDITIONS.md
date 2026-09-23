@@ -19,6 +19,13 @@ Declared in `configs/decision_conditions.json`.
 | status | results complete | results complete |
 | result | gate could not bite | gate could bite, was not needed |
 
+The `status` field inside `configs/decision_conditions.json` still reads
+`pre_registered_before_first_run` and always will. That file is arm-parity material: its
+digest `b6372fd9...` is pinned in all four Condition-B manifests, so advancing the string
+would invalidate the parity record of the series it describes. Read the status from this
+table, from `comparison_status` in `cross_arm_summary.json`, or from the report below - never
+from the pinned config.
+
 Condition-B result and its reading:
 [`results/agent_v5_condition_b/CONDITION_B_REPORT.md`](../results/agent_v5_condition_b/CONDITION_B_REPORT.md).
 
