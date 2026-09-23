@@ -1,0 +1,4 @@
+comparison,F,p_value,df_difference,full_model_residual_df
+shared linear -> shared quadratic,40.78476794456472,6.513938767385766e-07,1.0,28.0
+shared quadratic -> shared cubic,0.4293703269779585,0.5178425701955456,1.0,27.0
+shared linear slope -> realization-specific linear slopes,1.257086064728004,0.3143905713405086,5.0,24.0

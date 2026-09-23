@@ -1,0 +1,44 @@
+{
+  "analysis_population": {
+    "excluded_by_metadata": "E1 +P chemical perturbation",
+    "n_formulations": 3,
+    "n_points": 36,
+    "n_realizations": 6
+  },
+  "claim_boundary": "The quadratic model remains the canonical local representation. VFT and dual-annealing results are functional-form and numerical-optimizer sensitivity analyses, not independent molecular-parameter claims.",
+  "hierarchical_shared_slope": {
+    "fixed_realization_intercepts_shared_slope": {
+      "E_eta_kJ_mol": 42.051616146338475,
+      "ci95_kJ_mol": [40.20556532488127, 43.89766696779567]
+    },
+    "random_intercept_mixed_model_shared_slope": {
+      "E_eta_kJ_mol": 42.05161614633845,
+      "ci95_kJ_mol": [40.31225984721864, 43.79097244545826],
+      "random_intercept_sd_log": 0.6954884391798617,
+      "residual_sd_log": 0.07681302074453564,
+      "interpretation": "Supporting hierarchical sensitivity only; six realization groups are too few for strong variance-component inference."
+    },
+    "realization_specific_slope_test": {
+      "F": 1.257086064728004,
+      "df_num": 5,
+      "df_den": 24,
+      "p_value": 0.3143905713405086
+    }
+  },
+  "vft_optimizer_sensitivity": {
+    "bounded": {
+      "T0_K": 262.28391576265005,
+      "T0_C": -10.866084237349924,
+      "B_K": 456.89751553386805,
+      "fit_multiplicative_rmse": 1.0454085724856899
+    },
+    "dual_annealing": {
+      "T0_K": 262.2836180803981,
+      "T0_C": -10.86638191960185,
+      "B_K": 456.8999759315782,
+      "fit_multiplicative_rmse": 1.0454085724861804
+    },
+    "absolute_T0_difference_K": 0.00029768225192583486
+  },
+  "vft_leave_one_realization_T0_C_range": [-25.40765852724698, -5.070986761113716]
+}

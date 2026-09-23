@@ -102,6 +102,20 @@ PC1 share of between-realization variance ~= 99.63%
 cosine similarity of PC1 to constant vertical shift ~= 0.9998
 ```
 
+Thermal-model sensitivity on the same chemistry-audited 36-point population now also shows:
+
+```text
+linear -> quadratic nested test          p ~= 6.51e-7
+quadratic -> cubic nested test           p ~= 0.518
+shared -> realization-specific slopes    p ~= 0.314
+shared-slope E_eta (95% CI)              ~= 42.05 (40.21-43.90) kJ/mol
+quadratic held-temperature error         ~= 1.058x
+VFT held-temperature error               ~= 1.055x
+bounded vs dual-annealing VFT T0 delta   < 0.001 K
+```
+
+The quadratic form remains the canonical local model. The VFT/dual-annealing branch is a robustness check showing that the shared-shape result is not an artifact of polynomial form or nonlinear optimizer initialization.
+
 The positive conclusion is:
 
 > **Within the tested local chemistry family, the dominant realization-to-realization variation behaves approximately as a viscosity-scale shift superimposed on a transferable thermal-response shape.**
@@ -128,6 +142,18 @@ Across available anchor temperatures, the pooled local error is roughly 1.06-1.1
 Thus:
 
 > **A single state-specific viscosity anchor can locate a previously held-out formulation on the shared local thermal-response shape with roughly 6-10% pooled multiplicative error.**
+
+A same-formulation holdout now isolates the value of the state measurement itself. E2 is the only audited formulation with multiple realizations, so each E2 realization was held out while the remaining E2 data preserved formulation identity in training. Using the same quadratic thermal basis:
+
+```text
+110 C anchor -> predict 120/130 C
+formulation-only multiplicative RMSE   ~= 1.824x
+one-anchor state calibration           ~= 1.086x
+log-RMSE reduction                     ~= 86.2%
+cluster-bootstrap 95% interval         ~= 75.0-97.3%
+```
+
+This directly quantifies why an anchor measurement is useful: formulation identity does not locate the realized viscosity scale, whereas one in-domain measurement supplies that missing state information.
 
 This is a local chemistry-family interpolation result, not a claim of universal extrapolation across PUR chemistry.
 
@@ -344,6 +370,14 @@ Robustness checks:
 python scripts/statistical_robustness.py --output-dir derived/statistical_robustness
 ```
 
+Thermal functional-form, hierarchical-slope and optimizer sensitivity:
+
+```bash
+python scripts/thermal_model_robustness.py --output-dir derived/thermal_model_robustness
+```
+
+This analysis uses `data/realization_metadata.csv` to enforce the canonical 36-point chemistry-audited population and keeps the E1 `+P` perturbation outside the same-composition robustness fit.
+
 Provenance-aware audit:
 
 ```bash
@@ -357,6 +391,15 @@ python scripts/analysis_audit_v1.py \
   --external-db /path/to/hmpur_external.db \
   --output-dir derived/analysis_audit_v1
 ```
+
+State-anchor bridge analysis:
+
+```bash
+python scripts/state_anchor_bridge_analysis.py \
+  --output-dir derived/state_anchor_bridge
+```
+
+This analysis reproduces the same-formulation E2 comparison used to quantify the incremental value of one state anchor.
 
 Repository CI runs the local audit automatically.
 
@@ -395,9 +438,10 @@ Supported now:
 - realization state materially changes the measured viscosity scale;
 - a shared local thermal-response shape plus a realization-specific scale captures the audited local data far better than formulation identity alone;
 - one anchor can calibrate a held-out local formulation state to roughly 6-10% pooled multiplicative error;
+- within repeated E2 realizations, one 110 C anchor reduces pooled 120-130 C multiplicative error from about 1.824x for formulation identity alone to about 1.086x;
 - thermal-hold stability is strongly formulation dependent;
 - the validation formulation shows two low-drift 120 C repeats over the matched 15-60 min window;
-- the current Agent can use these upstream material rules through an outcome-blind scientific tool.
+- the current scientific tool exposes these upstream material rules for new development; frozen Agent runs must be interpreted under the evidence version they actually received.
 
 Not claimed:
 
@@ -406,6 +450,41 @@ Not claimed:
 - a unique molecular mechanism for AC1920/TK100 stabilization;
 - a universal optimal resin percentage;
 - that current V3 code is necessarily the exact historical runtime that selected the validation formulation.
+
+---
+
+### Agent V5 evidence-version boundary
+
+A pre-registered Agent V5 comparison protocol is frozen at `configs/agent_v5_comparison_protocol.json` version 1.1. A completed Condition-A N=10-per-arm series exists on the `agent-v5-implementation` development branch and must be interpreted under its original evidence version.
+
+The frozen Condition-A runs used chemistry-audited tool version `3.5-verified-phosphoric-perturbation`; they **did not** receive the later state-anchor bridge statistic. In that frozen comparison, both arms committed 10/10 runs, both had 0/10 unsupported shortcuts and 0/10 chemistry-domain violations, and both selected `M-HOLD-120` in 10/10 runs. The hard gate therefore produced no measurable primary-metric benefit under the drift-decision condition.
+
+The later state-anchor bridge result remains useful materials evidence:
+
+```text
+local E2, 110 C anchor -> predict 120/130 C
+formulation-only multiplicative RMSE ~= 1.824x
+one-anchor state calibration         ~= 1.086x
+log-RMSE reduction                   ~= 86.2%
+```
+
+It defines **evidence version 2** for future Agent development. Any new Agent series that exposes this statistic must use a fresh predeclared denominator and must not be appended to the frozen evidence-version-1 series.
+
+The scientific policy remains:
+
+```text
+M-ANCHOR has measured value when the shared thermal shape is valid
+                     |
+              chemistry boundary
+                     |
+       +-------------+-------------+
+       |                           |
+validated local support       chemistry shifted
+       |                           |
+anchor may be admissible      direct M-SWEEP first
+```
+
+See `docs/STATE_ANCHOR_TO_AGENT_BRIDGE.md` and `docs/AGENT_V5_EVIDENCE_VERSION_BOUNDARY.md`.
 
 ---
 

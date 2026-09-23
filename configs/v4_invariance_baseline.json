@@ -3,6 +3,36 @@
   "captured_at_git_commit": "63e6476865ecd0286e587b3f53e98b3a8313b77c",
   "declared_amendments": {
     "files": {
+      "configs/action_catalog.json": {
+        "amended_at_utc": "2026-09-23",
+        "amended_sha256": "2506145954d5f0aca4ad94550d45ac1d1d6a03a6b2f1a9654fc4210180690c26",
+        "authorization_scope": "document the completed same-formulation state-anchor bridge in the model-facing action text only; do not change any action name, parameter schema, deterministic scoring field, chemistry-domain gate, candidate lattice or arm-parity requirement, and do not extend, resume or pool any already-frozen Agent series under this text",
+        "authorized_by": "author",
+        "baseline_sha256": "7e240b12f23e3e93603fd4c53e314ae3090c6b8b51a2c9ef96751527200c784f",
+        "behavioural_invariance_evidence": {
+          "changed_fields_have_no_deterministic_consumer": "description, when_to_use and catalog_version are read only by scripts/run_scientific_agent_v3.py, scripts/run_agent_v4.py and scripts/run_agent_v5.py, which serialize them into the model-facing action list. No VOI, gating, admissibility, scoring or adjudication code in src/pur_new reads them.",
+          "frozen_records_are_unaffected": "results/agent_v4_voi/, results/agent_v5/ and results/agent_v5_condition_b/ are complete run records. Their counts, denominators and cross-arm summaries are not recomputed from this catalog.",
+          "tests": [
+            "tests/test_agent_v5.py::test_frozen_v4_voi_ranking_is_reproduced_by_the_amended_module",
+            "tests/test_decision_conditions.py::test_condition_a_scores_match_the_frozen_run_exactly",
+            "tests/test_decision_conditions.py::test_condition_a_cards_are_structurally_identical_to_the_frozen_run"
+          ]
+        },
+        "not_inert_for_future_runs": "The added text is model-visible. It was written after the Condition-A and Condition-B series were frozen and was not visible to any run in them. Any series launched under catalog_version 1.5.2 is a new evidence version and needs its own predeclared denominator and evidence-version record, per docs/AGENT_V5_EVIDENCE_VERSION_BOUNDARY.md. The recorded pre_enforcement_payload_sha256 of the frozen series was computed under 1.5.1, so a run under 1.5.2 is mechanically distinguishable from them.",
+        "reason": "The same-formulation state-anchor bridge analysis (formulation-only 1.824x versus one-anchor 1.086x for 120-130 C reconstruction) gave M-ANCHOR a measured value inside validated shared-shape support. The action text was updated so a future Agent reads that result from the audited tool description instead of inferring it, and reads with it the rule that a chemistry shift still requires a direct M-SWEEP first.",
+        "what_changed": [
+          "catalog_version 1.5.1 -> 1.5.2",
+          "analyze_local_material_response gained one when_to_use line about when M-ANCHOR has measured value and when chemistry-domain gating requires M-SWEEP first",
+          "get_chemistry_audited_rheology_summary gained one when_to_use line about quantifying the measured value of M-ANCHOR inside validated shared-shape support",
+          "the get_chemistry_audited_rheology_summary description now lists the same-formulation E2 one-anchor test among the returned results"
+        ],
+        "what_did_not_change": [
+          "every action name and parameter schema",
+          "the chemistry-domain applicability gate and its enforcement point",
+          "the candidate lattice and the arm-parity file list",
+          "every frozen run record, manifest, count and denominator"
+        ]
+      },
       "src/pur_new/voi.py": {
         "amended_at_utc": "2026-09-22",
         "amended_sha256": "54d6fdfbfb956f6a90a4f081505585edc7c72b152ae2c0b9f7b3a1a14ced48c0",

@@ -52,11 +52,19 @@ Detailed numerical outputs:
 
 ## Agent implementation rule
 
-Any Agent that consumes local rheology should prefer the audited scientific tool output from `get_state_aware_rheology_summary()` rather than reconstructing project context from prose. The tool version exposing the reconciled E1 +P condition is `3.5-verified-phosphoric-perturbation`.
+Any Agent that consumes local rheology should prefer the audited scientific tool output from `get_state_aware_rheology_summary()` rather than reconstructing project context from prose. The current tool version is `3.6-state-anchor-bridge`. It still exposes the reconciled E1 +P condition introduced in `3.5-verified-phosphoric-perturbation`, and adds the same-formulation state-anchor bridge statistic.
 
 Do not modify frozen historical benchmark records or prompts merely to propagate these facts. New work should use the active V5 manuscript line and current audited scientific tool.
 
 ## Realization-code privacy rule
 
 Use only the anonymized realization codes `R01`, `R02`, and `R03` in datasets, figures, manuscripts, reports, and Agent outputs. Do not surface pre-anonymization labels from historical revisions. Treat the anonymized codes as opaque realization identifiers, not operator identities.
+
+## State-anchor bridge and Agent evidence versions
+
+Before modifying Agent V5 or launching another series, read `docs/STATE_ANCHOR_TO_AGENT_BRIDGE.md` and `docs/AGENT_V5_EVIDENCE_VERSION_BOUNDARY.md`.
+
+The completed same-formulation bridge analysis quantifies the value of one 110 C state anchor within repeated E2 realizations (formulation-only 1.824x versus one-anchor 1.086x for 120-130 C reconstruction). It was added **after** the frozen Condition-A Agent V5 series and therefore was not model-visible in those runs.
+
+Treat the current tool output as a new evidence version. Do not resume, extend or pool an older declared Agent series after changing model-visible scientific evidence. A future series using the bridge statistic must receive a new predeclared denominator and evidence-version record. Do not use the local information-gain result to authorize M-ANCHOR for chemistry-shifted candidates without prior direct M-SWEEP verification.
 
