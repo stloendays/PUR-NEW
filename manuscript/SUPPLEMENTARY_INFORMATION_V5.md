@@ -41,18 +41,18 @@ The NCO:OH equivalent ratio of F1 was 1.82.
 
 Seven complete 80–130 °C viscosity curves are present in the raw local table. One E1 curve is a defined phosphoric-acid perturbation: 0.025 mmol H3PO4 from a 0.1 mol L−1 standard solution was added during the dehydration stage, corresponding to 0.25 mL of solution and 2.45 mg H3PO4. Because this deliberately changes the chemical condition relative to nominal E1, the primary same-composition analysis uses the six chemistry-comparable complete realizations listed below.
 
-The E1 +P curve is retained as a separate chemical-perturbation check. Its apparent $E_\eta$ is 40.766 kJ mol−1 with $R^2=0.9979$ for $\ln\eta$ versus $1/T$, compared with 42.052 ± 2.426 kJ mol−1 across the six primary realizations. Holding the primary shared thermal-shape coefficients fixed and fitting only an E1 +P intercept gives a multiplicative RMSE of 1.034×. A single 120 °C anchor predicts the remaining five E1 +P temperatures with a multiplicative RMSE of 1.039×. Relative to the available E1 GJJ day-1 record, the E1 +P viscosities are 9.5–17.1% lower across 80–130 °C; this comparison is treated as an observational reference rather than a paired treatment-control estimate.
+The E1 +P curve is retained as a separate chemical-perturbation check. Its apparent $E_\eta$ is 40.766 kJ mol−1 with $R^2=0.9979$ for $\ln\eta$ versus $1/T$, compared with 42.052 ± 2.426 kJ mol−1 across the six primary realizations. Holding the primary shared thermal-shape coefficients fixed and fitting only an E1 +P intercept gives a multiplicative RMSE of 1.034×. A single 120 °C anchor predicts the remaining five E1 +P temperatures with a multiplicative RMSE of 1.039×. Relative to the available E1 R01 day-1 record, the E1 +P viscosities are 9.5–17.1% lower across 80–130 °C; this comparison is treated as an observational reference rather than a paired treatment-control estimate.
 
 ## Supplementary Table S2 | Chemistry-audited temperature-sweep realizations
 
 | Realization | Formulation | Retest after 1 d | n temperatures | Apparent $E_\eta$ (kJ mol$^{-1}$) | $R^2$, $\ln\eta$ vs $1/T$ |
 |---|---|---:|---:|---:|---:|
-| E1 GJJ day-1 | E1 | yes | 6 | 42.712 | 0.9962 |
-| E2 CHH | E2 | no | 6 | 37.634 | 0.9651 |
-| E2 GJJ | E2 | no | 6 | 42.661 | 0.9897 |
-| E2 ZYX | E2 | no | 6 | 41.227 | 0.9901 |
-| E2 ZYX day-1 | E2 | yes | 6 | 44.551 | 0.9948 |
-| E3 CHH | E3 | no | 6 | 43.525 | 0.9959 |
+| E1 R01 day-1 | E1 | yes | 6 | 42.712 | 0.9962 |
+| E2 R03 | E2 | no | 6 | 37.634 | 0.9651 |
+| E2 R01 | E2 | no | 6 | 42.661 | 0.9897 |
+| E2 R02 | E2 | no | 6 | 41.227 | 0.9901 |
+| E2 R02 day-1 | E2 | yes | 6 | 44.551 | 0.9948 |
+| E3 R03 | E3 | no | 6 | 43.525 | 0.9959 |
 
 The chemistry-audited primary temperature-sweep dataset therefore contains 36 observations from six complete realizations of three nominal formulations.
 
@@ -265,8 +265,8 @@ $$
 
 | Formulation | Repeat | 15 min | 30 min | 45 min | 60 min | 90 min |
 |---|---|---:|---:|---:|---:|---:|
-| E1 | GJJ | 708.7 | 728.6 | — | 776.1 | 828.1 |
-| E5 | ZYX | 2210 | 2470 | — | 3349 | 4267 |
+| E1 | R01 | 708.7 | 728.6 | — | 776.1 | 828.1 |
+| E5 | R02 | 2210 | 2470 | — | 3349 | 4267 |
 | F1 | repeat 1 | 1230 | 1189 | 1203 | 1228 | — |
 | F1 | repeat 2 | 1281 | 1260 | 1289 | 1320 | — |
 
