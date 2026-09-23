@@ -1,0 +1,37 @@
+{
+  "analysis_id": "CBES_THERMAL_HOLD_CONDITION_SUMMARY",
+  "reader_facing_name": "Chemistry-Bounded Experiment Selection (CBES)",
+  "decision_condition": "thermal-hold drift",
+  "scientific_question": "Which experiment best separates the registered mechanisms of 120 C thermal-hold viscosity drift?",
+  "arms": {
+    "advice_only": {
+      "declared": 10,
+      "completed": 10,
+      "committed": 10,
+      "failed": 0,
+      "measurement_frequency": {
+        "M-HOLD-120": 10
+      },
+      "unsupported_shortcuts": 0,
+      "chemistry_domain_violations": 0,
+      "mean_hypothesis_discrimination": 0.666667,
+      "cards_removed_by_enforcement": 0,
+      "selection_entropy_bits": 0.468996
+    },
+    "enforced": {
+      "declared": 10,
+      "completed": 10,
+      "committed": 10,
+      "failed": 0,
+      "measurement_frequency": {
+        "M-HOLD-120": 10
+      },
+      "unsupported_shortcuts": 0,
+      "chemistry_domain_violations": 0,
+      "mean_hypothesis_discrimination": 0.666667,
+      "cards_removed_by_enforcement": 64,
+      "selection_entropy_bits": 0
+    }
+  },
+  "interpretation": "The applicability rule was non-binding because the direct thermal-hold measurement already dominated the drift decision; one-point state calibration carried no hypothesis discrimination for the registered drift hypotheses."
+}
