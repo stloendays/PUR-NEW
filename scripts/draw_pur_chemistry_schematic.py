@@ -44,9 +44,10 @@ def rdkit_svg(smiles: str, width: int, height: int) -> str:
     drawer.DrawMolecule(mol)
     drawer.FinishDrawing()
     svg = drawer.GetDrawingText()
-    start = svg.find(">")
+    svg_start = svg.find("<svg")
+    start = svg.find(">", svg_start)
     end = svg.rfind("</svg>")
-    if start < 0 or end < 0:
+    if svg_start < 0 or start < 0 or end < 0:
         raise RuntimeError("Could not extract RDKit SVG body")
     return svg[start + 1 : end]
 
