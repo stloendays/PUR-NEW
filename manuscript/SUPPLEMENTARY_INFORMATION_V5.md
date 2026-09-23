@@ -4,20 +4,21 @@
 
 ### Scope of this Supplementary Information
 
-This Supplementary Information (SI) supports the V5 manuscript as one closed scientific sequence from rheological-state identification to physical hypothesis adjudication. Notes 1–4 establish the local formulation set, state-conditioned temperature response, one-point state calibration and thermal-hold failure coordinate. Notes 5–7 place the local response inside the broader external evidence base and define the proportional-dilution null. Notes 8 onward document how the experimentally identified failure mode is converted into formulation-level hypotheses, experiment cards, deterministic value-of-information rules, controlled ablations and post-freeze wet-lab adjudication.
+This Supplementary Information (SI) supports one closed scientific sequence from rheological-state identification to physical hypothesis adjudication. Notes 1–4 establish the local formulation set, state-conditioned temperature response, one-point state calibration and thermal-hold failure coordinate. Notes 5–7 place the local response inside the broader external evidence base and define the proportional-dilution null. Notes 8 onward document the Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), Chemistry-Bounded Experiment Selection (CBES), controlled rule tests and post-freeze wet-lab adjudication.
 
 The SI preserves the separation between material evidence and computational decision evidence without presenting them as two independent stories. Material measurements define the physical state and unresolved failure mode; the hypothesis registry and decision rules determine what experiment can resolve that uncertainty; the held-out wet-lab result then updates the hypothesis state.
 
-The principal V5 claims supported here are:
+The principal claims supported here are:
 
 1. realization-dependent viscosity variation in the local reactive-PUR family is predominantly a calibratable scale shift on a shared local thermal response;
 2. one-point state calibration transfers that local thermal shape to a held formulation over the tested short temperature range;
 3. thermal-hold trajectory is a separate and substantially more formulation-sensitive rheological coordinate;
 4. the resin-modified validation formulation exhibits 1.60% mean absolute 15–60 min drift, well below the 7.79% proportional-dilution null;
 5. the experimentally identified failure mode is translated into competing formulation-level hypotheses and 292 formulation-measurement experiment cards;
-6. the rule-complete architecture selects the evidence-supported family in 9/10 runs with no zero-discrimination selections, whereas withholding the VOI score yields 0/5 supported-family selections and 3/5 zero-discrimination selections;
+6. RGES selects the evidence-supported family in 9/10 runs with no zero-discrimination selections, whereas withholding the VOI score yields 0/5 supported-family selections and 3/5 zero-discrimination selections;
 7. inverting rule order yields 10/10 zero-discrimination selections, showing that rule order changes scientific decision quality even when the critique stage detects the defect;
-8. the wet-lab result falsifies the reactive-core-only dilution explanation and retains resin-associated stabilization at the formulation level.
+8. under CBES, chemistry applicability is non-binding for a direct thermal-hold question but causes the processing-window problem to be framed as direct sweep verification before reuse of a one-point anchor shortcut;
+9. the wet-lab result falsifies the reactive-core-only dilution explanation and retains resin-associated stabilization at the formulation level.
 
 ---
 # Supplementary Note 1 | Local formulation design and primary analysis population
@@ -379,15 +380,15 @@ External formulation records containing acrylic-like and tackifier-like modifier
 
 ---
 
-# Supplementary Note 8 | V3 predecessor benchmark and candidate-space inheritance
+# Supplementary Note 8 | Candidate-Recovery Benchmark and candidate-space inheritance
 
-The active experiment-selection analysis inherits the 73-node formulation lattice and the outcome-blind evidence firewall established in the predecessor benchmark. The held-out validation formulation is not itself a lattice node. This predecessor benchmark remains useful for provenance because it established that the later validated region could be recovered without exposing the validation formulation or its outcome to the runtime.
+The active experiment-selection analysis inherits the 73-node formulation lattice and the outcome-blind evidence firewall established in the **Candidate-Recovery Benchmark (CRB)**. The held-out validation formulation is not itself a lattice node. CRB remains useful because it established that the later validated region could be recovered without exposing the validation formulation or its outcome to the runtime.
 
-The V3 confirmatory series contained 10 attempts, 8 committed decisions and 2 abstentions. All 8 committed decisions entered the predeclared near region. The strategy-ladder analysis further showed that most of the numerical distance improvement came from explicit deterministic scientific policy rather than unconstrained language-model generation.
+The confirmatory CRB series contained 10 attempts, 8 committed decisions and 2 abstentions. All 8 committed decisions entered the predeclared near region. The strategy-ladder analysis further showed that approximately 94.4% of the numerical distance improvement came from explicit deterministic scientific policy rather than unconstrained language-model generation.
 
-These predecessor results are not pooled with the active experiment-selection analysis. Their role is architectural: they justify retaining the same blinded evidence boundary and formulation lattice while changing the decision object from a formulation candidate to an experiment card.
+These predecessor results are not pooled with RGES or CBES. Their role is architectural: they justify retaining the same blinded evidence boundary and formulation lattice while changing the decision object from a formulation candidate to an experiment card.
 
-The full V3 strategy ladder, random-lattice comparison, cross-model transfer and approximately 94.4% distance decomposition remain preserved in `manuscript/SUPPLEMENTARY_INFORMATION_V1.md`, `results/STAGE1_AI4SCI_REPORT.md` and the frozen V3 result directories.
+A reader-facing aggregate summary is stored in `derived/crb_candidate_recovery_summary.json`; full historical run records are indexed through `docs/decision_architecture_provenance.md`.
 
 ---
 
@@ -579,7 +580,7 @@ For the dual-axis validation result:
 - H-RESIN survives;
 - H-DUAL remains entangled with H-RESIN for a dual-axis experiment and requires an acrylic-only measurement for direct separation.
 
-Because the wet-lab result existed before the V4 software architecture was formalized, this is a retrospective outcome-blind adjudication rather than a claim that V4 prospectively caused the original experiment to be run.
+Because the wet-lab result existed before the RGES software architecture was formalized, this is a retrospective outcome-blind adjudication rather than a claim that RGES prospectively caused the original experiment to be run.
 
 ---
 
@@ -595,30 +596,27 @@ Because the wet-lab result existed before the V4 software architecture was forma
 | apparent local $E_\eta$ fits | `analysis/results/local_thermal_curve_fits.csv` |
 | one-point LOFO transfer | `analysis/results/local_leave_one_formulation_one_point.csv` |
 | strict formulation + temperature holdout | `analysis/results/local_joint_formulation_temperature_extrapolation.csv` |
-| candidate lattice | `derived/stage1_blind_candidate_space_v1.json` |
-| registered hypothesis set | `configs/hypothesis_registry.json` |
-| measurement catalog | `configs/measurement_catalog.json` |
-| decision configuration | `configs/agent_v4.json` |
+| experiment candidate lattice | `derived/experiment_candidate_lattice.json` |
+| drift hypothesis registry | `configs/hypothesis_registry.json` |
+| drift measurement catalog | `configs/measurement_catalog.json` |
 | deterministic VOI implementation | `src/pur_new/voi.py` |
-| confirmatory series | `results/agent_v4_voi/series_n10/` |
-| VOI-score-withheld series | `results/agent_v4_voi/series_ablation_voi_withheld_n5/` |
-| rule-order series | `results/agent_v4_voi/series_ablation_rule_order_minimality_first_n5/` |
-| controlled-ablation summary | `results/agent_v4_voi/rule_layer_ablation.json` |
-| decision report | `results/agent_v4_voi/AGENT_V4_REPORT.md` |
-| sanitized V5 chemistry-domain comparison summary | `derived/agent_v5_condition_a_summary.json` |
-| V3 predecessor SI | `manuscript/SUPPLEMENTARY_INFORMATION_V1.md` |
+| CRB aggregate summary | `derived/crb_candidate_recovery_summary.json` |
+| RGES confirmatory and ablation summary | `derived/rges_rule_ablation_summary.json` |
+| CBES thermal-hold condition | `derived/cbes_thermal_hold_condition_summary.json` |
+| CBES processing-window condition | `derived/cbes_processing_window_condition_summary.json` |
+| historical run manifests and hashes | `docs/decision_architecture_provenance.md` |
 
 ---
 
-# Supplementary Note 19 | Chemistry-domain applicability under the thermal-hold decision
+# Supplementary Note 19 | CBES applicability under the thermal-hold decision
 
-A matched-arm Agent V5 comparison tested whether converting the same chemistry-domain applicability audit from advice into a hard measurement-admissibility rule changed experiment selection under the registered thermal-hold drift question.
+The **Chemistry-Bounded Experiment Selection (CBES)** comparison tested whether converting the same chemistry-domain applicability audit from advice into a hard measurement-admissibility rule changed experiment selection under the registered thermal-hold drift question.
 
-Both arms used the same model endpoint, prompts, candidate lattice, hypothesis registry, measurement catalog, evidence profile and VOI weights. The applicability audit was model-visible in both arms. The only intended arm-level difference was enforcement: in `V5_NO_GATE`, audited cards remained selectable; in `V5_FULL`, cards that depended on unsupported transfer of the shared thermal-response shape were removed before ranking and rejected again at freeze.
+Both arms used the same model endpoint, prompts, candidate lattice, hypothesis registry, measurement catalog, evidence profile and VOI weights. The applicability audit was model-visible in both arms. The only intended arm-level difference was enforcement: in the **advice-only** arm, audited cards remained selectable; in the **enforced** arm, cards that depended on unsupported transfer of the shared thermal-response shape were removed before ranking and rejected again at freeze.
 
 ## Supplementary Table S13 | Chemistry-domain matched-arm comparison under the drift decision
 
-| Quantity | V5_NO_GATE | V5_FULL |
+| Quantity | Advice-only | Enforced |
 |---|---:|---:|
 | declared / completed / committed runs | 10 / 10 / 10 | 10 / 10 / 10 |
 | abstained / invalid / failed | 0 / 0 / 0 | 0 / 0 / 0 |
@@ -629,11 +627,53 @@ Both arms used the same model endpoint, prompts, candidate lattice, hypothesis r
 | cards removed by applicability enforcement | 0 | 64 |
 | selection entropy, bits | 0.469 | 0.000 |
 
-The result is intentionally interpreted as a **non-binding applicability test** rather than as evidence that the enforced arm is universally superior. Under the drift registry, the matched-window 120 °C hold is the only measurement plan with non-zero hypothesis discrimination, because it observes the failure coordinate directly. The one-point anchor is relevant to viscosity-state location but does not separate the registered hold-drift hypotheses. Consequently, the advice-only arm already avoided the unsupported shortcut in all 10 runs.
+The result is a **non-binding applicability test**. Under the drift registry, the matched-window 120 °C hold is the only measurement plan with non-zero hypothesis discrimination because it observes the failure coordinate directly. The one-point anchor is relevant to viscosity-state location but does not separate the registered hold-drift hypotheses. Consequently, the advice-only arm already avoided the unsupported shortcut in all 10 runs.
 
-The enforced arm therefore removed 64 inadmissible cards without changing the selected measurement or the primary validity metrics. Its zero violation rate is partly a property of enforcement, whereas the 0/10 violation rate in the advice-only arm shows that the shortcut was not behaviorally attractive under this particular scientific question. This distinction is important: the chemistry-domain rule is measurement-specific and becomes decision-relevant only when a proposed experiment actually relies on transferring the shared thermal-response representation.
+The enforced arm therefore removed 64 inadmissible cards without changing the selected measurement or the primary validity metrics. Its zero violation rate is partly a property of enforcement, whereas the 0/10 violation rate in the advice-only arm shows that the shortcut was not behaviorally attractive under this particular scientific question. The chemistry-domain rule becomes decision-relevant only when a proposed experiment actually relies on transferring the shared thermal-response representation.
 
-A sanitized aggregate summary is stored in `derived/agent_v5_condition_a_summary.json`. These runs are analyzed separately from the rule-complete V4 confirmatory series and its controlled ablations.
+The aggregate result is stored in `derived/cbes_thermal_hold_condition_summary.json` and is analyzed separately from the RGES confirmatory and ablation series.
+
+---
+
+# Supplementary Note 20 | CBES processing-window decision
+
+A second CBES condition placed the same chemistry-domain rule in the laboratory decision for which the one-point shortcut is genuinely attractive: **is a resin-modified candidate inside the 120–130 °C processing-viscosity window?**
+
+The measurement plans were unchanged physically, but their relevance was re-declared against the viscosity-level question. `M-ANCHOR` used one 110 °C viscosity determination and inferred the 120–130 °C level from the shared local thermal-response shape. `M-SWEEP` directly measured 80–130 °C in 10 °C increments and therefore established both the processing-window level and the thermal-response shape for the modified chemistry. A predeclared effort term reflected the six-fold difference in viscosity determinations.
+
+Before any model call, deterministic preregistration placed the unsupported one-point anchor above the direct sweep in the advice-only selectable set:
+
+```text
+M-ANCHOR   VOI = 0.7392   shared-shape transfer unverified
+M-SWEEP    VOI = 0.6875   direct temperature-response measurement
+difference       0.0517
+```
+
+The advice-only selector nevertheless rejected the higher-ranked anchor in **10/10** runs and chose `M-SWEEP` each time. In every run the reasoning explicitly identified the same chemistry-domain issue: the resin-modified formulation had not yet demonstrated transfer of the local shared thermal-response shape. Thus the model-mediated selector accepted a lower deterministic score in order to obtain a direct measurement of the quantity whose transferability was uncertain.
+
+The enforced arm removed 64 inadmissible cards before ranking. It completed 9 of 10 declared runs and selected `M-SWEEP` in all 9 completed runs; one response failed because of malformed/truncated model output and was not replaced.
+
+## Supplementary Table S14 | Chemistry-domain matched-arm comparison under the processing-window decision
+
+| Quantity | Advice-only | Enforced |
+|---|---:|---:|
+| declared / completed / committed runs | 10 / 10 / 10 | 10 / 9 / 9 |
+| failed runs | 0 / 10 | 1 / 10 |
+| `M-SWEEP` selected | 10 / 10 | 9 / 9 completed |
+| unsupported shared-shape shortcuts | 0 / 10 | 0 / 10 declared |
+| chemistry-domain violations | 0 / 10 | 0 / 10 declared |
+| mean hypothesis discrimination | 1.000 | 1.000 |
+| selected in deterministic tied top set | 0 / 10 | 9 / 9 completed |
+| cards removed by applicability enforcement | 0 | 64 |
+| selection entropy, bits | 0.000 | 0.503 |
+
+The primary result is therefore not that enforcement produced a lower observed violation rate: the advice-only arm already avoided the shortcut. Instead, the two arms separate **reasoned avoidance** from **guaranteed admissibility**. In the advice-only arm, scientifically correct behavior depended on the model continuing to use the applicability audit to override a higher-VOI shortcut. In the enforced arm, the same unsupported shortcut was impossible by construction.
+
+The inverted entropy is a secondary observation. Advice-only selection was perfectly reproducible because the model repeatedly reasoned against the same unsupported high-ranked anchor and converged on one direct sweep. After enforcement removed that contrast, the surviving top sweep cards were deterministically equivalent and one alternative candidate appeared once, increasing entropy to 0.503 bits.
+
+For the PUR workflow, the experimental implication is concrete: the first processing-window assessment after resin modification should use a direct 80–130 °C sweep to establish the new temperature response. A one-point anchor can be reconsidered for nearby follow-up states only after shape transfer has been established experimentally.
+
+The aggregate result is stored in `derived/cbes_processing_window_condition_summary.json`; full frozen run provenance is indexed through `docs/decision_architecture_provenance.md`.
 
 ---
 
@@ -641,4 +681,4 @@ A sanitized aggregate summary is stored in `derived/agent_v5_condition_a_summary
 
 This SI reports only evidence needed to reproduce or audit the manuscript claims. Full engineering history, superseded prompt drafts, infrastructure failures and abandoned exploratory strategies remain in repository provenance but are not treated as scientific evidence.
 
-The predecessor candidate-recovery benchmark and the active experiment-selection analysis are intentionally not pooled. The predecessor establishes outcome-blind candidate-region recoverability and the importance of deterministic policy. The active manuscript asks the narrower and more causal question: under the same evidence contract, what happens when experiment-level rule content or rule order is manipulated while the model and candidate inventory are held fixed?
+CRB, RGES and the two CBES decision conditions are intentionally not pooled. CRB establishes outcome-blind candidate-region recoverability and candidate-space inheritance; RGES tests how rule content and rule order affect experiment informativeness; CBES tests how chemistry-domain applicability should govern the choice between transferred shortcuts and direct measurements.
