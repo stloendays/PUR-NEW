@@ -116,6 +116,77 @@ def validation_drift():
                 core_fraction=REACTIVE_CORE_FRACTION)
 
 
+PANELS = os.path.join(ROOT, "analysis", "figures_origin", "data")
+RESULTS = os.path.join(ROOT, "analysis", "results")
+
+
+def panel(name):
+    """A curated per-panel table exported for the earlier Origin figures.
+
+    These are the same quantities the manuscript quotes; they are read rather
+    than recomputed so a rebuilt figure cannot silently disagree with the text.
+    """
+    return pd.read_csv(os.path.join(PANELS, name + ".csv"))
+
+
+def state_shift_summary():
+    import json
+    with open(os.path.join(RESULTS, "local_model_free_state_shift_summary.json"),
+              encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+AGENT = os.path.join(ROOT, "results", "agent_v4_voi")
+ARM_DIRS = {                       # arm -> directory holding its run_* folders
+    "full": "series_n10",
+    "voi_withheld": "series_ablation_voi_withheld_n5",
+    # The order-inverted arm was declared at n = 5 and extended to n = 10
+    # after the first five were observed; all ten runs live in the n5 folder.
+    # The n10 manifest records the extension and holds no runs of its own.
+    "order_inverted": "series_ablation_rule_order_minimality_first_n5",
+}
+SUPPORTED_FAMILY = "dual_axis_resin_modified"
+
+
+def ablation_summary():
+    import json
+    with open(os.path.join(AGENT, "rule_layer_ablation.json"), encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def ablation_runs():
+    """One row per frozen run: the selected experiment's discrimination,
+    intervention family and measurement, read from its recommendation.json."""
+    import glob
+    import json
+    rows = []
+    for arm, sub in ARM_DIRS.items():
+        for path in sorted(glob.glob(os.path.join(AGENT, sub, "run_*", "*",
+                                                  "recommendation.json"))):
+            with open(path, encoding="utf-8") as fh:
+                card = json.load(fh)["experiment_card"]
+            run = os.path.basename(os.path.dirname(os.path.dirname(path)))
+            rows.append(dict(
+                arm=arm, run=int(run.split("_")[1]),
+                discrimination=float(card["voi_components"]["hypothesis_discrimination"]),
+                family=card["intervention_family"],
+                measurement=card["measurement_id"],
+                supported=card["intervention_family"] == SUPPORTED_FAMILY))
+    return pd.DataFrame(rows)
+
+
+def wilson(k, n, z=1.959963984540054):
+    """Two-sided Wilson score interval for k successes in n."""
+    import math
+    if n == 0:
+        return (float("nan"), float("nan"))
+    p = k / n
+    den = 1 + z * z / n
+    mid = (p + z * z / (2 * n)) / den
+    half = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / den
+    return (max(0.0, mid - half), min(1.0, mid + half))
+
+
 def model_comparison():
     return pd.read_csv(os.path.join(DERIVED, "thermal_model_robustness",
                                     "functional_form_model_comparison.csv"))

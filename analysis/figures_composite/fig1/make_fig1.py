@@ -5,8 +5,9 @@ glycol diol and 4,4'-MDI is 4,4'-methylenediphenyl diisocyanate. STEPANPOL PDP-7
 supplier aromatic polyester polyol whose exact backbone is not public, so it is a
 labelled block rather than a guessed structure.
 
-Panel b is the urethane N-H...O=C association in the hard segment. It is here because
-it is what the thermal-hold measurement reports on, not as decoration.
+Panel b is the urethane N-H...O=C association in the hard segment, beside the measured
+120 C drift. It shows the chemistry the formulation varies; it does not claim the drift
+is caused by this association, which nothing in the repository measures.
 
     pur_bridge_env/python make_fig1.py
 """
@@ -17,6 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
 
 import chem as C                                                  # noqa: E402
+import layout as L                                                # noqa: E402
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch    # noqa: E402
 from style import DARK_B, INK, MID, PALE_B, RED, TINT_B, TINT_G, Page  # noqa: E402
 
@@ -38,18 +40,31 @@ def panel_a(page):
     # --- PPG2000: HO-CH2-CH(CH3)-[O-CH2-CH(CH3)]n-OH --------------------------
     # The chain must end on carbon. Terminating on the ether oxygen would draw a
     # peroxide, which is what a first pass of this panel actually showed.
+    # Vertices: p0 = O of HO, p1 CH2, p2 CH(CH3), p3 ether O, p4 CH2,
+    # p5 CH(CH3), p6 = O of OH. The terminal labels sit ON p0 and p6 so the
+    # oxygens are unambiguous; they used to float 2 mm off the chain ends.
     p = C.zig((6.0, yb), 6, up_first=True)
     C.chain(ax, p)
-    C.atom(ax, (p[0][0] - 2.0, p[0][1]), "HO", ha="center")
+    C.atom(ax, (p[0][0] + 0.7, p[0][1]), "HO", ha="right")
     C.atom(ax, p[3], "O")                            # the single ether oxygen shown
-    for i in (2, 5):                                 # pendant methyls on the CH
-        C.bond(ax, p[i], (p[i][0] + 0.3, p[i][1] - 2.5))
-    C.atom(ax, (p[6][0] + 2.0, p[6][1]), "OH", ha="center")
-    for xb, lab in ((p[2][0] - 1.5, None), (p[5][0] + 1.5, "n")):
-        ax.plot([xb + (0.9 if lab else -0.9), xb, xb, xb + (0.9 if lab else -0.9)],
+    C.atom(ax, (p[6][0] - 0.7, p[6][1]), "OH", ha="left")
+    # A substituent leaves its carbon on the exterior of the chain angle: down
+    # from a valley vertex, up from a peak. The p5 methyl was drawn down into
+    # the angle, putting all three bonds of that carbon in one half-plane.
+    for i in (2, 5):
+        peak = p[i][1] > yb + 0.1
+        C.bond(ax, p[i], (p[i][0], p[i][1] + (2.1 if peak else -2.1)))
+    # Repeat unit [O-CH2-CH(CH3)]n. The left bracket crosses the CH-O bond
+    # (p2-p3) and the right one the CH-OH bond (p5-p6); both open inward. The
+    # first version put the left bracket one bond early, enclosing
+    # [CH(CH3)-O-CH2-CH(CH3)], which does not repeat into PPG, and drew both
+    # brackets facing outward so they enclosed nothing.
+    xl = (p[2][0] + p[3][0]) / 2.0
+    xr = (p[5][0] + p[6][0]) / 2.0
+    for xb, serif in ((xl, +0.6), (xr, -0.6)):
+        ax.plot([xb + serif, xb, xb, xb + serif],
                 [yb - 3.6, yb - 3.6, yb + 3.6, yb + 3.6], lw=0.7, color=MID, zorder=1)
-        if lab:
-            ax.text(xb + 1.2, yb - 3.9, lab, fontsize=5.0, color=MID, ha="left", va="top")
+    ax.text(xr + 0.3, yb - 3.9, "n", fontsize=5.0, color=MID, ha="left", va="top")
     ax.text(p[3][0], yb - 8.6, "PPG2000", fontsize=6.2, ha="center", fontweight="bold")
     ax.text(p[3][0], yb - 11.6, "polyether diol, $M_n$ 2000", fontsize=5.4, ha="center",
             color=MID)
@@ -74,15 +89,20 @@ def panel_a(page):
     mid = ((r1[0][0] + r2[3][0]) / 2.0, yb + 1.5)
     C.bond(ax, r1[0], mid)                            # the methylene bridge
     C.bond(ax, mid, r2[3])
+    # The isocyanate is written in condensed form, OCN- / -NCO, as polyurethane
+    # schemes conventionally do. Drawn skeletally, N=C=O is linear, so an
+    # implicit carbon sits on a straight line between two double bonds and
+    # vanishes: the group read as O=N, a nitroso group, which is what this panel
+    # showed until it was read as chemistry. Labelling that carbon instead left
+    # 2.2 mm bonds almost entirely under the label boxes, and there is no room
+    # to lengthen them before the O runs into the "+".
     for ring, vert, sgn in ((r1, r1[3], -1), (r2, r2[0], +1)):
-        n = (vert[0] + sgn * 2.2, vert[1])
+        n = (vert[0] + sgn * 2.4, vert[1])
         C.bond(ax, vert, n)
-        c = (n[0] + sgn * 2.2, n[1])
-        C.bond(ax, n, c, 2)
-        o = (c[0] + sgn * 2.2, c[1])
-        C.bond(ax, c, o, 2)
-        C.atom(ax, n, "N")
-        C.atom(ax, o, "O")
+        if sgn < 0:
+            C.atom(ax, (n[0] + 0.9, n[1]), "OCN", ha="right")
+        else:
+            C.atom(ax, (n[0] - 0.9, n[1]), "NCO", ha="left")
     ax.text(87.5, yb - 8.6, "4,4'-MDI", fontsize=6.2, ha="center", fontweight="bold")
     ax.text(87.5, yb - 11.6, "diisocyanate, NCO:OH 1.70-1.90", fontsize=5.4, ha="center",
             color=MID)
@@ -91,7 +111,7 @@ def panel_a(page):
 
     # --- reaction arrow -------------------------------------------------------
     arrow(ax, (112.0, yb), (126.0, yb), color=INK, lw=1.0, ms=2.8)
-    ax.text(119.0, yb + 2.2, "130 $\\rightarrow$ 120 $^\\circ$C", fontsize=5.4,
+    ax.text(119.0, yb + 2.2, "130 → 120 °C", fontsize=5.4,
             ha="center", color=MID)
     ax.text(119.0, yb - 3.4, "vacuum", fontsize=5.4, ha="center", color=MID)
 
@@ -150,11 +170,14 @@ def panel_b(page):
 
     ax.text(2.0, 66.0, "What the hold measures", fontsize=6.4, fontweight="bold",
             ha="left", va="top")
+    # States what is measured, not why. An earlier wording said holding "lets
+    # this association keep building", a mechanism nothing in the repository
+    # measures; the drift itself and the fixed composition are measured.
     ax.text(2.0, 62.0,
-            "Holding at 120 $^\\circ$C lets this association keep building, so\n"
-            "viscosity drifts while composition does not change. Drift is\n"
-            "therefore a coordinate of its own, not a second reading of\n"
-            "temperature response.",
+            "At 120 °C the composition is fixed, yet viscosity\n"
+            "still changes with time. Drift is therefore a coordinate\n"
+            "of its own, not a second reading of temperature\n"
+            "response.",
             fontsize=5.6, ha="left", va="top", color=INK, linespacing=1.45)
 
     ax.add_patch(FancyBboxPatch((1.0, 8.0), 54.0, 10.0,
@@ -162,7 +185,7 @@ def panel_b(page):
                                 fc=TINT_B, ec=PALE_B, lw=0.7, zorder=1))
     ax.text(28.0, 14.6, "E1 $+$9.51%    E5 $+$51.54%", fontsize=6.0, ha="center",
             fontweight="bold", zorder=4)
-    ax.text(28.0, 10.8, "15$\\rightarrow$60 min at 120 $^\\circ$C, same window",
+    ax.text(28.0, 10.8, "15→60 min at 120 °C, same window",
             fontsize=5.4, ha="center", color=MID, zorder=4)
 
 
@@ -229,6 +252,7 @@ def main():
     page.letter("c", 62.0, 78.0)
     page.title("One closed loop, from rheological state to physical adjudication",
                68.0, 78.0)
+    L.audit(page.fig)
     page.save(HERE, "Fig1")
 
 

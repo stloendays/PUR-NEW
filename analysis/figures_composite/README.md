@@ -1,101 +1,140 @@
-# Composite main figures
+# Composite figures
 
-Built the way the Catalyst-Essay figures are built: matplotlib assembles each figure on
-a page measured in millimetres, schematics are drawn rather than exported, and every
-figure is written as SVG, PDF and PNG at 600 dpi in one pass.
+The figures of the V5 manuscript, and three supplementary figures. Each is
+built by one script that assembles it on a page measured in millimetres,
+draws schematics rather than exporting them, reads its numbers from the
+repository tables, and writes **SVG, PDF and PNG** (600 dpi) in one pass.
 
-- `style.py` — the shared visual system, taken unchanged from Catalyst-Essay so the two
-  manuscripts look like they came from one group. 183 mm pages, Arial 5.3-9 pt, ticks
-  in, pastel blue/green with one red for the element a panel is about.
-- `chem.py` — skeletal-formula primitives. Structures here are repeat units and
-  linkages, which chemistry journals draw as 2D skeletal formulae rather than render
-  as 3D atoms.
-- `figN/make_figN.py` — one script per figure. Run with the project interpreter.
+Rebuild everything with the project interpreter:
 
 ```
-/d/Tools/pur_bridge_env/Scripts/python.exe fig1/make_fig1.py
-```
-
-## What is drawn atom-for-atom, and what is not
-
-PPG2000 and 4,4'-MDI have public, unambiguous formulae and are drawn atom-for-atom.
-STEPANPOL PDP-70 is a supplier aromatic polyester polyol whose exact backbone is not
-public, so it is a labelled block. Drawing a guessed backbone would be an invented
-structure in a figure that otherwise reports measurements.
-
-The urethane N-H...O=C contact in Fig 1b is drawn as a single vertical hydrogen bond.
-With a rigid offset between two urethane groups the reciprocal contact cannot also be
-vertical, so drawing both would show a geometry that does not exist.
-
-## Additional composites (2026-09-23)
-
-Built on the same `style.py` as Fig 1. All read the repository tables through
-`figdata.py`, so every number in them is derived, not transcribed.
-
-| Directory | Size | What it claims |
-|---|---|---|
-| `fig_arrhenius/` | 183 x 86 mm | Seven realizations share a local thermal response; E_eta scatters by 2.43 kJ/mol around 42.05; a linear Arrhenius form costs 11.8 % held-temperature error against 5.5 % for VFT. |
-| `fig_column/` | 120 x 152 mm | The same property for each realization, stacked in one column against the other six in grey, so level and slope compare directly. |
-| `fig_structure/` | 183 x 88 mm | The N-H...O=C association, as a 3D model, a 2D unit and the geometry achieved. |
-| `fig_hold/` | 183 x 64 mm | F1 holds flat at 120 C while E5 runs away; the 1.60 % mean absolute drift falls below the 7.79 % proportional-dilution null. |
-
-### `figdata.py`
-
-One loader for every figure. Two things it fixes that are easy to get wrong:
-
-* **The hold window is 15-60 min, matched.** E1 and E5 ran to 90 min and the
-  validation repeats only to 60, so a first-to-last drift would compare 75
-  minutes against 45. The manuscript's 9.51 %, 51.54 % and 1.60 % are all
-  15-60 min, and `hold_drift()` reproduces them exactly.
-* **E1 +P is never pooled.** It is a deliberate H3PO4 perturbation and sits
-  outside the primary population; `primary()` excludes it, giving n = 6,
-  42.05 +- 2.43 kJ/mol, CV 5.77 %.
-
-### The structure model
-
-`fig_structure/` carries a CIF this repository generated; there was no measured
-structure to use and this polymer is amorphous.
-
-* The unit is dimethyl 4,4'-methylenediphenyl dicarbamate, MMFF94-optimized
-  from SMILES by RDKit. That part is ordinary computational chemistry.
-* The three-unit stack is **constructed**: a rigid transform is searched for
-  under explicit acceptance criteria (N...O 2.90 +- 0.15 A, N-H...O >= 150 deg,
-  no heavy-heavy contact below 3.05 A), then every criterion is re-checked on
-  the result. It achieved N...O 2.92 A, N-H...O 164 deg, closest heavy contact
-  3.20 A.
-* It is a model of the association, not a crystal structure, and the figure
-  says so on its face.
-
-Three things the builder now refuses to do, each hit during development:
-translating along N-H (buries the units in one another), counting the H...O
-bond itself as a steric clash (fights its own objective), and accepting a
-solution without re-checking the N...O distance it was optimizing -- that last
-one once wrote a "hydrogen bond" of 5.63 A with every other check passing.
-
-## Legends, the overlap audit, and the sheet (2026-09-23)
-
-`layout.py` carries two things every figure here now uses.
-
-* **`legend(...)`** — the house legend frame. Framed legends are used where a
-  panel carries more than four or five series: seven Arrhenius lines and four
-  hold trajectories both read better from a legend than from end labels.
-* **`audit(fig)`** — measures every text and legend bounding box after a draw
-  and reports real intersections. It runs before every `save`. It caught two
-  collisions that survived a visual check: the run description under the
-  Arrhenius legend, and the two F1 trajectory labels, which finish 3 % apart
-  and landed on top of each other.
-
-`make_sheet.py` composes the finished figures into `Sheet_all_figures.{svg,pdf,png}`.
-Each figure is nested as an SVG, so the sheet is vector with live text rather
-than a screenshot, and each is scaled independently — on a sheet a figure does
-not owe anything submission size. The per-figure PDFs and SVGs remain the
-submission artifacts.
-
-Every figure ships svg, pdf and png. Rebuild everything with:
-
-```
-for d in fig1 fig_arrhenius fig_column fig_structure fig_hold; do
+for d in fig1 fig2 fig3 fig4 fig5 fig_arrhenius fig_column fig_structure; do
   (cd $d && D:/Tools/pur_bridge_env/Scripts/python.exe make_*.py)
 done
 D:/Tools/pur_bridge_env/Scripts/python.exe make_sheet.py
 ```
+
+The structure render in `fig_structure/` is a separate, slower step that needs
+the OVITO environment (see *The structure model* below).
+
+## The figures
+
+| Figure | Directory | Size (mm) | Reads |
+|---|---|---|---|
+| 1 | `fig1/` | 183 x 124 | drawn chemistry; the loop's two measured numbers |
+| 2 | `fig2/` | 183 x 104 | `figures_origin/data/p2A-D`, `results/local_model_free_state_shift_summary.json` |
+| 3 | `fig3/` | 183 x 68 | `results/local_leave_one_formulation_*`, `results/local_joint_formulation_temperature_extrapolation_summary.csv`, `p3C` |
+| 4 | `fig4/` | 183 x 88 | every run's `recommendation.json` under `results/agent_v4_voi/`, checked against `rule_layer_ablation.json` |
+| 5 | `fig5/` | 183 x 96 | `data/temperature_sweeps.csv`, `data/thermal_hold.csv`, `results/local_hold_dynamics.csv` |
+| S1 | `fig_arrhenius/` | 183 x 86 | all seven realizations, and `derived/thermal_model_robustness/` |
+| S2 | `fig_column/` | 120 x 152 | one property, seven realizations, stacked against each other |
+| S3 | `fig_structure/` | 183 x 88 | the generated hard-segment CIF |
+
+Three panels were redrawn rather than carried over, because the earlier
+drawings implied relationships the data does not have:
+
+* **2d** — two model specifications were joined by a thick diagonal, implying
+  intermediate states that were never fitted. Now two metrics, each on its own
+  axis, two bars each.
+* **4d** — three different outcomes counted over the same ten runs were joined
+  by a polyline, implying a trajectory. Now three separate rows, one segment
+  per run.
+* **5d** — a CV in percent and a ratio of drift rates shared one axis, while
+  the caption said no common scale was implied. Now two axes, each with its own
+  units and the data it comes from.
+
+## `figdata.py` — one data layer
+
+Every figure reads through it, so a number cannot differ between two figures.
+Conventions it settles:
+
+* **The hold window is 15-60 min, matched.** E1 and E5 ran to 90 min and the
+  validation repeats only to 60, so a first-to-last drift would compare 75
+  minutes against 45. `hold_drift()` reproduces the manuscript's 9.51 %,
+  51.54 % and 1.60 % exactly. The E5/E1 drift-rate ratio of 4.29 is a
+  different descriptor, fitted over the full 15-90 min hold, and Figure 5
+  labels which is which.
+* **E1 +P is never pooled.** It is a deliberate H3PO4 perturbation;
+  `primary()` excludes it, giving n = 6, 42.05 +- 2.43 kJ/mol, CV 5.77 %.
+* **Ablation runs are read one by one.** `ablation_runs()` walks each run's
+  `recommendation.json`, so Figure 4 can show every run. Figure 4 asserts that
+  the per-run records reproduce the frozen aggregate before it draws anything.
+  The order-inverted arm's ten runs all live in the `_n5` folder: it was
+  declared at n = 5 and extended to 10 after the first five were observed.
+* `wilson()` gives the two-sided 95 % intervals quoted in Figure 4.
+
+## Chemistry that is drawn
+
+PPG2000 and 4,4'-MDI have public, unambiguous formulae and are drawn atom for
+atom. STEPANPOL PDP-70 is a supplier polyester polyol whose backbone is not
+public, so it is a labelled block rather than a guessed structure.
+
+Read every drawn structure as chemistry, atom by atom. Each of these rendered
+cleanly and was wrong:
+
+* **PPG2000 ended on the ether oxygen** — an O-OH peroxide. The chain ends on
+  carbon.
+* **Its repeat brackets faced outward and sat one bond early**, enclosing
+  [CH(CH3)-O-CH2-CH(CH3)], which does not repeat into PPG. The unit is
+  [O-CH2-CH(CH3)]n, brackets crossing the CH-O and CH-OH bonds.
+* **A methyl pointed into its chain angle**, putting all three bonds of that
+  carbon in one half-plane. Substituents leave on the exterior: down from a
+  valley vertex, up from a peak.
+* **MDI's isocyanates read as nitroso groups.** N=C=O is linear, so the
+  implicit carbon vanishes between two collinear double bonds and the group
+  reads O=N. It is written OCN- / -NCO, as polyurethane schemes do.
+* **Two reciprocal H-bonds crossed in an X.** With a rigid offset both cannot be
+  vertical; Figure 1b draws the one contact that can.
+* **Figure 1b stated a mechanism** — that holding "lets this association keep
+  building". Nothing here measures that. It now states what is measured: the
+  composition is fixed and the viscosity still changes.
+
+## The structure model
+
+`fig_structure/mdi_hard_segment_stack.cif` is **generated by this repository**,
+not measured. There was no experimental structure to use, and this polymer is
+amorphous.
+
+* The unit is dimethyl 4,4'-methylenediphenyl dicarbamate, MMFF94-optimized
+  from SMILES by RDKit.
+* The three-unit stack is constructed: a rigid transform is searched for under
+  explicit acceptance criteria (N...O 2.90 +- 0.15 A, N-H...O >= 150 deg, no
+  heavy-heavy contact below 3.05 A), and every criterion is re-checked on the
+  result. It achieved N...O 2.92 A, N-H...O 164 deg, closest heavy contact
+  3.20 A. The figure says on its face that it is a model.
+
+```
+D:/Tools/pur_bridge_env/Scripts/python.exe fig_structure/build_hardsegment.py   # CIF
+D:/Tools/render-venv/Scripts/python.exe    fig_structure/build_render.py        # OVITO
+```
+
+The builder refuses three things, each hit during development: translating
+along N-H (buries the units in each other), counting the H...O bond itself as
+a clash (fights its own objective), and accepting a result without re-checking
+the N...O distance it optimized -- that once wrote a 5.63 A "hydrogen bond".
+The renderer identifies hydrogen bonds by being intermolecular, N-H-donated and
+near-linear, not by distance alone, which returned 20 contacts against the 2
+real ones.
+
+## `layout.py` — legends, and a measured overlap audit
+
+* **`legend(...)`** — the house legend frame, used where a panel carries more
+  than four or five series or where end labels would collide.
+* **`audit(fig)`** — runs before every `save`. It draws the figure, measures
+  every placed text, legend, axis label, title and *drawn* tick label, and
+  reports real intersections. Tick labels outside the view limits and on
+  switched-off axes are skipped: matplotlib returns them but never draws them.
+  It has caught collisions that survived a visual check, and it is tested
+  against planted ones.
+
+It does **not** check text against data marks. A label sitting on a data point,
+and two data points hiding each other, still have to be seen: an n = 6 strip
+once showed five dots because two values sat 0.12 % apart.
+
+## Sheets
+
+`make_sheet.py` composes the finished figures into
+`Sheet_main_figures.{svg,pdf,png}` (Figures 1-5, in reading order) and
+`Sheet_supplementary_figures.{svg,pdf,png}` (S1-S3). Each figure is nested as
+an SVG, so a sheet is vector with live text; each is scaled independently. The
+per-figure files remain the submission artifacts.
