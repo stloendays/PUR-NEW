@@ -1,5 +1,0 @@
- 6: #a5232a #de4532 #fbbe7c #dbefe6 #71a1cb #115fa4
-12: #a5232a #c92f2b #db3d30 #ea6643 #f8a36b #fde196 #faf8bc #c8e6ee #97c1dc #6b9ac7 #4a78b6 #115fa4
-14: #a5232a #c62f2a #d7312d #e35235 #ef764f #fbb475 #fde699 #fef9b7 #d2edf2 #acd2e5 #7dacd1 #6090c1 #4573b4 #115fa4
-16: #a5232a #c22d2a #d2302c #de4532 #e96341 #f38b5c #fbbe7c #fde79b #fef8b5 #dbefe6 #b9dbe9 #93beda #71a1cb #5988be #3e70b2 #115fa4
-18: #a5232a #be2c2a #cf302c #db3b2f #e45437 #ed704a #f69a65 #fcc682 #fde89d #fef7b3 #e2f1dd #c2e2ed #a4cbe1 #80aed2 #6998c6 #5382bb #396eb0 #115fa4
