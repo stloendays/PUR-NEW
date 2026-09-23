@@ -11,5 +11,5 @@ E1_plusP_delta_from_primary_mean,-1.2855,kJ/mol
 E1_plusP_standardized_delta,-0.5299,SD
 shared_shape_intercept_only_mult_RMSE,1.03396,multiplicative
 anchor_120C_predict_other_temperatures_mult_RMSE,1.03897,multiplicative
-geometric_mean_plusP_to_E1_GJJ_day1_ratio,0.878527,ratio
-mean_absolute_percent_difference_vs_E1_GJJ_day1,12.1064,percent
+geometric_mean_plusP_to_E1_R01_day1_ratio,0.878527,ratio
+mean_absolute_percent_difference_vs_E1_R01_day1,12.1064,percent
