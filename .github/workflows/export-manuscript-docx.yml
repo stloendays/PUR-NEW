@@ -156,6 +156,72 @@ jobs:
 
           pandoc build/PUR_SI_FOR_WORD.md             --from=markdown+tex_math_dollars             --to=docx             --citeproc             --bibliography=manuscript/references.bib             --csl=build/royal-society-of-chemistry.csl             --reference-doc=build/reference.docx             --resource-path=.:build:manuscript:analysis             -o build/PUR_Rheological_State_Experiment_Selection_Supplementary_Information.docx
 
+      - name: Normalize final Word typography
+        run: |
+          python - <<'PY'
+          from docx import Document
+          from docx.shared import RGBColor
+          from docx.oxml import OxmlElement
+          from docx.oxml.ns import qn
+
+          paths = [
+              "build/PUR_Rheological_State_Experiment_Selection_Manuscript.docx",
+              "build/PUR_Rheological_State_Experiment_Selection_Supplementary_Information.docx",
+          ]
+
+          def set_run_font_xml(run_el):
+              rpr = run_el.find(qn("w:rPr"))
+              if rpr is None:
+                  rpr = OxmlElement("w:rPr")
+                  run_el.insert(0, rpr)
+              rfonts = rpr.find(qn("w:rFonts"))
+              if rfonts is None:
+                  rfonts = OxmlElement("w:rFonts")
+                  rpr.insert(0, rfonts)
+              for attr in ("ascii", "hAnsi", "eastAsia", "cs"):
+                  rfonts.set(qn(f"w:{attr}"), "Times New Roman")
+              color = rpr.find(qn("w:color"))
+              if color is None:
+                  color = OxmlElement("w:color")
+                  rpr.append(color)
+              color.set(qn("w:val"), "000000")
+              for attr in ("themeColor", "themeTint", "themeShade"):
+                  key = qn(f"w:{attr}")
+                  if key in color.attrib:
+                      del color.attrib[key]
+
+          for path in paths:
+              doc = Document(path)
+
+              # Keep the Pandoc hierarchy/sizes, but force the manuscript house font.
+              for style in doc.styles:
+                  if hasattr(style, "font"):
+                      style.font.name = "Times New Roman"
+                      try:
+                          style._element.rPr.rFonts.set(qn("w:ascii"), "Times New Roman")
+                          style._element.rPr.rFonts.set(qn("w:hAnsi"), "Times New Roman")
+                          style._element.rPr.rFonts.set(qn("w:eastAsia"), "Times New Roman")
+                          style._element.rPr.rFonts.set(qn("w:cs"), "Times New Roman")
+                      except Exception:
+                          pass
+                      style.font.color.rgb = RGBColor(0, 0, 0)
+
+              # Force all ordinary/hyperlink runs to black Times New Roman.
+              for run_el in doc.element.body.iter(qn("w:r")):
+                  set_run_font_xml(run_el)
+
+              # Remove decorative paragraph borders (notably the blue rule below title).
+              for p_el in doc.element.body.iter(qn("w:p")):
+                  ppr = p_el.find(qn("w:pPr"))
+                  if ppr is None:
+                      continue
+                  pbdr = ppr.find(qn("w:pBdr"))
+                  if pbdr is not None:
+                      ppr.remove(pbdr)
+
+              doc.save(path)
+          PY
+
       - name: Verify native Word equations and embedded figures
         run: |
           python - <<'PY'
