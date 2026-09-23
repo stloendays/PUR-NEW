@@ -8,7 +8,7 @@ The main manuscript should emphasize only analyses that directly answer the pape
 
 ## 1. Realization labels and operator identity
 
-GJJ, ZYX and CHH are run labels from the same operator. They are not operator categories. The compact dataset therefore treats them as opaque within-operator experimental realizations.
+R01, R02 and R03 are run labels from the same operator. They are not operator categories. The compact dataset therefore treats them as opaque within-operator experimental realizations.
 
 `data/realization_metadata.csv` records the same-operator labels explicitly. Verified measurement metadata further establish that temperature-sweep repeatability used the same mother sample across temperatures within a sweep; distinct run labels are therefore not automatically interpreted as independent synthesis batches.
 
@@ -33,7 +33,7 @@ ln(eta) vs 1/T R2    = 0.9979
 
 The six-realization primary distribution is 42.05 ± 2.43 kJ/mol, placing E1 `+P` only 0.53 SD below the primary mean. When the thermal-shape coefficients learned from the six primary realizations are held fixed and only a curve-specific intercept is fitted to E1 `+P`, the multiplicative RMSE is 1.034×. Anchoring the same shared shape with only the 120 °C E1 `+P` viscosity predicts the other five temperatures with a multiplicative RMSE of 1.039×.
 
-Relative to the available E1 GJJ day-1 record, the `+P` viscosities are 9.5–17.1% lower across 80–130 °C, with a geometric mean ratio of 0.879. This comparator is retained as an observational reference rather than a paired treatment-control estimate because its parent-batch relationship is not established.
+Relative to the available E1 R01 day-1 record, the `+P` viscosities are 9.5–17.1% lower across 80–130 °C, with a geometric mean ratio of 0.879. This comparator is retained as an observational reference rather than a paired treatment-control estimate because its parent-batch relationship is not established.
 
 The scientific use of E1 `+P` is therefore specific: a defined low-dose acid perturbation leaves the temperature-response geometry compatible with the shared local shape while shifting the observed viscosity level. This strengthens the separation between viscosity scale and thermal-response shape without adding the perturbed curve to the primary same-composition fit.
 
