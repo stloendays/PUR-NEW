@@ -1,0 +1,12 @@
+N_O 2.916
+H_O 1.931
+angle 164.1
+heavy_min 3.203
+h_min 2.048
+rot_deg 30.30
+trans 6.634
+cell_a 32.984
+cell_b 35.518
+cell_c 28.879
+n_atoms 123
+n_units 3
