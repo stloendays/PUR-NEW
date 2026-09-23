@@ -58,7 +58,7 @@ The E1 +P curve is retained as a separate chemical-perturbation check. Its appar
 
 ## Supplementary Table S2 | Chemistry-audited temperature-sweep realizations
 
-| Realization | Formulation | Retest after 1 d | n temperatures | Apparent $E_\eta$ (kJ mol$^{-1}$) | $R^2$, $\ln\eta$ vs $1/T$ |
+| Realization | Formulation | Retest after 1 d | n temperatures | Apparent $E_\eta$ ($\mathrm{kJ\,mol^{-1}}$) | $R^2$, $\ln\eta$ vs $1/T$ |
 |---|---|---:|---:|---:|---:|
 | E1 R01 day-1 | E1 | yes | 6 | 42.712 | 0.9962 |
 | E2 R03 | E2 | no | 6 | 37.634 | 0.9651 |
@@ -277,7 +277,7 @@ $
 40.21\text{--}43.90~\mathrm{kJ\,mol^{-1}}.
 $
 
-A supporting random-intercept mixed model returned the same central estimate, 42.05 kJ mol$^{-1}$, with a 95% confidence interval of 40.31–43.79 kJ mol$^{-1}$. Because only six realization groups are available, variance-component estimates are treated as sensitivity evidence rather than as precise population parameters.
+A supporting random-intercept mixed model returned the same central estimate, 42.05 $\mathrm{kJ\,mol^{-1}}$, with a 95% confidence interval of 40.31–43.79 $\mathrm{kJ\,mol^{-1}}$. Because only six realization groups are available, variance-component estimates are treated as sensitivity evidence rather than as precise population parameters.
 
 To test whether the local thermal slopes themselves need to vary by realization, the shared-linear model was compared with a model containing realization-specific linear slopes while retaining realization intercepts. The added five slope degrees of freedom were not supported:
 
@@ -316,8 +316,8 @@ $$
 
 | Formulation / repeat | Measured window | 15→60 min change | 15→90 min change | Descriptive $\mathrm{d}\ln\eta/\mathrm{d}t$ |
 |---|---|---:|---:|---:|
-| E1 | 15–90 min | +9.51% | +16.85% | 0.125 h$^{-1}$ |
-| E5 | 15–90 min | +51.54% | +93.08% | 0.537 h$^{-1}$ |
+| E1 | 15–90 min | +9.51% | +16.85% | 0.125 $\mathrm{h^{-1}}$ |
+| E5 | 15–90 min | +51.54% | +93.08% | 0.537 $\mathrm{h^{-1}}$ |
 | F1 repeat 1 | 15–60 min | −0.16% | — | not used as headline kinetic descriptor |
 | F1 repeat 2 | 15–60 min | +3.04% | — | not used as headline kinetic descriptor |
 
@@ -373,13 +373,13 @@ Reanalysis of these external curves shows that $\ln\eta$ versus $1/T$ is general
 - median $R^2 \approx 0.9967$;
 - 37 of 39 curves have $R^2\ge0.98$.
 
-However, the apparent temperature-response descriptor spans approximately 34.7–94.2 kJ mol$^{-1}$, which is much broader than the local E1–E3 range.
+However, the apparent temperature-response descriptor spans approximately 34.7–94.2 $\mathrm{kJ\,mol^{-1}}$, which is much broader than the local E1–E3 range.
 
 To test transferability without formulation leakage, each complete curve was treated as one sample and its apparent $E_\eta$ as one target. Individual temperature points from the same formulation were never randomly split between training and test sets. The primary analysis used the 37 curves with $R^2\ge0.98$; the two lower-fit curves were retained as sensitivity-only records.
 
 A five-descriptor ridge model used prepolymer molecular weight, polyol topological polar surface area, an isocyanate structural descriptor, NCO content and polyol $T_g$.
 
-| Model | Family-held-out validation | $R^2$ | RMSE (kJ mol$^{-1}$) |
+| Model | Family-held-out validation | $R^2$ | RMSE ($\mathrm{kJ\,mol^{-1}}$) |
 |---|---|---:|---:|
 | five-descriptor ridge | leave-one-isocyanate-family-out | 0.910 | 3.12 |
 | five-descriptor ridge | leave-one-polyol-family-out | -1.456 | 16.33 |
