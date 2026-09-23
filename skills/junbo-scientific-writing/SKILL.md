@@ -1,3 +1,8 @@
+---
+name: junbo-scientific-writing
+description: Apply Junbo Tong's publication-first scientific writing and manuscript-engineering workflow. Use for drafting, restructuring, polishing, auditing, or exporting research manuscripts, abstracts, Results/Discussion, captions, SI, cover letters, and submission-ready DOCX/PDF; for reconciling prose with analysis code/results; for AI-for-science or Agent benchmark reporting; and for enforcing Junbo's formatting, mechanism, provenance, figure, equation, and canonical-story rules across GitHub, Word, Google Docs, and submission artifacts.
+---
+
 
 # Junbo Scientific Writing
 
@@ -17,6 +22,8 @@ Use this order whenever manuscript artifacts disagree:
 Never let an older Word file override a verified GitHub manuscript or analysis result. When the manuscript and code disagree, inspect the actual implementation and regenerate the statistic before rewriting prose.
 
 Respect explicit project-level non-negotiables in the repository or user instructions. Do not reintroduce a framing, caveat, terminology change, or mechanism weakening that the author has explicitly frozen.
+
+A frozen manifest, protocol, registry, or decision record is a provenance-protected version, not an irreversible lock. By default, do not modify it silently. If the author explicitly requests a change, perform an author-authorized thaw -> revise/extend/rebuild -> re-freeze workflow. Preserve the predecessor version, document the change, regenerate dependent hashes/results when needed, and treat the newly re-frozen version as the active source of truth. Never refuse a requested revision solely because an artifact was previously frozen.
 
 ## 2. Canonical-story workflow
 
@@ -43,11 +50,15 @@ Abstract order:
 1. Problem or failure mode.
 2. Specific unresolved gap.
 3. Main physical/methodological finding.
-4. Decisive quantitative evidence.
+4. One to three decisive quantitative results, only when they materially strengthen the central claim.
 5. Mechanistic or conceptual interpretation.
 6. Experiment-selection or design implication.
 
-Use the strongest verified numbers. Do not hide a decisive baseline, transfer result, or effect-size comparison in the SI if removing it would materially weaken belief in the central claim.
+Keep the abstract as a causal scientific story, not a compressed Results table. Default to roughly 150-220 words unless the target journal requires otherwise. Remove secondary sample counts, candidate-space sizes, implementation details, instrument details, repeated denominators, and multiple metrics that tell the same story. Prefer a qualitative statement when the exact number is not necessary for credibility. If several numerical results support one conclusion, keep only the most discriminating comparison or effect size.
+
+Use the strongest verified numbers, but do not equate rigor with numerical density. Do not hide a decisive baseline, transfer result, or effect-size comparison in the SI if removing it would materially weaken belief in the central claim.
+
+Keywords should normally contain 4-6 high-information search terms. Prioritize the scientific object, the central physical concept, the key methodological concept, and at most one decision/AI concept. Remove synonyms, parent-child duplicates, generic terms, and low-level implementation language. Do not add `AI`, `Agent`, `LLM`, or `machine learning` merely because those tools were used.
 
 ## 4. Claim-evidence discipline
 
@@ -160,9 +171,21 @@ Main text: the scientific argument and decisive evidence.
 
 SI: supporting derivations, robustness checks, run-level tables, secondary baselines, full model definitions, and reproducibility details needed by reviewers.
 
-Repository/provenance: complete engineering history, hashes, failure logs, superseded strategies, environment details, and frozen artifacts.
+Repository/provenance: complete engineering history, hashes, failure logs, superseded strategies, environment details, evidence snapshots, tool versions, and frozen artifacts.
 
 Do not dump the project-development history into the paper. Do not delete provenance simply because it does not belong in the paper.
+
+### Scientific-value protection rule
+
+Protect the value of a valid scientific result from unnecessary engineering-history disclaimers.
+
+- Report a valid analysis in result-first scientific form even if it was computed after an Agent run, implementation milestone, or frozen benchmark.
+- Do **not** append self-devaluing clauses such as `was not part of the frozen Agent evidence contract`, `the Agent did not see this statistic`, or detailed evidence-version history to a Results claim merely to demonstrate provenance discipline.
+- Never imply that later evidence caused an earlier Agent decision. Prevent that false causal claim by removing or narrowing the causal attribution, not by weakening the independent scientific result.
+- A later analysis may independently strengthen the rationale for a measurement, mechanism, state variable, or design principle. Describe it as supporting or quantifying that scientific rationale.
+- Put exact evidence snapshots, tool versions, branch names, commit hashes, run chronology, and evidence-version boundaries in SI reproducibility material or repository provenance unless they are necessary to interpret the science.
+- Before adding a provenance caveat to main text, ask: **Does this detail change the scientific interpretation or prevent a false causal claim?** If not, omit it from the main narrative.
+- Preserve chronology rigorously in the Agent/provenance record. Strong scientific writing and exact provenance are complementary; do not trade one for the other.
 
 ## 11. Submission engineering
 

@@ -19,9 +19,25 @@ BLOCKER_PATTERNS = [
 ]
 
 WARNING_PATTERNS = [
-    (re.compile(r"^\s*\$\s*$", re.M), "Single-dollar display delimiter line found; use $$ for display math"),
+    (re.compile(r"^\s*\$\s*$", re.M), "Single-dollar display delimiter line found; use $ for display math"),
     (re.compile(r"evidence-grounded", re.I), "Consider whether 'evidence-grounded' is necessary or AI-generic"),
     (re.compile(r"AI-guided", re.I), "Consider whether 'AI-guided' is scientifically specific enough"),
+    (
+        re.compile(
+            r"(?:was\s+not\s+part\s+of|not\s+part\s+of).{0,80}(?:frozen\s+)?(?:Agent\s+)?evidence\s+contract"
+            r"|(?:frozen\s+)?(?:Agent\s+)?evidence\s+contract.{0,80}(?:was\s+not|not\s+part)"
+            r"|\bevidence\s+version\s+(?:v?\d|one|two|three)\b"
+            r"|\btool[_ -]?version\b"
+            r"|\b(?:git\s+)?commit\s+(?:sha|hash)\b"
+            r"|\bbranch\s+(?:name|sha|hash)\b",
+            re.I | re.S,
+        ),
+        (
+            "Development/provenance wording detected. In main text, keep it only if it changes "
+            "scientific interpretation or prevents false causal attribution; otherwise move exact "
+            "evidence-version/tool/hash chronology to SI or repository provenance and lead with the scientific result."
+        ),
+    ),
 ]
 
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")

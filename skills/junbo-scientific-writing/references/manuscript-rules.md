@@ -9,18 +9,22 @@
 - Remove material that does not support the canonical story, reproducibility, or necessary context.
 - When a new development line is still moving, keep it out of the canonical manuscript until frozen.
 
-## 2. Abstract
+## 2. Abstract and keywords
 
 Use this order where appropriate:
 
 1. problem or failure mode;
 2. unresolved gap;
 3. main finding;
-4. decisive quantitative evidence;
+4. one to three decisive quantitative results;
 5. mechanism or physical interpretation;
 6. design/experiment-selection implication.
 
-Do not hide the strongest baseline or transfer result if it materially changes how convincing the central claim is.
+Default to a compact causal story rather than a numerical inventory. Roughly 150-220 words is a useful default unless the journal specifies otherwise. Remove secondary sample counts, candidate-space sizes, instrument details, implementation details, repeated denominators, and multiple metrics supporting the same point. Keep exact values only when they change the reader's belief in the central claim.
+
+Do not hide the strongest baseline, null-model contrast, transfer result, or effect-size comparison if it materially changes how convincing the central claim is.
+
+Use 4-6 keywords by default. Prefer one term each for the scientific object, central physical concept, major method, and decision/design concept. Delete redundant synonyms and generic AI vocabulary unless it is central to how the paper will be searched.
 
 ## 3. Introduction
 
@@ -41,6 +45,27 @@ Default paragraph logic:
 - Separate measured values, fitted descriptors, and post hoc adjudication.
 - Do not let software names become the scientific headline.
 - If a simple null model challenges a mechanism, compute it and report the contrast.
+- Lead with what the result establishes scientifically; do not attach repository-development disclaimers to the same sentence unless chronology changes the scientific interpretation.
+
+### Scientific-value protection
+
+A later analysis can strengthen the scientific interpretation of an earlier workflow without being a historical input to that workflow.
+
+**Bad main-text pattern**
+
+`A single state anchor reduced prediction error substantially. This analysis was not part of the frozen Agent evidence contract.`
+
+The second sentence is usually true but rhetorically misplaced: it converts a scientific result into an engineering-history disclaimer.
+
+**Preferred main-text pattern**
+
+`A single state-specific measurement reduced reconstruction error, demonstrating that formulation identity alone does not fully specify the realized state and that an in-domain anchor carries substantial state information.`
+
+If chronology must be documented to protect causal attribution, place it in SI/provenance, for example:
+
+`The frozen Agent series used evidence snapshot X; the later state-anchor analysis is reported independently and is not treated as a historical model input.`
+
+The rule is: **do not retrofit later evidence into an earlier causal story, but do not demote an independently valid scientific result merely because it was obtained later.**
 
 ## 5. Discussion
 
