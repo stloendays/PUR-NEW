@@ -101,9 +101,24 @@ Keep reader-facing scientific terminology stable. Keep these internal by default
 - commit hashes;
 - branch names;
 - prompt versions;
-- engineering codenames.
+- engineering codenames;
+- manuscript/architecture development labels such as V1/V2/V3/V4/V5.
 
 Expose them only where reproducibility requires it.
+
+### Final-stage semantic names
+
+In the final manuscript and SI, replace internal development versions with names that describe scientific function. Use one stable name throughout Results, Methods, captions, tables, Data/Code Availability and exports.
+
+Bad reader-facing sequence:
+
+`V3 -> V4 -> V5`
+
+Preferred scientific sequence:
+
+`Candidate-Recovery Benchmark (CRB) -> Rule-Grounded Experiment Selection (RGES) -> Chemistry-Bounded Experiment Selection (CBES)`
+
+Keep the historical mapping in repository provenance. If an internal filename contains a version label, cite a semantic alias or provenance index rather than exposing the implementation filename in the final reader-facing text.
 
 ## 9. Provenance
 
