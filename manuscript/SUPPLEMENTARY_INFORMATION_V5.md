@@ -260,7 +260,7 @@ The important result is not exact equality of slopes, but the comparatively narr
 
 ![Supplementary Figure S2. Temperature-response fits and model-form sensitivity](../analysis/figures_composite/fig_arrhenius/Fig_arrhenius.svg)
 
-**Supplementary Figure S2. Local temperature-response fits and functional-form sensitivity.** (A) $ln\eta$ versus $1000/T$ for all seven complete local curves. The H3PO4-perturbed E1 curve is shown for context but is excluded from the six-realization primary mean. (B) Apparent $E_\eta$ for each curve with within-curve slope-fit standard errors; the band and horizontal line show the primary mean ± 1 s.d. and mean, respectively. (C) Held-temperature error for the shared linear, quadratic, cubic and VFT/shifted-Andrade representations, with AICc shown alongside. The quadratic model is retained as the minimal flexible canonical form because the cubic term adds negligible predictive benefit, while the VFT form serves as a nonlinear sensitivity check.
+**Supplementary Figure S2. Local temperature-response fits and functional-form sensitivity.** (A) $\ln\eta$ versus $1000/T$ for all seven complete local curves. The H3PO4-perturbed E1 curve is shown for context but is excluded from the six-realization primary mean. (B) Apparent $E_\eta$ for each curve with within-curve slope-fit standard errors; the band and horizontal line show the primary mean ± 1 s.d. and mean, respectively. (C) Held-temperature error for the shared linear, quadratic, cubic and VFT/shifted-Andrade representations, with AICc shown alongside. The quadratic model is retained as the minimal flexible canonical form because the cubic term adds negligible predictive benefit, while the VFT form serves as a nonlinear sensitivity check.
 
 
 ## Shared-slope and hierarchical sensitivity
@@ -282,7 +282,7 @@ A supporting random-intercept mixed model returned the same central estimate, 42
 To test whether the local thermal slopes themselves need to vary by realization, the shared-linear model was compared with a model containing realization-specific linear slopes while retaining realization intercepts. The added five slope degrees of freedom were not supported:
 
 $
-F_{5,24}=1.257,qquad p=0.314.
+F_{5,24}=1.257,\qquad p=0.314.
 $
 
 This does not prove exact equality of thermal slopes. It shows that the current audited local data do not require realization-specific slope variation to explain the dominant state structure, consistent with the interpretation that realization dependence is primarily a viscosity-scale displacement.
