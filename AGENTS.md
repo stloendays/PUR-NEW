@@ -55,3 +55,8 @@ Detailed numerical outputs:
 Any Agent that consumes local rheology should prefer the audited scientific tool output from `get_state_aware_rheology_summary()` rather than reconstructing project context from prose. The tool version exposing the reconciled E1 +P condition is `3.5-verified-phosphoric-perturbation`.
 
 Do not modify frozen historical benchmark records or prompts merely to propagate these facts. New work should use the active V5 manuscript line and current audited scientific tool.
+
+## Realization-code privacy rule
+
+Use only the anonymized realization codes `R01`, `R02`, and `R03` in datasets, figures, manuscripts, reports, and Agent outputs. Do not surface pre-anonymization labels from historical revisions. Treat the anonymized codes as opaque realization identifiers, not operator identities.
+
