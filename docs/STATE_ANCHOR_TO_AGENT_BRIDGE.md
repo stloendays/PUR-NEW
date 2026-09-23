@@ -1,10 +1,12 @@
 # State-anchor evidence to Agent measurement policy
 
-## Status
+## Status and evidence-version boundary
 
-This document connects a completed pre-result materials analysis to the pre-registered Agent V5 measurement-admissibility design.
+This document connects a completed materials analysis to the Agent V5 measurement-admissibility design, but the chronology must remain explicit.
 
-It does **not** contain Agent V5 outcome claims. The active V5 comparison protocol remains frozen at `configs/agent_v5_comparison_protocol.json` version 1.1 and is still pre-implementation.
+The frozen Condition-A Agent V5 series on the implementation branch was run **before** the state-anchor bridge analysis was added to the active scientific tool. Those runs used the earlier chemistry-audited rheology tool output (tool version `3.5-verified-phosphoric-perturbation`) and therefore did **not** receive the 1.824x -> 1.086x state-anchor information-gain result.
+
+The current main-branch tool (`3.6-state-anchor-bridge`) is a new evidence version for future development. It must not be retroactively attributed to the already-frozen V5 runs, and runs generated under the two evidence versions must not be pooled as one confirmatory series.
 
 ## 1. Materials question
 
@@ -119,22 +121,21 @@ The first prevents `M-ANCHOR` from being an arbitrary convenience. The second pr
 
 ## 7. V5 information-parity requirement
 
-The primary V5 comparison is:
+Within any one evidence version, the two primary V5 arms must receive identical model-visible scientific information before enforcement.
 
-- `V5_NO_GATE`: the model sees the chemistry-audited rheology summary, state-anchor information-gain result and raw applicability audit, but applicability remains advice-only;
-- `V5_FULL`: the model sees the same scientific information, and the applicability audit is additionally enforced as a hard admissibility constraint.
+For the already-frozen Condition-A series, both arms received the same version-1 chemistry-audited tool output and the same applicability audit. The recorded pre-enforcement payload hash was identical across arms. The state-anchor bridge result was not part of either arm.
 
-Therefore the scientific facts must be identical across arms before enforcement. Only rule authority changes.
+For any future evidence-version-2 series, both arms may receive the new state-anchor information-gain result, but such a series must be declared and frozen separately. It cannot be appended to the existing N or described as a continuation of the original evidence contract.
 
-This is important for causal interpretation:
+The causal interpretation remains:
 
-> any change in unsupported shortcut rate should be attributed to converting the same scientific knowledge from advice into executable policy, not to giving one arm more scientific information.
+> within a fixed evidence version, any arm difference should be attributable to converting the same scientific knowledge from advice into executable policy, not to unequal scientific information.
 
 ## 8. Manuscript role
 
-The completed state-anchor bridge analysis may be reported as materials evidence because it is derived entirely from pre-validation local measurements.
+The completed state-anchor bridge analysis may be reported as a materials analysis because it is derived from the chemistry-audited local measurements. It strengthens the physical interpretation of why an anchor measurement can carry state information.
 
-Prospective V5 run outcomes must remain outside the manuscript until implementation, blindness, information-parity and result audits are complete and the result series is explicitly frozen.
+The already-frozen V5 runs must be reported under their original evidence version. The manuscript must not imply that those Agent decisions used the later state-anchor bridge statistic. If a new Agent series is run with evidence version 2, it must be reported separately with its own declared denominator, hashes and evidence-version label.
 
 ## 9. Claim boundary
 
