@@ -302,13 +302,13 @@ def _phosphoric_acid_perturbation(
         ),
         "shared_shape_intercept_only_multiplicative_error": intercept_only_error,
         "anchor_120c_predict_remaining_temperatures_multiplicative_error": anchor_error,
-        "observational_E1_GJJ_day1_comparator": {
+        "observational_E1_R01_day1_comparator": {
             "geometric_mean_viscosity_ratio": float(np.exp(np.mean(np.log(ratios)))),
             "percent_difference_range": [float(np.min(pct)), float(np.max(pct))],
             "mean_absolute_percent_difference": float(np.mean(np.abs(pct))),
             "interpretation_boundary": (
                 "Observational reference only; the compact record does not establish a paired "
-                "parent-batch relationship between E1 +P and E1 GJJ day-1."
+                "parent-batch relationship between E1 +P and E1 R01 day-1."
             ),
         },
         "interpretation": (
