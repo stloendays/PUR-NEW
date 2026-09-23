@@ -28,9 +28,11 @@ is preserved as reported. No run was added, replaced or re-scored.
 
 ## 3. Anonymization
 
-`GJJ -> R01`, `ZYX -> R02`, `CHH -> R03` across 45 active artifacts: `data/`,
-`derived/` (except the file in 3.2), `analysis/`, `docs/`, `manuscript/`,
-`scripts/`, `src/` and the READMEs.
+The three pre-anonymization run labels were replaced by `R01`, `R02` and `R03`
+across 45 active artifacts: `data/`, `derived/` (except the file in 3.2),
+`analysis/`, `docs/`, `manuscript/`, `scripts/`, `src/` and the READMEs. The
+mapping is not written out here, so that this report does not reintroduce what
+it is recording the removal of.
 
 The change is a pure relabeling. Each file is byte-identical to its previous
 revision once the substitution is reversed, so no measurement, fit, interval or
