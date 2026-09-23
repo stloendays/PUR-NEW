@@ -112,6 +112,12 @@ jobs:
               # the canonical Markdown on vector SVG assets.
               src = re.sub(r"(analysis/[^)]+)\.svg\)", r"\1.png)", src)
 
+              # Canonical Markdown keeps descriptive image alt text for readability,
+              # but Pandoc interprets it as an implicit figure caption. The manuscript
+              # already carries the full scientific caption as the following paragraph,
+              # so blank the image alt only in the Word-export source to avoid duplicate captions.
+              src = re.sub(r"!\[[^\]]*\]\(([^)]+)\)", r"![](\1)", src)
+
               lines = src.splitlines()
               if not lines:
                   raise SystemExit(f"Empty source: {src_path}")
