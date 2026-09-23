@@ -100,8 +100,12 @@ Three things the merge surfaced that git could not resolve:
   repository". That stopped being true when main's Results began quoting them in
   2.1 and 2.4. Reworded to point at where they are reported; the
   not-primary-evidence stance is unchanged.
-- `SUPPLEMENTARY_INFORMATION_V5`: a missing backslash on `\qquad` in the
-  shared-slope F test, which was rendering as literal text.
+- `SUPPLEMENTARY_INFORMATION_V5` carried two LaTeX defects into the merged text:
+  a missing backslash on `\qquad` in the shared-slope F test, and four display
+  blocks in the new robustness notes opened and closed with a single `$` instead
+  of `$$`. Both fixed. `audit_manuscript.py`, the checker main added the same day,
+  now reports 0 blockers and 0 warnings on both `MAIN_TEXT_V5.md` and
+  `SUPPLEMENTARY_INFORMATION_V5.md`.
 
 The state-anchor evidence stays out of the old series. It lives in
 `docs/STATE_ANCHOR_TO_AGENT_BRIDGE.md`, `derived/state_anchor_bridge/` and

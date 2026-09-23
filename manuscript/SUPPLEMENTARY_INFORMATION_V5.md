@@ -117,9 +117,9 @@ The quadratic term was strongly supported over the shared linear form ($F=40.78$
 
 As a nonlinear sensitivity analysis, viscosity was also represented as
 
-$
+$$
 \ln\eta_r(T)=a_r+\frac{B}{T-T_0}.
-$
+$$
 
 For any candidate $T_0$, the realization-specific intercepts and shared $B$ were solved by least squares. A bounded profile optimizer gave $T_0=262.284$ K and $B=456.90$ K. A seeded dual-annealing global search converged to $T_0=262.284$ K within 0.0003 K and the same fit error. The conclusion is therefore insensitive to optimizer initialization or local-minimum concerns.
 
@@ -248,23 +248,23 @@ The important result is not exact equality of slopes, but the comparatively narr
 
 A direct shared-slope regression with realization-specific intercepts gave
 
-$
+$$
 E_\eta=42.05~\mathrm{kJ\,mol^{-1}},
-$
+$$
 
 with a 95% confidence interval of
 
-$
+$$
 40.21\text{--}43.90~\mathrm{kJ\,mol^{-1}}.
-$
+$$
 
 A supporting random-intercept mixed model returned the same central estimate, 42.05 kJ mol$^{-1}$, with a 95% confidence interval of 40.31–43.79 kJ mol$^{-1}$. Because only six realization groups are available, variance-component estimates are treated as sensitivity evidence rather than as precise population parameters.
 
 To test whether the local thermal slopes themselves need to vary by realization, the shared-linear model was compared with a model containing realization-specific linear slopes while retaining realization intercepts. The added five slope degrees of freedom were not supported:
 
-$
+$$
 F_{5,24}=1.257,\qquad p=0.314.
-$
+$$
 
 This does not prove exact equality of thermal slopes. It shows that the current audited local data do not require realization-specific slope variation to explain the dominant state structure, consistent with the interpretation that realization dependence is primarily a viscosity-scale displacement.
 
