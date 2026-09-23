@@ -1,4 +1,5 @@
 name: export-submission-docx
+# Final submission export: canonical main + SI + rendered QA.
 
 on:
   push:
