@@ -248,6 +248,9 @@ jobs:
                   tcpr.append(tcw)
               tcw.set(qn("w:type"), "dxa")
               tcw.set(qn("w:w"), str(twips(width_emu)))
+              # python-docx also stores cell.width; LibreOffice relies on this
+              # state when laying out fixed-width tables even when tcW is present.
+              cell.width = width_emu
 
           def set_cell_margins(cell):
               tcpr = cell._tc.get_or_add_tcPr()
