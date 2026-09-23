@@ -1,0 +1,33 @@
+{
+  "agent_link": "This quantifies the scientific value of M-ANCHOR inside validated shared-shape support. It does not justify M-ANCHOR after a chemistry shift: the pre-registered Agent V5 chemistry-domain rule requires direct M-SWEEP verification first for resin-modified or otherwise shifted chemistry.",
+  "analysis_population": "chemistry-audited primary data; same-formulation holdout restricted to E2 because E2 is the only nominal formulation with multiple audited realizations",
+  "anchor_temperature_c": 110.0,
+  "cluster_bootstrap": {
+    "formulation_only_multiplicative_rmse_ci95": [1.2241288317402474, 2.2925004141589462],
+    "log_rmse_reduction_fraction_ci95": [0.7498120070687804, 0.9727661512432221],
+    "one_anchor_multiplicative_rmse_ci95": [1.0225287356019996, 1.145693332082523],
+    "reps": 10000,
+    "seed": 20260923,
+    "unit": "held_realization"
+  },
+  "formulation_only": {
+    "multiplicative_rmse": 1.8244156992081213,
+    "rmse_log": 0.6012597709532896
+  },
+  "interpretation": "Within repeated E2 realizations, formulation identity alone poorly locates the realized viscosity level. A single 110 C measurement supplies state information that substantially improves 120-130 C reconstruction when the shared-shape assumption is valid.",
+  "log_rmse_reduction_fraction": 0.8623002671298862,
+  "multiplicative_excess_error_reduction_fraction": 0.8952988712556182,
+  "n_held_realizations": 4,
+  "n_predictions": 8,
+  "one_anchor_state_calibration": {
+    "multiplicative_rmse": 1.086317254261679,
+    "rmse_log": 0.08279330984581383
+  },
+  "per_realization": [
+    {"formulation_only_multiplicative_rmse": 2.57057295819256, "held_realization": "E2__R01__day1_0", "log_rmse_reduction_fraction": 0.9961788459082158, "one_anchor_multiplicative_rmse": 1.003614177128804},
+    {"formulation_only_multiplicative_rmse": 1.053339401508001, "held_realization": "E2__R02__day1_0", "log_rmse_reduction_fraction": 0.15103100906105682, "one_anchor_multiplicative_rmse": 1.0451047273575078},
+    {"formulation_only_multiplicative_rmse": 1.3247647668453189, "held_realization": "E2__R02__day1_1", "log_rmse_reduction_fraction": 0.8772386039264802, "one_anchor_multiplicative_rmse": 1.0351276889568324},
+    {"formulation_only_multiplicative_rmse": 1.9890618633577792, "held_realization": "E2__R03__day1_0", "log_rmse_reduction_fraction": 0.7734635995360468, "one_anchor_multiplicative_rmse": 1.1685699355231964}
+  ],
+  "target_temperatures_c": [120.0, 130.0]
+}
