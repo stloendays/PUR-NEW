@@ -47,12 +47,12 @@ This exclusion is based on chemical comparability rather than on the direction o
 
 | Realization | Formulation | Retest after 1 d | n temperatures | Apparent $E_\eta$ (kJ mol$^{-1}$) | $R^2$, $\ln\eta$ vs $1/T$ |
 |---|---|---:|---:|---:|---:|
-| E1 GJJ day-1 | E1 | yes | 6 | 42.712 | 0.9962 |
-| E2 CHH | E2 | no | 6 | 37.634 | 0.9651 |
-| E2 GJJ | E2 | no | 6 | 42.661 | 0.9897 |
-| E2 ZYX | E2 | no | 6 | 41.227 | 0.9901 |
-| E2 ZYX day-1 | E2 | yes | 6 | 44.551 | 0.9948 |
-| E3 CHH | E3 | no | 6 | 43.525 | 0.9959 |
+| E1 R01 day-1 | E1 | yes | 6 | 42.712 | 0.9962 |
+| E2 R03 | E2 | no | 6 | 37.634 | 0.9651 |
+| E2 R01 | E2 | no | 6 | 42.661 | 0.9897 |
+| E2 R02 | E2 | no | 6 | 41.227 | 0.9901 |
+| E2 R02 day-1 | E2 | yes | 6 | 44.551 | 0.9948 |
+| E3 R03 | E3 | no | 6 | 43.525 | 0.9959 |
 
 The chemistry-audited primary temperature-sweep dataset therefore contains 36 observations from six complete realizations of three nominal formulations.
 
@@ -218,8 +218,8 @@ $$
 
 | Formulation | Repeat | 15 min | 30 min | 45 min | 60 min | 90 min |
 |---|---|---:|---:|---:|---:|---:|
-| E1 | GJJ | 708.7 | 728.6 | — | 776.1 | 828.1 |
-| E5 | ZYX | 2210 | 2470 | — | 3349 | 4267 |
+| E1 | R01 | 708.7 | 728.6 | — | 776.1 | 828.1 |
+| E5 | R02 | 2210 | 2470 | — | 3349 | 4267 |
 | F1 | repeat 1 | 1230 | 1189 | 1203 | 1228 | — |
 | F1 | repeat 2 | 1281 | 1260 | 1289 | 1320 | — |
 
