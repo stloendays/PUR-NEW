@@ -60,3 +60,7 @@ Do not modify frozen historical benchmark records or prompts merely to propagate
 
 Use only the anonymized realization codes `R01`, `R02`, and `R03` in datasets, figures, manuscripts, reports, and Agent outputs. Do not surface pre-anonymization labels from historical revisions. Treat the anonymized codes as opaque realization identifiers, not operator identities.
 
+## State-anchor bridge
+
+Before implementing or modifying Agent V5 measurement admissibility, read `docs/STATE_ANCHOR_TO_AGENT_BRIDGE.md`. The completed pre-result bridge analysis quantifies the value of one 110 C state anchor within repeated E2 realizations (formulation-only 1.824x versus one-anchor 1.086x for 120-130 C reconstruction) and must be interpreted together with the chemistry-domain applicability rule. Do not use this local information-gain result to authorize M-ANCHOR for chemistry-shifted candidates without prior direct M-SWEEP verification.
+
