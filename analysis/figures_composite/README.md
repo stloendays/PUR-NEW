@@ -116,6 +116,13 @@ The renderer identifies hydrogen bonds by being intermolecular, N-H-donated and
 near-linear, not by distance alone, which returned 20 contacts against the 2
 real ones.
 
+**A privacy grep reports two false matches here.** Searching the repository
+for the retired run labels finds one match each in `Fig_structure.svg` and
+`Sheet_supplementary_figures.svg`. Both sit inside the base64 data of the
+embedded OVITO render: random runs of the encoding, not text. Every text
+element in these figures uses only R01-R03. Do not edit the base64 to remove
+them; that corrupts the image.
+
 ## `layout.py` — legends, and a measured overlap audit
 
 * **`legend(...)`** — the house legend frame, used where a panel carries more

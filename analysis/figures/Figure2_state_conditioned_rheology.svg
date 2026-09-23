@@ -142,10 +142,10 @@
 <rect x='183.11' y='193.13' width='17.28' height='17.28' style='stroke-width: 0.89; stroke: none; fill: #FFFFFF;' />
 <line x1='184.83' y1='201.77' x2='198.66' y2='201.77' style='stroke-width: 1.71; stroke: #999999; stroke-linecap: butt;' />
 <circle cx='191.75' cy='201.77' r='2.64' style='stroke-width: 0.59; stroke: #999999; fill: #999999;' />
-<text x='83.10' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='15.84px' lengthAdjust='spacingAndGlyphs'>R03</text>
-<text x='125.39' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='11.27px' lengthAdjust='spacingAndGlyphs'>R01</text>
-<text x='163.10' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='15.42px' lengthAdjust='spacingAndGlyphs'>R02</text>
-<text x='204.97' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='34.38px' lengthAdjust='spacingAndGlyphs'>R02 day-1</text>
+<text x='83.10' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='12.50px' lengthAdjust='spacingAndGlyphs'>R03</text>
+<text x='125.39' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='12.50px' lengthAdjust='spacingAndGlyphs'>R01</text>
+<text x='163.10' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='12.50px' lengthAdjust='spacingAndGlyphs'>R02</text>
+<text x='204.97' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='31.45px' lengthAdjust='spacingAndGlyphs'>R02 day-1</text>
 <text x='48.36' y='44.75' style='font-size: 7.70px;fill: #555555; font-family: "Liberation Serif";' textLength='268.05px' lengthAdjust='spacingAndGlyphs'>Nominally identical E2 realizations remain separated across the full temperature sweep</text>
 <text x='48.36' y='33.06' style='font-size: 9.60px; font-weight: bold;fill: #111111; font-family: "Liberation Serif";' textLength='197.84px' lengthAdjust='spacingAndGlyphs'>A  Same recipe, different realized viscosity levels</text>
 </g>
@@ -221,10 +221,10 @@
 <rect x='436.83' y='193.13' width='17.28' height='17.28' style='stroke-width: 0.89; stroke: none; fill: #FFFFFF;' />
 <line x1='438.56' y1='201.77' x2='452.38' y2='201.77' style='stroke-width: 1.71; stroke: #999999; stroke-linecap: butt;' />
 <circle cx='445.47' cy='201.77' r='2.64' style='stroke-width: 0.59; stroke: #999999; fill: #999999;' />
-<text x='336.82' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='15.84px' lengthAdjust='spacingAndGlyphs'>R03</text>
-<text x='379.11' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='11.27px' lengthAdjust='spacingAndGlyphs'>R01</text>
-<text x='416.82' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='15.42px' lengthAdjust='spacingAndGlyphs'>R02</text>
-<text x='458.69' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='34.38px' lengthAdjust='spacingAndGlyphs'>R02 day-1</text>
+<text x='336.82' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='12.50px' lengthAdjust='spacingAndGlyphs'>R03</text>
+<text x='379.11' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='12.50px' lengthAdjust='spacingAndGlyphs'>R01</text>
+<text x='416.82' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='12.50px' lengthAdjust='spacingAndGlyphs'>R02</text>
+<text x='458.69' y='204.22' style='font-size: 7.50px;fill: #111111; font-family: "Liberation Serif";' textLength='31.45px' lengthAdjust='spacingAndGlyphs'>R02 day-1</text>
 <text x='302.08' y='45.13' style='font-size: 7.70px;fill: #555555; font-family: "Liberation Serif";' textLength='63.38px' lengthAdjust='spacingAndGlyphs'>Realization-specific </text>
 <text x='365.45' y='45.13' style='font-size: 7.70px;fill: #555555; font-family: "Liberation Serif";' textLength='3.41px' lengthAdjust='spacingAndGlyphs'>a</text>
 <text x='368.87' y='46.94' style='font-size: 5.39px;fill: #555555; font-family: "Liberation Serif";' textLength='1.80px' lengthAdjust='spacingAndGlyphs'>f</text>

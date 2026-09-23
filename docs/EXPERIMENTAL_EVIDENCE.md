@@ -19,16 +19,16 @@ The recorded full sweeps all decrease monotonically between 80 and 130 °C.
 | run | 80 °C | 90 °C | 100 °C | 110 °C | 120 °C | 130 °C |
 |---|---:|---:|---:|---:|---:|---:|
 | E1 (+P) | 3015 | 1964 | 1349 | 958 | 699 | 542 |
-| E1' (GJJ) | 3636 | 2288 | 1512 | 1073 | 780 | 599 |
-| E2 (GJJ) | 9462 | 5527 | 3705 | 2622 | 1955 | 1536 |
-| E2 (ZYX) | 18780 | 11540 | 7544 | 5710 | 4017 | 3302 |
-| E2 (CHH) | 27350 | 15560 | 10360 | 7895 | 6977 | 5128 |
-| E2' (ZYX) | 24470 | 15300 | 10330 | 6671 | 4863 | 3845 |
-| E3 (CHH) | 18570 | 11550 | 7546 | 5376 | 3839 | 2959 |
+| E1' (R01) | 3636 | 2288 | 1512 | 1073 | 780 | 599 |
+| E2 (R01) | 9462 | 5527 | 3705 | 2622 | 1955 | 1536 |
+| E2 (R02) | 18780 | 11540 | 7544 | 5710 | 4017 | 3302 |
+| E2 (R03) | 27350 | 15560 | 10360 | 7895 | 6977 | 5128 |
+| E2' (R02) | 24470 | 15300 | 10330 | 6671 | 4863 | 3845 |
+| E3 (R03) | 18570 | 11550 | 7546 | 5376 | 3839 | 2959 |
 
 The prime (`'`) denotes the source-sheet retest after one day of storage.
 
-GJJ, ZYX and CHH are retained as source run labels. Project metadata confirms that these records were produced by the **same operator**. They are therefore treated as opaque within-operator experimental realizations. Differences among them are not assigned to operator effects or to any specific preparation mechanism unless the corresponding process metadata are available.
+R01, R02 and R03 are retained as source run labels. Project metadata confirms that these records were produced by the **same operator**. They are therefore treated as opaque within-operator experimental realizations. Differences among them are not assigned to operator effects or to any specific preparation mechanism unless the corresponding process metadata are available.
 
 The absolute viscosity unit should be copied from the original instrument/source record in the final manuscript. Until that metadata is explicitly confirmed, the numeric values are treated here as **source-reported viscosity values** rather than assigning an inferred unit.
 

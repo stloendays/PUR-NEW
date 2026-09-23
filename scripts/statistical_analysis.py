@@ -5,7 +5,7 @@ Local analysis uses only the compact CSVs committed to this repository.
 External-database context is optional and is added when --external-db points to
 an HMPUR SQLite database containing `viscosity_curves` and `observations`.
 
-Important interpretation rule: GJJ, ZYX and CHH are opaque realization labels
+Important interpretation rule: R01, R02 and R03 are opaque realization labels
 from the same operator. They are never interpreted as operator categories.
 """
 

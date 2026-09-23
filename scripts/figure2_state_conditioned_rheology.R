@@ -104,10 +104,10 @@ e2$series <- ifelse(
   e2$run_label
 )
 series_cols <- c(
-  "GJJ" = pal[["core"]],
-  "ZYX" = pal[["state"]],
-  "CHH" = pal[["drift"]],
-  "ZYX day-1" = pal[["agent"]]
+  "R01" = pal[["core"]],
+  "R02" = pal[["state"]],
+  "R03" = pal[["drift"]],
+  "R02 day-1" = pal[["agent"]]
 )
 
 pA <- ggplot(e2, aes(x = temperature_c, y = viscosity_reported, colour = series, group = series)) +
