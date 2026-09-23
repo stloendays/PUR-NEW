@@ -413,6 +413,16 @@ jobs:
               for run_el in doc.element.body.iter(qn("w:r")):
                   set_run_font_xml(run_el)
 
+              # Keep bibliography compact but readable so the final reference
+              # does not spill onto an otherwise blank page.
+              if "Bibliography" in doc.styles:
+                  bib_style = doc.styles["Bibliography"]
+                  bib_style.font.name = "Times New Roman"
+                  bib_style.font.size = Pt(10)
+                  bib_style.paragraph_format.space_before = Pt(0)
+                  bib_style.paragraph_format.space_after = Pt(0)
+                  bib_style.paragraph_format.line_spacing = 1.0
+
               # Remove decorative paragraph borders from direct formatting and styles.
               for p_el in doc.element.body.iter(qn("w:p")):
                   ppr = p_el.find(qn("w:pPr"))
