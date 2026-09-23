@@ -1,0 +1,225 @@
+{
+  "arms": [
+    {
+      "applicability_audit_visible_to_model": true,
+      "applicability_gate_enforced": false,
+      "arm": "V5_NO_GATE",
+      "counts": {
+        "abstained": 0,
+        "attempted": 10,
+        "committed": 10,
+        "completed": 10,
+        "declared": 10,
+        "failed": 0,
+        "invalid": 0
+      },
+      "counts_note": "attempted/completed/committed/abstained/invalid/failed are reported separately and no failed or invalid run was replaced.",
+      "model": "gpt-5.6-luna",
+      "pre_enforcement_payload_sha256": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f",
+      "primary_metrics": {
+        "chemistry_domain_violation_rate_over_committed": {
+          "denominator": 10,
+          "numerator": 0,
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.2775
+          ]
+        },
+        "chemistry_domain_violation_rate_over_declared": {
+          "denominator": 10,
+          "numerator": 0,
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.2775
+          ]
+        },
+        "hypothesis_discrimination_mean_over_committed": 1.0,
+        "hypothesis_discrimination_n": 10,
+        "measurement_validity_rate_over_committed": {
+          "denominator": 10,
+          "numerator": 10,
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.7225,
+            1.0
+          ]
+        },
+        "selection_entropy_bits": -0.0,
+        "selection_entropy_note": "abstention is its own category; computed over completed runs",
+        "unsupported_shortcut_rate_over_committed": {
+          "denominator": 10,
+          "numerator": 0,
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.2775
+          ]
+        },
+        "unsupported_shortcut_rate_over_declared": {
+          "denominator": 10,
+          "numerator": 0,
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.2775
+          ]
+        }
+      },
+      "secondary_metrics": {
+        "candidate_frequency": {
+          "S1C41": 10
+        },
+        "intervention_family_frequency": {
+          "dual_axis_resin_modified": 10
+        },
+        "llm_latency_s_sum": 1765.611,
+        "mandatory_tool_executed_in_all_completed_runs": true,
+        "measurement_plan_frequency": {
+          "M-SWEEP": 10
+        },
+        "n_cards_removed_by_gate": [
+          0
+        ],
+        "selected_in_tied_top_set": 0,
+        "total_tokens_sum": 1704251,
+        "voi_of_committed_card_mean": 0.6875
+      },
+      "series": "series_no_gate_condition_b_n10"
+    },
+    {
+      "applicability_audit_visible_to_model": true,
+      "applicability_gate_enforced": true,
+      "arm": "V5_FULL",
+      "counts": {
+        "abstained": 0,
+        "attempted": 10,
+        "committed": 9,
+        "completed": 9,
+        "declared": 10,
+        "failed": 1,
+        "invalid": 0
+      },
+      "counts_note": "attempted/completed/committed/abstained/invalid/failed are reported separately and no failed or invalid run was replaced.",
+      "model": "gpt-5.6-luna",
+      "pre_enforcement_payload_sha256": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f",
+      "primary_metrics": {
+        "chemistry_domain_violation_rate_over_committed": {
+          "denominator": 9,
+          "numerator": 0,
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.2992
+          ]
+        },
+        "chemistry_domain_violation_rate_over_declared": {
+          "denominator": 10,
+          "numerator": 0,
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.2775
+          ]
+        },
+        "hypothesis_discrimination_mean_over_committed": 1.0,
+        "hypothesis_discrimination_n": 9,
+        "measurement_validity_rate_over_committed": {
+          "denominator": 9,
+          "numerator": 9,
+          "rate": 1.0,
+          "wilson_95ci": [
+            0.7008,
+            1.0
+          ]
+        },
+        "selection_entropy_bits": 0.503258,
+        "selection_entropy_note": "abstention is its own category; computed over completed runs",
+        "unsupported_shortcut_rate_over_committed": {
+          "denominator": 9,
+          "numerator": 0,
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.2992
+          ]
+        },
+        "unsupported_shortcut_rate_over_declared": {
+          "denominator": 10,
+          "numerator": 0,
+          "rate": 0.0,
+          "wilson_95ci": [
+            0.0,
+            0.2775
+          ]
+        }
+      },
+      "secondary_metrics": {
+        "candidate_frequency": {
+          "S1C41": 8,
+          "S1C51": 1
+        },
+        "intervention_family_frequency": {
+          "dual_axis_resin_modified": 9
+        },
+        "llm_latency_s_sum": 1404.842,
+        "mandatory_tool_executed_in_all_completed_runs": true,
+        "measurement_plan_frequency": {
+          "M-SWEEP": 9
+        },
+        "n_cards_removed_by_gate": [
+          64
+        ],
+        "selected_in_tied_top_set": 9,
+        "total_tokens_sum": 1504762,
+        "voi_of_committed_card_mean": 0.6875
+      },
+      "series": "series_full_condition_b_n10"
+    }
+  ],
+  "arms_are_not_pooled": true,
+  "comparison_id": "PUR_NEW_AGENT_V5_CHEMISTRY_GATE_COMPARISON_V1",
+  "comparison_status": "runs_present",
+  "forbidden_metrics_not_computed": [
+    "distance to the held-out validation formulation",
+    "post-result closeness to S1C39 or S1C41",
+    "any metric containing held-out wet-lab outcome information"
+  ],
+  "interpretation_rule": "This table reports what each arm did. It does not by itself establish that the gated runtime is better: a difference is interpretable only when the parity check passes, both denominators are reported, and the arms are not pooled. Frozen V4 is historical architecture context and is not a same-condition causal comparison for the gate.",
+  "parity": {
+    "checked_files": [
+      "configs/action_catalog.json",
+      "configs/agent_v5.json",
+      "configs/agent_v5_comparison_protocol_condition_b_v1.json",
+      "configs/decision_conditions.json",
+      "configs/evidence_access_profiles.json",
+      "configs/formulation_priors.json",
+      "configs/hypothesis_registry_level_v1.json",
+      "configs/measurement_catalog_level_v1.json",
+      "configs/verified_shape_transfer.json",
+      "configs/workflow.json",
+      "prompts/agent_v5_judge.txt",
+      "prompts/agent_v5_planner.txt",
+      "prompts/agent_v5_proposer.txt",
+      "prompts/agent_v5_robustness.txt",
+      "prompts/agent_v5_skeptic.txt",
+      "schemas/agent_v5_experiment.schema.json",
+      "scripts/run_agent_v5.py",
+      "src/pur_new/agent_v5.py",
+      "src/pur_new/chemistry_tools.py",
+      "src/pur_new/voi.py"
+    ],
+    "decision_condition": "B_processing_window",
+    "differences": [],
+    "information_parity_rule": "protocol v1.1: both arms must receive the same model-visible applicability facts. The pre-enforcement payload hash is the machine-checkable form of that requirement.",
+    "only_intended_difference": "whether the identical chemistry-domain applicability audit is enforced as hard experiment-card admissibility before VOI and at freeze",
+    "parity_ok": true,
+    "pre_enforcement_payload_sha256": {
+      "V5_FULL": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f",
+      "V5_NO_GATE": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f"
+    }
+  },
+  "primary_comparison": "V5_NO_GATE vs V5_FULL",
+  "protocol": "configs/agent_v5_comparison_protocol.json"
+}

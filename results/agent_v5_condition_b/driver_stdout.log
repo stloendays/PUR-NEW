@@ -1,0 +1,3 @@
+[2026-09-23T01:42:39Z] driver started: N=10 per arm, interleaved, condition=B_processing_window
+[2026-09-23T01:46:26Z] block 1/10 V5_NO_GATE: rc=0 arm V5_NO_GATE: 1 ok / 0 invalid / 0 failed of 10 declared
+[2026-09-23T01:49:28Z] block 1/10 V5_FULL: rc=0 arm V5_FULL: 1 ok / 0 invalid / 0 failed of 10 declared

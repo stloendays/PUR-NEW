@@ -16,7 +16,20 @@ Declared in `configs/decision_conditions.json`.
 | catalog | `configs/measurement_catalog.json` | `configs/measurement_catalog_level_v1.json` |
 | VOI weights | `BASE_WEIGHTS` | declared, including a budget term |
 | protocol | `configs/agent_v5_comparison_protocol.json` | `configs/agent_v5_comparison_protocol_condition_b_v1.json` |
-| status | results frozen | pre-registered before first run |
+| status | results complete | results complete |
+| result | gate could not bite | gate could bite, was not needed |
+
+Condition-B result and its reading:
+[`results/agent_v5_condition_b/CONDITION_B_REPORT.md`](../results/agent_v5_condition_b/CONDITION_B_REPORT.md).
+
+```text
+V5_NO_GATE   10/10 committed, M-SWEEP 10/10, violation 0/10, selected in tied top set 0/10
+V5_FULL      9 ok + 1 failed of 10 declared, M-SWEEP 9/9, violation 0/10
+```
+
+The inadmissible `S1C41::M-ANCHOR` held the entire un-gated tied top set at VOI 0.7392 and was
+declined in every run for the lower-scoring direct sweep at 0.6875. The advisory audit alone
+was sufficient; what enforcement adds is a guarantee rather than a tendency.
 
 ## Why a second condition exists
 

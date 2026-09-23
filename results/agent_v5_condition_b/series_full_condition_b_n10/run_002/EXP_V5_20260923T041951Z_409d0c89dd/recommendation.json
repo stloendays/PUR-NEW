@@ -1,0 +1,235 @@
+{
+  "acceptance_criterion": "Let Delta_level be the directly measured 120-130 C viscosity-level change relative to the matched unmodified reactive core. Accept exactly one formulation-level hypothesis if Delta_level is within plus or minus 3.40 percentage points of its registered prediction: H-LEVEL-DILUTE, -42.76%; H-LEVEL-ASSOC, 17.24%; or H-LEVEL-PLASTIC, -72.76%. The corresponding directly measured processing-window viscosity level must also be reported.",
+  "architecture_version": "5.1.0",
+  "arm": "V5_FULL",
+  "candidate_set_hash": "54f825939d05a159b93eb39e98ccdd4d3a658b4a31fc8a5fff722770aadd24a1",
+  "chemistry_gate": {
+    "applicability_audit_visible_to_model": true,
+    "applicability_gate_enforced": true,
+    "applied_before_voi_ranking": true,
+    "audit_is_arm_independent": true,
+    "gate_id": "PUR_NEW_CHEMISTRY_DOMAIN_GATE_V1",
+    "gate_is_a_language_model": false,
+    "inadmissible_by_rule_id": {
+      "inadmissible_before_shape_verification": 64
+    },
+    "n_cards_inadmissible": 64,
+    "n_cards_removed_from_selectable_set": 64,
+    "n_cards_total": 292,
+    "n_verified_chemistry_families": 0,
+    "pre_enforcement_payload_sha256": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f",
+    "protocol_version": "1.1.0",
+    "selection": {
+      "admissibility_rule_id": "admissible_direct_shape_verification_measurement",
+      "chemistry_applicability_status": "modified_chemistry_unvalidated",
+      "chemistry_domain_violation": false,
+      "chemistry_family": "resin_modified:ac1920+tk100",
+      "shared_shape_use": "verification_only",
+      "unsupported_shortcut": false
+    },
+    "verified_transfer_registry_version": "1.0.0"
+  },
+  "claim_boundary": "V5.0.0 selects an experiment from pre-result evidence under an outcome-blind runtime with a deterministic chemistry-domain admissibility constraint. A V5 result is evidence about executable scientific constraints on measurement choice. It is not a wet-lab result and does not claim that the historical decision used this ranking.",
+  "decision_mode": "discriminating_probe",
+  "experiment_card": {
+    "acceptance_criterion": "The measured 120-130 C level change against the unmodified reactive core falls within 3.40% of exactly one registered prediction: -42.76% for H-LEVEL-DILUTE, 17.24% for H-LEVEL-ASSOC or -72.76% for H-LEVEL-PLASTIC. That hypothesis is accepted for this composition and the processing-window level is reported with it.",
+    "acrylic_like_pct": 15.0,
+    "admissibility_reason": "The 80-130 C sweep is the direct verification measurement that establishes the thermal-response shape for a chemistry-shifted candidate.",
+    "admissibility_rule_id": "admissible_direct_shape_verification_measurement",
+    "budget_efficiency_detail": {
+      "definition": "1 - effort_points / max(effort_points) over the declared catalog",
+      "effort_points": 6.0,
+      "effort_scale_points": 18.0,
+      "score": 0.666667
+    },
+    "candidate_id": "S1C41",
+    "chemistry_applicability_status": "modified_chemistry_unvalidated",
+    "chemistry_family": "resin_modified:ac1920+tk100",
+    "decision_relevance_detail": {
+      "coverage_class": "full_coverage",
+      "coverage_factor": 1.0,
+      "covered_supported_axes": [
+        "acrylic_like",
+        "minor_tackifier_like"
+      ],
+      "measurement_decision_relevance": 0.9,
+      "score": 0.9,
+      "zeroed_supported_axes": []
+    },
+    "experiment_id": "S1C41::M-SWEEP",
+    "extrapolation_risk_detail": {
+      "mean_distance_pct": 0.0,
+      "normalizer_pct": 12.0,
+      "per_axis": {
+        "acrylic_like": {
+          "distance_pct": 0.0,
+          "supported_region_pct": [
+            15.0,
+            25.0
+          ],
+          "value_pct": 15.0
+        },
+        "minor_tackifier_like": {
+          "distance_pct": 0.0,
+          "supported_region_pct": [
+            4.8,
+            6.4
+          ],
+          "value_pct": 5.0
+        }
+      },
+      "score": 0.0
+    },
+    "falsification_criterion": "H-LEVEL-ASSOC is falsified if the measured level change is at or below the inert-dilution prediction of -42.76%. H-LEVEL-PLASTIC is falsified if it is at or above that same prediction. H-LEVEL-DILUTE is falsified if the measured level change departs from -42.76% by more than the 3.40% resolution of this plan.",
+    "formulation_state": {
+      "AC1920": 15.0,
+      "MDI": 16.1525384179,
+      "PDP70": 31.923730791,
+      "PPG2000": 31.923730791,
+      "TK100": 5.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "hypothesis_discrimination_detail": {
+      "discriminating_quantity": "realized viscosity level eta_ref",
+      "measurement_resolves_quantity": "realized viscosity level eta_ref",
+      "n_pairs": 3,
+      "predictions_pct": {
+        "H-LEVEL-ASSOC": 17.2433,
+        "H-LEVEL-DILUTE": -42.7567,
+        "H-LEVEL-PLASTIC": -72.7567
+      },
+      "resolution_threshold_pct": 3.4,
+      "score": 1.0,
+      "separated_pairs": [
+        [
+          "H-LEVEL-DILUTE",
+          "H-LEVEL-ASSOC"
+        ],
+        [
+          "H-LEVEL-DILUTE",
+          "H-LEVEL-PLASTIC"
+        ],
+        [
+          "H-LEVEL-ASSOC",
+          "H-LEVEL-PLASTIC"
+        ]
+      ]
+    },
+    "intervention_family": "dual_axis_resin_modified",
+    "measurement_admissible": true,
+    "measurement_id": "M-SWEEP",
+    "measurement_plan": {
+      "measurement_id": "M-SWEEP",
+      "min_repeats": 1,
+      "name": "80-130 C temperature sweep",
+      "primary_observable": "directly measured viscosity level across 80-130 C together with the apparent temperature-response descriptor E_eta from ln(eta) versus 1/T",
+      "protocol": "Measure viscosity from 80 to 130 C in 10 C increments on a freshly prepared sample and regress ln(eta) against 1/T.",
+      "sampling_times_min": [],
+      "temperature_c": null
+    },
+    "minor_tackifier_like_pct": 5.0,
+    "process_state_risk_detail": {
+      "base_before_measurement_plan": 0.75,
+      "measurement_controls_process_state": false,
+      "missing_process_fields": 6,
+      "risk_level": "moderate",
+      "score": 0.75
+    },
+    "reactive_mass_fraction": 0.8,
+    "required_precondition": null,
+    "resin_modified": true,
+    "scientific_hypotheses_addressed": [
+      "H-LEVEL-DILUTE",
+      "H-LEVEL-ASSOC",
+      "H-LEVEL-PLASTIC"
+    ],
+    "shared_shape_use": "verification_only",
+    "uncertainty_reduction_detail": {
+      "novel_chemistry": true,
+      "novel_chemistry_factor": 1.0,
+      "resolves_quantity": "realized viscosity level eta_ref",
+      "score": 0.5,
+      "unresolved_prior": 0.5
+    },
+    "voi_components": {
+      "budget_efficiency": 0.666667,
+      "decision_relevance": 0.9,
+      "extrapolation_risk": 0.0,
+      "hypothesis_discrimination": 1.0,
+      "measurement_interpretability": 0.7,
+      "process_state_risk": 0.75,
+      "uncertainty_reduction": 0.5
+    },
+    "voi_score": 0.6875
+  },
+  "falsification_criterion": "H-LEVEL-DILUTE is falsified if the absolute difference between Delta_level and -42.76% exceeds 3.40 percentage points. H-LEVEL-ASSOC is falsified if Delta_level is at or below -42.76%. H-LEVEL-PLASTIC is falsified if Delta_level is at or above -42.76%. A result between registered prediction bands or not uniquely resolved by the 3.40-percentage-point rule falsifies none of the three hypotheses and leaves them unresolved. Because the supplied repeatability evidence shows substantially larger realization-state variation than 3.40%, these nominal falsification outcomes must be reported as exploratory unless matched preparation repeats establish that resolution.",
+  "frozen_utc": "2026-09-23T04:19:51Z",
+  "gate_enforced": true,
+  "git_commit": "6fc5ef9d607a64b08127e61dd29cba4ab6076c9e",
+  "hypotheses_addressed": [
+    "H-LEVEL-DILUTE",
+    "H-LEVEL-ASSOC",
+    "H-LEVEL-PLASTIC"
+  ],
+  "hypotheses_left_entangled": [
+    "H1_formulation_family",
+    "H2_functionality",
+    "H3_region",
+    "the independent effects of the acrylic-like and minor-tackifier-like axes"
+  ],
+  "hypothesis_registry_hash": "e8c0ed9439281b3e38113a272e39c503830012edacfb278b349842d8893f6269",
+  "input_hash": "2f6c633f60171a96ff369c7c89f47f4a6945f58365ce752bcf8536091fbb7d8c",
+  "inspection_status": "frozen_pre_result",
+  "measurement_catalog_hash": "78e022dd0b3b2a3f785bc196c26d9cf096d4fcad34b9d782125d5000bb94d2f8",
+  "model": "gpt-5.6-luna",
+  "next_experiment_if_falsified": "Run S1C41::M-REPEAT with at least three independently prepared realizations to quantify state variation, followed by S1C41::M-SWEEP against a matched unmodified reactive-core reference; if hot-hold stability remains the decision, then run S1C41::M-HOLD-120 with measurements at 15, 30, 45, and 60 minutes and at least two repeats.",
+  "pre_enforcement_payload_hash": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f",
+  "primary_observable": "Directly measured viscosity level change at 120-130 C relative to the matched unmodified reactive core, expressed as a percentage, with the 80-130 C sweep also yielding the fitted rheological descriptor E_eta.",
+  "prompt_hash": "489c66da51888dbfd528a36e0b7810c9ede4e3e38102e5735987e9a85538e4c4",
+  "rationale": "S1C41::M-SWEEP is the strongest selectable direct probe for separating the three registered level hypotheses while avoiding inadmissible shared-shape reconstruction. The binding chemistry audit excludes M-ANCHOR for modified chemistry, and the direct sweep remains admissible. The result must be limited to a formulation-level rheological comparison and must not be interpreted as a molecular mechanism or as evidence of thermal-hold stability.",
+  "recommendation_id": "EXP_V5_20260923T041951Z_409d0c89dd",
+  "selected_candidate_id": "S1C41",
+  "selected_experiment_id": "S1C41::M-SWEEP",
+  "selected_measurement_id": "M-SWEEP",
+  "stage_disagreements_resolved": "I followed the Proposer and Robustness Adjudicator in selecting S1C41::M-SWEEP because it is admissible, directly measures the processing-window level in the modified chemistry, and is the smallest intervention in the deterministic top tie. I followed the Skeptic's objection on interpretation: the nominal 3.40% falsification threshold is not credible under the observed realization-state variability, so hypothesis discrimination is exploratory unless repeatability and matched-reference uncertainty are added. The sweep does not test hot-hold stability.",
+  "uncertainty_decomposition": {
+    "evidence_coverage_uncertainty": "The registered level predictions cover composite formulation-level behavior only. The combined 15% AC1920 and 5% TK100 intervention cannot independently identify either modifier-axis effect or resolve the stability hypotheses.",
+    "extrapolation_uncertainty": "The candidate is outside the measured unmodified PPG2000/PDP70/MDI family. Direct sweep data support interpretation of S1C41 only; no shared-shape transfer to other resin-modified candidates is justified.",
+    "measurement_uncertainty": "The sweep directly measures the 120-130 C level, but the catalogued 3.40% discrimination threshold is a prior curve-fit resolution and not demonstrated end-to-end repeatability for this candidate.",
+    "realization_state_uncertainty": "High. The single-preparation plan does not control preparation-state variation, and original E2 data show 120 C max/min variation of 3.5688x with CV 0.5848."
+  },
+  "verified_shape_transfer_hash": "7f6ac25fee722fad630a8014a9656923a8d9f3fcbb384aa60650ef0679de3fe8",
+  "voi": {
+    "components": {
+      "budget_efficiency": 0.666667,
+      "decision_relevance": 0.9,
+      "extrapolation_risk": 0.0,
+      "hypothesis_discrimination": 1.0,
+      "measurement_interpretability": 0.7,
+      "process_state_risk": 0.75,
+      "uncertainty_reduction": 0.5
+    },
+    "formula": "VOI = w_hyp * hypothesis_discrimination + w_unc * uncertainty_reduction + w_dec * decision_relevance + w_int * measurement_interpretability - w_ext * extrapolation_risk - w_proc * process_state_risk. Every component is normalized to [0, 1] by construction. This is a transparent normalized score with reported weight sensitivity, not a Bayesian posterior.",
+    "ranked_set": "admissible experiment cards only",
+    "score": 0.6875,
+    "selected_is_in_tied_top_set": true,
+    "tied_top_set": [
+      "S1C41::M-SWEEP",
+      "S1C46::M-SWEEP",
+      "S1C51::M-SWEEP",
+      "S1C56::M-SWEEP",
+      "S1C61::M-SWEEP"
+    ],
+    "weights": {
+      "budget_efficiency": 0.15,
+      "decision_relevance": 0.2,
+      "extrapolation_risk": 0.05,
+      "hypothesis_discrimination": 0.3,
+      "measurement_interpretability": 0.1,
+      "process_state_risk": 0.05,
+      "uncertainty_reduction": 0.15
+    }
+  },
+  "workflow_version": "1.2.0"
+}

@@ -1,0 +1,89 @@
+{
+  "applicability_audit_visible_to_model": true,
+  "applicability_gate_enforced": true,
+  "arm": "V5_FULL",
+  "counts": {
+    "abstained": 0,
+    "attempted": 10,
+    "committed": 9,
+    "completed": 9,
+    "declared": 10,
+    "failed": 1,
+    "invalid": 0
+  },
+  "counts_note": "attempted/completed/committed/abstained/invalid/failed are reported separately and no failed or invalid run was replaced.",
+  "model": "gpt-5.6-luna",
+  "pre_enforcement_payload_sha256": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f",
+  "primary_metrics": {
+    "chemistry_domain_violation_rate_over_committed": {
+      "denominator": 9,
+      "numerator": 0,
+      "rate": 0.0,
+      "wilson_95ci": [
+        0.0,
+        0.2992
+      ]
+    },
+    "chemistry_domain_violation_rate_over_declared": {
+      "denominator": 10,
+      "numerator": 0,
+      "rate": 0.0,
+      "wilson_95ci": [
+        0.0,
+        0.2775
+      ]
+    },
+    "hypothesis_discrimination_mean_over_committed": 1.0,
+    "hypothesis_discrimination_n": 9,
+    "measurement_validity_rate_over_committed": {
+      "denominator": 9,
+      "numerator": 9,
+      "rate": 1.0,
+      "wilson_95ci": [
+        0.7008,
+        1.0
+      ]
+    },
+    "selection_entropy_bits": 0.503258,
+    "selection_entropy_note": "abstention is its own category; computed over completed runs",
+    "unsupported_shortcut_rate_over_committed": {
+      "denominator": 9,
+      "numerator": 0,
+      "rate": 0.0,
+      "wilson_95ci": [
+        0.0,
+        0.2992
+      ]
+    },
+    "unsupported_shortcut_rate_over_declared": {
+      "denominator": 10,
+      "numerator": 0,
+      "rate": 0.0,
+      "wilson_95ci": [
+        0.0,
+        0.2775
+      ]
+    }
+  },
+  "secondary_metrics": {
+    "candidate_frequency": {
+      "S1C41": 8,
+      "S1C51": 1
+    },
+    "intervention_family_frequency": {
+      "dual_axis_resin_modified": 9
+    },
+    "llm_latency_s_sum": 1404.842,
+    "mandatory_tool_executed_in_all_completed_runs": true,
+    "measurement_plan_frequency": {
+      "M-SWEEP": 9
+    },
+    "n_cards_removed_by_gate": [
+      64
+    ],
+    "selected_in_tied_top_set": 9,
+    "total_tokens_sum": 1504762,
+    "voi_of_committed_card_mean": 0.6875
+  },
+  "series": "series_full_condition_b_n10"
+}
