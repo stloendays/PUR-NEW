@@ -102,6 +102,20 @@ PC1 share of between-realization variance ~= 99.63%
 cosine similarity of PC1 to constant vertical shift ~= 0.9998
 ```
 
+Thermal-model sensitivity on the same chemistry-audited 36-point population now also shows:
+
+```text
+linear -> quadratic nested test          p ~= 6.51e-7
+quadratic -> cubic nested test           p ~= 0.518
+shared -> realization-specific slopes    p ~= 0.314
+shared-slope E_eta (95% CI)              ~= 42.05 (40.21-43.90) kJ/mol
+quadratic held-temperature error         ~= 1.058x
+VFT held-temperature error               ~= 1.055x
+bounded vs dual-annealing VFT T0 delta   < 0.001 K
+```
+
+The quadratic form remains the canonical local model. The VFT/dual-annealing branch is a robustness check showing that the shared-shape result is not an artifact of polynomial form or nonlinear optimizer initialization.
+
 The positive conclusion is:
 
 > **Within the tested local chemistry family, the dominant realization-to-realization variation behaves approximately as a viscosity-scale shift superimposed on a transferable thermal-response shape.**
@@ -343,6 +357,14 @@ Robustness checks:
 ```bash
 python scripts/statistical_robustness.py --output-dir derived/statistical_robustness
 ```
+
+Thermal functional-form, hierarchical-slope and optimizer sensitivity:
+
+```bash
+python scripts/thermal_model_robustness.py --output-dir derived/thermal_model_robustness
+```
+
+This analysis uses `data/realization_metadata.csv` to enforce the canonical 36-point chemistry-audited population and keeps the E1 `+P` perturbation outside the same-composition robustness fit.
 
 Provenance-aware audit:
 
