@@ -1,15 +1,17 @@
 # Statistical and model analysis
 
+> **Status — exploratory historical analysis.** This document predates the final chemistry audit and retains all seven complete temperature-sweep curves, including the deliberate E1 +P phosphoric-acid perturbation. Its 42-point fit statistics are therefore **not** the canonical manuscript headline values. The reader-facing manuscript and SI use six chemistry-comparable realizations (36 observations) for the primary same-composition analysis and treat E1 +P separately. Use `manuscript/MAIN_TEXT_V5.md`, `manuscript/SUPPLEMENTARY_INFORMATION_V5.md` and the current versioned analysis outputs for manuscript statistics.
+
 ## Scope
 
-This analysis asks two separate questions using the current PUR-NEW evidence.
+This exploratory analysis asks two separate questions.
 
 1. **Does a formulation-only temperature model leave structured residual variation that is captured by experimental realization / process state?**
 2. **Do temperature response and thermal-hold stability behave as distinct rheological coordinates in the current chemistry?**
 
-The temperature-sweep dataset contains 42 measurements from 3 nominal formulations and 7 recorded realizations. R01, R02 and R03 are **not operator categories**: project metadata confirms that these runs were produced by the same operator. They are therefore treated only as opaque realization identifiers. The analysis does not assign their variation to any specific physical cause.
+The full local sweep table contains 42 measurements from 3 nominal formulations and 7 recorded curves. R01, R02 and R03 are opaque realization codes and do not encode operator identity. The analysis does not assign realization-to-realization variation to any specific physical cause.
 
-The absolute viscosity unit remains source-unconfirmed. All model comparisons use `ln(viscosity_reported)` or dimensionless ratios, so the conclusions below do not depend on inventing an absolute unit.
+Current audited manuscript and figure outputs report viscosity in mPa·s. The regression comparisons below operate on `ln(viscosity_reported)` or dimensionless ratios.
 
 ---
 
