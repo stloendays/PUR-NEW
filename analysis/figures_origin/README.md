@@ -67,10 +67,10 @@ The same entity keeps the same colour in every panel.
 | Entity | Hex |
 |---|---|
 | E1 | `#1F4E79` |
-| E2 GJJ | `#14524F` |
-| E2 ZYX | `#1F7A78` |
-| E2 ZYX day-1 | `#46A8A0` |
-| E2 CHH | `#84C9C0` |
+| E2 R01 | `#14524F` |
+| E2 R02 | `#1F7A78` |
+| E2 R02 day-1 | `#46A8A0` |
+| E2 R03 | `#84C9C0` |
 | E3 | `#6B4C9A` |
 | E5 | `#C1502E` |
 | F1 (rep 1 / rep 2) | `#C8952A` / `#E0BE72` |

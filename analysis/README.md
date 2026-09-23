@@ -37,7 +37,7 @@ python scripts/statistical_analysis.py \
   --external-db /path/to/hmpur_external.db
 ```
 
-The run labels GJJ, ZYX and CHH are treated as opaque within-operator realization labels. They are not interpreted as different operators.
+The run labels R01, R02 and R03 are treated as opaque within-operator realization labels. They are not interpreted as different operators.
 
 
 ## Strict local transfer and bounded extrapolation

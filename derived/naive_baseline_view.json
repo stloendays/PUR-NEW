@@ -824,252 +824,252 @@
     {
       "formulation_id": "E1",
       "retest_after_1d": "true",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 80.0,
       "viscosity_reported": 3636.0
     },
     {
       "formulation_id": "E1",
       "retest_after_1d": "true",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 90.0,
       "viscosity_reported": 2288.0
     },
     {
       "formulation_id": "E1",
       "retest_after_1d": "true",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 100.0,
       "viscosity_reported": 1512.0
     },
     {
       "formulation_id": "E1",
       "retest_after_1d": "true",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 110.0,
       "viscosity_reported": 1073.0
     },
     {
       "formulation_id": "E1",
       "retest_after_1d": "true",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 120.0,
       "viscosity_reported": 780.0
     },
     {
       "formulation_id": "E1",
       "retest_after_1d": "true",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 130.0,
       "viscosity_reported": 599.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 80.0,
       "viscosity_reported": 9462.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 90.0,
       "viscosity_reported": 5527.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 100.0,
       "viscosity_reported": 3705.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 110.0,
       "viscosity_reported": 2622.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 120.0,
       "viscosity_reported": 1955.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 130.0,
       "viscosity_reported": 1536.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 80.0,
       "viscosity_reported": 18780.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 90.0,
       "viscosity_reported": 11540.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 100.0,
       "viscosity_reported": 7544.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 110.0,
       "viscosity_reported": 5710.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 120.0,
       "viscosity_reported": 4017.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 130.0,
       "viscosity_reported": 3302.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 80.0,
       "viscosity_reported": 27350.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 90.0,
       "viscosity_reported": 15560.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 100.0,
       "viscosity_reported": 10360.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 110.0,
       "viscosity_reported": 7895.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 120.0,
       "viscosity_reported": 6977.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 130.0,
       "viscosity_reported": 5128.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "true",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 80.0,
       "viscosity_reported": 24470.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "true",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 90.0,
       "viscosity_reported": 15300.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "true",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 100.0,
       "viscosity_reported": 10330.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "true",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 110.0,
       "viscosity_reported": 6671.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "true",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 120.0,
       "viscosity_reported": 4863.0
     },
     {
       "formulation_id": "E2",
       "retest_after_1d": "true",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 130.0,
       "viscosity_reported": 3845.0
     },
     {
       "formulation_id": "E3",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 80.0,
       "viscosity_reported": 18570.0
     },
     {
       "formulation_id": "E3",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 90.0,
       "viscosity_reported": 11550.0
     },
     {
       "formulation_id": "E3",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 100.0,
       "viscosity_reported": 7546.0
     },
     {
       "formulation_id": "E3",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 110.0,
       "viscosity_reported": 5376.0
     },
     {
       "formulation_id": "E3",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 120.0,
       "viscosity_reported": 3839.0
     },
     {
       "formulation_id": "E3",
       "retest_after_1d": "false",
-      "run_label": "CHH",
+      "run_label": "R03",
       "temperature_c": 130.0,
       "viscosity_reported": 2959.0
     }
@@ -1077,56 +1077,56 @@
   "raw_thermal_hold_measurements": [
     {
       "formulation_id": "E1",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 120.0,
       "time_min": 15.0,
       "viscosity_reported": 708.7
     },
     {
       "formulation_id": "E1",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 120.0,
       "time_min": 30.0,
       "viscosity_reported": 728.6
     },
     {
       "formulation_id": "E1",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 120.0,
       "time_min": 60.0,
       "viscosity_reported": 776.1
     },
     {
       "formulation_id": "E1",
-      "run_label": "GJJ",
+      "run_label": "R01",
       "temperature_c": 120.0,
       "time_min": 90.0,
       "viscosity_reported": 828.1
     },
     {
       "formulation_id": "E5",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 120.0,
       "time_min": 15.0,
       "viscosity_reported": 2210.0
     },
     {
       "formulation_id": "E5",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 120.0,
       "time_min": 30.0,
       "viscosity_reported": 2470.0
     },
     {
       "formulation_id": "E5",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 120.0,
       "time_min": 60.0,
       "viscosity_reported": 3349.0
     },
     {
       "formulation_id": "E5",
-      "run_label": "ZYX",
+      "run_label": "R02",
       "temperature_c": 120.0,
       "time_min": 90.0,
       "viscosity_reported": 4267.0

@@ -85,7 +85,7 @@ err_state, err_form = loto("state"), loto("form")
 
 e2 = primary[primary["formulation_id"] == "E2"].copy()
 e2["series"] = np.where(e2["retest"], e2["run_label"] + " day-1", e2["run_label"])
-SER = ["GJJ", "ZYX", "ZYX day-1", "CHH"]
+SER = ["R01", "R02", "R02 day-1", "R03"]
 
 # Panel 2A / 2B: wide format, one Y column per realization.
 for panel, col in (("fig2A", "viscosity_reported"), ("fig2B", "eta_adj")):
@@ -186,7 +186,7 @@ fp = fits[fits["realization_id"] != "E1__+P__day1_0"].reset_index(drop=True)
 e_mean = float(fp["apparent_E_kJ_mol"].mean())
 e_sd = float(fp["apparent_E_kJ_mol"].std(ddof=1))
 e_cv = 100 * e_sd / e_mean
-fp["label"] = ["E1 day-1", "E2 CHH", "E2 GJJ", "E2 ZYX", "E2 ZYX day-1", "E3 CHH"]
+fp["label"] = ["E1 day-1", "E2 R03", "E2 R01", "E2 R02", "E2 R02 day-1", "E3 R03"]
 fp["idx"] = range(len(fp), 0, -1)
 fp["mean_x"] = e_mean
 write("fig5A", fp[["idx", "label", "apparent_E_kJ_mol", "mean_x", "formulation_id"]])

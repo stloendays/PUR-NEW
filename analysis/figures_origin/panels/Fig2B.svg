@@ -123,7 +123,7 @@
 	</text>
 	
 	<text x="1571" dominant-baseline="auto" y="346" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="84" font-weight="400" olab:comment="">
-		<tspan x="1571" style="white-space:pre;font-kerning:none" xml:space="preserve">E2 GJJ</tspan>
+		<tspan x="1571" style="white-space:pre;font-kerning:none" xml:space="preserve">E2 R01</tspan>
 	</text>
 	
 	<polyline points="1360,421 1548,421" style="stroke: #1F7A78;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" fill="none" olab:comment=""/>
@@ -133,7 +133,7 @@
 	</text>
 	
 	<text x="1571" dominant-baseline="auto" y="449" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="84" font-weight="400" olab:comment="">
-		<tspan x="1571" style="white-space:pre;font-kerning:none" xml:space="preserve">E2 ZYX</tspan>
+		<tspan x="1571" style="white-space:pre;font-kerning:none" xml:space="preserve">E2 R02</tspan>
 	</text>
 	
 	<polyline points="1360,524 1548,524" style="stroke: #46A8A0;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" fill="none" olab:comment=""/>
@@ -143,7 +143,7 @@
 	</text>
 	
 	<text x="1571" dominant-baseline="auto" y="552" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="84" font-weight="400" olab:comment="">
-		<tspan x="1571" style="white-space:pre;font-kerning:none" xml:space="preserve">E2 ZYX day-1</tspan>
+		<tspan x="1571" style="white-space:pre;font-kerning:none" xml:space="preserve">E2 R02 day-1</tspan>
 	</text>
 	
 	<polyline points="1360,627 1548,627" style="stroke: #84C9C0;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" fill="none" olab:comment=""/>
@@ -153,7 +153,7 @@
 	</text>
 	
 	<text x="1571" dominant-baseline="auto" y="655" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="84" font-weight="400" olab:comment="">
-		<tspan x="1571" style="white-space:pre;font-kerning:none" xml:space="preserve">E2 CHH</tspan>
+		<tspan x="1571" style="white-space:pre;font-kerning:none" xml:space="preserve">E2 R03</tspan>
 	</text>
 	
 </svg>

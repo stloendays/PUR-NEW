@@ -272,7 +272,7 @@ The validation formulation contained PPG2000, PDP-70, AC1920, TK100, and MDI on 
 
 Temperature-sweep viscosity was recorded from 80 to 130 °C in 10 °C increments. The absolute viscosity unit is not confirmed in the available source record; local values are therefore reported as source-reported viscosity rather than assigned an unverified unit.
 
-Run identifiers were retained for provenance. Project metadata confirms that GJJ, ZYX, and CHH are realization labels associated with the same operator rather than different operator identities.
+Run identifiers were retained for provenance. Project metadata confirms that R01, R02, and R03 are realization labels associated with the same operator rather than different operator identities.
 
 One E1 temperature curve was labelled with phosphoric-acid context. Because the additive condition was not represented in the compact formulation table and its exact amount was not encoded, this curve was excluded from the chemistry-audited primary state analysis and retained for sensitivity analysis. The resulting primary temperature-sweep dataset contained 36 observations from six complete realizations of three nominal formulations.
 

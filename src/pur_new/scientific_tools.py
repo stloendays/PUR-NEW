@@ -184,7 +184,7 @@ def _phosphoric_acid_perturbation(
 
     comparator = sweeps[
         (sweeps["formulation_id"] == "E1")
-        & (sweeps["run_label"] == "GJJ")
+        & (sweeps["run_label"] == "R01")
         & (sweeps["retest_after_1d"] == True)  # noqa: E712
     ][["temperature_c", "viscosity_reported"]].rename(
         columns={"viscosity_reported": "comparator_viscosity"}
@@ -216,13 +216,13 @@ def _phosphoric_acid_perturbation(
         ),
         "shared_shape_intercept_only_multiplicative_error": intercept_only_error,
         "anchor_120c_predict_remaining_temperatures_multiplicative_error": anchor_error,
-        "observational_E1_GJJ_day1_comparator": {
+        "observational_E1_R01_day1_comparator": {
             "geometric_mean_viscosity_ratio": float(np.exp(np.mean(np.log(ratios)))),
             "percent_difference_range": [float(np.min(pct)), float(np.max(pct))],
             "mean_absolute_percent_difference": float(np.mean(np.abs(pct))),
             "interpretation_boundary": (
                 "Observational reference only; the compact record does not establish a paired "
-                "parent-batch relationship between E1 +P and E1 GJJ day-1."
+                "parent-batch relationship between E1 +P and E1 R01 day-1."
             ),
         },
         "interpretation": (
@@ -288,7 +288,7 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
                 "standard solution was added during dehydration. It is excluded from the "
                 "same-composition primary state model and exposed separately as a perturbation check."
             ),
-            "same_operator_labels": ["GJJ", "ZYX", "CHH"],
+            "same_operator_labels": ["R01", "R02", "R03"],
             "day1_parent_sample_relation": "unknown in compact source metadata",
         },
         "discovered_patterns": {

@@ -50,7 +50,7 @@ response shape: comparatively stable over the measured temperature window
 response level: strongly dependent on realization / preparation state
 ```
 
-The data do not identify which physical subcomponent of the run history causes the level shift because GJJ/ZYX/CHH are retained only as source labels.
+The data do not identify which physical subcomponent of the run history causes the level shift because R01/R02/R03 are retained only as source labels.
 
 ## 3. Explanatory leave-one-temperature-out diagnostic
 
@@ -78,7 +78,7 @@ A concise defensible result is:
 
 > Absolute melt-viscosity levels varied strongly across recorded realizations of the same nominal PUR formulation, whereas the fitted 80–130 °C temperature-response parameter remained comparatively conserved. This decoupling indicates that composition alone does not define the observed rheological state and motivates explicit representation of preparation/process realization in the design workflow.
 
-A stronger mechanistic statement should not be made without metadata that identifies the actual origin of GJJ/ZYX/CHH differences.
+A stronger mechanistic statement should not be made without metadata that identifies the actual origin of R01/R02/R03 differences.
 
 ## 5. Recommended placement
 

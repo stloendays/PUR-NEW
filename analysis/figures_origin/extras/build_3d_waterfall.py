@@ -27,12 +27,12 @@ SRC = r"D:\Research\PUR-NEW\data\temperature_sweeps.csv"
 # 顺序让 E2 家族相邻，深度方向上就能看出"同配方四次实现"的散布
 ORDER = [
     ("E1 +P", "#1F4E79"),
-    ("E1 GJJ day-1", "#4A7FB5"),
-    ("E2 GJJ", "#14524F"),
-    ("E2 ZYX", "#1F7A78"),
-    ("E2 ZYX day-1", "#46A8A0"),
-    ("E2 CHH", "#84C9C0"),
-    ("E3 CHH", "#6B4C9A"),
+    ("E1 R01 day-1", "#4A7FB5"),
+    ("E2 R01", "#14524F"),
+    ("E2 R02", "#1F7A78"),
+    ("E2 R02 day-1", "#46A8A0"),
+    ("E2 R03", "#84C9C0"),
+    ("E3 R03", "#6B4C9A"),
 ]
 
 

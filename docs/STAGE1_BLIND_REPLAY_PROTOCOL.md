@@ -54,7 +54,7 @@ Profile `blind_pre_result`.
 
 **Allowed:** original E1–E5 formulations; chemistry-audited temperature sweeps
 (`E1 +P` retained as `sensitivity_only` because it is phosphoric-acid-labelled;
-`GJJ`/`ZYX`/`CHH` treated as same-operator realization labels, not different
+`R01`/`R02`/`R03` treated as same-operator realization labels, not different
 operators; `viscosity_reported` kept unit-free); original E1/E5 thermal-hold data;
 the paper-derived state-aware rheology tool; curated external PUR
 literature/patent evidence under the hierarchy

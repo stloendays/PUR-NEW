@@ -15,7 +15,7 @@ This directory contains the compact experimental dataset and provenance metadata
 ## Important metadata rules
 
 1. `viscosity_reported` is the instrument-reported viscosity in **mPa·s**, measured with an RV-SSR-H high-temperature rotational viscometer (Shanghai Fangrui Instrument Co., Ltd.), NKY-25 heater and No. 27 spindle. Rotation speed was adjusted to maintain approximately 40–60% torque; each temperature setpoint was equilibrated for 15 min before the displayed value was recorded.
-2. GJJ, ZYX and CHH are retained as source run labels, but project metadata confirms that these records were produced by the **same operator**. Statistical analysis therefore treats them as opaque within-operator experimental realizations, not as operator categories.
+2. R01, R02 and R03 are retained as source run labels, but project metadata confirms that these records were produced by the **same operator**. Statistical analysis therefore treats them as opaque within-operator experimental realizations, not as operator categories.
 3. The temperature-sweep repeatability protocol used the same mother sample across temperatures within a sweep, so individual temperature points are not independent resyntheses. Prime-marked runs remain recorded through `retest_after_1d = true`; the available metadata do not establish independent synthesis-batch identities across distinct run labels.
 4. The E1 `+P` temperature sweep is explicitly phosphoric-acid-labelled in the source record. Because the additive identity/amount is not represented in `formulations.csv`, `realization_metadata.csv` flags this curve as `sensitivity_only` for the chemistry-audited primary state-shift analysis.
 5. The follow-up formulation stops at 60 min. No 90 min follow-up value should be imputed.

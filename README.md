@@ -34,7 +34,7 @@ E1/E2/E3: NCO:OH = 1.70 / 1.80 / 1.90 at 50/50 PPG2000/PDP-70
 E4/E2/E5: composition perturbation around 50/50 at NCO:OH = 1.80
 ```
 
-GJJ, ZYX and CHH are **same-operator run labels**, not different operators.
+R01, R02 and R03 are **same-operator run labels**, not different operators.
 
 The compact source data are stored in:
 

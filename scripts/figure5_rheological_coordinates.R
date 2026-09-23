@@ -93,7 +93,7 @@ theme_pur <- function() {
 }
 
 # Panel A: apparent temperature-response descriptor across primary realizations.
-fits_primary$label <- c("E1 day-1", "E2 CHH", "E2 GJJ", "E2 ZYX", "E2 ZYX day-1", "E3 CHH")
+fits_primary$label <- c("E1 day-1", "E2 R03", "E2 R01", "E2 R02", "E2 R02 day-1", "E3 R03")
 fits_primary$label <- factor(fits_primary$label, levels = rev(fits_primary$label))
 
 pA <- ggplot(fits_primary, aes(y = label, x = apparent_E_kJ_mol)) +
