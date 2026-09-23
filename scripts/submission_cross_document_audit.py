@@ -17,6 +17,7 @@ PLACEHOLDER_RE = re.compile(
     re.I | re.M,
 )
 VERSION_RE = re.compile(r"(?<![A-Za-z0-9])V[1-9](?![A-Za-z0-9])")
+SINGLE_DOLLAR_DISPLAY_RE = re.compile(r"^\s*\$\s*$", re.M)
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
 CITE_BLOCK_RE = re.compile(r"\[@([^\]]+)\]")
 CITE_BARE_RE = re.compile(r"(?<!\[)@([A-Za-z0-9_:.+-]+)")
@@ -77,6 +78,8 @@ def main() -> int:
     for name, text in (("main", main), ("SI", si)):
         if PLACEHOLDER_RE.search(text):
             errors.append(f"{name}: unresolved drafting placeholder remains")
+        if SINGLE_DOLLAR_DISPLAY_RE.search(text):
+            errors.append(f"{name}: single-dollar display-math delimiter remains; use $ blocks or inline math")
         versions = sorted(set(VERSION_RE.findall(text)))
         if versions:
             errors.append(f"{name}: internal numbered development label(s) remain: {versions}")
