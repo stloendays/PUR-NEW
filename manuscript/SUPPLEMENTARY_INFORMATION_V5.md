@@ -605,7 +605,35 @@ Because the wet-lab result existed before the V4 software architecture was forma
 | rule-order series | `results/agent_v4_voi/series_ablation_rule_order_minimality_first_n5/` |
 | controlled-ablation summary | `results/agent_v4_voi/rule_layer_ablation.json` |
 | decision report | `results/agent_v4_voi/AGENT_V4_REPORT.md` |
+| sanitized V5 chemistry-domain comparison summary | `derived/agent_v5_condition_a_summary.json` |
 | V3 predecessor SI | `manuscript/SUPPLEMENTARY_INFORMATION_V1.md` |
+
+---
+
+# Supplementary Note 19 | Chemistry-domain applicability under the thermal-hold decision
+
+A matched-arm Agent V5 comparison tested whether converting the same chemistry-domain applicability audit from advice into a hard measurement-admissibility rule changed experiment selection under the registered thermal-hold drift question.
+
+Both arms used the same model endpoint, prompts, candidate lattice, hypothesis registry, measurement catalog, evidence profile and VOI weights. The applicability audit was model-visible in both arms. The only intended arm-level difference was enforcement: in `V5_NO_GATE`, audited cards remained selectable; in `V5_FULL`, cards that depended on unsupported transfer of the shared thermal-response shape were removed before ranking and rejected again at freeze.
+
+## Supplementary Table S13 | Chemistry-domain matched-arm comparison under the drift decision
+
+| Quantity | V5_NO_GATE | V5_FULL |
+|---|---:|---:|
+| declared / completed / committed runs | 10 / 10 / 10 | 10 / 10 / 10 |
+| abstained / invalid / failed | 0 / 0 / 0 | 0 / 0 / 0 |
+| `M-HOLD-120` selected | 10 / 10 | 10 / 10 |
+| unsupported shared-shape shortcuts | 0 / 10 | 0 / 10 |
+| chemistry-domain violations | 0 / 10 | 0 / 10 |
+| mean hypothesis discrimination | 0.667 | 0.667 |
+| cards removed by applicability enforcement | 0 | 64 |
+| selection entropy, bits | 0.469 | 0.000 |
+
+The result is intentionally interpreted as a **non-binding applicability test** rather than as evidence that the enforced arm is universally superior. Under the drift registry, the matched-window 120 °C hold is the only measurement plan with non-zero hypothesis discrimination, because it observes the failure coordinate directly. The one-point anchor is relevant to viscosity-state location but does not separate the registered hold-drift hypotheses. Consequently, the advice-only arm already avoided the unsupported shortcut in all 10 runs.
+
+The enforced arm therefore removed 64 inadmissible cards without changing the selected measurement or the primary validity metrics. Its zero violation rate is partly a property of enforcement, whereas the 0/10 violation rate in the advice-only arm shows that the shortcut was not behaviorally attractive under this particular scientific question. This distinction is important: the chemistry-domain rule is measurement-specific and becomes decision-relevant only when a proposed experiment actually relies on transferring the shared thermal-response representation.
+
+A sanitized aggregate summary is stored in `derived/agent_v5_condition_a_summary.json`. These runs are analyzed separately from the rule-complete V4 confirmatory series and its controlled ablations.
 
 ---
 
