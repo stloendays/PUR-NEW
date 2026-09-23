@@ -163,6 +163,29 @@ Across the full measured temperature range, pooled one-point transfer remains ap
 
 The one-point experiment should be interpreted as state calibration inside a validated local chemistry neighborhood. It is not evidence for a universal polyurethane master curve.
 
+## Same-formulation test: information gained from one state anchor
+
+The leave-one-formulation analysis above asks whether a thermal shape transfers to a nominal formulation that was absent from fitting. A separate test asks a different question that is directly relevant to state identification: **how much predictive information does one state-specific measurement add when the nominal formulation is already known?**
+
+E2 is the only chemistry-audited nominal formulation represented by multiple realizations, so this comparison was restricted to E2. Each E2 realization was held out in turn. The training set retained the other E2 realizations, so a formulation-only quadratic model could predict the held realization without seeing any state-specific measurement from it. The state-calibrated model used the same training data to learn the shared quadratic thermal shape, then received one 110 °C viscosity anchor from the held realization and predicted only 120 and 130 °C.
+
+Across four held E2 realizations and eight target predictions:
+
+- formulation-only multiplicative RMSE = **1.824×**;
+- one-anchor multiplicative RMSE = **1.086×**;
+- reduction in log-RMSE = **86.2%**.
+
+A 10,000-replicate cluster bootstrap that resampled complete held realizations gave a 95% interval of **75.0–97.3%** for the log-RMSE reduction. The corresponding 95% intervals for multiplicative RMSE were 1.224–2.293× for the formulation-only baseline and 1.023–1.146× after one-anchor state calibration.
+
+This comparison isolates the value of state information from formulation identity. It shows that, inside the validated E1–E3 chemistry neighborhood, one in-range viscosity measurement can sharply improve short-range reconstruction because it locates the realized viscosity scale. The result does **not** extend the shared-shape prior to resin-modified chemistry. For chemistry-shifted candidates, a direct temperature sweep is required before one-point state calibration is treated as admissible.
+
+Machine-readable results are stored in:
+
+```text
+derived/state_anchor_bridge/same_formulation_anchor_110_to_120_130.csv
+derived/state_anchor_bridge/state_anchor_bridge_summary.json
+```
+
 ---
 
 # Supplementary Note 4 | Joint formulation-and-temperature holdout
