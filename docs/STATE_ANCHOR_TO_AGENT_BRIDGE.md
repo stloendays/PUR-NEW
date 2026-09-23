@@ -1,4 +1,4 @@
-# State-anchor evidence to Agent measurement policy
+# State-anchor evidence and its Agent interpretation boundary
 
 ## Status and evidence-version boundary
 
@@ -6,7 +6,7 @@ This document connects a completed materials analysis to the Agent V5 measuremen
 
 The frozen Condition-A Agent V5 series on the implementation branch was run **before** the state-anchor bridge analysis was added to the active scientific tool. Those runs used the earlier chemistry-audited rheology tool output (tool version `3.5-verified-phosphoric-perturbation`) and therefore did **not** receive the 1.824x -> 1.086x state-anchor information-gain result.
 
-The current main-branch tool (`3.6-state-anchor-bridge`) is a new evidence version for future development. It must not be retroactively attributed to the already-frozen V5 runs, and runs generated under the two evidence versions must not be pooled as one confirmatory series.
+The state-anchor information-gain statistic is retained as a materials/statistical analysis. It is deliberately excluded from the current model-visible Agent tool output and must not be treated as a decision-time Agent input.
 
 ## 1. Materials question
 
@@ -79,7 +79,7 @@ The anchor is therefore not merely another temperature point. It is an observati
 
 This result remains local. It quantifies the value of state calibration **conditional on a valid shared thermal shape**.
 
-## 5. Connection to Agent measurement plans
+## 5. Relation to Agent measurement semantics
 
 The measurement catalog already distinguishes:
 
@@ -88,9 +88,11 @@ The measurement catalog already distinguishes:
 - `M-HOLD-120`: direct observation of thermal-hold drift;
 - `M-REPEAT`: realization/process-state control.
 
-The bridge analysis gives quantitative evidence for why `M-ANCHOR` is useful inside the validated local chemistry domain.
+The bridge analysis gives quantitative support to the physical interpretation of what an anchor measurement observes: realized viscosity-state information inside the validated local chemistry domain.
 
-It does not imply that `M-ANCHOR` is universally admissible.
+This statistic is **not** supplied to the Agent. The Agent measurement catalog remains grounded in the broader, previously established state-conditioned rheology and chemistry-domain logic rather than in this later numerical comparison.
+
+The result does not imply that `M-ANCHOR` is universally admissible.
 
 ## 6. Connection to the pre-registered Agent V5 chemistry-domain gate
 
@@ -112,12 +114,7 @@ assess_shared_shape_applicability(candidate)
                  +--> M-SWEEP remains admissible and is the required verification
 ```
 
-This creates a two-part scientific rule:
-
-1. **Value rule:** the local data quantify that one anchor can be highly informative when the shared thermal shape is valid.
-2. **Applicability rule:** external chemistry-domain analysis determines where that local shortcut is allowed to operate.
-
-The first prevents `M-ANCHOR` from being an arbitrary convenience. The second prevents the measured local shortcut from being silently extrapolated across chemistry.
+The material analysis and the Agent rule are therefore related but not identical. The bridge analysis quantifies the physical information content of an anchor, while the Agent applicability rule determines when use of the shared-shape shortcut is scientifically admissible. The bridge statistic itself is not part of the Agent payload.
 
 ## 7. V5 information-parity requirement
 
@@ -125,17 +122,17 @@ Within any one evidence version, the two primary V5 arms must receive identical 
 
 For the already-frozen Condition-A series, both arms received the same version-1 chemistry-audited tool output and the same applicability audit. The recorded pre-enforcement payload hash was identical across arms. The state-anchor bridge result was not part of either arm.
 
-For any future evidence-version-2 series, both arms may receive the new state-anchor information-gain result, but such a series must be declared and frozen separately. It cannot be appended to the existing N or described as a continuation of the original evidence contract.
+Future Agent series should continue to use the declared Agent evidence contract without the later state-anchor information-gain statistic unless the author explicitly authorizes a new design.
 
 The causal interpretation remains:
 
-> within a fixed evidence version, any arm difference should be attributable to converting the same scientific knowledge from advice into executable policy, not to unequal scientific information.
+> within a fixed Agent evidence contract, any arm difference should be attributable to converting the same scientific knowledge from advice into executable policy, not to unequal scientific information.
 
 ## 8. Manuscript role
 
 The completed state-anchor bridge analysis may be reported as a materials analysis because it is derived from the chemistry-audited local measurements. It strengthens the physical interpretation of why an anchor measurement can carry state information.
 
-The already-frozen V5 runs must be reported under their original evidence version. The manuscript must not imply that those Agent decisions used the later state-anchor bridge statistic. If a new Agent series is run with evidence version 2, it must be reported separately with its own declared denominator, hashes and evidence-version label.
+The bridge statistic should be reported for its scientific meaning: it quantifies the information carried by a state-specific anchor. Agent results should be reported from the evidence actually used at decision time, without importing this later statistic into the causal account of those decisions.
 
 ## 9. Claim boundary
 
