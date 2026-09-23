@@ -54,7 +54,7 @@ Detailed numerical outputs:
 
 Any Agent that consumes local rheology should prefer the audited scientific tool output from `get_state_aware_rheology_summary()` rather than reconstructing project context from prose. The tool version exposing the reconciled E1 +P condition is `3.5-verified-phosphoric-perturbation`.
 
-Do not modify frozen historical benchmark records or prompts merely to propagate these facts. New work should use the active V5 manuscript line and current audited scientific tool.
+Do not modify frozen historical benchmark records or prompts merely to propagate these facts. New work should use the active canonical manuscript and current audited scientific tool.
 
 ## Realization-code privacy rule
 
@@ -69,4 +69,28 @@ The completed same-formulation bridge analysis quantifies the value of one 110 C
 Do **not** add this bridge statistic to Agent tool outputs, prompts, VOI components, ranking payloads or future Agent evidence contracts unless the author explicitly reverses this decision. Agent measurement semantics may remain scientifically motivated by the broader state-conditioned rheology result, but the 1.824x -> 1.086x statistic itself is explanatory manuscript evidence only.
 
 Do not use the local information-gain result to authorize M-ANCHOR for chemistry-shifted candidates without prior direct M-SWEEP verification.
+
+## Reader-facing decision architecture names
+
+Final manuscript, SI, figures, captions, tables and Data/Code Availability must use semantic scientific names rather than internal numbered development labels:
+
+- **CRB** — Candidate-Recovery Benchmark;
+- **RGES** — Rule-Grounded Experiment Selection;
+- **CBES** — Chemistry-Bounded Experiment Selection.
+
+Internal numbered versions may remain in filenames, frozen manifests, branch names and repository provenance. Do not expose them on reader-facing manuscript surfaces at final stage. If a reproducibility path contains an internal version label, create or cite a semantic alias/provenance index instead.
+
+See `docs/decision_architecture_provenance.md`.
+
+## CBES processing-window result
+
+The processing-window condition is frozen and reportable. Its scientific interpretation is laboratory-facing:
+
+- the unsupported one-point anchor had deterministic VOI 0.7392;
+- the direct 80-130 C sweep had VOI 0.6875;
+- the advice-only selector rejected the higher-ranked anchor and chose `M-SWEEP` in 10/10 runs because shared-shape transfer had not been verified in the resin-modified chemistry;
+- the enforced arm chose `M-SWEEP` in all 9 completed runs, with one declared malformed-output failure not replaced;
+- hard enforcement therefore adds a guarantee of admissibility rather than a demonstrated behavioral advantage in this condition.
+
+Use this to connect the Agent to the physical PUR workflow: after a meaningful chemistry shift, establish the temperature response with a direct sweep before reusing a one-point calibration shortcut. Keep Condition A and the processing-window condition separate; do not pool denominators.
 
