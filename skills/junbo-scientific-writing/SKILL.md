@@ -187,6 +187,24 @@ Protect the value of a valid scientific result from unnecessary engineering-hist
 - Before adding a provenance caveat to main text, ask: **Does this detail change the scientific interpretation or prevent a false causal claim?** If not, omit it from the main narrative.
 - Preserve chronology rigorously in the Agent/provenance record. Strong scientific writing and exact provenance are complementary; do not trade one for the other.
 
+### Final-stage semantic naming rule
+
+Before a manuscript enters final polishing or export, remove internal development-version labels from all reader-facing surfaces.
+
+- Do not leave names such as `V1`, `V2`, `V3`, `V4`, `V5`, branch nicknames, run-series codenames, or filenames containing those labels in the title, Abstract, main text, SI prose, tables, captions, figure links, or Data/Code Availability.
+- Replace development chronology with a stable **scientific-function name**. Prefer a short descriptive name plus acronym when repeated.
+- Preserve the internal version label only in repository provenance, frozen manifests, tags, commit history, or implementation filenames that are not shown to the reader.
+- If a reproducibility path would expose an internal version label, create a semantic reader-facing alias or provenance index and cite that instead.
+- Version labels may remain reader-facing only when the version identity is itself the scientific variable being compared; ordinary manuscript development history does not qualify.
+- Maintain a mapping from semantic manuscript names to historical repository artifacts so provenance is preserved without forcing development jargon into the paper.
+
+For the current reactive-PUR manuscript, use:
+- **CRB** — Candidate-Recovery Benchmark;
+- **RGES** — Rule-Grounded Experiment Selection;
+- **CBES** — Chemistry-Bounded Experiment Selection.
+
+Do not reintroduce legacy numbered architecture names into the final manuscript or SI.
+
 ## 11. Submission engineering
 
 Before final submission, remove or resolve:

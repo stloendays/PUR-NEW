@@ -33,6 +33,8 @@ PT_MM = 25.4 / 72.0
 GAP, PAD, TOP = 9.0, 8.0, 17.0      # between figures, around the sheet, header
 CAP = 4.6                           # caption strip above each figure
 
+# Supplementary figures carry no S-number: numbering belongs to the SI, which
+# already has its own Supplementary Figure S1 (the chemistry schematic).
 # stem -> (title, columns). Each column is a list of (file, caption, scale).
 # Columns are balanced by total height, and the order inside the main sheet
 # follows the manuscript: 1 and 2 down the left, 3 to 5 down the right.
@@ -52,13 +54,13 @@ SHEETS = {
     "Sheet_supplementary_figures": (
         "PUR-NEW supplementary figures",
         [[("fig_arrhenius/Fig_arrhenius.svg",
-           "Figure S1   All seven realizations, and the functional-form "
+           "All seven realizations, and the functional-form "
            "comparison", 0.72),
           ("fig_structure/Fig_structure.svg",
-           "Figure S3   Hard-segment association, modelled from a generated "
+           "Hard-segment association, modelled from a generated "
            "CIF", 0.72)],
          [("fig_column/Fig_column.svg",
-           "Figure S2   One property, seven realizations, one column", 0.80)]]),
+           "One property, seven realizations, one column", 0.80)]]),
 }
 
 

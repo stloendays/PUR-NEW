@@ -361,11 +361,10 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
     thermal = _thermal_descriptor(df)
     hold = _original_hold()
     perturbation = _phosphoric_acid_perturbation(df, thermal)
-    same_formulation_anchor_gain = _same_formulation_anchor_gain(df)
 
     return {
         "tool_name": "get_state_aware_rheology_summary",
-        "tool_version": "3.6-state-anchor-bridge",
+        "tool_version": "3.6-anonymized-realization-codes",
         "source_scope": "original pre-validation local measurements with chemistry-comparability audit",
         "validation_formulation_visible": False,
         "provenance_audit": {
@@ -408,7 +407,6 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
                     "Within the tested local chemistry family, one state-specific viscosity anchor can locate a previously held-out nominal formulation on the shared thermal-response shape to roughly 6-10% pooled multiplicative error."
                 ),
             },
-            "same_formulation_anchor_information_gain": same_formulation_anchor_gain,
             "thermal_coordinate": {
                 **thermal,
                 "interpretation": (
@@ -426,7 +424,6 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
         "design_rules": [
             "Represent a candidate as formulation plus process/realization state, not composition alone.",
             "Use one state-specific anchor measurement to locate a new realization or nearby local formulation on the transferable thermal-response shape when it remains inside the supported local chemistry family.",
-            "Within repeated E2 realizations, a 110 C anchor reduced 120-130 C pooled multiplicative error from about 1.824x for formulation identity alone to about 1.086x; treat this as measured value of state information, not as permission to extrapolate the shortcut across chemistry.",
             "Treat static viscosity, temperature response and thermal-hold stability as separate decision variables.",
             "When the failure mode is hot-hold drift, choose an experiment and measurement window that directly test drift rather than only matching one nominal viscosity value.",
             "Use external resin/tackifier evidence to define chemically plausible directions, but do not convert analogue proximity into a predicted local outcome.",
@@ -434,7 +431,7 @@ def get_state_aware_rheology_summary_v3() -> dict[str, Any]:
         ],
         "experiment_design_implications": {
             "state_anchor": (
-                "A single in-range anchor has directly measured information value within repeated E2 realizations: a 110 C anchor reduced pooled 120-130 C multiplicative error from about 1.824x to about 1.086x. The shortcut is allowed only inside validated shared-shape support; chemistry-shifted candidates require direct sweep verification first."
+                "A single in-range anchor can be used for efficient local state calibration when the shared thermal-response shape remains inside validated chemistry support. Chemistry-shifted candidates require direct sweep verification first."
             ),
             "hold_window": (
                 "For the current local study, 120 C and the common 15-60 min window directly interrogate the observed instability while matching the available validation window."

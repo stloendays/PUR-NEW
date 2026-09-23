@@ -42,9 +42,10 @@ WARNING_PATTERNS = [
 
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
 FIGURE_CAPTION_RE = re.compile(r"\*\*Figure\s+(\d+)\.", re.I)
+DEVELOPMENT_VERSION_RE = re.compile(r"(?<![A-Za-z0-9])v\d+(?![A-Za-z0-9])", re.I)
 
 
-def audit(path: Path, repo_root: Path | None) -> tuple[list[str], list[str]]:
+def audit(path: Path, repo_root: Path | None, *, final: bool = False) -> tuple[list[str], list[str]]:
     text = path.read_text(encoding="utf-8")
     blockers: list[str] = []
     warnings: list[str] = []
@@ -57,7 +58,19 @@ def audit(path: Path, repo_root: Path | None) -> tuple[list[str], list[str]]:
         if pattern.search(text):
             warnings.append(message)
 
-    if text.count("$$") % 2 != 0:
+    version_labels = sorted(set(DEVELOPMENT_VERSION_RE.findall(text)), key=str.lower)
+    if version_labels:
+        message = (
+            "Internal development-version label(s) remain in reader-facing text: "
+            + ", ".join(version_labels)
+            + ". Replace them with stable scientific-function names/acronyms and keep the historical mapping in repository provenance."
+        )
+        if final:
+            blockers.append(message)
+        else:
+            warnings.append(message)
+
+    if text.count("$") % 2 != 0:
         blockers.append("Unbalanced $$ display-math delimiters")
 
     captions = [int(x) for x in FIGURE_CAPTION_RE.findall(text)]
@@ -98,6 +111,11 @@ def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("manuscript", type=Path)
     p.add_argument("--repo-root", type=Path, default=None)
+    p.add_argument(
+        "--final",
+        action="store_true",
+        help="Apply final-manuscript blockers, including removal of internal development-version labels.",
+    )
     args = p.parse_args()
 
     manuscript = args.manuscript.resolve()
@@ -106,7 +124,7 @@ def main() -> int:
         return 2
 
     root = args.repo_root.resolve() if args.repo_root else None
-    blockers, warnings = audit(manuscript, root)
+    blockers, warnings = audit(manuscript, root, final=args.final)
 
     print(f"Manuscript: {manuscript}")
     print(f"Blockers: {len(blockers)}")

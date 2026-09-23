@@ -2,7 +2,7 @@
 <rect x="0" y="0" width="255.76" height="168.48" fill="#ffffff"/>
 <text x="8.00" y="7.0" font-family="Arial" font-size="5.0" font-weight="700" fill="#1B1B1B">PUR-NEW supplementary figures</text>
 <text x="8.00" y="11.6" font-family="Arial" font-size="3.0" fill="#6B6F76">Each figure is the same vector artwork as its own SVG and PDF; figures are scaled individually on this sheet only.</text>
-<text x="8.00" y="20.00" font-family="Arial" font-size="3.4" font-weight="700" fill="#1B1B1B">Figure S1   All seven realizations, and the functional-form comparison</text>
+<text x="8.00" y="20.00" font-family="Arial" font-size="3.4" font-weight="700" fill="#1B1B1B">All seven realizations, and the functional-form comparison</text>
 <svg x="8.00" y="21.60" width="131.76" height="61.92" viewBox="0 0 518.740157 243.779528" preserveAspectRatio="xMinYMin meet">
 
  <metadata>
@@ -1333,7 +1333,7 @@ L 501.732283 215.433071
  </defs>
 
 </svg>
-<text x="8.00" y="95.52" font-family="Arial" font-size="3.4" font-weight="700" fill="#1B1B1B">Figure S3   Hard-segment association, modelled from a generated CIF</text>
+<text x="8.00" y="95.52" font-family="Arial" font-size="3.4" font-weight="700" fill="#1B1B1B">Hard-segment association, modelled from a generated CIF</text>
 <svg x="8.00" y="97.12" width="131.76" height="63.36" viewBox="0 0 518.740157 249.448819" preserveAspectRatio="xMinYMin meet">
 
  <metadata>
@@ -1646,7 +1646,7 @@ z
  </defs>
 
 </svg>
-<text x="151.76" y="20.00" font-family="Arial" font-size="3.4" font-weight="700" fill="#1B1B1B">Figure S2   One property, seven realizations, one column</text>
+<text x="151.76" y="20.00" font-family="Arial" font-size="3.4" font-weight="700" fill="#1B1B1B">One property, seven realizations, one column</text>
 <svg x="151.76" y="21.60" width="96.00" height="121.84" viewBox="0 0 340.15748 431.716535" preserveAspectRatio="xMinYMin meet">
 
  <metadata>

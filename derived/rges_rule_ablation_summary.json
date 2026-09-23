@@ -1,0 +1,36 @@
+{
+  "analysis_id": "RGES_RULE_ABLATION_SUMMARY",
+  "reader_facing_name": "Rule-Grounded Experiment Selection (RGES)",
+  "purpose": "Sanitized aggregate summary of the rule-complete experiment-selection series and two controlled rule ablations.",
+  "confirmatory": {
+    "declared_runs": 10,
+    "completed_runs": 10,
+    "evidence_supported_family": 9,
+    "zero_discrimination": 0,
+    "mean_hypothesis_discrimination": 0.667,
+    "measurement_frequency": {
+      "M-HOLD-120": 10
+    }
+  },
+  "score_withheld": {
+    "declared_runs": 5,
+    "completed_runs": 5,
+    "evidence_supported_family": 0,
+    "zero_discrimination": 3,
+    "mean_hypothesis_discrimination": 0.267,
+    "measurement_frequency": {
+      "M-HOLD-120": 5
+    }
+  },
+  "rule_order_inverted": {
+    "declared_runs": 10,
+    "completed_runs": 10,
+    "evidence_supported_family": 0,
+    "zero_discrimination": 10,
+    "mean_hypothesis_discrimination": 0,
+    "high_severity_objection": 10,
+    "robustness_recommended_change": 5,
+    "committed_anyway": 10
+  },
+  "interpretation": "Rule content and rule order determine whether the selected experiment can discriminate the registered formulation-level hypotheses. Verbal critique remains diagnostic unless it can alter the decision."
+}

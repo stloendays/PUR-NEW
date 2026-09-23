@@ -1,0 +1,276 @@
+from __future__ import annotations
+
+from pathlib import Path
+from html import escape
+
+from rdkit import Chem
+from rdkit.Chem.Draw import rdMolDraw2D
+import cairosvg
+
+
+OUTDIR = Path("results/figures")
+MANUSCRIPT_OUTDIR = Path("analysis/figures")
+SVG_PATH = OUTDIR / "pur_chemistry_schematic.svg"
+PNG_PATH = OUTDIR / "pur_chemistry_schematic.png"
+MANUSCRIPT_SVG_PATH = MANUSCRIPT_OUTDIR / "Supplementary_Figure_S1_PUR_chemistry.svg"
+MANUSCRIPT_PNG_PATH = MANUSCRIPT_OUTDIR / "Supplementary_Figure_S1_PUR_chemistry.png"
+
+W, H = 1600, 1000
+
+COLORS = {
+    "ink": "#111111",
+    "muted": "#555555",
+    "line": "#C9C9C9",
+    "panel": "#F7F7F7",
+    "blue": "#222222",
+    "blue_light": "#F1F1F1",
+    "amber": "#555555",
+    "amber_light": "#F4F4F4",
+    "acid": "#333333",
+    "acid_light": "#EFEFEF",
+    "green": "#444444",
+    "green_light": "#F2F2F2",
+    "white": "#FFFFFF",
+}
+
+
+def rdkit_svg(smiles: str, width: int, height: int) -> str:
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        raise ValueError(f"Invalid SMILES: {smiles}")
+    Chem.rdDepictor.Compute2DCoords(mol)
+    drawer = rdMolDraw2D.MolDraw2DSVG(width, height)
+    opts = drawer.drawOptions()
+    opts.bondLineWidth = 2
+    opts.padding = 0.08
+    opts.addStereoAnnotation = True
+    drawer.DrawMolecule(mol)
+    drawer.FinishDrawing()
+    svg = drawer.GetDrawingText()
+    svg_start = svg.find("<svg")
+    start = svg.find(">", svg_start)
+    end = svg.rfind("</svg>")
+    if svg_start < 0 or start < 0 or end < 0:
+        raise RuntimeError("Could not extract RDKit SVG body")
+    return svg[start + 1 : end]
+
+
+def nested_mol(smiles: str, x: int, y: int, width: int, height: int) -> str:
+    body = rdkit_svg(smiles, width, height)
+    return (
+        f'<svg x="{x}" y="{y}" width="{width}" height="{height}" '
+        f'viewBox="0 0 {width} {height}">{body}</svg>'
+    )
+
+
+def rect(x, y, w, h, fill, stroke=None, rx=18, sw=2) -> str:
+    stroke_attr = f' stroke="{stroke}" stroke-width="{sw}"' if stroke else ""
+    return (
+        f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" '
+        f'fill="{fill}"{stroke_attr}/>'
+    )
+
+
+def line(x1, y1, x2, y2, stroke, sw=3, dash=None) -> str:
+    dash_attr = f' stroke-dasharray="{dash}"' if dash else ""
+    return (
+        f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
+        f'stroke="{stroke}" stroke-width="{sw}" stroke-linecap="round"{dash_attr}/>'
+    )
+
+
+def arrow(x1, y1, x2, y2, stroke=None, sw=3) -> str:
+    stroke = stroke or COLORS["ink"]
+    return (
+        line(x1, y1, x2, y2, stroke, sw)
+        + f'<polygon points="{x2},{y2} {x2-14},{y2-8} {x2-14},{y2+8}" fill="{stroke}"/>'
+    )
+
+
+def text(x, y, value, size=24, weight=400, fill=None, anchor="start") -> str:
+    fill = fill or COLORS["ink"]
+    return (
+        f'<text x="{x}" y="{y}" font-family="Times New Roman, Times, serif" '
+        f'font-size="{size}" font-weight="{weight}" fill="{fill}" '
+        f'text-anchor="{anchor}">{escape(value)}</text>'
+    )
+
+
+def multiline(x, y, lines, size=22, weight=400, fill=None, anchor="start", leading=1.25) -> str:
+    fill = fill or COLORS["ink"]
+    spans = []
+    for i, item in enumerate(lines):
+        dy = 0 if i == 0 else int(size * leading)
+        spans.append(f'<tspan x="{x}" dy="{dy}">{escape(item)}</tspan>')
+    return (
+        f'<text x="{x}" y="{y}" font-family="Times New Roman, Times, serif" '
+        f'font-size="{size}" font-weight="{weight}" fill="{fill}" '
+        f'text-anchor="{anchor}">' + "".join(spans) + "</text>"
+    )
+
+
+def panel_title(x, y, letter, title_value) -> str:
+    return (
+        text(x, y, letter, 25, 700, COLORS["blue"])
+        + text(x + 38, y, title_value, 25, 700)
+    )
+
+
+def soft_chain(points, stroke=None, sw=8) -> str:
+    stroke = stroke or COLORS["blue"]
+    d = "M " + " C ".join(
+        f"{a[0]},{a[1]} {b[0]},{b[1]} {c[0]},{c[1]}"
+        for a, b, c in points
+    )
+    return f'<path d="{d}" fill="none" stroke="{stroke}" stroke-width="{sw}" stroke-linecap="round"/>'
+
+
+def build_svg() -> str:
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',
+        '<rect width="100%" height="100%" fill="#FFFFFF"/>',
+        text(55, 58, "Local reactive-PUR chemistry, preparation, and perturbation context", 34, 700),
+        text(
+            55,
+            91,
+            "PPG2000 / STEPANPOL PDP-70 / 4,4'-MDI; E1 +P retained as a separate chemical perturbation",
+            18,
+            400,
+            COLORS["muted"],
+        ),
+    ]
+
+    # Panels
+    panel_boxes = [
+        (45, 120, 730, 355),
+        (800, 120, 755, 355),
+        (45, 500, 730, 430),
+        (800, 500, 755, 430),
+    ]
+    for x, y, w, h in panel_boxes:
+        parts.append(rect(x, y, w, h, COLORS["panel"], COLORS["line"], 22, 2))
+
+    # A: Components
+    parts += [
+        panel_title(70, 158, "A", "Formulation building blocks"),
+        rect(72, 180, 210, 185, COLORS["white"], COLORS["line"], 15, 1),
+        rect(300, 180, 210, 185, COLORS["white"], COLORS["line"], 15, 1),
+        rect(528, 180, 220, 185, COLORS["white"], COLORS["line"], 15, 1),
+        text(177, 204, "PPG2000", 20, 700, anchor="middle"),
+        text(405, 204, "STEPANPOL PDP-70", 18, 700, anchor="middle"),
+        text(638, 204, "4,4'-MDI", 20, 700, anchor="middle"),
+        nested_mol("[*]CC(C)O[*]", 92, 215, 170, 105),
+        multiline(405, 247, ["polyester polyol", "exact microstructure", "not asserted here"], 18, 400, COLORS["muted"], "middle", 1.22),
+        nested_mol("O=C=Nc1ccc(Cc2ccc(N=C=O)cc2)cc1", 542, 215, 190, 105),
+        text(177, 345, "polyether soft-segment source", 16, 400, COLORS["muted"], "middle"),
+        text(405, 345, "co-polyol / formulation component", 16, 400, COLORS["muted"], "middle"),
+        text(638, 345, "diisocyanate", 16, 400, COLORS["muted"], "middle"),
+        rect(72, 382, 676, 68, COLORS["acid_light"], "#E9B8C6", 14, 1),
+        nested_mol("OP(=O)(O)O", 92, 389, 90, 54),
+        text(196, 407, "E1 +P: H3PO4", 18, 700, COLORS["acid"]),
+        text(196, 433, "0.025 mmol from 0.1 mol/L standard solution (0.25 mL); separate perturbation condition", 15, 400, COLORS["acid"]),
+    ]
+
+    # B: Process sequence
+    parts += [
+        panel_title(825, 158, "B", "Sample preparation sequence"),
+        rect(830, 202, 150, 110, COLORS["blue_light"], "#B9D0F7", 15, 1),
+        rect(1010, 202, 170, 110, COLORS["green_light"], "#B9DECf", 15, 1),
+        rect(1210, 202, 145, 110, COLORS["amber_light"], "#E8C98F", 15, 1),
+        rect(1385, 202, 145, 110, COLORS["green_light"], "#B9DECF", 15, 1),
+        multiline(905, 236, ["Mix polyols", "E1-E3: 50/50", "PPG/PDP-70"], 17, 700, anchor="middle", leading=1.2),
+        multiline(1095, 233, ["Vacuum dehydrate", "~130 °C", "~1 h"], 17, 700, anchor="middle", leading=1.2),
+        multiline(1282, 236, ["Add 4,4'-MDI", "NCO:OH", "1.70 / 1.80 / 1.90"], 17, 700, anchor="middle", leading=1.2),
+        multiline(1457, 233, ["Vacuum stir", "~120 °C", "~1 h 20 min"], 17, 700, anchor="middle", leading=1.2),
+        arrow(982, 257, 1006, 257, COLORS["muted"], 2),
+        arrow(1182, 257, 1206, 257, COLORS["muted"], 2),
+        arrow(1357, 257, 1381, 257, COLORS["muted"], 2),
+        line(1095, 314, 1095, 355, COLORS["acid"], 2, "7,6"),
+        rect(925, 356, 340, 74, COLORS["acid_light"], "#E9B8C6", 13, 1),
+        text(1095, 382, "E1 +P branch", 18, 700, COLORS["acid"], "middle"),
+        text(1095, 410, "H3PO4 is added during the dehydration stage", 16, 400, COLORS["acid"], "middle"),
+        text(830, 454, "Preparation parameters follow the current repository experimental-method metadata.", 15, 400, COLORS["muted"]),
+    ]
+
+    # C: Chemistry
+    parts += [
+        panel_title(70, 538, "C", "Urethane-forming reaction motif"),
+        text(135, 598, "polyol –OH", 21, 700, COLORS["blue"], "middle"),
+        text(290, 598, "+", 30, 700, COLORS["muted"], "middle"),
+        text(440, 598, "isocyanate –N=C=O", 21, 700, COLORS["amber"], "middle"),
+        arrow(550, 590, 640, 590, COLORS["ink"], 3),
+        text(595, 570, "addition", 15, 400, COLORS["muted"], "middle"),
+        nested_mol("[*]OC(=O)N[*]", 195, 625, 300, 145),
+        text(345, 793, "urethane linkage motif: –O–C(=O)–NH–", 19, 700, anchor="middle"),
+        rect(85, 823, 650, 78, COLORS["white"], COLORS["line"], 13, 1),
+        multiline(
+            110,
+            850,
+            [
+                "Interpretation level: chemical motif + formulation architecture.",
+                "This is not an atomistic simulation or a claim about exact PDP-70 sequence structure.",
+            ],
+            16,
+            400,
+            COLORS["muted"],
+            "start",
+            1.32,
+        ),
+    ]
+
+    # D: Network and state-conditioned interpretation
+    parts += [
+        panel_title(825, 538, "D", "Schematic PUR network and perturbation context"),
+        text(858, 579, "soft segment", 16, 700, COLORS["blue"]),
+        line(958, 574, 1000, 574, COLORS["blue"], 7),
+        text(1032, 579, "MDI-derived hard region", 16, 700, COLORS["amber"]),
+        rect(1225, 561, 34, 18, COLORS["amber"], None, 4, 0),
+        text(1280, 579, "H-bond / association", 16, 700, COLORS["muted"]),
+        line(1450, 574, 1515, 574, COLORS["muted"], 2, "5,5"),
+    ]
+
+    chain_y = [650, 730, 810]
+    for idx, y in enumerate(chain_y):
+        parts.append(
+            f'<path d="M 850 {y} C 900 {y-28}, 940 {y+28}, 990 {y} '
+            f'S 1080 {y-30}, 1135 {y} S 1230 {y+28}, 1285 {y} '
+            f'S 1380 {y-28}, 1510 {y}" fill="none" stroke="{COLORS["blue"]}" '
+            'stroke-width="8" stroke-linecap="round"/>'
+        )
+        for x in (1010 + 18 * idx, 1170 - 10 * idx, 1340 + 12 * idx):
+            parts.append(rect(x, y - 14, 58, 28, COLORS["amber"], None, 6, 0))
+
+    # H-bond / association guides
+    for x in (1040, 1190, 1370):
+        parts.append(line(x, 665, x + 8, 715, COLORS["muted"], 2, "5,6"))
+        parts.append(line(x + 8, 745, x + 15, 795, COLORS["muted"], 2, "5,6"))
+
+    parts += [
+        rect(842, 846, 672, 58, COLORS["acid_light"], "#E9B8C6", 12, 1),
+        text(865, 871, "E1 +P observation:", 16, 700, COLORS["acid"]),
+        text(1000, 871, "thermal-response geometry remains close while viscosity level shifts.", 16, 400, COLORS["ink"]),
+        text(865, 894, "Intercept-only fit to the shared thermal shape: 1.034× multiplicative RMSE.", 15, 400, COLORS["muted"]),
+        text(55, 968, "Schematic summary of the experimentally audited formulation and preparation context; not to scale.", 14, 400, COLORS["muted"]),
+        text(1545, 968, "Supplementary Figure S1", 14, 700, COLORS["muted"], "end"),
+        "</svg>",
+    ]
+
+    return "".join(parts)
+
+
+def main() -> None:
+    OUTDIR.mkdir(parents=True, exist_ok=True)
+    MANUSCRIPT_OUTDIR.mkdir(parents=True, exist_ok=True)
+    svg = build_svg()
+    for path in (SVG_PATH, MANUSCRIPT_SVG_PATH):
+        path.write_text(svg, encoding="utf-8")
+    for path in (PNG_PATH, MANUSCRIPT_PNG_PATH):
+        cairosvg.svg2png(bytestring=svg.encode("utf-8"), write_to=str(path), output_width=W, output_height=H)
+    print(f"Wrote {SVG_PATH}")
+    print(f"Wrote {PNG_PATH}")
+    print(f"Wrote {MANUSCRIPT_SVG_PATH}")
+    print(f"Wrote {MANUSCRIPT_PNG_PATH}")
+
+
+if __name__ == "__main__":
+    main()

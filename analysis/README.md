@@ -55,7 +55,7 @@ Recompute the provenance-aware audit with:
 python scripts/analysis_audit_v1.py --output-dir analysis/results
 ```
 
-The V5 manuscript figures are built by the Python scripts under `analysis/figures_composite/` (see its README): one `make_figN.py` per figure, each writing SVG, PDF and PNG, plus `make_sheet.py` for a combined sheet. The R route below produced the earlier Figure 3 and is kept for the V3/V4 manuscripts, which still reference `analysis/figures/`.
+The manuscript figures are built by the Python scripts under `analysis/figures_composite/` (see its README): one `make_figN.py` per figure, each writing SVG, PDF and PNG, plus `make_sheet.py` for the combined sheets. The R route below produced the earlier Figure 3 and is kept for the earlier manuscript drafts, which still reference `analysis/figures/`.
 
 Render the earlier Figure 3 with R:
 

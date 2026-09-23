@@ -30,9 +30,9 @@ These runs did not contain the later same-formulation state-anchor information-g
 
 The Condition-A result is diagnostic: both arms produced zero unsupported shortcuts and zero chemistry-domain violations over 10 committed selections, and both selected the 120 C hold measurement in all 10 runs. Under this decision condition, hard enforcement therefore produced no measurable improvement in the primary violation metric.
 
-## Evidence version 2 — current main scientific tool
+## Later state-anchor analysis — materials evidence only
 
-Current main adds the same-formulation E2 state-anchor bridge:
+A later same-formulation E2 analysis found:
 
 ```text
 formulation-only 120-130 C multiplicative RMSE ~= 1.824x
@@ -40,14 +40,9 @@ one 110 C state anchor                         ~= 1.086x
 log-RMSE reduction                             ~= 86.2%
 ```
 
-This is new scientific evidence. It is useful for future Agent development but must not be attributed to the frozen evidence-version-1 runs.
+This result is retained as a materials/statistical analysis that strengthens interpretation of the hidden viscosity-state coordinate. It is deliberately **not exposed to the Agent** through the scientific-tool payload, prompts, VOI components or ranking inputs.
 
-Any Agent series that exposes this result to the model must:
-
-1. use a new series label and fresh predeclared denominator;
-2. state that it uses evidence version 2;
-3. not resume or extend the evidence-version-1 N;
-4. report its results separately rather than pooling across evidence versions.
+Accordingly, it does not define a second Agent evidence version and should not be used as a reason to extend or re-run the frozen Condition-A series. If the author later chooses to change the Agent evidence contract, that would require a separately declared design.
 
 ## Manifest dependency gap discovered during reconciliation
 

@@ -414,7 +414,7 @@ manuscript/MAIN_TEXT_V5.md
 manuscript/SUPPLEMENTARY_INFORMATION_V5.md
 ```
 
-The audited V3 and rule-grounded V4 manuscripts remain preserved as provenance predecessors rather than overwritten. The current V5 line now integrates the chemistry-family transfer analysis while retaining frozen historical decision records unchanged.
+Historical manuscript revisions remain preserved as repository provenance rather than overwritten. Reader-facing decision architectures now use semantic names: Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), and Chemistry-Bounded Experiment Selection (CBES).
 
 The intended Results order is:
 
@@ -423,8 +423,9 @@ The intended Results order is:
 2. one-point calibration across a held-out local formulation
 3. distinct thermal-response and temporal-stability coordinates
 4. external evidence defines the intervention boundary
-5. Agent operationalizes the discovered rules
-6. human wet-lab physically adjudicates the selected point
+5. RGES operationalizes the discovered rules into formulation-measurement experiments
+6. CBES decides when shared-shape shortcuts are admissible versus when direct measurement is required
+7. human wet-lab physically adjudicates the selected point
 ```
 
 This order keeps the materials-science discovery primary and the Agent downstream as an experimental decision layer.
@@ -441,7 +442,7 @@ Supported now:
 - within repeated E2 realizations, one 110 C anchor reduces pooled 120-130 C multiplicative error from about 1.824x for formulation identity alone to about 1.086x;
 - thermal-hold stability is strongly formulation dependent;
 - the validation formulation shows two low-drift 120 C repeats over the matched 15-60 min window;
-- the current scientific tool exposes these upstream material rules for new development; frozen Agent runs must be interpreted under the evidence version they actually received.
+- the current Agent uses the audited rheological regularities and chemistry-domain rules, while the later same-formulation state-anchor gain is retained as a materials analysis rather than an Agent input.
 
 Not claimed:
 
@@ -449,13 +450,13 @@ Not claimed:
 - universal statistical independence of thermal sensitivity and hold stability;
 - a unique molecular mechanism for AC1920/TK100 stabilization;
 - a universal optimal resin percentage;
-- that current V3 code is necessarily the exact historical runtime that selected the validation formulation.
+- that the current CRB implementation is necessarily the exact historical runtime that selected the validation formulation.
 
 ---
 
-### Agent V5 evidence-version boundary
+### Chemistry-Bounded Experiment Selection evidence boundary
 
-A pre-registered Agent V5 comparison protocol is frozen at `configs/agent_v5_comparison_protocol.json` version 1.1. A completed Condition-A N=10-per-arm series exists on the `agent-v5-implementation` development branch and must be interpreted under its original evidence version.
+The frozen chemistry-bounded comparisons preserve exact historical implementation provenance in the repository. Reader-facing reporting uses the semantic CBES name rather than internal development numbering.
 
 The frozen Condition-A runs used chemistry-audited tool version `3.5-verified-phosphoric-perturbation`; they **did not** receive the later state-anchor bridge statistic. In that frozen comparison, both arms committed 10/10 runs, both had 0/10 unsupported shortcuts and 0/10 chemistry-domain violations, and both selected `M-HOLD-120` in 10/10 runs. The hard gate therefore produced no measurable primary-metric benefit under the drift-decision condition.
 
@@ -468,7 +469,7 @@ one-anchor state calibration         ~= 1.086x
 log-RMSE reduction                   ~= 86.2%
 ```
 
-It defines **evidence version 2** for future Agent development. Any new Agent series that exposes this statistic must use a fresh predeclared denominator and must not be appended to the frozen evidence-version-1 series.
+This later bridge result is retained as **materials/statistical evidence only**. It is deliberately excluded from the Agent's model-visible scientific-tool payload, prompts and ranking inputs. It strengthens the interpretation of state calibration without being treated as a decision-time Agent input.
 
 The scientific policy remains:
 
@@ -484,25 +485,25 @@ validated local support       chemistry shifted
 anchor may be admissible      direct M-SWEEP first
 ```
 
-See `docs/STATE_ANCHOR_TO_AGENT_BRIDGE.md` and `docs/AGENT_V5_EVIDENCE_VERSION_BOUNDARY.md`.
+See `docs/STATE_ANCHOR_TO_AGENT_BRIDGE.md`, `docs/AGENT_V5_EVIDENCE_VERSION_BOUNDARY.md`, and `docs/PUR_MEASUREMENT_DECISION_LOGIC.md`.
 
 ---
 
-### Agent V4 manuscript line
+### Rule-Grounded Experiment Selection manuscript line
 
-The audited V3 manuscript remains frozen and preserved in `manuscript/MAIN_TEXT_V3.md`. `manuscript/MAIN_TEXT_V4.md` preserves the completed rule-grounded Agent manuscript line. The active canonical manuscript candidate is now `manuscript/MAIN_TEXT_V5.md`, with its aligned supporting document in `manuscript/SUPPLEMENTARY_INFORMATION_V5.md`. V5 fuses the material and Agent sections into one closed scientific loop from rheological-state identification to hypothesis-discriminating experiment selection and wet-lab adjudication.
+RGES changes the decision unit from a formulation candidate to an **experiment card = formulation × measurement plan** (73 × 4 = 292 cards) while keeping the Planner → Evidence/Tool Layer → Proposer → Skeptic → Robustness Adjudicator → Judge → Freeze sequence. The deterministic VOI tool, registered hypotheses and measurement catalog are explicit scientific rules rather than additional language-model stages.
 
-V4 changes the decision unit from a formulation candidate to an **experiment card = formulation × measurement plan** (73 × 4 = 292 cards) while keeping the same Planner → Evidence/Tool Layer → Proposer → Skeptic → Robustness Adjudicator → Judge → Freeze sequence. The deterministic VOI tool, registered hypotheses and measurement catalog are explicit scientific rules rather than additional language-model stages.
+The manuscript-facing RGES evidence contains three controlled conditions under one model/evidence contract:
 
-The manuscript-facing decision evidence inherited by V5 remains frozen around three controlled conditions under the same model/evidence contract:
-
-- full V4 confirmatory series: 10 declared runs, 9/10 evidence-supported family selections, 0/10 zero-discrimination selections;
+- rule-complete confirmatory series: 10 declared runs, 9/10 evidence-supported family selections, 0/10 zero-discrimination selections;
 - VOI-score-withheld ablation: 5 declared runs, 0/5 evidence-supported family selections, 3/5 zero-discrimination selections;
 - rule-order-inverted ablation: 10 runs, 0/10 evidence-supported family selections, 10/10 zero-discrimination selections.
 
-The order-inverted arm is particularly important: the Skeptic identified the zero-discrimination defect at high severity in 10/10 runs, yet all ten frozen decisions still committed. V4 therefore supports a rule-design result rather than an autonomy claim: **rule content and rule order are causal parts of scientific decision quality, while critique without decision authority is diagnostic rather than corrective.**
+The order-inverted arm is particularly important: the Skeptic identified the zero-discrimination defect at high severity in 10/10 runs, yet all ten frozen decisions still committed. RGES therefore supports a rule-design result rather than an autonomy claim: **rule content and rule order are causal parts of scientific decision quality, while critique without decision authority is diagnostic rather than corrective.**
 
-Do not silently overwrite or retroactively relabel frozen records. V3 and V4 remain provenance-preserving predecessors; V5 is the active manuscript upgrade. If the author explicitly requests a thaw/revision/re-freeze, update the active manifest or protocol as instructed, regenerate dependent hashes/results where needed, and preserve the previous frozen version as provenance.
+CBES extends this architecture with measurement applicability. Under the thermal-hold condition, the gate is non-binding because the direct hold assay already dominates. Under the processing-window condition, an unsupported one-point anchor is deterministically preferred (VOI 0.7392 versus 0.6875 for a direct sweep), but the advice-only selector rejects that shortcut in 10/10 runs and chooses the full sweep; hard enforcement therefore adds a guarantee of admissibility rather than an observed preference shift.
+
+Historical numbered revisions remain preserved in repository provenance. Final reader-facing manuscripts and SI use CRB/RGES/CBES rather than internal development numbers.
 
 ### Agent V5 chemistry-domain gate
 
@@ -545,8 +546,8 @@ The project-specific writing and provenance rules are versioned in `skills/junbo
 These are author-level constraints for future manuscript revisions and should not be relaxed by automated rewriting:
 
 - **Do not introduce `n_targets = 1` framing or equivalent language as a manuscript limitation.** Do not foreground the benchmark by reducing it to a target-count disclaimer.
-- **Do not further weaken the current V3 mechanism interpretation.** Preserve the present balance: the resin-modified formulation is consistent with a lower effective concentration of reaction-capable material during thermal holding, while direct molecular-level measurements were not collected. Do not rewrite this into a more defensive or less informative statement unless new evidence requires it.
+- **Do not further weaken the current mechanism interpretation.** Preserve the present balance: the resin-modified formulation is consistent with a lower effective concentration of reaction-capable material during thermal holding, while direct molecular-level measurements were not collected. Do not rewrite this into a more defensive or less informative statement unless new evidence requires it.
 - **Preserve the verified experimental metadata consistently across manuscript, figures and repository:** viscosity is reported in mPa·s from the RV-SSR-H/NKY-25 setup with No. 27 spindle, variable speed at approximately 40–60% torque and 15 min equilibration per temperature.
-- **Retain rule/model attribution without conflation.** Preserve the V3 result that approximately **94% of the numerical distance improvement arose from transparent deterministic scientific policy**, and foreground the stronger V4 controlled-ablation result: removing the VOI score or inverting rule order collapses hypothesis-discriminating composition choice even with the same model, prompts and evidence contract.
+- **Retain rule/model attribution without conflation.** Preserve the CRB result that approximately **94% of the numerical distance improvement arose from transparent deterministic scientific policy**, and foreground the stronger RGES controlled-ablation result: removing the VOI score or inverting rule order collapses hypothesis-discriminating composition choice even with the same model, prompts and evidence contract.
 - Keep the current hierarchy of evidence: local experiment establishes the rheological structure and failure mode; external PUR evidence defines plausible intervention regions; deterministic scientific policy constrains the decision geometry; the language model operates inside that geometry; wet-lab results provide physical adjudication.
 

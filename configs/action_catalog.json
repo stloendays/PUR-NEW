@@ -1,5 +1,5 @@
 {
-  "catalog_version": "1.5.2",
+  "catalog_version": "1.5.3",
   "purpose": "Deterministic scientific actions for a discovery-first PUR Agent: first extract material-response structure from measured evidence, then use that structure to choose informative formulation-process experiments.",
   "actions": [
     {
@@ -8,8 +8,7 @@
       "when_to_use": [
         "first, before candidate ranking",
         "to identify which material-response regularities should control experiment selection",
-        "to decide whether a new point should target viscosity level, state calibration, thermal response, or hold stability",
-        "to quantify when M-ANCHOR has measured value and when chemistry-domain gating requires M-SWEEP first"
+        "to decide whether a new point should target viscosity level, state calibration, thermal response, or hold stability"
       ],
       "parameters": {
         "type": "object",
@@ -19,12 +18,11 @@
     },
     {
       "name": "get_chemistry_audited_rheology_summary",
-      "description": "Return the chemistry-provenance-audited local rheology result from original pre-validation measurements: same-order formulation/state comparison, model-free state-shift check, leave-one-formulation one-point calibration, a same-formulation E2 test quantifying the information gain from one 110 C anchor for 120-130 C prediction, apparent thermal-response descriptor, original hold contrast, and a separate verified E1 +P chemical-perturbation check. E1 +P is 0.025 mmol H3PO4 from a 0.1 mol/L standard solution added during dehydration; it remains outside the primary same-composition fit but its thermal-shape compatibility is returned. The validation formulation/outcome is excluded.",
+      "description": "Return the chemistry-provenance-audited local rheology result from original pre-validation measurements: same-order formulation/state comparison, model-free state-shift check, leave-one-formulation one-point calibration, apparent thermal-response descriptor, original hold contrast, and a separate verified E1 +P chemical-perturbation check. E1 +P is 0.025 mmol H3PO4 from a 0.1 mol/L standard solution added during dehydration; it remains outside the primary same-composition fit but its thermal-shape compatibility is returned. The validation formulation/outcome is excluded.",
       "when_to_use": [
         "as the preferred local-science summary for new chemistry-first development",
         "before deciding whether a discovered local rheological regularity can guide a new experiment",
-        "when a new Agent or ML layer needs audited material evidence rather than frozen benchmark compatibility output",
-        "to quantify the measured value of M-ANCHOR inside validated shared-shape support before applying chemistry-domain admissibility rules"
+        "when a new Agent or ML layer needs audited material evidence rather than frozen benchmark compatibility output"
       ],
       "parameters": {
         "type": "object",

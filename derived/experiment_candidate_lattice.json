@@ -1,0 +1,2443 @@
+{
+  "candidate_set_id": "PUR_NEW_STAGE1_BLIND_CANDIDATE_SPACE_V1",
+  "candidates": [
+    {
+      "candidate_id": "S1C01",
+      "constraint_notes": [
+        "Reactive-core-only formulation matching measured local design point E1 (PPG2000/PDP70 = 50/50, NCO:OH = 1.70), renormalized to total wt%.",
+        "Admissible because it stays entirely inside the measured local chemistry; it tests reactive-core / stoichiometry tuning rather than resin modification.",
+        "Search dimension introduced by the original local E1-E5 experimental design.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "LOCAL_FORMULATIONS",
+        "LOCAL_TEMPERATURE_SWEEPS",
+        "LOCAL_HOLD"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 19.2866666667,
+        "PDP70": 40.3566666667,
+        "PPG2000": 40.3566666667,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "measured_reactive_core_only"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C02",
+      "constraint_notes": [
+        "Reactive-core-only formulation matching measured local design point E2 (PPG2000/PDP70 = 50/50, NCO:OH = 1.80), renormalized to total wt%.",
+        "Admissible because it stays entirely inside the measured local chemistry; it tests reactive-core / stoichiometry tuning rather than resin modification.",
+        "Search dimension introduced by the original local E1-E5 experimental design.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "LOCAL_FORMULATIONS",
+        "LOCAL_TEMPERATURE_SWEEPS"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 20.1906730224,
+        "PDP70": 39.9046634888,
+        "PPG2000": 39.9046634888,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "measured_reactive_core_only"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C03",
+      "constraint_notes": [
+        "Reactive-core-only formulation matching measured local design point E3 (PPG2000/PDP70 = 50/50, NCO:OH = 1.90), renormalized to total wt%.",
+        "Admissible because it stays entirely inside the measured local chemistry; it tests reactive-core / stoichiometry tuning rather than resin modification.",
+        "Search dimension introduced by the original local E1-E5 experimental design.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "LOCAL_FORMULATIONS",
+        "LOCAL_TEMPERATURE_SWEEPS"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 21.0759641345,
+        "PDP70": 39.4620179327,
+        "PPG2000": 39.4620179327,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "measured_reactive_core_only"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C04",
+      "constraint_notes": [
+        "Reactive-core-only formulation matching measured local design point E4 (PPG2000/PDP70 = 60/40, NCO:OH = 1.80), renormalized to total wt%.",
+        "Admissible because it stays entirely inside the measured local chemistry; it tests reactive-core / stoichiometry tuning rather than resin modification.",
+        "Search dimension introduced by the original local E1-E5 experimental design.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "LOCAL_FORMULATIONS",
+        "LOCAL_TEMPERATURE_SWEEPS"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 19.8333333333,
+        "PDP70": 32.0666666667,
+        "PPG2000": 48.1,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "measured_reactive_core_only"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C05",
+      "constraint_notes": [
+        "Reactive-core-only formulation matching measured local design point E5 (PPG2000/PDP70 = 40/60, NCO:OH = 1.80), renormalized to total wt%.",
+        "Admissible because it stays entirely inside the measured local chemistry; it tests reactive-core / stoichiometry tuning rather than resin modification.",
+        "Search dimension introduced by the original local E1-E5 experimental design.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "LOCAL_FORMULATIONS",
+        "LOCAL_TEMPERATURE_SWEEPS",
+        "LOCAL_HOLD"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 20.5433333333,
+        "PDP70": 47.6733333333,
+        "PPG2000": 31.7833333333,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "measured_reactive_core_only"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C06",
+      "constraint_notes": [
+        "Reactive-core-only interpolation: stoichiometry midpoint between NCO:OH 1.70 and 1.80 at 50/50.",
+        "Admissible because it lies strictly between two measured local design points, so it requires no extrapolation beyond the measured chemistry.",
+        "Search dimension introduced by the original local E1-E5 design; this candidate exists so that continued reactive-core / stoichiometry tuning is a fully competitive alternative to resin modification.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "LOCAL_FORMULATIONS",
+        "LOCAL_TEMPERATURE_SWEEPS"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 19.7386698446,
+        "PDP70": 40.1306650777,
+        "PPG2000": 40.1306650777,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "interpolated_reactive_core_only"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C07",
+      "constraint_notes": [
+        "Reactive-core-only interpolation: stoichiometry midpoint between NCO:OH 1.80 and 1.90 at 50/50.",
+        "Admissible because it lies strictly between two measured local design points, so it requires no extrapolation beyond the measured chemistry.",
+        "Search dimension introduced by the original local E1-E5 design; this candidate exists so that continued reactive-core / stoichiometry tuning is a fully competitive alternative to resin modification.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "LOCAL_FORMULATIONS",
+        "LOCAL_TEMPERATURE_SWEEPS"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 20.6333185785,
+        "PDP70": 39.6833407108,
+        "PPG2000": 39.6833407108,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "interpolated_reactive_core_only"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C08",
+      "constraint_notes": [
+        "Reactive-core-only interpolation: polyol-ratio midpoint between 60/40 and 50/50 at NCO:OH 1.80.",
+        "Admissible because it lies strictly between two measured local design points, so it requires no extrapolation beyond the measured chemistry.",
+        "Search dimension introduced by the original local E1-E5 design; this candidate exists so that continued reactive-core / stoichiometry tuning is a fully competitive alternative to resin modification.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "LOCAL_FORMULATIONS",
+        "LOCAL_TEMPERATURE_SWEEPS"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 20.0120031779,
+        "PDP70": 35.9856650777,
+        "PPG2000": 44.0023317444,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "interpolated_reactive_core_only"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C09",
+      "constraint_notes": [
+        "Reactive-core-only interpolation: polyol-ratio midpoint between 50/50 and 40/60 at NCO:OH 1.80.",
+        "Admissible because it lies strictly between two measured local design points, so it requires no extrapolation beyond the measured chemistry.",
+        "Search dimension introduced by the original local E1-E5 design; this candidate exists so that continued reactive-core / stoichiometry tuning is a fully competitive alternative to resin modification.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "LOCAL_FORMULATIONS",
+        "LOCAL_TEMPERATURE_SWEEPS"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 20.3670031779,
+        "PDP70": 43.7889984111,
+        "PPG2000": 35.8439984111,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "interpolated_reactive_core_only"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C10",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis held at zero (control level on this axis).",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "LOCAL_FORMULATIONS"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 19.6859061969,
+        "PDP70": 38.9070469016,
+        "PPG2000": 38.9070469016,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C11",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis held at zero (control level on this axis).",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "LOCAL_FORMULATIONS"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 19.1811393713,
+        "PDP70": 37.9094303143,
+        "PPG2000": 37.9094303143,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C12",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis held at zero (control level on this axis).",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H13",
+        "LOCAL_FORMULATIONS"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 18.6763725458,
+        "PDP70": 36.9118137271,
+        "PPG2000": 36.9118137271,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C13",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis held at zero (control level on this axis).",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H13",
+        "LOCAL_FORMULATIONS"
+      ],
+      "formulation_state": {
+        "AC1920": 0.0,
+        "MDI": 18.1716057202,
+        "PDP70": 35.9141971399,
+        "PPG2000": 35.9141971399,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C14",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 2.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 2.5,
+        "MDI": 19.6859061969,
+        "PDP70": 38.9070469016,
+        "PPG2000": 38.9070469016,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C15",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 2.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 2.5,
+        "MDI": 19.1811393713,
+        "PDP70": 37.9094303143,
+        "PPG2000": 37.9094303143,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C16",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 2.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 2.5,
+        "MDI": 18.6763725458,
+        "PDP70": 36.9118137271,
+        "PPG2000": 36.9118137271,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C17",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 2.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 2.5,
+        "MDI": 18.1716057202,
+        "PDP70": 35.9141971399,
+        "PPG2000": 35.9141971399,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C18",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 2.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 2.5,
+        "MDI": 17.6668388946,
+        "PDP70": 34.9165805527,
+        "PPG2000": 34.9165805527,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C19",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 5 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 5.0,
+        "MDI": 19.1811393713,
+        "PDP70": 37.9094303143,
+        "PPG2000": 37.9094303143,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C20",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 5.0,
+        "MDI": 18.6763725458,
+        "PDP70": 36.9118137271,
+        "PPG2000": 36.9118137271,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C21",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 5.0,
+        "MDI": 18.1716057202,
+        "PDP70": 35.9141971399,
+        "PPG2000": 35.9141971399,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C22",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 5.0,
+        "MDI": 17.6668388946,
+        "PDP70": 34.9165805527,
+        "PPG2000": 34.9165805527,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C23",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 5.0,
+        "MDI": 17.1620720691,
+        "PDP70": 33.9189639655,
+        "PPG2000": 33.9189639655,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C24",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 7.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 7.5,
+        "MDI": 18.6763725458,
+        "PDP70": 36.9118137271,
+        "PPG2000": 36.9118137271,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C25",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 7.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 7.5,
+        "MDI": 18.1716057202,
+        "PDP70": 35.9141971399,
+        "PPG2000": 35.9141971399,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C26",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 7.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 7.5,
+        "MDI": 17.6668388946,
+        "PDP70": 34.9165805527,
+        "PPG2000": 34.9165805527,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C27",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 7.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 7.5,
+        "MDI": 17.1620720691,
+        "PDP70": 33.9189639655,
+        "PPG2000": 33.9189639655,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C28",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 7.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 7.5,
+        "MDI": 16.6573052435,
+        "PDP70": 32.9213473782,
+        "PPG2000": 32.9213473782,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C29",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 10 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 10.0,
+        "MDI": 18.1716057202,
+        "PDP70": 35.9141971399,
+        "PPG2000": 35.9141971399,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C30",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 10 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 10.0,
+        "MDI": 17.6668388946,
+        "PDP70": 34.9165805527,
+        "PPG2000": 34.9165805527,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C31",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 10 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07"
+      ],
+      "formulation_state": {
+        "AC1920": 10.0,
+        "MDI": 17.1620720691,
+        "PDP70": 33.9189639655,
+        "PPG2000": 33.9189639655,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C32",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 10 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 10.0,
+        "MDI": 16.6573052435,
+        "PDP70": 32.9213473782,
+        "PPG2000": 32.9213473782,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C33",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 10 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H07",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 10.0,
+        "MDI": 16.1525384179,
+        "PDP70": 31.923730791,
+        "PPG2000": 31.923730791,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C34",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 12.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H08"
+      ],
+      "formulation_state": {
+        "AC1920": 12.5,
+        "MDI": 17.6668388946,
+        "PDP70": 34.9165805527,
+        "PPG2000": 34.9165805527,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C35",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 12.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H08"
+      ],
+      "formulation_state": {
+        "AC1920": 12.5,
+        "MDI": 17.1620720691,
+        "PDP70": 33.9189639655,
+        "PPG2000": 33.9189639655,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C36",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 12.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H08"
+      ],
+      "formulation_state": {
+        "AC1920": 12.5,
+        "MDI": 16.6573052435,
+        "PDP70": 32.9213473782,
+        "PPG2000": 32.9213473782,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C37",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 12.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H08",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 12.5,
+        "MDI": 16.1525384179,
+        "PDP70": 31.923730791,
+        "PPG2000": 31.923730791,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C38",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 12.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H08",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 12.5,
+        "MDI": 15.6477715924,
+        "PDP70": 30.9261142038,
+        "PPG2000": 30.9261142038,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C39",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 15 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H08"
+      ],
+      "formulation_state": {
+        "AC1920": 15.0,
+        "MDI": 17.1620720691,
+        "PDP70": 33.9189639655,
+        "PPG2000": 33.9189639655,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C40",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 15 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H08"
+      ],
+      "formulation_state": {
+        "AC1920": 15.0,
+        "MDI": 16.6573052435,
+        "PDP70": 32.9213473782,
+        "PPG2000": 32.9213473782,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C41",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 15 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H08"
+      ],
+      "formulation_state": {
+        "AC1920": 15.0,
+        "MDI": 16.1525384179,
+        "PDP70": 31.923730791,
+        "PPG2000": 31.923730791,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C42",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 15 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H08",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 15.0,
+        "MDI": 15.6477715924,
+        "PDP70": 30.9261142038,
+        "PPG2000": 30.9261142038,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C43",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 15 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H08",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 15.0,
+        "MDI": 15.1430047668,
+        "PDP70": 29.9284976166,
+        "PPG2000": 29.9284976166,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C44",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 17.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H08"
+      ],
+      "formulation_state": {
+        "AC1920": 17.5,
+        "MDI": 16.6573052435,
+        "PDP70": 32.9213473782,
+        "PPG2000": 32.9213473782,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C45",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 17.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H08"
+      ],
+      "formulation_state": {
+        "AC1920": 17.5,
+        "MDI": 16.1525384179,
+        "PDP70": 31.923730791,
+        "PPG2000": 31.923730791,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C46",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 17.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H08"
+      ],
+      "formulation_state": {
+        "AC1920": 17.5,
+        "MDI": 15.6477715924,
+        "PDP70": 30.9261142038,
+        "PPG2000": 30.9261142038,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C47",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 17.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H08",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 17.5,
+        "MDI": 15.1430047668,
+        "PDP70": 29.9284976166,
+        "PPG2000": 29.9284976166,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C48",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 17.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H08",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 17.5,
+        "MDI": 14.6382379413,
+        "PDP70": 28.9308810294,
+        "PPG2000": 28.9308810294,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C49",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 20 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H03",
+        "H04",
+        "H05",
+        "H06"
+      ],
+      "formulation_state": {
+        "AC1920": 20.0,
+        "MDI": 16.1525384179,
+        "PDP70": 31.923730791,
+        "PPG2000": 31.923730791,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C50",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 20 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06"
+      ],
+      "formulation_state": {
+        "AC1920": 20.0,
+        "MDI": 15.6477715924,
+        "PDP70": 30.9261142038,
+        "PPG2000": 30.9261142038,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C51",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 20 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06"
+      ],
+      "formulation_state": {
+        "AC1920": 20.0,
+        "MDI": 15.1430047668,
+        "PDP70": 29.9284976166,
+        "PPG2000": 29.9284976166,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C52",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 20 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 20.0,
+        "MDI": 14.6382379413,
+        "PDP70": 28.9308810294,
+        "PPG2000": 28.9308810294,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C53",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 20 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H03",
+        "H04",
+        "H05",
+        "H06",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 20.0,
+        "MDI": 14.1334711157,
+        "PDP70": 27.9332644421,
+        "PPG2000": 27.9332644421,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C54",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 22.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 22.5,
+        "MDI": 15.6477715924,
+        "PDP70": 30.9261142038,
+        "PPG2000": 30.9261142038,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C55",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 22.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 22.5,
+        "MDI": 15.1430047668,
+        "PDP70": 29.9284976166,
+        "PPG2000": 29.9284976166,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C56",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 22.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 22.5,
+        "MDI": 14.6382379413,
+        "PDP70": 28.9308810294,
+        "PPG2000": 28.9308810294,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C57",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 22.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 22.5,
+        "MDI": 14.1334711157,
+        "PDP70": 27.9332644421,
+        "PPG2000": 27.9332644421,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C58",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 22.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 22.5,
+        "MDI": 13.6287042901,
+        "PDP70": 26.9356478549,
+        "PPG2000": 26.9356478549,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C59",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 25 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 25.0,
+        "MDI": 15.1430047668,
+        "PDP70": 29.9284976166,
+        "PPG2000": 29.9284976166,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C60",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 25 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 25.0,
+        "MDI": 14.6382379413,
+        "PDP70": 28.9308810294,
+        "PPG2000": 28.9308810294,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C61",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 25 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 25.0,
+        "MDI": 14.1334711157,
+        "PDP70": 27.9332644421,
+        "PPG2000": 27.9332644421,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C62",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 25 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 25.0,
+        "MDI": 13.6287042901,
+        "PDP70": 26.9356478549,
+        "PPG2000": 26.9356478549,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C63",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 25 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 25.0,
+        "MDI": 13.1239374646,
+        "PDP70": 25.9380312677,
+        "PPG2000": 25.9380312677,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C64",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 27.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 27.5,
+        "MDI": 14.6382379413,
+        "PDP70": 28.9308810294,
+        "PPG2000": 28.9308810294,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C65",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 27.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 27.5,
+        "MDI": 14.1334711157,
+        "PDP70": 27.9332644421,
+        "PPG2000": 27.9332644421,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C66",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 27.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 27.5,
+        "MDI": 13.6287042901,
+        "PDP70": 26.9356478549,
+        "PPG2000": 26.9356478549,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C67",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 27.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 27.5,
+        "MDI": 13.1239374646,
+        "PDP70": 25.9380312677,
+        "PPG2000": 25.9380312677,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C68",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 27.5 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 27.5,
+        "MDI": 12.619170639,
+        "PDP70": 24.9404146805,
+        "PPG2000": 24.9404146805,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C69",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 30 wt% of total formulation.",
+        "Tackifier-like TK100 axis held at zero (control level on this axis).",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 30.0,
+        "MDI": 14.1334711157,
+        "PDP70": 27.9332644421,
+        "PPG2000": 27.9332644421,
+        "TK100": 0.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C70",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 30 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 2.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 30.0,
+        "MDI": 13.6287042901,
+        "PDP70": 26.9356478549,
+        "PPG2000": 26.9356478549,
+        "TK100": 2.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C71",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 30 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10"
+      ],
+      "formulation_state": {
+        "AC1920": 30.0,
+        "MDI": 13.1239374646,
+        "PDP70": 25.9380312677,
+        "PPG2000": 25.9380312677,
+        "TK100": 5.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C72",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 30 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 7.5 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 30.0,
+        "MDI": 12.619170639,
+        "PDP70": 24.9404146805,
+        "PPG2000": 24.9404146805,
+        "TK100": 7.5,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    },
+    {
+      "candidate_id": "S1C73",
+      "constraint_notes": [
+        "Acrylic-like AC1920 axis at 30 wt% of total formulation.",
+        "Tackifier-like TK100 axis at 10 wt% of total formulation.",
+        "E2 reactive-core proportions are preserved and scaled into the remaining total-formulation fraction, so only the modifier axes vary.",
+        "Lattice node of a uniform grid (acrylic 0-30 step 5; tackifier 0-10 step 2.5) whose bounds come from external pre-result literature anchors only.",
+        "No post-result information was used to construct this candidate."
+      ],
+      "evidence_references": [
+        "H01",
+        "H02",
+        "H09",
+        "H10",
+        "H13"
+      ],
+      "formulation_state": {
+        "AC1920": 30.0,
+        "MDI": 12.1144038135,
+        "PDP70": 23.9427980933,
+        "PPG2000": 23.9427980933,
+        "TK100": 10.0,
+        "amount_basis": "normalized_total_wt_percent",
+        "design_layer": "uniform_modifier_lattice_on_E2_core"
+      },
+      "process_state": {
+        "hold_temperature_c": null,
+        "hold_time_min": null,
+        "mixing_history": null,
+        "reaction_temperature_c": null,
+        "reaction_time_min": null,
+        "sample_age": null
+      }
+    }
+  ],
+  "decision_context": "Target-blind Stage-1 pre-result candidate space. Built only from the measured local E1-E5 design and curated external PUR literature anchors. Candidate order and IDs encode no preference. No candidate carries a measurement plan or hold schedule: the Agent must decide what to measure and define its own falsifiable acceptance criterion.",
+  "provenance": {
+    "acrylic_like_grid_pct": [
+      0.0,
+      2.5,
+      5.0,
+      7.5,
+      10.0,
+      12.5,
+      15.0,
+      17.5,
+      20.0,
+      22.5,
+      25.0,
+      27.5,
+      30.0
+    ],
+    "acrylic_upper_bound_rule": "first lattice node at or above the largest directly commensurate external acrylic anchor (25 wt%, H09/H10)",
+    "candidate_ids_encode_historical_identity": false,
+    "candidate_order_encodes_rank": false,
+    "carries_hold_schedule": false,
+    "carries_measurement_plan": false,
+    "claim_boundary": "This space is constructed from pre-result evidence only. The later wet-lab formulation is not a node of the lattice, so exact composition recovery is impossible by construction and only region/direction recovery can be scored.",
+    "generator": "scripts/build_stage1_blind_candidate_space.py",
+    "grid_rule": "uniform lattice anchored at zero; acrylic step 2.5 to 30.0; tackifier step 2.5 to 10.0",
+    "n_candidates": 73,
+    "reactive_core_anchor": "E2 (data/formulations.csv, stage=original)",
+    "reactive_core_only_option_available": true,
+    "reads_follow_up_formulation_row": false,
+    "reads_follow_up_hold_results": false,
+    "tackifier_like_grid_pct": [
+      0.0,
+      2.5,
+      5.0,
+      7.5,
+      10.0
+    ],
+    "tackifier_upper_bound_rule": "explicit 'below about 10 wt%' guidance (H13)",
+    "validation_outcome_included": false,
+    "validation_recipe_numeric_values_used_to_generate_grid": false
+  }
+}

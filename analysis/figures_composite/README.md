@@ -1,6 +1,6 @@
 # Composite figures
 
-The figures of the V5 manuscript, and three supplementary figures. Each is
+The manuscript figures, and three supplementary figures. Each is
 built by one script that assembles it on a page measured in millimetres,
 draws schematics rather than exporting them, reads its numbers from the
 repository tables, and writes **SVG, PDF and PNG** (600 dpi) in one pass.
@@ -26,9 +26,9 @@ the OVITO environment (see *The structure model* below).
 | 3 | `fig3/` | 183 x 68 | `results/local_leave_one_formulation_*`, `results/local_joint_formulation_temperature_extrapolation_summary.csv`, `p3C` |
 | 4 | `fig4/` | 183 x 88 | every run's `recommendation.json` under `results/agent_v4_voi/`, checked against `rule_layer_ablation.json` |
 | 5 | `fig5/` | 183 x 96 | `data/temperature_sweeps.csv`, `data/thermal_hold.csv`, `results/local_hold_dynamics.csv` |
-| S1 | `fig_arrhenius/` | 183 x 86 | all seven realizations, and `derived/thermal_model_robustness/` |
-| S2 | `fig_column/` | 120 x 152 | one property, seven realizations, stacked against each other |
-| S3 | `fig_structure/` | 183 x 88 | the generated hard-segment CIF |
+| supp. | `fig_arrhenius/` | 183 x 86 | all seven realizations, and `derived/thermal_model_robustness/` |
+| supp. | `fig_column/` | 120 x 152 | one property, seven realizations, stacked against each other |
+| supp. | `fig_structure/` | 183 x 88 | the generated hard-segment CIF |
 
 Three panels were redrawn rather than carried over, because the earlier
 drawings implied relationships the data does not have:
@@ -116,6 +116,13 @@ The renderer identifies hydrogen bonds by being intermolecular, N-H-donated and
 near-linear, not by distance alone, which returned 20 contacts against the 2
 real ones.
 
+**A privacy grep reports two false matches here.** Searching the repository
+for the retired run labels finds one match each in `Fig_structure.svg` and
+`Sheet_supplementary_figures.svg`. Both sit inside the base64 data of the
+embedded OVITO render: random runs of the encoding, not text. Every text
+element in these figures uses only R01-R03. Do not edit the base64 to remove
+them; that corrupts the image.
+
 ## `layout.py` — legends, and a measured overlap audit
 
 * **`legend(...)`** — the house legend frame, used where a panel carries more
@@ -135,6 +142,6 @@ once showed five dots because two values sat 0.12 % apart.
 
 `make_sheet.py` composes the finished figures into
 `Sheet_main_figures.{svg,pdf,png}` (Figures 1-5, in reading order) and
-`Sheet_supplementary_figures.{svg,pdf,png}` (S1-S3). Each figure is nested as
+`Sheet_supplementary_figures.{svg,pdf,png}` (the three supplementary figures, unnumbered: the SI owns S-numbers and already has an S1). Each figure is nested as
 an SVG, so a sheet is vector with live text; each is scaled independently. The
 per-figure files remain the submission artifacts.

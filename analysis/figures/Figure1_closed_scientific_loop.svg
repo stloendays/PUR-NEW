@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="680" viewBox="0 0 1440 680" role="img" aria-label="Closed scientific loop from rheological state identification to physical adjudication">
+<style>
+text{font-family:"Times New Roman",Times,serif;fill:#111}
+.title{font-size:27px;font-weight:700}
+.stage{font-size:18px;font-weight:700}
+.body{font-size:14px}
+.small{font-size:12px;fill:#555}
+.bold{font-weight:700}
+.box{stroke:#111;stroke-width:1.5;rx:16;ry:16}
+.arrow{stroke:#111;stroke-width:2;fill:none;marker-end:url(#arrow)}
+.feedback{stroke:#111;stroke-width:1.7;fill:none;marker-end:url(#arrow)}
+</style>
+<defs>
+<marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><polygon points="0 0, 9 4, 0 8" fill="#111"/></marker>
+</defs>
+<rect width="1440" height="680" fill="white"/>
+<text x="720" y="45" text-anchor="middle" class="title">From rheological state identification to hypothesis-discriminating experiment selection</text>
+
+<!-- stage boxes -->
+<rect x="35" y="125" width="245" height="330" fill="#F2F2F2" class="box"/>
+<rect x="320" y="125" width="245" height="330" fill="#E4E4E4" class="box"/>
+<rect x="605" y="125" width="245" height="330" fill="#FFFFFF" class="box"/>
+<rect x="890" y="125" width="245" height="330" fill="#F2F2F2" class="box"/>
+<rect x="1175" y="125" width="230" height="330" fill="#D7D7D7" class="box"/>
+
+<!-- arrows -->
+<line x1="280" y1="290" x2="316" y2="290" class="arrow"/>
+<line x1="565" y1="290" x2="601" y2="290" class="arrow"/>
+<line x1="850" y1="290" x2="886" y2="290" class="arrow"/>
+<line x1="1135" y1="290" x2="1171" y2="290" class="arrow"/>
+
+<!-- stage 1 -->
+<text x="157" y="165" text-anchor="middle" class="stage">1  Hidden state</text>
+<text x="157" y="215" text-anchor="middle" class="body">Same nominal recipe</text>
+<text x="157" y="238" text-anchor="middle" class="body">≠ same measured state</text>
+<text x="157" y="295" text-anchor="middle" class="body bold">Shared local thermal shape</text>
+<text x="157" y="318" text-anchor="middle" class="body bold">+ realization-specific scale</text>
+<text x="157" y="405" text-anchor="middle" class="small">one-point state calibration</text>
+
+<!-- stage 2 -->
+<text x="442" y="165" text-anchor="middle" class="stage">2  Actionable failure mode</text>
+<text x="442" y="215" text-anchor="middle" class="body">Temperature response:</text>
+<text x="442" y="238" text-anchor="middle" class="body">locally concentrated</text>
+<text x="442" y="295" text-anchor="middle" class="body">Thermal-hold drift:</text>
+<text x="442" y="318" text-anchor="middle" class="body bold">strongly formulation-sensitive</text>
+<text x="442" y="405" text-anchor="middle" class="small">thermal-hold trajectory</text>
+
+<!-- stage 3 -->
+<text x="727" y="165" text-anchor="middle" class="stage">3  Competing hypotheses</text>
+<text x="727" y="215" text-anchor="middle" class="body">Why does resin modification</text>
+<text x="727" y="238" text-anchor="middle" class="body">suppress drift?</text>
+<rect x="625" y="285" width="82" height="42" fill="#F7F7F7" class="box"/><text x="666" y="312" text-anchor="middle" class="body bold">H-CORE</text>
+<rect x="686" y="340" width="84" height="42" fill="#EEEEEE" class="box"/><text x="728" y="367" text-anchor="middle" class="body bold">H-RESIN</text>
+<rect x="748" y="285" width="82" height="42" fill="#E6E6E6" class="box"/><text x="789" y="312" text-anchor="middle" class="body bold">H-DUAL</text>
+<text x="727" y="425" text-anchor="middle" class="small">falsifiable material question</text>
+
+<!-- stage 4 -->
+<text x="1012" y="165" text-anchor="middle" class="stage">4  Discriminating experiment</text>
+<text x="1012" y="215" text-anchor="middle" class="body">Formulation × measurement</text>
+<text x="1012" y="238" text-anchor="middle" class="body">= experiment card</text>
+<text x="1012" y="295" text-anchor="middle" class="body bold">VOI + rule order</text>
+<text x="1012" y="318" text-anchor="middle" class="body bold">+ model-mediated selection</text>
+<text x="1012" y="405" text-anchor="middle" class="small">informative next experiment</text>
+
+<!-- stage 5 -->
+<text x="1290" y="165" text-anchor="middle" class="stage">5  Physical adjudication</text>
+<text x="1290" y="215" text-anchor="middle" class="body">Wet-lab thermal hold</text>
+<text x="1290" y="278" text-anchor="middle" class="body bold">Observed drift: 1.60%</text>
+<text x="1290" y="303" text-anchor="middle" class="body">Dilution null: 7.79%</text>
+<text x="1290" y="350" text-anchor="middle" class="body bold">H-CORE falsified</text>
+<text x="1290" y="405" text-anchor="middle" class="small">hypothesis state updated</text>
+
+<!-- feedback loop -->
+<path d="M1290 475 L1290 540 L727 540 L727 470" class="feedback"/>
+<text x="1008" y="572" text-anchor="middle" class="body bold">physical outcome closes the hypothesis loop</text>
+
+<text x="720" y="635" text-anchor="middle" class="body bold">Material physics defines the question; explicit hypotheses define the experiment; wet-lab evidence updates the physics.</text>
+</svg>

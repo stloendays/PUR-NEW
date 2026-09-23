@@ -5,26 +5,64 @@
     "files": {
       "configs/action_catalog.json": {
         "amended_at_utc": "2026-09-23",
-        "amended_sha256": "2506145954d5f0aca4ad94550d45ac1d1d6a03a6b2f1a9654fc4210180690c26",
-        "authorization_scope": "document the completed same-formulation state-anchor bridge in the model-facing action text only; do not change any action name, parameter schema, deterministic scoring field, chemistry-domain gate, candidate lattice or arm-parity requirement, and do not extend, resume or pool any already-frozen Agent series under this text",
+        "amended_sha256": "4d4e032b2f8c6185337542bbf8e45983333156bc0f022d8bf5017ccb1ca45c0e",
+        "authorization_basis": "The author approved keeping the catalog as merged from main and declaring it here (2026-09-23). The decision it implements is recorded in AGENTS.md, section 'State-anchor bridge and Agent boundary': the same-formulation bridge statistic (1.824x -> 1.086x) is materials and statistical interpretation only, and is not to enter Agent tool outputs, prompts, VOI components, ranking payloads or future Agent evidence contracts unless the author explicitly reverses that decision. Implemented on main in c0e9926 and a1045a4 (this catalog) with 6058cee (the tool output in src/pur_new/scientific_tools.py).",
+        "authorization_scope": "remove the same-formulation state-anchor bridge statistic from the model-facing action text only, returning that text to catalog_version 1.5.1; do not change any action name, parameter schema, deterministic scoring field, chemistry-domain gate, candidate lattice or arm-parity requirement, and do not extend, resume or pool any already-frozen Agent series under this text",
         "authorized_by": "author",
         "baseline_sha256": "7e240b12f23e3e93603fd4c53e314ae3090c6b8b51a2c9ef96751527200c784f",
         "behavioural_invariance_evidence": {
-          "changed_fields_have_no_deterministic_consumer": "description, when_to_use and catalog_version are read only by scripts/run_scientific_agent_v3.py, scripts/run_agent_v4.py and scripts/run_agent_v5.py, which serialize them into the model-facing action list. No VOI, gating, admissibility, scoring or adjudication code in src/pur_new reads them.",
+          "changed_fields_have_no_deterministic_consumer": "The change touches only catalog_version, two when_to_use lines and one description clause. Re-checked on the merged tree: description and when_to_use are read field by field only by scripts/run_scientific_agent_v3.py, scripts/run_agent_v4.py and scripts/run_agent_v5.py, which serialize them into the model-facing action list; scripts/run_agent_recommendation.py passes the whole catalog into its model-facing input payload; scripts/run_agent_v4_series.py, scripts/run_agent_v5_series.py and scripts/audit_stage1_blindness.py hash the file as a recorded input. No code in src/pur_new reads the catalog, so no VOI, gating, admissibility, scoring or adjudication path consumes any of these fields.",
           "frozen_records_are_unaffected": "results/agent_v4_voi/, results/agent_v5/ and results/agent_v5_condition_b/ are complete run records. Their counts, denominators and cross-arm summaries are not recomputed from this catalog.",
+          "text_restores_the_pinned_baseline": "Apart from catalog_version, the 1.5.3 file is line-for-line identical to the pinned 1.5.1 baseline (baseline_sha256).",
           "tests": [
+            "tests/test_agent_v5.py::test_v4_inputs_and_frozen_results_are_unchanged_by_v5",
             "tests/test_agent_v5.py::test_frozen_v4_voi_ranking_is_reproduced_by_the_amended_module",
             "tests/test_decision_conditions.py::test_condition_a_scores_match_the_frozen_run_exactly",
-            "tests/test_decision_conditions.py::test_condition_a_cards_are_structurally_identical_to_the_frozen_run"
+            "tests/test_decision_conditions.py::test_condition_a_cards_are_structurally_identical_to_the_frozen_run",
+            "tests/test_scientific_tool_v3.py::test_v3_planner_action_uses_enriched_scientific_tool (passes against the tool output that no longer carries the bridge statistic)"
           ]
         },
-        "not_inert_for_future_runs": "The added text is model-visible. It was written after the Condition-A and Condition-B series were frozen and was not visible to any run in them. Any series launched under catalog_version 1.5.2 is a new evidence version and needs its own predeclared denominator and evidence-version record, per docs/AGENT_V5_EVIDENCE_VERSION_BOUNDARY.md. The recorded pre_enforcement_payload_sha256 of the frozen series was computed under 1.5.1, so a run under 1.5.2 is mechanically distinguishable from them.",
-        "reason": "The same-formulation state-anchor bridge analysis (formulation-only 1.824x versus one-anchor 1.086x for 120-130 C reconstruction) gave M-ANCHOR a measured value inside validated shared-shape support. The action text was updated so a future Agent reads that result from the audited tool description instead of inferring it, and reads with it the rule that a chemistry shift still requires a direct M-SWEEP first.",
+        "correction_to_prior_amendment": "The 1.5.2 record attributes the separation of a 1.5.2 run from the frozen series to pre_enforcement_payload_sha256. That hash cannot carry it: build_pre_enforcement_payload in src/pur_new/agent_v5.py holds only the VOI view and the chemistry applicability audit, and no per-run hash covers the action catalog (prompt_hash covers the stage-prompt templates; input_hash covers the measurement catalog, not the action catalog). The separation does hold, through the series manifest: every manifest written by scripts/run_agent_v5_series.py hashes configs/action_catalog.json among its input files, and the frozen series recorded the 1.5.1 hash. The prior record is kept verbatim under prior_amendments.",
+        "not_inert_for_future_runs": "The catalog text is model-visible. Under 1.5.3 the action list the V5 planner sees equals the 1.5.1 list that the frozen Condition-A and Condition-B series saw, because catalog_version is not part of that list, so a single run's own record cannot tell them apart. A series launched through scripts/run_agent_v5_series.py is still distinguishable, because its manifest records the catalog file hash and the 1.5.3 file differs from 1.5.1 in its version string. Any such series is a new evidence version and needs its own predeclared denominator and evidence-version record, per docs/AGENT_V5_EVIDENCE_VERSION_BOUNDARY.md.",
+        "prior_amendments": [
+          {
+            "amended_at_utc": "2026-09-23",
+            "amended_sha256": "2506145954d5f0aca4ad94550d45ac1d1d6a03a6b2f1a9654fc4210180690c26",
+            "authorization_scope": "document the completed same-formulation state-anchor bridge in the model-facing action text only; do not change any action name, parameter schema, deterministic scoring field, chemistry-domain gate, candidate lattice or arm-parity requirement, and do not extend, resume or pool any already-frozen Agent series under this text",
+            "authorized_by": "author",
+            "baseline_sha256": "7e240b12f23e3e93603fd4c53e314ae3090c6b8b51a2c9ef96751527200c784f",
+            "behavioural_invariance_evidence": {
+              "changed_fields_have_no_deterministic_consumer": "description, when_to_use and catalog_version are read only by scripts/run_scientific_agent_v3.py, scripts/run_agent_v4.py and scripts/run_agent_v5.py, which serialize them into the model-facing action list. No VOI, gating, admissibility, scoring or adjudication code in src/pur_new reads them.",
+              "frozen_records_are_unaffected": "results/agent_v4_voi/, results/agent_v5/ and results/agent_v5_condition_b/ are complete run records. Their counts, denominators and cross-arm summaries are not recomputed from this catalog.",
+              "tests": [
+                "tests/test_agent_v5.py::test_frozen_v4_voi_ranking_is_reproduced_by_the_amended_module",
+                "tests/test_decision_conditions.py::test_condition_a_scores_match_the_frozen_run_exactly",
+                "tests/test_decision_conditions.py::test_condition_a_cards_are_structurally_identical_to_the_frozen_run"
+              ]
+            },
+            "not_inert_for_future_runs": "The added text is model-visible. It was written after the Condition-A and Condition-B series were frozen and was not visible to any run in them. Any series launched under catalog_version 1.5.2 is a new evidence version and needs its own predeclared denominator and evidence-version record, per docs/AGENT_V5_EVIDENCE_VERSION_BOUNDARY.md. The recorded pre_enforcement_payload_sha256 of the frozen series was computed under 1.5.1, so a run under 1.5.2 is mechanically distinguishable from them.",
+            "reason": "The same-formulation state-anchor bridge analysis (formulation-only 1.824x versus one-anchor 1.086x for 120-130 C reconstruction) gave M-ANCHOR a measured value inside validated shared-shape support. The action text was updated so a future Agent reads that result from the audited tool description instead of inferring it, and reads with it the rule that a chemistry shift still requires a direct M-SWEEP first.",
+            "what_changed": [
+              "catalog_version 1.5.1 -> 1.5.2",
+              "analyze_local_material_response gained one when_to_use line about when M-ANCHOR has measured value and when chemistry-domain gating requires M-SWEEP first",
+              "get_chemistry_audited_rheology_summary gained one when_to_use line about quantifying the measured value of M-ANCHOR inside validated shared-shape support",
+              "the get_chemistry_audited_rheology_summary description now lists the same-formulation E2 one-anchor test among the returned results"
+            ],
+            "what_did_not_change": [
+              "every action name and parameter schema",
+              "the chemistry-domain applicability gate and its enforcement point",
+              "the candidate lattice and the arm-parity file list",
+              "every frozen run record, manifest, count and denominator"
+            ],
+            "superseded_by": "catalog_version 1.5.3 (this record)"
+          }
+        ],
+        "reason": "The author's decision recorded in AGENTS.md keeps the same-formulation bridge statistic out of Agent-facing text. catalog_version 1.5.2 had written it into two when_to_use lines and one description clause; 1.5.3, merged from main, removes all three.",
         "what_changed": [
-          "catalog_version 1.5.1 -> 1.5.2",
-          "analyze_local_material_response gained one when_to_use line about when M-ANCHOR has measured value and when chemistry-domain gating requires M-SWEEP first",
-          "get_chemistry_audited_rheology_summary gained one when_to_use line about quantifying the measured value of M-ANCHOR inside validated shared-shape support",
-          "the get_chemistry_audited_rheology_summary description now lists the same-formulation E2 one-anchor test among the returned results"
+          "catalog_version 1.5.2 -> 1.5.3",
+          "analyze_local_material_response lost the when_to_use line, added in 1.5.2, about when M-ANCHOR has measured value and when chemistry-domain gating requires M-SWEEP first",
+          "get_chemistry_audited_rheology_summary lost the when_to_use line, added in 1.5.2, about quantifying the measured value of M-ANCHOR inside validated shared-shape support",
+          "the get_chemistry_audited_rheology_summary description no longer lists the same-formulation E2 one-anchor test among the returned results"
         ],
         "what_did_not_change": [
           "every action name and parameter schema",
