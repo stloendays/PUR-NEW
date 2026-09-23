@@ -26,9 +26,9 @@ the OVITO environment (see *The structure model* below).
 | 3 | `fig3/` | 183 x 68 | `results/local_leave_one_formulation_*`, `results/local_joint_formulation_temperature_extrapolation_summary.csv`, `p3C` |
 | 4 | `fig4/` | 183 x 88 | every run's `recommendation.json` under `results/agent_v4_voi/`, checked against `rule_layer_ablation.json` |
 | 5 | `fig5/` | 183 x 96 | `data/temperature_sweeps.csv`, `data/thermal_hold.csv`, `results/local_hold_dynamics.csv` |
-| S1 | `fig_arrhenius/` | 183 x 86 | all seven realizations, and `derived/thermal_model_robustness/` |
-| S2 | `fig_column/` | 120 x 152 | one property, seven realizations, stacked against each other |
-| S3 | `fig_structure/` | 183 x 88 | the generated hard-segment CIF |
+| supp. | `fig_arrhenius/` | 183 x 86 | all seven realizations, and `derived/thermal_model_robustness/` |
+| supp. | `fig_column/` | 120 x 152 | one property, seven realizations, stacked against each other |
+| supp. | `fig_structure/` | 183 x 88 | the generated hard-segment CIF |
 
 Three panels were redrawn rather than carried over, because the earlier
 drawings implied relationships the data does not have:
@@ -142,6 +142,6 @@ once showed five dots because two values sat 0.12 % apart.
 
 `make_sheet.py` composes the finished figures into
 `Sheet_main_figures.{svg,pdf,png}` (Figures 1-5, in reading order) and
-`Sheet_supplementary_figures.{svg,pdf,png}` (S1-S3). Each figure is nested as
+`Sheet_supplementary_figures.{svg,pdf,png}` (the three supplementary figures, unnumbered: the SI owns S-numbers and already has an S1). Each figure is nested as
 an SVG, so a sheet is vector with live text; each is scaled independently. The
 per-figure files remain the submission artifacts.
