@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:olab="http://www.originlab.com/namespaces/olab" viewBox="0 0 6270 4950" width="183mm" height="144.47mm">
+<rect x="0" y="0" width="6270" height="4950" fill="#ffffff"/>
+<text x="40" y="150" font-family="Arial" font-size="150" font-weight="700" fill="#000000">a</text>
+<svg x="0" y="67" width="3100" height="2373" viewBox="0 0 1801 1379" preserveAspectRatio="xMidYMid meet">
+
+	<defs>
+		<mask id="p0_Cp_1">
+			<rect x="306" y="110" width="1405" height="1049" fill="white"/>
+		</mask>
+	</defs>
+	<g mask="url(#p0_Cp_1)">
+		<rect x="0" y="0" width="1801" height="1379" visibility="hidden" fill="none" opacity="0"/>
+		<polyline points="540,563 540,178" style="stroke: #8A9199;stroke-width: 7;stroke-linecap:round;stroke-linejoin:round" fill="none" olab:comment=""/>
+		<polyline points="1008,1158 1008,724" style="stroke: #8A9199;stroke-width: 7;stroke-linecap:round;stroke-linejoin:round" fill="none" olab:comment=""/>
+		<polyline points="1476,1158 1476,881" style="stroke: #8A9199;stroke-width: 7;stroke-linecap:round;stroke-linejoin:round" fill="none" olab:comment=""/>
+		<rect x="526" y="246" width="27" height="27" shape-rendering="crispEdges" fill="#1F4E79" fill-rule="evenodd" style="stroke: #1F4E79;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+		<rect x="994" y="1144" width="27" height="27" shape-rendering="crispEdges" fill="#C8952A" fill-rule="evenodd" style="stroke: #C8952A;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+		<rect x="1462" y="1144" width="27" height="27" shape-rendering="crispEdges" fill="#C1502E" fill-rule="evenodd" style="stroke: #C1502E;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+	</g>
+	<polyline points="306,1158 1710,1158" style="stroke: black;stroke-width: 3;stroke-linecap:square;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="540,1158 540,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="1008,1158 1008,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="1476,1158 1476,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,1158 306,110" style="stroke: black;stroke-width: 3;stroke-linecap:square;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,1158 340,1158" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,908 340,908" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,659 340,659" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,409 340,409" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,160 340,160" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<text x="532" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="532" style="font-kerning:none">1</tspan>
+	</text>
+	<text x="1000" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="1000" style="font-kerning:none">2</tspan>
+	</text>
+	<text x="1468" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="1468" style="font-kerning:none">3</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="1167" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.00</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="917" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.25</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="668" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.50</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="418" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.75</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="169" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">1.00</tspan>
+	</text>
+	<text x="0" dominant-baseline="auto" y="0" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="33" font-weight="400" transform="matrix(-1.83698e-16 -1 0.999999 -1.83698e-16 188 859)" olab:comment="">
+		<tspan x="0" style="white-space:pre;font-kerning:none" xml:space="preserve">Supported-family selection rate</tspan>
+	</text>
+	
+	<text x="646" dominant-baseline="auto" y="1283" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="33" font-weight="400" olab:comment="">
+		<tspan x="646" style="white-space:pre;font-kerning:none" xml:space="preserve">1 rule-complete    2 VOI withheld    3 order inverted</tspan>
+	</text>
+	
+
+</svg>
+<text x="3210" y="150" font-family="Arial" font-size="150" font-weight="700" fill="#000000">b</text>
+<svg x="3170" y="67" width="3100" height="2373" viewBox="0 0 1801 1379" preserveAspectRatio="xMidYMid meet">
+
+	<polyline points="306,1158 1710,1158" style="stroke: black;stroke-width: 3;stroke-linecap:square;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="540,1158 540,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="1008,1158 1008,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="1476,1158 1476,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,1158 306,110" style="stroke: black;stroke-width: 3;stroke-linecap:square;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,1158 340,1158" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,809 340,809" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,459 340,459" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,110 340,110" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<text x="532" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="532" style="font-kerning:none">1</tspan>
+	</text>
+	<text x="1000" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="1000" style="font-kerning:none">2</tspan>
+	</text>
+	<text x="1468" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="1468" style="font-kerning:none">3</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="1167" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.00</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="818" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.25</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="468" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.50</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="119" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.75</tspan>
+	</text>
+	<defs>
+		<mask id="p1_Cp_1">
+			<rect x="306" y="110" width="1405" height="1049" fill="white"/>
+		</mask>
+	</defs>
+	<g mask="url(#p1_Cp_1)">
+		<rect x="0" y="0" width="1801" height="1379" visibility="hidden" fill="none" opacity="0"/>
+		<rect x="526" y="212" width="27" height="27" shape-rendering="crispEdges" fill="#1F4E79" fill-rule="evenodd" style="stroke: #1F4E79;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+		<rect x="994" y="771" width="27" height="27" shape-rendering="crispEdges" fill="#C8952A" fill-rule="evenodd" style="stroke: #C8952A;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+		<rect x="1462" y="1144" width="27" height="27" shape-rendering="crispEdges" fill="#C1502E" fill-rule="evenodd" style="stroke: #C1502E;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+	</g>
+	<text x="0" dominant-baseline="auto" y="0" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="33" font-weight="400" transform="matrix(-1.83698e-16 -1 0.999999 -1.83698e-16 188 862)" olab:comment="">
+		<tspan x="0" style="white-space:pre;font-kerning:none" xml:space="preserve">Mean hypothesis discrimination</tspan>
+	</text>
+	
+	<text x="646" dominant-baseline="auto" y="1283" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="33" font-weight="400" olab:comment="">
+		<tspan x="646" style="white-space:pre;font-kerning:none" xml:space="preserve">1 rule-complete    2 VOI withheld    3 order inverted</tspan>
+	</text>
+	
+
+</svg>
+<text x="40" y="2660" font-family="Arial" font-size="150" font-weight="700" fill="#000000">c</text>
+<svg x="0" y="2577" width="3100" height="2373" viewBox="0 0 1801 1379" preserveAspectRatio="xMidYMid meet">
+
+	<defs>
+		<mask id="p2_Cp_1">
+			<rect x="306" y="110" width="1405" height="1049" fill="white"/>
+		</mask>
+	</defs>
+	<g mask="url(#p2_Cp_1)">
+		<rect x="0" y="0" width="1801" height="1379" visibility="hidden" fill="none" opacity="0"/>
+		<polyline points="540,437 540,160" style="stroke: #8A9199;stroke-width: 7;stroke-linecap:round;stroke-linejoin:round" fill="none" olab:comment=""/>
+		<polyline points="1008,594 1008,160" style="stroke: #8A9199;stroke-width: 7;stroke-linecap:round;stroke-linejoin:round" fill="none" olab:comment=""/>
+		<polyline points="1476,762 1476,267" style="stroke: #8A9199;stroke-width: 7;stroke-linecap:round;stroke-linejoin:round" fill="none" olab:comment=""/>
+		<rect x="526" y="146" width="27" height="27" shape-rendering="crispEdges" fill="#1F4E79" fill-rule="evenodd" style="stroke: #1F4E79;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+		<rect x="994" y="146" width="27" height="27" shape-rendering="crispEdges" fill="#C8952A" fill-rule="evenodd" style="stroke: #C8952A;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+		<rect x="1462" y="445" width="27" height="27" shape-rendering="crispEdges" fill="#C1502E" fill-rule="evenodd" style="stroke: #C1502E;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+	</g>
+	<polyline points="306,1158 1710,1158" style="stroke: black;stroke-width: 3;stroke-linecap:square;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="540,1158 540,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="1008,1158 1008,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="1476,1158 1476,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,1158 306,110" style="stroke: black;stroke-width: 3;stroke-linecap:square;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,1158 340,1158" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,908 340,908" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,659 340,659" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,409 340,409" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,160 340,160" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<text x="532" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="532" style="font-kerning:none">1</tspan>
+	</text>
+	<text x="1000" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="1000" style="font-kerning:none">2</tspan>
+	</text>
+	<text x="1468" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="1468" style="font-kerning:none">3</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="1167" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.00</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="917" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.25</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="668" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.50</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="418" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.75</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="169" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">1.00</tspan>
+	</text>
+	<text x="0" dominant-baseline="auto" y="0" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="33" font-weight="400" transform="matrix(-1.83698e-16 -1 0.999999 -1.83698e-16 188 888)" olab:comment="">
+		<tspan x="0" style="white-space:pre;font-kerning:none" xml:space="preserve">Matched 120 °C hold selection rate</tspan>
+	</text>
+	
+	<text x="646" dominant-baseline="auto" y="1283" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="33" font-weight="400" olab:comment="">
+		<tspan x="646" style="white-space:pre;font-kerning:none" xml:space="preserve">1 rule-complete    2 VOI withheld    3 order inverted</tspan>
+	</text>
+	
+
+</svg>
+<text x="3210" y="2660" font-family="Arial" font-size="150" font-weight="700" fill="#000000">d</text>
+<svg x="3170" y="2577" width="3100" height="2373" viewBox="0 0 1801 1379" preserveAspectRatio="xMidYMid meet">
+
+	<defs>
+		<mask id="p3_Cp_1">
+			<rect x="306" y="110" width="1405" height="1049" fill="white"/>
+		</mask>
+	</defs>
+	<g mask="url(#p3_Cp_1)">
+		<rect x="0" y="0" width="1801" height="1379" visibility="hidden" fill="none" opacity="0"/>
+		<polyline points="468,205 1008,682 1548,205" style="stroke: #C1502E;stroke-width: 10;stroke-linecap:round;stroke-linejoin:round" fill="none" olab:comment=""/>
+		<rect x="454" y="191" width="27" height="27" shape-rendering="crispEdges" fill="#C1502E" fill-rule="evenodd" style="stroke: #C1502E;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+		<rect x="994" y="668" width="27" height="27" shape-rendering="crispEdges" fill="#C1502E" fill-rule="evenodd" style="stroke: #C1502E;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+		<rect x="1534" y="191" width="27" height="27" shape-rendering="crispEdges" fill="#C1502E" fill-rule="evenodd" style="stroke: #C1502E;stroke-width: 2;stroke-linecap:round;stroke-linejoin:round" olab:comment=""/>
+	</g>
+	<polyline points="306,1158 1710,1158" style="stroke: black;stroke-width: 3;stroke-linecap:square;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="468,1158 468,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="1008,1158 1008,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="1548,1158 1548,1124" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,1158 306,110" style="stroke: black;stroke-width: 3;stroke-linecap:square;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,1158 340,1158" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,920 340,920" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,682 340,682" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,443 340,443" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<polyline points="306,205 340,205" style="stroke: black;stroke-width: 3;stroke-linecap:butt;stroke-linejoin:round" fill="none" olab:comment=""/>
+	<text x="460" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="460" style="font-kerning:none">1</tspan>
+	</text>
+	<text x="1000" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="1000" style="font-kerning:none">2</tspan>
+	</text>
+	<text x="1540" dominant-baseline="auto" y="1219" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="1540" style="font-kerning:none">3</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="1167" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.00</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="929" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.25</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="691" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.50</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="452" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">0.75</tspan>
+	</text>
+	<text x="212" dominant-baseline="auto" y="214" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="29" font-weight="400" olab:comment="">
+		<tspan x="212" style="font-kerning:none">1.00</tspan>
+	</text>
+	<text x="0" dominant-baseline="auto" y="0" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="33" font-weight="400" transform="matrix(-1.83698e-16 -1 0.999999 -1.83698e-16 188 747)" olab:comment="">
+		<tspan x="0" style="white-space:pre;font-kerning:none" xml:space="preserve">Fraction of runs</tspan>
+	</text>
+	
+	<text x="557" dominant-baseline="auto" y="1283" fill="black" font-family="Arial,'MS PGothic',SimSun" font-size="33" font-weight="400" olab:comment="">
+		<tspan x="557" style="white-space:pre;font-kerning:none" xml:space="preserve">1 skeptic objects   2 robustness says change   3 judge commits</tspan>
+	</text>
+	
+
+</svg>
+</svg>
