@@ -210,9 +210,18 @@ jobs:
               for run_el in doc.element.body.iter(qn("w:r")):
                   set_run_font_xml(run_el)
 
-              # Remove decorative paragraph borders (notably the blue rule below title).
+              # Remove decorative paragraph borders from both direct formatting
+              # and paragraph styles (notably the blue rule below Title).
               for p_el in doc.element.body.iter(qn("w:p")):
                   ppr = p_el.find(qn("w:pPr"))
+                  if ppr is None:
+                      continue
+                  pbdr = ppr.find(qn("w:pBdr"))
+                  if pbdr is not None:
+                      ppr.remove(pbdr)
+
+              for style in doc.styles:
+                  ppr = getattr(style._element, "pPr", None)
                   if ppr is None:
                       continue
                   pbdr = ppr.find(qn("w:pBdr"))
