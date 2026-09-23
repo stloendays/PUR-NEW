@@ -102,6 +102,29 @@ The same-order comparison isolates the effect of replacing formulation-level int
 
 Thus, within the present local chemistry family, the dominant realization effect is almost indistinguishable from a uniform vertical displacement in log-viscosity space.
 
+## Functional-form and optimizer sensitivity
+
+The shared thermal representation was stress-tested without changing the chemistry-audited 36-point analysis population. The purpose of this analysis is model-form robustness, not replacement of the canonical quadratic representation.
+
+| Shared state-conditioned thermal form | Parameters | Fit multiplicative RMSE | Held-temperature multiplicative error | AICc |
+|---|---:|---:|---:|---:|
+| linear inverse-temperature | 7 | 1.073× | 1.118× | -71.18 |
+| quadratic inverse-temperature | 8 | 1.046× | 1.058× | -100.20 |
+| cubic inverse-temperature | 9 | 1.045× | 1.055× | -97.18 |
+| VFT/shifted-Andrade type | 8 | 1.045× | 1.055× | -100.74 |
+
+The quadratic term was strongly supported over the shared linear form ($F=40.78$, $p=6.51\times10^{-7}$). Adding a cubic term did not provide detectable additional support ($F=0.43$, $p=0.518$), and its small held-temperature improvement was accompanied by worse AICc. The canonical quadratic form is therefore retained as a minimal flexible representation.
+
+As a nonlinear sensitivity analysis, viscosity was also represented as
+
+$
+\ln\eta_r(T)=a_r+\frac{B}{T-T_0}.
+$
+
+For any candidate $T_0$, the realization-specific intercepts and shared $B$ were solved by least squares. A bounded profile optimizer gave $T_0=262.284$ K and $B=456.90$ K. A seeded dual-annealing global search converged to $T_0=262.284$ K within 0.0003 K and the same fit error. The conclusion is therefore insensitive to optimizer initialization or local-minimum concerns.
+
+The fitted $T_0$ is not treated as a measured glass-transition temperature or as an independent molecular parameter. Its leave-one-realization estimates ranged from approximately -25.4 to -5.1 °C, showing that it is not sufficiently stable for mechanistic interpretation in this sparse local dataset. The VFT analysis is used only to show that the shared-shape conclusion is not an artifact of the quadratic polynomial basis.
+
 ---
 
 # Supplementary Note 3 | Leave-one-formulation one-point calibration
@@ -197,6 +220,30 @@ $$
 corresponding to a coefficient of variation of approximately 5.77%.
 
 The important result is not exact equality of slopes, but the comparatively narrow local spread of the temperature-response coordinate relative to the much larger changes observed in viscosity level and thermal-hold trajectory.
+
+## Shared-slope and hierarchical sensitivity
+
+A direct shared-slope regression with realization-specific intercepts gave
+
+$
+E_\eta=42.05~\mathrm{kJ\,mol^{-1}},
+$
+
+with a 95% confidence interval of
+
+$
+40.21\text{--}43.90~\mathrm{kJ\,mol^{-1}}.
+$
+
+A supporting random-intercept mixed model returned the same central estimate, 42.05 kJ mol$^{-1}$, with a 95% confidence interval of 40.31–43.79 kJ mol$^{-1}$. Because only six realization groups are available, variance-component estimates are treated as sensitivity evidence rather than as precise population parameters.
+
+To test whether the local thermal slopes themselves need to vary by realization, the shared-linear model was compared with a model containing realization-specific linear slopes while retaining realization intercepts. The added five slope degrees of freedom were not supported:
+
+$
+F_{5,24}=1.257,qquad p=0.314.
+$
+
+This does not prove exact equality of thermal slopes. It shows that the current audited local data do not require realization-specific slope variation to explain the dominant state structure, consistent with the interpretation that realization dependence is primarily a viscosity-scale displacement.
 
 ---
 
