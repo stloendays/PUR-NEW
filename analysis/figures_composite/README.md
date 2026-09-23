@@ -1,6 +1,6 @@
 # Composite figures
 
-The manuscript figures, and three supplementary figures. Each is
+The manuscript figures and several supplementary/diagnostic figure assets. Each is
 built by one script that assembles it on a page measured in millimetres,
 draws schematics rather than exporting them, reads its numbers from the
 repository tables, and writes **SVG, PDF and PNG** (600 dpi) in one pass.
@@ -12,6 +12,11 @@ for d in fig1 fig2 fig3 fig4 fig5 fig_arrhenius fig_column fig_structure; do
   (cd $d && D:/Tools/pur_bridge_env/Scripts/python.exe make_*.py)
 done
 D:/Tools/pur_bridge_env/Scripts/python.exe make_sheet.py
+
+The current SI also uses `analysis/figures/Supplementary_Figure_S1_PUR_chemistry.svg`
+as Supplementary Figure S1. `fig_arrhenius/Fig_arrhenius.svg` is Supplementary
+Figure S2. The column and constructed-structure figures remain repository
+diagnostics and are not cited as manuscript evidence.
 ```
 
 The structure render in `fig_structure/` is a separate, slower step that needs
@@ -26,9 +31,9 @@ the OVITO environment (see *The structure model* below).
 | 3 | `fig3/` | 183 x 68 | `results/local_leave_one_formulation_*`, `results/local_joint_formulation_temperature_extrapolation_summary.csv`, `p3C` |
 | 4 | `fig4/` | 183 x 88 | every run's `recommendation.json` under `results/agent_v4_voi/`, checked against `rule_layer_ablation.json` |
 | 5 | `fig5/` | 183 x 96 | `data/temperature_sweeps.csv`, `data/thermal_hold.csv`, `results/local_hold_dynamics.csv` |
-| supp. | `fig_arrhenius/` | 183 x 86 | all seven realizations, and `derived/thermal_model_robustness/` |
-| supp. | `fig_column/` | 120 x 152 | one property, seven realizations, stacked against each other |
-| supp. | `fig_structure/` | 183 x 88 | the generated hard-segment CIF |
+| SI S2 | `fig_arrhenius/` | 183 x 86 | all seven realizations, and `derived/thermal_model_robustness/` |
+| diagnostic | `fig_column/` | 120 x 152 | one property, seven realizations, stacked against each other |
+| diagnostic | `fig_structure/` | 183 x 88 | the generated hard-segment CIF; constructed model, not measured structure |
 
 Three panels were redrawn rather than carried over, because the earlier
 drawings implied relationships the data does not have:
@@ -142,6 +147,6 @@ once showed five dots because two values sat 0.12 % apart.
 
 `make_sheet.py` composes the finished figures into
 `Sheet_main_figures.{svg,pdf,png}` (Figures 1-5, in reading order) and
-`Sheet_supplementary_figures.{svg,pdf,png}` (the three supplementary figures, unnumbered: the SI owns S-numbers and already has an S1). Each figure is nested as
+`Sheet_supplementary_figures.{svg,pdf,png}` (a repository review sheet containing the three composite supplementary/diagnostic assets). The SI numbering is independent: the chemistry schematic is S1 and the Arrhenius/model-form figure is S2. Each figure is nested as
 an SVG, so a sheet is vector with live text; each is scaled independently. The
 per-figure files remain the submission artifacts.
