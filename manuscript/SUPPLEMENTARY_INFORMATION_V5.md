@@ -208,7 +208,7 @@ A stricter stress test withheld both formulation identity and the high-temperatu
 For each fold:
 
 1. one nominal formulation was removed completely from thermal-shape fitting;
-2. the shared thermal response was fitted only to the other formulations at temperatures $\leq110~^\circ\mathrm{C}$;
+2. the shared thermal response was fitted only to the other formulations at temperatures ≤110 °C;
 3. one measured 110 °C viscosity value from the unseen realization was supplied to determine the state offset;
 4. viscosity was predicted at 120 and 130 °C, neither of which contributed to fitting the shared shape.
 
