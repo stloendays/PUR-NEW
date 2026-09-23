@@ -1,0 +1,53 @@
+{
+  "analysis_id": "PUR_NEW_AGENT_V5_CONDITION_A_PUBLIC_SUMMARY",
+  "purpose": "Sanitized aggregate summary of the completed Agent V5 chemistry-domain matched-arm comparison under the thermal-hold drift decision.",
+  "source": {
+    "repository": "stloendays/PUR-NEW",
+    "branch": "agent-v5-implementation",
+    "raw_result_path": "results/agent_v5/comparison_n10",
+    "raw_cross_arm_summary_blob_sha": "4018508b9c7ecc85590afa52acc16fe0aad99b5f",
+    "raw_comparison_manifest_blob_sha": "95199ffba4857ac552b06d54133aab5225876591",
+    "protocol_version": "1.1.0",
+    "model": "gpt-5.6-luna",
+    "pre_enforcement_payload_sha256": "21c08bfe7dd0908de0d1fa33fab7c4a5334df391dce60b807c4331d6055cee9c"
+  },
+  "decision_condition": "thermal-hold drift",
+  "arms": {
+    "V5_NO_GATE": {
+      "declared": 10,
+      "attempted": 10,
+      "completed": 10,
+      "committed": 10,
+      "abstained": 0,
+      "invalid": 0,
+      "failed": 0,
+      "selected_measurement": {
+        "M-HOLD-120": 10
+      },
+      "unsupported_shortcuts": 0,
+      "chemistry_domain_violations": 0,
+      "mean_hypothesis_discrimination": 0.666667,
+      "cards_removed_by_gate": 0,
+      "selection_entropy_bits": 0.468996
+    },
+    "V5_FULL": {
+      "declared": 10,
+      "attempted": 10,
+      "completed": 10,
+      "committed": 10,
+      "abstained": 0,
+      "invalid": 0,
+      "failed": 0,
+      "selected_measurement": {
+        "M-HOLD-120": 10
+      },
+      "unsupported_shortcuts": 0,
+      "chemistry_domain_violations": 0,
+      "mean_hypothesis_discrimination": 0.666667,
+      "cards_removed_by_gate": 64,
+      "selection_entropy_bits": 0
+    }
+  },
+  "interpretation": "Under the drift-decision condition, hard chemistry-domain enforcement was non-binding for the selected measurement because both arms chose the direct thermal-hold assay in every run. The enforced arm removed unsupported anchor cards without improving the primary violation metrics, which were already zero in the advice-only arm.",
+  "claim_boundary": "This comparison shows when the gate did not change behavior. It does not establish that the gate is beneficial under every decision condition and is not pooled with the V4 confirmatory or ablation series."
+}
