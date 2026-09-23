@@ -21,6 +21,12 @@ The principal claims supported here are:
 9. the wet-lab result falsifies the reactive-core-only dilution explanation and retains resin-associated stabilization at the formulation level.
 
 ---
+
+## Statistical conventions
+
+For temperature-sweep analyses, one complete experimental realization is the material-level unit; temperatures measured within that realization are repeated observations on the same trajectory. Unless otherwise specified, mean ± values denote mean ± 1 standard deviation across realizations. Curve-level standard errors and confidence intervals are labelled explicitly. Realization-level cluster bootstraps resample complete realizations rather than individual temperature points. Computational run counts are reported separately from material replicates.
+
+
 # Supplementary Note 1 | Local formulation design and primary analysis population
 
 The original local formulation space consisted of five reactive polyurethane hot-melt adhesive formulations based on PPG2000, STEPANPOL PDP-70 and 4,4'-MDI. E1–E3 varied the reported NCO:OH ratio at a fixed 50/50 PPG2000/PDP-70 ratio. E4 and E5 retained NCO:OH = 1.80 while changing the polyol ratio. A later resin-modified formulation, F1, introduced AC1920 and TK100 while retaining the same PPG2000/PDP-70 nominal ratio.
@@ -37,6 +43,12 @@ The original local formulation space consisted of five reactive polyurethane hot
 | F1 | follow-up | 50/50 | 1.82 | 39.60 | 39.60 | 17.00 | 5.00 | 20.19 | source-reported parts |
 
 The NCO:OH equivalent ratio of F1 was 1.82.
+
+
+![Supplementary Figure S1. Local reactive-PUR chemistry and preparation context](../analysis/figures/Supplementary_Figure_S1_PUR_chemistry.svg)
+
+**Supplementary Figure S1. Local reactive-PUR chemistry, preparation sequence and perturbation context.** (A) PPG2000 and 4,4′-MDI are shown explicitly, whereas STEPANPOL PDP-70 is represented as a labelled polyester-polyol block because its exact supplier backbone is not public. The E1 +P condition contains 0.025 mmol H3PO4 delivered from a 0.1 mol L−1 standard solution. (B) Preparation sequence and the point at which H3PO4 was introduced during dehydration. (C) Urethane-linkage formation motif. (D) Schematic soft-/hard-segment context and the observed E1 +P compatibility with the local thermal-response shape. The network drawing is chemical context rather than an atomistically resolved or directly measured structure.
+
 
 ## Primary temperature-sweep analysis population
 
@@ -244,6 +256,12 @@ $$
 corresponding to a coefficient of variation of approximately 5.77%.
 
 The important result is not exact equality of slopes, but the comparatively narrow local spread of the temperature-response coordinate relative to the much larger changes observed in viscosity level and thermal-hold trajectory.
+
+
+![Supplementary Figure S2. Temperature-response fits and model-form sensitivity](../analysis/figures_composite/fig_arrhenius/Fig_arrhenius.svg)
+
+**Supplementary Figure S2. Local temperature-response fits and functional-form sensitivity.** (A) $ln\eta$ versus $1000/T$ for all seven complete local curves. The H3PO4-perturbed E1 curve is shown for context but is excluded from the six-realization primary mean. (B) Apparent $E_\eta$ for each curve with within-curve slope-fit standard errors; the band and horizontal line show the primary mean ± 1 s.d. and mean, respectively. (C) Held-temperature error for the shared linear, quadratic, cubic and VFT/shifted-Andrade representations, with AICc shown alongside. The quadratic model is retained as the minimal flexible canonical form because the cubic term adds negligible predictive benefit, while the VFT form serves as a nonlinear sensitivity check.
+
 
 ## Shared-slope and hierarchical sensitivity
 
