@@ -439,6 +439,18 @@ jobs:
               for table in list(doc.tables):
                   rebuild_table(doc, table, usable_width)
 
+              # LibreOffice renders Pandoc's bibliography-wide hyperlinks
+              # with an extraneous trailing glyph. Unwrap hyperlinks while
+              # preserving all child runs and their inline formatting.
+              for hyperlink in list(doc.element.body.iter(qn("w:hyperlink"))):
+                  parent = hyperlink.getparent()
+                  index = parent.index(hyperlink)
+                  for child in list(hyperlink):
+                      hyperlink.remove(child)
+                      parent.insert(index, child)
+                      index += 1
+                  parent.remove(hyperlink)
+
               # Keep each figure with its full scientific caption.
               for para in doc.paragraphs:
                   has_drawing = bool(para._p.xpath(".//w:drawing"))
