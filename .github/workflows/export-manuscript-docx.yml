@@ -234,6 +234,20 @@ jobs:
                   if pbdr is not None:
                       ppr.remove(pbdr)
 
+              # Keep each figure with its full scientific caption. Pandoc places
+              # the image in its own paragraph followed by the authored caption.
+              # Binding them prevents long captions from being split across pages.
+              paragraphs = doc.paragraphs
+              for idx, para in enumerate(paragraphs):
+                  has_drawing = bool(para._p.xpath(".//w:drawing"))
+                  if has_drawing:
+                      para.paragraph_format.keep_with_next = True
+                  txt = para.text.strip()
+                  if txt.startswith("Figure ") or txt.startswith("Supplementary Figure "):
+                      para.paragraph_format.keep_together = True
+                  if txt.startswith("Table ") or txt.startswith("Supplementary Table "):
+                      para.paragraph_format.keep_with_next = True
+
               doc.save(path)
           PY
 
