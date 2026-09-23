@@ -130,9 +130,9 @@ The quadratic term was strongly supported over the shared linear form ($F=40.78$
 
 As a nonlinear sensitivity analysis, viscosity was also represented as
 
-$
+$$
 \ln\eta_r(T)=a_r+\frac{B}{T-T_0}.
-$
+$$
 
 For any candidate $T_0$, the realization-specific intercepts and shared $B$ were solved by least squares. A bounded profile optimizer gave $T_0=262.284$ K and $B=456.90$ K. A seeded dual-annealing global search converged to $T_0=262.284$ K within 0.0003 K and the same fit error. The conclusion is therefore insensitive to optimizer initialization or local-minimum concerns.
 
