@@ -165,8 +165,13 @@ jobs:
       - name: Normalize final Word typography
         run: |
           python - <<'PY'
+          from copy import deepcopy
+          import re
+
           from docx import Document
-          from docx.shared import RGBColor
+          from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT, WD_TABLE_ALIGNMENT
+          from docx.enum.text import WD_ALIGN_PARAGRAPH
+          from docx.shared import Pt, RGBColor
           from docx.oxml import OxmlElement
           from docx.oxml.ns import qn
 
@@ -196,6 +201,180 @@ jobs:
                   if key in color.attrib:
                       del color.attrib[key]
 
+          def twips(emu):
+              return int(emu / 635)
+
+          def numeric_like(text):
+              text = text.strip().replace("×", "").replace("%", "").replace("−", "-")
+              return bool(re.fullmatch(r"[\s+\-0-9.,/=<>–—]+", text))
+
+          def table_width_props(table):
+              n = len(table.columns)
+              header = [c.text.strip() for c in table.rows[0].cells]
+
+              # Two main-text tables get deliberate widths.
+              if n == 5 and header and header[0] == "Decision condition":
+                  return [0.28, 0.09, 0.20, 0.22, 0.21]
+              if n == 4 and header and header[0] == "Scientific decision":
+                  return [0.18, 0.27, 0.25, 0.30]
+
+              scores = []
+              for j in range(n):
+                  values = [row.cells[j].text.strip() for row in table.rows]
+                  body = values[1:]
+                  nonempty = [x for x in body if x]
+                  numfrac = (
+                      sum(numeric_like(x) for x in nonempty) / max(1, len(nonempty))
+                  )
+                  h = len(values[0])
+                  mx = max([len(x) for x in body] or [0])
+                  if numfrac >= 0.7:
+                      score = max(7.0, min(13.0, 5.5 + 0.22 * h + 0.08 * mx))
+                  else:
+                      score = max(11.0, min(34.0, 7.0 + 0.35 * h + 0.42 * min(mx, 45)))
+                  scores.append(score)
+
+              props = [x / sum(scores) for x in scores]
+              floor = 0.09 if n <= 6 else 0.07
+              props = [max(floor, p) for p in props]
+              total = sum(props)
+              return [p / total for p in props]
+
+          def set_cell_width(cell, width_emu):
+              tcpr = cell._tc.get_or_add_tcPr()
+              tcw = tcpr.find(qn("w:tcW"))
+              if tcw is None:
+                  tcw = OxmlElement("w:tcW")
+                  tcpr.append(tcw)
+              tcw.set(qn("w:type"), "dxa")
+              tcw.set(qn("w:w"), str(twips(width_emu)))
+
+          def set_cell_margins(cell):
+              tcpr = cell._tc.get_or_add_tcPr()
+              mar = tcpr.find(qn("w:tcMar"))
+              if mar is None:
+                  mar = OxmlElement("w:tcMar")
+                  tcpr.append(mar)
+              for name, value in (("top", 45), ("start", 65), ("bottom", 45), ("end", 65)):
+                  el = mar.find(qn(f"w:{name}"))
+                  if el is None:
+                      el = OxmlElement(f"w:{name}")
+                      mar.append(el)
+                  el.set(qn("w:w"), str(value))
+                  el.set(qn("w:type"), "dxa")
+
+          def set_table_borders(table):
+              pr = table._tbl.tblPr
+              old = pr.find(qn("w:tblBorders"))
+              if old is not None:
+                  pr.remove(old)
+              borders = OxmlElement("w:tblBorders")
+              pr.append(borders)
+              for edge, size, colour in (
+                  ("top", "8", "777777"),
+                  ("bottom", "8", "777777"),
+                  ("insideH", "3", "B5B5B5"),
+              ):
+                  el = OxmlElement(f"w:{edge}")
+                  el.set(qn("w:val"), "single")
+                  el.set(qn("w:sz"), size)
+                  el.set(qn("w:color"), colour)
+                  borders.append(el)
+              for edge in ("left", "right", "insideV"):
+                  el = OxmlElement(f"w:{edge}")
+                  el.set(qn("w:val"), "nil")
+                  borders.append(el)
+
+          def rebuild_table(doc, old, usable_width):
+              rows = len(old.rows)
+              cols = len(old.columns)
+              props = table_width_props(old)
+
+              # Preserve the original cell content, including OMML math.
+              saved = []
+              for row in old.rows:
+                  saved.append(
+                      [
+                          [
+                              deepcopy(child)
+                              for child in cell._tc
+                              if child.tag != qn("w:tcPr")
+                          ]
+                          for cell in row.cells
+                      ]
+                  )
+
+              new = doc.add_table(rows=rows, cols=cols)
+              new.alignment = WD_TABLE_ALIGNMENT.CENTER
+              new.autofit = False
+
+              widths = [int(usable_width * p) for p in props]
+              widths[-1] = usable_width - sum(widths[:-1])
+
+              pr = new._tbl.tblPr
+              layout = pr.find(qn("w:tblLayout"))
+              if layout is None:
+                  layout = OxmlElement("w:tblLayout")
+                  pr.append(layout)
+              layout.set(qn("w:type"), "fixed")
+              tblw = pr.find(qn("w:tblW"))
+              tblw.set(qn("w:type"), "dxa")
+              tblw.set(qn("w:w"), str(twips(usable_width)))
+
+              grid = new._tbl.tblGrid
+              for child in list(grid):
+                  grid.remove(child)
+              for width in widths:
+                  gc = OxmlElement("w:gridCol")
+                  gc.set(qn("w:w"), str(twips(width)))
+                  grid.append(gc)
+
+              # Determine numeric/narrative body columns for alignment.
+              numfrac = []
+              for j in range(cols):
+                  vals = [row.cells[j].text.strip() for row in old.rows[1:]]
+                  nonempty = [x for x in vals if x]
+                  numfrac.append(
+                      sum(numeric_like(x) for x in nonempty) / max(1, len(nonempty))
+                  )
+
+              for ri, row in enumerate(new.rows):
+                  if ri == 0:
+                      trpr = row._tr.get_or_add_trPr()
+                      hdr = OxmlElement("w:tblHeader")
+                      hdr.set(qn("w:val"), "true")
+                      trpr.append(hdr)
+
+                  for ci, cell in enumerate(row.cells):
+                      for child in list(cell._tc):
+                          if child.tag != qn("w:tcPr"):
+                              cell._tc.remove(child)
+                      for child in saved[ri][ci]:
+                          cell._tc.append(child)
+
+                      set_cell_width(cell, widths[ci])
+                      set_cell_margins(cell)
+                      cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+
+                      for para in cell.paragraphs:
+                          para.paragraph_format.space_before = Pt(0)
+                          para.paragraph_format.space_after = Pt(0)
+                          para.paragraph_format.line_spacing = 1.0
+                          if ri == 0:
+                              para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                          elif ci == 0 or numfrac[ci] < 0.7:
+                              para.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                          else:
+                              para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                          for run in para.runs:
+                              run.font.size = Pt(8.5 if cols >= 6 else 9)
+                              if ri == 0:
+                                  run.bold = True
+
+              set_table_borders(new)
+              old._tbl.addprevious(new._tbl)
+              old._tbl.getparent().remove(old._tbl)
+
           for path in paths:
               doc = Document(path)
 
@@ -204,10 +383,13 @@ jobs:
                   if hasattr(style, "font"):
                       style.font.name = "Times New Roman"
                       try:
-                          style._element.rPr.rFonts.set(qn("w:ascii"), "Times New Roman")
-                          style._element.rPr.rFonts.set(qn("w:hAnsi"), "Times New Roman")
-                          style._element.rPr.rFonts.set(qn("w:eastAsia"), "Times New Roman")
-                          style._element.rPr.rFonts.set(qn("w:cs"), "Times New Roman")
+                          rpr = style._element.get_or_add_rPr()
+                          rfonts = rpr.find(qn("w:rFonts"))
+                          if rfonts is None:
+                              rfonts = OxmlElement("w:rFonts")
+                              rpr.insert(0, rfonts)
+                          for attr in ("ascii", "hAnsi", "eastAsia", "cs"):
+                              rfonts.set(qn(f"w:{attr}"), "Times New Roman")
                       except Exception:
                           pass
                       style.font.color.rgb = RGBColor(0, 0, 0)
@@ -216,8 +398,7 @@ jobs:
               for run_el in doc.element.body.iter(qn("w:r")):
                   set_run_font_xml(run_el)
 
-              # Remove decorative paragraph borders from both direct formatting
-              # and paragraph styles (notably the blue rule below Title).
+              # Remove decorative paragraph borders from direct formatting and styles.
               for p_el in doc.element.body.iter(qn("w:p")):
                   ppr = p_el.find(qn("w:pPr"))
                   if ppr is None:
@@ -234,11 +415,17 @@ jobs:
                   if pbdr is not None:
                       ppr.remove(pbdr)
 
-              # Keep each figure with its full scientific caption. Pandoc places
-              # the image in its own paragraph followed by the authored caption.
-              # Binding them prevents long captions from being split across pages.
-              paragraphs = doc.paragraphs
-              for idx, para in enumerate(paragraphs):
+              # Rebuild Pandoc tables at a deterministic page width. This avoids
+              # LibreOffice collapsing percentage-width Markdown tables into narrow columns.
+              section = doc.sections[0]
+              usable_width = int(
+                  section.page_width - section.left_margin - section.right_margin
+              )
+              for table in list(doc.tables):
+                  rebuild_table(doc, table, usable_width)
+
+              # Keep each figure with its full scientific caption.
+              for para in doc.paragraphs:
                   has_drawing = bool(para._p.xpath(".//w:drawing"))
                   if has_drawing:
                       para.paragraph_format.keep_with_next = True
