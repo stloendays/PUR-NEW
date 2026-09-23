@@ -441,7 +441,7 @@ Supported now:
 - within repeated E2 realizations, one 110 C anchor reduces pooled 120-130 C multiplicative error from about 1.824x for formulation identity alone to about 1.086x;
 - thermal-hold stability is strongly formulation dependent;
 - the validation formulation shows two low-drift 120 C repeats over the matched 15-60 min window;
-- the current scientific tool exposes these upstream material rules for new development; frozen Agent runs must be interpreted under the evidence version they actually received.
+- the current Agent uses the audited rheological regularities and chemistry-domain rules, while the later same-formulation state-anchor gain is retained as a materials analysis rather than an Agent input.
 
 Not claimed:
 
@@ -468,7 +468,7 @@ one-anchor state calibration         ~= 1.086x
 log-RMSE reduction                   ~= 86.2%
 ```
 
-It defines **evidence version 2** for future Agent development. Any new Agent series that exposes this statistic must use a fresh predeclared denominator and must not be appended to the frozen evidence-version-1 series.
+This later bridge result is retained as **materials/statistical evidence only**. It is deliberately excluded from the Agent's model-visible scientific-tool payload, prompts and ranking inputs. It strengthens the interpretation of state calibration without being treated as a decision-time Agent input.
 
 The scientific policy remains:
 
