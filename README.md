@@ -143,6 +143,18 @@ Thus:
 
 > **A single state-specific viscosity anchor can locate a previously held-out formulation on the shared local thermal-response shape with roughly 6-10% pooled multiplicative error.**
 
+A same-formulation holdout now isolates the value of the state measurement itself. E2 is the only audited formulation with multiple realizations, so each E2 realization was held out while the remaining E2 data preserved formulation identity in training. Using the same quadratic thermal basis:
+
+```text
+110 C anchor -> predict 120/130 C
+formulation-only multiplicative RMSE   ~= 1.824x
+one-anchor state calibration           ~= 1.086x
+log-RMSE reduction                     ~= 86.2%
+cluster-bootstrap 95% interval         ~= 75.0-97.3%
+```
+
+This directly quantifies why an anchor measurement is useful: formulation identity does not locate the realized viscosity scale, whereas one in-domain measurement supplies that missing state information.
+
 This is a local chemistry-family interpolation result, not a claim of universal extrapolation across PUR chemistry.
 
 ---
@@ -380,6 +392,15 @@ python scripts/analysis_audit_v1.py \
   --output-dir derived/analysis_audit_v1
 ```
 
+State-anchor bridge analysis:
+
+```bash
+python scripts/state_anchor_bridge_analysis.py \
+  --output-dir derived/state_anchor_bridge
+```
+
+This analysis reproduces the same-formulation E2 comparison used to quantify the incremental value of one state anchor.
+
 Repository CI runs the local audit automatically.
 
 ---
@@ -417,6 +438,7 @@ Supported now:
 - realization state materially changes the measured viscosity scale;
 - a shared local thermal-response shape plus a realization-specific scale captures the audited local data far better than formulation identity alone;
 - one anchor can calibrate a held-out local formulation state to roughly 6-10% pooled multiplicative error;
+- within repeated E2 realizations, one 110 C anchor reduces pooled 120-130 C multiplicative error from about 1.824x for formulation identity alone to about 1.086x;
 - thermal-hold stability is strongly formulation dependent;
 - the validation formulation shows two low-drift 120 C repeats over the matched 15-60 min window;
 - the current Agent can use these upstream material rules through an outcome-blind scientific tool.
@@ -428,6 +450,36 @@ Not claimed:
 - a unique molecular mechanism for AC1920/TK100 stabilization;
 - a universal optimal resin percentage;
 - that current V3 code is necessarily the exact historical runtime that selected the validation formulation.
+
+---
+
+### Prospective Agent V5 chemistry-domain gate
+
+A pre-registered Agent V5 comparison protocol is frozen at `configs/agent_v5_comparison_protocol.json` version 1.1. It is currently a **pre-implementation protocol, not a reported result series**.
+
+The new state-anchor bridge result and the chemistry-domain analysis have complementary roles:
+
+```text
+measured value of state information
+    local E2: formulation-only 1.824x -> one-anchor 1.086x
+                    |
+                    v
+M-ANCHOR is scientifically useful when shared-shape support is validated
+                    |
+chemistry-domain boundary
+                    |
+        +-----------+-----------+
+        |                       |
+local supported chemistry   chemistry-shifted candidate
+        |                       |
+M-ANCHOR may be used        direct M-SWEEP first
+                                |
+                        anchor only after verification
+```
+
+The V5 primary comparison will expose the **same applicability facts** to both `V5_NO_GATE` and `V5_FULL`. The intended difference is enforcement only: the no-gate arm receives the chemistry-domain audit as advice, whereas the full arm converts the same audit into hard measurement admissibility before VOI and freeze. This preserves information parity while testing whether an experimentally discovered material boundary is more useful as executable scientific policy than as prose-only context.
+
+See `docs/STATE_ANCHOR_TO_AGENT_BRIDGE.md`.
 
 ---
 
