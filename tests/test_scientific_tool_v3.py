@@ -21,7 +21,7 @@ def test_v3_planner_action_uses_enriched_scientific_tool():
     assert trace[0]["status"] == "ok"
     result = trace[0]["result"]
     assert result["validation_formulation_visible"] is False
-    assert result["tool_version"] == "3.5-verified-phosphoric-perturbation"
+    assert result["tool_version"] == "3.6-state-anchor-bridge"
     assert result["provenance_audit"]["excluded_from_primary_state_model"] == ["E1__+P__day1_0"]
 
     patterns = result["discovered_patterns"]
@@ -32,6 +32,15 @@ def test_v3_planner_action_uses_enriched_scientific_tool():
 
     lo, hi = patterns["one_point_state_calibration"]["pooled_multiplicative_error_factor_range"]
     assert 1.0 < lo <= hi < 1.2
+
+    bridge = patterns["same_formulation_anchor_information_gain"]
+    assert bridge["n_held_realizations"] == 4
+    assert bridge["anchor_temperature_c"] == 110.0
+    assert bridge["target_temperatures_c"] == [120.0, 130.0]
+    assert bridge["formulation_only_multiplicative_error"] > 1.8
+    assert bridge["one_anchor_multiplicative_error"] < 1.1
+    assert bridge["log_rmse_reduction_fraction"] > 0.85
+
     assert "temporal_stability_coordinate" in patterns
 
     perturb = patterns["chemical_perturbation_check"]
