@@ -223,17 +223,7 @@ For each fold:
 | held formulation | E2 | 8 | 1.080 | 1.64% | 4.56% |
 | held formulation | E3 | 2 | 1.110 | 10.58% | 10.58% |
 
-A 10,000-replicate bootstrap that resampled complete held realizations produced:
-
-$$
-\mathrm{multiplicative\ RMSE}_{50\%}=1.087,
-$$
-
-with a 95% interval of
-
-$$
-1.043\text{--}1.126\times .
-$$
+A 10,000-replicate bootstrap that resampled complete held realizations gave a median multiplicative RMSE of 1.087, with a 95% interval of 1.043–1.126×.
 
 The maximum individual multiplicative error in this test was approximately 1.189×.
 
@@ -572,8 +562,8 @@ Nine confirmatory runs selected the dual-axis experiment family represented by t
 
 For the dual-axis validation result:
 
-- observed mean absolute $SI_{15\rightarrow60}=1.60\%$;
-- H-CORE dilution prediction $=7.79\%$;
+- observed mean absolute $SI_{15\rightarrow60}$: 1.60%;
+- H-CORE dilution prediction: 7.79%;
 - H-CORE is falsified under the frozen criterion;
 - H-RESIN survives;
 - H-DUAL remains entangled with H-RESIN for a dual-axis experiment and requires an acrylic-only measurement for direct separation.
