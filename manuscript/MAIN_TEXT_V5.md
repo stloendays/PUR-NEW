@@ -130,7 +130,7 @@ This transfer is intentionally local: the predictions extend only 10-20 °C beyo
 
 One-point calibration locates a realization on the thermal curve; it does not describe how viscosity evolves during thermal residence. We therefore summarized the local temperature response by regressing $\ln \eta$ against $1/T$.  The apparent temperature-response descriptor $E_\eta$ had a mean of approximately 42.05 kJ mol$^{-1}$, a standard deviation of 2.43 kJ mol$^{-1}$ and a coefficient of variation of 5.77% across the chemistry-audited sweeps. A shared-slope model with realization-specific intercepts recovered $E_\eta=42.05$ kJ mol$^{-1}$ with a 95% confidence interval of 40.21–43.90 kJ mol$^{-1}$. Allowing realization-specific linear thermal slopes did not improve the audited local model ($F_{5,24}=1.26$, $p=0.314$), providing a direct sensitivity check that the dominant realization effect lies in viscosity scale rather than requiring different local thermal slopes. This quantity is used only as a rheological descriptor and is not interpreted as a chemical reaction activation energy.
 
-Thermal-hold behavior was far more formulation sensitive. E1 increased from 708.7 mPa·s at 15 min to 776.1 mPa·s at 60 min and 828.1 mPa·s at 90 min, whereas E5 increased from 2210 to 3349 and 4267 mPa·s over the same times. The directly observed 15–60 min viscosity increases were 9.51% for E1 and 51.54% for E5. A descriptive model,
+Thermal-hold behavior was far more sensitive to formulation. E1 increased from 708.7 mPa·s at 15 min to 776.1 mPa·s at 60 min and 828.1 mPa·s at 90 min, whereas E5 increased from 2210 to 3349 and 4267 mPa·s over the same interval. The directly observed 15–60 min increases were 9.51% for E1 and 51.54% for E5. A descriptive model,
 
 $$
 \ln \eta(t)=\ln \eta_0+k_{\mathrm{drift}}t,
@@ -138,7 +138,7 @@ $$
 
 gave $k_{\mathrm{drift}}\approx0.125~\mathrm{h}^{-1}$ for E1 and $0.537~\mathrm{h}^{-1}$ for E5, a 4.29-fold difference.
 
-Because composition and stoichiometry change together between E1 and E5, this contrast is interpreted at the formulation level. Temperature-sweep and thermal-hold measurements are therefore treated as complementary rheological coordinates rather than as a matched covariance design. Across the measured formulation space, temporal viscosity evolution spans a much wider contrast than the local temperature-response descriptor. We therefore represent the measured rheological state with three coordinates,
+Because composition and stoichiometry change together between E1 and E5, this contrast is interpreted at the formulation level rather than assigned to a single molecular cause. Temperature-sweep and thermal-hold measurements are therefore treated as complementary rheological coordinates, not as a matched covariance design. Across the measured formulation space, temporal viscosity evolution spans a much wider range than the local temperature-response descriptor. We represent the measured rheological state with three coordinates,
 
 $$
 \mathbf{R}_{\mathrm{rheo}}=
@@ -151,7 +151,7 @@ The concentrated local temperature response is chemistry bounded rather than uni
 
 To test the boundary directly, we treated each complete external formulation curve as one sample and predicted its apparent $E_\eta$ using grouped family holdouts rather than splitting temperature points from the same curve. A ridge model using prepolymer molecular-weight, polyol polarity, isocyanate structural, NCO-content and polyol-$T_g$ descriptors transferred well when an entire isocyanate family was withheld ($R^2=0.910$, RMSE = 3.12 kJ mol$^{-1}$), but failed when an entire polyol family was withheld ($R^2=-1.456$, RMSE = 16.33 kJ mol$^{-1}$). A minimal $T_g$ + NCO-content model showed the same asymmetry ($R^2=0.851$ versus 0.033 for isocyanate- and polyol-family holdouts, respectively).
 
-The result changes the interpretation of the local master response. Temperature-response transfer is not simply a question of curve linearity: it depends strongly on whether the new chemistry remains inside a represented soft-segment family. Polyol-family change is therefore an empirical boundary condition for transferring the shared thermal-response prior. The associated descriptor correlations are interpreted as family-level structure rather than as independent molecular mechanisms because several polyol descriptors co-vary with chemistry class.
+These grouped holdouts change how the local master response should be interpreted. Transferability is not simply a consequence of smooth or nearly linear temperature dependence; it depends strongly on whether the new chemistry remains within a represented soft-segment family. A change in polyol family is therefore an empirical boundary condition for reusing the shared thermal-response prior. The descriptor associations are treated as family-level structure rather than independent molecular mechanisms because several polyol features co-vary with chemistry class.
 
 ### 2.5 External evidence converts the failure mode into testable intervention hypotheses
 
@@ -249,21 +249,19 @@ The wet-lab result closes the loop: a mean absolute drift of 1.60% lies far belo
 
 ### 3.1 Local formulation design
 
-The original formulation space contained five reactive PUR compositions based on PPG2000, STEPANPOL PDP-70 and 4,4'-MDI. E1–E3 used a 50/50 PPG2000/PDP-70 polyol ratio with reported NCO:OH values of 1.70, 1.80 and 1.90. E4 and E5 retained NCO:OH = 1.80 while using PPG2000/PDP-70 ratios of 60/40 and 40/60. Formulation records are stored in the versioned repository data tables.
+The local formulation space contained five reactive PUR compositions based on PPG2000, STEPANPOL PDP-70 and 4,4'-MDI. E1–E3 used a 50/50 PPG2000/PDP-70 polyol ratio with reported NCO:OH values of 1.70, 1.80 and 1.90, whereas E4 and E5 retained NCO:OH = 1.80 and used PPG2000/PDP-70 ratios of 60/40 and 40/60. The resin-modified validation formulation contained PPG2000, PDP-70, AC1920, TK100 and MDI on a source-reported parts basis and had an NCO:OH equivalent ratio of 1.82.
 
-The validation formulation contained PPG2000, PDP-70, AC1920, TK100 and MDI on a source-reported parts basis. The NCO:OH equivalent ratio of the validation formulation was 1.82.
-
-For sample preparation, the polyol components were charged first, stirred and vacuum-dehydrated at approximately 130 °C for 1 h. 4,4'-MDI was then added, followed by stirring under vacuum at approximately 120 °C for about 1 h 20 min.
+For sample preparation, the polyol components were charged first, stirred and vacuum-dehydrated at approximately 130 °C for 1 h. 4,4'-MDI was then added, and the mixture was stirred under vacuum at approximately 120 °C for a further 1 h 20 min.
 
 ### 3.2 Temperature-sweep data and chemistry audit
 
-Temperature-sweep viscosity was measured from 80 to 130 °C in 10 °C increments using an RV-SSR-H high-temperature rotational viscometer (Shanghai Fangrui Instrument Co., Ltd.) equipped with an NKY-25 viscosity-heater unit and a No. 27 spindle. The instrument output was recorded in mPa·s. Rotation speed was not fixed; it was adjusted to maintain the instrument torque at approximately 40–60%. At each set temperature, the sample was equilibrated for 15 min before the viscosity value displayed by the instrument was recorded.
+Temperature-sweep viscosity was measured from 80 to 130 °C in 10 °C increments using an RV-SSR-H high-temperature rotational viscometer (Shanghai Fangrui Instrument Co., Ltd.) equipped with an NKY-25 heater unit and a No. 27 spindle. Viscosity was recorded in mPa·s. Rotation speed was adjusted as needed to maintain approximately 40–60% instrument torque, and each sample was equilibrated for 15 min at the target temperature before recording the displayed viscosity.
 
-Viscosity measurements were performed on prepared sample material rather than by an in-reactor sensor. The repeatability protocol used the same mother sample across the temperatures within a sweep, so the temperature points do not represent independent resyntheses.
+Measurements were made on prepared sample material rather than with an in-reactor sensor. Within a given sweep, the same mother sample was measured across temperatures; the individual temperature points therefore do not represent independent resyntheses.
 
-Run identifiers were retained for provenance. Project metadata confirms that R01, R02 and R03 are realization labels associated with the same operator rather than different operator identities. Here, a realization denotes a complete measured temperature–viscosity curve/run. Distinct run labels are therefore treated as rheological measurement realizations; the available source record does not establish that they are independent synthesis batches. Day-1 retests are retained as separately observed rheological states without assigning an unverified batch relationship.
+R01, R02 and R03 are anonymized realization codes retained solely to distinguish observed rheological runs. They are treated as opaque identifiers and do not encode operator identity. Here, a realization denotes one observed temperature-viscosity curve arising from a nominal formulation under its particular preparation, storage and measurement history; distinct codes are not assumed to represent independent synthesis batches. Day-1 retests are retained as separately observed rheological states without assigning an unverified batch relationship.
 
-One E1 temperature curve was prepared with 0.025 mmol H3PO4 delivered as a 0.1 mol L−1 standard solution (0.25 mL) during the dehydration stage. Because this intentionally changes the chemical condition relative to nominal E1, the curve was excluded from the chemistry-audited primary same-composition state analysis and used as a separate perturbation check. The primary temperature-sweep dataset therefore contained 36 observations from six complete realizations of three nominal formulations.
+One E1 temperature curve was prepared with 0.025 mmol H3PO4 delivered as a 0.1 mol L−1 standard solution (0.25 mL) during dehydration. Because this deliberately changed the chemical condition relative to nominal E1, the curve was excluded from the chemistry-audited same-composition analysis and evaluated separately as a perturbation check. The primary temperature-sweep dataset therefore comprised 36 observations from six complete realizations of three nominal formulations.
 
 ### 3.3 State-conditioned temperature-response models
 
@@ -337,7 +335,7 @@ The fraction of between-realization variance explained by the first singular mod
 
 ### 3.5 One-point state calibration
 
-Transfer across nominal formulations was evaluated by leave-one-formulation-out analysis. For each fold, all realizations of one formulation were excluded from fitting the shared thermal shape. The remaining formulations were used to estimate $g(T)$. One viscosity value from each held realization at anchor temperature $T_0$ was then used to estimate
+Transfer across nominal formulations was evaluated using leave-one-formulation-out analysis. In each fold, all realizations of one formulation were excluded while the remaining formulations were used to estimate the shared thermal shape $g(T)$. A single viscosity value from each held realization at anchor temperature $T_0$ was then used to estimate
 
 $$
 \hat a_{fr}=\ln \eta_{fr}(T_0)-\hat g(T_0).
@@ -357,11 +355,11 @@ $$
 
 The remaining temperatures were reconstructed from this calibrated response and performance was summarized in multiplicative-error space.
 
-A stricter formulation-and-temperature holdout removed one formulation entirely and fitted the shared thermal response only on the other formulations at temperatures no higher than 110 °C. A single 110 °C anchor was provided for each unseen realization, and predictions were generated at 120 and 130 °C. Pooled log-RMSE, multiplicative RMSE, absolute percentage error and a 10,000-replicate realization-level cluster bootstrap were calculated.
+A stricter formulation-and-temperature holdout removed one formulation entirely and fitted the shared thermal response only to the remaining formulations at temperatures no higher than 110 °C. Each unseen realization was then located using a single 110 °C anchor and predicted at 120 and 130 °C. Performance was summarized by pooled log-RMSE, multiplicative RMSE, absolute percentage error and a 10,000-replicate realization-level cluster bootstrap.
 
 ### 3.6 Thermal-hold measurements
 
-Original E1 and E5 samples were held at 120 °C and measured at 15, 30, 60 and 90 min. The validation formulation was measured in two repeat runs at 15, 30, 45 and 60 min. For the thermal-hold protocol, $t=0$ was defined as the time at which the sample reached 120 °C. The material was stirred during the hold and kept sealed under vacuum. Viscosity was determined by sampling the prepared material for viscometer measurement rather than by continuous in-situ sensing.
+E1 and E5 were held at 120 °C and measured at 15, 30, 60 and 90 min. The validation formulation was measured in two repeat runs at 15, 30, 45 and 60 min. For all thermal-hold measurements, $t=0$ was defined as the time at which the sample reached 120 °C. The material was stirred during the hold and kept sealed under vacuum. Viscosity was measured on sampled material with the viscometer rather than by continuous in-situ sensing.
 
 The primary matched stability comparison used the common 15–60 min interval,
 
@@ -393,7 +391,7 @@ using $R=8.314462618~\mathrm{J\,mol^{-1}\,K^{-1}}$. $E_\eta$ is reported only as
 
 ### 3.8 External PUR evidence base and chemistry-family transfer analysis
 
-The external evidence layer contains literature, patent, material, formulation, measurement and dense viscosity-curve records with explicit provenance. The dense prepolymer set comprises 39 temperature-viscosity curves and 4559 individual measurements from the public Pugar dataset [@Pugar2025PURViscosityML].
+The external evidence layer contains literature, patent, material, formulation, measurement and dense viscosity-curve records with explicit provenance. The dense prepolymer subset comprises 39 temperature-viscosity curves and 4559 individual measurements from the public Pugar dataset [@Pugar2025PURViscosityML].
 
 For the chemistry-family transfer analysis, each complete formulation curve contributed one target: the apparent rheological $E_\eta$ obtained from the slope of $\ln\eta$ versus $1/T$. Individual temperature points from the same formulation were never split across training and test sets. Curves with $R^2\geq0.98$ were used for the primary family-transfer analysis; the two lower-fit curves were retained as sensitivity-only records.
 
@@ -403,31 +401,31 @@ External formulation records containing acrylic-like or tackifier-like component
 
 ### 3.9 Scientific decision architecture
 
-The computational decision layer operated downstream of the rheological analysis. Its decision object was an experiment card defined as one formulation candidate paired with one measurement plan. Crossing the fixed 73-node formulation lattice with four measurement plans produced 292 cards. The held-out validation formulation and its measured outcome were excluded from the decision-time payload. We refer to this experiment-card architecture as **Rule-Grounded Experiment Selection (RGES)**. Its chemistry-applicability extension, which adds deterministic measurement admissibility without changing the five model stages, is termed **Chemistry-Bounded Experiment Selection (CBES)**.
+The computational decision layer operated downstream of the rheological analysis. Each decision object was an experiment card consisting of one formulation candidate paired with one measurement plan. Crossing the fixed 73-node formulation lattice with four measurement plans produced 292 cards, while the held-out validation formulation and its measured outcome were excluded from the decision-time payload. We refer to this experiment-card architecture as **Rule-Grounded Experiment Selection (RGES)**. Its chemistry-applicability extension, which adds deterministic measurement admissibility without changing the five model stages, is termed **Chemistry-Bounded Experiment Selection (CBES)**.
 
 Three formulation-level hypotheses defined the unresolved scientific question. H-CORE predicts that matched-window viscosity drift scales with the reactive mass fraction of the E1 reference; H-RESIN predicts suppression beyond proportional dilution; and H-DUAL predicts that low drift requires the tackifier-containing dual-axis intervention and is therefore separable from H-RESIN only with an acrylic-only composition. The measurement catalog contained a matched-window 120 °C thermal hold, a repeatability assessment, a one-point anchor and a temperature sweep.
 
 Each card received a deterministic value-of-information score combining hypothesis discrimination, uncertainty reduction, decision relevance, measurement interpretability, extrapolation risk and process-state risk, with base weights of 0.30, 0.20, 0.25, 0.10, 0.10 and 0.05, respectively. The score is a decision heuristic rather than a calibrated posterior quantity. Decision stability was assessed by independently scaling each weight from 0.5× to 1.5× while holding all other inputs fixed.
 
-The language-model workflow retained the same five decision stages used in the predecessor architecture: Planner, Proposer, Skeptic, Robustness Adjudicator and Judge, with deterministic tools supplying the candidate inventory, evidence summaries and rule calculations. The final recommendation was frozen before the held-out result was exposed.
+The language-model workflow comprised five decision stages—Planner, Proposer, Skeptic, Robustness Adjudicator and Judge—while deterministic tools supplied the candidate inventory, evidence summaries and rule calculations. The final recommendation was frozen before the held-out result was exposed.
 
 The 292-card confirmatory and ablation series are retained exactly as frozen. An additional deterministic chemistry-domain layer evaluates measurement applicability rather than formulation admissibility. Candidates within the audited unmodified local family may use one-point state calibration as an interpolation prior, whereas resin-modified or otherwise chemistry-shifted candidates require direct temperature-response verification before that shortcut is trusted. Measurements that directly observe thermal-hold drift, realization spread or temperature response remain admissible because they do not require the transferred shared-shape assumption.
 
 ### 3.10 Confirmatory series and controlled ablations
 
-The rule-complete confirmatory series comprised 10 declared runs under one fixed decision contract. Model endpoint, prompts, evidence profile, hypothesis registry, measurement catalog, formulation lattice, experiment-card inventory and deterministic scoring implementation were held fixed across runs. Attempted, completed, abstained and committed outputs were tracked separately.
+The rule-complete confirmatory series comprised 10 declared runs under a single fixed decision contract. Model endpoint, prompts, evidence profile, hypothesis registry, measurement catalog, formulation lattice, experiment-card inventory and deterministic scoring implementation were held constant across runs. Attempted, completed, abstained and committed outputs were tracked separately.
 
 Two controlled ablations isolated the effect of the deterministic rule layer. In the score-withheld arm ($N=5$), the model, prompts, evidence contract, hypothesis registry, measurement catalog and all 292 cards were unchanged, while the deterministic score, component vector, ranking, stability analysis and tool-generated acceptance criteria were removed. In the rule-order arm ($N=10$), the same rule components were retained but their lexicographic priority changed from coverage → discrimination → relevance → burden to burden → coverage → discrimination → relevance.
 
 Two-sided 95% Wilson score intervals were used for reported run proportions. The computational arms are interpreted as controlled decision-architecture experiments rather than as independent material replicates.
 
-CBES was evaluated under two separately registered scientific decision conditions, each using matched advice-only and enforced arms. The thermal-hold condition retained the drift hypotheses and measurement catalog used by RGES. A second processing-window condition asked whether a modified candidate lay inside the 120–130 °C viscosity window; it replaced the drift hypotheses with formulation-level viscosity hypotheses, re-declared measurement relevance for the level question and included a predeclared experimental-effort term because one anchor and a six-point sweep answer that question at substantially different cost. The chemistry-applicability rule, candidate lattice, prompts, model endpoint and arm definitions were otherwise held fixed. Both arms received the same model-visible applicability audit; enforcement changed only experiment-card admissibility. The two scientific conditions were analyzed separately and were not pooled with each other or with the RGES confirmatory and ablation series.
+CBES was evaluated under two separately registered scientific decision conditions, each with matched advice-only and enforced arms. The thermal-hold condition retained the drift hypotheses and measurement catalog used by RGES. The processing-window condition instead asked whether a modified candidate lay within the 120–130 °C viscosity window; it replaced the drift hypotheses with formulation-level viscosity hypotheses, redefined measurement relevance for the level question and included a predeclared experimental-effort term because a one-point anchor and a six-point sweep differ substantially in measurement burden. The chemistry-applicability rule, candidate lattice, prompts, model endpoint and arm definitions were otherwise held fixed. Both arms received the same model-visible applicability audit, and enforcement changed only experiment-card admissibility. The two scientific conditions were analyzed separately and were not pooled with one another or with the RGES confirmatory and ablation series.
 
 ### 3.11 Post-freeze adjudication and statistical scope
 
-Post-freeze adjudication was separated from decision generation. For each committed run, the selected experiment, rationale and decision criteria were serialized before the held-out formulation and wet-lab measurements were loaded. The adjudication step then compared the observed mean absolute 15–60 min drift with the H-CORE proportional-dilution prediction derived from the source-reported reactive mass fraction.
+Post-freeze adjudication was kept separate from decision generation. For each committed run, the selected experiment, rationale and decision criteria were serialized before the held-out formulation and wet-lab measurements were loaded. Adjudication then compared the observed mean absolute 15–60 min drift with the H-CORE proportional-dilution prediction derived from the source-reported reactive mass fraction.
 
-Material-level claims are based on the five-formulation local design, six chemistry-audited complete temperature-sweep realizations and the matched thermal-hold validation measurements. Decision-series proportions quantify reproducibility under fixed computational contracts rather than frequencies in a material population. Full run-level records, manifests, hashes, stability sweeps and adjudication artifacts are reported in the Supplementary Information and versioned repository.
+Material-level claims are based on the five-formulation local design, six chemistry-audited complete temperature-sweep realizations and the matched thermal-hold validation measurements. Decision-series proportions describe reproducibility under fixed computational contracts rather than frequencies in a material population. Full run-level records, manifests, hashes, stability sweeps and adjudication artifacts are provided in the Supplementary Information and versioned repository.
 ---
 
 ## 4. Conclusions
