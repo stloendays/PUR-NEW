@@ -441,7 +441,7 @@ Supported now:
 - within repeated E2 realizations, one 110 C anchor reduces pooled 120-130 C multiplicative error from about 1.824x for formulation identity alone to about 1.086x;
 - thermal-hold stability is strongly formulation dependent;
 - the validation formulation shows two low-drift 120 C repeats over the matched 15-60 min window;
-- the current Agent can use these upstream material rules through an outcome-blind scientific tool.
+- the current scientific tool exposes these upstream material rules for new development; frozen Agent runs must be interpreted under the evidence version they actually received.
 
 Not claimed:
 
@@ -453,33 +453,38 @@ Not claimed:
 
 ---
 
-### Prospective Agent V5 chemistry-domain gate
+### Agent V5 evidence-version boundary
 
-A pre-registered Agent V5 comparison protocol is frozen at `configs/agent_v5_comparison_protocol.json` version 1.1. It is currently a **pre-implementation protocol, not a reported result series**.
+A pre-registered Agent V5 comparison protocol is frozen at `configs/agent_v5_comparison_protocol.json` version 1.1. A completed Condition-A N=10-per-arm series exists on the `agent-v5-implementation` development branch and must be interpreted under its original evidence version.
 
-The new state-anchor bridge result and the chemistry-domain analysis have complementary roles:
+The frozen Condition-A runs used chemistry-audited tool version `3.5-verified-phosphoric-perturbation`; they **did not** receive the later state-anchor bridge statistic. In that frozen comparison, both arms committed 10/10 runs, both had 0/10 unsupported shortcuts and 0/10 chemistry-domain violations, and both selected `M-HOLD-120` in 10/10 runs. The hard gate therefore produced no measurable primary-metric benefit under the drift-decision condition.
+
+The later state-anchor bridge result remains useful materials evidence:
 
 ```text
-measured value of state information
-    local E2: formulation-only 1.824x -> one-anchor 1.086x
-                    |
-                    v
-M-ANCHOR is scientifically useful when shared-shape support is validated
-                    |
-chemistry-domain boundary
-                    |
-        +-----------+-----------+
-        |                       |
-local supported chemistry   chemistry-shifted candidate
-        |                       |
-M-ANCHOR may be used        direct M-SWEEP first
-                                |
-                        anchor only after verification
+local E2, 110 C anchor -> predict 120/130 C
+formulation-only multiplicative RMSE ~= 1.824x
+one-anchor state calibration         ~= 1.086x
+log-RMSE reduction                   ~= 86.2%
 ```
 
-The V5 primary comparison will expose the **same applicability facts** to both `V5_NO_GATE` and `V5_FULL`. The intended difference is enforcement only: the no-gate arm receives the chemistry-domain audit as advice, whereas the full arm converts the same audit into hard measurement admissibility before VOI and freeze. This preserves information parity while testing whether an experimentally discovered material boundary is more useful as executable scientific policy than as prose-only context.
+It defines **evidence version 2** for future Agent development. Any new Agent series that exposes this statistic must use a fresh predeclared denominator and must not be appended to the frozen evidence-version-1 series.
 
-See `docs/STATE_ANCHOR_TO_AGENT_BRIDGE.md`.
+The scientific policy remains:
+
+```text
+M-ANCHOR has measured value when the shared thermal shape is valid
+                     |
+              chemistry boundary
+                     |
+       +-------------+-------------+
+       |                           |
+validated local support       chemistry shifted
+       |                           |
+anchor may be admissible      direct M-SWEEP first
+```
+
+See `docs/STATE_ANCHOR_TO_AGENT_BRIDGE.md` and `docs/AGENT_V5_EVIDENCE_VERSION_BOUNDARY.md`.
 
 ---
 
