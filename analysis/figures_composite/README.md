@@ -71,3 +71,31 @@ translating along N-H (buries the units in one another), counting the H...O
 bond itself as a steric clash (fights its own objective), and accepting a
 solution without re-checking the N...O distance it was optimizing -- that last
 one once wrote a "hydrogen bond" of 5.63 A with every other check passing.
+
+## Legends, the overlap audit, and the sheet (2026-09-23)
+
+`layout.py` carries two things every figure here now uses.
+
+* **`legend(...)`** — the house legend frame. Framed legends are used where a
+  panel carries more than four or five series: seven Arrhenius lines and four
+  hold trajectories both read better from a legend than from end labels.
+* **`audit(fig)`** — measures every text and legend bounding box after a draw
+  and reports real intersections. It runs before every `save`. It caught two
+  collisions that survived a visual check: the run description under the
+  Arrhenius legend, and the two F1 trajectory labels, which finish 3 % apart
+  and landed on top of each other.
+
+`make_sheet.py` composes the finished figures into `Sheet_all_figures.{svg,pdf,png}`.
+Each figure is nested as an SVG, so the sheet is vector with live text rather
+than a screenshot, and each is scaled independently — on a sheet a figure does
+not owe anything submission size. The per-figure PDFs and SVGs remain the
+submission artifacts.
+
+Every figure ships svg, pdf and png. Rebuild everything with:
+
+```
+for d in fig1 fig_arrhenius fig_column fig_structure fig_hold; do
+  (cd $d && D:/Tools/pur_bridge_env/Scripts/python.exe make_*.py)
+done
+D:/Tools/pur_bridge_env/Scripts/python.exe make_sheet.py
+```

@@ -18,6 +18,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import chem as C
+import layout as L
 from style import DARK_B, GRID, INK, MID, PALE_B, RED, Page, crop_rgba
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -146,6 +147,7 @@ def main():
             ha="left", va="bottom", family="monospace")
     pg.letter("c", 77, 48)
 
+    L.audit(pg.fig)
     pg.save(HERE, "Fig_structure")
 
 

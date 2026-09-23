@@ -17,6 +17,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import figdata as D
+import layout as L
 from style import DARK_B, DARK_G, FE, GRID, INK, MID, OS, PALE_B, RED, Page
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -38,17 +39,21 @@ def main():
     # ---- a  normalized trajectories --------------------------------------
     ax = pg.ax(13, 11, 70, 45)
     ax.axvspan(t0, t1, color=PALE_B, alpha=.38, lw=0, zorder=0)
-    ax.text((t0 + t1) / 2.0, 1.955, "matched window", fontsize=5.2, color=DARK_B,
-            ha="center", va="top")
+    ax.text((t0 + t1) / 2.0, 0.945, "matched window", fontsize=5.2, color=DARK_B,
+            ha="center", va="bottom")
     ax.axhline(1.0, color=GRID, lw=0.6, zorder=1)
 
+    # A legend, not end labels: the two F1 repeats finish 3 % apart and their
+    # labels collided, which the overlap audit caught at 40 %.
+    handles = []
     for s in ORDER:
         g = h[h.series == s].sort_values("time_min")
         y = g.viscosity_reported.to_numpy() / g.viscosity_reported.iloc[0]
-        ax.plot(g.time_min, y, lw=1.0, color=COL[s], zorder=3)
+        ln, = ax.plot(g.time_min, y, lw=1.0, color=COL[s], zorder=3,
+                      label=LABEL[s])
         ax.scatter(g.time_min, y, s=11, fc="white", ec=COL[s], lw=0.8, zorder=4)
-        ax.text(g.time_min.iloc[-1] + 2.0, y[-1], LABEL[s], fontsize=5.6,
-                color=COL[s], va="center", ha="left", fontweight="bold")
+        handles.append(ln)
+    L.legend(ax, handles, [h_.get_label() for h_ in handles], loc="upper left")
 
     ax.set_xlim(10, 104)
     ax.set_ylim(0.93, 1.99)
@@ -100,6 +105,7 @@ def main():
             fontsize=5.4, color=INK, ha="left", va="top", linespacing=1.6)
     pg.letter("b", 90, 62)
 
+    L.audit(pg.fig)
     pg.save(HERE, "Fig_hold")
 
 

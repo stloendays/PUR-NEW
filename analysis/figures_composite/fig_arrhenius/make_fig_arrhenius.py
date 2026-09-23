@@ -1,14 +1,14 @@
 """Viscosity-temperature master figure.
 
-a  Arrhenius lines for all seven realizations, direct-labelled at the right end
-   so no legend box eats page area.
+a  Arrhenius lines for all seven realizations, with a framed legend.
 b  Activation energy per realization against the primary mean +- 1 s.d.
 c  Held-temperature error for four functional forms, which is what actually
    decides between them.
 
 Axis ranges are cut to the data plus its error bars. An Arrhenius panel always
-leaves two empty corners; the lower-right one carries the run description
-instead of being padding.
+leaves two empty corners, so the legend takes the lower-right one and the run
+description the upper-left, and neither costs page area. `layout.audit` checks
+that claim rather than leaving it to the eye.
 
     D:/Tools/pur_bridge_env/Scripts/python.exe make_fig_arrhenius.py
 """
@@ -20,6 +20,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import figdata as D
+import layout as L
 from style import DARK_B, DARK_G, FE, GRID, INK, MID, OS, PALE_B, RED, RU, Page
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -38,7 +39,11 @@ COL = {
 }
 DASH = {r: ((0, (3.2, 1.6)) if "1 d" in r else "-") for r in COL}
 ORDER = list(COL)
-XHI, XLAB = 2.96, 2.868                            # axis limit, label column
+# Data spans 1000/T = 2.4805 (130 C) to 2.8316 (80 C). Lines are drawn only
+# just past that: running a fit out to the axis edge both clipped it against
+# the top of the panel and extrapolated the model beyond anything measured.
+XLO, XHI = 2.455, 2.862
+FIT_LO, FIT_HI = 2.470, 2.845
 
 
 def main():
@@ -50,26 +55,18 @@ def main():
 
     # ---- a  Arrhenius ----------------------------------------------------
     ax = pg.ax(12.5, 10, 84, 70)
-    xs = np.array([2.46, XLAB - 0.012])
+    xs = np.array([FIT_LO, FIT_HI])
+    handles = []
     for rid in ORDER:
         g = sw[sw.rid == rid].sort_values("inv_T")
         f = fits[fits.rid == rid].iloc[0]
         c = COL[rid]
-        ax.plot(xs, f.lnA + f.slope * xs / 1000.0, lw=0.9, color=c,
-                linestyle=DASH[rid], zorder=2)
+        ln, = ax.plot(xs, f.lnA + f.slope * xs / 1000.0, lw=0.9, color=c,
+                      linestyle=DASH[rid], zorder=2, label=rid)
         ax.scatter(g.inv_T, g.ln_eta, s=11, fc="white", ec=c, lw=0.8, zorder=3)
+        handles.append(ln)
 
-    ends = sorted(((fits[fits.rid == r].iloc[0].lnA
-                    + fits[fits.rid == r].iloc[0].slope * XLAB / 1000.0, r)
-                   for r in ORDER), reverse=True)
-    last = None
-    for y, rid in ends:
-        y = min(y, last - 0.235) if last is not None else y
-        last = y
-        ax.text(XLAB + 0.008, y, rid, fontsize=5.4, color=COL[rid],
-                va="center", ha="left", fontweight="bold")
-
-    ax.set_xlim(2.455, XHI)
+    ax.set_xlim(XLO, XHI)
     ax.set_ylim(6.05, 10.45)
     ax.set_xlabel("1000 / T   (K$^{-1}$)")
     ax.set_ylabel(r"ln [ $\eta$ / (mPa s) ]")
@@ -85,13 +82,17 @@ def main():
     tp.set_xlabel("temperature  (\u00b0C)", labelpad=2)
     tp.tick_params(length=2.4, width=0.6, direction="in")
 
-    # The lower-right triangle is structurally empty in an Arrhenius plot; it
-    # carries the run description rather than becoming page padding.
-    ax.text(2.700, 7.42, "7 realizations\n6 temperatures each\n42 points",
-            fontsize=5.8, color=INK, ha="left", va="top", linespacing=1.55)
-    ax.text(2.700, 6.30, "per-realization fit\n$R^2$ = 0.965 \u2013 0.998\n"
-                         "dashed = 1 d retest",
-            fontsize=5.4, color=MID, ha="left", va="bottom", linespacing=1.55)
+    # The lower-right triangle is structurally empty in an Arrhenius plot, so
+    # the legend lives there instead of eating a label column off the right
+    # edge, which is where the seven names were crowded before.
+    L.legend(ax, handles, [h.get_label() for h in handles], loc="lower right",
+             ncol=2, title="realization  (dashed = 1 d retest)")
+    # Top-left is the other structurally empty corner: eta falls with
+    # temperature, so every line is at its lowest at small 1000/T. Putting this
+    # bottom-left ran it into the legend.
+    ax.text(XLO + 0.007, 10.38, "7 realizations \u00b7 6 temperatures each \u00b7 42 points\n"
+                          "per-realization $R^2$ = 0.965 \u2013 0.998",
+            fontsize=5.2, color=MID, ha="left", va="top", linespacing=1.6)
     pg.letter("a", 3, 84)
 
     # ---- b  E_eta per realization ---------------------------------------
@@ -146,6 +147,7 @@ def main():
     ax.set_axisbelow(True)
     pg.letter("c", 100, 41)
 
+    L.audit(pg.fig)
     pg.save(HERE, "Fig_arrhenius")
 
 

@@ -25,6 +25,7 @@ from matplotlib.patches import Rectangle
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import figdata as D
+import layout as L
 from style import DARK_B, DARK_G, FE, GRID, INK, MID, OS, PALE_B, RED, RU, Page
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -125,6 +126,7 @@ def main():
                 "primary mean (%.1f, n = 6), full scale \u00b1 5 kJ mol$^{-1}$." % mu,
                 fontsize=5.2, color=MID, va="bottom", ha="left")
 
+    L.audit(pg.fig)
     pg.save(HERE, "Fig_column")
 
 
