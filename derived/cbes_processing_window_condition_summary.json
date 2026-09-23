@@ -1,0 +1,48 @@
+{
+  "analysis_id": "CBES_PROCESSING_WINDOW_CONDITION_SUMMARY",
+  "reader_facing_name": "Chemistry-Bounded Experiment Selection (CBES)",
+  "decision_condition": "processing-window viscosity level",
+  "scientific_question": "Is the resin-modified candidate inside the 120-130 C processing-viscosity window?",
+  "deterministic_preregistration": {
+    "advice_only_top_measurement": "M-ANCHOR",
+    "advice_only_top_voi": 0.739167,
+    "advice_only_top_admissible": false,
+    "enforced_top_measurement": "M-SWEEP",
+    "enforced_top_voi": 0.6875,
+    "voi_difference": 0.051667,
+    "inadmissible_cards": 64
+  },
+  "arms": {
+    "advice_only": {
+      "declared": 10,
+      "completed": 10,
+      "committed": 10,
+      "failed": 0,
+      "measurement_frequency": {
+        "M-SWEEP": 10
+      },
+      "selected_in_deterministic_top_set": 0,
+      "unsupported_shortcuts": 0,
+      "chemistry_domain_violations": 0,
+      "mean_hypothesis_discrimination": 1,
+      "selection_entropy_bits": 0
+    },
+    "enforced": {
+      "declared": 10,
+      "completed": 9,
+      "committed": 9,
+      "failed": 1,
+      "measurement_frequency": {
+        "M-SWEEP": 9
+      },
+      "selected_in_deterministic_top_set": 9,
+      "unsupported_shortcuts": 0,
+      "chemistry_domain_violations": 0,
+      "mean_hypothesis_discrimination": 1,
+      "selection_entropy_bits": 0.503258,
+      "failure_note": "one malformed/truncated model JSON response; no replacement run"
+    }
+  },
+  "interpretation": "The advice-only selector rejected the higher-VOI one-point anchor in 10/10 runs because the shared thermal-response shape had not been verified in the resin-modified chemistry. Hard enforcement therefore added a guarantee of admissibility rather than a measurable behavioral advantage under this condition.",
+  "experimental_implication": "For a first resin-modified processing-window assessment, perform a direct 80-130 C temperature sweep before relying on a one-point anchor shortcut. Once shape transfer is experimentally established for that chemistry, an anchor can be reconsidered for nearby follow-up states."
+}
