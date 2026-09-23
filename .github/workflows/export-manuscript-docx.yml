@@ -1,23 +1,20 @@
-name: export-manuscript-docx
+name: export-submission-docx
 
 on:
   push:
     branches: [main]
     paths:
       - ".github/workflows/export-manuscript-docx.yml"
-      - "manuscript/MAIN_TEXT_V3.md"
+      - "manuscript/MAIN_TEXT_V5.md"
+      - "manuscript/SUPPLEMENTARY_INFORMATION_V5.md"
       - "manuscript/references.bib"
-      - "scripts/figure1_workflow.R"
-      - "scripts/figure2_state_conditioned_rheology.R"
-      - "scripts/figure3_local_transfer.R"
-      - "scripts/figure4_rheological_coordinates.R"
-      - "scripts/figure5_outcome_blind_agent.R"
-      - "data/temperature_sweeps.csv"
-      - "data/thermal_hold.csv"
-      - "analysis/results/local_leave_one_formulation_pooled.csv"
-      - "analysis/results/local_leave_one_formulation_one_point.csv"
-      - "analysis/results/local_joint_formulation_temperature_extrapolation.csv"
-      - "analysis/results/local_joint_formulation_temperature_extrapolation_summary.csv"
+      - "scripts/submission_cross_document_audit.py"
+      - "skills/junbo-scientific-writing/scripts/audit_manuscript.py"
+      - "analysis/figures_composite/**"
+      - "analysis/figures/Supplementary_Figure_S1_PUR_chemistry.*"
+      - "data/**"
+      - "derived/**"
+      - "analysis/results/**"
   workflow_dispatch:
 
 permissions:
@@ -26,58 +23,55 @@ permissions:
 jobs:
   export:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
-      - uses: r-lib/actions/setup-r@v2
+      - uses: actions/setup-python@v5
         with:
-          r-version: "release"
+          python-version: "3.11"
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          packages: |
-            any::ggplot2
-            any::patchwork
-            any::scales
-            any::jsonlite
-            any::svglite
-          cache-version: 1
-
-      - name: Render current manuscript figures
+      - name: Install project and test dependencies
         run: |
-          Rscript scripts/figure1_workflow.R
-          Rscript scripts/figure2_state_conditioned_rheology.R
-          Rscript scripts/figure3_local_transfer.R
-          Rscript scripts/figure4_rheological_coordinates.R
-          Rscript scripts/figure5_outcome_blind_agent.R
+          python -m pip install --upgrade pip
+          python -m pip install -e . pytest python-docx
 
-      - name: Install document dependencies
+      - name: Run repository tests
+        run: python -m pytest -q
+
+      - name: Audit canonical manuscript and SI
+        run: |
+          python skills/junbo-scientific-writing/scripts/audit_manuscript.py             manuscript/MAIN_TEXT_V5.md --repo-root . --final
+          python skills/junbo-scientific-writing/scripts/audit_manuscript.py             manuscript/SUPPLEMENTARY_INFORMATION_V5.md --repo-root . --final
+          python scripts/submission_cross_document_audit.py
+
+      - name: Install document rendering dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc
-          python -m pip install python-docx
-          mkdir -p build
-          curl -L --fail --retry 3 \
-            https://raw.githubusercontent.com/citation-style-language/styles/master/royal-society-of-chemistry.csl \
-            -o build/royal-society-of-chemistry.csl
+          sudo apt-get install -y pandoc libreoffice-writer poppler-utils
+          mkdir -p build/render_main build/render_si
+          curl -L --fail --retry 3             https://raw.githubusercontent.com/citation-style-language/styles/master/royal-society-of-chemistry.csl             -o build/royal-society-of-chemistry.csl
 
       - name: Build Word reference style
         run: |
-          mkdir -p build
           python - <<'PY'
           from docx import Document
-          from docx.shared import Pt, Inches, RGBColor
+          from docx.enum.section import WD_SECTION
+          from docx.enum.text import WD_LINE_SPACING
+          from docx.shared import Inches, Pt, RGBColor
           from docx.oxml.ns import qn
 
           out = "build/reference.docx"
           doc = Document()
           sec = doc.sections[0]
-          sec.top_margin = Inches(0.8)
-          sec.bottom_margin = Inches(0.8)
-          sec.left_margin = Inches(0.85)
-          sec.right_margin = Inches(0.85)
+          sec.page_width = Inches(8.5)
+          sec.page_height = Inches(11)
+          sec.top_margin = Inches(0.75)
+          sec.bottom_margin = Inches(0.75)
+          sec.left_margin = Inches(0.82)
+          sec.right_margin = Inches(0.82)
 
-          def set_font(style_name, size, bold=None):
+          def set_font(style_name, size, bold=None, space_before=0, space_after=0):
               st = doc.styles[style_name]
               st.font.name = "Times New Roman"
               st._element.rPr.rFonts.set(qn("w:eastAsia"), "Times New Roman")
@@ -85,75 +79,134 @@ jobs:
               st.font.color.rgb = RGBColor(0, 0, 0)
               if bold is not None:
                   st.font.bold = bold
-              ppr = st._element.pPr
-              if ppr is not None:
-                  for child in list(ppr):
-                      if child.tag == qn("w:pBdr"):
-                          ppr.remove(child)
+              pf = st.paragraph_format
+              pf.space_before = Pt(space_before)
+              pf.space_after = Pt(space_after)
+              pf.line_spacing = 1.08
 
-          set_font("Normal", 11)
-          set_font("Title", 16, True)
-          set_font("Heading 1", 13, True)
-          set_font("Heading 2", 11.5, True)
-          set_font("Heading 3", 11, True)
-          set_font("Caption", 10)
+          set_font("Normal", 11, False, 0, 5)
+          set_font("Title", 16, True, 0, 10)
+          set_font("Heading 1", 13, True, 10, 5)
+          set_font("Heading 2", 11.5, True, 8, 4)
+          set_font("Heading 3", 11, True, 7, 3)
+          set_font("Caption", 10, False, 4, 7)
 
-          p = doc.add_paragraph("Reference")
+          # Pandoc commonly uses these styles if present.
+          for name in ("Body Text", "First Paragraph"):
+              if name in doc.styles:
+                  set_font(name, 11, False, 0, 5)
+
+          doc.add_paragraph("Reference")
           doc.save(out)
           PY
 
-      - name: Prepare canonical manuscript source
+      - name: Prepare current manuscript sources for Word
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
 
-          src = Path("manuscript/MAIN_TEXT_V3.md").read_text(encoding="utf-8")
-          marker = "\n## Author notes for the next revision"
-          if marker in src:
-              src = src.split(marker, 1)[0].rstrip() + "\n"
+          def prepare(src_path, out_path, title_override=None):
+              src = Path(src_path).read_text(encoding="utf-8")
+              # Use PNG in Word for maximum renderer compatibility while leaving
+              # the canonical Markdown on vector SVG assets.
+              src = re.sub(r"(analysis/[^)]+)\.svg\)", r"\1.png)", src)
 
-          lines = src.splitlines()
-          if not lines or not lines[0].startswith("# "):
-              raise SystemExit("Expected H1 manuscript title")
-          title = lines[0][2:].strip().replace('"', '\\"')
-          body_lines = [line for line in lines[1:] if line.strip() != "---"]
-          body = "\n".join(body_lines).lstrip()
-          prepared = f'---\ntitle: "{title}"\n---\n\n{body}\n'
-          Path("build/MAIN_TEXT_V3_FOR_WORD.md").write_text(prepared, encoding="utf-8")
+              lines = src.splitlines()
+              if not lines:
+                  raise SystemExit(f"Empty source: {src_path}")
+
+              if title_override is None:
+                  if not lines[0].startswith("# "):
+                      raise SystemExit(f"Expected H1 title in {src_path}")
+                  title = lines[0][2:].strip()
+                  body_lines = lines[1:]
+              else:
+                  title = title_override
+                  body_lines = lines[1:] if lines[0].startswith("# ") else lines
+
+              # Horizontal rules are drafting separators, not submission content.
+              body_lines = [line for line in body_lines if line.strip() != "---"]
+              body = "\n".join(body_lines).lstrip()
+              title_yaml = title.replace('"', '\\"')
+              prepared = (
+                  "---\n"
+                  f'title: "{title_yaml}"\n'
+                  'reference-section-title: "References"\n'
+                  "---\n\n"
+                  + body
+                  + "\n"
+              )
+              Path(out_path).write_text(prepared, encoding="utf-8")
+
+          prepare(
+              "manuscript/MAIN_TEXT_V5.md",
+              "build/PUR_MANUSCRIPT_FOR_WORD.md",
+          )
+          prepare(
+              "manuscript/SUPPLEMENTARY_INFORMATION_V5.md",
+              "build/PUR_SI_FOR_WORD.md",
+              title_override="Supplementary Information",
+          )
           PY
 
-      - name: Convert GitHub manuscript directly to DOCX
-        working-directory: manuscript
+      - name: Convert canonical Markdown to DOCX
         run: |
-          pandoc ../build/MAIN_TEXT_V3_FOR_WORD.md \
-            --from=markdown+tex_math_dollars \
-            --to=docx \
-            --citeproc \
-            --bibliography=references.bib \
-            --csl=../build/royal-society-of-chemistry.csl \
-            --reference-doc=../build/reference.docx \
-            --resource-path=.:..:../analysis/figures \
-            -o ../build/PUR_MAIN_TEXT_V3_DIRECT_FROM_GITHUB.docx
+          pandoc build/PUR_MANUSCRIPT_FOR_WORD.md             --from=markdown+tex_math_dollars             --to=docx             --citeproc             --bibliography=manuscript/references.bib             --csl=build/royal-society-of-chemistry.csl             --reference-doc=build/reference.docx             --resource-path=.:build:manuscript:analysis             -o build/PUR_Rheological_State_Experiment_Selection_Manuscript.docx
 
-      - name: Verify native Word equations
+          pandoc build/PUR_SI_FOR_WORD.md             --from=markdown+tex_math_dollars             --to=docx             --citeproc             --bibliography=manuscript/references.bib             --csl=build/royal-society-of-chemistry.csl             --reference-doc=build/reference.docx             --resource-path=.:build:manuscript:analysis             -o build/PUR_Rheological_State_Experiment_Selection_Supplementary_Information.docx
+
+      - name: Verify native Word equations and embedded figures
         run: |
           python - <<'PY'
-          import re, zipfile
-          p = "build/PUR_MAIN_TEXT_V3_DIRECT_FROM_GITHUB.docx"
-          with zipfile.ZipFile(p) as z:
-              xml = z.read("word/document.xml").decode("utf-8")
-          n_math = xml.count("<m:oMath")
-          leftovers = re.findall(r"\\\\(?:eta|ln|frac|mathbf|mathrm|approx|beta|mu|delta)", xml)
-          print("OMML equation elements:", n_math)
-          print("Literal LaTeX commands remaining:", len(leftovers))
-          if n_math < 10:
-              raise SystemExit("Expected native Word equations were not generated")
-          if leftovers:
-              raise SystemExit("Literal LaTeX commands remain in document XML")
+          import re
+          import zipfile
+
+          files = [
+              ("build/PUR_Rheological_State_Experiment_Selection_Manuscript.docx", 5, 10),
+              ("build/PUR_Rheological_State_Experiment_Selection_Supplementary_Information.docx", 2, 10),
+          ]
+          for p, min_images, min_math in files:
+              with zipfile.ZipFile(p) as z:
+                  xml = z.read("word/document.xml").decode("utf-8")
+                  media = [n for n in z.namelist() if n.startswith("word/media/")]
+              n_math = xml.count("<m:oMath")
+              leftovers = re.findall(
+                  r"\\(?:eta|ln|frac|mathbf|mathrm|approx|beta|mu|delta)",
+                  xml,
+              )
+              print(p)
+              print("  OMML equation elements:", n_math)
+              print("  embedded media:", len(media))
+              print("  literal LaTeX commands:", len(leftovers))
+              if n_math < min_math:
+                  raise SystemExit(f"Too few native equations in {p}")
+              if len(media) < min_images:
+                  raise SystemExit(f"Expected at least {min_images} embedded figures in {p}")
+              if leftovers:
+                  raise SystemExit(f"Literal LaTeX commands remain in {p}")
           PY
+
+      - name: Render DOCX files for visual QA
+        run: |
+          mkdir -p build/lo_profile build/pdf
+          libreoffice -env:UserInstallation=file://$PWD/build/lo_profile             --headless --convert-to pdf --outdir build/pdf             build/PUR_Rheological_State_Experiment_Selection_Manuscript.docx
+          libreoffice -env:UserInstallation=file://$PWD/build/lo_profile             --headless --convert-to pdf --outdir build/pdf             build/PUR_Rheological_State_Experiment_Selection_Supplementary_Information.docx
+
+          pdftoppm -png -r 120             build/pdf/PUR_Rheological_State_Experiment_Selection_Manuscript.pdf             build/render_main/page
+          pdftoppm -png -r 120             build/pdf/PUR_Rheological_State_Experiment_Selection_Supplementary_Information.pdf             build/render_si/page
+
+          test -n "$(ls build/render_main/page-*.png)"
+          test -n "$(ls build/render_si/page-*.png)"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: PUR-main-manuscript-direct-docx
-          path: build/PUR_MAIN_TEXT_V3_DIRECT_FROM_GITHUB.docx
+          name: PUR-submission-manuscript-package
+          path: |
+            build/PUR_Rheological_State_Experiment_Selection_Manuscript.docx
+            build/PUR_Rheological_State_Experiment_Selection_Supplementary_Information.docx
+            build/pdf/*.pdf
+            build/render_main/page-*.png
+            build/render_si/page-*.png
           if-no-files-found: error
+          retention-days: 14
