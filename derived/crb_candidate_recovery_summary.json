@@ -1,0 +1,13 @@
+{
+  "analysis_id": "CRB_CANDIDATE_RECOVERY_SUMMARY",
+  "reader_facing_name": "Candidate-Recovery Benchmark (CRB)",
+  "attempted_runs": 10,
+  "committed_decisions": 8,
+  "abstentions": 2,
+  "committed_in_predeclared_near_region": 8,
+  "near_region_candidates": 18,
+  "candidate_lattice_size": 73,
+  "uniform_random_near_region_fraction": 0.2466,
+  "deterministic_policy_share_of_distance_improvement": 0.944,
+  "role": "Architectural predecessor establishing the outcome-blind evidence firewall and candidate-space inheritance; not pooled with experiment-selection series."
+}
