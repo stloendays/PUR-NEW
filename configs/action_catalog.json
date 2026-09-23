@@ -22,7 +22,7 @@
       "when_to_use": [
         "as the preferred local-science summary for new chemistry-first development",
         "before deciding whether a discovered local rheological regularity can guide a new experiment",
-        "when a new Agent or ML layer needs audited material evidence rather than frozen benchmark compatibility output",
+        "when a new Agent or ML layer needs audited material evidence rather than frozen benchmark compatibility output"
       ],
       "parameters": {
         "type": "object",
