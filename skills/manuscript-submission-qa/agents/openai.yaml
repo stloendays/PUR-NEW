@@ -1,0 +1,3 @@
+interface:
+  display_name: "Manuscript Submission QA"
+  short_description: "Audit and export scientific manuscripts without format drift"
