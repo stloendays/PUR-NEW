@@ -103,6 +103,9 @@ Before Pandoc:
 
 After Pandoc and before visual review:
 - force the intended font family and black text unless the journal template overrides it;
+- **justify body paragraphs on both left and right margins;**
+- **center the manuscript title and top-level major section headings;**
+- **center every figure/image horizontally in its paragraph/container;**
 - remove decorative title/heading borders introduced by Word styles;
 - preserve native OMML equations;
 - verify that figures are embedded rather than linked to temporary paths;
@@ -139,6 +142,9 @@ Use the `docx` skill renderer. Inspect **every page at 100% zoom**, not a sample
 
 Check for:
 - clipped or missing glyphs;
+- body paragraphs that are not fully justified;
+- a manuscript title or top-level major heading that is not centered;
+- figures/images that are not horizontally centered;
 - tables collapsed into narrow columns;
 - figures cropped, blurry, or too small;
 - image/caption separation;
