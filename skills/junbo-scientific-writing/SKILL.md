@@ -241,6 +241,9 @@ Unless a journal template overrides it:
 - Times New Roman.
 - Black text throughout.
 - Body text 10 pt or larger.
+- **Justify body paragraphs on both left and right margins.**
+- **Center the manuscript title and top-level major section headings.**
+- **Center all figures/images horizontally on the page.**
 - Restrained academic layout.
 - Bold complete table-caption lines.
 - Stable terminology; expand abbreviations once, then use them consistently.
