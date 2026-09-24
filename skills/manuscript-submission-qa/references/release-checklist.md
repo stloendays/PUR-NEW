@@ -41,6 +41,9 @@ Use this immediately before delivery.
 ## Visual gate
 - [ ] Every main-text page inspected at 100% zoom.
 - [ ] Every SI page inspected at 100% zoom.
+- [ ] Body paragraphs are justified on both left and right margins.
+- [ ] Manuscript title and top-level major section headings are centered.
+- [ ] All figures/images are horizontally centered.
 - [ ] No clipped/overlapping text.
 - [ ] No collapsed tables.
 - [ ] No duplicate/split captions.
