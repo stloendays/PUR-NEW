@@ -222,139 +222,82 @@ In the Agent, these sources are not treated as passive references. They are conv
 
 ---
 
-## 6. Outcome-blind Agent evaluation against a held-out wet-lab result
+## 6. Rule-Grounded Experiment Selection
 
-The current paper does **not** rely on an unverifiable contemporaneous recommendation record.
-Instead, Agent decision quality is measured through a reproducible outcome-blind
-reconstruction.
+The current manuscript-facing decision object is an **experiment card = formulation × measurement**. A fixed lattice of 73 formulation candidates is crossed with four measurement plans to produce 292 cards.
 
-The scored Arm B benchmark uses a 73-node candidate lattice derived from the original E1-E5
-design and pre-result external evidence. The held-out validated composition is deliberately
-not a lattice node, so exact recipe recovery is impossible by construction. A structural
-blindness audit verifies that the held-out formulation and follow-up measurements are
-unreachable from the Agent runtime; direct probes through all four formulation-specific
-action paths are rejected by the evidence firewall.
+For the registered thermal-hold hypotheses, the deterministic layer supplies:
 
-The enforced chronology is:
+- hypothesis discrimination;
+- uncertainty reduction;
+- decision relevance;
+- measurement interpretability;
+- extrapolation risk;
+- process-state risk;
+- chemistry-domain applicability.
 
-```text
-pre-result evidence
--> Agent decision
--> frozen recommendation + hashes
--> BLIND PHASE CLOSED
--> held-out wet-lab truth loaded
--> adjudication
-```
+These quantities define the scientific decision geometry before any model-mediated selection.
 
-Confirmatory v3h results:
+The rule-complete confirmatory series gives:
 
 ```text
-10 attempted runs
-8 committed decisions
-2 abstentions
-8 / 8 committed decisions in the predeclared near region
-mean modifier-plane L1 = 2.281 percentage points
-median modifier-plane L1 = 1.877 percentage points
+10/10 selected the matched-window 120 C hold
+9/10 selected the evidence-supported dual-axis family
+0/10 selected a zero-discrimination experiment
 ```
 
-The lattice itself contains:
+Controlled perturbations show why the explicit policy matters:
 
 ```text
-18 / 73 near-region candidates = 24.66%
-48 / 73 dual-axis candidates   = 65.75%
-uniform-random mean L1         = 12.074 percentage points
+VOI withheld:
+0/5 evidence-supported family
+3/5 zero-discrimination selections
+
+rule order inverted:
+0/10 evidence-supported family
+10/10 zero-discrimination selections
 ```
 
-The naive single-pass LLM baseline produced 0/7 near-region decisions and repeatedly selected
-the same reactive-core-only candidate.
+The order-inverted arm is especially informative: critique identified the zero-discrimination defect in all 10 runs, but the frozen decision still followed the bad upstream priority. The manuscript therefore treats rule content and rule order as causal parts of decision quality, while critique without decision authority is diagnostic rather than corrective.
 
-Attribution is explicit: approximately 94% of the quantitative distance improvement comes
-from the transparent deterministic rule layer. The language-model layer contributes a smaller
-decision step; this remains observable when the deterministic candidate ordering is withheld
-from every model payload.
-
-The held-out wet-lab measurement is used only as the post-closure adjudication yardstick.
+The model contribution is deliberately narrow. The deterministic layer defines most of the useful geometry; model-mediated selection resolves ambiguity inside or near the scientifically admissible region.
 
 ---
 
-## 7. Discovery-to-Experiment Agent V3
+## 7. Chemistry-Bounded Experiment Selection and physical adjudication
 
-The current canonical decision architecture is:
+CBES adds a chemistry-applicability rule for measurements that rely on transfer of the shared local temperature response.
 
-```text
-STRUCTURAL EVIDENCE FIREWALL
-          |
-          v
-       Planner
-          |
-          v
-  Evidence / Tool Layer
-          |
-          v
-       Proposer
-          |
-          v
-       Skeptic
-          |
-          v
-Robustness Adjudicator
-          |
-          v
-        Judge
-          |
-          v
-        Freeze
-          |
-          v
- Human wet-lab execution
-          |
-          v
- Physical adjudication
-```
+For the thermal-hold decision, the rule is non-binding: both advice-only and enforced conditions select the direct 120 C hold in 10/10 runs because the assay measures the failure coordinate itself.
 
-For historical benchmark compatibility, the predecessor Action remains:
+For a processing-window decision in resin-modified chemistry, the unsupported one-point anchor has higher deterministic VOI than a direct temperature sweep (0.7392 versus 0.6875). The advice-only selector nevertheless rejects the shortcut in 10/10 runs because shared-shape transfer has not been established after the chemistry shift. Hard enforcement gives the same sweep choice in all 9 valid commitments while making the unsupported anchor unavailable by construction.
+
+The laboratory implication is simple:
 
 ```text
-get_state_aware_rheology_summary()
+validated local shared-shape support
+-> one-point state calibration may be used
+
+meaningful chemistry shift
+-> direct temperature sweep first
+-> reconsider one-point calibration only after shape transfer is established
 ```
 
-For current chemistry-first development, the preferred audited Actions are:
+The resin-modified wet-lab validation gives:
 
 ```text
-get_chemistry_audited_rheology_summary()
-assess_shared_shape_applicability(candidate)
+mean absolute 15-60 min drift = 1.60%
+H-CORE proportional-dilution prediction = 7.79%
+registered H-RESIN support threshold = 3.89%
 ```
 
-The first exposes the chemistry-provenance-audited local rheology findings. The second prevents the local shared thermal-response shape from being silently extrapolated into resin-modified chemistry: unmodified local-family candidates may use one-point calibration as an interpolation prior, whereas chemistry-shifted candidates are routed to direct temperature-sweep verification first.
+Thus H-CORE is rejected and H-RESIN satisfies its registered support criterion at the formulation level. H-DUAL remains unresolved and requires an acrylic-only matched-window hold.
 
-The audited rheology Action exposes, without the validation outcome:
+### Chronology boundary
 
-- audited formulation-only versus state-aware model comparison;
-- model-free state-shift check;
-- leave-one-formulation one-point calibration;
-- local thermal-response descriptor;
-- original E1/E5 hold-stability contrast;
-- experiment-design implications and claim boundaries.
+The formalized RGES/CBES software architecture was developed after the historical wet-lab validation result already existed. The current computational evaluation is therefore an outcome-blind retrospective adjudication: the held-out result is excluded from decision-time evidence, but the formalized architecture must not be described as having prospectively caused the original experiment to be run.
 
-The Agent is therefore designed to use the paper's discovered material regularities to choose an experiment, rather than simply search for a literature recipe.
-
-Its pre-result decision logic is explicitly **knowledge-guided**:
-
-```text
-local E1-E5 evidence
--> state-aware rheological diagnosis
--> literature/database formulation priors
--> physical and uncertainty constraints
--> Agent formulation decision
-```
-
-The intended interpretation is not that the LLM independently guessed the later successful formulation from sparse data alone. Instead, the Agent uses pre-result scientific knowledge to redirect the decision from further reactive-core micro-tuning toward an externally supported resin-modified formulation family. The later wet-lab result then physically adjudicates that evidence-guided decision.
-
-The active Stage-1 evaluation is a single outcome-blind reconstruction of the preexperimental decision state. It tests problem recovery, intervention-family recovery, and only after freeze, quantitative neighborhood agreement. See `docs/STAGE1_PREEXPERIMENTAL_RECONSTRUCTION.md`.
-
-The Skeptic and Robustness Adjudicator are decision-quality controls. The central materials paper does **not** require component-wise ablation to prove that each internal stage is individually necessary.
-
-See `docs/AGENT_V3_ARCHITECTURE.md`.
+Historical numbered Agent implementations remain preserved in repository provenance. Reader-facing manuscript text uses the semantic CRB/RGES/CBES names.
 
 ---
 
@@ -427,7 +370,7 @@ The intended Results order is:
 4. external evidence defines the intervention boundary
 5. RGES operationalizes the discovered rules into formulation-measurement experiments
 6. CBES decides when shared-shape shortcuts are admissible versus when direct measurement is required
-7. human wet-lab physically adjudicates the selected point
+7. wet-lab data physically adjudicate the registered hypothesis contrast
 ```
 
 This order keeps the materials-science discovery primary and the Agent downstream as an experimental decision layer.
