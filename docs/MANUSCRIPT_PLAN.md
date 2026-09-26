@@ -2,7 +2,7 @@
 
 ## Working title
 
-**Realization-Aware Rheology Enables Hypothesis-Driven Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives**
+**Rheological State Identification Guides Hypothesis-Driven Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives**
 
 The paper is a materials-discovery and data-to-decision study. The central story begins with experimental realization: nominally identical formulations need not occupy the same rheological state. The physical/statistical analysis first makes these records scientifically comparable, then identifies the actionable failure coordinate. The Agent operates downstream of that structured evidence to select a discriminating experiment for human wet-lab adjudication.
 
