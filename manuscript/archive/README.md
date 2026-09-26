@@ -15,6 +15,14 @@ These snapshots were copied from the active manuscript state before the main-tex
 
 This snapshot preserves the state after the Results discussion was compressed but before the decision-architecture Methods were shortened and moved toward the SI.
 
+## Figure snapshot reference
+
+The redesigned Figure 1–5 set reviewed with these manuscript snapshots is pinned by Git commit:
+
+`bf771c7094114a953a0c232885eba914cf175925`
+
+This commit contains the SVG/PDF/PNG files and the corresponding figure-generation scripts under `analysis/figures_composite/`. Later figure revisions must not erase the ability to recover this exact set.
+
 ## Preservation rule
 
 - Do not overwrite or delete archived manuscript snapshots.
