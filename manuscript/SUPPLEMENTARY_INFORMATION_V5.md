@@ -4,9 +4,9 @@
 
 ### Scope of this Supplementary Information
 
-This Supplementary Information (SI) supports one closed scientific sequence from experimental realization and rheological-state identification to physical hypothesis adjudication. Notes 1–4 establish the local formulation set, state-conditioned temperature response, one-point state calibration and thermal-hold failure coordinate. Notes 5–7 place the local response inside the broader external evidence base and define the proportional-dilution null. Notes 8 onward document the Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), Chemistry-Bounded Experiment Selection (CBES), controlled rule tests and post-freeze wet-lab adjudication.
+This Supplementary Information (SI) supports one closed scientific sequence from experimental realization and rheological-state identification through physical hypothesis adjudication. Notes 1–4 establish the local formulation set, state-conditioned temperature response, one-point state calibration and thermal-hold failure coordinate. Notes 5–7 place the local response in the broader external evidence base and define the proportional-dilution null. Notes 8 onward document the Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), Chemistry-Bounded Experiment Selection (CBES), controlled rule tests and post-freeze wet-lab adjudication.
 
-The SI preserves the separation between material evidence and computational decision evidence without presenting them as two independent stories. Material measurements define the physical state and unresolved failure mode; the hypothesis registry and decision rules determine what experiment can resolve that uncertainty; the held-out wet-lab result then updates the hypothesis state.
+Material evidence and computational decision evidence are kept separate but are not presented as two independent stories. Material measurements define the physical state and unresolved failure mode; the hypothesis registry and decision rules determine what experiment can resolve that uncertainty; the held-out wet-lab result then updates the hypothesis state.
 
 The principal claims supported here are:
 
@@ -24,7 +24,7 @@ The principal claims supported here are:
 
 ## Statistical conventions
 
-For temperature-sweep analyses, one complete experimental realization is the material-level unit; temperatures measured within that realization are repeated observations on the same trajectory. Unless otherwise specified, mean ± values denote mean ± 1 standard deviation across realizations. Curve-level standard errors and confidence intervals are labelled explicitly. Realization-level cluster bootstraps resample complete realizations rather than individual temperature points. Computational run counts are reported separately from material replicates.
+One complete experimental realization is the material-level unit for temperature-sweep analyses; temperatures measured within a realization are repeated observations on the same trajectory. Unless otherwise specified, mean ± values denote mean ± 1 standard deviation across realizations. Curve-level standard errors and confidence intervals are labelled explicitly. Realization-level cluster bootstraps resample complete realizations rather than individual temperature points. Computational run counts are reported separately from material replicates.
 
 
 # Supplementary Note 1 | Local formulation design and primary analysis population
@@ -52,9 +52,9 @@ The NCO:OH equivalent ratio of F1 was 1.82.
 
 ## Primary temperature-sweep analysis population
 
-Seven complete 80–130 °C viscosity curves are present in the raw local table. One E1 curve is a defined phosphoric-acid perturbation: 0.025 mmol H3PO4 from a 0.1 mol L−1 standard solution was added during the dehydration stage, corresponding to 0.25 mL of solution and 2.45 mg H3PO4. Because this deliberately changes the chemical condition relative to nominal E1, the primary same-composition analysis uses the six chemistry-comparable complete realizations listed below.
+The raw local table contains seven complete 80–130 °C viscosity curves. One E1 curve is a defined phosphoric-acid perturbation: 0.025 mmol H3PO4 from a 0.1 mol L−1 standard solution was added during the dehydration stage, corresponding to 0.25 mL of solution and 2.45 mg H3PO4. Because this deliberately changes the chemical condition relative to nominal E1, the primary same-composition analysis uses the six chemistry-comparable complete realizations listed below.
 
-The E1 +P curve is retained as a separate chemical-perturbation check. Its apparent $E_\eta$ is 40.766 kJ mol−1 with $R^2=0.9979$ for $\ln\eta$ versus $1/T$, compared with 42.052 ± 2.426 kJ mol−1 across the six primary realizations. Holding the primary shared thermal-shape coefficients fixed and fitting only an E1 +P intercept gives a multiplicative RMSE of 1.034×. A single 120 °C anchor predicts the remaining five E1 +P temperatures with a multiplicative RMSE of 1.039×. Relative to the available E1 R01 day-1 record, the E1 +P viscosities are 9.5–17.1% lower across 80–130 °C; this comparison is treated as an observational reference rather than a paired treatment-control estimate.
+The E1 +P curve is retained as a separate chemical-perturbation check. Its apparent $E_\eta$ is 40.766 kJ mol−1 with $R^2=0.9979$ for $\ln\eta$ versus $1/T$, compared with 42.052 ± 2.426 kJ mol−1 across the six primary realizations. Holding the primary shared thermal-shape coefficients fixed and fitting only an E1 +P intercept gives a multiplicative RMSE of 1.034×; a single 120 °C anchor predicts the remaining five E1 +P temperatures with 1.039×. Relative to the available E1 R01 day-1 record, E1 +P viscosities are 9.5–17.1% lower across 80–130 °C. This comparison serves as an observational reference rather than a paired treatment-control estimate.
 
 ## Supplementary Table S2 | Chemistry-audited temperature-sweep realizations
 
@@ -67,7 +67,7 @@ The E1 +P curve is retained as a separate chemical-perturbation check. Its appar
 | E2 R02 day-1 | E2 | yes | 6 | 44.551 | 0.9948 |
 | E3 R03 | E3 | no | 6 | 43.525 | 0.9959 |
 
-The chemistry-audited primary temperature-sweep dataset therefore contains 36 observations from six complete realizations of three nominal formulations.
+The chemistry-audited primary dataset therefore contains 36 observations from six complete realizations of three nominal formulations.
 
 ---
 
@@ -100,7 +100,7 @@ $$
 a_{fr}+\beta_1 z(T)+\beta_2 z(T)^2+\varepsilon_{frT},
 $$
 
-respectively. Here $f$ denotes nominal formulation and $r$ a measured realization. The realization-specific intercept $a_{fr}$ is fitted directly and locates the realized viscosity scale. Conceptually, $a_{fr}=\mu_f+\delta_{fr}$, where $\delta_{fr}$ is the realization-specific displacement from the formulation baseline; the present regression estimates $a_{fr}$ directly rather than attempting to identify these two contributions separately.
+respectively. Here $f$ denotes nominal formulation and $r$ a measured realization. The realization-specific intercept $a_{fr}$ is fitted directly and locates the realized viscosity scale. Conceptually, $a_{fr}=\mu_f+\delta_{fr}$, where $\delta_{fr}$ is the realization-specific displacement from the formulation baseline; the regression estimates $a_{fr}$ directly rather than attempting to separate these two contributions.
 
 ## Supplementary Table S3 | State-model comparison
 
@@ -111,13 +111,13 @@ respectively. Here $f$ denotes nominal formulation and $r$ a measured realizatio
 | held-temperature multiplicative error, formulation-only quadratic | leave-one-temperature-out prediction | 1.423× |
 | held-temperature multiplicative error, state-conditioned quadratic | leave-one-temperature-out prediction | 1.058× |
 
-The same-order comparison isolates the effect of replacing formulation-level intercepts with realization-specific intercepts rather than changing the thermal basis at the same time. As an additional sensitivity check, restricting both models to a linear thermal response increases $R^2$ from 0.8519 for the formulation-only model to 0.9943 for the state-conditioned model. The same structural conclusion is also recovered without the parametric regression model. Singular-value decomposition of the chemistry-audited log-viscosity matrix after temperature-wise centering assigns 99.63% of between-realization variance to the first singular mode. The corresponding loading vector has cosine similarity 0.9998 to a constant vector.
+Because both models share the same quadratic thermal basis, this comparison isolates the effect of replacing formulation-level intercepts with realization-specific intercepts. As a sensitivity check, restricting both models to a linear thermal response raises $R^2$ from 0.8519 for the formulation-only model to 0.9943 for the state-conditioned model. The same structural conclusion holds without the parametric regression model. Singular-value decomposition of the chemistry-audited log-viscosity matrix after temperature-wise centering assigns 99.63% of between-realization variance to the first singular mode, and the corresponding loading vector has cosine similarity 0.9998 to a constant vector.
 
 Thus, within the present local chemistry family, the dominant realization effect is almost indistinguishable from a uniform vertical displacement in log-viscosity space.
 
 ## Functional-form and optimizer sensitivity
 
-The shared thermal representation was stress-tested without changing the chemistry-audited 36-point analysis population. The purpose of this analysis is model-form robustness, not replacement of the canonical quadratic representation.
+The shared thermal representation was stress-tested on the same chemistry-audited 36-point analysis population. This analysis checks model-form robustness; it does not replace the canonical quadratic representation.
 
 | Shared state-conditioned thermal form | Parameters | Fit multiplicative RMSE | Held-temperature multiplicative error | AICc |
 |---|---:|---:|---:|---:|
@@ -126,7 +126,7 @@ The shared thermal representation was stress-tested without changing the chemist
 | cubic inverse-temperature | 9 | 1.045× | 1.055× | -97.18 |
 | VFT/shifted-Andrade type | 8 | 1.045× | 1.055× | -100.74 |
 
-The quadratic term was strongly supported over the shared linear form ($F=40.78$, $p=6.51\times10^{-7}$). Adding a cubic term did not provide detectable additional support ($F=0.43$, $p=0.518$), and its small held-temperature improvement was accompanied by worse AICc. The canonical quadratic form is therefore retained as a minimal flexible representation.
+The quadratic term was strongly supported over the linear form ($F=40.78$, $p=6.51\times10^{-7}$). Adding a cubic term did not improve the fit detectably ($F=0.43$, $p=0.518$), and its small held-temperature gain came with worse AICc. The canonical quadratic form is retained as a minimal flexible representation.
 
 As a nonlinear sensitivity analysis, viscosity was also represented as
 
@@ -134,9 +134,9 @@ $$
 \ln\eta_r(T)=a_r+\frac{B}{T-T_0}.
 $$
 
-For any candidate $T_0$, the realization-specific intercepts and shared $B$ were solved by least squares. A bounded profile optimizer gave $T_0=262.284$ K and $B=456.90$ K. A seeded dual-annealing global search converged to $T_0=262.284$ K within 0.0003 K and the same fit error. The conclusion is therefore insensitive to optimizer initialization or local-minimum concerns.
+For any candidate $T_0$, the realization-specific intercepts and shared $B$ were solved by least squares. A bounded profile optimizer gave $T_0=262.284$ K and $B=456.90$ K. A seeded dual-annealing global search converged to $T_0=262.284$ K within 0.0003 K and the same fit error, confirming that the conclusion is insensitive to optimizer initialization or local-minimum concerns.
 
-The fitted $T_0$ is not treated as a measured glass-transition temperature or as an independent molecular parameter. Its leave-one-realization estimates ranged from approximately -25.4 to -5.1 °C, showing that it is not sufficiently stable for mechanistic interpretation in this sparse local dataset. The VFT analysis is used only to show that the shared-shape conclusion is not an artifact of the quadratic polynomial basis.
+The fitted $T_0$ is not treated as a measured glass-transition temperature or as an independent molecular parameter; its leave-one-realization estimates ranged from approximately -25.4 to -5.1 °C, too unstable for mechanistic interpretation in this sparse local dataset. The VFT analysis serves only to confirm that the shared-shape conclusion is not an artifact of the quadratic polynomial basis.
 
 ---
 
@@ -174,13 +174,13 @@ Across the full measured temperature range, pooled one-point transfer remains ap
 | E3 | 1 | 1.049 |
 | pooled | 6 | 1.099 |
 
-The one-point experiment should be interpreted as state calibration inside a validated local chemistry neighborhood. It is not evidence for a universal polyurethane master curve.
+One-point calibration is state calibration inside a validated local chemistry neighborhood, not evidence for a universal polyurethane master curve.
 
 ## Same-formulation test: information gained from one state anchor
 
-The leave-one-formulation analysis above asks whether a thermal shape transfers to a nominal formulation that was absent from fitting. A separate test asks a different question that is directly relevant to state identification: **how much predictive information does one state-specific measurement add when the nominal formulation is already known?**
+The leave-one-formulation analysis above asks whether a thermal shape transfers to a nominal formulation absent from fitting. A separate test addresses a question directly relevant to state identification: **how much predictive information does one state-specific measurement add when the nominal formulation is already known?**
 
-E2 is the only chemistry-audited nominal formulation represented by multiple realizations, so this comparison was restricted to E2. Each E2 realization was held out in turn. The training set retained the other E2 realizations, so a formulation-only quadratic model could predict the held realization without seeing any state-specific measurement from it. The state-calibrated model used the same training data to learn the shared quadratic thermal shape, then received one 110 °C viscosity anchor from the held realization and predicted only 120 and 130 °C.
+E2 is the only chemistry-audited nominal formulation represented by multiple realizations, so this comparison was restricted to E2. Each E2 realization was held out in turn. Because the training set retained the other E2 realizations, a formulation-only quadratic model could predict the held realization without any state-specific measurement from it. The state-calibrated model learned the shared quadratic thermal shape from the same training data, then received one 110 °C viscosity anchor from the held realization and predicted only 120 and 130 °C.
 
 Across four held E2 realizations and eight target predictions:
 
@@ -190,7 +190,7 @@ Across four held E2 realizations and eight target predictions:
 
 A 10,000-replicate cluster bootstrap that resampled complete held realizations gave a 95% interval of **75.0–97.3%** for the log-RMSE reduction. The corresponding 95% intervals for multiplicative RMSE were 1.224–2.293× for the formulation-only baseline and 1.023–1.146× after one-anchor state calibration.
 
-This comparison isolates the value of state information from formulation identity. It shows that, inside the validated E1–E3 chemistry neighborhood, one in-range viscosity measurement can sharply improve short-range reconstruction because it locates the realized viscosity scale. The result does **not** extend the shared-shape prior to resin-modified chemistry. For chemistry-shifted candidates, a direct temperature sweep is required before one-point state calibration is treated as admissible.
+This comparison isolates the value of state information from formulation identity: inside the validated E1–E3 chemistry neighborhood, one in-range viscosity measurement can sharply improve short-range reconstruction because it locates the realized viscosity scale. The result does **not** extend the shared-shape prior to resin-modified chemistry. For chemistry-shifted candidates, a direct temperature sweep is required before one-point state calibration can be treated as admissible.
 
 Machine-readable results are stored in:
 
@@ -225,7 +225,7 @@ For each fold:
 
 A 10,000-replicate bootstrap that resampled complete held realizations gave a median multiplicative RMSE of 1.087, with a 95% interval of 1.043–1.126×.
 
-The maximum individual multiplicative error in this test was approximately 1.189×.
+The maximum individual multiplicative error was approximately 1.189×.
 
 The supported claim is therefore limited to **10–20 °C short-range extrapolation inside the chemistry-audited E1–E3 neighborhood after one state-specific anchor**.
 
@@ -233,13 +233,13 @@ The supported claim is therefore limited to **10–20 °C short-range extrapolat
 
 # Supplementary Note 5 | Apparent local temperature-response descriptor
 
-For each chemistry-audited complete realization, $\ln\eta$ was regressed against $1/T$ with $T$ in kelvin. The descriptor was calculated as $E_\eta=R\,\mathrm{d}\ln\eta/\mathrm{d}(1/T)$ using $R=8.314462618$ J mol⁻¹ K⁻¹.
+For each chemistry-audited complete realization, $\ln\eta$ was regressed against $1/T$ with $T$ in kelvin. The descriptor $E_\eta=R\,\mathrm{d}\ln\eta/\mathrm{d}(1/T)$ was calculated using $R=8.314462618$ J mol⁻¹ K⁻¹.
 
-This descriptor is used only to summarize the local temperature dependence of viscosity and is not interpreted as a reaction activation energy.
+This descriptor summarizes local temperature dependence of viscosity and is not interpreted as a reaction activation energy.
 
 Across the six chemistry-audited realizations, $E_\eta$ was 42.05 ± 2.43 kJ mol⁻¹, corresponding to a coefficient of variation of approximately 5.77%.
 
-The important result is not exact equality of slopes, but the comparatively narrow local spread of the temperature-response coordinate relative to the much larger changes observed in viscosity level and thermal-hold trajectory.
+What matters is not exact slope equality but the narrow local spread of the temperature-response coordinate relative to the much larger changes observed in viscosity level and thermal-hold trajectory.
 
 
 ![Supplementary Figure S2. Temperature-response fits and model-form sensitivity](../analysis/figures_composite/fig_arrhenius/Fig_arrhenius.svg)
@@ -251,19 +251,17 @@ The important result is not exact equality of slopes, but the comparatively narr
 
 A direct shared-slope regression with realization-specific intercepts gave $E_\eta=42.05$ kJ mol⁻¹, with a 95% confidence interval of 40.21–43.90 kJ mol⁻¹.
 
-A supporting random-intercept mixed model returned the same central estimate, 42.05 kJ mol⁻¹, with a 95% confidence interval of 40.31–43.79 kJ mol⁻¹. Because only six realization groups are available, variance-component estimates are treated as sensitivity evidence rather than as precise population parameters.
+A random-intercept mixed model returned the same central estimate, 42.05 kJ mol⁻¹, with a 95% confidence interval of 40.31–43.79 kJ mol⁻¹. With only six realization groups, variance-component estimates are treated as sensitivity evidence rather than precise population parameters.
 
-To test whether the local thermal slopes themselves need to vary by realization, the shared-linear model was compared with a model containing realization-specific linear slopes while retaining realization intercepts. The added five slope degrees of freedom were not supported ($F_{5,24}=1.257$, $p=0.314$).
+To test whether local thermal slopes need to vary by realization, the shared-linear model was compared with one allowing realization-specific slopes while retaining realization intercepts. The five additional slope parameters were not supported ($F_{5,24}=1.257$, $p=0.314$).
 
-This does not prove exact equality of thermal slopes. It shows that the current audited local data do not require realization-specific slope variation to explain the dominant state structure, consistent with the interpretation that realization dependence is primarily a viscosity-scale displacement.
+This does not prove exact slope equality, but it shows that the current local data do not require realization-specific slope variation to explain the dominant state structure — consistent with realization dependence being primarily a viscosity-scale displacement.
 
 ---
 
 # Supplementary Note 6 | Thermal-hold dynamics and matched-window validation
 
-Original E1 and E5 formulations were measured during isothermal holding at 120 °C at 15, 30, 60 and 90 min.
-
-The follow-up resin-modified formulation F1 was measured in two repeat runs at 15, 30, 45 and 60 min.
+E1 and E5 were measured during isothermal holding at 120 °C at 15, 30, 60 and 90 min. The resin-modified formulation F1 was measured in two repeat runs at 15, 30, 45 and 60 min.
 
 The matched-window stability index used for direct comparison is
 
@@ -326,26 +324,26 @@ $$
 
 The measured F1 mean absolute drift is 1.60%. Thus the observed reduction from E1 is 7.91 percentage points, whereas proportional dilution predicts a reduction of only 1.72 percentage points. The measured suppression is approximately 4.6-fold larger than the dilution-only reduction.
 
-The validation therefore supports a low-drift rheological region and shows that the stabilization exceeds simple proportional dilution of the original reactive core.
+The validation supports a low-drift rheological region and shows that stabilization exceeds simple proportional dilution of the original reactive core.
 
 ---
 
 # Supplementary Note 7 | External PUR evidence and generalization boundary
 
-The external evidence layer is used to define chemical plausibility and the boundary of the local result, not as a direct predictor of the validation formulation.
+The external evidence layer defines chemical plausibility and the boundary of the local result; it is not used as a direct predictor of the validation formulation.
 
 The curated HMPUR database integrates public papers, patents, open datasets and structured protocol records. The associated project database contains 21 sources, 85 standardized formulations, 278 formulation-component records, 547 property/performance observations, 22 experimental/process protocols, 4559 temperature-viscosity curve points and 1599 descriptor records.
 
 The dense external polyurethane-prepolymer set contains 39 temperature-viscosity curves and 4559 individual measurements.
 
-Reanalysis of these external curves shows that $\ln\eta$ versus $1/T$ is generally well represented locally:
+Reanalysis shows that $\ln\eta$ versus $1/T$ is generally well represented locally:
 
 - median $R^2 \approx 0.9967$;
 - 37 of 39 curves have $R^2\ge0.98$.
 
 However, the apparent temperature-response descriptor spans approximately 34.7–94.2 kJ mol⁻¹, which is much broader than the local E1–E3 range.
 
-To test transferability without formulation leakage, each complete curve was treated as one sample and its apparent $E_\eta$ as one target. Individual temperature points from the same formulation were never randomly split between training and test sets. The primary analysis used the 37 curves with $R^2\ge0.98$; the two lower-fit curves were retained as sensitivity-only records.
+To test transferability without formulation leakage, each complete curve was treated as one sample and its apparent $E_\eta$ as one target; individual temperature points from the same formulation were never randomly split across training and test sets. The primary analysis used the 37 curves with $R^2\ge0.98$; the two lower-fit curves were retained as sensitivity-only records.
 
 A five-descriptor ridge model used prepolymer molecular weight, polyol topological polar surface area, an isocyanate structural descriptor, NCO content and polyol $T_g$.
 
@@ -358,21 +356,21 @@ A five-descriptor ridge model used prepolymer molecular weight, polyol topologic
 
 Both models therefore show the same directional asymmetry between isocyanate-family and polyol-family transfer.
 
-These grouped tests show that the apparent temperature-response descriptor transfers much more readily across the represented isocyanate variation than across an entirely unseen polyol family. The result is interpreted as a chemistry-domain boundary, not as evidence that any individual descriptor is a unique molecular control variable. Several polyol descriptors co-vary strongly with family identity, so coefficient and rank-correlation summaries remain descriptive.
+These grouped tests show that the apparent temperature-response descriptor transfers far more readily across the represented isocyanate variation than across an unseen polyol family. This asymmetry marks a chemistry-domain boundary, not evidence that any single descriptor is a unique molecular control variable. Several polyol descriptors co-vary strongly with family identity, so coefficient and rank-correlation summaries remain descriptive.
 
 The public-data workflow resolves a pinned upstream source revision, records the downloaded archive hash, derives formulation-level targets and uploads only derived reports. The external temperature-response set is not used as a thermal-hold stability label source.
 
-This family-level result sharpens the claim scope. The local shared thermal shape is treated as a **chemistry-bounded transferable representation**, not a universal PUR relation. For prospective use, unmodified local-family candidates can use one-point state calibration as an interpolation prior, whereas resin-modified or otherwise chemistry-shifted candidates require a direct temperature-sweep check before that shortcut is accepted.
+This family-level result sharpens the claim scope: the local shared thermal shape is a **chemistry-bounded transferable representation**, not a universal PUR relation. For prospective use, unmodified local-family candidates can use one-point state calibration as an interpolation prior, whereas resin-modified or otherwise chemistry-shifted candidates require a direct temperature-sweep check before that shortcut is accepted.
 
-External formulation records containing acrylic-like and tackifier-like modifiers are separately used as evidence-bounded intervention priors. Numeric modifier fractions are used as quantitative anchors only when their denominator basis is sufficiently explicit. Records with ambiguous bases remain directional evidence.
+External formulation records containing acrylic-like and tackifier-like modifiers are separately used as evidence-bounded intervention priors. Numeric modifier fractions serve as quantitative anchors only when their denominator basis is sufficiently explicit; records with ambiguous bases remain directional evidence.
 
 ---
 
 # Supplementary Note 8 | Candidate-Recovery Benchmark and candidate-space inheritance
 
-The active experiment-selection analysis inherits the 73-node formulation lattice and the outcome-blind evidence firewall established in the **Candidate-Recovery Benchmark (CRB)**. The held-out validation formulation is not itself a lattice node. CRB remains useful because it established that the later validated region could be recovered without exposing the validation formulation or its outcome to the runtime.
+The experiment-selection analysis inherits the 73-node formulation lattice and the outcome-blind evidence firewall established in the **Candidate-Recovery Benchmark (CRB)**. The held-out validation formulation is not itself a lattice node. CRB established that the later validated region could be recovered without exposing the validation formulation or its outcome to the runtime.
 
-The confirmatory CRB series contained 10 attempts, 8 committed decisions and 2 abstentions. All 8 committed decisions entered the predeclared near region. The strategy-ladder analysis further showed that approximately 94.4% of the numerical distance improvement came from explicit deterministic scientific policy rather than unconstrained language-model generation.
+The confirmatory CRB series contained 10 attempts, 8 committed decisions and 2 abstentions. All 8 committed decisions entered the predeclared near region. The strategy-ladder analysis showed that approximately 94.4% of the numerical distance improvement came from explicit deterministic scientific policy rather than unconstrained language-model generation.
 
 These predecessor results are not pooled with RGES or CBES. Their role is architectural: they justify retaining the same blinded evidence boundary and formulation lattice while changing the decision object from a formulation candidate to an experiment card.
 
@@ -382,7 +380,7 @@ A reader-facing aggregate summary is stored in `derived/crb_candidate_recovery_s
 
 # Supplementary Note 9 | Experiment-card decision object: 292 formulation-measurement pairs
 
-The active decision analysis crosses the frozen 73-node formulation lattice with four measurement plans:
+The decision analysis crosses the frozen 73-node formulation lattice with four measurement plans:
 
 1. `M-HOLD-120`: matched-window 120 °C thermal hold;
 2. `M-REPEAT`: repeatability/state-control measurement;
@@ -397,7 +395,7 @@ $$
 
 experiment cards.
 
-The change is scientifically important because formulation choice and measurement choice are no longer conflated. A plausible composition can still be a poor experiment if its measurement cannot discriminate the registered hypotheses, and an appropriate measurement can still be wasted on a composition whose competing predictions collapse.
+This separation matters: a plausible composition can still yield a poor experiment if its measurement cannot discriminate the registered hypotheses, and the right measurement can still be wasted on a composition whose competing predictions collapse.
 
 ---
 
@@ -413,7 +411,7 @@ Three formulation-level hypotheses were registered before model-mediated experim
 | H-RESIN | resin modification suppresses drift beyond simple dilution | drift substantially below the H-CORE prediction; registered support criterion: drift below 0.5× the H-CORE prediction | drift remains at or above the dilution prediction |
 | H-DUAL | acrylic and tackifier axes play different roles; low drift requires the tackifier-containing dual-axis intervention | low drift only for tackifier-containing compositions | an acrylic-only composition reaches the same low-drift regime |
 
-Here $\phi_r$ is the source-reported reactive-core mass fraction. The hypotheses do not claim a molecularly resolved reaction pathway.
+Here $\phi_r$ is the source-reported reactive-core mass fraction. These hypotheses do not claim a molecularly resolved reaction pathway.
 
 For the completed dual-axis validation formulation, the registered H-RESIN support threshold is half of the H-CORE prediction. Thus, after calculating the reactive mass fraction,
 
@@ -448,17 +446,17 @@ $$
 
 The six normalized components represent hypothesis discrimination, uncertainty reduction, decision relevance, measurement interpretability, extrapolation risk and process-state risk. Base weights are 0.30, 0.20, 0.25, 0.10, 0.10 and 0.05, respectively.
 
-The VOI score is a transparent scientific decision rule. It is not a Bayesian posterior and is not described as calibrated expected information gain.
+The VOI score is a transparent decision rule, not a Bayesian posterior or calibrated expected-information-gain estimate.
 
-Under the frozen registry, only the matched-window 120 °C hold carries non-zero hypothesis discrimination. The other three measurement plans observe coordinates on which the registered hypotheses do not make distinct predictions.
+Under the frozen registry, only the matched-window 120 °C hold carries non-zero hypothesis discrimination; the other three measurement plans observe coordinates on which the registered hypotheses make no distinct predictions.
 
-Independent perturbation of each VOI weight from 0.5× to 1.5× preserves the same five-card top set, the same intervention family and the same 120 °C hold measurement. The deterministic layer is therefore stable at the level of the tied top set rather than at the level of an arbitrary single representative.
+Independently perturbing each VOI weight from 0.5× to 1.5× preserves the same five-card top set, intervention family and 120 °C hold measurement. The deterministic layer is stable at the tied-top-set level, not at the level of any single representative.
 
 ---
 
 # Supplementary Note 12 | Confirmatory experiment-selection series
 
-The rule-complete architecture confirmatory series was declared at $N=10$ before its first run. Model endpoint, prompts, evidence profile, candidate lattice, experiment-card inventory, hypothesis registry, measurement catalog and deterministic VOI implementation were held fixed.
+The confirmatory series for the rule-complete architecture was declared at $N=10$ before its first run. Model endpoint, prompts, evidence profile, candidate lattice, experiment-card inventory, hypothesis registry, measurement catalog and deterministic VOI implementation were held fixed.
 
 ## Supplementary Table S10 | Rule-complete confirmatory series
 
@@ -477,25 +475,25 @@ The rule-complete architecture confirmatory series was declared at $N=10$ before
 
 Nine runs selected `S1C41::M-HOLD-120`. One run selected the acrylic-only `S1C39::M-HOLD-120` as a discriminating probe.
 
-The result should not be interpreted as ten independent discoveries of a formulation. The series measures reproducibility of a frozen decision architecture under the same evidence contract.
+These are not ten independent formulation discoveries. The series measures reproducibility of a frozen decision architecture under the same evidence contract.
 
 ---
 
 # Supplementary Note 13 | Tie-break attribution and the measurable model-layer departure
 
-The deterministic VOI layer is indifferent among five top-scoring dual-axis cards. A coded baseline then applies the supplied minimum-sufficient-intervention policy: maximize VOI, minimize total modifier burden, and finally break any remaining tie by identifier.
+The deterministic VOI layer is indifferent among five top-scoring dual-axis cards. A coded baseline then applies the minimum-sufficient-intervention policy: maximize VOI, minimize total modifier burden, and break any remaining tie by identifier.
 
 That deterministic baseline selects `S1C41::M-HOLD-120` in 10/10 cases. The frozen confirmatory series agrees in 9/10 runs and departs once.
 
 The single departure, `S1C39::M-HOLD-120`, gives up 0.075 VOI relative to the tied maximum and selects an acrylic-only probe because it separates H-RESIN from H-DUAL, the pair left entangled by the dual-axis experiment.
 
-This is the measurable model-layer contribution in the confirmatory series. The other 9/10 selections demonstrate competent application of a supplied scientific policy rather than independent inference of that policy.
+This departure is the measurable model-layer contribution in the confirmatory series; the other 9/10 selections reflect competent application of a supplied scientific policy rather than independent inference of that policy.
 
 ---
 
 # Supplementary Note 14 | Controlled VOI-score withholding
 
-The score-withheld arm was declared at $N=5$. The model, endpoint, all five stage prompts, hypothesis registry, measurement catalog, evidence profile, structural firewall, 73-node lattice and all 292 experiment cards were held fixed. Only the deterministic VOI score, component vector, ranking/tie set, stability sweep and tool-generated acceptance/falsification criteria were withheld.
+The score-withheld arm was declared at $N=5$. Model, endpoint, all five stage prompts, hypothesis registry, measurement catalog, evidence profile, structural firewall, 73-node lattice and all 292 experiment cards were held fixed. Only the deterministic VOI score, component vector, ranking/tie set, stability sweep and tool-generated acceptance/falsification criteria were withheld.
 
 ## Supplementary Table S11 | Rule-complete architecture versus VOI-score-withheld arm
 
@@ -520,7 +518,7 @@ The rule-order arm retains the same cards and VOI components but changes the lex
 
 Under sufficiency-first ordering, the deterministic rank-1 experiment is a dual-axis hold with hypothesis discrimination 0.667. Under minimality-first ordering, the rank-1 experiment is a reactive-core-only hold with hypothesis discrimination 0.
 
-The rule-order result comprises ten completed runs analyzed as a distinct decision-architecture arm and is not pooled with either the rule-complete architecture or the score-withheld arm. Run-level provenance is retained in the versioned repository.
+These ten runs form a distinct decision-architecture arm and are not pooled with the rule-complete or score-withheld series. Run-level provenance is retained in the versioned repository.
 
 ## Supplementary Table S12 | Rule-order arm
 
@@ -548,7 +546,7 @@ In 10/10 runs, the Skeptic raises a high-severity objection identifying the same
 
 The Robustness Adjudicator recommends changing the experiment in 5/10 runs. Nevertheless, all 10 frozen decisions commit to the rule-prioritized experiment.
 
-The important result is therefore structural rather than rhetorical. A critique stage can diagnose a scientific failure and still fail to change the selected experiment when upstream rule priority retains decision authority.
+The result is structural: a critique stage can diagnose a scientific failure and still fail to change the selected experiment when upstream rule priority retains decision authority.
 
 ---
 
@@ -558,7 +556,7 @@ The decision architecture preserves a strict order: pre-result evidence → expe
 
 The adjudicator verifies the frozen recommendation hash before scoring.
 
-Nine confirmatory runs selected the dual-axis experiment family represented by the completed wet-lab validation. The remaining selection corresponds to a different formulation contrast and is therefore outside the available physical adjudication set.
+Nine confirmatory runs selected the dual-axis experiment family represented by the completed wet-lab validation. The remaining selection targets a different formulation contrast and falls outside the available physical adjudication set.
 
 For the dual-axis validation result:
 
@@ -598,7 +596,7 @@ Because the wet-lab result existed before the RGES software architecture was for
 
 # Supplementary Note 19 | CBES applicability under the thermal-hold decision
 
-The **Chemistry-Bounded Experiment Selection (CBES)** comparison tested whether converting the same chemistry-domain applicability audit from advice into a hard measurement-admissibility rule changed experiment selection under the registered thermal-hold drift question.
+**Chemistry-Bounded Experiment Selection (CBES)** tested whether converting the same chemistry-domain applicability audit from advice into a hard measurement-admissibility rule changed experiment selection under the registered thermal-hold drift question.
 
 Both arms used the same model endpoint, prompts, candidate lattice, hypothesis registry, measurement catalog, evidence profile and VOI weights. The applicability audit was model-visible in both arms. The only intended arm-level difference was enforcement: in the **advice-only** arm, audited cards remained selectable; in the **enforced** arm, cards that depended on unsupported transfer of the shared thermal-response shape were removed before ranking and rejected again at freeze.
 
@@ -615,11 +613,11 @@ Both arms used the same model endpoint, prompts, candidate lattice, hypothesis r
 | cards removed by applicability enforcement | 0 | 64 |
 | selection entropy, bits | 0.469 | 0.000 |
 
-The result is a **non-binding applicability test**. Under the drift registry, the matched-window 120 °C hold is the only measurement plan with non-zero hypothesis discrimination because it observes the failure coordinate directly. The one-point anchor is relevant to viscosity-state location but does not separate the registered hold-drift hypotheses. Consequently, the advice-only arm already avoided the unsupported shortcut in all 10 runs.
+The result is a **non-binding applicability test**. Under the drift registry, the matched-window 120 °C hold is the only measurement plan with non-zero hypothesis discrimination because it observes the failure coordinate directly; the one-point anchor locates viscosity state but does not separate the registered hold-drift hypotheses. Consequently, the advice-only arm already avoided the unsupported shortcut in all 10 runs.
 
-The enforced arm therefore removed 64 inadmissible cards without changing the selected measurement or the primary validity metrics. Its zero violation rate is partly a property of enforcement, whereas the 0/10 violation rate in the advice-only arm shows that the shortcut was not behaviorally attractive under this particular scientific question. The chemistry-domain rule becomes decision-relevant only when a proposed experiment actually relies on transferring the shared thermal-response representation.
+Enforcement removed 64 inadmissible cards without changing the selected measurement or the primary validity metrics. Its zero violation rate is partly a property of enforcement, whereas the 0/10 violation rate in the advice-only arm shows that the shortcut was not behaviorally attractive under this scientific question. The chemistry-domain rule becomes decision-relevant only when a proposed experiment actually relies on transferring the shared thermal-response representation.
 
-The aggregate result is stored in `derived/cbes_thermal_hold_condition_summary.json` and is analyzed separately from the RGES confirmatory and ablation series.
+The aggregate result is stored in `derived/cbes_thermal_hold_condition_summary.json`, analyzed separately from the RGES confirmatory and ablation series.
 
 ---
 
@@ -627,7 +625,7 @@ The aggregate result is stored in `derived/cbes_thermal_hold_condition_summary.j
 
 A second CBES condition placed the same chemistry-domain rule in the laboratory decision for which the one-point shortcut is genuinely attractive: **is a resin-modified candidate inside the 120–130 °C processing-viscosity window?**
 
-The measurement plans were unchanged physically, but their relevance was re-declared against the viscosity-level question. `M-ANCHOR` used one 110 °C viscosity determination and inferred the 120–130 °C level from the shared local thermal-response shape. `M-SWEEP` directly measured 80–130 °C in 10 °C increments and therefore established both the processing-window level and the thermal-response shape for the modified chemistry. A predeclared effort term reflected the six-fold difference in viscosity determinations.
+The measurement plans were physically unchanged, but their relevance was re-declared against the viscosity-level question. `M-ANCHOR` used one 110 °C viscosity determination to infer the 120–130 °C level from the shared local thermal-response shape. `M-SWEEP` directly measured 80–130 °C in 10 °C increments, establishing both the processing-window level and the thermal-response shape for the modified chemistry. A predeclared effort term reflected the six-fold difference in viscosity determinations.
 
 Before any model call, deterministic preregistration placed the unsupported one-point anchor above the direct sweep in the advice-only selectable set:
 
@@ -637,9 +635,9 @@ M-SWEEP    VOI = 0.6875   direct temperature-response measurement
 difference       0.0517
 ```
 
-The advice-only selector nevertheless rejected the higher-ranked anchor in **10/10** runs and chose `M-SWEEP` each time. In every run the reasoning explicitly identified the same chemistry-domain issue: the resin-modified formulation had not yet demonstrated transfer of the local shared thermal-response shape. Thus the model-mediated selector accepted a lower deterministic score in order to obtain a direct measurement of the quantity whose transferability was uncertain.
+The advice-only selector rejected the higher-ranked anchor in **10/10** runs and chose `M-SWEEP` each time. In every run the reasoning explicitly identified the same issue: the resin-modified formulation had not yet demonstrated transfer of the local shared thermal-response shape. The model-mediated selector thus accepted a lower deterministic score to obtain a direct measurement of the quantity whose transferability was uncertain.
 
-The enforced arm removed 64 inadmissible cards before ranking. It completed 9 of 10 declared runs and selected `M-SWEEP` in all 9 completed runs; one response failed because of malformed/truncated model output and was not replaced.
+The enforced arm removed 64 inadmissible cards before ranking and completed 9 of 10 declared runs; all 9 selected `M-SWEEP`. One response failed because of malformed/truncated model output and was not replaced.
 
 ## Supplementary Table S14 | Chemistry-domain matched-arm comparison under the processing-window decision
 
@@ -655,9 +653,9 @@ The enforced arm removed 64 inadmissible cards before ranking. It completed 9 of
 | cards removed by applicability enforcement | 0 | 64 |
 | selection entropy, bits | 0.000 | 0.503 |
 
-The primary result is therefore not that enforcement produced a lower observed violation rate: the advice-only arm already avoided the shortcut. Instead, the two arms separate **reasoned avoidance** from **guaranteed admissibility**. In the advice-only arm, scientifically correct behavior depended on the model continuing to use the applicability audit to override a higher-VOI shortcut. In the enforced arm, the same unsupported shortcut was impossible by construction.
+The primary result is not that enforcement lowered the observed violation rate — the advice-only arm already avoided the shortcut. Rather, the two arms separate **reasoned avoidance** from **guaranteed admissibility**. In the advice-only arm, scientifically correct behavior depended on the model continuing to use the applicability audit to override a higher-VOI shortcut; in the enforced arm, the same unsupported shortcut was impossible by construction.
 
-The inverted entropy is a secondary observation. Advice-only selection was perfectly reproducible because the model repeatedly reasoned against the same unsupported high-ranked anchor and converged on one direct sweep. After enforcement removed that contrast, the surviving top sweep cards were deterministically equivalent and one alternative candidate appeared once, increasing entropy to 0.503 bits.
+Entropy inversion is a secondary observation. Advice-only selection was perfectly reproducible: the model repeatedly rejected the same unsupported high-ranked anchor, converging on one direct sweep. After enforcement removed that contrast, the surviving top sweep cards were deterministically equivalent and one alternative candidate appeared once, raising entropy to 0.503 bits.
 
 For the PUR workflow, the experimental implication is concrete: the first processing-window assessment after resin modification should use a direct 80–130 °C sweep to establish the new temperature response. A one-point anchor can be reconsidered for nearby follow-up states only after shape transfer has been established experimentally.
 
