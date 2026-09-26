@@ -1,0 +1,103 @@
+{
+  "protocol_id": "PUR_NEW_REALIZATION_AWARE_EVIDENCE_INTEGRATION_DIAGNOSTIC_V1",
+  "reader_facing_name": "Realization-Aware Evidence Integration",
+  "acronym": "RAEI",
+  "status": "diagnostic_preregistered_before_first_model_call",
+  "declared_date": "2026-09-26",
+  "source_branch": "agent-v5-implementation",
+  "source_commit": "2b45d258826203c269105c55088e1d0c855eb9c1",
+  "purpose": "Test whether preserving and explicitly modeling experimental realization structure changes downstream Agent measurement selection for a new in-domain realization, while keeping the underlying E2 measurements, scientific question, measurement inventory, model stages and chemistry domain fixed.",
+  "scientific_question": "For a future realization of nominal formulation E2, within the already audited PPG2000/PDP70/MDI chemistry family, which next viscosity measurement is the lowest-burden option that remains scientifically justified for determining the 120-130 C processing-window level?",
+  "unit_of_decision": "measurement_plan",
+  "target_scenario": {
+    "nominal_formulation": "E2",
+    "chemistry_family": "unmodified_ppg2000_pdp70_mdi",
+    "chemistry_domain_status": "inside the audited local shared-shape support",
+    "target_temperatures_c": [120, 130],
+    "future_realization_outcome_visible": false,
+    "held_out_validation_formulation_visible": false
+  },
+  "evidence_arms": {
+    "NOMINAL_ONLY": {
+      "description": "The E2 observations are collapsed by formulation and temperature. The Agent sees counts and distribution summaries at each temperature but no cross-temperature realization identity, no state-conditioned fit and no one-anchor transfer statistic.",
+      "underlying_measurements": "same chemistry-audited E2 temperature-sweep observations used by REALIZATION_AWARE",
+      "realization_identity_preserved": false,
+      "state_conditioned_model_visible": false,
+      "same_formulation_anchor_validation_visible": false
+    },
+    "REALIZATION_AWARE": {
+      "description": "The Agent sees the same nominal summaries plus the chemistry-audited state-conditioned rheology summary and the same-formulation E2 one-anchor validation derived from the same underlying measurements.",
+      "underlying_measurements": "same chemistry-audited E2 temperature-sweep observations used by NOMINAL_ONLY",
+      "realization_identity_preserved": true,
+      "state_conditioned_model_visible": true,
+      "same_formulation_anchor_validation_visible": true
+    }
+  },
+  "measurement_inventory": [
+    {
+      "measurement_id": "M-ANCHOR",
+      "effort_points": 1,
+      "decision_quantity": "120-130 C viscosity level reconstructed from one 110 C state anchor",
+      "scientific_dependency": "requires evidence that a shared thermal-response shape transfers across realizations inside this chemistry family"
+    },
+    {
+      "measurement_id": "M-SWEEP",
+      "effort_points": 6,
+      "decision_quantity": "direct viscosity level from 80-130 C, including direct 120 and 130 C measurements",
+      "scientific_dependency": "none beyond the measurement itself"
+    },
+    {
+      "measurement_id": "M-HOLD-120",
+      "effort_points": 8,
+      "decision_quantity": "15-60 min thermal-hold drift",
+      "scientific_dependency": "answers a different coordinate and does not directly resolve the processing-window level"
+    },
+    {
+      "measurement_id": "M-REPEAT",
+      "effort_points": 18,
+      "decision_quantity": "between-preparation realization spread",
+      "scientific_dependency": "answers process reproducibility rather than the level of the current realization"
+    }
+  ],
+  "model_architecture": {
+    "stages": ["Planner", "Proposer", "Skeptic", "Robustness Adjudicator", "Judge"],
+    "same_model_all_stages": true,
+    "deterministic_ranking_visible": false,
+    "reason": "The ablation isolates scientific evidence representation rather than the model's ability to copy a precomputed measurement ranking."
+  },
+  "run_design": {
+    "diagnostic_runs_per_arm": 5,
+    "declared_before_first_model_call": true,
+    "interleaved": true,
+    "no_silent_replacement_of_failed_or_invalid_runs": true,
+    "denominator_for_rates": "declared attempted runs per arm"
+  },
+  "predeclared_evidence_consistent_policy": {
+    "NOMINAL_ONLY": {
+      "measurement_id": "M-SWEEP",
+      "basis": "Without model-visible cross-temperature realization structure or validated one-anchor transfer, using M-ANCHOR would assume a transfer relation that the supplied representation has not established. M-SWEEP directly measures the target temperatures."
+    },
+    "REALIZATION_AWARE": {
+      "measurement_id": "M-ANCHOR",
+      "basis": "Inside the same audited E2 chemistry family, the existing leave-one-realization analysis establishes that one 110 C state anchor can locate the realized viscosity level and reconstruct 120-130 C with low multiplicative error, making the one-point route the lowest-burden supported measurement."
+    }
+  },
+  "primary_metrics": [
+    "committed_abstained_invalid_failed_counts",
+    "measurement_selection_distribution",
+    "M-ANCHOR selection rate",
+    "predeclared evidence-consistent policy match rate",
+    "mean declared effort points among committed decisions",
+    "NOMINAL_ONLY unsupported-anchor rate",
+    "REALIZATION_AWARE overmeasurement rate",
+    "Proposer-to-Judge measurement reversal rate"
+  ],
+  "secondary_effect": "difference in mean declared effort points between REALIZATION_AWARE and NOMINAL_ONLY; descriptive only for this diagnostic series",
+  "claim_boundaries": [
+    "This diagnostic tests information representation for an in-domain future E2 realization; it is not a new materials replicate.",
+    "It does not establish universal one-point calibration across polyurethane chemistries.",
+    "It does not replace the chemistry-domain gate. Existing CBES results remain the evidence that chemistry-shifted candidates require direct thermal-shape verification before using the anchor shortcut.",
+    "The deterministic policy is used only for controller-side scoring and is not shown to the model.",
+    "The diagnostic N=5 per arm is not pooled with RGES, CBES, CRB or any later confirmatory extension."
+  ]
+}
