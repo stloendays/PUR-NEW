@@ -18,7 +18,7 @@ The principal claims supported here are:
 6. RGES selects the evidence-supported family in 9/10 runs with no zero-discrimination selections, whereas withholding the VOI score yields 0/5 supported-family selections and 3/5 zero-discrimination selections;
 7. inverting rule order yields 10/10 zero-discrimination selections, showing that rule order changes scientific decision quality even when the critique stage detects the defect;
 8. under CBES, chemistry applicability is non-binding for a direct thermal-hold question but causes the processing-window problem to be framed as direct sweep verification before reuse of a one-point anchor shortcut;
-9. the wet-lab result falsifies the reactive-core-only dilution explanation and retains resin-associated stabilization at the formulation level.
+9. the wet-lab result rejects the reactive-core-only dilution explanation and leaves resin-associated stabilization compatible with the data at the formulation level.
 
 ---
 
