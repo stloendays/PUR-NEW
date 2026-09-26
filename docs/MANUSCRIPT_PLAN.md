@@ -2,32 +2,32 @@
 
 ## Working title
 
-**State-Conditioned Rheological Design and Evidence-Grounded Agent Guidance for Reactive Polyurethane Hot-Melt Adhesives**
+**Realization-Aware Rheology Enables Hypothesis-Driven Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives**
 
-The paper is a materials-discovery and experiment-selection study. The physical/statistical result comes first; the Agent converts those findings into one useful experiment.
+The paper is a materials-discovery and data-to-decision study. The central story begins with experimental realization: nominally identical formulations need not occupy the same rheological state. The physical/statistical analysis first makes these records scientifically comparable, then identifies the actionable failure coordinate. The Agent operates downstream of that structured evidence to select a discriminating experiment for human wet-lab adjudication.
 
-The current main-text draft is `manuscript/MAIN_TEXT_DRAFT.md`.
+The current main-text draft is `manuscript/MAIN_TEXT_V5.md`.
 
 ---
 
 ## Central scientific logic
 
 ```text
-1. Original local PUR experiments reveal large realization-dependent viscosity shifts.
-2. Chemistry-provenance audit separates the phosphoric-acid-labelled E1 +P curve from the clean same-composition state analysis.
-3. A low-dimensional state-shift structure remains: realization mainly changes viscosity scale while a shared local thermal-response shape is transferable.
-4. One viscosity anchor calibrates an entirely held-out local formulation state to roughly 6-10% pooled multiplicative error; a stricter formulation-plus-temperature holdout retains approximately 1.09x error for 120-130 C short-range extrapolation.
-5. Temperature response and thermal-hold stability are distinct, differently tunable rheological coordinates.
-6. External PUR evidence defines a chemically plausible resin-modification direction and its generalization boundary.
-7. The Agent uses these material rules as scientific tools, reasons over uncertainty and external evidence, and selects a formulation-process experiment.
-8. The recommendation is frozen before physical adjudication in current prospective use; the historical validation chronology is author-confirmed but lacks the original contemporaneous freeze artifact in the repository.
-9. Human wet-lab execution provides the physical result.
-10. The result supports, rejects or qualifies the recommendation and updates the next design state.
+1. Real reactive-PUR experiments are realized under different preparation, reaction and measurement histories, so nominal formulation does not guarantee directly comparable rheological data.
+2. Chemistry-provenance audit defines which records represent the same nominal chemistry and which are deliberate perturbations.
+3. The audited local data reveal a low-dimensional realization structure: viscosity level shifts strongly while a shared local thermal-response shape is retained.
+4. One in-domain viscosity anchor supplies the missing realized-state information and supports short-range reconstruction only after the shared shape has been established.
+5. Thermal-hold stability is a distinct, more formulation-sensitive coordinate and becomes the actionable failure mode.
+6. External PUR evidence supplies provenance-preserved intervention priors, while chemistry-family holdouts define where local thermal-response transfer is admissible.
+7. Deterministic scientific tools convert these findings into an experiment space: formulation x measurement, explicit hypotheses, VOI and chemistry-domain gates.
+8. The model-mediated Agent operates inside this decision geometry to choose the next discriminating experiment rather than replacing the physical rules.
+9. Human wet-lab execution provides the physical adjudication.
+10. The new observation updates the structured evidence state for the next design round.
 ```
 
 Main methodological statement:
 
-> **Reactive-PUR rheology in the tested local chemistry family is well represented by a state-specific viscosity-scale coordinate plus a transferable thermal-response shape. A discovery-to-experiment Agent operationalizes that material rule, together with thermal-hold stability and external formulation evidence, to choose a falsifiable experiment for human wet-lab adjudication.**
+> **Reactive-PUR measurements become decision-useful when realization-dependent viscosity displacement is separated from reusable local thermal-response structure. That realization-aware representation identifies thermal-hold drift as the actionable failure coordinate and, together with chemistry-domain limits and provenance-preserved external evidence, defines the scientific decision geometry within which an Agent selects the next discriminating experiment for human wet-lab adjudication.**
 
 ---
 
