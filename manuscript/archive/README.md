@@ -21,6 +21,13 @@ This snapshot preserves the state after the Results discussion was compressed bu
 
 This snapshot preserves the active manuscript immediately before the Introduction/Results transitions, Figure 1–5 captions and Conclusion were tightened for final-style readability.
 
+## 2026-09-26 pre-language-polish snapshot
+
+- `MAIN_TEXT_2026-09-26_pre_language_polish.md`
+- `SUPPLEMENTARY_INFORMATION_2026-09-26_pre_language_polish.md`
+
+These snapshots preserve the active main text and SI (main at `031a444`) immediately before a sentence-level language polish of both files. The polish changes wording only; numbers, identifiers, citations and scientific claims are unchanged.
+
 ## Figure snapshot reference
 
 The redesigned Figure 1–5 set reviewed with these manuscript snapshots is pinned by Git commit:
