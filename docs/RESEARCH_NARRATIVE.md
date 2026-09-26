@@ -1,21 +1,40 @@
 # Research narrative
 
-## 1. Problem definition
+## 1. Canonical story: from experimental realization to scientific decision
 
-The project is not framed as a static composition-to-viscosity regression problem. In reactive polyurethane hot-melt adhesives, the measured response depends on both **formulation** and **process state**.
+The project is not a static composition-to-viscosity regression study and not an Agent benchmark attached to a materials paper. Its scientific problem begins with **experimental realization**.
 
-```text
-x_chem = formulation variables
-z_proc = reaction history, thermal holding time, preparation / realization perturbation
-```
+Reactive polyurethane hot-melt adhesive measurements are generated through preparation, reaction, thermal residence and rheological measurement steps that cannot be assumed to produce identical material states across runs. Nominal formulation is therefore necessary but insufficient to define the experimental object.
 
 Conceptually:
 
 ```text
-y = rheology(x_chem, z_proc) + experimental uncertainty
+nominal formulation
++ preparation / reaction / measurement history
+-> realized rheological state
+-> measured response
 ```
 
-The practical objective is not merely to hit one viscosity value. It is to identify formulation-process states whose rheology remains useful and sufficiently stable under realistic processing history.
+The paper asks two linked questions:
+
+1. **Can realization-induced variability be separated from reusable material structure?**
+2. **Once the data are made scientifically comparable, how should the next experiment be selected from sparse local data, external evidence and chemistry-dependent constraints?**
+
+The canonical causal chain is:
+
+```text
+real-world experimental realization
+-> realization-aware rheological state
+-> reusable local thermal-response structure
+-> actionable thermal-hold failure coordinate
+-> structured + provenance-preserved evidence
+-> deterministic scientific decision geometry
+-> model-mediated experiment selection
+-> human wet-lab adjudication
+-> updated evidence state for the next round
+```
+
+The Agent is therefore a **decision layer over structured scientific evidence**, not the source of the underlying physical rules and not a substitute for laboratory measurement.
 
 ## 2. Original experimental design
 
@@ -67,7 +86,7 @@ The local apparent temperature-sensitivity descriptor is comparatively concentra
 
 rather than reducing rheology to one static viscosity target.
 
-These physical and model findings are upstream of the Agent. They establish the state-aware design theory first.
+These physical and model findings are upstream of the Agent. Their role is to transform heterogeneous realization-dependent measurements into a comparable scientific representation before any model-mediated decision is attempted.
 
 ## 4. External evidence defines the chemistry search rationale
 
@@ -84,9 +103,9 @@ with additional directional evidence that acrylic functionality/effective reacti
 
 The mechanistic interpretation remains bounded: external analogues justify testing resin identity and functionality, but do not prove one molecular pathway for AC1920/TK100.
 
-## 5. Agent recommendation before the validation result
+## 5. Structured evidence becomes an experiment-selection problem
 
-After the state-aware problem had been established, the Agent was used as a decision layer over the available pre-result evidence.
+After the realization-aware rheological problem had been established, local measurements, chemistry-domain limits, external formulation evidence and measurement semantics were assembled into an explicit decision state. The Agent was then used as a decision layer over that structured pre-result evidence.
 
 The research team confirms the following historical order:
 
@@ -201,9 +220,9 @@ physical/model findings
 
 The strongest overall narrative is:
 
-> **The physical/model findings first established a state-aware rheological design problem. The Agent then selected a validation formulation without access to its later experimental outcome. Human wet-lab execution subsequently produced a low-drift response that supported the recommendation with respect to thermal-hold stability.**
+> **Realization-aware rheology first converts experimentally heterogeneous records into a scientifically comparable state representation. That representation reveals thermal-hold drift as the actionable failure coordinate and defines where local thermal-response shortcuts remain admissible. Provenance-preserved external evidence and deterministic scientific rules then convert the unresolved material question into an experiment-selection problem. The Agent operates within that decision geometry, and human wet-lab execution provides the final physical adjudication.**
 
-This is stronger and more scientifically coherent than presenting the experiment as an input that the Agent later appears to predict.
+The manuscript should therefore read as one continuous materials-science workflow: **realization -> comparable evidence -> actionable failure mode -> discriminating experiment -> physical adjudication**, rather than as a rheology study followed by a separate Agent benchmark.
 
 ## 11. Next design objective
 
