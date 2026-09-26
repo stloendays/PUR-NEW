@@ -2,23 +2,24 @@
 
 ## Scientific question
 
-How can a formulation-design workflow for reactive polyurethane hot-melt adhesives remain useful when rheology depends not only on composition, but also on reaction history, time at temperature and experimental/process realization?
+How can reactive-PUR experiments remain scientifically comparable and decision-useful when nominally identical formulations are realized under different preparation, reaction and measurement histories?
 
 ## Current answer
 
-Treat the experimental object as a **formulation-process state**, quantify state-dependent rheology before the Agent acts, let the Agent recommend a formulation under structured uncertainty, and use human wet-lab execution as an independent physical adjudicator.
+Treat the experimental object as a **realization-aware rheological state** rather than a nominal recipe alone. First separate reusable material structure from realization-dependent viscosity displacement; then identify thermal-hold drift as the actionable formulation coordinate; finally let a chemistry-bounded Agent integrate structured local data, external evidence and measurement semantics to choose the next discriminating experiment. Human wet-lab measurement remains the physical adjudicator.
 
 ## Canonical evidence chain
 
 ```text
-original measured formulation + process evidence
--> state-shift / thermal-response analysis
--> state-aware design theory
--> evidence-grounded Agent recommendation
--> freeze validation formulation + rationale + criterion
--> human wet-lab execution
--> separate physical adjudication
--> update response + uncertainty state
+real-world experimental realization
+-> realization-aware rheological state
+-> reusable local thermal-response structure
+-> actionable thermal-hold failure coordinate
+-> provenance-preserved evidence + chemistry-domain limits
+-> deterministic experiment geometry
+-> model-mediated experiment selection
+-> human wet-lab adjudication
+-> updated evidence state
 -> next design round
 ```
 
@@ -37,18 +38,18 @@ with a realization/state-specific viscosity scale `alpha_r` and a shared local t
 Key model comparisons:
 
 ```text
-formulation-only R2 ~= 0.895
-state-shift shared-shape R2 ~= 0.998
-held-temperature error: ~1.406x -> ~1.055x
-strict unseen-realization formulation-only error: ~1.60x
-one-point state calibration error: ~1.065-1.098x
+formulation-only quadratic R2 ~= 0.8553
+state-conditioned quadratic R2 ~= 0.9977
+held-temperature error: ~1.423x -> ~1.058x
+same-formulation 110 C anchor: 1.824x -> 1.086x at 120-130 C
+held-formulation one-point calibration: ~1.06-1.10x pooled
 ```
 
 ### Distinct rheological coordinates
 
 ```text
-mean local apparent E_eta = 41.87 +/- 2.27 kJ/mol
-CV = 5.4%
+mean local apparent E_eta = 42.05 +/- 2.43 kJ/mol
+CV = 5.77%
 ```
 
 while original 120 C hold drift differs strongly:
@@ -112,20 +113,17 @@ It should not be presented as the historical freeze artifact unless older proven
 
 ## Agent contribution
 
-The Agent contribution is defined at three levels:
+The Agent contribution is downstream of the material analysis:
 
 ```text
-1. state representation
-   formulation + process realization + evidence gaps
-
-2. uncertainty-aware decision
-   measurement + repeatability + process-history + extrapolation + evidence-coverage uncertainty
-
-3. recommendation
-   selected formulation + alternatives + rationale + criterion / abstention
+1. consume the realization-aware evidence state
+2. respect chemistry-domain and measurement-admissibility rules
+3. integrate local measurements with provenance-preserved external priors
+4. choose a formulation x measurement experiment that resolves the open hypothesis
+5. commit / abstain under explicit scientific rules
 ```
 
-The Agent does not receive credit for physical execution. The wet-lab result is the independent adjudicator.
+The Agent does not receive credit for the state-shift discovery, deterministic chemistry/VOI rules, or physical execution. The wet-lab result is the independent adjudicator.
 
 ## Infrastructure now implemented
 
