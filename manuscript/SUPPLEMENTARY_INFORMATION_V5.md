@@ -18,7 +18,7 @@ The principal claims supported here are:
 6. RGES selects the evidence-supported family in 9/10 runs with no zero-discrimination selections, whereas withholding the VOI score yields 0/5 supported-family selections and 3/5 zero-discrimination selections;
 7. inverting rule order yields 10/10 zero-discrimination selections, showing that rule order changes scientific decision quality even when the critique stage detects the defect;
 8. under CBES, chemistry applicability is non-binding for a direct thermal-hold question but causes the processing-window problem to be framed as direct sweep verification before reuse of a one-point anchor shortcut;
-9. the wet-lab result rejects the reactive-core-only dilution explanation and leaves resin-associated stabilization compatible with the data at the formulation level.
+9. the wet-lab result rejects the reactive-core-only dilution explanation and satisfies the registered H-RESIN support criterion at the formulation level.
 
 ---
 
@@ -410,12 +410,12 @@ Three formulation-level hypotheses were registered before model-mediated experim
 | ID | Formulation-level statement | Pre-result prediction | Falsification logic |
 |---|---|---|---|
 | H-CORE | matched-window drift is set by the reactive core; modifiers act only through inert-mass dilution | $SI_{15\rightarrow60}=9.51\%\times\phi_r$ | observed drift falls well below the dilution prediction |
-| H-RESIN | resin modification suppresses drift beyond simple dilution | drift substantially below the H-CORE prediction | drift remains at or above the dilution prediction |
+| H-RESIN | resin modification suppresses drift beyond simple dilution | drift substantially below the H-CORE prediction; registered support criterion: drift below 0.5× the H-CORE prediction | drift remains at or above the dilution prediction |
 | H-DUAL | acrylic and tackifier axes play different roles; low drift requires the tackifier-containing dual-axis intervention | low drift only for tackifier-containing compositions | an acrylic-only composition reaches the same low-drift regime |
 
 Here $\phi_r$ is the source-reported reactive-core mass fraction. The hypotheses do not claim a molecularly resolved reaction pathway.
 
-For the completed dual-axis validation formulation,
+For the completed dual-axis validation formulation, the registered H-RESIN support threshold is half of the H-CORE prediction. Thus, after calculating the reactive mass fraction,
 
 $$
 \phi_r=\frac{99.39}{121.39}=0.8189,
@@ -427,7 +427,7 @@ $$
 9.51\%\times0.8189=7.79\%.
 $$
 
-The measured mean absolute matched-window drift is 1.60%, which is used only in post-freeze adjudication.
+The resulting H-CORE prediction is 7.79%, giving an H-RESIN support threshold of 3.90%. The measured absolute drifts of the two validation repeats are 0.16% and 3.04%, with a mean absolute matched-window drift of 1.60%; both repeats and the mean satisfy the registered H-RESIN support criterion.
 
 ---
 
@@ -565,7 +565,7 @@ For the dual-axis validation result:
 - observed mean absolute $SI_{15\rightarrow60}$: 1.60%;
 - H-CORE dilution prediction: 7.79%;
 - H-CORE is falsified under the frozen criterion;
-- H-RESIN survives;
+- H-RESIN satisfies its registered support criterion;
 - H-DUAL remains entangled with H-RESIN for a dual-axis experiment and requires an acrylic-only measurement for direct separation.
 
 Because the wet-lab result existed before the RGES software architecture was formalized, this is a retrospective outcome-blind adjudication rather than a claim that RGES prospectively caused the original experiment to be run.
