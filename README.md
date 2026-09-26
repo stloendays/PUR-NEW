@@ -2,26 +2,28 @@
 
 > **Agent handoff:** automated coding/research agents should read [`AGENTS.md`](AGENTS.md) first. Claude Code should also read [`CLAUDE.md`](CLAUDE.md). These files point to the current reconciled experimental facts and canonical V5 sources.
 
-## State-Conditioned Rheology Enables Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives
+## Realization-Aware Rheology Enables Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives
 
-PUR-NEW studies a practical formulation problem:
+PUR-NEW studies a practical data-to-decision problem:
 
-> **How should a reactive PUR experiment be selected when the measured rheology depends on both chemistry and the experimentally realized material state?**
+> **How can reactive-PUR measurements remain scientifically comparable and useful for the next experimental decision when nominally identical formulations are realized under different preparation, reaction and measurement histories?**
 
-The project is organized around a materials-science discovery first, followed by an Agent-guided experimental decision and human wet-lab adjudication.
+The project is organized as one continuous materials-science loop rather than a materials study followed by a separate Agent benchmark.
 
 ```text
-measured rheology
--> state-conditioned material regularities
--> design rules
--> external formulation evidence
--> scientific decision Agent
--> frozen experiment point + criterion
+real-world experimental realization
+-> realization-aware rheological state
+-> reusable local thermal-response structure
+-> actionable thermal-hold failure coordinate
+-> structured + provenance-preserved evidence
+-> deterministic scientific decision geometry
+-> model-mediated experiment selection
 -> human wet-lab execution
 -> physical adjudication
+-> updated evidence state
 ```
 
-The Agent is a scientific recommender. It does not synthesize material or operate laboratory hardware.
+The Agent is a scientific decision layer over structured evidence. It does not create the underlying physical rules, synthesize material, or operate laboratory hardware.
 
 ---
 
