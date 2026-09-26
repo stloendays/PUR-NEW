@@ -4,356 +4,199 @@
 
 **Rheological State Identification Guides Hypothesis-Driven Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives**
 
-The paper is a materials-discovery and data-to-decision study. The central story begins with experimental realization: nominally identical formulations need not occupy the same rheological state. The physical/statistical analysis first makes these records scientifically comparable, then identifies the actionable failure coordinate. The Agent operates downstream of that structured evidence to select a discriminating experiment for human wet-lab adjudication.
-
-The current main-text draft is `manuscript/MAIN_TEXT_V5.md`.
-
----
-
-## Central scientific logic
+The manuscript is a materials-science study in which the decision layer is downstream of experimentally established rheology. The active reader-facing story is:
 
 ```text
-1. Real reactive-PUR experiments are realized under different preparation, reaction and measurement histories, so nominal formulation does not guarantee directly comparable rheological data.
-2. Chemistry-provenance audit defines which records represent the same nominal chemistry and which are deliberate perturbations.
-3. The audited local data reveal a low-dimensional realization structure: viscosity level shifts strongly while a shared local thermal-response shape is retained.
-4. One in-domain viscosity anchor supplies the missing realized-state information and supports short-range reconstruction only after the shared shape has been established.
-5. Thermal-hold stability is a distinct, more formulation-sensitive coordinate and becomes the actionable failure mode.
-6. External PUR evidence supplies provenance-preserved intervention priors, while chemistry-family holdouts define where local thermal-response transfer is admissible.
-7. Deterministic scientific tools convert these findings into an experiment space: formulation x measurement, explicit hypotheses, VOI and chemistry-domain gates.
-8. The model-mediated Agent operates inside this decision geometry to choose the next discriminating experiment rather than replacing the physical rules.
-9. Human wet-lab execution provides the physical adjudication.
-10. The new observation updates the structured evidence state for the next design round.
+experimental realization
+-> rheological state identification
+-> reusable local temperature response
+-> thermal-hold failure coordinate
+-> chemistry-bounded transfer + intervention priors
+-> formulation x measurement experiment cards
+-> deterministic scientific rules
+-> model-mediated selection
+-> wet-lab physical adjudication
 ```
 
-Main methodological statement:
-
-> **Reactive-PUR measurements become decision-useful when realization-dependent viscosity displacement is separated from reusable local thermal-response structure. That realization-aware representation identifies thermal-hold drift as the actionable failure coordinate and, together with chemistry-domain limits and provenance-preserved external evidence, defines the scientific decision geometry within which an Agent selects the next discriminating experiment for human wet-lab adjudication.**
+The active main text is `manuscript/MAIN_TEXT_V5.md`. Historical manuscripts and pre-edit snapshots are preserved and must not be overwritten.
 
 ---
 
-## Results order
+## Central scientific claim
 
-### Result 1 — Chemistry-audited state-shift rheology
+> **Nominal formulation alone does not specify the rheological state of reactive PUR. Within the audited local chemistry, realization-dependent viscosity level can be separated from a reusable temperature response; thermal-hold drift then defines a distinct formulation-sensitive failure coordinate that can be converted into a hypothesis-driven next-experiment decision.**
 
-Use the primary audited dataset:
+## Supporting claims and decisive evidence
+
+### 1. Realization state is a dominant source of viscosity variation
+
+Primary audited dataset:
 
 ```text
-36 temperature-viscosity points
+36 temperature-viscosity observations
 6 complete realizations
 3 nominal formulations
 ```
 
-The E1 `+P` curve is phosphoric-acid-labelled and is treated as sensitivity-only until its additive identity/amount is fully reconciled.
-
-Primary comparison:
+Same-basis model comparison:
 
 ```text
-formulation-only linear model:
-R2 ~= 0.852
-held-temperature error ~= 1.442x
+formulation-only quadratic R2 = 0.8553
+state-conditioned quadratic R2 = 0.9977
 
-state intercept + shared quadratic thermal shape:
-R2 ~= 0.9977
-held-temperature error ~= 1.058x
-```
-
-Positive model:
-
-```text
-ln eta_r(T) = alpha_r + g(T) + epsilon
+held-temperature multiplicative error:
+1.423x -> 1.058x
 ```
 
 Model-free check:
 
 ```text
-PC1 explains ~= 99.63% of between-realization variance
-PC1 similarity to constant vertical shift ~= 0.9998
+PC1 = 99.63% of between-realization variance
+cosine similarity to constant vertical shift = 0.9998
 ```
 
-Interpretation:
+The E1 phosphoric-acid perturbation is chemically resolved as 0.025 mmol H3PO4 from a 0.1 mol/L standard solution added during dehydration. It remains outside the primary same-composition fit and is used as a defined perturbation check.
 
-> The dominant realization effect is an approximately multiplicative viscosity-scale displacement across the measured temperature range.
+### 2. One anchor measures realized state information
 
-The earlier all-recorded-curves analysis can remain in Supplementary Information as a sensitivity analysis.
-
-### Result 2 — One-point formulation transfer and bounded local extrapolation
-
-First remove one nominal formulation entirely, learn the shared thermal shape from the others, give each held realization one anchor, and predict its remaining temperatures.
-
-At a 120 C anchor:
+Same-formulation E2 comparison:
 
 ```text
-held E1 ~= 1.028x
-held E2 ~= 1.119x
-held E3 ~= 1.049x
-pooled  ~= 1.099x
+formulation identity only = 1.824x
++ one 110 C state anchor = 1.086x
 ```
 
-Across available anchors, pooled error remains roughly 1.06-1.10x.
-
-Then apply a stricter **joint formulation-and-temperature holdout**:
+Strict formulation + temperature holdout:
 
 ```text
-shape fitting: other formulations only, temperatures <= 110 C
-held formulation: completely unseen during shape fitting
-state information from held realization: one measured 110 C anchor
-prediction targets: 120 C and 130 C
-```
-
-Results:
-
-```text
-n held predictions = 12
+12 predictions from 6 held realizations
 pooled multiplicative RMSE = 1.088x
-120 C multiplicative RMSE = 1.087x
-130 C multiplicative RMSE = 1.089x
-median absolute percentage error = 5.68%
-realization-bootstrap 95% interval = 1.043x-1.126x
+MAPE = 5.68%
+cluster-bootstrap 95% interval = 1.043-1.126x
 ```
 
-Paper-facing conclusion:
+Claim boundary: this is short-range transfer inside the audited E1-E3 chemistry, not universal PUR extrapolation.
 
-> **Within the chemistry-audited E1-E3 neighborhood, a state-specific anchor transfers the shared thermal-response shape to a previously unseen formulation, and the same representation supports 10-20 C short-range extrapolation beyond the fitted temperature range with approximately 1.09x pooled multiplicative error.**
+### 3. Temperature response and thermal-hold drift are distinct measured coordinates
 
-Do not describe this as universal chemistry extrapolation, long-range extrapolation, or transfer across unrelated PUR chemistry families.
-
-### Result 3 — Temperature response and thermal-hold stability are distinct coordinates
-
-Chemistry-audited thermal descriptor:
+Local apparent temperature-response descriptor:
 
 ```text
-mean apparent E_eta ~= 42.05 kJ/mol
-SD                  ~= 2.43 kJ/mol
-CV                  ~= 5.77%
+E_eta = 42.05 +/- 2.43 kJ/mol
+CV = 5.77%
 ```
 
-Original 120 C hold response:
-
-```text
-E1 dln(eta)/dt ~= 0.125 h^-1
-E5 dln(eta)/dt ~= 0.537 h^-1
-ratio          ~= 4.29x
-```
-
-Matched 15-60 min endpoint drift:
+Matched 15-60 min hold drift:
 
 ```text
 E1 = +9.51%
 E5 = +51.54%
 ```
 
-Use:
-
-> **temperature response and thermal-hold stability are distinct, differently tunable rheological coordinates in the current design.**
-
-Do not use `independent` or `orthogonal`.
-
-### Result 4 — External database defines the intervention boundary
-
-External curve context:
+Full 15-90 min log-viscosity drift-rate ratio:
 
 ```text
-39 dense prepolymer curves
-4559 temperature-viscosity points
-median curve R2 ~= 0.9967
-37/39 curves have R2 >= 0.98
-apparent E_eta range ~= 34.7-94.2 kJ/mol
+E5 / E1 = 4.29x
 ```
 
-The database is used for:
+Do not describe the coordinates as statistically independent or orthogonal because they were not jointly measured across the full formulation set.
+
+### 4. Chemistry bounds reuse of the local temperature response
+
+External dense-curve context:
 
 ```text
-broad chemistry landscape
-+
-chemically plausible resin/tackifier directions
-+
-generalization boundary
+39 polyurethane-prepolymer curves
+4559 viscosity measurements
+37/39 with ln(eta) vs 1/T R2 >= 0.98
+E_eta range approximately 34.7-94.2 kJ/mol
 ```
 
-It is not the primary high-accuracy predictor.
-
-Modifier-fraction denominators are audited in `data/external_evidence_basis_audit.csv`. Ambiguous addition-level percentages remain directional evidence rather than exact total-formulation anchors.
-
-### Result 5 — Discovery-to-Experiment Agent
-
-Canonical architecture:
+Grouped family holdout:
 
 ```text
-Planner
--> Evidence / Tool Layer
--> Proposer
--> Skeptic
--> Robustness Adjudicator
--> Judge
--> Freeze
+isocyanate-family holdout: R2 = 0.910, RMSE = 3.12 kJ/mol
+polyol-family holdout:     R2 = -1.456, RMSE = 16.33 kJ/mol
 ```
 
-Core scientific Action:
+Interpretation: the local shared response is chemistry bounded; a resin-modified or otherwise shifted chemistry should receive a direct temperature sweep before one-point state calibration is reused.
+
+### 5. Experiment informativeness belongs to the formulation-measurement pair
+
+Decision object:
 
 ```text
-get_state_aware_rheology_summary()
+73 formulation candidates x 4 measurement plans = 292 experiment cards
 ```
 
-The Action now performs the chemistry-provenance audit and returns:
+The deterministic layer supplies VOI, hypothesis discrimination and chemistry applicability. The model operates inside this geometry.
 
-- audited state-shift model comparison;
-- model-free state-shift check;
-- leave-one-formulation one-point calibration;
-- bounded formulation-and-temperature extrapolation with a strict claim boundary;
-- audited local thermal descriptor;
-- original E1/E5 hold contrast;
-- experiment-design implications and claim boundaries.
-
-The validation formulation and its outcome are excluded from this Action.
-
-The Agent should be described as using discovered material regularities to choose an experiment, not as a literature recipe matcher.
-
-Component ablation is not required for the central paper claim. Repeated API replay may be used only as a secondary reproducibility/consistency check.
-
-### Result 6 — Human-executed physical adjudication
-
-Agent-selected validation formulation:
+Rule-complete series:
 
 ```text
-PPG2000 = 39.60
-PDP-70  = 39.60
-AC1920  = 17
-TK100   = 5
-MDI     = 20.19
+10/10 selected matched-window 120 C hold
+9/10 selected evidence-supported dual-axis family
+0/10 zero-discrimination selections
 ```
 
-120 C hold repeats, common 15-60 min window:
+Ablations:
 
 ```text
-repeat 1 = -0.16%
-repeat 2 = +3.04%
-mean     = +1.47%
+VOI withheld:      0/5 supported family; 3/5 zero discrimination
+rule order inverted: 0/10 supported family; 10/10 zero discrimination
 ```
 
-References:
+Main interpretation: rule content and rule priority determine whether the experiment can answer the scientific question; critique alone is not sufficient if it lacks decision authority.
+
+### 6. Wet-lab adjudication rejects the simple dilution null
+
+Validation matched-window drift:
 
 ```text
-E1 = +9.51%
-E5 = +51.54%
+repeat 1 absolute drift = 0.16%
+repeat 2 absolute drift = 3.04%
+mean absolute drift = 1.60%
 ```
 
-The validation formulation therefore enters a substantially lower-drift regime. This supports the decision objective but does not isolate the mechanism of AC1920 versus TK100.
+Registered tests:
+
+```text
+H-CORE proportional-dilution prediction = 7.79%
+H-RESIN support threshold = 3.89%
+```
+
+Therefore:
+
+- H-CORE is rejected;
+- H-RESIN satisfies its registered support criterion at the formulation level;
+- H-DUAL remains unresolved and requires an acrylic-only matched-window hold.
 
 ---
 
-## Figure plan
+## Main-text emphasis
 
-### Figure 1 — Scientific chronology and Agent decision system
+The main text should prioritize:
 
-Panel A:
+1. rheological state structure;
+2. one-anchor state information;
+3. thermal-hold failure coordinate;
+4. chemistry-dependent transfer boundary;
+5. experiment-card decision geometry;
+6. physical hypothesis adjudication.
 
-```text
-Physical measurements
--> state-conditioned material discovery
--> design rules
--> Agent recommendation
--> freeze
--> human experiment
--> physical adjudication
-```
+Run hashes, engineering chronology, full prompts, failed outputs, detailed arm manifests and superseded architecture history belong in SI/provenance.
 
-Panel B:
+## Chronology boundary
 
-```text
-Planner
--> Evidence/Tools
--> Proposer
--> Skeptic
--> Robustness Adjudicator
--> Judge
--> Freeze
-```
+The formalized RGES/CBES architecture must **not** be described as having prospectively caused the historical wet-lab validation experiment. The wet-lab result existed before the formalized RGES software architecture. The current computational evaluation is outcome-blind at decision time and supports retrospective scientific adjudication of the frozen decision logic.
 
-### Figure 2 — Low-dimensional state-shift rheology
+If independently timestamped evidence for an earlier recommendation is recovered, preserve it in provenance without rewriting the current formalized-RGES chronology.
 
-```text
-A raw chemistry-audited 80-130 C curves
-B normalized / aligned curves
-C model-free PC1 loading versus constant vertical-shift vector
-D formulation-only versus state-aware held-temperature error
-```
+## Version preservation
 
-### Figure 3 — Local formulation transfer and bounded extrapolation
+Before any substantial manuscript restructuring:
 
-Use the reproducible R script `scripts/figure3_local_transfer.R`.
-
-```text
-A pooled leave-one-formulation-out error across anchor temperatures
-B held E1/E2/E3 errors using the 120 C anchor
-C observed versus predicted viscosity for the stricter joint holdout:
-  - held formulation absent from shape fitting
-  - shared shape fitted only through 110 C
-  - one 110 C anchor from the held realization
-  - prediction at unseen 120 C and 130 C
-```
-
-Panel C should report the pooled 1.088x multiplicative RMSE, 5.68% median absolute percentage error, and realization-bootstrap 95% interval of 1.043x-1.126x. The caption must call this **short-range local extrapolation** and explicitly exclude cross-chemistry or universal extrapolation claims.
-
-### Figure 4 — Thermal-hold stability and physical validation
-
-Plot E1, E5 and both validation-formulation repeats at 120 C. Make the common 15-60 min estimand visually explicit.
-
-### Figure 5 — Evidence-to-experiment map
-
-Show:
-
-```text
-local rheological rules
-+ external resin/tackifier evidence
-+ uncertainty
--> Agent-selected experiment point
-```
-
-Encode fraction-basis confidence so ambiguous literature percentages are not presented as exact commensurate anchors.
-
-### Supplementary
-
-- E1 +P sensitivity analysis;
-- all-recorded-curves versus chemistry-audited model comparison;
-- mixed-effects model;
-- functional-form sensitivity;
-- realization provenance table;
-- external chemistry-family grouped validation;
-- optional repeated Agent replay.
-
----
-
-## Claim hierarchy
-
-### Strong physical/model claims
-
-- the dominant local realization effect is approximately a viscosity-scale shift;
-- a shared local thermal shape plus state-specific scale substantially outperforms formulation identity alone;
-- one anchor calibrates a completely held-out local formulation state to roughly 6-10% pooled multiplicative error;
-- thermal-hold stability varies strongly across formulations and is a separate design response.
-
-### Agent physical-validation claim
-
-- the research team confirms that the historical validation formulation was selected before its later wet-lab outcome was known to the Agent;
-- human execution produced two low-drift hold trajectories;
-- those measurements support the recommendation with respect to thermal-hold stability.
-
-### Provenance boundary
-
-- the current repository does not contain the original contemporaneous historical freeze artifact;
-- today's V3 code and V2 grid are later formalizations unless older provenance establishes otherwise;
-- current replay output must not be backdated into the historical recommendation event.
-
-### Claims that remain too strong
-
-- a universal reactive-PUR master curve;
-- universal statistical independence of temperature sensitivity and stability;
-- a unique molecular pathway for viscosity build-up or resin stabilization;
-- a universal optimum modifier percentage;
-- current V3 as the exact historical runtime without archived provenance.
-
----
-
-## Reporting rule
-
-Analyses are selected because they answer a scientific question, not because their results are favorable. Low-value exploratory checks need not occupy the main text, but an analysis should not be silently removed solely because its result weakens a claim. The manuscript can prioritize the strongest pre-defined evidence while preserving contradictory or boundary-defining results in the appropriate sensitivity/Supplementary context.
+1. archive the current active manuscript under `manuscript/archive/`;
+2. do not overwrite historical `MAIN_TEXT_V*.md` or SI files;
+3. retain exact figure recovery through pinned commits or archived outputs;
+4. edit only the active manuscript after the snapshot is created.
