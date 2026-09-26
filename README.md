@@ -1,6 +1,6 @@
 # PUR-NEW
 
-> **Agent handoff:** automated coding/research agents should read [`AGENTS.md`](AGENTS.md) first. Claude Code should also read [`CLAUDE.md`](CLAUDE.md). These files point to the current reconciled experimental facts and canonical V5 sources.
+> **Agent handoff:** automated coding/research agents should read [`AGENTS.md`](AGENTS.md) first. Claude Code should also read [`CLAUDE.md`](CLAUDE.md). These files point to the current reconciled experimental facts and canonical manuscript sources.
 
 ## Rheological State Identification Guides Hypothesis-Driven Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives
 
