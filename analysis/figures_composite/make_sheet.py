@@ -37,20 +37,20 @@ CAP = 4.6                           # caption strip above each figure
 # already has its own Supplementary Figure S1 (the chemistry schematic).
 # stem -> (title, columns). Each column is a list of (file, caption, scale).
 # Columns are balanced by total height, and the order inside the main sheet
-# follows the manuscript: 1 and 2 down the left, 3 to 5 down the right.
+# follows the manuscript: 1 to 3 down the left, 4 and 5 down the right.
 SHEETS = {
     "Sheet_main_figures": (
         "PUR-NEW manuscript figures 1\u20135",
-        [[("fig1/Fig1.svg", "Figure 1   One closed loop, from rheological state "
+        [[("fig1/Fig1.svg", "Figure 1   One closed loop from experimental realization "
                             "to physical adjudication", 0.70),
-          ("fig2/Fig2.svg", "Figure 2   Realization-dependent variation is a "
-                            "calibratable state shift", 0.70)],
-         [("fig3/Fig3.svg", "Figure 3   One-point calibration transfers the "
-                            "shared thermal response", 0.70),
-          ("fig4/Fig4.svg", "Figure 4   Decision quality depends on rule content "
-                            "and rule order", 0.70),
-          ("fig5/Fig5.svg", "Figure 5   Temperature response is concentrated; "
-                            "hold trajectory is not", 0.70)]]),
+          ("fig2/Fig2.svg", "Figure 2   Nominal formulation does not define the "
+                            "realized rheological state", 0.70),
+          ("fig3/Fig3.svg", "Figure 3   One viscosity anchor observes the "
+                            "realized state", 0.70)],
+         [("fig4/Fig4.svg", "Figure 4   Explicit rules shape which experiment "
+                            "is informative", 0.70),
+          ("fig5/Fig5.svg", "Figure 5   Rheological coordinates and physical "
+                            "adjudication", 0.70)]]),
     "Sheet_supplementary_figures": (
         "PUR-NEW supplementary figures",
         [[("fig_arrhenius/Fig_arrhenius.svg",

@@ -26,17 +26,63 @@ the OVITO environment (see *The structure model* below).
 
 | Figure | Directory | Size (mm) | Reads |
 |---|---|---|---|
-| 1 | `fig1/` | 183 x 124 | drawn chemistry; the loop's two measured numbers |
-| 2 | `fig2/` | 183 x 104 | `figures_origin/data/p2A-D`, `results/local_model_free_state_shift_summary.json` |
-| 3 | `fig3/` | 183 x 68 | `results/local_leave_one_formulation_*`, `results/local_joint_formulation_temperature_extrapolation_summary.csv`, `p3C` |
-| 4 | `fig4/` | 183 x 88 | every run's `recommendation.json` under `results/agent_v4_voi/`, checked against `rule_layer_ablation.json` |
-| 5 | `fig5/` | 183 x 96 | `data/temperature_sweeps.csv`, `data/thermal_hold.csv`, `results/local_hold_dynamics.csv` |
+| 1 | `fig1/` | 183 x 143 | drawn chemistry; every loop number and glyph through `figdata` (sweeps, holds, strict holdout, 292 cards) |
+| 2 | `fig2/` | 183 x 100 | `figures_origin/data/p2A-D`, the state-conditioned fit (`figdata.state_model`), `results/local_model_free_state_shift_summary.json` |
+| 3 | `fig3/` | 183 x 98 | strict-holdout detail and summary, `derived/state_anchor_bridge/`, `results/local_leave_one_formulation_pooled.csv`, the bootstrap re-run with seed 20260918 |
+| 4 | `fig4/` | 183 x 144 | every run's `voi_full_ranking.json`, `recommendation.json` and `deliberation.json` under `results/agent_v4_voi/`, checked against `rule_layer_ablation.json` |
+| 5 | `fig5/` | 183 x 100 | `data/temperature_sweeps.csv`, `data/thermal_hold.csv`, `results/local_hold_dynamics.csv`, `analysis/results/analysis_summary.json`, `series_n10/adjudication_summary.json` |
+
+### 2026-09-26 redesign of Figures 1-5
+
+Each main figure now answers a different question with a different visual
+grammar, and one colour language runs through all five (`style.py`): blue for
+realization / state / temperature response, orange for thermal-hold failure,
+green for validated outcomes and retained directions, grey for null models,
+inactive and inadmissible cards. The previous versions remain in git history.
+
+* **Figure 1** — a two-layer closed loop instead of a linear chain: the
+  physical/material layer (left) feeds one structured evidence state (centre),
+  the only input to the decision/experiment layer (right); the wet-lab outcome
+  returns to the evidence state. An "order of authority" strip puts
+  model-mediated selection below physical evidence and deterministic rules.
+  Glyphs are drawn from the data they name. The hard-segment H-bond panel was
+  dropped: it was context, not evidence.
+* **Figure 2** — raw and aligned E2 curves as one before/after pair joined by
+  the operation (subtract `a_fr`); the fitted state intercept as a latent axis
+  beside the formulation-only level; the singular-mode loading on an axis from
+  zero, where a constant shift is flat; dumbbells for the matched-basis model
+  comparison.
+* **Figure 3** — the calibration geometry drawn on one real strict-holdout
+  realization (shape from other formulations at <= 110 C, one anchor, predicted
+  vs measured); formulation identity vs one state anchor as a fork with every
+  prediction; parity; the bootstrap distribution (a histogram, since six
+  clusters make it lumpy) with the anchor-temperature sweep on the same axis.
+* **Figure 4** — the 292 experiment cards drawn as four measurement maps of the
+  formulation lattice: VOI fill, discrimination dots, the tied top set, CBES
+  inadmissibility (M-ANCHOR on resin-modified candidates, 64 cards; the RGES
+  series ran without this gate) and the rule-complete selections. A VOI
+  anatomy panel, the arms' selections on the lattice, and a run-by-run tile
+  map with the critique flags replace the three proportion bars.
+* **Figure 5** — E5 and the validation formulation have no temperature sweep,
+  so the coordinate panel is an orthogonal frame with margins only; no joint
+  point is imputed. The null-model test is one drift axis (E1 reference,
+  dilution prediction, frozen H-RESIN acceptance threshold, measured repeats),
+  and the hypotheses carry an understated status.
+
+### `data/` — the tables the new panels draw
+
+Written by the scripts on every build: `fig2C_state_axis.csv` (fitted `a_fr`
+and `mu_f`), `fig3D_strict_holdout_bootstrap.csv` (10,000 replicates),
+`fig4A_experiment_cards.csv` (all 292 cards with VOI components, tied-top and
+CBES admissibility), `fig4CD_runs.csv` (each frozen run's selection and
+critique flags).
 | SI S2 | `fig_arrhenius/` | 183 x 86 | all seven realizations, and `derived/thermal_model_robustness/` |
 | diagnostic | `fig_column/` | 120 x 152 | one property, seven realizations, stacked against each other |
 | diagnostic | `fig_structure/` | 183 x 88 | the generated hard-segment CIF; constructed model, not measured structure |
 
-Three panels were redrawn rather than carried over, because the earlier
-drawings implied relationships the data does not have:
+Before the 2026-09-26 redesign, three panels had already been redrawn because
+the earlier drawings implied relationships the data does not have (the same
+rules still hold in the redesign):
 
 * **2d** — two model specifications were joined by a thick diagonal, implying
   intermediate states that were never fitted. Now two metrics, each on its own
@@ -67,6 +113,13 @@ Conventions it settles:
   The order-inverted arm's ten runs all live in the `_n5` folder: it was
   declared at n = 5 and extended to 10 after the first five were observed.
 * `wilson()` gives the two-sided 95 % intervals quoted in Figure 4.
+* **Recomputations are asserted, not trusted.** `state_model()` refits the
+  formulation-only and state-conditioned models (R^2 0.8553 / 0.9977);
+  `strict_holdout_curve()` reproduces every strict-holdout prediction to 1e-9;
+  `strict_holdout_bootstrap()` reproduces the 1.043-1.126x interval with the
+  analysis seed; `experiment_cards()` asserts the 292-card inventory is
+  identical in every frozen run; `run_critique()` reproduces the critique counts
+  of `rule_layer_ablation.json`.
 
 ## Chemistry that is drawn
 

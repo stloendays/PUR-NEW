@@ -19,6 +19,31 @@ TINT_G, TINT_B, PAPER = "#E4ECDE", "#E3E7F0", "#F0EEEF"
 PALE_B, PALE_G, MID_G, LINE = "#C6CCDC", "#CBD7C3", "#ACBF9F", "#D6D6D6"
 DARK_G, DARK_B = "#5E7A52", "#5A6480"
 
+# Semantic palette for the main Figures 1-5. One meaning per hue, across all five:
+#   blue   realization / rheological state / temperature response
+#   orange thermal-hold failure / unstable response
+#   green  validated outcome / retained direction
+#   grey   null model / inactive / inadmissible / background
+# Flat fills only; the one ramp (VOI) is sequential in lightness.
+BLUE_XD, BLUE_D, BLUE, BLUE_M, BLUE_L, BLUE_XL = (
+    "#1D3A5F", "#2F5B8A", "#4C7DB0", "#8EAFD2", "#CFDDEE", "#EEF3F9")
+ORNG_D, ORNG, ORNG_M, ORNG_L, ORNG_XL = (
+    "#A9501B", "#D9782F", "#EBAA78", "#F6D8C0", "#FCF1E8")
+GRN_D, GRN, GRN_M, GRN_L, GRN_XL = (
+    "#2F6B3F", "#4F9460", "#8DBE97", "#D2E7D6", "#EFF6F0")
+GRY_D, GRY, GRY_M, GRY_L, GRY_XL = (
+    "#4E535A", "#8A9098", "#B9BEC4", "#DDE0E3", "#F3F4F5")
+VOI_RAMP = ["#F3F4F5", "#D6DCE4", "#A9B6C7", "#6F829C", "#3F5470", "#1F2E45"]
+
+
+def tidy(ax, grid="y"):
+    """Open axes: no top/right spine, a hairline grid behind the data."""
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    if grid:
+        ax.grid(axis=grid, color=GRID, lw=0.4, zorder=0)
+    ax.set_axisbelow(True)
+
 RC = {
     "font.family": "Arial", "font.size": 7, "axes.linewidth": 0.6,
     "axes.edgecolor": INK, "axes.labelcolor": INK, "text.color": INK,
