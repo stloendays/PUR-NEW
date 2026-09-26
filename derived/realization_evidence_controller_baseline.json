@@ -1,0 +1,52 @@
+{
+  "analysis_id": "RAEI_CONTROLLER_BASELINE_V1",
+  "status": "validated_pre_model_control",
+  "validated_by_github_actions_run_id": 36231663405,
+  "validation_step_conclusion": "success",
+  "protocol": "configs/realization_evidence_ablation_v1.json",
+  "underlying_data": {
+    "nominal_formulation": "E2",
+    "chemistry_family": "unmodified_ppg2000_pdp70_mdi",
+    "n_chemistry_audited_observations": 24,
+    "n_realizations": 4,
+    "temperatures_c": [80, 90, 100, 110, 120, 130],
+    "same_underlying_measurements_in_both_evidence_arms": true
+  },
+  "preexisting_same_formulation_material_result": {
+    "formulation_only_multiplicative_rmse": 1.8244156992081213,
+    "one_anchor_multiplicative_rmse": 1.086317254261679,
+    "log_rmse_reduction_fraction": 0.8623002671298862,
+    "interpretation": "Within audited repeated E2 realizations, a 110 C state anchor supplies substantial information about the realized viscosity level at 120-130 C when the local shared-shape assumption is valid."
+  },
+  "controller_side_evidence_sufficiency": {
+    "NOMINAL_ONLY": {
+      "supported_lowest_burden_measurement": "M-SWEEP",
+      "effort_points": 6,
+      "reason": "The nominal-only representation shows matched-temperature spread but does not establish cross-temperature realization pairing or validated one-anchor transfer. M-ANCHOR would therefore require an unstated inference; M-SWEEP measures 120-130 C directly."
+    },
+    "REALIZATION_AWARE": {
+      "supported_lowest_burden_measurement": "M-ANCHOR",
+      "effort_points": 1,
+      "reason": "The target stays within the audited E2 chemistry family and the realization-aware representation includes the leave-one-realization anchor validation. The one-point route is therefore scientifically supported for this in-domain task."
+    }
+  },
+  "implied_measurement_burden_contrast": {
+    "effort_points_nominal_only": 6,
+    "effort_points_realization_aware": 1,
+    "absolute_effort_points_saved": 5,
+    "fractional_effort_reduction": 0.8333333333333334,
+    "interpretation": "The deterministic evidence-sufficiency control predicts that preserving realization information can reduce the next-measurement burden from a six-point sweep to a one-point anchor for this specific in-domain E2 task."
+  },
+  "agent_model_series": {
+    "preregistered_runs_per_arm": 5,
+    "status": "not_started",
+    "reason": "GitHub Actions preflight passed, but repository secret OPENAI_API_KEY was not configured at run time.",
+    "scientific_interpretation": "This is an execution-environment stop, not a failed or null Agent result. No model attempt is counted."
+  },
+  "claim_boundary": [
+    "The 83.3% burden reduction is a controller-side deterministic consequence of the supplied evidence and measurement definitions, not an observed Agent behavior rate.",
+    "The result applies to a future realization inside the audited E2 chemistry family only.",
+    "It does not authorize one-point transfer to resin-modified or otherwise chemistry-shifted candidates.",
+    "Frozen CRB, RGES and CBES results are unchanged."
+  ]
+}
