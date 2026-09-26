@@ -14,6 +14,23 @@ This file is the first-stop project handoff for coding/research agents working i
 - Explicit perturbations: `data/experimental_perturbations.csv`
 - Agent-facing physical evidence: `src/pur_new/scientific_tools.py`
 
+## Canonical manuscript story
+
+The active reader-facing story is:
+
+```text
+experimental realization
+-> realization-aware rheological state
+-> reusable local thermal-response structure
+-> actionable thermal-hold failure coordinate
+-> structured/provenance-preserved evidence
+-> deterministic scientific decision geometry
+-> model-mediated experiment selection
+-> human wet-lab adjudication
+```
+
+Do not rewrite the paper as either (a) a static formulation-to-viscosity prediction study or (b) a materials paper followed by a disconnected Agent benchmark. The Agent operates downstream of the physical analysis and must not receive credit for deterministic rheological rules, chemistry-domain gates, VOI geometry, or wet-lab results.
+
 ## Critical reconciled facts
 
 ### F1 stoichiometry
