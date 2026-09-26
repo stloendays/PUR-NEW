@@ -427,7 +427,7 @@ $$
 9.51\%\times0.8189=7.79\%.
 $$
 
-The resulting H-CORE prediction is 7.79%, giving an H-RESIN support threshold of 3.90%. The measured absolute drifts of the two validation repeats are 0.16% and 3.04%, with a mean absolute matched-window drift of 1.60%; both repeats and the mean satisfy the registered H-RESIN support criterion.
+The resulting H-CORE prediction is 7.79%, giving an H-RESIN support threshold of 3.89%. The measured absolute drifts of the two validation repeats are 0.16% and 3.04%, with a mean absolute matched-window drift of 1.60%; both repeats and the mean satisfy the registered H-RESIN support criterion.
 
 ---
 
