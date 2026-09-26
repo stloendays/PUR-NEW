@@ -35,6 +35,12 @@ experimental realization
 
 Do not rewrite the paper as either (a) a static formulation-to-viscosity prediction study or (b) a materials paper followed by a disconnected Agent benchmark. The Agent operates downstream of the physical analysis and must not receive credit for deterministic rheological rules, chemistry-domain gates, VOI geometry, or wet-lab results.
 
+## Chronology boundary
+
+The formalized RGES/CBES software architecture was developed after the historical wet-lab validation result already existed. Current computational evaluation must therefore be described as outcome-blind retrospective adjudication, not as proof that the formalized RGES/CBES architecture prospectively caused the original experiment to be run.
+
+Keep any earlier informal recommendation history in provenance unless independently timestamped evidence is recovered and explicitly incorporated. Do not let older narrative documents override this boundary.
+
 ## Critical reconciled facts
 
 ### F1 stoichiometry
