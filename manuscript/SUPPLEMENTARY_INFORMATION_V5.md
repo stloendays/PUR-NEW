@@ -1,10 +1,10 @@
 # Supplementary Information
 
-## Rheological State Identification Enables Hypothesis-Driven Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives
+## Rheological State Identification Guides Hypothesis-Driven Experiment Selection in Reactive Polyurethane Hot-Melt Adhesives
 
 ### Scope of this Supplementary Information
 
-This Supplementary Information (SI) supports one closed scientific sequence from rheological-state identification to physical hypothesis adjudication. Notes 1–4 establish the local formulation set, state-conditioned temperature response, one-point state calibration and thermal-hold failure coordinate. Notes 5–7 place the local response inside the broader external evidence base and define the proportional-dilution null. Notes 8 onward document the Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), Chemistry-Bounded Experiment Selection (CBES), controlled rule tests and post-freeze wet-lab adjudication.
+This Supplementary Information (SI) supports one closed scientific sequence from experimental realization and rheological-state identification to physical hypothesis adjudication. Notes 1–4 establish the local formulation set, state-conditioned temperature response, one-point state calibration and thermal-hold failure coordinate. Notes 5–7 place the local response inside the broader external evidence base and define the proportional-dilution null. Notes 8 onward document the Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), Chemistry-Bounded Experiment Selection (CBES), controlled rule tests and post-freeze wet-lab adjudication.
 
 The SI preserves the separation between material evidence and computational decision evidence without presenting them as two independent stories. Material measurements define the physical state and unresolved failure mode; the hypothesis registry and decision rules determine what experiment can resolve that uncertainty; the held-out wet-lab result then updates the hypothesis state.
 
