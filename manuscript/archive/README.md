@@ -9,6 +9,12 @@ This directory preserves reader-facing manuscript snapshots before later editori
 
 These snapshots were copied from the active manuscript state before the main-text Agent/decision sections were compressed to foreground the materials-science argument. The scientific data, figures and frozen decision records were not changed by the archival operation.
 
+## 2026-09-26 post-Results-trim / pre-Methods-trim snapshot
+
+- `MAIN_TEXT_2026-09-26_post_results_trim_pre_methods_trim.md`
+
+This snapshot preserves the state after the Results discussion was compressed but before the decision-architecture Methods were shortened and moved toward the SI.
+
 ## Preservation rule
 
 - Do not overwrite or delete archived manuscript snapshots.
