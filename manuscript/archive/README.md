@@ -15,6 +15,12 @@ These snapshots were copied from the active manuscript state before the main-tex
 
 This snapshot preserves the state after the Results discussion was compressed but before the decision-architecture Methods were shortened and moved toward the SI.
 
+## 2026-09-26 pre-final-style-polish snapshot
+
+- `MAIN_TEXT_2026-09-26_pre_final_style_polish.md`
+
+This snapshot preserves the active manuscript immediately before the Introduction/Results transitions, Figure 1–5 captions and Conclusion were tightened for final-style readability.
+
 ## Figure snapshot reference
 
 The redesigned Figure 1–5 set reviewed with these manuscript snapshots is pinned by Git commit:
