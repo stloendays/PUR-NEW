@@ -14,6 +14,10 @@ This file is the first-stop project handoff for coding/research agents working i
 - Explicit perturbations: `data/experimental_perturbations.csv`
 - Agent-facing physical evidence: `src/pur_new/scientific_tools.py`
 
+## Manuscript preservation rule
+
+Previous manuscript and figure versions are provenance records and must be retained. Do not overwrite, delete or repurpose files under `manuscript/archive/`, historical `MAIN_TEXT_V*.md` / SI snapshots, or older rendered figure directories merely because a newer reader-facing version exists. Editorial work should update the active manuscript while preserving predecessor snapshots. Before a substantial structural compression or rewrite, create an explicit archive snapshot when one does not already exist.
+
 ## Canonical manuscript story
 
 The active reader-facing story is:
