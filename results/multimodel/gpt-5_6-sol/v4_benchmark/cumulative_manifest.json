@@ -1,0 +1,865 @@
+{
+  "batches": [
+    {
+      "batch_id": "batch_01",
+      "driver_sha256": "50eb4def49ae861b6aa75fc997cdb83fb3d24e34d690c30cd6c459390cdbf639",
+      "finished_utc": "2026-09-25T04:04:34Z",
+      "interruptions": [
+        {
+          "action": "operator stopped the driver at a run boundary; the in-flight cbes_B_processing_window_V5_NO_GATE/sol_r003 process was killed before writing any output and is treated as not attempted; the five sol_r003 runs that received 429 remain recorded as technical failures and are not re-run",
+          "cause": "router usage limit (HTTP 429 usage_limit_reached; resets 2026-09-24T10:34:08Z)",
+          "utc": "2026-09-24T06:48:30Z"
+        }
+      ],
+      "main_tree_git_commit": "2b45d258826203c269105c55088e1d0c855eb9c1",
+      "openai_package": "3.10.0",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "protocol_sha256": "26aa2f073c6b1a13d3be5c7f23528a6a99da262013df42ff62afaecc95c27605",
+      "python": "3.12.14",
+      "replicate_ids": [
+        "sol_r001",
+        "sol_r002",
+        "sol_r003",
+        "sol_r004",
+        "sol_r005"
+      ],
+      "resumed": [
+        {
+          "driver_sha256": "5f61b8be18e7605ede4eff74ede81ad27fecf0abb14a292b0017fe4e11be2eae",
+          "protocol_sha256": "82d87ff33becceee3c659791052ad0b4ce5c80d2b4f34f6a5e2fe0130d658242",
+          "utc": "2026-09-24T06:50:13Z"
+        },
+        {
+          "driver_sha256": "5f61b8be18e7605ede4eff74ede81ad27fecf0abb14a292b0017fe4e11be2eae",
+          "protocol_sha256": "82d87ff33becceee3c659791052ad0b4ce5c80d2b4f34f6a5e2fe0130d658242",
+          "utc": "2026-09-24T07:27:29Z"
+        },
+        {
+          "driver_sha256": "5f61b8be18e7605ede4eff74ede81ad27fecf0abb14a292b0017fe4e11be2eae",
+          "protocol_sha256": "82d87ff33becceee3c659791052ad0b4ce5c80d2b4f34f6a5e2fe0130d658242",
+          "utc": "2026-09-24T15:37:31Z"
+        },
+        {
+          "driver_sha256": "5f61b8be18e7605ede4eff74ede81ad27fecf0abb14a292b0017fe4e11be2eae",
+          "protocol_sha256": "82d87ff33becceee3c659791052ad0b4ce5c80d2b4f34f6a5e2fe0130d658242",
+          "utc": "2026-09-25T03:14:16Z"
+        },
+        {
+          "driver_sha256": "5f61b8be18e7605ede4eff74ede81ad27fecf0abb14a292b0017fe4e11be2eae",
+          "protocol_sha256": "82d87ff33becceee3c659791052ad0b4ce5c80d2b4f34f6a5e2fe0130d658242",
+          "utc": "2026-09-25T03:48:39Z"
+        },
+        {
+          "driver_sha256": "5f61b8be18e7605ede4eff74ede81ad27fecf0abb14a292b0017fe4e11be2eae",
+          "protocol_sha256": "82d87ff33becceee3c659791052ad0b4ce5c80d2b4f34f6a5e2fe0130d658242",
+          "utc": "2026-09-25T03:50:15Z"
+        }
+      ],
+      "role": "execution batch (provenance only, not an explanatory variable)",
+      "started_utc": "2026-09-24T05:38:53Z"
+    },
+    {
+      "batch_id": "batch_02",
+      "driver_sha256": "5f61b8be18e7605ede4eff74ede81ad27fecf0abb14a292b0017fe4e11be2eae",
+      "finished_utc": "2026-09-30T15:43:08Z",
+      "main_tree_git_commit": "2b45d258826203c269105c55088e1d0c855eb9c1",
+      "openai_package": "3.10.0",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "protocol_sha256": "82d87ff33becceee3c659791052ad0b4ce5c80d2b4f34f6a5e2fe0130d658242",
+      "python": "3.12.14",
+      "replicate_ids": [
+        "sol_r006",
+        "sol_r007",
+        "sol_r008",
+        "sol_r009",
+        "sol_r010"
+      ],
+      "resumed": [
+        {
+          "driver_sha256": "5f61b8be18e7605ede4eff74ede81ad27fecf0abb14a292b0017fe4e11be2eae",
+          "protocol_sha256": "82d87ff33becceee3c659791052ad0b4ce5c80d2b4f34f6a5e2fe0130d658242",
+          "utc": "2026-09-26T13:35:17Z"
+        },
+        {
+          "driver_sha256": "5f61b8be18e7605ede4eff74ede81ad27fecf0abb14a292b0017fe4e11be2eae",
+          "protocol_sha256": "82d87ff33becceee3c659791052ad0b4ce5c80d2b4f34f6a5e2fe0130d658242",
+          "utc": "2026-09-28T02:48:24Z"
+        },
+        {
+          "driver_sha256": "5f61b8be18e7605ede4eff74ede81ad27fecf0abb14a292b0017fe4e11be2eae",
+          "protocol_sha256": "82d87ff33becceee3c659791052ad0b4ce5c80d2b4f34f6a5e2fe0130d658242",
+          "utc": "2026-09-30T14:58:02Z"
+        },
+        {
+          "driver_sha256": "5f61b8be18e7605ede4eff74ede81ad27fecf0abb14a292b0017fe4e11be2eae",
+          "protocol_sha256": "82d87ff33becceee3c659791052ad0b4ce5c80d2b4f34f6a5e2fe0130d658242",
+          "utc": "2026-09-30T14:58:53Z"
+        }
+      ],
+      "role": "execution batch (provenance only, not an explanatory variable)",
+      "started_utc": "2026-09-26T08:28:08Z"
+    }
+  ],
+  "created_utc": "2026-09-24T05:38:21Z",
+  "model": "gpt-5.6-sol",
+  "protocol_id": "PUR_NEW_CROSSMODEL_GPT56_SOL_REPLICATION_V1",
+  "replicates": [
+    {
+      "batch_id": "batch_01",
+      "conditions": {
+        "cbes_A_drift_V5_FULL": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_FULL\\sol_r001",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 252.34
+        },
+        "cbes_A_drift_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_NO_GATE\\sol_r001",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 236.19
+        },
+        "cbes_B_processing_window_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_FULL\\sol_r001",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 329.44
+        },
+        "cbes_B_processing_window_V5_NO_GATE": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_NO_GATE\\sol_r001",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 8.28
+        },
+        "naive_direct_llm": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\naive_direct_llm\\sol_r001",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 54.7
+        },
+        "rges_full_v4": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_full_v4\\sol_r001",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 281.78
+        },
+        "rges_rule_order_minimality_first": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_rule_order_minimality_first\\sol_r001",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 235.45
+        },
+        "rges_voi_withheld": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_voi_withheld\\sol_r001",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 244.47
+        }
+      },
+      "finished_utc": "2026-09-25T03:50:15Z",
+      "replicate_id": "sol_r001",
+      "started_utc": "2026-09-24T05:38:53Z"
+    },
+    {
+      "batch_id": "batch_01",
+      "conditions": {
+        "cbes_A_drift_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_FULL\\sol_r002",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 294.59
+        },
+        "cbes_A_drift_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_NO_GATE\\sol_r002",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 311.16
+        },
+        "cbes_B_processing_window_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_FULL\\sol_r002",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 269.05
+        },
+        "cbes_B_processing_window_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_NO_GATE\\sol_r002",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 277.82
+        },
+        "naive_direct_llm": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\naive_direct_llm\\sol_r002",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 31.42
+        },
+        "rges_full_v4": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_full_v4\\sol_r002",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 328.02
+        },
+        "rges_rule_order_minimality_first": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_rule_order_minimality_first\\sol_r002",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 270.76
+        },
+        "rges_voi_withheld": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_voi_withheld\\sol_r002",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 272.02
+        }
+      },
+      "finished_utc": "2026-09-25T03:50:15Z",
+      "replicate_id": "sol_r002",
+      "started_utc": "2026-09-24T06:06:16Z"
+    },
+    {
+      "batch_id": "batch_01",
+      "conditions": {
+        "cbes_A_drift_V5_FULL": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_FULL\\sol_r003",
+          "status": "technical_failure",
+          "technical_failure": true,
+          "wall_seconds": 9.53
+        },
+        "cbes_A_drift_V5_NO_GATE": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_NO_GATE\\sol_r003",
+          "status": "technical_failure",
+          "technical_failure": true,
+          "wall_seconds": 10.06
+        },
+        "cbes_B_processing_window_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_FULL\\sol_r003",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 258.17
+        },
+        "cbes_B_processing_window_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_NO_GATE\\sol_r003",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 297.6
+        },
+        "naive_direct_llm": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\naive_direct_llm\\sol_r003",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 29.68
+        },
+        "rges_full_v4": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_full_v4\\sol_r003",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 241.95
+        },
+        "rges_rule_order_minimality_first": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_rule_order_minimality_first\\sol_r003",
+          "status": "technical_failure",
+          "technical_failure": true,
+          "wall_seconds": 9.96
+        },
+        "rges_voi_withheld": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_voi_withheld\\sol_r003",
+          "status": "technical_failure",
+          "technical_failure": true,
+          "wall_seconds": 164.29
+        }
+      },
+      "finished_utc": "2026-09-25T03:50:15Z",
+      "replicate_id": "sol_r003",
+      "started_utc": "2026-09-24T06:40:31Z"
+    },
+    {
+      "batch_id": "batch_01",
+      "conditions": {
+        "cbes_A_drift_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_FULL\\sol_r004",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 253.72
+        },
+        "cbes_A_drift_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_NO_GATE\\sol_r004",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 292.17
+        },
+        "cbes_B_processing_window_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_FULL\\sol_r004",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 303.55
+        },
+        "cbes_B_processing_window_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_NO_GATE\\sol_r004",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 289.62
+        },
+        "naive_direct_llm": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\naive_direct_llm\\sol_r004",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 26.3
+        },
+        "rges_full_v4": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_full_v4\\sol_r004",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 268.9
+        },
+        "rges_rule_order_minimality_first": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_rule_order_minimality_first\\sol_r004",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 201.45
+        },
+        "rges_voi_withheld": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_voi_withheld\\sol_r004",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 285.13
+        }
+      },
+      "finished_utc": "2026-09-25T03:50:15Z",
+      "replicate_id": "sol_r004",
+      "started_utc": "2026-09-24T15:46:58Z"
+    },
+    {
+      "batch_id": "batch_01",
+      "conditions": {
+        "cbes_A_drift_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_FULL\\sol_r005",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 298.51
+        },
+        "cbes_A_drift_V5_NO_GATE": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_NO_GATE\\sol_r005",
+          "status": "technical_failure",
+          "technical_failure": true,
+          "wall_seconds": 187.98
+        },
+        "cbes_B_processing_window_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_FULL\\sol_r005",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 307.76
+        },
+        "cbes_B_processing_window_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_NO_GATE\\sol_r005",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 241.76
+        },
+        "naive_direct_llm": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\naive_direct_llm\\sol_r005",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 26.11
+        },
+        "rges_full_v4": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_full_v4\\sol_r005",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 263.19
+        },
+        "rges_rule_order_minimality_first": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_rule_order_minimality_first\\sol_r005",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 218.75
+        },
+        "rges_voi_withheld": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_voi_withheld\\sol_r005",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 229.66
+        }
+      },
+      "finished_utc": "2026-09-25T04:04:34Z",
+      "replicate_id": "sol_r005",
+      "started_utc": "2026-09-24T16:19:14Z"
+    },
+    {
+      "batch_id": "batch_02",
+      "conditions": {
+        "cbes_A_drift_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_FULL\\sol_r006",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 238.56
+        },
+        "cbes_A_drift_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_NO_GATE\\sol_r006",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 247.78
+        },
+        "cbes_B_processing_window_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_FULL\\sol_r006",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 281.11
+        },
+        "cbes_B_processing_window_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_NO_GATE\\sol_r006",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 271.92
+        },
+        "naive_direct_llm": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\naive_direct_llm\\sol_r006",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 27.62
+        },
+        "rges_full_v4": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_full_v4\\sol_r006",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 244.79
+        },
+        "rges_rule_order_minimality_first": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_rule_order_minimality_first\\sol_r006",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 212.26
+        },
+        "rges_voi_withheld": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_voi_withheld\\sol_r006",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 223.41
+        }
+      },
+      "finished_utc": "2026-09-30T14:58:53Z",
+      "replicate_id": "sol_r006",
+      "started_utc": "2026-09-26T08:28:08Z"
+    },
+    {
+      "batch_id": "batch_02",
+      "conditions": {
+        "cbes_A_drift_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_FULL\\sol_r007",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 252.17
+        },
+        "cbes_A_drift_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_NO_GATE\\sol_r007",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 266.25
+        },
+        "cbes_B_processing_window_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_FULL\\sol_r007",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 263.2
+        },
+        "cbes_B_processing_window_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_NO_GATE\\sol_r007",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 264.57
+        },
+        "naive_direct_llm": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\naive_direct_llm\\sol_r007",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 25.78
+        },
+        "rges_full_v4": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_full_v4\\sol_r007",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 235.2
+        },
+        "rges_rule_order_minimality_first": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_rule_order_minimality_first\\sol_r007",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 245.73
+        },
+        "rges_voi_withheld": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_voi_withheld\\sol_r007",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 240.98
+        }
+      },
+      "finished_utc": "2026-09-30T14:58:53Z",
+      "replicate_id": "sol_r007",
+      "started_utc": "2026-09-26T08:57:33Z"
+    },
+    {
+      "batch_id": "batch_02",
+      "conditions": {
+        "cbes_A_drift_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_FULL\\sol_r008",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 251.03
+        },
+        "cbes_A_drift_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_NO_GATE\\sol_r008",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 286.3
+        },
+        "cbes_B_processing_window_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_FULL\\sol_r008",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 230.4
+        },
+        "cbes_B_processing_window_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_NO_GATE\\sol_r008",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 265.09
+        },
+        "naive_direct_llm": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\naive_direct_llm\\sol_r008",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 28.56
+        },
+        "rges_full_v4": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_full_v4\\sol_r008",
+          "status": "technical_failure",
+          "technical_failure": true,
+          "wall_seconds": 164.12
+        },
+        "rges_rule_order_minimality_first": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_rule_order_minimality_first\\sol_r008",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 216.0
+        },
+        "rges_voi_withheld": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_voi_withheld\\sol_r008",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 249.4
+        }
+      },
+      "finished_utc": "2026-09-30T14:58:53Z",
+      "replicate_id": "sol_r008",
+      "started_utc": "2026-09-26T09:28:02Z"
+    },
+    {
+      "batch_id": "batch_02",
+      "conditions": {
+        "cbes_A_drift_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_FULL\\sol_r009",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 258.32
+        },
+        "cbes_A_drift_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_NO_GATE\\sol_r009",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 241.54
+        },
+        "cbes_B_processing_window_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_FULL\\sol_r009",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 256.4
+        },
+        "cbes_B_processing_window_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_NO_GATE\\sol_r009",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 242.04
+        },
+        "naive_direct_llm": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\naive_direct_llm\\sol_r009",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 24.67
+        },
+        "rges_full_v4": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_full_v4\\sol_r009",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 244.38
+        },
+        "rges_rule_order_minimality_first": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_rule_order_minimality_first\\sol_r009",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 190.46
+        },
+        "rges_voi_withheld": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_voi_withheld\\sol_r009",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 240.67
+        }
+      },
+      "finished_utc": "2026-09-30T14:58:53Z",
+      "replicate_id": "sol_r009",
+      "started_utc": "2026-09-26T13:56:20Z"
+    },
+    {
+      "batch_id": "batch_02",
+      "conditions": {
+        "cbes_A_drift_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_FULL\\sol_r010",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 562.23
+        },
+        "cbes_A_drift_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_A_drift_V5_NO_GATE\\sol_r010",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 748.3
+        },
+        "cbes_B_processing_window_V5_FULL": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_FULL\\sol_r010",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 644.59
+        },
+        "cbes_B_processing_window_V5_NO_GATE": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\cbes_B_processing_window_V5_NO_GATE\\sol_r010",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 618.58
+        },
+        "naive_direct_llm": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\naive_direct_llm\\sol_r010",
+          "status": "invalid",
+          "technical_failure": false,
+          "wall_seconds": 22.9
+        },
+        "rges_full_v4": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_full_v4\\sol_r010",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 237.02
+        },
+        "rges_rule_order_minimality_first": {
+          "returncode": 0,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_rule_order_minimality_first\\sol_r010",
+          "status": "ok",
+          "technical_failure": false,
+          "wall_seconds": 220.91
+        },
+        "rges_voi_withheld": {
+          "returncode": 1,
+          "run_dir": "results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\rges_voi_withheld\\sol_r010",
+          "status": "technical_failure",
+          "technical_failure": true,
+          "wall_seconds": 63.8
+        }
+      },
+      "finished_utc": "2026-09-30T15:43:08Z",
+      "replicate_id": "sol_r010",
+      "started_utc": "2026-09-26T14:24:54Z"
+    }
+  ],
+  "series": {
+    "cbes_A_drift_V5_FULL": {
+      "declaration_checks": {
+        "arm_equal_luna": true,
+        "candidate_set_sha256_equal_luna": true,
+        "decision_condition_equal_luna": true,
+        "evidence_state_sha256_equal_luna": true,
+        "model_is_sol": true,
+        "n_cards_inadmissible_equal_luna": true,
+        "pre_enforcement_payload_sha256_equal_luna": true,
+        "series_input_hashes_equal_luna": true
+      },
+      "luna_reference": "results/agent_v5/series_full_n10",
+      "replay_base_commit": "4421cb2ee99585c468026aa381133922b064d32c",
+      "replay_tree": "D:\\Research\\_purnew_wt\\sol_replay\\cbes_A_drift_V5_FULL",
+      "series_dir": "results/multimodel/gpt-5_6-sol/v4_benchmark/cbes_A_drift_V5_FULL"
+    },
+    "cbes_A_drift_V5_NO_GATE": {
+      "declaration_checks": {
+        "arm_equal_luna": true,
+        "candidate_set_sha256_equal_luna": true,
+        "decision_condition_equal_luna": true,
+        "evidence_state_sha256_equal_luna": true,
+        "model_is_sol": true,
+        "n_cards_inadmissible_equal_luna": true,
+        "pre_enforcement_payload_sha256_equal_luna": true,
+        "series_input_hashes_equal_luna": true
+      },
+      "luna_reference": "results/agent_v5/series_no_gate_n10",
+      "replay_base_commit": "0c205dcb49806673adec3836bb298ae04e5b214e",
+      "replay_tree": "D:\\Research\\_purnew_wt\\sol_replay\\cbes_A_drift_V5_NO_GATE",
+      "series_dir": "results/multimodel/gpt-5_6-sol/v4_benchmark/cbes_A_drift_V5_NO_GATE"
+    },
+    "cbes_B_processing_window_V5_FULL": {
+      "declaration_checks": {
+        "arm_equal_luna": true,
+        "candidate_set_sha256_equal_luna": true,
+        "decision_condition_equal_luna": true,
+        "evidence_state_sha256_equal_luna": true,
+        "model_is_sol": true,
+        "n_cards_inadmissible_equal_luna": true,
+        "pre_enforcement_payload_sha256_equal_luna": true,
+        "series_input_hashes_equal_luna": true
+      },
+      "luna_reference": "results/agent_v5_condition_b/series_full_condition_b_n10",
+      "replay_base_commit": "6fc5ef9d607a64b08127e61dd29cba4ab6076c9e",
+      "replay_tree": "D:\\Research\\_purnew_wt\\sol_replay\\cbes_B_processing_window_V5_FULL",
+      "series_dir": "results/multimodel/gpt-5_6-sol/v4_benchmark/cbes_B_processing_window_V5_FULL"
+    },
+    "cbes_B_processing_window_V5_NO_GATE": {
+      "declaration_checks": {
+        "arm_equal_luna": true,
+        "candidate_set_sha256_equal_luna": true,
+        "decision_condition_equal_luna": true,
+        "evidence_state_sha256_equal_luna": true,
+        "model_is_sol": true,
+        "n_cards_inadmissible_equal_luna": true,
+        "pre_enforcement_payload_sha256_equal_luna": true,
+        "series_input_hashes_equal_luna": true
+      },
+      "luna_reference": "results/agent_v5_condition_b/series_no_gate_condition_b_n10",
+      "replay_base_commit": "4421cb2ee99585c468026aa381133922b064d32c",
+      "replay_tree": "D:\\Research\\_purnew_wt\\sol_replay\\cbes_B_processing_window_V5_NO_GATE",
+      "series_dir": "results/multimodel/gpt-5_6-sol/v4_benchmark/cbes_B_processing_window_V5_NO_GATE"
+    },
+    "naive_direct_llm": {
+      "declaration_checks": {
+        "declared": true
+      },
+      "luna_reference": "results/baselines/naive_llm",
+      "replay_base_commit": "662297bf1fd065c0d628ac052880a531d4ef1200",
+      "replay_tree": "D:\\Research\\_purnew_wt\\sol_replay\\naive_direct_llm",
+      "series_dir": "results/multimodel/gpt-5_6-sol/v4_benchmark/naive_direct_llm"
+    },
+    "rges_full_v4": {
+      "declaration_checks": {
+        "arm_equal_luna": true,
+        "candidate_set_sha256_equal_luna": true,
+        "evidence_state_sha256_equal_luna": true,
+        "model_is_sol": true,
+        "series_input_hashes_equal_luna": true
+      },
+      "luna_reference": "results/agent_v4_voi/series_n10",
+      "replay_base_commit": "99373987221e4ee94f782ad821f6ee2e1463da34",
+      "replay_tree": "D:\\Research\\_purnew_wt\\sol_replay\\rges_full_v4",
+      "series_dir": "results/multimodel/gpt-5_6-sol/v4_benchmark/rges_full_v4"
+    },
+    "rges_rule_order_minimality_first": {
+      "declaration_checks": {
+        "arm_equal_luna": true,
+        "candidate_set_sha256_equal_luna": true,
+        "evidence_state_sha256_equal_luna": true,
+        "model_is_sol": true,
+        "rule_order_equal_luna": true,
+        "series_input_hashes_equal_luna": true,
+        "voi_withheld_flag_equal_luna": true
+      },
+      "luna_reference": "results/agent_v4_voi/series_ablation_rule_order_minimality_first_n5",
+      "replay_base_commit": "38d6f638ce44759a5bbfd82fb01f42f931a6bcf6",
+      "replay_tree": "D:\\Research\\_purnew_wt\\sol_replay\\rges_rule_order_minimality_first",
+      "series_dir": "results/multimodel/gpt-5_6-sol/v4_benchmark/rges_rule_order_minimality_first"
+    },
+    "rges_voi_withheld": {
+      "declaration_checks": {
+        "arm_equal_luna": true,
+        "candidate_set_sha256_equal_luna": true,
+        "evidence_state_sha256_equal_luna": true,
+        "model_is_sol": true,
+        "series_input_hashes_equal_luna": true,
+        "voi_withheld_flag_equal_luna": true
+      },
+      "luna_reference": "results/agent_v4_voi/series_ablation_voi_withheld_n5",
+      "replay_base_commit": "71bf7d9b20e5f8a529c762d2675d5b8d30130976",
+      "replay_tree": "D:\\Research\\_purnew_wt\\sol_replay\\rges_voi_withheld",
+      "series_dir": "results/multimodel/gpt-5_6-sol/v4_benchmark/rges_voi_withheld"
+    }
+  }
+}

@@ -1,0 +1,216 @@
+{
+  "acceptance_criterion": "Accept the state-control objective if R <= 2.00, corresponding to a between-preparation spread of <= 100%, at both 120 C and 130 C across the three independent preparations. This shows that the candidate-level spread beats the catalog's 100% state-control threshold, but it does not accept any of the three level hypotheses because no matched E2 reference is included.",
+  "architecture_version": "5.1.0",
+  "arm": "V5_NO_GATE",
+  "candidate_set_hash": "54f825939d05a159b93eb39e98ccdd4d3a658b4a31fc8a5fff722770aadd24a1",
+  "chemistry_gate": {
+    "applicability_audit_visible_to_model": true,
+    "applicability_gate_enforced": false,
+    "applied_before_voi_ranking": true,
+    "audit_is_arm_independent": true,
+    "gate_id": "PUR_NEW_CHEMISTRY_DOMAIN_GATE_V1",
+    "gate_is_a_language_model": false,
+    "inadmissible_by_rule_id": {
+      "inadmissible_before_shape_verification": 64
+    },
+    "n_cards_inadmissible": 64,
+    "n_cards_removed_from_selectable_set": 0,
+    "n_cards_total": 292,
+    "n_verified_chemistry_families": 0,
+    "pre_enforcement_payload_sha256": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f",
+    "protocol_version": "1.1.0",
+    "selection": {
+      "admissibility_rule_id": "admissible_direct_state_control_measurement",
+      "chemistry_applicability_status": "modified_chemistry_unvalidated",
+      "chemistry_domain_violation": false,
+      "chemistry_family": "resin_modified:ac1920+tk100",
+      "shared_shape_use": "verification_only",
+      "unsupported_shortcut": false
+    },
+    "verified_transfer_registry_version": "1.0.0"
+  },
+  "claim_boundary": "V5.0.0 selects an experiment from pre-result evidence under an outcome-blind runtime with a deterministic chemistry-domain admissibility constraint. A V5 result is evidence about executable scientific constraints on measurement choice. It is not a wet-lab result and does not claim that the historical decision used this ranking.",
+  "decision_mode": "state_control_experiment",
+  "experiment_card": {
+    "acceptance_criterion": "This plan does not return realized viscosity level eta_ref, so it cannot accept or reject any registered level hypothesis. Selecting it leaves the processing-window question open.",
+    "acrylic_like_pct": 15.0,
+    "admissibility_reason": "The repeatability experiment observes between-preparation spread directly and does not reuse the shared thermal-response shape.",
+    "admissibility_rule_id": "admissible_direct_state_control_measurement",
+    "budget_efficiency_detail": {
+      "definition": "1 - effort_points / max(effort_points) over the declared catalog",
+      "effort_points": 18.0,
+      "effort_scale_points": 18.0,
+      "score": 0.0
+    },
+    "candidate_id": "S1C41",
+    "chemistry_applicability_status": "modified_chemistry_unvalidated",
+    "chemistry_family": "resin_modified:ac1920+tk100",
+    "decision_relevance_detail": {
+      "coverage_class": "full_coverage",
+      "coverage_factor": 1.0,
+      "covered_supported_axes": [
+        "acrylic_like",
+        "minor_tackifier_like"
+      ],
+      "measurement_decision_relevance": 0.55,
+      "score": 0.55,
+      "zeroed_supported_axes": []
+    },
+    "experiment_id": "S1C41::M-REPEAT",
+    "extrapolation_risk_detail": {
+      "mean_distance_pct": 0.0,
+      "normalizer_pct": 12.0,
+      "per_axis": {
+        "acrylic_like": {
+          "distance_pct": 0.0,
+          "supported_region_pct": [
+            15.0,
+            25.0
+          ],
+          "value_pct": 15.0
+        },
+        "minor_tackifier_like": {
+          "distance_pct": 0.0,
+          "supported_region_pct": [
+            4.8,
+            6.4
+          ],
+          "value_pct": 5.0
+        }
+      },
+      "score": 0.0
+    },
+    "falsification_criterion": "No registered level hypothesis is falsifiable by this plan: it observes realization displacement delta_fr rather than realized viscosity level eta_ref.",
+    "formulation_state": {
+      "AC1920": 15.0,
+      "MDI": 16.1525384179,
+      "PDP70": 31.923730791,
+      "PPG2000": 31.923730791,
+      "TK100": 5.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "hypothesis_discrimination_detail": {
+      "discriminating_quantity": "realized viscosity level eta_ref",
+      "measurement_resolves_quantity": "realization displacement delta_fr",
+      "n_pairs": 3,
+      "note": "this measurement does not resolve the coordinate the registry disagrees about",
+      "score": 0.0,
+      "separated_pairs": []
+    },
+    "intervention_family": "dual_axis_resin_modified",
+    "measurement_admissible": true,
+    "measurement_id": "M-REPEAT",
+    "measurement_plan": {
+      "measurement_id": "M-REPEAT",
+      "min_repeats": 3,
+      "name": "repeatability / state-control experiment",
+      "primary_observable": "between-preparation spread of the realized viscosity-scale coordinate a_fr at matched temperature",
+      "protocol": "Prepare the same nominal composition three times under a controlled and fully recorded process history, then measure the 80-130 C sweep for each preparation.",
+      "sampling_times_min": [],
+      "temperature_c": null
+    },
+    "minor_tackifier_like_pct": 5.0,
+    "process_state_risk_detail": {
+      "base_before_measurement_plan": 0.75,
+      "measurement_controls_process_state": true,
+      "missing_process_fields": 6,
+      "risk_level": "moderate",
+      "score": 0.15
+    },
+    "reactive_mass_fraction": 0.8,
+    "required_precondition": null,
+    "resin_modified": true,
+    "scientific_hypotheses_addressed": [
+      "H-LEVEL-DILUTE",
+      "H-LEVEL-ASSOC",
+      "H-LEVEL-PLASTIC"
+    ],
+    "shared_shape_use": "verification_only",
+    "uncertainty_reduction_detail": {
+      "novel_chemistry": true,
+      "novel_chemistry_factor": 1.0,
+      "resolves_quantity": "realization displacement delta_fr",
+      "score": 0.8,
+      "unresolved_prior": 0.8
+    },
+    "voi_components": {
+      "budget_efficiency": 0.0,
+      "decision_relevance": 0.55,
+      "extrapolation_risk": 0.0,
+      "hypothesis_discrimination": 0.0,
+      "measurement_interpretability": 0.9,
+      "process_state_risk": 0.15,
+      "uncertainty_reduction": 0.8
+    },
+    "voi_score": 0.3125
+  },
+  "falsification_criterion": "If R > 2.00, corresponding to a between-preparation spread > 100%, at either 120 C or 130 C, falsify the premise that the current preparation protocol controls S1C41's realized viscosity level adequately for formulation-level comparison. Neither this outcome nor R <= 2.00 directly falsifies H-LEVEL-DILUTE, H-LEVEL-ASSOC, or H-LEVEL-PLASTIC; all three remain entangled because the card lacks contemporaneous matched E2 controls.",
+  "frozen_utc": "2026-09-26T14:20:34Z",
+  "gate_enforced": false,
+  "git_commit": "4421cb2ee99585c468026aa381133922b064d32c",
+  "hypotheses_addressed": [
+    "H-LEVEL-DILUTE",
+    "H-LEVEL-ASSOC",
+    "H-LEVEL-PLASTIC"
+  ],
+  "hypotheses_left_entangled": [
+    "H-LEVEL-DILUTE",
+    "H-LEVEL-ASSOC",
+    "H-LEVEL-PLASTIC"
+  ],
+  "hypothesis_registry_hash": "e8c0ed9439281b3e38113a272e39c503830012edacfb278b349842d8893f6269",
+  "input_hash": "dac3d2e2235ee9c186ddf0bf1293aba452cfa07ed283473d0d6daad30b1c3c27",
+  "inspection_status": "frozen_pre_result",
+  "measurement_catalog_hash": "78e022dd0b3b2a3f785bc196c26d9cf096d4fcad34b9d782125d5000bb94d2f8",
+  "model": "gpt-5.6-sol",
+  "next_experiment_if_falsified": "Tighten and fully record the preparation history, then repeat S1C41::M-REPEAT. Once R <= 2.00 at both 120 C and 130 C, run direct 80-130 C sweeps on independently prepared S1C41 and contemporaneous matched-history unmodified E2 controls, using at least three preparations per composition, to test the -42.76%, +17.24%, and -72.76% registered level predictions.",
+  "pre_enforcement_payload_hash": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f",
+  "primary_observable": "Between-preparation multiplicative spread of the realized viscosity-scale coordinate a_fr from three independent 80-130 C sweeps, reported as R = exp(max(a_fr) - min(a_fr)), equivalently the max/min viscosity-scale ratio; the decision is based particularly on R at 120 C and 130 C.",
+  "prompt_hash": "489c66da51888dbfd528a36e0b7810c9ede4e3e38102e5735987e9a85538e4c4",
+  "rationale": "S1C41 is the smallest-modifier-burden member of the tied leading candidate set and remains within the supplied coarse evidence regions. The dominant scientific obstacle is uncontrolled realization state, not lack of numerical separation among the registered predictions. S1C41::M-REPEAT is therefore the most defensible supplied card, even though it is a prerequisite state-control experiment rather than a definitive hypothesis discriminator. Its rheological result can establish candidate-level reproducibility only, not molecular association, plasticization, or modifier-specific causality.",
+  "recommendation_id": "EXP_V5_20260926T142034Z_b37e31e729",
+  "selected_candidate_id": "S1C41",
+  "selected_experiment_id": "S1C41::M-REPEAT",
+  "selected_measurement_id": "M-REPEAT",
+  "stage_disagreements_resolved": "I follow the Robustness Adjudicator and the Skeptic over the Proposer on measurement choice. The Proposer's S1C41::M-SWEEP is chemistry-valid but uses one preparation and cannot overcome the documented approximately threefold realization spread. S1C41::M-REPEAT retains direct 80-130 C measurements while adding three independent preparations, so its main value is removing realization-state ambiguity. I also reject the deterministic VOI-leading M-ANCHOR cards: although the audit is advisory, those cards are marked inadmissible_before_shape_verification because they reconstruct the modified-chemistry response using an unverified unmodified-family shape.",
+  "uncertainty_decomposition": {
+    "evidence_coverage_uncertainty": "The card contains no contemporaneous unmodified E2 controls and no acrylic-only or tackifier-only controls. It therefore cannot calculate a matched formulation displacement or separate acrylic, tackifier, and interaction contributions.",
+    "extrapolation_uncertainty": "S1C41 is outside the measured unmodified chemistry family, although its 15% acrylic-like and 5% tackifier-like loadings lie within the supplied analogue-supported regions. Direct sweeps remove shared-shape extrapolation from the observable, but generalization beyond S1C41 remains unsupported.",
+    "measurement_uncertainty": "Three direct sweeps avoid one-point reconstruction, but only three preparations are available and the catalog's state-control discrimination threshold is 100%; uncertainty in the spread estimate remains substantial.",
+    "realization_state_uncertainty": "This is the dominant uncertainty. Historical E2 max/min ratios are 3.57 at 120 C and 3.34 at 130 C. M-REPEAT directly estimates the corresponding spread for S1C41 rather than treating one realization as a formulation property."
+  },
+  "verified_shape_transfer_hash": "7f6ac25fee722fad630a8014a9656923a8d9f3fcbb384aa60650ef0679de3fe8",
+  "voi": {
+    "components": {
+      "budget_efficiency": 0.0,
+      "decision_relevance": 0.55,
+      "extrapolation_risk": 0.0,
+      "hypothesis_discrimination": 0.0,
+      "measurement_interpretability": 0.9,
+      "process_state_risk": 0.15,
+      "uncertainty_reduction": 0.8
+    },
+    "formula": "VOI = w_hyp * hypothesis_discrimination + w_unc * uncertainty_reduction + w_dec * decision_relevance + w_int * measurement_interpretability - w_ext * extrapolation_risk - w_proc * process_state_risk. Every component is normalized to [0, 1] by construction. This is a transparent normalized score with reported weight sensitivity, not a Bayesian posterior.",
+    "ranked_set": "all experiment cards",
+    "score": 0.3125,
+    "selected_is_in_tied_top_set": false,
+    "tied_top_set": [
+      "S1C41::M-ANCHOR",
+      "S1C46::M-ANCHOR",
+      "S1C51::M-ANCHOR",
+      "S1C56::M-ANCHOR",
+      "S1C61::M-ANCHOR"
+    ],
+    "weights": {
+      "budget_efficiency": 0.15,
+      "decision_relevance": 0.2,
+      "extrapolation_risk": 0.05,
+      "hypothesis_discrimination": 0.3,
+      "measurement_interpretability": 0.1,
+      "process_state_risk": 0.05,
+      "uncertainty_reduction": 0.15
+    }
+  },
+  "workflow_version": "1.2.0"
+}

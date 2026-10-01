@@ -1,0 +1,7 @@
+{
+  "baseline": "naive_direct_llm",
+  "completion_tokens": 1110,
+  "latency_s": 23.656646999996156,
+  "prompt_tokens": 8705,
+  "total_tokens": 9815
+}

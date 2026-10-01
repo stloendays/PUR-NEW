@@ -1,0 +1,3 @@
+[2026-09-30T14:58:02Z] all series declared and verified against the Luna contracts
+[2026-09-30T14:58:02Z] batch_02: resuming unattempted pairs of sol_r006..sol_r010
+refusing to overwrite existing run directory cbes_A_drift_V5_NO_GATE/sol_r010

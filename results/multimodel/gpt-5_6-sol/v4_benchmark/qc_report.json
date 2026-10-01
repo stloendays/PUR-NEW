@@ -1,0 +1,1342 @@
+{
+  "generated_utc": "2026-10-01T02:11:13Z",
+  "n_sol_runs": 80,
+  "n_passing_integrity": 59,
+  "n_technical_failure": 9,
+  "runs": [
+    {
+      "run_id": "sol_r001",
+      "condition_key": "naive_direct_llm",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r002",
+      "condition_key": "naive_direct_llm",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "input_hash_equals_luna": true,
+        "provenance_complete": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r003",
+      "condition_key": "naive_direct_llm",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r004",
+      "condition_key": "naive_direct_llm",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "input_hash_equals_luna": true,
+        "provenance_complete": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r005",
+      "condition_key": "naive_direct_llm",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r006",
+      "condition_key": "naive_direct_llm",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r007",
+      "condition_key": "naive_direct_llm",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r008",
+      "condition_key": "naive_direct_llm",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r009",
+      "condition_key": "naive_direct_llm",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r010",
+      "condition_key": "naive_direct_llm",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r001",
+      "condition_key": "rges_full_v4",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r002",
+      "condition_key": "rges_full_v4",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r003",
+      "condition_key": "rges_full_v4",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r004",
+      "condition_key": "rges_full_v4",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r005",
+      "condition_key": "rges_full_v4",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r006",
+      "condition_key": "rges_full_v4",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r007",
+      "condition_key": "rges_full_v4",
+      "status": "invalid",
+      "technical_failure": false,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r008",
+      "condition_key": "rges_full_v4",
+      "status": "technical_failure",
+      "technical_failure": true,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r009",
+      "condition_key": "rges_full_v4",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r010",
+      "condition_key": "rges_full_v4",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r001",
+      "condition_key": "rges_voi_withheld",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r002",
+      "condition_key": "rges_voi_withheld",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r003",
+      "condition_key": "rges_voi_withheld",
+      "status": "technical_failure",
+      "technical_failure": true,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r004",
+      "condition_key": "rges_voi_withheld",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r005",
+      "condition_key": "rges_voi_withheld",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r006",
+      "condition_key": "rges_voi_withheld",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r007",
+      "condition_key": "rges_voi_withheld",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r008",
+      "condition_key": "rges_voi_withheld",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r009",
+      "condition_key": "rges_voi_withheld",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r010",
+      "condition_key": "rges_voi_withheld",
+      "status": "technical_failure",
+      "technical_failure": true,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r001",
+      "condition_key": "rges_rule_order_minimality_first",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r002",
+      "condition_key": "rges_rule_order_minimality_first",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r003",
+      "condition_key": "rges_rule_order_minimality_first",
+      "status": "technical_failure",
+      "technical_failure": true,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r004",
+      "condition_key": "rges_rule_order_minimality_first",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r005",
+      "condition_key": "rges_rule_order_minimality_first",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r006",
+      "condition_key": "rges_rule_order_minimality_first",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r007",
+      "condition_key": "rges_rule_order_minimality_first",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r008",
+      "condition_key": "rges_rule_order_minimality_first",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r009",
+      "condition_key": "rges_rule_order_minimality_first",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r010",
+      "condition_key": "rges_rule_order_minimality_first",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "voi_full_ranking_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r001",
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r002",
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r003",
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "status": "technical_failure",
+      "technical_failure": true,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r004",
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r005",
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "status": "technical_failure",
+      "technical_failure": true,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r006",
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r007",
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r008",
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r009",
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r010",
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r001",
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "status": "technical_failure",
+      "technical_failure": true,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r002",
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r003",
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "status": "technical_failure",
+      "technical_failure": true,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r004",
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r005",
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r006",
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r007",
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r008",
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r009",
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r010",
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r001",
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "status": "technical_failure",
+      "technical_failure": true,
+      "checks": {
+        "record_present": false
+      },
+      "passes_integrity": false
+    },
+    {
+      "run_id": "sol_r002",
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r003",
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r004",
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r005",
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r006",
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r007",
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r008",
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r009",
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r010",
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r001",
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r002",
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r003",
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r004",
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r005",
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r006",
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r007",
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r008",
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r009",
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    },
+    {
+      "run_id": "sol_r010",
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "status": "ok",
+      "technical_failure": false,
+      "checks": {
+        "record_present": true,
+        "model_on_every_stage_is_sol": true,
+        "prompt_hash_equals_luna": true,
+        "candidate_set_hash_equals_luna": true,
+        "hypothesis_registry_hash_equals_luna": true,
+        "measurement_catalog_hash_equals_luna": true,
+        "pre_enforcement_payload_hash_equals_luna": true,
+        "experiment_cards_sha256_equals_luna": true,
+        "admissibility_audit_sha256_equals_luna": true,
+        "provenance_complete": true,
+        "tool_use_correct": true
+      },
+      "passes_integrity": true
+    }
+  ]
+}

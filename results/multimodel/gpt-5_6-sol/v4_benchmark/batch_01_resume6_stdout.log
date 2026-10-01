@@ -1,0 +1,7 @@
+[2026-09-25T03:50:15Z] all series declared and verified against the Luna contracts
+[2026-09-25T03:50:15Z] batch_01: resuming unattempted pairs of sol_r001..sol_r005
+[2026-09-25T03:55:20Z] sol_r005 cbes_A_drift_V5_FULL: ok (298.51s)
+[2026-09-25T03:59:24Z] sol_r005 cbes_B_processing_window_V5_NO_GATE: ok (241.76s)
+[2026-09-25T04:04:34Z] sol_r005 cbes_B_processing_window_V5_FULL: ok (307.76s)
+[2026-09-25T04:04:34Z] batch_01 finished
+[2026-09-25T04:04:40Z] summary rc=0 =40 integrity_pass=28 luna_repro={'naive_direct_llm': True, 'rges_full_v4': True, 'rges_voi_withheld': True, 'rges_rule_order_minimality_first': True, 'cbes_A_drift_V5_NO_GATE': True, 'cbes_A_drift_V5_FULL': True, 'cbes_B_processing_window_V5_NO_GATE': True, 'cbes_B_processing_window_V5_FULL': True} 

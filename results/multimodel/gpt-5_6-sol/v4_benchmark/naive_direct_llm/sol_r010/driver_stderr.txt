@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "D:\Research\_purnew_wt\sol_replay\naive_direct_llm\scripts\run_naive_llm_baseline.py", line 188, in <module>
+    main()
+  File "D:\Research\_purnew_wt\sol_replay\naive_direct_llm\scripts\run_naive_llm_baseline.py", line 170, in main
+    validate(record, recommendation_schema)
+  File "D:\Tools\pur_bridge_env\Lib\site-packages\jsonschema\validators.py", line 1332, in validate
+    raise error
+jsonschema.exceptions.ValidationError: 'No candidate-specific 120 C thermal-hold measurements are available.' is not of type 'object'
+
+Failed validating 'type' in schema['properties']['constraints']['items']:
+    {'type': 'object',
+     'additionalProperties': False,
+     'required': ['name', 'status'],
+     'properties': {'name': {'type': 'string'},
+                    'status': {'enum': ['pass', 'fail', 'unknown']},
+                    'detail': {'type': ['string', 'null']}}}
+
+On instance['constraints'][1]:
+    'No candidate-specific 120 C thermal-hold measurements are available.'

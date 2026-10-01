@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "D:\Research\_purnew_wt\sol_replay\rges_rule_order_minimality_first\scripts\run_agent_v4.py", line 697, in <module>
+    main()
+  File "D:\Research\_purnew_wt\sol_replay\rges_rule_order_minimality_first\scripts\run_agent_v4.py", line 516, in main
+    planner, stage_usage["planner"] = call_json(
+                                      ^^^^^^^^^^
+  File "D:\Research\_purnew_wt\sol_replay\rges_rule_order_minimality_first\scripts\run_agent_v4.py", line 100, in call_json
+    response = client.chat.completions.create(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\pur_bridge_env\Lib\site-packages\openai\_utils\_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\pur_bridge_env\Lib\site-packages\openai\resources\chat\completions\completions.py", line 1296, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "D:\Tools\pur_bridge_env\Lib\site-packages\openai\_base_client.py", line 1368, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\pur_bridge_env\Lib\site-packages\openai\_base_client.py", line 1141, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.RateLimitError: Error code: 429 - {'error': {'message': '上游错误：{"error":{"type":"usage_limit_reached","message":"The usage limit has been reached","plan_type":"team","resets_at":1790246048,"eligible_promo":null,"resets_in_seconds":13571}}', 'type': 'api_yes_proxy_error', 'code': 429}}

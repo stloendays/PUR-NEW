@@ -1,0 +1,146 @@
+[2026-09-24T05:35:49Z] declared series naive_direct_llm: N=20 (no model call)
+[2026-09-24T05:36:17Z] declared series naive_direct_llm: N=20 (no model call)
+[2026-09-24T05:36:18Z] declared series rges_full_v4: N=20 (no model call)
+[2026-09-24T05:36:42Z] declared series rges_voi_withheld: N=20 (no model call)
+[2026-09-24T05:36:42Z] declared series rges_rule_order_minimality_first: N=20 (no model call)
+[2026-09-24T05:36:55Z] declared series cbes_A_drift_V5_NO_GATE: N=20 (no model call)
+[2026-09-24T05:36:57Z] declared series cbes_A_drift_V5_FULL: N=20 (no model call)
+[2026-09-24T05:38:24Z] declared series cbes_B_processing_window_V5_NO_GATE: N=20 (no model call)
+[2026-09-24T05:38:27Z] declared series cbes_B_processing_window_V5_FULL: N=20 (no model call)
+[2026-09-24T05:38:27Z] all series declared and verified against the Luna contracts
+[2026-09-24T05:38:53Z] all series declared and verified against the Luna contracts
+[2026-09-24T05:38:53Z] batch_01: replicates sol_r001..sol_r005
+[2026-09-24T05:39:48Z] sol_r001 naive_direct_llm: invalid (54.7s)
+[2026-09-24T05:44:30Z] sol_r001 rges_full_v4: ok (281.78s)
+[2026-09-24T05:48:34Z] sol_r001 rges_voi_withheld: ok (244.47s)
+[2026-09-24T05:52:30Z] sol_r001 rges_rule_order_minimality_first: ok (235.45s)
+[2026-09-24T05:56:26Z] sol_r001 cbes_A_drift_V5_NO_GATE: ok (236.19s)
+[2026-09-24T06:00:38Z] sol_r001 cbes_A_drift_V5_FULL: invalid (252.34s)
+[2026-09-24T06:00:47Z] sol_r001 cbes_B_processing_window_V5_NO_GATE: invalid (8.28s)
+[2026-09-24T06:06:16Z] sol_r001 cbes_B_processing_window_V5_FULL: ok (329.44s)
+[2026-09-24T06:06:47Z] sol_r002 naive_direct_llm: ok (31.42s)
+[2026-09-24T06:12:16Z] sol_r002 rges_full_v4: invalid (328.02s)
+[2026-09-24T06:16:48Z] sol_r002 rges_voi_withheld: ok (272.02s)
+[2026-09-24T06:21:18Z] sol_r002 rges_rule_order_minimality_first: ok (270.76s)
+[2026-09-24T06:26:30Z] sol_r002 cbes_A_drift_V5_NO_GATE: ok (311.16s)
+[2026-09-24T06:31:24Z] sol_r002 cbes_A_drift_V5_FULL: ok (294.59s)
+[2026-09-24T06:36:02Z] sol_r002 cbes_B_processing_window_V5_NO_GATE: ok (277.82s)
+[2026-09-24T06:40:31Z] sol_r002 cbes_B_processing_window_V5_FULL: ok (269.05s)
+[2026-09-24T06:41:01Z] sol_r003 naive_direct_llm: invalid (29.68s)
+[2026-09-24T06:45:03Z] sol_r003 rges_full_v4: invalid (241.95s)
+[2026-09-24T06:47:47Z] sol_r003 rges_voi_withheld: technical_failure (164.29s)
+[2026-09-24T06:47:57Z] sol_r003 rges_rule_order_minimality_first: technical_failure (9.96s)
+[2026-09-24T06:48:07Z] sol_r003 cbes_A_drift_V5_NO_GATE: technical_failure (10.06s)
+[2026-09-24T06:48:17Z] sol_r003 cbes_A_drift_V5_FULL: technical_failure (9.53s)
+[2026-09-24T06:49:05Z] operator stop: router usage limit (HTTP 429 usage_limit_reached, resets 2026-09-24T10:34:08Z) after sol_r003 cbes_A_drift_V5_FULL; the in-flight cbes_B_processing_window_V5_NO_GATE/sol_r003 attempt was killed before writing any output and is treated as not attempted
+[2026-09-24T06:50:13Z] all series declared and verified against the Luna contracts
+[2026-09-24T06:50:13Z] batch_01: resuming unattempted pairs of sol_r001..sol_r005
+[2026-09-24T06:50:19Z] quota probe: usage limit, sleeping 13519s before the next run
+[2026-09-24T07:27:29Z] all series declared and verified against the Luna contracts
+[2026-09-24T07:27:29Z] batch_01: resuming unattempted pairs of sol_r001..sol_r005
+[2026-09-24T07:27:36Z] quota probe: usage limit, sleeping 11282s before the next run
+[2026-09-24T07:27:58Z] operator note: previous resume driver ended with the controlling session while sleeping on quota (no run in flight, nothing lost); relaunched detached as PID 37292
+[2026-09-24T15:37:29Z] operator note: detached driver PID 37292 did not survive session teardown; no run was attempted after 07:27Z; relaunching --resume-batch
+[2026-09-24T15:37:31Z] all series declared and verified against the Luna contracts
+[2026-09-24T15:37:31Z] batch_01: resuming unattempted pairs of sol_r001..sol_r005
+[2026-09-24T15:42:38Z] sol_r003 cbes_B_processing_window_V5_NO_GATE: ok (297.6s)
+[2026-09-24T15:46:58Z] sol_r003 cbes_B_processing_window_V5_FULL: ok (258.17s)
+[2026-09-24T15:47:26Z] sol_r004 naive_direct_llm: ok (26.3s)
+[2026-09-24T15:51:57Z] sol_r004 rges_full_v4: ok (268.9s)
+[2026-09-24T15:56:44Z] sol_r004 rges_voi_withheld: ok (285.13s)
+[2026-09-24T16:00:07Z] sol_r004 rges_rule_order_minimality_first: ok (201.45s)
+[2026-09-24T16:05:02Z] sol_r004 cbes_A_drift_V5_NO_GATE: ok (292.17s)
+[2026-09-24T16:09:18Z] sol_r004 cbes_A_drift_V5_FULL: ok (253.72s)
+[2026-09-24T16:14:09Z] sol_r004 cbes_B_processing_window_V5_NO_GATE: ok (289.62s)
+[2026-09-24T16:19:14Z] sol_r004 cbes_B_processing_window_V5_FULL: ok (303.55s)
+[2026-09-24T16:19:42Z] sol_r005 naive_direct_llm: invalid (26.11s)
+[2026-09-24T16:24:07Z] sol_r005 rges_full_v4: ok (263.19s)
+[2026-09-24T16:27:58Z] sol_r005 rges_voi_withheld: ok (229.66s)
+[2026-09-24T16:31:39Z] sol_r005 rges_rule_order_minimality_first: ok (218.75s)
+[2026-09-24T16:34:49Z] sol_r005 cbes_A_drift_V5_NO_GATE: technical_failure (187.98s)
+[2026-09-24T16:34:52Z] quota probe: usage limit, sleeping 9190s before the next run
+[2026-09-25T03:14:14Z] operator note: the quota-waiting driver ended with the controlling session while sleeping (no run in flight); relaunching --resume-batch for the 3 unattempted sol_r005 pairs
+[2026-09-25T03:14:16Z] all series declared and verified against the Luna contracts
+[2026-09-25T03:14:16Z] batch_01: resuming unattempted pairs of sol_r001..sol_r005
+[2026-09-25T03:14:27Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:15:34Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:16:42Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:17:49Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:18:57Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:20:04Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:21:12Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:22:19Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:23:27Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:24:34Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:25:42Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:26:49Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-25T03:48:38Z] operator note: previous driver ended with the controlling session during connection-error probing (router 127.0.0.1:8788 was down; no run attempted); router is back, relaunching --resume-batch
+[2026-09-25T03:48:39Z] all series declared and verified against the Luna contracts
+[2026-09-25T03:48:39Z] batch_01: resuming unattempted pairs of sol_r001..sol_r005
+[2026-09-25T03:50:05Z] operator note: the 03:48Z driver and its in-flight cbes_A_drift_V5_FULL/sol_r005 process were killed by session teardown about 1 min after start, before the runner wrote any output (empty directory removed; treated as not attempted). Relaunching via WMI so the driver is outside the session process tree.
+[2026-09-25T03:50:15Z] all series declared and verified against the Luna contracts
+[2026-09-25T03:50:15Z] batch_01: resuming unattempted pairs of sol_r001..sol_r005
+[2026-09-25T03:55:20Z] sol_r005 cbes_A_drift_V5_FULL: ok (298.51s)
+[2026-09-25T03:59:24Z] sol_r005 cbes_B_processing_window_V5_NO_GATE: ok (241.76s)
+[2026-09-25T04:04:34Z] sol_r005 cbes_B_processing_window_V5_FULL: ok (307.76s)
+[2026-09-25T04:04:34Z] batch_01 finished
+[2026-09-25T04:04:40Z] summary rc=0 =40 integrity_pass=28 luna_repro={'naive_direct_llm': True, 'rges_full_v4': True, 'rges_voi_withheld': True, 'rges_rule_order_minimality_first': True, 'cbes_A_drift_V5_NO_GATE': True, 'cbes_A_drift_V5_FULL': True, 'cbes_B_processing_window_V5_NO_GATE': True, 'cbes_B_processing_window_V5_FULL': True} 
+[2026-09-26T08:28:08Z] all series declared and verified against the Luna contracts
+[2026-09-26T08:28:08Z] batch_02: replicates sol_r006..sol_r010
+[2026-09-26T08:28:40Z] sol_r006 naive_direct_llm: invalid (27.62s)
+[2026-09-26T08:32:46Z] sol_r006 rges_full_v4: invalid (244.79s)
+[2026-09-26T08:36:31Z] sol_r006 rges_voi_withheld: ok (223.41s)
+[2026-09-26T08:40:05Z] sol_r006 rges_rule_order_minimality_first: ok (212.26s)
+[2026-09-26T08:44:16Z] sol_r006 cbes_A_drift_V5_NO_GATE: ok (247.78s)
+[2026-09-26T08:48:17Z] sol_r006 cbes_A_drift_V5_FULL: ok (238.56s)
+[2026-09-26T08:52:50Z] sol_r006 cbes_B_processing_window_V5_NO_GATE: ok (271.92s)
+[2026-09-26T08:57:33Z] sol_r006 cbes_B_processing_window_V5_FULL: ok (281.11s)
+[2026-09-26T08:58:18Z] sol_r007 naive_direct_llm: invalid (25.78s)
+[2026-09-26T09:02:17Z] sol_r007 rges_full_v4: invalid (235.2s)
+[2026-09-26T09:06:20Z] sol_r007 rges_voi_withheld: ok (240.98s)
+[2026-09-26T09:10:28Z] sol_r007 rges_rule_order_minimality_first: ok (245.73s)
+[2026-09-26T09:14:56Z] sol_r007 cbes_A_drift_V5_NO_GATE: ok (266.25s)
+[2026-09-26T09:19:10Z] sol_r007 cbes_A_drift_V5_FULL: ok (252.17s)
+[2026-09-26T09:23:37Z] sol_r007 cbes_B_processing_window_V5_NO_GATE: ok (264.57s)
+[2026-09-26T09:28:02Z] sol_r007 cbes_B_processing_window_V5_FULL: ok (263.2s)
+[2026-09-26T09:28:33Z] sol_r008 naive_direct_llm: invalid (28.56s)
+[2026-09-26T09:31:19Z] sol_r008 rges_full_v4: technical_failure (164.12s)
+[2026-09-26T09:31:23Z] quota probe: usage limit, sleeping 14067s before the next run
+[2026-09-26T13:30:02Z] sol_r008 rges_voi_withheld: ok (249.4s)
+[2026-09-26T13:35:02Z] operator note: batch_02 driver was interrupted (^C in batch_02_stdout.log) at ~13:32Z while running sol_r008 rges_rule_order_minimality_first; the runner had written no output (empty replay-tree directory removed; treated as not attempted). One-token quota probe OK (3.3 s) at ~13:34Z; relaunching --resume-batch via WMI outside the session process tree.
+[2026-09-26T13:35:17Z] all series declared and verified against the Luna contracts
+[2026-09-26T13:35:17Z] batch_02: resuming unattempted pairs of sol_r006..sol_r010
+[2026-09-26T13:38:59Z] sol_r008 rges_rule_order_minimality_first: ok (216.0s)
+[2026-09-26T13:43:47Z] sol_r008 cbes_A_drift_V5_NO_GATE: ok (286.3s)
+[2026-09-26T13:48:00Z] sol_r008 cbes_A_drift_V5_FULL: ok (251.03s)
+[2026-09-26T13:52:28Z] sol_r008 cbes_B_processing_window_V5_NO_GATE: ok (265.09s)
+[2026-09-26T13:56:20Z] sol_r008 cbes_B_processing_window_V5_FULL: ok (230.4s)
+[2026-09-26T13:56:46Z] sol_r009 naive_direct_llm: invalid (24.67s)
+[2026-09-26T14:00:52Z] sol_r009 rges_full_v4: ok (244.38s)
+[2026-09-26T14:04:56Z] sol_r009 rges_voi_withheld: ok (240.67s)
+[2026-09-26T14:08:08Z] sol_r009 rges_rule_order_minimality_first: ok (190.46s)
+[2026-09-26T14:12:11Z] sol_r009 cbes_A_drift_V5_NO_GATE: ok (241.54s)
+[2026-09-26T14:16:31Z] sol_r009 cbes_A_drift_V5_FULL: ok (258.32s)
+[2026-09-26T14:20:35Z] sol_r009 cbes_B_processing_window_V5_NO_GATE: ok (242.04s)
+[2026-09-26T14:24:54Z] sol_r009 cbes_B_processing_window_V5_FULL: ok (256.4s)
+[2026-09-26T14:25:19Z] sol_r010 naive_direct_llm: invalid (22.9s)
+[2026-09-26T14:29:18Z] sol_r010 rges_full_v4: ok (237.02s)
+[2026-09-26T14:30:23Z] sol_r010 rges_voi_withheld: technical_failure (63.8s)
+[2026-09-26T14:30:26Z] quota probe: usage limit, sleeping 14216s before the next run
+[2026-09-28T02:48:21Z] operator note: the quota-sleeping batch_02 resume driver (sleep from 14:30Z on 09-26) did not survive and never logged again; no run in flight and no leftover run directory. Quota probe OK; relaunching --resume-batch via WMI for the 5 unattempted sol_r010 pairs
+[2026-09-28T02:48:24Z] all series declared and verified against the Luna contracts
+[2026-09-28T02:48:24Z] batch_02: resuming unattempted pairs of sol_r006..sol_r010
+[2026-09-28T02:52:09Z] sol_r010 rges_rule_order_minimality_first: ok (220.91s)
+[2026-09-30T14:57:58Z] operator note: the batch_02 resume driver launched 2026-09-28T02:48Z stopped logging after sol_r010 rges_rule_order_minimality_first (02:52Z); no driver process alive and no run in flight. Relaunching --resume-batch (detached, outside the session process tree) for the 4 unattempted sol_r010 pairs; the driver's own quota probe gates each run.
+[2026-09-30T14:58:02Z] all series declared and verified against the Luna contracts
+[2026-09-30T14:58:02Z] batch_02: resuming unattempted pairs of sol_r006..sol_r010
+[2026-09-30T14:58:51Z] operator note: resume refused because the 2026-09-28 driver died while starting sol_r010 cbes_A_drift_V5_NO_GATE; its replay-tree run directory was empty (no output written), removed and treated as not attempted. Relaunching --resume-batch.
+[2026-09-30T14:58:53Z] all series declared and verified against the Luna contracts
+[2026-09-30T14:58:53Z] batch_02: resuming unattempted pairs of sol_r006..sol_r010
+[2026-09-30T14:59:04Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-30T15:12:37Z] sol_r010 cbes_A_drift_V5_NO_GATE: ok (748.3s)
+[2026-09-30T15:22:01Z] sol_r010 cbes_A_drift_V5_FULL: ok (562.23s)
+[2026-09-30T15:32:21Z] sol_r010 cbes_B_processing_window_V5_NO_GATE: ok (618.58s)
+[2026-09-30T15:43:08Z] sol_r010 cbes_B_processing_window_V5_FULL: ok (644.59s)
+[2026-09-30T15:43:08Z] batch_02 finished
+[2026-09-30T15:43:16Z] summary rc=0 =80 integrity_pass=59 luna_repro={'naive_direct_llm': True, 'rges_full_v4': True, 'rges_voi_withheld': True, 'rges_rule_order_minimality_first': True, 'cbes_A_drift_V5_NO_GATE': True, 'cbes_A_drift_V5_FULL': True, 'cbes_B_processing_window_V5_NO_GATE': True, 'cbes_B_processing_window_V5_FULL': True} 

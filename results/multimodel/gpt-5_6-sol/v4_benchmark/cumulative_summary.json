@@ -1,0 +1,3271 @@
+{
+  "generated_utc": "2026-10-01T02:11:12Z",
+  "protocol_id": "PUR_NEW_CROSSMODEL_GPT56_SOL_REPLICATION_V1",
+  "dataset_rule": "all Sol replicates executed under the protocol are pooled; execution batches are provenance only",
+  "denominator_rule": "rates use attempted runs minus technical (API/infrastructure) failures; model-output-invalid runs stay in the denominator",
+  "final_decision_correct_definition": {
+    "naive_direct_llm": "CRB level-3 endpoint: selected candidate within the predeclared 7.5 pp modifier-plane L1 near region of the held-out composition (post-freeze scoring)",
+    "rges": "frozen RGES adjudication rule: committed selection whose intervention family (dual-axis resin-modified) AND measurement plan (M-HOLD-120) both match the completed experiment",
+    "cbes_A": "committed, chemistry-admissible (no domain violation, no unsupported shortcut) selection of the direct thermal-hold measurement M-HOLD-120",
+    "cbes_B": "committed, chemistry-admissible (no domain violation, no unsupported shortcut) selection of the direct temperature sweep M-SWEEP"
+  },
+  "conditions": {
+    "naive_direct_llm": {
+      "role": "Direct LLM",
+      "reader_facing": "CRB naive direct-LLM baseline",
+      "luna": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 0,
+            "of": 10
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 0,
+        "n_scientific_denominator": 10,
+        "n_completed": 7,
+        "n_committed": 7,
+        "n_abstained": 0,
+        "n_invalid": 3,
+        "final_decision_correct": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "intervention_family_counts": {
+          "reactive_core_only": 7
+        },
+        "measurement_counts": {
+          "null": 7
+        },
+        "selected_counts": {
+          "S1C01": 7
+        },
+        "selection_entropy_bits": -0.0,
+        "mean_hypothesis_discrimination": null,
+        "zero_discrimination": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "high_severity_objection": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "committed_anyway": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "tie_occurrence": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "tie_visible_to_model": 0,
+        "tie_break_selected_inside_tied_set": 0,
+        "tie_break_matches_coded_minimum_burden_rule": 0,
+        "proposer_tie_break_inside_tied_set": 0,
+        "proposer_tie_break_matches_coded_rule": 0,
+        "n_with_proposer_stage": 0,
+        "final_decision_differs_from_proposer": 0,
+        "tie_break_departures_from_coded_rule": [],
+        "tool_use_correct": {
+          "count": 0,
+          "of": 7,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3543
+          ]
+        },
+        "provenance_complete": {
+          "count": 7,
+          "of": 7,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6457,
+            1.0
+          ]
+        },
+        "failure_categories": {
+          "invalid_model_output_not_retained": 3
+        },
+        "total_tokens_mean": 9943,
+        "total_tokens_sum": 69598,
+        "llm_latency_s_mean": 32.6,
+        "modifier_plane_l1_mean": 18.123,
+        "near_region_hit": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        }
+      },
+      "luna_reproduction_check": {
+        "pass": true,
+        "mismatches": {}
+      },
+      "sol": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 0,
+            "of": 10
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 0,
+        "n_scientific_denominator": 10,
+        "n_completed": 2,
+        "n_committed": 2,
+        "n_abstained": 0,
+        "n_invalid": 8,
+        "final_decision_correct": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "intervention_family_counts": {
+          "reactive_core_only": 2
+        },
+        "measurement_counts": {
+          "null": 2
+        },
+        "selected_counts": {
+          "S1C01": 2
+        },
+        "selection_entropy_bits": -0.0,
+        "mean_hypothesis_discrimination": null,
+        "zero_discrimination": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "high_severity_objection": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "committed_anyway": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "tie_occurrence": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "tie_visible_to_model": 0,
+        "tie_break_selected_inside_tied_set": 0,
+        "tie_break_matches_coded_minimum_burden_rule": 0,
+        "proposer_tie_break_inside_tied_set": 0,
+        "proposer_tie_break_matches_coded_rule": 0,
+        "n_with_proposer_stage": 0,
+        "final_decision_differs_from_proposer": 0,
+        "tie_break_departures_from_coded_rule": [],
+        "tool_use_correct": {
+          "count": 0,
+          "of": 2,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.6576
+          ]
+        },
+        "provenance_complete": {
+          "count": 2,
+          "of": 2,
+          "rate": 1.0,
+          "wilson_95": [
+            0.3424,
+            1.0
+          ]
+        },
+        "failure_categories": {
+          "schema_validation": 8
+        },
+        "total_tokens_mean": 9849,
+        "total_tokens_sum": 19698,
+        "llm_latency_s_mean": 26.3,
+        "modifier_plane_l1_mean": 18.123,
+        "near_region_hit": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        }
+      },
+      "sol_runs_passing_integrity": 2,
+      "sol_minus_luna": {
+        "final_decision_correct_rate": 0.0,
+        "mean_hypothesis_discrimination": null
+      }
+    },
+    "rges_full_v4": {
+      "role": "Full PUR Agent (rule-complete experiment selection)",
+      "reader_facing": "RGES rule-complete",
+      "luna": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 9,
+            "of": 10
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 0,
+        "n_scientific_denominator": 10,
+        "n_completed": 10,
+        "n_committed": 10,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "intervention_family_counts": {
+          "dual_axis_resin_modified": 9,
+          "acrylic_only": 1
+        },
+        "measurement_counts": {
+          "M-HOLD-120": 10
+        },
+        "selected_counts": {
+          "S1C41::M-HOLD-120": 9,
+          "S1C39::M-HOLD-120": 1
+        },
+        "selection_entropy_bits": 0.468996,
+        "mean_hypothesis_discrimination": 0.6667,
+        "zero_discrimination": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "high_severity_objection": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 1,
+          "of": 10,
+          "rate": 0.1,
+          "wilson_95": [
+            0.0179,
+            0.4042
+          ]
+        },
+        "committed_anyway": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "tie_occurrence": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 10,
+        "tie_break_selected_inside_tied_set": 9,
+        "tie_break_matches_coded_minimum_burden_rule": 9,
+        "proposer_tie_break_inside_tied_set": 10,
+        "proposer_tie_break_matches_coded_rule": 10,
+        "n_with_proposer_stage": 10,
+        "final_decision_differs_from_proposer": 1,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "run_003",
+            "selected": "S1C39::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "failure_categories": {},
+        "total_tokens_mean": 103146,
+        "total_tokens_sum": 1031460,
+        "llm_latency_s_mean": 204.1
+      },
+      "luna_reproduction_check": {
+        "pass": true,
+        "mismatches": {}
+      },
+      "sol": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 2,
+            "of": 9
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 1,
+        "n_scientific_denominator": 9,
+        "n_completed": 5,
+        "n_committed": 5,
+        "n_abstained": 0,
+        "n_invalid": 4,
+        "final_decision_correct": {
+          "count": 2,
+          "of": 9,
+          "rate": 0.2222,
+          "wilson_95": [
+            0.0632,
+            0.5474
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 2,
+          "of": 9,
+          "rate": 0.2222,
+          "wilson_95": [
+            0.0632,
+            0.5474
+          ]
+        },
+        "intervention_family_counts": {
+          "acrylic_only": 3,
+          "dual_axis_resin_modified": 2
+        },
+        "measurement_counts": {
+          "M-HOLD-120": 5
+        },
+        "selected_counts": {
+          "S1C49::M-HOLD-120": 3,
+          "S1C51::M-HOLD-120": 2
+        },
+        "selection_entropy_bits": 0.970951,
+        "mean_hypothesis_discrimination": 0.6667,
+        "zero_discrimination": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 2,
+          "of": 9,
+          "rate": 0.2222,
+          "wilson_95": [
+            0.0632,
+            0.5474
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 4,
+          "of": 9,
+          "rate": 0.4444,
+          "wilson_95": [
+            0.1888,
+            0.7334
+          ]
+        },
+        "high_severity_objection": {
+          "count": 5,
+          "of": 9,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.2666,
+            0.8112
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 5,
+          "of": 9,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.2666,
+            0.8112
+          ]
+        },
+        "committed_anyway": {
+          "count": 5,
+          "of": 9,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.2666,
+            0.8112
+          ]
+        },
+        "tie_occurrence": {
+          "count": 5,
+          "of": 9,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.2666,
+            0.8112
+          ]
+        },
+        "tie_visible_to_model": 5,
+        "tie_break_selected_inside_tied_set": 2,
+        "tie_break_matches_coded_minimum_burden_rule": 0,
+        "proposer_tie_break_inside_tied_set": 5,
+        "proposer_tie_break_matches_coded_rule": 1,
+        "n_with_proposer_stage": 9,
+        "final_decision_differs_from_proposer": 7,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "sol_r001",
+            "selected": "S1C49::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r004",
+            "selected": "S1C49::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r005",
+            "selected": "S1C49::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r009",
+            "selected": "S1C51::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r010",
+            "selected": "S1C51::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 5,
+          "of": 5,
+          "rate": 1.0,
+          "wilson_95": [
+            0.5655,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 5,
+          "of": 5,
+          "rate": 1.0,
+          "wilson_95": [
+            0.5655,
+            1.0
+          ]
+        },
+        "failure_categories": {
+          "selection_outside_admissible_card_set": 4,
+          "technical_failure": 1
+        },
+        "total_tokens_mean": 112634,
+        "total_tokens_sum": 563171,
+        "llm_latency_s_mean": 252.3
+      },
+      "sol_runs_passing_integrity": 5,
+      "sol_minus_luna": {
+        "final_decision_correct_rate": -0.6778,
+        "mean_hypothesis_discrimination": 0.0
+      }
+    },
+    "rges_voi_withheld": {
+      "role": "rule-layer ablation: deterministic VOI score withheld",
+      "reader_facing": "RGES score-withheld",
+      "luna": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 0,
+            "of": 5
+          }
+        },
+        "n_attempted": 5,
+        "n_technical_failure": 0,
+        "n_scientific_denominator": 5,
+        "n_completed": 5,
+        "n_committed": 5,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 0,
+          "of": 5,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4345
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 0,
+          "of": 5,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4345
+          ]
+        },
+        "intervention_family_counts": {
+          "reactive_core_only": 3,
+          "acrylic_only": 2
+        },
+        "measurement_counts": {
+          "M-HOLD-120": 5
+        },
+        "selected_counts": {
+          "S1C01::M-HOLD-120": 2,
+          "S1C49::M-HOLD-120": 1,
+          "S1C05::M-HOLD-120": 1,
+          "S1C39::M-HOLD-120": 1
+        },
+        "selection_entropy_bits": 1.921928,
+        "mean_hypothesis_discrimination": 0.2667,
+        "zero_discrimination": {
+          "count": 3,
+          "of": 5,
+          "rate": 0.6,
+          "wilson_95": [
+            0.2307,
+            0.8824
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 0,
+          "of": 5,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4345
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 5,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4345
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 5,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4345
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 5,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4345
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 5,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.4345
+          ]
+        },
+        "high_severity_objection": {
+          "count": 5,
+          "of": 5,
+          "rate": 1.0,
+          "wilson_95": [
+            0.5655,
+            1.0
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 4,
+          "of": 5,
+          "rate": 0.8,
+          "wilson_95": [
+            0.3755,
+            0.9638
+          ]
+        },
+        "committed_anyway": {
+          "count": 5,
+          "of": 5,
+          "rate": 1.0,
+          "wilson_95": [
+            0.5655,
+            1.0
+          ]
+        },
+        "tie_occurrence": {
+          "count": 5,
+          "of": 5,
+          "rate": 1.0,
+          "wilson_95": [
+            0.5655,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 0,
+        "tie_break_selected_inside_tied_set": 0,
+        "tie_break_matches_coded_minimum_burden_rule": 0,
+        "proposer_tie_break_inside_tied_set": 1,
+        "proposer_tie_break_matches_coded_rule": 1,
+        "n_with_proposer_stage": 5,
+        "final_decision_differs_from_proposer": 3,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "run_001",
+            "selected": "S1C49::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_002",
+            "selected": "S1C05::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_003",
+            "selected": "S1C39::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_004",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_005",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 5,
+          "of": 5,
+          "rate": 1.0,
+          "wilson_95": [
+            0.5655,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 5,
+          "of": 5,
+          "rate": 1.0,
+          "wilson_95": [
+            0.5655,
+            1.0
+          ]
+        },
+        "failure_categories": {},
+        "total_tokens_mean": 280629,
+        "total_tokens_sum": 1403143,
+        "llm_latency_s_mean": 204.8
+      },
+      "luna_reproduction_check": {
+        "pass": true,
+        "mismatches": {}
+      },
+      "sol": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 0,
+            "of": 8
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 2,
+        "n_scientific_denominator": 8,
+        "n_completed": 8,
+        "n_committed": 8,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "intervention_family_counts": {
+          "reactive_core_only": 7,
+          "acrylic_only": 1
+        },
+        "measurement_counts": {
+          "M-HOLD-120": 8
+        },
+        "selected_counts": {
+          "S1C01::M-HOLD-120": 7,
+          "S1C49::M-HOLD-120": 1
+        },
+        "selection_entropy_bits": 0.543564,
+        "mean_hypothesis_discrimination": 0.0833,
+        "zero_discrimination": {
+          "count": 7,
+          "of": 8,
+          "rate": 0.875,
+          "wilson_95": [
+            0.5291,
+            0.9776
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "high_severity_objection": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "committed_anyway": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "tie_occurrence": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 0,
+        "tie_break_selected_inside_tied_set": 0,
+        "tie_break_matches_coded_minimum_burden_rule": 0,
+        "proposer_tie_break_inside_tied_set": 0,
+        "proposer_tie_break_matches_coded_rule": 0,
+        "n_with_proposer_stage": 8,
+        "final_decision_differs_from_proposer": 7,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "sol_r001",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r002",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r004",
+            "selected": "S1C49::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r005",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r006",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r007",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r008",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r009",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "failure_categories": {
+          "technical_failure": 2
+        },
+        "total_tokens_mean": 289077,
+        "total_tokens_sum": 2312618,
+        "llm_latency_s_mean": 238.8
+      },
+      "sol_runs_passing_integrity": 8,
+      "sol_minus_luna": {
+        "final_decision_correct_rate": 0.0,
+        "mean_hypothesis_discrimination": -0.1834
+      }
+    },
+    "rges_rule_order_minimality_first": {
+      "role": "rule-layer ablation: rule order inverted",
+      "reader_facing": "RGES order-inverted",
+      "luna": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 0,
+            "of": 10
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 0,
+        "n_scientific_denominator": 10,
+        "n_completed": 10,
+        "n_committed": 10,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "intervention_family_counts": {
+          "reactive_core_only": 10
+        },
+        "measurement_counts": {
+          "M-HOLD-120": 7,
+          "M-REPEAT": 3
+        },
+        "selected_counts": {
+          "S1C02::M-HOLD-120": 7,
+          "S1C02::M-REPEAT": 3
+        },
+        "selection_entropy_bits": 0.881291,
+        "mean_hypothesis_discrimination": 0.0,
+        "zero_discrimination": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "high_severity_objection": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 5,
+          "of": 10,
+          "rate": 0.5,
+          "wilson_95": [
+            0.2366,
+            0.7634
+          ]
+        },
+        "committed_anyway": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "tie_occurrence": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 10,
+        "tie_break_selected_inside_tied_set": 0,
+        "tie_break_matches_coded_minimum_burden_rule": 0,
+        "proposer_tie_break_inside_tied_set": 0,
+        "proposer_tie_break_matches_coded_rule": 0,
+        "n_with_proposer_stage": 10,
+        "final_decision_differs_from_proposer": 3,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "run_001",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_002",
+            "selected": "S1C02::M-REPEAT",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_003",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_004",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_005",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_006",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_007",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_008",
+            "selected": "S1C02::M-REPEAT",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_009",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "run_010",
+            "selected": "S1C02::M-REPEAT",
+            "coded": "S1C41::M-HOLD-120"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "failure_categories": {},
+        "total_tokens_mean": 95502,
+        "total_tokens_sum": 955018,
+        "llm_latency_s_mean": 205.3
+      },
+      "luna_reproduction_check": {
+        "pass": true,
+        "mismatches": {}
+      },
+      "sol": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 0,
+            "of": 9
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 1,
+        "n_scientific_denominator": 9,
+        "n_completed": 9,
+        "n_committed": 9,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "intervention_family_counts": {
+          "reactive_core_only": 9
+        },
+        "measurement_counts": {
+          "M-HOLD-120": 9
+        },
+        "selected_counts": {
+          "S1C02::M-HOLD-120": 9
+        },
+        "selection_entropy_bits": -0.0,
+        "mean_hypothesis_discrimination": 0.0,
+        "zero_discrimination": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "high_severity_objection": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 7,
+          "of": 9,
+          "rate": 0.7778,
+          "wilson_95": [
+            0.4526,
+            0.9368
+          ]
+        },
+        "committed_anyway": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "tie_occurrence": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 9,
+        "tie_break_selected_inside_tied_set": 0,
+        "tie_break_matches_coded_minimum_burden_rule": 0,
+        "proposer_tie_break_inside_tied_set": 0,
+        "proposer_tie_break_matches_coded_rule": 0,
+        "n_with_proposer_stage": 9,
+        "final_decision_differs_from_proposer": 0,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "sol_r001",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r002",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r004",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r005",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r006",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r007",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r008",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r009",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r010",
+            "selected": "S1C02::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "failure_categories": {
+          "technical_failure": 1
+        },
+        "total_tokens_mean": 104093,
+        "total_tokens_sum": 936841,
+        "llm_latency_s_mean": 215.4
+      },
+      "sol_runs_passing_integrity": 9,
+      "sol_minus_luna": {
+        "final_decision_correct_rate": 0.0,
+        "mean_hypothesis_discrimination": 0.0
+      }
+    },
+    "cbes_A_drift_V5_NO_GATE": {
+      "role": "architecture ablation: chemistry gate advice-only (thermal-hold condition)",
+      "reader_facing": "CBES thermal-hold advice-only",
+      "luna": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 10,
+            "of": 10
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 0,
+        "n_scientific_denominator": 10,
+        "n_completed": 10,
+        "n_committed": 10,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "intervention_family_counts": {
+          "dual_axis_resin_modified": 9,
+          "acrylic_only": 1
+        },
+        "measurement_counts": {
+          "M-HOLD-120": 10
+        },
+        "selected_counts": {
+          "S1C41::M-HOLD-120": 9,
+          "S1C39::M-HOLD-120": 1
+        },
+        "selection_entropy_bits": 0.468996,
+        "mean_hypothesis_discrimination": 0.6667,
+        "zero_discrimination": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "high_severity_objection": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 1,
+          "of": 10,
+          "rate": 0.1,
+          "wilson_95": [
+            0.0179,
+            0.4042
+          ]
+        },
+        "committed_anyway": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "tie_occurrence": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 10,
+        "tie_break_selected_inside_tied_set": 9,
+        "tie_break_matches_coded_minimum_burden_rule": 9,
+        "proposer_tie_break_inside_tied_set": 10,
+        "proposer_tie_break_matches_coded_rule": 10,
+        "n_with_proposer_stage": 10,
+        "final_decision_differs_from_proposer": 1,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "run_007",
+            "selected": "S1C39::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "failure_categories": {},
+        "total_tokens_mean": 157352,
+        "total_tokens_sum": 1573515,
+        "llm_latency_s_mean": 330.0
+      },
+      "luna_reproduction_check": {
+        "pass": true,
+        "mismatches": {}
+      },
+      "sol": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 2,
+        "n_scientific_denominator": 8,
+        "n_completed": 8,
+        "n_committed": 8,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "intervention_family_counts": {
+          "acrylic_only": 5,
+          "reactive_core_only": 3
+        },
+        "measurement_counts": {
+          "M-HOLD-120": 8
+        },
+        "selected_counts": {
+          "S1C39::M-HOLD-120": 3,
+          "S1C01::M-HOLD-120": 2,
+          "S1C49::M-HOLD-120": 2,
+          "S1C09::M-HOLD-120": 1
+        },
+        "selection_entropy_bits": 1.905639,
+        "mean_hypothesis_discrimination": 0.4167,
+        "zero_discrimination": {
+          "count": 3,
+          "of": 8,
+          "rate": 0.375,
+          "wilson_95": [
+            0.1368,
+            0.6943
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "high_severity_objection": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "committed_anyway": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "tie_occurrence": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 8,
+        "tie_break_selected_inside_tied_set": 0,
+        "tie_break_matches_coded_minimum_burden_rule": 0,
+        "proposer_tie_break_inside_tied_set": 8,
+        "proposer_tie_break_matches_coded_rule": 8,
+        "n_with_proposer_stage": 8,
+        "final_decision_differs_from_proposer": 8,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "sol_r001",
+            "selected": "S1C39::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r002",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r004",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r006",
+            "selected": "S1C39::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r007",
+            "selected": "S1C39::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r008",
+            "selected": "S1C49::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r009",
+            "selected": "S1C49::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r010",
+            "selected": "S1C09::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "failure_categories": {
+          "technical_failure": 2
+        },
+        "total_tokens_mean": 171864,
+        "total_tokens_sum": 1374909,
+        "llm_latency_s_mean": 320.2
+      },
+      "sol_runs_passing_integrity": 8,
+      "sol_minus_luna": {
+        "final_decision_correct_rate": 0.0,
+        "mean_hypothesis_discrimination": -0.25
+      }
+    },
+    "cbes_A_drift_V5_FULL": {
+      "role": "Full PUR Agent with enforced chemistry gate (thermal-hold condition)",
+      "reader_facing": "CBES thermal-hold enforced",
+      "luna": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 10,
+            "of": 10
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 0,
+        "n_scientific_denominator": 10,
+        "n_completed": 10,
+        "n_committed": 10,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "intervention_family_counts": {
+          "dual_axis_resin_modified": 10
+        },
+        "measurement_counts": {
+          "M-HOLD-120": 10
+        },
+        "selected_counts": {
+          "S1C41::M-HOLD-120": 10
+        },
+        "selection_entropy_bits": -0.0,
+        "mean_hypothesis_discrimination": 0.6667,
+        "zero_discrimination": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "high_severity_objection": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "committed_anyway": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "tie_occurrence": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 10,
+        "tie_break_selected_inside_tied_set": 10,
+        "tie_break_matches_coded_minimum_burden_rule": 10,
+        "proposer_tie_break_inside_tied_set": 10,
+        "proposer_tie_break_matches_coded_rule": 10,
+        "n_with_proposer_stage": 10,
+        "final_decision_differs_from_proposer": 0,
+        "tie_break_departures_from_coded_rule": [],
+        "tool_use_correct": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "failure_categories": {},
+        "total_tokens_mean": 159617,
+        "total_tokens_sum": 1596173,
+        "llm_latency_s_mean": 261.2
+      },
+      "luna_reproduction_check": {
+        "pass": true,
+        "mismatches": {}
+      },
+      "sol": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 1,
+          "final_decision_correct": {
+            "count": 8,
+            "of": 9
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 2,
+        "n_scientific_denominator": 8,
+        "n_completed": 8,
+        "n_committed": 8,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "intervention_family_counts": {
+          "acrylic_only": 6,
+          "reactive_core_only": 2
+        },
+        "measurement_counts": {
+          "M-HOLD-120": 8
+        },
+        "selected_counts": {
+          "S1C49::M-HOLD-120": 3,
+          "S1C39::M-HOLD-120": 3,
+          "S1C01::M-HOLD-120": 2
+        },
+        "selection_entropy_bits": 1.561278,
+        "mean_hypothesis_discrimination": 0.5,
+        "zero_discrimination": {
+          "count": 2,
+          "of": 8,
+          "rate": 0.25,
+          "wilson_95": [
+            0.0715,
+            0.5907
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 8,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.3244
+          ]
+        },
+        "high_severity_objection": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 7,
+          "of": 8,
+          "rate": 0.875,
+          "wilson_95": [
+            0.5291,
+            0.9776
+          ]
+        },
+        "committed_anyway": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "tie_occurrence": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 8,
+        "tie_break_selected_inside_tied_set": 0,
+        "tie_break_matches_coded_minimum_burden_rule": 0,
+        "proposer_tie_break_inside_tied_set": 8,
+        "proposer_tie_break_matches_coded_rule": 5,
+        "n_with_proposer_stage": 8,
+        "final_decision_differs_from_proposer": 8,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "sol_r002",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r004",
+            "selected": "S1C49::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r005",
+            "selected": "S1C49::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r006",
+            "selected": "S1C39::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r007",
+            "selected": "S1C39::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r008",
+            "selected": "S1C39::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r009",
+            "selected": "S1C01::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          },
+          {
+            "run_id": "sol_r010",
+            "selected": "S1C49::M-HOLD-120",
+            "coded": "S1C41::M-HOLD-120"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 8,
+          "of": 8,
+          "rate": 1.0,
+          "wilson_95": [
+            0.6756,
+            1.0
+          ]
+        },
+        "failure_categories": {
+          "empty_model_content": 1,
+          "technical_failure": 1
+        },
+        "total_tokens_mean": 171475,
+        "total_tokens_sum": 1371801,
+        "llm_latency_s_mean": 294.1
+      },
+      "sol_runs_passing_integrity": 8,
+      "sol_minus_luna": {
+        "final_decision_correct_rate": 0.0,
+        "mean_hypothesis_discrimination": -0.1667
+      }
+    },
+    "cbes_B_processing_window_V5_NO_GATE": {
+      "role": "architecture ablation: chemistry gate advice-only (processing-window condition)",
+      "reader_facing": "CBES processing-window advice-only",
+      "luna": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 10,
+            "of": 10
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 0,
+        "n_scientific_denominator": 10,
+        "n_completed": 10,
+        "n_committed": 10,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "intervention_family_counts": {
+          "dual_axis_resin_modified": 10
+        },
+        "measurement_counts": {
+          "M-SWEEP": 10
+        },
+        "selected_counts": {
+          "S1C41::M-SWEEP": 10
+        },
+        "selection_entropy_bits": -0.0,
+        "mean_hypothesis_discrimination": 1.0,
+        "zero_discrimination": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "high_severity_objection": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "committed_anyway": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "tie_occurrence": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 10,
+        "tie_break_selected_inside_tied_set": 0,
+        "tie_break_matches_coded_minimum_burden_rule": 0,
+        "proposer_tie_break_inside_tied_set": 0,
+        "proposer_tie_break_matches_coded_rule": 0,
+        "n_with_proposer_stage": 10,
+        "final_decision_differs_from_proposer": 0,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "run_001",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "run_002",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "run_003",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "run_004",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "run_005",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "run_006",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "run_007",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "run_008",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "run_009",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "run_010",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "failure_categories": {},
+        "total_tokens_mean": 170425,
+        "total_tokens_sum": 1704251,
+        "llm_latency_s_mean": 176.6
+      },
+      "luna_reproduction_check": {
+        "pass": true,
+        "mismatches": {}
+      },
+      "sol": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 1,
+          "final_decision_correct": {
+            "count": 5,
+            "of": 10
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 1,
+        "n_scientific_denominator": 9,
+        "n_completed": 9,
+        "n_committed": 9,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 5,
+          "of": 9,
+          "rate": 0.5556,
+          "wilson_95": [
+            0.2666,
+            0.8112
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "intervention_family_counts": {
+          "dual_axis_resin_modified": 9
+        },
+        "measurement_counts": {
+          "M-SWEEP": 5,
+          "M-REPEAT": 3,
+          "M-HOLD-120": 1
+        },
+        "selected_counts": {
+          "S1C41::M-SWEEP": 5,
+          "S1C41::M-REPEAT": 3,
+          "S1C41::M-HOLD-120": 1
+        },
+        "selection_entropy_bits": 1.351644,
+        "mean_hypothesis_discrimination": 0.5556,
+        "zero_discrimination": {
+          "count": 4,
+          "of": 9,
+          "rate": 0.4444,
+          "wilson_95": [
+            0.1888,
+            0.7334
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 9,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2992
+          ]
+        },
+        "high_severity_objection": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 3,
+          "of": 9,
+          "rate": 0.3333,
+          "wilson_95": [
+            0.1206,
+            0.6458
+          ]
+        },
+        "committed_anyway": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "tie_occurrence": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 9,
+        "tie_break_selected_inside_tied_set": 0,
+        "tie_break_matches_coded_minimum_burden_rule": 0,
+        "proposer_tie_break_inside_tied_set": 0,
+        "proposer_tie_break_matches_coded_rule": 0,
+        "n_with_proposer_stage": 9,
+        "final_decision_differs_from_proposer": 4,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "sol_r002",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "sol_r003",
+            "selected": "S1C41::M-REPEAT",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "sol_r004",
+            "selected": "S1C41::M-HOLD-120",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "sol_r005",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "sol_r006",
+            "selected": "S1C41::M-REPEAT",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "sol_r007",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "sol_r008",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "sol_r009",
+            "selected": "S1C41::M-REPEAT",
+            "coded": "S1C41::M-ANCHOR"
+          },
+          {
+            "run_id": "sol_r010",
+            "selected": "S1C41::M-SWEEP",
+            "coded": "S1C41::M-ANCHOR"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "failure_categories": {
+          "empty_model_content": 1
+        },
+        "total_tokens_mean": 182018,
+        "total_tokens_sum": 1638159,
+        "llm_latency_s_mean": 299.6
+      },
+      "sol_runs_passing_integrity": 9,
+      "sol_minus_luna": {
+        "final_decision_correct_rate": -0.4444,
+        "mean_hypothesis_discrimination": -0.4444
+      }
+    },
+    "cbes_B_processing_window_V5_FULL": {
+      "role": "Full PUR Agent with enforced chemistry gate (processing-window condition)",
+      "reader_facing": "CBES processing-window enforced",
+      "luna": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 9,
+            "of": 10
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 0,
+        "n_scientific_denominator": 10,
+        "n_completed": 9,
+        "n_committed": 9,
+        "n_abstained": 0,
+        "n_invalid": 1,
+        "final_decision_correct": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "intervention_family_counts": {
+          "dual_axis_resin_modified": 9
+        },
+        "measurement_counts": {
+          "M-SWEEP": 9
+        },
+        "selected_counts": {
+          "S1C41::M-SWEEP": 8,
+          "S1C51::M-SWEEP": 1
+        },
+        "selection_entropy_bits": 0.503258,
+        "mean_hypothesis_discrimination": 1.0,
+        "zero_discrimination": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "high_severity_objection": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "committed_anyway": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "tie_occurrence": {
+          "count": 9,
+          "of": 10,
+          "rate": 0.9,
+          "wilson_95": [
+            0.5958,
+            0.9821
+          ]
+        },
+        "tie_visible_to_model": 9,
+        "tie_break_selected_inside_tied_set": 9,
+        "tie_break_matches_coded_minimum_burden_rule": 8,
+        "proposer_tie_break_inside_tied_set": 9,
+        "proposer_tie_break_matches_coded_rule": 8,
+        "n_with_proposer_stage": 9,
+        "final_decision_differs_from_proposer": 0,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "run_001",
+            "selected": "S1C51::M-SWEEP",
+            "coded": "S1C41::M-SWEEP"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 9,
+          "of": 9,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7008,
+            1.0
+          ]
+        },
+        "failure_categories": {
+          "malformed_json": 1
+        },
+        "total_tokens_mean": 167196,
+        "total_tokens_sum": 1504762,
+        "llm_latency_s_mean": 156.1
+      },
+      "luna_reproduction_check": {
+        "pass": true,
+        "mismatches": {}
+      },
+      "sol": {
+        "sensitivity_empty_content_counted_invalid": {
+          "n_empty_model_content": 0,
+          "final_decision_correct": {
+            "count": 4,
+            "of": 10
+          }
+        },
+        "n_attempted": 10,
+        "n_technical_failure": 0,
+        "n_scientific_denominator": 10,
+        "n_completed": 10,
+        "n_committed": 10,
+        "n_abstained": 0,
+        "n_invalid": 0,
+        "final_decision_correct": {
+          "count": 4,
+          "of": 10,
+          "rate": 0.4,
+          "wilson_95": [
+            0.1682,
+            0.6873
+          ]
+        },
+        "supported_family_dual_axis": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "intervention_family_counts": {
+          "dual_axis_resin_modified": 10
+        },
+        "measurement_counts": {
+          "M-REPEAT": 5,
+          "M-SWEEP": 4,
+          "M-HOLD-120": 1
+        },
+        "selected_counts": {
+          "S1C41::M-REPEAT": 4,
+          "S1C51::M-SWEEP": 2,
+          "S1C41::M-SWEEP": 2,
+          "S1C51::M-REPEAT": 1,
+          "S1C41::M-HOLD-120": 1
+        },
+        "selection_entropy_bits": 2.121928,
+        "mean_hypothesis_discrimination": 0.4,
+        "zero_discrimination": {
+          "count": 6,
+          "of": 10,
+          "rate": 0.6,
+          "wilson_95": [
+            0.3127,
+            0.8318
+          ]
+        },
+        "selected_in_tied_top_set": {
+          "count": 4,
+          "of": 10,
+          "rate": 0.4,
+          "wilson_95": [
+            0.1682,
+            0.6873
+          ]
+        },
+        "chemistry_gate_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "unsupported_shortcut": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "constraint_violation": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "deterministic_rule_override_attempt": {
+          "count": 0,
+          "of": 10,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775
+          ]
+        },
+        "high_severity_objection": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "robustness_said_change_experiment": {
+          "count": 4,
+          "of": 10,
+          "rate": 0.4,
+          "wilson_95": [
+            0.1682,
+            0.6873
+          ]
+        },
+        "committed_anyway": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "tie_occurrence": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "tie_visible_to_model": 10,
+        "tie_break_selected_inside_tied_set": 4,
+        "tie_break_matches_coded_minimum_burden_rule": 2,
+        "proposer_tie_break_inside_tied_set": 10,
+        "proposer_tie_break_matches_coded_rule": 6,
+        "n_with_proposer_stage": 10,
+        "final_decision_differs_from_proposer": 6,
+        "tie_break_departures_from_coded_rule": [
+          {
+            "run_id": "sol_r001",
+            "selected": "S1C41::M-REPEAT",
+            "coded": "S1C41::M-SWEEP"
+          },
+          {
+            "run_id": "sol_r002",
+            "selected": "S1C41::M-REPEAT",
+            "coded": "S1C41::M-SWEEP"
+          },
+          {
+            "run_id": "sol_r003",
+            "selected": "S1C51::M-SWEEP",
+            "coded": "S1C41::M-SWEEP"
+          },
+          {
+            "run_id": "sol_r005",
+            "selected": "S1C41::M-REPEAT",
+            "coded": "S1C41::M-SWEEP"
+          },
+          {
+            "run_id": "sol_r006",
+            "selected": "S1C51::M-REPEAT",
+            "coded": "S1C41::M-SWEEP"
+          },
+          {
+            "run_id": "sol_r007",
+            "selected": "S1C51::M-SWEEP",
+            "coded": "S1C41::M-SWEEP"
+          },
+          {
+            "run_id": "sol_r008",
+            "selected": "S1C41::M-REPEAT",
+            "coded": "S1C41::M-SWEEP"
+          },
+          {
+            "run_id": "sol_r009",
+            "selected": "S1C41::M-HOLD-120",
+            "coded": "S1C41::M-SWEEP"
+          }
+        ],
+        "tool_use_correct": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "provenance_complete": {
+          "count": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ]
+        },
+        "failure_categories": {},
+        "total_tokens_mean": 179011,
+        "total_tokens_sum": 1790112,
+        "llm_latency_s_mean": 307.6
+      },
+      "sol_runs_passing_integrity": 10,
+      "sol_minus_luna": {
+        "final_decision_correct_rate": -0.5,
+        "mean_hypothesis_discrimination": -0.6
+      }
+    }
+  },
+  "sol_replicates": [
+    "sol_r001",
+    "sol_r002",
+    "sol_r003",
+    "sol_r004",
+    "sol_r005",
+    "sol_r006",
+    "sol_r007",
+    "sol_r008",
+    "sol_r009",
+    "sol_r010"
+  ],
+  "sol_cumulative_n_replicates": 10
+}

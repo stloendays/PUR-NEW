@@ -1,0 +1,9 @@
+[2026-09-30T14:58:53Z] all series declared and verified against the Luna contracts
+[2026-09-30T14:58:53Z] batch_02: resuming unattempted pairs of sol_r006..sol_r010
+[2026-09-30T14:59:04Z] quota probe: APIConnectionError, retrying in 60s
+[2026-09-30T15:12:37Z] sol_r010 cbes_A_drift_V5_NO_GATE: ok (748.3s)
+[2026-09-30T15:22:01Z] sol_r010 cbes_A_drift_V5_FULL: ok (562.23s)
+[2026-09-30T15:32:21Z] sol_r010 cbes_B_processing_window_V5_NO_GATE: ok (618.58s)
+[2026-09-30T15:43:08Z] sol_r010 cbes_B_processing_window_V5_FULL: ok (644.59s)
+[2026-09-30T15:43:08Z] batch_02 finished
+[2026-09-30T15:43:16Z] summary rc=0 =80 integrity_pass=59 luna_repro={'naive_direct_llm': True, 'rges_full_v4': True, 'rges_voi_withheld': True, 'rges_rule_order_minimality_first': True, 'cbes_A_drift_V5_NO_GATE': True, 'cbes_A_drift_V5_FULL': True, 'cbes_B_processing_window_V5_NO_GATE': True, 'cbes_B_processing_window_V5_FULL': True} 

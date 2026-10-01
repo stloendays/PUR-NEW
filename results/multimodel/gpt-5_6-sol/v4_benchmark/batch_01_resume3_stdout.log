@@ -1,0 +1,18 @@
+[2026-09-24T15:37:31Z] all series declared and verified against the Luna contracts
+[2026-09-24T15:37:31Z] batch_01: resuming unattempted pairs of sol_r001..sol_r005
+[2026-09-24T15:42:38Z] sol_r003 cbes_B_processing_window_V5_NO_GATE: ok (297.6s)
+[2026-09-24T15:46:58Z] sol_r003 cbes_B_processing_window_V5_FULL: ok (258.17s)
+[2026-09-24T15:47:26Z] sol_r004 naive_direct_llm: ok (26.3s)
+[2026-09-24T15:51:57Z] sol_r004 rges_full_v4: ok (268.9s)
+[2026-09-24T15:56:44Z] sol_r004 rges_voi_withheld: ok (285.13s)
+[2026-09-24T16:00:07Z] sol_r004 rges_rule_order_minimality_first: ok (201.45s)
+[2026-09-24T16:05:02Z] sol_r004 cbes_A_drift_V5_NO_GATE: ok (292.17s)
+[2026-09-24T16:09:18Z] sol_r004 cbes_A_drift_V5_FULL: ok (253.72s)
+[2026-09-24T16:14:09Z] sol_r004 cbes_B_processing_window_V5_NO_GATE: ok (289.62s)
+[2026-09-24T16:19:14Z] sol_r004 cbes_B_processing_window_V5_FULL: ok (303.55s)
+[2026-09-24T16:19:42Z] sol_r005 naive_direct_llm: invalid (26.11s)
+[2026-09-24T16:24:07Z] sol_r005 rges_full_v4: ok (263.19s)
+[2026-09-24T16:27:58Z] sol_r005 rges_voi_withheld: ok (229.66s)
+[2026-09-24T16:31:39Z] sol_r005 rges_rule_order_minimality_first: ok (218.75s)
+[2026-09-24T16:34:49Z] sol_r005 cbes_A_drift_V5_NO_GATE: technical_failure (187.98s)
+[2026-09-24T16:34:52Z] quota probe: usage limit, sleeping 9190s before the next run

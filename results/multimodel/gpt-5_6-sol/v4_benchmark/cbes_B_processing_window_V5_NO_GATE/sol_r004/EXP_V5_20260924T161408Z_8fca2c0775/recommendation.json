@@ -1,0 +1,221 @@
+{
+  "acceptance_criterion": "Accept S1C41 as an E1-like mitigation of the hot-hold failure if the mean SI_15_60 is less than or equal to 11.51% across at least two independent repeats. This is the E1 reference of 9.51% plus the declared 2.00-percentage-point M-HOLD-120 resolution.",
+  "architecture_version": "5.1.0",
+  "arm": "V5_NO_GATE",
+  "candidate_set_hash": "54f825939d05a159b93eb39e98ccdd4d3a658b4a31fc8a5fff722770aadd24a1",
+  "chemistry_gate": {
+    "applicability_audit_visible_to_model": true,
+    "applicability_gate_enforced": false,
+    "applied_before_voi_ranking": true,
+    "audit_is_arm_independent": true,
+    "gate_id": "PUR_NEW_CHEMISTRY_DOMAIN_GATE_V1",
+    "gate_is_a_language_model": false,
+    "inadmissible_by_rule_id": {
+      "inadmissible_before_shape_verification": 64
+    },
+    "n_cards_inadmissible": 64,
+    "n_cards_removed_from_selectable_set": 0,
+    "n_cards_total": 292,
+    "n_verified_chemistry_families": 0,
+    "pre_enforcement_payload_sha256": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f",
+    "protocol_version": "1.1.0",
+    "selection": {
+      "admissibility_rule_id": "admissible_direct_drift_measurement",
+      "chemistry_applicability_status": "modified_chemistry_unvalidated",
+      "chemistry_domain_violation": false,
+      "chemistry_family": "resin_modified:ac1920+tk100",
+      "shared_shape_use": "verification_only",
+      "unsupported_shortcut": false
+    },
+    "verified_transfer_registry_version": "1.0.0"
+  },
+  "claim_boundary": "V5.0.0 selects an experiment from pre-result evidence under an outcome-blind runtime with a deterministic chemistry-domain admissibility constraint. A V5 result is evidence about executable scientific constraints on measurement choice. It is not a wet-lab result and does not claim that the historical decision used this ranking.",
+  "decision_mode": "committed_experiment",
+  "experiment_card": {
+    "acceptance_criterion": "This plan does not return realized viscosity level eta_ref, so it cannot accept or reject any registered level hypothesis. Selecting it leaves the processing-window question open.",
+    "acrylic_like_pct": 15.0,
+    "admissibility_reason": "The matched-window 120 C hold observes thermal-hold drift directly and does not reuse the shared thermal-response shape, so it stays admissible outside the validated chemistry family.",
+    "admissibility_rule_id": "admissible_direct_drift_measurement",
+    "budget_efficiency_detail": {
+      "definition": "1 - effort_points / max(effort_points) over the declared catalog",
+      "effort_points": 8.0,
+      "effort_scale_points": 18.0,
+      "score": 0.555556
+    },
+    "candidate_id": "S1C41",
+    "chemistry_applicability_status": "modified_chemistry_unvalidated",
+    "chemistry_family": "resin_modified:ac1920+tk100",
+    "decision_relevance_detail": {
+      "coverage_class": "full_coverage",
+      "coverage_factor": 1.0,
+      "covered_supported_axes": [
+        "acrylic_like",
+        "minor_tackifier_like"
+      ],
+      "measurement_decision_relevance": 0.25,
+      "score": 0.25,
+      "zeroed_supported_axes": []
+    },
+    "experiment_id": "S1C41::M-HOLD-120",
+    "extrapolation_risk_detail": {
+      "mean_distance_pct": 0.0,
+      "normalizer_pct": 12.0,
+      "per_axis": {
+        "acrylic_like": {
+          "distance_pct": 0.0,
+          "supported_region_pct": [
+            15.0,
+            25.0
+          ],
+          "value_pct": 15.0
+        },
+        "minor_tackifier_like": {
+          "distance_pct": 0.0,
+          "supported_region_pct": [
+            4.8,
+            6.4
+          ],
+          "value_pct": 5.0
+        }
+      },
+      "score": 0.0
+    },
+    "falsification_criterion": "No registered level hypothesis is falsifiable by this plan: it observes isothermal time coordinate S_t rather than realized viscosity level eta_ref.",
+    "formulation_state": {
+      "AC1920": 15.0,
+      "MDI": 16.1525384179,
+      "PDP70": 31.923730791,
+      "PPG2000": 31.923730791,
+      "TK100": 5.0,
+      "amount_basis": "normalized_total_wt_percent",
+      "design_layer": "uniform_modifier_lattice_on_E2_core"
+    },
+    "hypothesis_discrimination_detail": {
+      "discriminating_quantity": "realized viscosity level eta_ref",
+      "measurement_resolves_quantity": "isothermal time coordinate S_t",
+      "n_pairs": 3,
+      "note": "this measurement does not resolve the coordinate the registry disagrees about",
+      "score": 0.0,
+      "separated_pairs": []
+    },
+    "intervention_family": "dual_axis_resin_modified",
+    "measurement_admissible": true,
+    "measurement_id": "M-HOLD-120",
+    "measurement_plan": {
+      "measurement_id": "M-HOLD-120",
+      "min_repeats": 2,
+      "name": "matched-window 120 C thermal hold",
+      "primary_observable": "SI_15_60 = (eta_60 - eta_15) / eta_15, percent",
+      "protocol": "Hold the melt at 120 C. Record viscosity at 15, 30, 45 and 60 min. Report the 15-60 min matched-window relative change. Run at least two independent repeats.",
+      "sampling_times_min": [
+        15,
+        30,
+        45,
+        60
+      ],
+      "temperature_c": 120
+    },
+    "minor_tackifier_like_pct": 5.0,
+    "process_state_risk_detail": {
+      "base_before_measurement_plan": 0.75,
+      "measurement_controls_process_state": false,
+      "missing_process_fields": 6,
+      "risk_level": "moderate",
+      "score": 0.75
+    },
+    "reactive_mass_fraction": 0.8,
+    "required_precondition": null,
+    "resin_modified": true,
+    "scientific_hypotheses_addressed": [
+      "H-LEVEL-DILUTE",
+      "H-LEVEL-ASSOC",
+      "H-LEVEL-PLASTIC"
+    ],
+    "shared_shape_use": "verification_only",
+    "uncertainty_reduction_detail": {
+      "novel_chemistry": true,
+      "novel_chemistry_factor": 1.0,
+      "resolves_quantity": "isothermal time coordinate S_t",
+      "score": 0.9,
+      "unresolved_prior": 0.9
+    },
+    "voi_components": {
+      "budget_efficiency": 0.555556,
+      "decision_relevance": 0.25,
+      "extrapolation_risk": 0.0,
+      "hypothesis_discrimination": 0.0,
+      "measurement_interpretability": 1.0,
+      "process_state_risk": 0.75,
+      "uncertainty_reduction": 0.9
+    },
+    "voi_score": 0.330833
+  },
+  "falsification_criterion": "If the mean SI_15_60 is greater than or equal to 49.54%, the S1C41-specific instantiation of H1_formulation_family is falsified because the result is not distinguishable, at the 2.00-percentage-point resolution, from the E5 high-drift reference of 51.54%. A mean at or below 11.51% rejects the E5-like no-mitigation outcome and supports the S1C41-specific mitigation hypothesis. Values strictly between 11.51% and 49.54% show partial mitigation but neither meet acceptance nor trigger falsification.",
+  "frozen_utc": "2026-09-24T16:14:08Z",
+  "gate_enforced": false,
+  "git_commit": "4421cb2ee99585c468026aa381133922b064d32c",
+  "hypotheses_addressed": [
+    "H1_formulation_family"
+  ],
+  "hypotheses_left_entangled": [
+    "H-LEVEL-DILUTE",
+    "H-LEVEL-ASSOC",
+    "H-LEVEL-PLASTIC",
+    "H2_functionality",
+    "H3_region"
+  ],
+  "hypothesis_registry_hash": "e8c0ed9439281b3e38113a272e39c503830012edacfb278b349842d8893f6269",
+  "input_hash": "554f2333fd7eb2d53f95fbf7888f4774d2cfd5014825193647ff01843c7aab8b",
+  "inspection_status": "frozen_pre_result",
+  "measurement_catalog_hash": "78e022dd0b3b2a3f785bc196c26d9cf096d4fcad34b9d782125d5000bb94d2f8",
+  "model": "gpt-5.6-sol",
+  "next_experiment_if_falsified": "Run S1C41::M-SWEEP next to measure the absolute 120-130 C viscosity level and composition-specific temperature response directly, separating an unacceptable residence-time drift result from the distinct static processing-level question.",
+  "pre_enforcement_payload_hash": "816289f9778615a5bd9c27da4e0e6c7493f66bbd6d89746120ef51f869e1b09f",
+  "primary_observable": "Arithmetic mean across at least two independent preparations of SI_15_60 = 100 \u00d7 (eta_60 - eta_15) / eta_15 at 120 C, with the individual-repeat values also reported.",
+  "prompt_hash": "489c66da51888dbfd528a36e0b7810c9ede4e3e38102e5735987e9a85538e4c4",
+  "rationale": "S1C41 uses the smallest total modifier burden among the tied dual-axis candidates, while M-HOLD-120 directly measures the stated hot-residence failure with no unsupported chemistry-shape transfer. The experiment can establish only whether this realized formulation mitigates 15-60 min viscosity growth at 120 C; it cannot attribute the result to either modifier axis, resolve the static-level hypotheses, or support a molecular mechanism.",
+  "recommendation_id": "EXP_V5_20260924T161408Z_8fca2c0775",
+  "selected_candidate_id": "S1C41",
+  "selected_experiment_id": "S1C41::M-HOLD-120",
+  "selected_measurement_id": "M-HOLD-120",
+  "stage_disagreements_resolved": "I do not follow the Proposer or Robustness Adjudicator in selecting S1C41::M-SWEEP. Their choice is the best supplied card for direct modified-chemistry level measurement, and I agree with rejecting the numerically top M-ANCHOR cards because their shape transfer is unverified. However, the declared failure mode is excessive 120 C residence-time drift, the level registry explicitly makes no drift prediction, and the Skeptic correctly notes that the one-preparation sweep lacks a matched E2 baseline and cannot defensibly achieve its claimed 3.4% three-way discrimination. I therefore follow the Planner's direct matched-window requirement and the Skeptic's scope objection by selecting S1C41::M-HOLD-120. This leaves all three level hypotheses entangled but directly tests the favored formulation-level mitigation hypothesis against the observed failure.",
+  "uncertainty_decomposition": {
+    "evidence_coverage_uncertainty": "Only E1 and E5 have local hold trajectories, each from one labeled run, and no modified E2-anchored candidate has prior hold data. The reference thresholds are therefore sparse comparators rather than population estimates.",
+    "extrapolation_uncertainty": "There is no temperature, time-window, or shared-shape extrapolation in the selected measurement: 120 C and 15-60 min are observed directly. Formulation inference remains specific to S1C41; transfer to other AC1920/TK100 loadings is unsupported.",
+    "measurement_uncertainty": "M-HOLD-120 has a declared 2.00-percentage-point resolution and requires at least two independent repeats; the mean and individual SI_15_60 values must both be retained.",
+    "realization_state_uncertainty": "Substantial preparation-state variability is credible because historical E2 viscosity CVs were 54-58% at 120-130 C. Independent preparations and fully recorded process histories reduce but do not eliminate this uncertainty."
+  },
+  "verified_shape_transfer_hash": "7f6ac25fee722fad630a8014a9656923a8d9f3fcbb384aa60650ef0679de3fe8",
+  "voi": {
+    "components": {
+      "budget_efficiency": 0.555556,
+      "decision_relevance": 0.25,
+      "extrapolation_risk": 0.0,
+      "hypothesis_discrimination": 0.0,
+      "measurement_interpretability": 1.0,
+      "process_state_risk": 0.75,
+      "uncertainty_reduction": 0.9
+    },
+    "formula": "VOI = w_hyp * hypothesis_discrimination + w_unc * uncertainty_reduction + w_dec * decision_relevance + w_int * measurement_interpretability - w_ext * extrapolation_risk - w_proc * process_state_risk. Every component is normalized to [0, 1] by construction. This is a transparent normalized score with reported weight sensitivity, not a Bayesian posterior.",
+    "ranked_set": "all experiment cards",
+    "score": 0.330833,
+    "selected_is_in_tied_top_set": false,
+    "tied_top_set": [
+      "S1C41::M-ANCHOR",
+      "S1C46::M-ANCHOR",
+      "S1C51::M-ANCHOR",
+      "S1C56::M-ANCHOR",
+      "S1C61::M-ANCHOR"
+    ],
+    "weights": {
+      "budget_efficiency": 0.15,
+      "decision_relevance": 0.2,
+      "extrapolation_risk": 0.05,
+      "hypothesis_discrimination": 0.3,
+      "measurement_interpretability": 0.1,
+      "process_state_risk": 0.05,
+      "uncertainty_reduction": 0.15
+    }
+  },
+  "workflow_version": "1.2.0"
+}

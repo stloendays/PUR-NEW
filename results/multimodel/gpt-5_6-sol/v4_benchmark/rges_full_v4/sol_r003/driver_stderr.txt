@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "D:\Research\_purnew_wt\sol_replay\rges_full_v4\scripts\run_agent_v4.py", line 591, in <module>
+    main()
+  File "D:\Research\_purnew_wt\sol_replay\rges_full_v4\scripts\run_agent_v4.py", line 506, in main
+    recommendation = freeze_experiment(
+                     ^^^^^^^^^^^^^^^^^^
+  File "D:\Research\_purnew_wt\sol_replay\rges_full_v4\scripts\run_agent_v4.py", line 257, in freeze_experiment
+    raise ValueError(f"selected_experiment_id is not an admissible experiment card: {experiment_id!r}")
+ValueError: selected_experiment_id is not an admissible experiment card: 'E2::M-HOLD-120'
