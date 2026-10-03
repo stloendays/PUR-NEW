@@ -1,0 +1,16 @@
+anchor_c,numerator_source,denominator_source,n_common_curves,log_rmse_ratio,boot95_lo,boot95_hi,share_boot_ratio_gt_1,curve_set
+60.0,b_same_polyol_other_iso,a_same_polyol_same_iso,31,0.8929545845723542,0.6920371682480851,0.9991606458079872,0.0243,primary
+60.0,c_other_polyol_same_iso,a_same_polyol_same_iso,31,2.665678503545707,2.015287219437192,4.248994681020749,1.0,primary
+60.0,c_other_polyol_same_iso,b_same_polyol_other_iso,31,2.985234131277046,2.1762986704822196,5.134747392746103,1.0,primary
+60.0,d_all_other,b_same_polyol_other_iso,31,2.106673703761415,1.7045413710966477,3.296492509093812,1.0,primary
+60.0,c_other_polyol_same_iso,d_all_other,31,1.417036784551391,1.2429636333382974,1.653779940198196,1.0,primary
+60.0,b_same_polyol_other_iso,a_same_polyol_same_iso,34,0.7119283773462168,0.34163355391558076,1.0048030203246991,0.0279,all_curves
+60.0,c_other_polyol_same_iso,a_same_polyol_same_iso,34,1.4794977297845353,1.003496767134375,3.4267316446221554,0.9752,all_curves
+60.0,c_other_polyol_same_iso,b_same_polyol_other_iso,34,2.0781552988511414,1.5927805764129694,4.213395157965326,1.0,all_curves
+60.0,d_all_other,b_same_polyol_other_iso,34,1.4050586606176083,1.2292374236935966,2.262499542435592,1.0,all_curves
+60.0,c_other_polyol_same_iso,d_all_other,34,1.4790523393077883,1.2631573438531758,1.950577998159194,1.0,all_curves
+60.0,b_same_polyol_other_iso,a_same_polyol_same_iso,30,0.811222507148843,0.7115398905151502,0.973855053509023,0.0149,primary_regime_screened
+60.0,c_other_polyol_same_iso,a_same_polyol_same_iso,30,3.550125730877088,2.7320782458944857,4.9753401634866945,1.0,primary_regime_screened
+60.0,c_other_polyol_same_iso,b_same_polyol_other_iso,30,4.37626631360921,3.490437638836071,5.7797701281700675,1.0,primary_regime_screened
+60.0,d_all_other,b_same_polyol_other_iso,30,2.920444574865654,2.4252122397136167,3.7420042729351612,1.0,primary_regime_screened
+60.0,c_other_polyol_same_iso,d_all_other,30,1.4984931921916465,1.3252989205450867,1.6838025786848334,1.0,primary_regime_screened

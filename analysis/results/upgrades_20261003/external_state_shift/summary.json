@@ -1,0 +1,1076 @@
+{
+  "script": "scripts/external_state_shift_validation.py",
+  "data": {
+    "db_path": "C:\\Users\\ASUS\\Documents\\Codex\\2026-08-06\\referenced-chatgpt-conversation-this-is-an\\outputs\\HMPUR_引君database\\database\\hmpur_external.db",
+    "db_sha256": "2eaf52a6ebceed0c07e173289949571b5aa9a1a05f8619ffbce720f9c1c27a95",
+    "table": "viscosity_curves",
+    "opened": "read-only (sqlite URI mode=ro)",
+    "n_rows": 4559,
+    "n_curves": 39,
+    "source": "Pugar et al. 2025, github.com/joepugar/viscosity-modeling"
+  },
+  "settings": {
+    "T_ref_c": 60.0,
+    "z_definition": "z = 1e3*(1/T - 1/Tref), T in K",
+    "grid_c": [
+      42.5,
+      45.0,
+      47.5,
+      50.0,
+      52.5,
+      55.0,
+      57.5,
+      60.0,
+      62.5,
+      65.0,
+      67.5,
+      70.0,
+      72.5,
+      75.0,
+      77.5
+    ],
+    "grid_rule": "node kept only if inside the curve's measured range and >=3 spike-free measured points within +/-1.25 C (no extrapolation, no bridging of data gaps)",
+    "smoother": "tricube-weighted local quadratic in z, half-width 2.5 C, after Hampel spike removal (window 7, 5 robust SD, floor 0.03 in ln eta) on per-curve quadratic residuals",
+    "primary_curve_rule": "ln eta vs 1/T R^2 >= 0.98 (manuscript section 3.8)",
+    "headline_anchor_c": 60.0,
+    "strict_primary": "shape fitted on source curves at nodes <= 57.5 C; anchor 57.5 C; predict +10 and +20 C",
+    "bootstrap": {
+      "type": "curve-level cluster bootstrap",
+      "n_resamples": 10000,
+      "seed_base": 20261003,
+      "seeds": "SEED+i pooled anchor tables (i = curve-set index 0 primary, 1 all_curves, 2 primary_regime_screened), SEED+10+i paired contrasts, SEED+20 strict"
+    }
+  },
+  "inclusion": {
+    "primary_curves": [
+      "C_44M_10",
+      "C_44M_6",
+      "C_44M_8",
+      "C_MLQ_10",
+      "C_MLQ_4",
+      "C_MLQ_6",
+      "C_MLQ_8",
+      "D_44M_10",
+      "D_44M_4",
+      "D_44M_8",
+      "D_I_5",
+      "D_I_9",
+      "D_MLQ_10",
+      "D_MLQ_4",
+      "D_MLQ_6",
+      "D_MLQ_8",
+      "D_TD80_10",
+      "D_W_5",
+      "D_W_9",
+      "P_44M_10",
+      "P_44M_4",
+      "P_44M_6",
+      "P_44M_8",
+      "P_I_5",
+      "P_I_9",
+      "P_MLQ_10",
+      "P_MLQ_4",
+      "P_MLQ_6",
+      "P_MLQ_8",
+      "P_TD80_10",
+      "P_TD80_4",
+      "P_TD80_7",
+      "P_TDS_10",
+      "P_TDS_4",
+      "P_TDS_7",
+      "P_W_5",
+      "P_W_9"
+    ],
+    "excluded_from_primary": [
+      {
+        "sample_id": "D_44M_6",
+        "ln_eta_inv_T_r2": 0.9281
+      },
+      {
+        "sample_id": "D_TD80_7",
+        "ln_eta_inv_T_r2": 0.8527
+      }
+    ],
+    "incomplete_grid_curves": [
+      {
+        "sample_id": "D_I_9",
+        "missing_nodes_c": "47.5;50;60;72.5"
+      },
+      {
+        "sample_id": "D_W_9",
+        "missing_nodes_c": "45;47.5;50;60;72.5"
+      },
+      {
+        "sample_id": "P_TDS_10",
+        "missing_nodes_c": "42.5;50;52.5;55;65"
+      }
+    ],
+    "svd_uses_complete_grid_curves_only": true,
+    "anchor_and_shape_fits_use_all_kept_nodes": true
+  },
+  "sanity": {
+    "apparent_E_eta_range_kJ_mol_all39": [
+      34.74,
+      94.15
+    ],
+    "n_curves_r2_ge_0_98": 37,
+    "manuscript_range_kJ_mol": [
+      34.7,
+      94.2
+    ],
+    "apparent_E_eta_range_by_polyol_kJ_mol": {
+      "C": [
+        56.8,
+        76.8
+      ],
+      "D": [
+        50.6,
+        94.2
+      ],
+      "P": [
+        34.7,
+        44.6
+      ]
+    }
+  },
+  "smoothing": {
+    "median_curve_resid_rms_log": 0.0028,
+    "max_curve_resid_rms_log": 0.00965,
+    "max_curve_resid_rms_curve": "C_MLQ_4",
+    "total_spikes_flagged": 44
+  },
+  "geometry_primary": {
+    "within_polyol_family": {
+      "C": {
+        "n_curves_svd": 7,
+        "mode1_variance_fraction": 0.99903,
+        "mode1_cosine_to_constant": 0.99693,
+        "non_shift_mult": 1.08093,
+        "r2_family_level_only": 0.38337,
+        "r2_curve_level_shared_shape": 0.99554,
+        "r2_curve_specific_quadratic": 0.99934,
+        "mult_rmse_curve_level_shared_shape": 1.08173
+      },
+      "D": {
+        "n_curves_svd": 10,
+        "mode1_variance_fraction": 0.99927,
+        "mode1_cosine_to_constant": 0.99841,
+        "non_shift_mult": 1.05502,
+        "r2_family_level_only": 0.38432,
+        "r2_curve_level_shared_shape": 0.99773,
+        "r2_curve_specific_quadratic": 0.99996,
+        "mult_rmse_curve_level_shared_shape": 1.05346
+      },
+      "P": {
+        "n_curves_svd": 17,
+        "mode1_variance_fraction": 0.99976,
+        "mode1_cosine_to_constant": 0.99956,
+        "non_shift_mult": 1.02826,
+        "r2_family_level_only": 0.24889,
+        "r2_curve_level_shared_shape": 0.9991,
+        "r2_curve_specific_quadratic": 0.99996,
+        "mult_rmse_curve_level_shared_shape": 1.02897
+      }
+    },
+    "within_polyol_x_iso_family": {
+      "C_44M": {
+        "n_curves_svd": 3,
+        "mode1_variance_fraction": 0.99997,
+        "mode1_cosine_to_constant": 0.99892,
+        "non_shift_mult": 1.03005,
+        "r2_family_level_only": 0.55146,
+        "r2_curve_level_shared_shape": 0.99902,
+        "r2_curve_specific_quadratic": 0.99999,
+        "mult_rmse_curve_level_shared_shape": 1.03009
+      },
+      "C_MLQ": {
+        "n_curves_svd": 4,
+        "mode1_variance_fraction": 0.99925,
+        "mode1_cosine_to_constant": 0.99638,
+        "non_shift_mult": 1.09841,
+        "r2_family_level_only": 0.3365,
+        "r2_curve_level_shared_shape": 0.9945,
+        "r2_curve_specific_quadratic": 0.99904,
+        "mult_rmse_curve_level_shared_shape": 1.10048
+      },
+      "D_44M": {
+        "n_curves_svd": 3,
+        "mode1_variance_fraction": 0.99999,
+        "mode1_cosine_to_constant": 0.99818,
+        "non_shift_mult": 1.06594,
+        "r2_family_level_only": 0.28581,
+        "r2_curve_level_shared_shape": 0.99739,
+        "r2_curve_specific_quadratic": 0.99997,
+        "mult_rmse_curve_level_shared_shape": 1.06612
+      },
+      "D_MLQ": {
+        "n_curves_svd": 4,
+        "mode1_variance_fraction": 0.9998,
+        "mode1_cosine_to_constant": 0.99848,
+        "non_shift_mult": 1.04317,
+        "r2_family_level_only": 0.43867,
+        "r2_curve_level_shared_shape": 0.99817,
+        "r2_curve_specific_quadratic": 0.99997,
+        "mult_rmse_curve_level_shared_shape": 1.04332
+      },
+      "P_44M": {
+        "n_curves_svd": 4,
+        "mode1_variance_fraction": 0.99999,
+        "mode1_cosine_to_constant": 0.99962,
+        "non_shift_mult": 1.0247,
+        "r2_family_level_only": 0.23477,
+        "r2_curve_level_shared_shape": 0.9994,
+        "r2_curve_specific_quadratic": 0.99998,
+        "mult_rmse_curve_level_shared_shape": 1.02486
+      },
+      "P_MLQ": {
+        "n_curves_svd": 4,
+        "mode1_variance_fraction": 0.99994,
+        "mode1_cosine_to_constant": 0.99964,
+        "non_shift_mult": 1.02124,
+        "r2_family_level_only": 0.28743,
+        "r2_curve_level_shared_shape": 0.99943,
+        "r2_curve_specific_quadratic": 0.99995,
+        "mult_rmse_curve_level_shared_shape": 1.0214
+      },
+      "P_TD80": {
+        "n_curves_svd": 3,
+        "mode1_variance_fraction": 0.9999,
+        "mode1_cosine_to_constant": 0.99969,
+        "non_shift_mult": 1.01248,
+        "r2_family_level_only": 0.50946,
+        "r2_curve_level_shared_shape": 0.99964,
+        "r2_curve_specific_quadratic": 0.99994,
+        "mult_rmse_curve_level_shared_shape": 1.01264
+      },
+      "P_TDS": {
+        "n_curves_svd": 2,
+        "r2_family_level_only": 0.66662,
+        "r2_curve_level_shared_shape": 0.99856,
+        "r2_curve_specific_quadratic": 0.99977,
+        "mult_rmse_curve_level_shared_shape": 1.02365
+      }
+    },
+    "same_iso_across_polyol_families": {
+      "44M": {
+        "n_curves_svd": 10,
+        "mode1_variance_fraction": 0.99604,
+        "mode1_cosine_to_constant": 0.99737,
+        "non_shift_mult": 1.11329,
+        "r2_family_level_only": 0.22587,
+        "r2_curve_level_shared_shape": 0.99291,
+        "r2_curve_specific_quadratic": 0.99998,
+        "mult_rmse_curve_level_shared_shape": 1.1133
+      },
+      "I": {
+        "n_curves_svd": 3,
+        "mode1_variance_fraction": 0.99583,
+        "mode1_cosine_to_constant": 0.98069,
+        "non_shift_mult": 1.13717,
+        "r2_family_level_only": 0.50218,
+        "r2_curve_level_shared_shape": 0.97817,
+        "r2_curve_specific_quadratic": 0.99994,
+        "mult_rmse_curve_level_shared_shape": 1.12726
+      },
+      "MLQ": {
+        "n_curves_svd": 12,
+        "mode1_variance_fraction": 0.99601,
+        "mode1_cosine_to_constant": 0.99636,
+        "non_shift_mult": 1.1388,
+        "r2_family_level_only": 0.20651,
+        "r2_curve_level_shared_shape": 0.99109,
+        "r2_curve_specific_quadratic": 0.99971,
+        "mult_rmse_curve_level_shared_shape": 1.13902
+      },
+      "TD80": {
+        "n_curves_svd": 4,
+        "mode1_variance_fraction": 0.97947,
+        "mode1_cosine_to_constant": 0.99968,
+        "non_shift_mult": 1.06381,
+        "r2_family_level_only": 0.5851,
+        "r2_curve_level_shared_shape": 0.99122,
+        "r2_curve_specific_quadratic": 0.99994,
+        "mult_rmse_curve_level_shared_shape": 1.06385
+      },
+      "W": {
+        "n_curves_svd": 3,
+        "mode1_variance_fraction": 0.99985,
+        "mode1_cosine_to_constant": 0.99313,
+        "non_shift_mult": 1.1409,
+        "r2_family_level_only": 0.20377,
+        "r2_curve_level_shared_shape": 0.98768,
+        "r2_curve_specific_quadratic": 0.99996,
+        "mult_rmse_curve_level_shared_shape": 1.13489
+      }
+    },
+    "two_polyol_families_pooled": {
+      "C+D": {
+        "n_curves_svd": 17,
+        "mode1_variance_fraction": 0.9992,
+        "mode1_cosine_to_constant": 0.99854,
+        "non_shift_mult": 1.07518,
+        "r2_family_level_only": 0.25143,
+        "r2_curve_level_shared_shape": 0.99738,
+        "r2_curve_specific_quadratic": 0.99981,
+        "mult_rmse_curve_level_shared_shape": 1.07457
+      },
+      "C+P": {
+        "n_curves_svd": 24,
+        "mode1_variance_fraction": 0.99847,
+        "mode1_cosine_to_constant": 0.99634,
+        "non_shift_mult": 1.13668,
+        "r2_family_level_only": 0.14138,
+        "r2_curve_level_shared_shape": 0.99246,
+        "r2_curve_specific_quadratic": 0.99987,
+        "mult_rmse_curve_level_shared_shape": 1.13593
+      },
+      "D+P": {
+        "n_curves_svd": 27,
+        "mode1_variance_fraction": 0.99246,
+        "mode1_cosine_to_constant": 0.99721,
+        "non_shift_mult": 1.10986,
+        "r2_family_level_only": 0.27635,
+        "r2_curve_level_shared_shape": 0.99038,
+        "r2_curve_specific_quadratic": 0.99996,
+        "mult_rmse_curve_level_shared_shape": 1.10866
+      }
+    },
+    "all_families_pooled": {
+      "all": {
+        "n_curves_svd": 34,
+        "mode1_variance_fraction": 0.99648,
+        "mode1_cosine_to_constant": 0.99663,
+        "non_shift_mult": 1.13324,
+        "r2_family_level_only": 0.18907,
+        "r2_curve_level_shared_shape": 0.99182,
+        "r2_curve_specific_quadratic": 0.99989,
+        "mult_rmse_curve_level_shared_shape": 1.13101
+      }
+    }
+  },
+  "anchor_headline_primary": {
+    "anchor_c": 60.0,
+    "common_a_to_d": {
+      "a_same_polyol_same_iso": {
+        "n_curves": 31,
+        "pooled_mult_rmse": 1.0778,
+        "boot95": [
+          1.0465,
+          1.1121
+        ],
+        "worst_curve": "C_MLQ_4",
+        "worst_curve_mult_rmse": 1.3224
+      },
+      "b_same_polyol_other_iso": {
+        "n_curves": 31,
+        "pooled_mult_rmse": 1.0691,
+        "boot95": [
+          1.0383,
+          1.1037
+        ],
+        "worst_curve": "C_MLQ_4",
+        "worst_curve_mult_rmse": 1.3186
+      },
+      "c_other_polyol_same_iso": {
+        "n_curves": 31,
+        "pooled_mult_rmse": 1.2209,
+        "boot95": [
+          1.1859,
+          1.2565
+        ],
+        "worst_curve": "C_MLQ_4",
+        "worst_curve_mult_rmse": 1.4868
+      },
+      "d_all_other": {
+        "n_curves": 31,
+        "pooled_mult_rmse": 1.1513,
+        "boot95": [
+          1.1218,
+          1.1893
+        ],
+        "worst_curve": "C_MLQ_4",
+        "worst_curve_mult_rmse": 1.4709
+      },
+      "ref_own_curve": {
+        "n_curves": 31,
+        "pooled_mult_rmse": 1.0305,
+        "boot95": [
+          1.0055,
+          1.0526
+        ],
+        "worst_curve": "C_MLQ_4",
+        "worst_curve_mult_rmse": 1.1771
+      }
+    },
+    "available": {
+      "a_same_polyol_same_iso": {
+        "n_curves": 34,
+        "pooled_mult_rmse": 1.0759,
+        "boot95": [
+          1.0466,
+          1.1088
+        ],
+        "worst_curve": "C_MLQ_4",
+        "worst_curve_mult_rmse": 1.3224
+      },
+      "b_same_polyol_other_iso": {
+        "n_curves": 35,
+        "pooled_mult_rmse": 1.0673,
+        "boot95": [
+          1.0393,
+          1.0994
+        ],
+        "worst_curve": "C_MLQ_4",
+        "worst_curve_mult_rmse": 1.3186
+      },
+      "c_other_polyol_same_iso": {
+        "n_curves": 32,
+        "pooled_mult_rmse": 1.2192,
+        "boot95": [
+          1.1848,
+          1.253
+        ],
+        "worst_curve": "C_MLQ_4",
+        "worst_curve_mult_rmse": 1.4868
+      },
+      "d_all_other": {
+        "n_curves": 35,
+        "pooled_mult_rmse": 1.1479,
+        "boot95": [
+          1.12,
+          1.1837
+        ],
+        "worst_curve": "C_MLQ_4",
+        "worst_curve_mult_rmse": 1.4709
+      },
+      "ref_own_curve": {
+        "n_curves": 35,
+        "pooled_mult_rmse": 1.029,
+        "boot95": [
+          1.0059,
+          1.05
+        ],
+        "worst_curve": "C_MLQ_4",
+        "worst_curve_mult_rmse": 1.1771
+      }
+    },
+    "range_over_anchor_temperatures_common": {
+      "a_same_polyol_same_iso": [
+        1.0746,
+        1.1408
+      ],
+      "b_same_polyol_other_iso": [
+        1.063,
+        1.114
+      ],
+      "c_other_polyol_same_iso": [
+        1.2209,
+        1.488
+      ],
+      "d_all_other": [
+        1.1509,
+        1.309
+      ],
+      "ref_own_curve": [
+        1.0168,
+        1.0315
+      ]
+    },
+    "paired_log_rmse_ratios": [
+      {
+        "anchor_c": 60.0,
+        "numerator_source": "b_same_polyol_other_iso",
+        "denominator_source": "a_same_polyol_same_iso",
+        "n_common_curves": 31,
+        "log_rmse_ratio": 0.893,
+        "boot95_lo": 0.692,
+        "boot95_hi": 0.9992,
+        "share_boot_ratio_gt_1": 0.0243
+      },
+      {
+        "anchor_c": 60.0,
+        "numerator_source": "c_other_polyol_same_iso",
+        "denominator_source": "a_same_polyol_same_iso",
+        "n_common_curves": 31,
+        "log_rmse_ratio": 2.6657,
+        "boot95_lo": 2.0153,
+        "boot95_hi": 4.249,
+        "share_boot_ratio_gt_1": 1.0
+      },
+      {
+        "anchor_c": 60.0,
+        "numerator_source": "c_other_polyol_same_iso",
+        "denominator_source": "b_same_polyol_other_iso",
+        "n_common_curves": 31,
+        "log_rmse_ratio": 2.9852,
+        "boot95_lo": 2.1763,
+        "boot95_hi": 5.1347,
+        "share_boot_ratio_gt_1": 1.0
+      },
+      {
+        "anchor_c": 60.0,
+        "numerator_source": "d_all_other",
+        "denominator_source": "b_same_polyol_other_iso",
+        "n_common_curves": 31,
+        "log_rmse_ratio": 2.1067,
+        "boot95_lo": 1.7045,
+        "boot95_hi": 3.2965,
+        "share_boot_ratio_gt_1": 1.0
+      },
+      {
+        "anchor_c": 60.0,
+        "numerator_source": "c_other_polyol_same_iso",
+        "denominator_source": "d_all_other",
+        "n_common_curves": 31,
+        "log_rmse_ratio": 1.417,
+        "boot95_lo": 1.243,
+        "boot95_hi": 1.6538,
+        "share_boot_ratio_gt_1": 1.0
+      }
+    ]
+  },
+  "anchor_headline_all_curves": {
+    "common_a_to_d": {
+      "a_same_polyol_same_iso": {
+        "n_curves": 34,
+        "pooled_mult_rmse": 1.2016,
+        "boot95": [
+          1.071,
+          1.3143
+        ],
+        "worst_curve": "D_TD80_10",
+        "worst_curve_mult_rmse": 1.993
+      },
+      "b_same_polyol_other_iso": {
+        "n_curves": 34,
+        "pooled_mult_rmse": 1.1397,
+        "boot95": [
+          1.0586,
+          1.2254
+        ],
+        "worst_curve": "D_TD80_7",
+        "worst_curve_mult_rmse": 1.8306
+      },
+      "c_other_polyol_same_iso": {
+        "n_curves": 34,
+        "pooled_mult_rmse": 1.3122,
+        "boot95": [
+          1.2279,
+          1.4047
+        ],
+        "worst_curve": "D_TD80_7",
+        "worst_curve_mult_rmse": 2.1885
+      },
+      "d_all_other": {
+        "n_curves": 34,
+        "pooled_mult_rmse": 1.2017,
+        "boot95": [
+          1.13,
+          1.292
+        ],
+        "worst_curve": "D_TD80_7",
+        "worst_curve_mult_rmse": 1.9791
+      },
+      "ref_own_curve": {
+        "n_curves": 34,
+        "pooled_mult_rmse": 1.0484,
+        "boot95": [
+          1.0067,
+          1.0756
+        ],
+        "worst_curve": "D_TD80_7",
+        "worst_curve_mult_rmse": 1.2275
+      }
+    },
+    "available": {
+      "a_same_polyol_same_iso": {
+        "n_curves": 37,
+        "pooled_mult_rmse": 1.1941,
+        "boot95": [
+          1.0699,
+          1.3011
+        ],
+        "worst_curve": "D_TD80_10",
+        "worst_curve_mult_rmse": 1.993
+      },
+      "b_same_polyol_other_iso": {
+        "n_curves": 37,
+        "pooled_mult_rmse": 1.1347,
+        "boot95": [
+          1.0564,
+          1.2168
+        ],
+        "worst_curve": "D_TD80_7",
+        "worst_curve_mult_rmse": 1.8306
+      },
+      "c_other_polyol_same_iso": {
+        "n_curves": 34,
+        "pooled_mult_rmse": 1.3122,
+        "boot95": [
+          1.228,
+          1.4061
+        ],
+        "worst_curve": "D_TD80_7",
+        "worst_curve_mult_rmse": 2.1885
+      },
+      "d_all_other": {
+        "n_curves": 37,
+        "pooled_mult_rmse": 1.1983,
+        "boot95": [
+          1.1314,
+          1.281
+        ],
+        "worst_curve": "D_TD80_7",
+        "worst_curve_mult_rmse": 1.9791
+      },
+      "ref_own_curve": {
+        "n_curves": 37,
+        "pooled_mult_rmse": 1.0467,
+        "boot95": [
+          1.0072,
+          1.0737
+        ],
+        "worst_curve": "D_TD80_7",
+        "worst_curve_mult_rmse": 1.2275
+      }
+    }
+  },
+  "strict_primary": {
+    "split_c": 57.5,
+    "common_a_to_d": {
+      "a_same_polyol_same_iso": {
+        "n_curves": 33,
+        "n_predictions": 66,
+        "pooled_mult_rmse": 1.1279,
+        "boot95": [
+          1.0718,
+          1.1903
+        ],
+        "mult_rmse_plus10c": 1.0927,
+        "mult_rmse_plus20c": 1.1563,
+        "median_ape_pct": 4.39
+      },
+      "b_same_polyol_other_iso": {
+        "n_curves": 33,
+        "n_predictions": 66,
+        "pooled_mult_rmse": 1.1154,
+        "boot95": [
+          1.0599,
+          1.1766
+        ],
+        "mult_rmse_plus10c": 1.0871,
+        "mult_rmse_plus20c": 1.1387,
+        "median_ape_pct": 3.24
+      },
+      "c_other_polyol_same_iso": {
+        "n_curves": 33,
+        "n_predictions": 66,
+        "pooled_mult_rmse": 1.2847,
+        "boot95": [
+          1.2287,
+          1.3558
+        ],
+        "mult_rmse_plus10c": 1.1935,
+        "mult_rmse_plus20c": 1.3594,
+        "median_ape_pct": 18.72
+      },
+      "d_all_other": {
+        "n_curves": 33,
+        "n_predictions": 66,
+        "pooled_mult_rmse": 1.2101,
+        "boot95": [
+          1.147,
+          1.289
+        ],
+        "mult_rmse_plus10c": 1.1466,
+        "mult_rmse_plus20c": 1.2616,
+        "median_ape_pct": 11.59
+      },
+      "ref_own_curve": {
+        "n_curves": 33,
+        "n_predictions": 66,
+        "pooled_mult_rmse": 1.1824,
+        "boot95": [
+          1.0416,
+          1.3249
+        ],
+        "mult_rmse_plus10c": 1.1217,
+        "mult_rmse_plus20c": 1.2303,
+        "median_ape_pct": 1.97
+      }
+    },
+    "available": {
+      "a_same_polyol_same_iso": {
+        "n_curves": 36,
+        "n_predictions": 72,
+        "pooled_mult_rmse": 1.1301,
+        "boot95": [
+          1.0796,
+          1.1883
+        ],
+        "mult_rmse_plus10c": 1.0917,
+        "mult_rmse_plus20c": 1.1607,
+        "median_ape_pct": 5.02
+      },
+      "b_same_polyol_other_iso": {
+        "n_curves": 37,
+        "n_predictions": 74,
+        "pooled_mult_rmse": 1.1108,
+        "boot95": [
+          1.0605,
+          1.1677
+        ],
+        "mult_rmse_plus10c": 1.0835,
+        "mult_rmse_plus20c": 1.1334,
+        "median_ape_pct": 3.46
+      },
+      "c_other_polyol_same_iso": {
+        "n_curves": 34,
+        "n_predictions": 68,
+        "pooled_mult_rmse": 1.2827,
+        "boot95": [
+          1.2273,
+          1.3507
+        ],
+        "mult_rmse_plus10c": 1.192,
+        "mult_rmse_plus20c": 1.3569,
+        "median_ape_pct": 18.72
+      },
+      "d_all_other": {
+        "n_curves": 37,
+        "n_predictions": 74,
+        "pooled_mult_rmse": 1.2039,
+        "boot95": [
+          1.1473,
+          1.2768
+        ],
+        "mult_rmse_plus10c": 1.142,
+        "mult_rmse_plus20c": 1.254,
+        "median_ape_pct": 11.59
+      },
+      "ref_own_curve": {
+        "n_curves": 37,
+        "n_predictions": 74,
+        "pooled_mult_rmse": 1.1933,
+        "boot95": [
+          1.046,
+          1.333
+        ],
+        "mult_rmse_plus10c": 1.124,
+        "mult_rmse_plus20c": 1.2472,
+        "median_ape_pct": 2.02
+      }
+    }
+  },
+  "strict_all_curves": {
+    "common_a_to_d": {
+      "a_same_polyol_same_iso": {
+        "n_curves": 36,
+        "n_predictions": 72,
+        "pooled_mult_rmse": 1.4764,
+        "boot95": [
+          1.1094,
+          1.9125
+        ],
+        "mult_rmse_plus10c": 1.1818,
+        "mult_rmse_plus20c": 1.6906,
+        "median_ape_pct": 5.22
+      },
+      "b_same_polyol_other_iso": {
+        "n_curves": 36,
+        "n_predictions": 72,
+        "pooled_mult_rmse": 1.1557,
+        "boot95": [
+          1.1054,
+          1.2085
+        ],
+        "mult_rmse_plus10c": 1.0954,
+        "mult_rmse_plus20c": 1.2011,
+        "median_ape_pct": 5.21
+      },
+      "c_other_polyol_same_iso": {
+        "n_curves": 36,
+        "n_predictions": 72,
+        "pooled_mult_rmse": 1.4402,
+        "boot95": [
+          1.3009,
+          1.5908
+        ],
+        "mult_rmse_plus10c": 1.2119,
+        "mult_rmse_plus20c": 1.6141,
+        "median_ape_pct": 20.87
+      },
+      "d_all_other": {
+        "n_curves": 36,
+        "n_predictions": 72,
+        "pooled_mult_rmse": 1.2195,
+        "boot95": [
+          1.1551,
+          1.2992
+        ],
+        "mult_rmse_plus10c": 1.1448,
+        "mult_rmse_plus20c": 1.2787,
+        "median_ape_pct": 11.29
+      },
+      "ref_own_curve": {
+        "n_curves": 36,
+        "n_predictions": 72,
+        "pooled_mult_rmse": 1.5758,
+        "boot95": [
+          1.0579,
+          2.066
+        ],
+        "mult_rmse_plus10c": 1.2393,
+        "mult_rmse_plus20c": 1.8336,
+        "median_ape_pct": 2.16
+      }
+    }
+  },
+  "regime_screened_sensitivity": {
+    "rule": "primary curves whose own quadratic over the grid fits within 1.05x",
+    "removed": [
+      {
+        "sample_id": "C_MLQ_4",
+        "own_grid_quadratic_mult_rmse": 1.083
+      }
+    ],
+    "geometry": {
+      "within_polyol_family": {
+        "C": {
+          "n_curves_svd": 6,
+          "mode1_variance_fraction": 0.99995,
+          "mode1_cosine_to_constant": 0.99892,
+          "non_shift_mult": 1.02953,
+          "r2_family_level_only": 0.56302,
+          "r2_curve_level_shared_shape": 0.99903,
+          "r2_curve_specific_quadratic": 0.99999,
+          "mult_rmse_curve_level_shared_shape": 1.02962
+        },
+        "D": {
+          "n_curves_svd": 10,
+          "mode1_variance_fraction": 0.99927,
+          "mode1_cosine_to_constant": 0.99841,
+          "non_shift_mult": 1.05502,
+          "r2_family_level_only": 0.38432,
+          "r2_curve_level_shared_shape": 0.99773,
+          "r2_curve_specific_quadratic": 0.99996,
+          "mult_rmse_curve_level_shared_shape": 1.05346
+        },
+        "P": {
+          "n_curves_svd": 17,
+          "mode1_variance_fraction": 0.99976,
+          "mode1_cosine_to_constant": 0.99956,
+          "non_shift_mult": 1.02826,
+          "r2_family_level_only": 0.24889,
+          "r2_curve_level_shared_shape": 0.9991,
+          "r2_curve_specific_quadratic": 0.99996,
+          "mult_rmse_curve_level_shared_shape": 1.02897
+        }
+      },
+      "same_iso_across_polyol_families": {
+        "44M": {
+          "n_curves_svd": 10,
+          "mode1_variance_fraction": 0.99604,
+          "mode1_cosine_to_constant": 0.99737,
+          "non_shift_mult": 1.11329,
+          "r2_family_level_only": 0.22587,
+          "r2_curve_level_shared_shape": 0.99291,
+          "r2_curve_specific_quadratic": 0.99998,
+          "mult_rmse_curve_level_shared_shape": 1.1133
+        },
+        "I": {
+          "n_curves_svd": 3,
+          "mode1_variance_fraction": 0.99583,
+          "mode1_cosine_to_constant": 0.98069,
+          "non_shift_mult": 1.13717,
+          "r2_family_level_only": 0.50218,
+          "r2_curve_level_shared_shape": 0.97817,
+          "r2_curve_specific_quadratic": 0.99994,
+          "mult_rmse_curve_level_shared_shape": 1.12726
+        },
+        "MLQ": {
+          "n_curves_svd": 11,
+          "mode1_variance_fraction": 0.99301,
+          "mode1_cosine_to_constant": 0.99719,
+          "non_shift_mult": 1.10951,
+          "r2_family_level_only": 0.29664,
+          "r2_curve_level_shared_shape": 0.99119,
+          "r2_curve_specific_quadratic": 0.99998,
+          "mult_rmse_curve_level_shared_shape": 1.10953
+        },
+        "TD80": {
+          "n_curves_svd": 4,
+          "mode1_variance_fraction": 0.97947,
+          "mode1_cosine_to_constant": 0.99968,
+          "non_shift_mult": 1.06381,
+          "r2_family_level_only": 0.5851,
+          "r2_curve_level_shared_shape": 0.99122,
+          "r2_curve_specific_quadratic": 0.99994,
+          "mult_rmse_curve_level_shared_shape": 1.06385
+        },
+        "W": {
+          "n_curves_svd": 3,
+          "mode1_variance_fraction": 0.99985,
+          "mode1_cosine_to_constant": 0.99313,
+          "non_shift_mult": 1.1409,
+          "r2_family_level_only": 0.20377,
+          "r2_curve_level_shared_shape": 0.98768,
+          "r2_curve_specific_quadratic": 0.99996,
+          "mult_rmse_curve_level_shared_shape": 1.13489
+        }
+      },
+      "all_families_pooled": {
+        "all": {
+          "n_curves_svd": 33,
+          "mode1_variance_fraction": 0.99562,
+          "mode1_cosine_to_constant": 0.99686,
+          "non_shift_mult": 1.12014,
+          "r2_family_level_only": 0.22139,
+          "r2_curve_level_shared_shape": 0.99182,
+          "r2_curve_specific_quadratic": 0.99998,
+          "mult_rmse_curve_level_shared_shape": 1.1184
+        }
+      }
+    },
+    "anchor_common_a_to_d": {
+      "a_same_polyol_same_iso": {
+        "n_curves": 30,
+        "pooled_mult_rmse": 1.0541,
+        "boot95": [
+          1.039,
+          1.0688
+        ],
+        "worst_curve": "D_44M_4",
+        "worst_curve_mult_rmse": 1.1465
+      },
+      "b_same_polyol_other_iso": {
+        "n_curves": 30,
+        "pooled_mult_rmse": 1.0437,
+        "boot95": [
+          1.0332,
+          1.0537
+        ],
+        "worst_curve": "D_44M_4",
+        "worst_curve_mult_rmse": 1.1068
+      },
+      "c_other_polyol_same_iso": {
+        "n_curves": 30,
+        "pooled_mult_rmse": 1.2057,
+        "boot95": [
+          1.1779,
+          1.2315
+        ],
+        "worst_curve": "D_W_5",
+        "worst_curve_mult_rmse": 1.3376
+      },
+      "d_all_other": {
+        "n_curves": 30,
+        "pooled_mult_rmse": 1.1329,
+        "boot95": [
+          1.117,
+          1.1484
+        ],
+        "worst_curve": "D_44M_4",
+        "worst_curve_mult_rmse": 1.2207
+      },
+      "ref_own_curve": {
+        "n_curves": 30,
+        "pooled_mult_rmse": 1.0066,
+        "boot95": [
+          1.0051,
+          1.008
+        ],
+        "worst_curve": "P_TD80_10",
+        "worst_curve_mult_rmse": 1.0139
+      }
+    },
+    "range_over_anchor_temperatures_common": {
+      "a_same_polyol_same_iso": [
+        1.0541,
+        1.1217
+      ],
+      "b_same_polyol_other_iso": [
+        1.0435,
+        1.0897
+      ],
+      "c_other_polyol_same_iso": [
+        1.2057,
+        1.4718
+      ],
+      "d_all_other": [
+        1.1309,
+        1.2866
+      ],
+      "ref_own_curve": [
+        1.0058,
+        1.0107
+      ]
+    },
+    "strict_common_a_to_d": {
+      "a_same_polyol_same_iso": {
+        "n_curves": 32,
+        "n_predictions": 64,
+        "pooled_mult_rmse": 1.0704,
+        "boot95": [
+          1.0513,
+          1.0896
+        ],
+        "mult_rmse_plus10c": 1.0425,
+        "mult_rmse_plus20c": 1.0905,
+        "median_ape_pct": 4.01
+      },
+      "b_same_polyol_other_iso": {
+        "n_curves": 32,
+        "n_predictions": 64,
+        "pooled_mult_rmse": 1.0607,
+        "boot95": [
+          1.0451,
+          1.0749
+        ],
+        "mult_rmse_plus10c": 1.0348,
+        "mult_rmse_plus20c": 1.079,
+        "median_ape_pct": 2.47
+      },
+      "c_other_polyol_same_iso": {
+        "n_curves": 32,
+        "n_predictions": 64,
+        "pooled_mult_rmse": 1.2582,
+        "boot95": [
+          1.224,
+          1.2929
+        ],
+        "mult_rmse_plus10c": 1.1659,
+        "mult_rmse_plus20c": 1.3314,
+        "median_ape_pct": 18.72
+      },
+      "d_all_other": {
+        "n_curves": 32,
+        "n_predictions": 64,
+        "pooled_mult_rmse": 1.1667,
+        "boot95": [
+          1.1399,
+          1.1924
+        ],
+        "mult_rmse_plus10c": 1.1054,
+        "mult_rmse_plus20c": 1.2136,
+        "median_ape_pct": 11.42
+      },
+      "ref_own_curve": {
+        "n_curves": 32,
+        "n_predictions": 64,
+        "pooled_mult_rmse": 1.0576,
+        "boot95": [
+          1.0369,
+          1.0774
+        ],
+        "mult_rmse_plus10c": 1.0233,
+        "mult_rmse_plus20c": 1.0788,
+        "median_ape_pct": 1.91
+      }
+    }
+  },
+  "figure": {
+    "file": "external_state_shift_diagnostic.png",
+    "panel_A_B_family": "polyol family P (primary curves)"
+  }
+}
