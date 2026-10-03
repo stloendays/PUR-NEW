@@ -1,0 +1,41 @@
+condition_key,run_id,proposer_experiment_id,robustness_preferred_experiment_id,selected_experiment_id,status,failure_category,final_decision_correct,robustness_move
+rges_full_v4,sol_r001,S1C51::M-HOLD-120,S1C49::M-HOLD-120,S1C49::M-HOLD-120,ok,,False,acrylic-only hold (separates H-RESIN from H-DUAL)
+rges_full_v4,sol_r002,S1C51::M-HOLD-120,E2::M-HOLD-120,E2::M-HOLD-120,invalid,selection_outside_admissible_card_set,False,requested card outside the declared inventory (rejected at freeze)
+rges_full_v4,sol_r003,S1C41::M-HOLD-120,E2::M-HOLD-120,E2::M-HOLD-120,invalid,selection_outside_admissible_card_set,False,requested card outside the declared inventory (rejected at freeze)
+rges_full_v4,sol_r004,S1C41::M-HOLD-120,S1C49::M-HOLD-120,S1C49::M-HOLD-120,ok,,False,acrylic-only hold (separates H-RESIN from H-DUAL)
+rges_full_v4,sol_r005,S1C51::M-HOLD-120,S1C49::M-HOLD-120,S1C49::M-HOLD-120,ok,,False,acrylic-only hold (separates H-RESIN from H-DUAL)
+rges_full_v4,sol_r006,S1C41::M-HOLD-120,E2::M-HOLD-120,E2::M-HOLD-120,invalid,selection_outside_admissible_card_set,False,requested card outside the declared inventory (rejected at freeze)
+rges_full_v4,sol_r007,S1C41::M-HOLD-120,E2::M-HOLD-120,E2::M-HOLD-120,invalid,selection_outside_admissible_card_set,False,requested card outside the declared inventory (rejected at freeze)
+rges_voi_withheld,sol_r001,S1C49::M-HOLD-120,S1C01::M-HOLD-120,S1C01::M-HOLD-120,ok,,False,"different candidate, same measurement"
+rges_voi_withheld,sol_r002,S1C49::M-HOLD-120,S1C01::M-HOLD-120,S1C01::M-HOLD-120,ok,,False,"different candidate, same measurement"
+rges_voi_withheld,sol_r005,S1C49::M-HOLD-120,S1C01::M-HOLD-120,S1C01::M-HOLD-120,ok,,False,"different candidate, same measurement"
+rges_voi_withheld,sol_r006,S1C49::M-HOLD-120,S1C01::M-HOLD-120,S1C01::M-HOLD-120,ok,,False,"different candidate, same measurement"
+rges_voi_withheld,sol_r007,S1C49::M-HOLD-120,S1C01::M-HOLD-120,S1C01::M-HOLD-120,ok,,False,"different candidate, same measurement"
+rges_voi_withheld,sol_r008,S1C49::M-HOLD-120,S1C01::M-HOLD-120,S1C01::M-HOLD-120,ok,,False,"different candidate, same measurement"
+rges_voi_withheld,sol_r009,S1C49::M-HOLD-120,S1C01::M-HOLD-120,S1C01::M-HOLD-120,ok,,False,"different candidate, same measurement"
+cbes_A_drift_V5_NO_GATE,sol_r001,S1C41::M-HOLD-120,S1C39::M-HOLD-120,S1C39::M-HOLD-120,ok,,True,acrylic-only hold (separates H-RESIN from H-DUAL)
+cbes_A_drift_V5_NO_GATE,sol_r002,S1C41::M-HOLD-120,S1C01::M-HOLD-120,S1C01::M-HOLD-120,ok,,True,"different candidate, same measurement"
+cbes_A_drift_V5_NO_GATE,sol_r004,S1C41::M-HOLD-120,S1C01::M-HOLD-120,S1C01::M-HOLD-120,ok,,True,"different candidate, same measurement"
+cbes_A_drift_V5_NO_GATE,sol_r006,S1C41::M-HOLD-120,S1C39::M-HOLD-120,S1C39::M-HOLD-120,ok,,True,acrylic-only hold (separates H-RESIN from H-DUAL)
+cbes_A_drift_V5_NO_GATE,sol_r007,S1C41::M-HOLD-120,S1C39::M-HOLD-120,S1C39::M-HOLD-120,ok,,True,acrylic-only hold (separates H-RESIN from H-DUAL)
+cbes_A_drift_V5_NO_GATE,sol_r008,S1C41::M-HOLD-120,S1C49::M-HOLD-120,S1C49::M-HOLD-120,ok,,True,acrylic-only hold (separates H-RESIN from H-DUAL)
+cbes_A_drift_V5_NO_GATE,sol_r009,S1C41::M-HOLD-120,S1C49::M-HOLD-120,S1C49::M-HOLD-120,ok,,True,acrylic-only hold (separates H-RESIN from H-DUAL)
+cbes_A_drift_V5_NO_GATE,sol_r010,S1C41::M-HOLD-120,S1C09::M-HOLD-120,S1C09::M-HOLD-120,ok,,True,"different candidate, same measurement"
+cbes_A_drift_V5_FULL,sol_r002,S1C51::M-HOLD-120,S1C01::M-HOLD-120,S1C01::M-HOLD-120,ok,,True,"different candidate, same measurement"
+cbes_A_drift_V5_FULL,sol_r004,S1C41::M-HOLD-120,S1C49::M-HOLD-120,S1C49::M-HOLD-120,ok,,True,acrylic-only hold (separates H-RESIN from H-DUAL)
+cbes_A_drift_V5_FULL,sol_r005,S1C51::M-HOLD-120,S1C49::M-HOLD-120,S1C49::M-HOLD-120,ok,,True,acrylic-only hold (separates H-RESIN from H-DUAL)
+cbes_A_drift_V5_FULL,sol_r006,S1C41::M-HOLD-120,S1C39::M-HOLD-120,S1C39::M-HOLD-120,ok,,True,acrylic-only hold (separates H-RESIN from H-DUAL)
+cbes_A_drift_V5_FULL,sol_r007,S1C41::M-HOLD-120,S1C39::M-HOLD-120,S1C39::M-HOLD-120,ok,,True,acrylic-only hold (separates H-RESIN from H-DUAL)
+cbes_A_drift_V5_FULL,sol_r008,S1C41::M-HOLD-120,S1C39::M-HOLD-120,S1C39::M-HOLD-120,ok,,True,acrylic-only hold (separates H-RESIN from H-DUAL)
+cbes_A_drift_V5_FULL,sol_r009,S1C41::M-HOLD-120,S1C01::M-HOLD-120,S1C01::M-HOLD-120,ok,,True,"different candidate, same measurement"
+cbes_A_drift_V5_FULL,sol_r010,S1C51::M-HOLD-120,S1C49::M-HOLD-120,S1C49::M-HOLD-120,ok,,True,acrylic-only hold (separates H-RESIN from H-DUAL)
+cbes_B_processing_window_V5_NO_GATE,sol_r003,S1C41::M-SWEEP,S1C41::M-REPEAT,S1C41::M-REPEAT,ok,,False,replicated-preparation check before the direct measurement
+cbes_B_processing_window_V5_NO_GATE,sol_r004,S1C41::M-SWEEP,S1C41::M-SWEEP,S1C41::M-HOLD-120,ok,,False,different measurement
+cbes_B_processing_window_V5_NO_GATE,sol_r006,S1C41::M-SWEEP,S1C41::M-REPEAT,S1C41::M-REPEAT,ok,,False,replicated-preparation check before the direct measurement
+cbes_B_processing_window_V5_NO_GATE,sol_r009,S1C41::M-SWEEP,S1C41::M-REPEAT,S1C41::M-REPEAT,ok,,False,replicated-preparation check before the direct measurement
+cbes_B_processing_window_V5_FULL,sol_r001,S1C41::M-SWEEP,S1C41::M-REPEAT,S1C41::M-REPEAT,ok,,False,replicated-preparation check before the direct measurement
+cbes_B_processing_window_V5_FULL,sol_r002,S1C41::M-SWEEP,S1C41::M-REPEAT,S1C41::M-REPEAT,ok,,False,replicated-preparation check before the direct measurement
+cbes_B_processing_window_V5_FULL,sol_r005,S1C41::M-SWEEP,S1C41::M-SWEEP,S1C41::M-REPEAT,ok,,False,replicated-preparation check before the direct measurement
+cbes_B_processing_window_V5_FULL,sol_r006,S1C51::M-SWEEP,S1C51::M-REPEAT,S1C51::M-REPEAT,ok,,False,replicated-preparation check before the direct measurement
+cbes_B_processing_window_V5_FULL,sol_r008,S1C41::M-SWEEP,S1C41::M-REPEAT,S1C41::M-REPEAT,ok,,False,replicated-preparation check before the direct measurement
+cbes_B_processing_window_V5_FULL,sol_r009,S1C51::M-SWEEP,S1C51::M-SWEEP,S1C41::M-HOLD-120,ok,,False,"different candidate, same measurement"

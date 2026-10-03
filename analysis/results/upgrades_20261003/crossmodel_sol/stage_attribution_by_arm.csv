@@ -1,0 +1,15 @@
+condition_key,model,n_scientific,n_invalid,proposer_in_tied_top_set,final_in_tied_top_set,final_differs_from_proposer,final_decision_correct,n_technical_failure
+rges_full_v4,gpt-5.6-luna,10,0,10,9,1,9,0
+rges_full_v4,gpt-5.6-sol,9,4,5,2,7,2,1
+rges_voi_withheld,gpt-5.6-luna,5,0,1,0,3,0,0
+rges_voi_withheld,gpt-5.6-sol,8,0,0,0,7,0,2
+rges_rule_order_minimality_first,gpt-5.6-luna,10,0,0,0,3,0,0
+rges_rule_order_minimality_first,gpt-5.6-sol,9,0,0,0,0,0,1
+cbes_A_drift_V5_NO_GATE,gpt-5.6-luna,10,0,10,9,1,10,0
+cbes_A_drift_V5_NO_GATE,gpt-5.6-sol,8,0,8,0,8,8,2
+cbes_A_drift_V5_FULL,gpt-5.6-luna,10,0,10,10,0,10,0
+cbes_A_drift_V5_FULL,gpt-5.6-sol,8,0,8,0,8,8,2
+cbes_B_processing_window_V5_NO_GATE,gpt-5.6-luna,10,0,0,0,0,10,0
+cbes_B_processing_window_V5_NO_GATE,gpt-5.6-sol,9,0,0,0,4,5,1
+cbes_B_processing_window_V5_FULL,gpt-5.6-luna,10,1,9,9,0,9,0
+cbes_B_processing_window_V5_FULL,gpt-5.6-sol,10,0,10,4,6,4,0

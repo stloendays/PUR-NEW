@@ -1,0 +1,12 @@
+condition_key,robustness_move,n
+cbes_A_drift_V5_FULL,acrylic-only hold (separates H-RESIN from H-DUAL),6
+cbes_A_drift_V5_FULL,"different candidate, same measurement",2
+cbes_A_drift_V5_NO_GATE,acrylic-only hold (separates H-RESIN from H-DUAL),5
+cbes_A_drift_V5_NO_GATE,"different candidate, same measurement",3
+cbes_B_processing_window_V5_FULL,"different candidate, same measurement",1
+cbes_B_processing_window_V5_FULL,replicated-preparation check before the direct measurement,5
+cbes_B_processing_window_V5_NO_GATE,different measurement,1
+cbes_B_processing_window_V5_NO_GATE,replicated-preparation check before the direct measurement,3
+rges_full_v4,acrylic-only hold (separates H-RESIN from H-DUAL),3
+rges_full_v4,requested card outside the declared inventory (rejected at freeze),4
+rges_voi_withheld,"different candidate, same measurement",7

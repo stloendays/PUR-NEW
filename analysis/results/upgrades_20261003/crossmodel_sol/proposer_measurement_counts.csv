@@ -1,0 +1,15 @@
+condition_key,model,proposer_measurement,n
+cbes_A_drift_V5_FULL,gpt-5.6-luna,M-HOLD-120,10
+cbes_A_drift_V5_FULL,gpt-5.6-sol,M-HOLD-120,8
+cbes_A_drift_V5_NO_GATE,gpt-5.6-luna,M-HOLD-120,10
+cbes_A_drift_V5_NO_GATE,gpt-5.6-sol,M-HOLD-120,8
+cbes_B_processing_window_V5_FULL,gpt-5.6-luna,M-SWEEP,9
+cbes_B_processing_window_V5_FULL,gpt-5.6-sol,M-SWEEP,10
+cbes_B_processing_window_V5_NO_GATE,gpt-5.6-luna,M-SWEEP,10
+cbes_B_processing_window_V5_NO_GATE,gpt-5.6-sol,M-SWEEP,9
+rges_full_v4,gpt-5.6-luna,M-HOLD-120,10
+rges_full_v4,gpt-5.6-sol,M-HOLD-120,9
+rges_rule_order_minimality_first,gpt-5.6-luna,M-HOLD-120,10
+rges_rule_order_minimality_first,gpt-5.6-sol,M-HOLD-120,9
+rges_voi_withheld,gpt-5.6-luna,M-HOLD-120,5
+rges_voi_withheld,gpt-5.6-sol,M-HOLD-120,8

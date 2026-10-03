@@ -1,0 +1,219 @@
+{
+  "source": "D:\\Research\\PUR-NEW\\results\\multimodel\\gpt-5_6-sol\\v4_benchmark\\run_level_rows.csv",
+  "source_sha256": "e17718d472f6d9ca5a80f635fb89029d3904da2a4d141f70e2368a519548d5f7",
+  "source_commit": "dc1f861 (agent-v5-implementation)",
+  "denominator_rule": "scientific denominator = attempted minus technical failures; invalid model outputs stay in",
+  "by_arm": [
+    {
+      "condition_key": "rges_full_v4",
+      "model": "gpt-5.6-luna",
+      "n_scientific": 10,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 10,
+      "final_in_tied_top_set": 9,
+      "final_differs_from_proposer": 1,
+      "final_decision_correct": 9,
+      "n_technical_failure": 0
+    },
+    {
+      "condition_key": "rges_full_v4",
+      "model": "gpt-5.6-sol",
+      "n_scientific": 9,
+      "n_invalid": 4,
+      "proposer_in_tied_top_set": 5,
+      "final_in_tied_top_set": 2,
+      "final_differs_from_proposer": 7,
+      "final_decision_correct": 2,
+      "n_technical_failure": 1
+    },
+    {
+      "condition_key": "rges_voi_withheld",
+      "model": "gpt-5.6-luna",
+      "n_scientific": 5,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 1,
+      "final_in_tied_top_set": 0,
+      "final_differs_from_proposer": 3,
+      "final_decision_correct": 0,
+      "n_technical_failure": 0
+    },
+    {
+      "condition_key": "rges_voi_withheld",
+      "model": "gpt-5.6-sol",
+      "n_scientific": 8,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 0,
+      "final_in_tied_top_set": 0,
+      "final_differs_from_proposer": 7,
+      "final_decision_correct": 0,
+      "n_technical_failure": 2
+    },
+    {
+      "condition_key": "rges_rule_order_minimality_first",
+      "model": "gpt-5.6-luna",
+      "n_scientific": 10,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 0,
+      "final_in_tied_top_set": 0,
+      "final_differs_from_proposer": 3,
+      "final_decision_correct": 0,
+      "n_technical_failure": 0
+    },
+    {
+      "condition_key": "rges_rule_order_minimality_first",
+      "model": "gpt-5.6-sol",
+      "n_scientific": 9,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 0,
+      "final_in_tied_top_set": 0,
+      "final_differs_from_proposer": 0,
+      "final_decision_correct": 0,
+      "n_technical_failure": 1
+    },
+    {
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "model": "gpt-5.6-luna",
+      "n_scientific": 10,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 10,
+      "final_in_tied_top_set": 9,
+      "final_differs_from_proposer": 1,
+      "final_decision_correct": 10,
+      "n_technical_failure": 0
+    },
+    {
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "model": "gpt-5.6-sol",
+      "n_scientific": 8,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 8,
+      "final_in_tied_top_set": 0,
+      "final_differs_from_proposer": 8,
+      "final_decision_correct": 8,
+      "n_technical_failure": 2
+    },
+    {
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "model": "gpt-5.6-luna",
+      "n_scientific": 10,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 10,
+      "final_in_tied_top_set": 10,
+      "final_differs_from_proposer": 0,
+      "final_decision_correct": 10,
+      "n_technical_failure": 0
+    },
+    {
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "model": "gpt-5.6-sol",
+      "n_scientific": 8,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 8,
+      "final_in_tied_top_set": 0,
+      "final_differs_from_proposer": 8,
+      "final_decision_correct": 8,
+      "n_technical_failure": 2
+    },
+    {
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "model": "gpt-5.6-luna",
+      "n_scientific": 10,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 0,
+      "final_in_tied_top_set": 0,
+      "final_differs_from_proposer": 0,
+      "final_decision_correct": 10,
+      "n_technical_failure": 0
+    },
+    {
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "model": "gpt-5.6-sol",
+      "n_scientific": 9,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 0,
+      "final_in_tied_top_set": 0,
+      "final_differs_from_proposer": 4,
+      "final_decision_correct": 5,
+      "n_technical_failure": 1
+    },
+    {
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "model": "gpt-5.6-luna",
+      "n_scientific": 10,
+      "n_invalid": 1,
+      "proposer_in_tied_top_set": 9,
+      "final_in_tied_top_set": 9,
+      "final_differs_from_proposer": 0,
+      "final_decision_correct": 9,
+      "n_technical_failure": 0
+    },
+    {
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "model": "gpt-5.6-sol",
+      "n_scientific": 10,
+      "n_invalid": 0,
+      "proposer_in_tied_top_set": 10,
+      "final_in_tied_top_set": 4,
+      "final_differs_from_proposer": 6,
+      "final_decision_correct": 4,
+      "n_technical_failure": 0
+    }
+  ],
+  "sol_robustness_moves": [
+    {
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "robustness_move": "acrylic-only hold (separates H-RESIN from H-DUAL)",
+      "n": 6
+    },
+    {
+      "condition_key": "cbes_A_drift_V5_FULL",
+      "robustness_move": "different candidate, same measurement",
+      "n": 2
+    },
+    {
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "robustness_move": "acrylic-only hold (separates H-RESIN from H-DUAL)",
+      "n": 5
+    },
+    {
+      "condition_key": "cbes_A_drift_V5_NO_GATE",
+      "robustness_move": "different candidate, same measurement",
+      "n": 3
+    },
+    {
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "robustness_move": "different candidate, same measurement",
+      "n": 1
+    },
+    {
+      "condition_key": "cbes_B_processing_window_V5_FULL",
+      "robustness_move": "replicated-preparation check before the direct measurement",
+      "n": 5
+    },
+    {
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "robustness_move": "different measurement",
+      "n": 1
+    },
+    {
+      "condition_key": "cbes_B_processing_window_V5_NO_GATE",
+      "robustness_move": "replicated-preparation check before the direct measurement",
+      "n": 3
+    },
+    {
+      "condition_key": "rges_full_v4",
+      "robustness_move": "acrylic-only hold (separates H-RESIN from H-DUAL)",
+      "n": 3
+    },
+    {
+      "condition_key": "rges_full_v4",
+      "robustness_move": "requested card outside the declared inventory (rejected at freeze)",
+      "n": 4
+    },
+    {
+      "condition_key": "rges_voi_withheld",
+      "robustness_move": "different candidate, same measurement",
+      "n": 7
+    }
+  ]
+}
