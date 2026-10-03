@@ -94,6 +94,19 @@ def lattice_frame(ax, ylab=True, fs=5.6):
             va="top", linespacing=1.0)
 
 
+def withheld_critique():
+    """Critique totals of the score-withheld arm over both of its series."""
+    import json
+    path = os.path.join(D.ROOT, "analysis", "results", "upgrades_20261003",
+                        "score_withheld_extension", "summary.json")
+    with open(path, encoding="utf-8") as fh:
+        s = json.load(fh)
+    blocks = (s["original_block"]["internal_critique"],
+              s["extension_block"]["internal_critique"])
+    return {k: sum(b[k] for b in blocks)
+            for k in ("high_severity_objection", "robustness_said_change_experiment")}
+
+
 def main():
     cards = D.experiment_cards()
     runs = D.ablation_runs()
@@ -104,14 +117,15 @@ def main():
     by = {a: runs[runs.arm == a].sort_values("run") for a in ARMS}
 
     # ---- the numbers this figure must reproduce ---------------------------
-    table1 = {"full": (10, 9, 0, 0.667), "voi_withheld": (5, 0, 3, 0.267),
+    table1 = {"full": (10, 9, 0, 0.667), "voi_withheld": (10, 0, 3, 0.467),
               "order_inverted": (10, 0, 10, 0.000)}
     for a in ARMS:
         n, sup, zero, mean = table1[a]
         r = by[a]
         assert (len(r), int(r.supported.sum()), int((r.discrimination == 0).sum()),
                 round(r.discrimination.mean(), 3)) == (n, sup, zero, mean), a
-        ic = agg[key[a]]["internal_critique"]
+        ic = (withheld_critique() if a == "voi_withheld"
+              else agg[key[a]]["internal_critique"])
         c = crit[crit.arm == a]
         assert int(c.high_severity.sum()) == ic["high_severity_objection"], a
         assert int(c.robustness_change.sum()) == ic["robustness_said_change_experiment"], a

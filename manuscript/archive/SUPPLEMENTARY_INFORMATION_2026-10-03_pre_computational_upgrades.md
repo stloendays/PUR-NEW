@@ -4,22 +4,21 @@
 
 ### Scope of this Supplementary Information
 
-This Supplementary Information (SI) supports one closed scientific sequence from experimental realization and rheological-state identification to physical hypothesis adjudication. Notes 1–4 establish the local formulation set, state-conditioned temperature response, one-point state calibration and thermal-hold failure coordinate. Notes 5–7 place the local response inside the broader external evidence base and define the proportional-dilution null. Notes 8 onward document the Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), Chemistry-Bounded Experiment Selection (CBES), controlled rule tests and post-freeze wet-lab adjudication; Note 21 reports the cross-model replication of the decision matrix.
+This Supplementary Information (SI) supports one closed scientific sequence from experimental realization and rheological-state identification to physical hypothesis adjudication. Notes 1–4 establish the local formulation set, state-conditioned temperature response, one-point state calibration and thermal-hold failure coordinate. Notes 5–7 place the local response inside the broader external evidence base and define the proportional-dilution null. Notes 8 onward document the Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), Chemistry-Bounded Experiment Selection (CBES), controlled rule tests and post-freeze wet-lab adjudication.
 
 The SI preserves the separation between material evidence and computational decision evidence without presenting them as two independent stories. Material measurements define the physical state and unresolved failure mode; the hypothesis registry and decision rules determine what experiment can resolve that uncertainty; the held-out wet-lab result then updates the hypothesis state.
 
 The principal claims supported here are:
 
-1. realization-dependent viscosity variation in the local reactive-PUR family is predominantly a calibratable scale shift on a shared local thermal response, with a between-realization state spread 19-fold larger than residual scatter;
-2. one-point state calibration transfers that local thermal shape to a held formulation over the tested short temperature range, with calibrated posterior predictive intervals for held realizations, and the same level-shift structure and one-point calibration hold within external polyol families but not across them;
+1. realization-dependent viscosity variation in the local reactive-PUR family is predominantly a calibratable scale shift on a shared local thermal response;
+2. one-point state calibration transfers that local thermal shape to a held formulation over the tested short temperature range;
 3. thermal-hold trajectory is a separate and substantially more formulation-sensitive rheological coordinate;
 4. the resin-modified validation formulation exhibits 1.60% mean absolute 15–60 min drift, well below the 7.79% proportional-dilution null;
 5. the experimentally identified failure mode is translated into competing formulation-level hypotheses and 292 formulation-measurement experiment cards;
-6. RGES selects the evidence-supported family in 9/10 runs with no zero-discrimination selections, whereas withholding the VOI score yields 0/10 supported-family selections and 3/10 zero-discrimination selections; the tied top set is stable under joint re-weighting, and a formal expected-information-gain discrimination term resolves it to the card selected in 9/10 runs;
+6. RGES selects the evidence-supported family in 9/10 runs with no zero-discrimination selections, whereas withholding the VOI score yields 0/5 supported-family selections and 3/5 zero-discrimination selections;
 7. inverting rule order yields 10/10 zero-discrimination selections, showing that rule order changes scientific decision quality even when the critique stage detects the defect;
 8. under CBES, chemistry applicability is non-binding for a direct thermal-hold question but causes the processing-window problem to be framed as direct sweep verification before reuse of a one-point anchor shortcut;
-9. the wet-lab result rejects the reactive-core-only dilution explanation (probability 0.010 under H-CORE after propagating hold-drift repeatability) and satisfies the registered H-RESIN support criterion at the formulation level;
-10. the deterministic decision layer and both rule ablations reproduce under a second base model, and the two models make the same measurement proposal in every valid run.
+9. the wet-lab result rejects the reactive-core-only dilution explanation and satisfies the registered H-RESIN support criterion at the formulation level.
 
 ---
 
@@ -138,37 +137,6 @@ $$
 For any candidate $T_0$, the realization-specific intercepts and shared $B$ were solved by least squares. A bounded profile optimizer gave $T_0=262.284$ K and $B=456.90$ K. A seeded dual-annealing global search converged to $T_0=262.284$ K within 0.0003 K and the same fit error. The conclusion is therefore insensitive to optimizer initialization or local-minimum concerns.
 
 The fitted $T_0$ is not treated as a measured glass-transition temperature or as an independent molecular parameter. Its leave-one-realization estimates ranged from approximately -25.4 to -5.1 °C, showing that it is not sufficiently stable for mechanistic interpretation in this sparse local dataset. The VFT analysis is used only to show that the shared-shape conclusion is not an artifact of the quadratic polynomial basis.
-
-The same comparison was extended to the anchor tasks themselves. The quadratic basis is statistically tied with the VFT form on every task and outperforms the Arrhenius form throughout; the Williams–Landel–Ferry form is an exact reparameterization of VFT and gives identical numbers.
-
-| Thermal basis | ΔAICc | Held-temperature | LOFO one-point (all anchors pooled) | Strict holdout | E2 same-formulation anchor |
-|---|---:|---:|---:|---:|---:|
-| Arrhenius (linear in $1/T$) | 29.6 | 1.118× | 1.119× | 1.168× | 1.142× |
-| quadratic in $z$ | 0.5 | 1.058× | 1.084× | 1.088× | 1.086× |
-| cubic in $z$ | 3.6 | 1.055× | 1.084× | 1.115× | 1.085× |
-| VFT / WLF (shared $B$, $T_0$) | 0 | 1.055× | 1.084× | 1.081× | 1.087× |
-
-## Hierarchical Bayesian state model
-
-The state-conditioned representation was also fitted as a hierarchical model,
-
-$$
-\ln\eta_{frT}=a_{fr}+\beta_1z(T)+\beta_2z(T)^2+\varepsilon_{frT},\qquad
-a_{fr}\sim\mathcal{N}(\mu_f,\tau^2),\qquad
-\varepsilon_{frT}\sim\mathcal{N}(0,\sigma_r^2),\qquad
-\log\sigma_r\sim\mathcal{N}(\lambda,\omega^2),
-$$
-
-with formulation means $\mu_f\sim\mathcal{N}(7.5,3^2)$, $\beta_k\sim\mathcal{N}(0,50^2)$, $\tau\sim$ half-Cauchy(0, 1), $\lambda\sim\mathcal{N}(\log0.05,1.5^2)$ and $\omega\sim$ half-Normal(0, 1). Formulation-level means were used because E1–E3 are designed NCO:OH levels rather than exchangeable draws; $\tau$ is therefore the within-formulation state spread $\delta_{fr}$. Sampling used Metropolis-within-Gibbs with four chains of 5,000 retained draws after 2,000 warm-up (maximum $\hat R$ 1.009, minimum bulk effective sample size 775 across all fits).
-
-| Quantity | Posterior median (95% credible interval) |
-|---|---|
-| between-realization state spread $\tau$ | 0.59 (0.30–1.57) in $\ln\eta$ |
-| typical residual scatter $e^{\lambda}$ | 0.032 (0.014–0.074) |
-| $\tau/e^{\lambda}$ | 18.6 (6.2–64.2) |
-| $\beta_1$, $\beta_2$ | 4.40 (4.16–4.54), 3.37 (2.84–4.37) |
-
-For one-anchor prediction, the anchor entered the likelihood of the held realization's intercept, and the held realization's residual scale was drawn from its population distribution. Posterior-mean reconstruction errors reproduced the frequentist values (strict holdout 1.093×, E2 same-formulation anchor 1.091×). For held-out realizations, nominal 80% and 95% posterior predictive intervals covered 82% (148/180) and 92% (166/180) of predictions; across the four hyperprior settings tested for $\omega$, 95% coverage was 91–94%. The state-spread ratio was insensitive to the $\omega$ prior (medians 18.2–18.6).
 
 ---
 
@@ -360,27 +328,6 @@ The measured F1 mean absolute drift is 1.60%. Thus the observed reduction from E
 
 The validation therefore supports a low-drift rheological region and shows that the stabilization exceeds simple proportional dilution of the original reactive core.
 
-## Uncertainty propagation for the registered H-CORE test
-
-Hold-drift repeatability was estimated in two independent ways. The first used residual scatter of $\ln\eta$ about a linear time trend within each measured hold trajectory (E1, E5 and both validation repeats; 8 degrees of freedom); for a two-point 15→60 min drift this scatter gives $\sigma_{\mathrm{drift}}=\sqrt2\,\sigma_{\mathrm{point}}$. The second used the spread between the two validation repeats.
-
-| Quantity | Value |
-|---|---:|
-| $\sigma_{\mathrm{drift}}$ from within-trajectory scatter | 0.0226 in $\ln\eta$ |
-| $\sigma_{\mathrm{drift}}$ from the two validation repeats | 0.0224 in $\ln\eta$ |
-| H-CORE prediction | 7.79% |
-| registered H-RESIN support threshold | 3.89% |
-| observed mean absolute drift | 1.60% |
-| P(mean absolute drift ≤ 1.60% under H-CORE) | 0.010 |
-| largest value of that probability with $\sigma_{\mathrm{drift}}$ inflated 1–8× | 0.032 |
-
-The Monte Carlo propagation (10⁶ draws, seed 20261003) combines three sources of uncertainty:
-- the larger repeatability estimate, together with its scaled-inverse-χ² sampling uncertainty;
-- the uncertainty of the single E1 reference drift that defines H-CORE;
-- a ±0.03 range in reactive fraction.
-
-Independent noise is then applied to each of the two validation repeats. Because added noise increases the expected absolute drift, inflating the repeatability does not make the observed 1.60% easy to reach under H-CORE.
-
 ---
 
 # Supplementary Note 7 | External PUR evidence and generalization boundary
@@ -414,24 +361,6 @@ Both models therefore show the same directional asymmetry between isocyanate-fam
 These grouped tests show that the apparent temperature-response descriptor transfers much more readily across the represented isocyanate variation than across an entirely unseen polyol family. The result is interpreted as a chemistry-domain boundary, not as evidence that any individual descriptor is a unique molecular control variable. Several polyol descriptors co-vary strongly with family identity, so coefficient and rank-correlation summaries remain descriptive.
 
 The public-data workflow resolves a pinned upstream source revision, records the downloaded archive hash, derives formulation-level targets and uploads only derived reports. The external temperature-response set is not used as a thermal-hold stability label source.
-
-## External test of the level-shift structure and one-point calibration
-
-The descriptor-level asymmetry was tested directly on the calibration task.
-- **Grid.** Each external curve was placed on a common 42.5–77.5 °C grid (2.5 °C steps, never outside the curve's measured range) by a per-curve quadratic smooth of $\ln\eta$ against $z(T)$, with $T_{\mathrm{ref}}=60$ °C. The median smoothing residual was 0.003 in $\ln\eta$.
-- **Curves.** The primary set used the curves with $R^2\ge0.98$. Paired comparisons used the 31 curves for which all four shape sources were available.
-- **Statistics.** Intervals are 10,000-replicate curve-level cluster bootstraps (seed 20261003).
-
-Within each polyol family, a curve-specific level on a shared quadratic thermal response explained 99.6–99.9% of $\ln\eta$ variation, compared with 25–38% for a single family level. After removing the curve level, the residual spread across a family was 1.03–1.08×. The external families therefore reproduce the level-shift structure identified locally.
-
-| Source of the shared thermal shape | One 60 °C anchor (31 curves) | Strict test: shape fitted ≤ 57.5 °C, predict +10/+20 °C |
-|---|---:|---:|
-| same polyol, same isocyanate | 1.078× (1.046–1.112) | 1.128× (1.07–1.19) |
-| same polyol, different isocyanate | 1.069× (1.038–1.104) | 1.115× (1.06–1.18) |
-| different polyol, same isocyanate | 1.221× (1.186–1.257) | 1.285× (1.23–1.36) |
-| all other curves | 1.151× (1.122–1.189) | 1.210× (1.15–1.29) |
-
-Shapes from the same polyol family reproduce the local 1.06–1.10× one-point performance. Changing the isocyanate within a polyol family carries no detectable cost: the paired log-error ratio is 0.89 (0.69–1.00). Taking the shape from a different polyol family roughly triples the log error, with a paired ratio of 2.99 (2.18–5.13). Median absolute errors in the strict test are 3–4% within a polyol family and 19% across polyol families. This is the empirical basis of the CBES applicability rule, demonstrated on the calibration task itself.
 
 This family-level result sharpens the claim scope. The local shared thermal shape is treated as a **chemistry-bounded transferable representation**, not a universal PUR relation. For prospective use, unmodified local-family candidates can use one-point state calibration as an interpolation prior, whereas resin-modified or otherwise chemistry-shifted candidates require a direct temperature-sweep check before that shortcut is accepted.
 
@@ -525,35 +454,6 @@ Under the frozen registry, only the matched-window 120 °C hold carries non-zero
 
 Independent perturbation of each VOI weight from 0.5× to 1.5× preserves the same five-card top set, the same intervention family and the same 120 °C hold measurement. The deterministic layer is therefore stable at the level of the tied top set rather than at the level of an arbitrary single representative.
 
-## Joint weight sensitivity
-
-All six weights were also re-weighted jointly (100,000 draws per scheme, fixed seed).
-
-| Sampling scheme | Same five-card top set | Top card is the 120 °C hold | Top card in the dual-axis family |
-|---|---:|---:|---:|
-| independent 0.5–1.5× multipliers on all six weights | 100% | 100% | 100% |
-| same, renormalized | 100% | 100% | 100% |
-| Dirichlet centred on nominal weights, κ = 100 | 100% | 100% | 100% |
-| Dirichlet, κ = 30 | 99.998% | 99.998% | 100% |
-| Dirichlet, κ = 10 | 99.5% | 99.5% | 100% |
-| flat Dirichlet | 79.3% | 79.3% | 100% |
-
-No zero-discrimination card ranked first in any draw. Sobol decomposition showed that the margin between the best dual-axis hold card and the best alternative is set by the decision-relevance weight (total index 1.00). The family ranking changes only if that weight is set to zero, and the process-risk weight must rise elevenfold before a repeatability card ties the hold.
-
-## Formal expected-information-gain counterpart
-
-A Bayesian experimental-design model was built from decision-time information only. Its ingredients were:
-- a prior over {H-CORE, H-RESIN, H-DUAL};
-- the registered hypothesis predictions for each card's 15–60 min drift;
-- the declared 2.0% hold-measurement resolution.
-
-Expected information gain (EIG), the mutual information between hypothesis and outcome, was computed for all 292 cards. The validation formulation and its measured drift entered no prior, likelihood or weight.
-
-- EIG is non-zero for exactly the 64 matched-window hold cards on modifier-containing candidates that carry non-zero $D_{\mathrm{hyp}}$, and zero for the other three measurement plans. Over all cards its Spearman correlation with $D_{\mathrm{hyp}}$ is 0.94.
-- With EIG substituted for $D_{\mathrm{hyp}}$ in the VOI, the five-way tie resolves uniquely to `S1C41::M-HOLD-120` (15 wt% acrylic-like, 5 wt% tackifier-like). This held in all 40 prior, noise and likelihood-encoding settings tested. It is the card selected by the minimum-burden tie-break and in 9/10 rule-complete runs.
-
-The 292-card reproduction, all sampling schemes and the EIG table are provided in `analysis/results/upgrades_20261003/voi_eig_sensitivity/`.
-
 ---
 
 # Supplementary Note 12 | Confirmatory experiment-selection series
@@ -595,23 +495,22 @@ This is the measurable model-layer contribution in the confirmatory series. The 
 
 # Supplementary Note 14 | Controlled VOI-score withholding
 
-The score-withheld arm comprises ten runs under one fixed contract. The model, endpoint, all five stage prompts, hypothesis registry, measurement catalog, evidence profile, structural firewall, 73-node lattice and all 292 experiment cards were held fixed. Only the deterministic VOI score, component vector, ranking/tie set, stability sweep and tool-generated acceptance/falsification criteria were withheld.
+The score-withheld arm was declared at $N=5$. The model, endpoint, all five stage prompts, hypothesis registry, measurement catalog, evidence profile, structural firewall, 73-node lattice and all 292 experiment cards were held fixed. Only the deterministic VOI score, component vector, ranking/tie set, stability sweep and tool-generated acceptance/falsification criteria were withheld.
 
 ## Supplementary Table S11 | Rule-complete architecture versus VOI-score-withheld arm
 
 | Quantity | Rule-complete architecture | VOI withheld |
 |---|---:|---:|
-| runs | 10 | 10 |
-| evidence-supported family | 9/10 | 0/10 |
-| 95% Wilson interval | [0.596, 0.982] | [0.000, 0.278] |
-| acrylic-only selections | 1/10 | 7/10 |
-| reactive-core-only selections | 0/10 | 3/10 |
-| matched-window 120 °C hold | 10/10 | 10/10 |
-| zero-discrimination selections | 0/10 | 3/10 |
-| mean hypothesis discrimination | 0.667 | 0.467 |
-| mean post-hoc VOI | 0.6850 | 0.5053 |
+| runs | 10 | 5 |
+| evidence-supported family | 9/10 | 0/5 |
+| 95% Wilson interval | [0.596, 0.982] | [0.000, 0.435] |
+| reactive-core-only selections | 0/10 | 3/5 |
+| matched-window 120 °C hold | 10/10 | 5/5 |
+| zero-discrimination selections | 0/10 | 3/5 |
+| mean hypothesis discrimination | 0.667 | 0.267 |
+| mean post-hoc VOI | 0.6850 | 0.3931 |
 
-The measurement choice survives score withholding because the registered failure mode still points to the 120 °C hold. The composition choice does not: without the score, no run selects the dual-axis intervention that the evidence supports. The selections instead fall on single-modifier acrylic-only probes or on reactive-core-only compositions that cannot separate the registered hypotheses. The decision-relevance term of the VOI is what directs the experiment to the intervention most likely to deliver a low-drift formulation (Supplementary Note 11).
+The measurement choice survives score withholding because the registered failure mode still points to the 120 °C hold. The composition choice does not: three of five runs spend the experiment on a reactive-core-only composition that cannot separate the registered hypotheses.
 
 ---
 
@@ -637,7 +536,7 @@ The rule-order result comprises ten completed runs analyzed as a distinct decisi
 | committed anyway | 10/10 |
 | mean hypothesis discrimination | 0.000 |
 
-Order inversion damages more than composition choice. Three of ten runs also divert from `M-HOLD-120` to `M-REPEAT`, whereas the score-withheld arm retains the matched-window hold in all ten runs.
+Order inversion damages more than composition choice. Three of ten runs also divert from `M-HOLD-120` to `M-REPEAT`, whereas the score-withheld arm retains the matched-window hold in all five runs.
 
 ---
 
@@ -694,12 +593,6 @@ Because the wet-lab result existed before the RGES software architecture was for
 | CBES thermal-hold condition | `derived/cbes_thermal_hold_condition_summary.json` |
 | CBES processing-window condition | `derived/cbes_processing_window_condition_summary.json` |
 | historical run manifests and hashes | `docs/decision_architecture_provenance.md` |
-| hierarchical state model and thermal-basis comparison | `analysis/results/upgrades_20261003/hierarchical_state_model/` |
-| external level-shift and one-point calibration test | `analysis/results/upgrades_20261003/external_state_shift/` |
-| H-CORE uncertainty propagation | `analysis/results/upgrades_20261003/hcore_uncertainty/` |
-| joint VOI weight sensitivity and expected information gain | `analysis/results/upgrades_20261003/voi_eig_sensitivity/` |
-| score-withheld arm (ten runs) | `analysis/results/upgrades_20261003/score_withheld_extension/`; run records indexed in `docs/decision_architecture_provenance.md` |
-| cross-model replication | `analysis/results/upgrades_20261003/crossmodel_sol/`; run records indexed in `docs/decision_architecture_provenance.md` |
 
 ---
 
@@ -772,43 +665,8 @@ The aggregate result is stored in `derived/cbes_processing_window_condition_summ
 
 ---
 
-# Supplementary Note 21 | Cross-model replication of the decision matrix
-
-All RGES and CBES conditions were re-executed with a second base model, gpt-5.6-sol; the original series used gpt-5.6-luna. Each of 10 replicates ran every condition in interleaved order. Each condition ran from a replay environment whose pinned inputs were byte-identical to the original series: evidence state, candidate set, hypothesis registry, measurement catalog, stage prompts and decision code. For CBES, the pre-enforcement payload hashes were also identical. Only the base model differed. The original aggregates regenerate exactly from the frozen records in all conditions.
-
-**Deterministic layer.** The VOI scores, tied top set, chemistry-applicability audit and enforcement payloads were identical across models.
-
-**Rule ablations.** Both ablations reproduced, with the effect at least as strong under the second model.
-
-| Hypothesis discrimination of the selection | gpt-5.6-luna | gpt-5.6-sol |
-|---|---:|---:|
-| rule-complete, mean | 0.667 | 0.667 |
-| score withheld, mean | 0.467 | 0.083 |
-| score withheld, zero-discrimination selections | 3/10 | 7/8 |
-| rule order inverted, zero-discrimination selections | 10/10 | 9/9 |
-
-**Proposal stage.** In every valid run the second model's Proposer chose the same measurement as the original model's Proposer:
-- the matched-window 120 °C hold in 9/9 rule-complete runs, and in 16/16 CBES thermal-hold runs, all of them inside the deterministic tied top set;
-- the direct 80–130 °C sweep in 19/19 CBES processing-window runs.
-
-**Robustness stage.** The two models differed in how often the Robustness Adjudicator revised a proposal. The principal revisions by the second model were:
-
-| Robustness revision by the second model | Runs | Scientific content |
-|---|---:|---|
-| acrylic-only 120 °C hold | 14 | the contrast that separates H-RESIN from H-DUAL (Section 2.10) |
-| replicated-preparation check before the direct sweep | 8 | motivated by the 2.80–3.57× E2 realization spread (Section 2.1) |
-| contemporaneous reactive-core reference hold outside the declared inventory | 4 | rejected at the freeze stage; no inadmissible experiment committed |
-
-**Admissibility.** In the CBES thermal-hold condition, all valid commitments of the second model satisfied the registered endpoint under both advice-only and enforced applicability (8/8 each), and no chemistry-domain violation or unsupported shortcut occurred in any of the 35 completed CBES runs.
-
-**Interpretation.** The scientific rules fixed what was informative and admissible independently of the base model. Model-specific deliberation decided which admissible contrast to pursue next.
-
-The stage-level attribution is in `analysis/results/upgrades_20261003/crossmodel_sol/`. Run records, per-run integrity checks and the replay-environment manifest are indexed in `docs/decision_architecture_provenance.md`.
-
----
-
 # Supplementary reporting boundary
 
 This SI reports only evidence needed to reproduce or audit the manuscript claims. Full engineering history, superseded prompt drafts, infrastructure failures and abandoned exploratory strategies remain in repository provenance but are not treated as scientific evidence.
 
-CRB, RGES, the two CBES decision conditions and the two base models are intentionally not pooled. CRB establishes outcome-blind candidate-region recoverability and candidate-space inheritance; RGES tests how rule content and rule order affect experiment informativeness; CBES tests how chemistry-domain applicability should govern the choice between transferred shortcuts and direct measurements.
+CRB, RGES and the two CBES decision conditions are intentionally not pooled. CRB establishes outcome-blind candidate-region recoverability and candidate-space inheritance; RGES tests how rule content and rule order affect experiment informativeness; CBES tests how chemistry-domain applicability should govern the choice between transferred shortcuts and direct measurements.

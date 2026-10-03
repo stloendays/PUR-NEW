@@ -23,6 +23,15 @@ derived/cbes_processing_window_condition_summary.json
 
 The historical run directories, manifests, hashes and branch-specific raw traces remain unchanged. The processing-window CBES series was explicitly frozen at commit `af47a03` on the implementation branch; its raw report is preserved there together with the matched-arm manifests and cross-arm table. The main branch carries sanitized aggregate summaries so manuscript-facing artifacts do not expose superseded realization labels or internal development naming.
 
+## 2026-10-03 additions
+
+| Manuscript element | Repository location |
+|---|---|
+| RGES score-withheld arm, runs 1–5 | `results/agent_v4_voi/series_ablation_voi_withheld_n5/` |
+| RGES score-withheld arm, runs 6–10 (replay environment byte-identical to runs 1–5; public records use R01–R03, originals in the private store listed in `private_artifacts_index.json`) | `results/agent_v4_voi/series_ablation_voi_withheld_extension_n5/` |
+| Cross-model replication (second base model gpt-5.6-sol; 10 replicates × 8 conditions) | `results/multimodel/gpt-5_6-sol/v4_benchmark/` on `agent-v5-implementation` (commit `dc1f861`) |
+| Reader-facing summaries of both | `analysis/results/upgrades_20261003/score_withheld_extension/`, `analysis/results/upgrades_20261003/crossmodel_sol/` |
+
 ## Reporting rule
 
 Do not pool CRB, RGES or the two CBES decision conditions. They answer different questions:

@@ -21,6 +21,13 @@ This snapshot preserves the state after the Results discussion was compressed bu
 
 This snapshot preserves the active manuscript immediately before the Introduction/Results transitions, Figure 1–5 captions and Conclusion were tightened for final-style readability.
 
+## 2026-10-03 pre-computational-upgrades snapshot
+
+- `MAIN_TEXT_2026-10-03_pre_computational_upgrades.md`
+- `SUPPLEMENTARY_INFORMATION_2026-10-03_pre_computational_upgrades.md`
+
+These snapshots preserve the active manuscript and SI immediately before the 2026-10-03 analyses (`analysis/results/upgrades_20261003/`) were incorporated. Those analyses are: cross-model replication, H-CORE uncertainty propagation, external state-shift validation, EIG and global weight sensitivity, the hierarchical state model, and the score-withheld arm at N = 10.
+
 ## Figure snapshot reference
 
 The redesigned Figure 1–5 set reviewed with these manuscript snapshots is pinned by Git commit:

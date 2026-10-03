@@ -139,13 +139,31 @@ def state_shift_summary():
 AGENT = os.path.join(ROOT, "results", "agent_v4_voi")
 ARM_DIRS = {                       # arm -> directory holding its run_* folders
     "full": "series_n10",
-    "voi_withheld": "series_ablation_voi_withheld_n5",
+    # The score-withheld arm: runs 1-5 in the original series, runs 6-10 in the
+    # extension series executed from a byte-identical replay tree.
+    "voi_withheld": ["series_ablation_voi_withheld_n5",
+                     "series_ablation_voi_withheld_extension_n5"],
     # The order-inverted arm was declared at n = 5 and extended to n = 10
     # after the first five were observed; all ten runs live in the n5 folder.
     # The n10 manifest records the extension and holds no runs of its own.
     "order_inverted": "series_ablation_rule_order_minimality_first_n5",
 }
 SUPPORTED_FAMILY = "dual_axis_resin_modified"
+
+
+def arm_run_files(arm, filename):
+    """(run number, path) for every frozen run of an arm. An arm stored in several
+    series directories is numbered consecutively in the listed order."""
+    import glob
+    subs = ARM_DIRS[arm] if isinstance(ARM_DIRS[arm], list) else [ARM_DIRS[arm]]
+    out, offset = [], 0
+    for sub in subs:
+        paths = sorted(glob.glob(os.path.join(AGENT, sub, "run_*", "*", filename)))
+        nums = [int(os.path.basename(os.path.dirname(os.path.dirname(p))).split("_")[1])
+                for p in paths]
+        out += [(offset + n, p) for n, p in zip(nums, paths)]
+        offset += max(nums) if nums else 0
+    return out
 
 
 def ablation_summary():
@@ -160,14 +178,12 @@ def ablation_runs():
     import glob
     import json
     rows = []
-    for arm, sub in ARM_DIRS.items():
-        for path in sorted(glob.glob(os.path.join(AGENT, sub, "run_*", "*",
-                                                  "recommendation.json"))):
+    for arm in ARM_DIRS:
+        for run, path in arm_run_files(arm, "recommendation.json"):
             with open(path, encoding="utf-8") as fh:
                 card = json.load(fh)["experiment_card"]
-            run = os.path.basename(os.path.dirname(os.path.dirname(path)))
             rows.append(dict(
-                arm=arm, run=int(run.split("_")[1]),
+                arm=arm, run=run,
                 candidate_id=card["candidate_id"],
                 discrimination=float(card["voi_components"]["hypothesis_discrimination"]),
                 family=card["intervention_family"],
@@ -390,16 +406,14 @@ def run_critique():
     import glob
     import json
     rows = []
-    for arm, sub in ARM_DIRS.items():
-        for path in sorted(glob.glob(os.path.join(AGENT, sub, "run_*", "*",
-                                                  "deliberation.json"))):
+    for arm in ARM_DIRS:
+        for run, path in arm_run_files(arm, "deliberation.json"):
             with open(path, encoding="utf-8") as fh:
                 d = json.load(fh)
             sk = d.get("skeptic") or {}
             rb = d.get("robustness_adjudication") or {}
-            run = os.path.basename(os.path.dirname(os.path.dirname(path)))
             rows.append(dict(
-                arm=arm, run=int(run.split("_")[1]),
+                arm=arm, run=run,
                 high_severity=any(o.get("severity") == "high"
                                   for o in sk.get("objections", [])),
                 robustness_change=rb.get("skeptic_objection_effect")

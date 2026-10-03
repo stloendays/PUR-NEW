@@ -14,6 +14,11 @@ voi_withheld,2,S1C05,0.0,reactive_core_only,M-HOLD-120,False,True,True
 voi_withheld,3,S1C39,0.666667,acrylic_only,M-HOLD-120,False,True,False
 voi_withheld,4,S1C01,0.0,reactive_core_only,M-HOLD-120,False,True,True
 voi_withheld,5,S1C01,0.0,reactive_core_only,M-HOLD-120,False,True,True
+voi_withheld,6,S1C39,0.666667,acrylic_only,M-HOLD-120,False,True,False
+voi_withheld,7,S1C49,0.666667,acrylic_only,M-HOLD-120,False,True,False
+voi_withheld,8,S1C39,0.666667,acrylic_only,M-HOLD-120,False,True,True
+voi_withheld,9,S1C49,0.666667,acrylic_only,M-HOLD-120,False,True,False
+voi_withheld,10,S1C49,0.666667,acrylic_only,M-HOLD-120,False,True,False
 order_inverted,1,S1C02,0.0,reactive_core_only,M-HOLD-120,False,True,True
 order_inverted,2,S1C02,0.0,reactive_core_only,M-REPEAT,False,True,False
 order_inverted,3,S1C02,0.0,reactive_core_only,M-HOLD-120,False,True,True
