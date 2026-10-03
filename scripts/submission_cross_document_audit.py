@@ -105,8 +105,11 @@ def main() -> int:
     check_image_paths(SI, si, errors)
     if not continuous([int(x) for x in MAIN_FIG_RE.findall(main)], list(range(1, 6))):
         errors.append("Main figure captions must be continuous Figure 1-5")
-    if not continuous([int(x) for x in MAIN_TABLE_RE.findall(main)], [1, 2]):
-        errors.append("Main table captions must be continuous Table 1-2")
+    # The main text carries no tables since the 2026-09-26 trim moved them to the SI;
+    # any main-text table that is added must still be numbered continuously from 1.
+    main_tables = sorted(set(int(x) for x in MAIN_TABLE_RE.findall(main)))
+    if main_tables != list(range(1, len(main_tables) + 1)):
+        errors.append("Main table captions must be continuous from Table 1")
     if not continuous([int(x) for x in SI_FIG_RE.findall(si)], [1, 2]):
         errors.append("SI figure captions must be Supplementary Figure S1-S2")
     if not continuous([int(x) for x in SI_TABLE_RE.findall(si)], list(range(1, 15))):
