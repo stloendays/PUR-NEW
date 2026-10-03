@@ -1,0 +1,12 @@
+{
+  "blind_phase_closed_utc": "2026-10-03T11:01:01Z",
+  "frozen_recommendation_hashes": {
+    "run_001": "b019cc6b07eb9fd9fbb7f073db4c716e8de71e4203177d61df325c592df1579d",
+    "run_002": "4c339e7c2dbb90249421d2a21d42267505bf13ffdb13281d1b1154b611ab8fab",
+    "run_003": "f1bebc6b22167c81f1023e2c0c513d980fa93dbb5b56e7afd9dab76f5f6ba8b1",
+    "run_004": "1c74bb3d320e2ccce6cb47e098790bcbfc4bd83285d52a90d433f8e915b2c62f",
+    "run_005": "f21e122065c9509c9299c238e5e64121f37fa16019cdbacce0a043186c491a9a"
+  },
+  "n_runs_declared": 5,
+  "series_label": "agent_v4_ablation_voi_withheld_extension_runs6to10"
+}

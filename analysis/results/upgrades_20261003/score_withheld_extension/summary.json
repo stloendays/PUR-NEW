@@ -1,0 +1,220 @@
+{
+  "original_block": {
+    "label": "score_withheld_runs_1_to_5",
+    "series": "results\\agent_v4_voi\\series_ablation_voi_withheld_n5",
+    "arm": "voi_withheld",
+    "voi_scores_withheld_from_model": true,
+    "model": "gpt-5.6-luna",
+    "n_runs_declared": 5,
+    "n_runs_completed": 5,
+    "run_range": null,
+    "n_runs_declared_originally": 5,
+    "extensions": null,
+    "decision_modes": {
+      "state_control_experiment": 3,
+      "committed_experiment": 2
+    },
+    "intervention_family_counts": {
+      "reactive_core_only": 3,
+      "acrylic_only": 2
+    },
+    "measurement_counts": {
+      "M-HOLD-120": 5
+    },
+    "candidate_counts": {
+      "S1C01": 2,
+      "S1C49": 1,
+      "S1C05": 1,
+      "S1C39": 1
+    },
+    "supported_family_recovery": {
+      "count": 0,
+      "of_declared": 5,
+      "wilson_95": [
+        0.0,
+        0.4345
+      ]
+    },
+    "failure_mode_measurement_selection": {
+      "count": 5,
+      "of_declared": 5,
+      "wilson_95": [
+        0.5655,
+        1.0
+      ]
+    },
+    "selection_inside_deterministic_tied_top_set": {
+      "count": 0,
+      "of_scored": 5,
+      "wilson_95": [
+        0.0,
+        0.4345
+      ]
+    },
+    "post_hoc_voi_of_selection": {
+      "mean": 0.3931,
+      "min": 0.2435,
+      "max": 0.6175
+    },
+    "hypothesis_discrimination_of_selection": {
+      "mean": 0.266667,
+      "n_with_zero_discrimination": 3,
+      "of_completed": 5
+    },
+    "internal_critique": {
+      "high_severity_objection": 5,
+      "robustness_said_change_experiment": 4,
+      "committed_anyway": 5,
+      "of_completed": 5,
+      "note": "A high-severity Skeptic objection that does not change the frozen decision shows the critique stage detecting a defect the decision policy then overrides."
+    }
+  },
+  "extension_block": {
+    "label": "score_withheld_runs_6_to_10",
+    "series": "results\\agent_v4_voi\\series_ablation_voi_withheld_extension_n5",
+    "arm": "voi_withheld",
+    "voi_scores_withheld_from_model": true,
+    "model": "gpt-5.6-luna",
+    "n_runs_declared": 5,
+    "n_runs_completed": 5,
+    "run_range": null,
+    "n_runs_declared_originally": 5,
+    "extensions": null,
+    "decision_modes": {
+      "committed_experiment": 4,
+      "discriminating_probe": 1
+    },
+    "intervention_family_counts": {
+      "acrylic_only": 5
+    },
+    "measurement_counts": {
+      "M-HOLD-120": 5
+    },
+    "candidate_counts": {
+      "S1C49": 3,
+      "S1C39": 2
+    },
+    "supported_family_recovery": {
+      "count": 0,
+      "of_declared": 5,
+      "wilson_95": [
+        0.0,
+        0.4345
+      ]
+    },
+    "failure_mode_measurement_selection": {
+      "count": 5,
+      "of_declared": 5,
+      "wilson_95": [
+        0.5655,
+        1.0
+      ]
+    },
+    "selection_inside_deterministic_tied_top_set": {
+      "count": 0,
+      "of_scored": 5,
+      "wilson_95": [
+        0.0,
+        0.4345
+      ]
+    },
+    "post_hoc_voi_of_selection": {
+      "mean": 0.6175,
+      "min": 0.6175,
+      "max": 0.6175
+    },
+    "hypothesis_discrimination_of_selection": {
+      "mean": 0.666667,
+      "n_with_zero_discrimination": 0,
+      "of_completed": 5
+    },
+    "internal_critique": {
+      "high_severity_objection": 5,
+      "robustness_said_change_experiment": 1,
+      "committed_anyway": 5,
+      "of_completed": 5,
+      "note": "A high-severity Skeptic objection that does not change the frozen decision shows the critique stage detecting a defect the decision policy then overrides."
+    }
+  },
+  "combined_n10": {
+    "n_runs_declared": 10,
+    "n_runs_completed": 10,
+    "intervention_family_counts": {
+      "acrylic_only": 7,
+      "reactive_core_only": 3
+    },
+    "measurement_counts": {
+      "M-HOLD-120": 10
+    },
+    "candidate_counts": {
+      "S1C49": 4,
+      "S1C39": 3,
+      "S1C01": 2,
+      "S1C05": 1
+    },
+    "supported_family_recovery": {
+      "count": 0,
+      "of_declared": 10,
+      "wilson_95": [
+        0.0,
+        0.2775
+      ]
+    },
+    "failure_mode_measurement_selection": {
+      "count": 10,
+      "of_declared": 10,
+      "wilson_95": [
+        0.7225,
+        1.0
+      ]
+    },
+    "selection_inside_deterministic_tied_top_set": {
+      "count": 0,
+      "of_scored": 10,
+      "wilson_95": [
+        0.0,
+        0.2775
+      ]
+    },
+    "hypothesis_discrimination_of_selection": {
+      "mean": 0.466667,
+      "n_with_zero_discrimination": 3,
+      "of_completed": 10
+    }
+  },
+  "rule_complete_reference": {
+    "n_runs_declared": 10,
+    "supported_family_recovery": {
+      "count": 9,
+      "of_declared": 10,
+      "wilson_95": [
+        0.5958,
+        0.9821
+      ]
+    },
+    "failure_mode_measurement_selection": {
+      "count": 10,
+      "of_declared": 10,
+      "wilson_95": [
+        0.7225,
+        1.0
+      ]
+    },
+    "hypothesis_discrimination_of_selection": {
+      "mean": 0.666667,
+      "n_with_zero_discrimination": 0,
+      "of_completed": 10
+    },
+    "intervention_family_counts": {
+      "dual_axis_resin_modified": 9,
+      "acrylic_only": 1
+    }
+  },
+  "extension_provenance": {
+    "declared_utc": "2026-10-03T10:47:00Z",
+    "decided_after_observing_the_earlier_block": true,
+    "executed_from": "replay tree rges_voi_withheld (commit 71bf7d9); 14/14 series input hashes, evidence state and candidate set byte-identical to series_ablation_voi_withheld_n5",
+    "model": "gpt-5.6-luna",
+    "realization_codes": "public run records use R01-R03; see private_artifacts_index.json in the series directory"
+  }
+}

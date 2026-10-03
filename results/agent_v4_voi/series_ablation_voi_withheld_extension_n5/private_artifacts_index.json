@@ -1,0 +1,44 @@
+{
+  "purpose": "Run records produced from a replay tree whose pinned scientific-tool bytes predate the realization-code anonymization. Public copies replace the three pre-anonymization labels with R01, R02 and R03 (mapping of commit e411711); nothing else differs. Byte-identical originals are held outside the repository.",
+  "private_store": {
+    "location": "local, outside the repository (D:\\Research\\PUR-NEW-private)"
+  },
+  "n_files": 5,
+  "files": [
+    {
+      "path": "run_001/EXP_V4_20261003T104958Z_b022cb4550/deliberation.json",
+      "original_sha256": "faac2562ab1c875a6619edbf9d1cc18e6cfc4ded946f19bf9bce8fb94a15f0e4",
+      "original_bytes": 301265,
+      "public_sha256": "bdeb320cc06090436e962f5285a8c52391f52fc2ade28370da753dfa008d64c8",
+      "private_copy": "D:\\Research\\PUR-NEW-private\\agent_v4_voi\\series_ablation_voi_withheld_extension_n5\\run_001\\EXP_V4_20261003T104958Z_b022cb4550\\deliberation.json"
+    },
+    {
+      "path": "run_002/EXP_V4_20261003T105226Z_0f106f88f3/deliberation.json",
+      "original_sha256": "5a4599c59efa4345359e7335cca5eb09d5c7e456573b9d2b2c46354151e8265d",
+      "original_bytes": 299691,
+      "public_sha256": "89ae7b65c3d555e8f7c5b5e1b0447f06fa40f8bdaf5889f48b9336980b6e4ece",
+      "private_copy": "D:\\Research\\PUR-NEW-private\\agent_v4_voi\\series_ablation_voi_withheld_extension_n5\\run_002\\EXP_V4_20261003T105226Z_0f106f88f3\\deliberation.json"
+    },
+    {
+      "path": "run_003/EXP_V4_20261003T105445Z_23fbdbc556/deliberation.json",
+      "original_sha256": "e2065c9e61b2d442bf79960b305010ad5095e3f4be0780cd2b1504cca9f1a9af",
+      "original_bytes": 300429,
+      "public_sha256": "21da02ac83c57d0f5e2080c60777c50d3d79893efb1f4875c33da5bf3123a4ec",
+      "private_copy": "D:\\Research\\PUR-NEW-private\\agent_v4_voi\\series_ablation_voi_withheld_extension_n5\\run_003\\EXP_V4_20261003T105445Z_23fbdbc556\\deliberation.json"
+    },
+    {
+      "path": "run_004/EXP_V4_20261003T105730Z_d0870ff102/deliberation.json",
+      "original_sha256": "eb596efebd31900c7705b705e0ffe7c3f09fb65a3caf570524a856c60cb7255e",
+      "original_bytes": 316980,
+      "public_sha256": "b5655cb7ff82ad714a9a4bbee105d91f3192486a6842117595124f8f5ad3f04b",
+      "private_copy": "D:\\Research\\PUR-NEW-private\\agent_v4_voi\\series_ablation_voi_withheld_extension_n5\\run_004\\EXP_V4_20261003T105730Z_d0870ff102\\deliberation.json"
+    },
+    {
+      "path": "run_005/EXP_V4_20261003T110025Z_aea276dbfa/deliberation.json",
+      "original_sha256": "1d90bea524ae79e2b8cb0e276a2302f694c1e3f03c079d3eb60b3336d6867827",
+      "original_bytes": 303872,
+      "public_sha256": "666fbdbca4c0269f57b39f4655cadab730d5afe1331ea24439ce3a2500139ef7",
+      "private_copy": "D:\\Research\\PUR-NEW-private\\agent_v4_voi\\series_ablation_voi_withheld_extension_n5\\run_005\\EXP_V4_20261003T110025Z_aea276dbfa\\deliberation.json"
+    }
+  ]
+}
