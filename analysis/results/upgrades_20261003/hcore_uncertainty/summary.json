@@ -1,0 +1,106 @@
+{
+  "seed": 20261003,
+  "n_monte_carlo": 1000000,
+  "inputs_sha256": {
+    "data/thermal_hold.csv": "78aeb9c126a83048307f822f715c2a169a7414eaea6233b1770e5acf4b74d854",
+    "data/formulations.csv": "b5a11b6752d52a375c9d2b3e3528f424531825f4e0f8d1c9042cee99be6a738e"
+  },
+  "reactive_mass_fraction": 0.8187659609523025,
+  "e1_drift_15_60_pct": 9.510371102017778,
+  "hcore_prediction_pct": 7.786768134356594,
+  "hresin_support_threshold_pct": 3.893384067178297,
+  "validation_drifts_pct": [
+    -0.1626016260162566,
+    3.0444964871194413
+  ],
+  "observed_mean_abs_drift_pct": 1.603549056567849,
+  "sigma_point_ln": 0.01594789626571361,
+  "sigma_point_dof": 8,
+  "sigma_drift_from_point_scatter_ln": 0.022553731190291425,
+  "sigma_drift_from_validation_repeats_ln": 0.022357339926794086,
+  "primary_sigma_source": "within-trajectory point scatter (sqrt 2 x)",
+  "scenarios": [
+    {
+      "p_mean_abs_le_observed": 0.009651,
+      "p_registered_support_under_hcore": 0.078699,
+      "hcore_true_drift_pct_median": 7.782700761881076,
+      "hcore_true_drift_pct_95": [
+        3.2314483829488556,
+        12.589023670972836
+      ],
+      "stat_under_hcore_pct_95": [
+        2.442140726208958,
+        14.148797922194598
+      ],
+      "scenario": "primary",
+      "sigma_median_ln": 0.02353515038957909,
+      "note": "sigma from within-trajectory point scatter (sqrt 2 x); its uncertainty propagated (dof=8); reactive fraction +/-0.03"
+    },
+    {
+      "p_mean_abs_le_observed": 0.005429,
+      "p_registered_support_under_hcore": 0.065516,
+      "hcore_true_drift_pct_median": 7.788614205073033,
+      "hcore_true_drift_pct_95": [
+        3.910621751015395,
+        11.832056047879023
+      ],
+      "stat_under_hcore_pct_95": [
+        2.8216675342678395,
+        13.14100956159371
+      ],
+      "scenario": "sigma_point_fixed",
+      "sigma_median_ln": 0.022553731190291425,
+      "note": "within-trajectory scatter only, fixed"
+    },
+    {
+      "p_mean_abs_le_observed": 0.005248,
+      "p_registered_support_under_hcore": 0.06408,
+      "hcore_true_drift_pct_median": 7.783950832393739,
+      "hcore_true_drift_pct_95": [
+        3.9364234703466066,
+        11.799300618280531
+      ],
+      "stat_under_hcore_pct_95": [
+        2.850306208402038,
+        13.09445218635362
+      ],
+      "scenario": "sigma_rep_fixed",
+      "sigma_median_ln": 0.022357339926794086,
+      "note": "between-repeat spread only, fixed"
+    },
+    {
+      "p_mean_abs_le_observed": 0.031778,
+      "p_registered_support_under_hcore": 0.166482,
+      "hcore_true_drift_pct_median": 7.790220255862058,
+      "hcore_true_drift_pct_95": [
+        0.2633507775231588,
+        16.0380227093562
+      ],
+      "stat_under_hcore_pct_95": [
+        1.4215212818140923,
+        18.72122923883354
+      ],
+      "scenario": "sigma_rep_x2",
+      "sigma_median_ln": 0.04471467985358817,
+      "note": "between-repeat spread inflated 2x"
+    },
+    {
+      "p_mean_abs_le_observed": 0.027399,
+      "p_registered_support_under_hcore": 0.145337,
+      "hcore_true_drift_pct_median": 7.78156141958838,
+      "hcore_true_drift_pct_95": [
+        -3.266484954480805,
+        20.360846390546836
+      ],
+      "stat_under_hcore_pct_95": [
+        1.53115945877406,
+        24.7014204283583
+      ],
+      "scenario": "sigma_rep_x3",
+      "sigma_median_ln": 0.06707201978038226,
+      "note": "between-repeat spread inflated 3x"
+    }
+  ],
+  "sigma_multiple_needed_for_p_0_05": null,
+  "outcome_blindness_note": "The H-CORE prediction and the registered threshold are computed exactly as registered (E1 reference drift x source-reported reactive fraction); the validation drifts enter only as the observed statistic and, conservatively, as one estimate of hold-drift repeatability."
+}
