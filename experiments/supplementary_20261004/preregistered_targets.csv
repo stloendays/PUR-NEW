@@ -1,0 +1,15 @@
+experiment_id,formulation,endpoint,temperature_or_window,expected_center_or_range,support_zone,gray_zone,contradiction_zone,role
+F1-b,F1,full_curve_mult_RMSE,80-130C,~1.05-1.10x,<=1.10x,>1.10x and <1.20x,>=1.20x,primary
+F1-c,F1,full_curve_mult_RMSE,80-130C,~1.05-1.10x,<=1.10x,>1.10x and <1.20x,>=1.20x,primary
+F1-b,F1,anchor_110_to_120_130_mult_RMSE,110->120/130C,~1.09x,<=1.13x,>1.13x and <1.20x,>=1.20x,primary
+F1-c,F1,anchor_110_to_120_130_mult_RMSE,110->120/130C,~1.09x,<=1.13x,>1.13x and <1.20x,>=1.20x,primary
+F1-b,F1,apparent_E_eta_kJ_mol,80-130C,~42,37.2-46.9,near/outside boundary with conflicting curve metrics,outside 37.2-46.9 with QC pass,secondary
+F1-c,F1,apparent_E_eta_kJ_mol,80-130C,~42,37.2-46.9,near/outside boundary with conflicting curve metrics,outside 37.2-46.9 with QC pass,secondary
+F1-b,F1,return_110C_abs_diff,post-130C return,~0-3%,<=3%,>3% requires scan-integrity review,NA,QC
+F1-c,F1,return_110C_abs_diff,post-130C return,~0-3%,<=3%,>3% requires scan-integrity review,NA,QC
+E1-b,E1,SI_15_60,120C 15-60min,~9-10%,reference reproducibility assessment,replicate-dependent,replicate-dependent,repeatability
+E1-c,E1,SI_15_60,120C 15-60min,~9-10%,reference reproducibility assessment,replicate-dependent,replicate-dependent,repeatability
+F1-hold-b,F1,abs_SI_15_60,120C 15-60min,~1-2%,<=3.89%,>3.89% and <7.79%,>=7.79%,primary
+F1-hold-c,F1,abs_SI_15_60,120C 15-60min,~1-2%,<=3.89%,>3.89% and <7.79%,>=7.79%,primary
+acrylic-only-1,acrylic-only,SI_15_60,120C 15-60min,not prefilled,use frozen hypothesis registry,use frozen hypothesis registry,use frozen hypothesis registry,mechanism-discrimination
+acrylic-only-2,acrylic-only,SI_15_60,120C 15-60min,not prefilled,use frozen hypothesis registry,use frozen hypothesis registry,use frozen hypothesis registry,mechanism-discrimination

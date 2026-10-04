@@ -61,6 +61,19 @@ The E1 `+P` curve has an apparent $E_\eta$ of **40.77 kJ/mol** ($R^2=0.9979$), w
 
 See `data/experimental_perturbations.csv`, `derived/e1_phosphoric_acid_summary.csv`, and `docs/DATA_AND_MODEL_AUDIT.md`.
 
+
+
+### Prospective supplementary experiment registered
+
+A new wet-lab follow-up is registered under `experiments/supplementary_20261004/`. It is a **prospective plan, not completed evidence**. The plan adds direct F1 80–130 °C sweeps after the resin/tackifier chemistry shift, independent E1/E3 repeat sweeps, additional E1/F1 120 °C hold repeats, and prospective process-state records (KF water, NCO%, actual masses, vacuum, timing and storage).
+
+The key decision is whether the F1 shared thermal shape remains transferable after chemistry modification or whether direct measurement confirms the CBES applicability boundary. Registered numerical targets, gray zones and contradiction thresholds are stored separately from blank measured-value fields and must not be changed after the data are seen.
+
+See:
+- `experiments/supplementary_20261004/PLAN.md`
+- `experiments/supplementary_20261004/preregistered_targets.csv`
+- `experiments/supplementary_20261004/results_template.csv`
+
 ---
 
 ## 2. Main material finding: a low-dimensional rheological state structure

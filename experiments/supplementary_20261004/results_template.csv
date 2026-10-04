@@ -1,0 +1,13 @@
+prep_id,day,order,formulation,measurement_type,temperature_c,time_min,viscosity_mPa_s,return_check,actual_ppg2000,actual_pdp70,actual_ac1920,actual_tk100,actual_mdi,kf_water_value,kf_water_unit,nco_percent,vacuum_value,vacuum_unit,dehydration_time_min,reaction_time_min,synthesis_to_measurement_min,storage_condition,next_day_retest,standard_oil_qc,notes
+E1-b,1,1,E1,temperature_sweep,,,,,,,,,,,,,,,,,,,,,
+E3-b,1,2,E3,temperature_sweep,,,,,,,,,,,,,,,,,,,,,
+F1-b,1,3,F1,temperature_sweep,,,,,,,,,,,,,,,,,,,,,
+E3-c,2,1,E3,temperature_sweep,,,,,,,,,,,,,,,,,,,,,
+E1-c,2,2,E1,temperature_sweep,,,,,,,,,,,,,,,,,,,,,
+F1-c,2,3,F1,temperature_sweep,,,,,,,,,,,,,,,,,,,,,
+F1-hold-b,,,F1,thermal_hold,120,,,,,,,,,,,,,,,,,,,,
+F1-hold-c,,,F1,thermal_hold,120,,,,,,,,,,,,,,,,,,,,
+E1-hold-b,,,E1,thermal_hold,120,,,,,,,,,,,,,,,,,,,,
+E1-hold-c,,,E1,thermal_hold,120,,,,,,,,,,,,,,,,,,,,
+acrylic-only-1,,,acrylic-only,thermal_hold,120,,,,,,,,,,,,,,,,,,,,
+acrylic-only-2,,,acrylic-only,thermal_hold,120,,,,,,,,,,,,,,,,,,,,

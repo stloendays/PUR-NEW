@@ -77,6 +77,22 @@ Detailed numerical outputs:
 - `derived/e1_phosphoric_acid_perturbation.csv`
 - `derived/e1_phosphoric_acid_summary.csv`
 
+
+
+## Prospective supplementary wet-lab plan
+
+A supplementary experiment plan has been registered on **2026-10-04** and is **not yet an observed result**.
+
+Read `experiments/supplementary_20261004/PLAN.md` before entering or analyzing any new F1/E1/E3 measurements. The registered work includes:
+
+- two independent F1 direct 80–130 °C sweeps with 110 °C return checks;
+- additional independent E1/E3 temperature sweeps;
+- additional E1 and F1 120 °C hold repeats;
+- prospective KF water, actual mass, NCO%, vacuum, timing, storage and calibration records;
+- an optional acrylic-only 120 °C matched-window hold for direct H-RESIN versus H-DUAL separation.
+
+The numerical targets and support/gray/contradiction boundaries are planning criteria, not raw data. Do not copy target values into measurement tables, move thresholds after seeing results, or merge these prospective records into the active manuscript until the real measurements are adjudicated.
+
 ## Agent implementation rule
 
 Any Agent that consumes local rheology should prefer the audited scientific tool output from `get_state_aware_rheology_summary()` rather than reconstructing project context from prose. The tool version exposing the reconciled E1 +P condition is `3.5-verified-phosphoric-perturbation`.
