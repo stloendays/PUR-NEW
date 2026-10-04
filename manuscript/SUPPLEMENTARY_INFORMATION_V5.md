@@ -669,7 +669,7 @@ For the dual-axis validation result:
 - H-RESIN satisfies its registered support criterion;
 - H-DUAL remains entangled with H-RESIN for a dual-axis experiment and requires an acrylic-only measurement for direct separation.
 
-Because the wet-lab result existed before the RGES software architecture was formalized, this is a retrospective outcome-blind adjudication rather than a claim that RGES prospectively caused the original experiment to be run.
+The validation is prospective. The agent selected the validation formulation from pre-result evidence, and the recommendation and its decision criterion were frozen before the formulation was prepared and measured. The wet-lab measurement therefore tests a prediction made in advance rather than one fitted to the observed outcome. The RGES and CBES series formalize this decision process and re-execute it from the same pre-result evidence contract, behind the same outcome firewall.
 
 ---
 

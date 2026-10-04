@@ -190,7 +190,7 @@ pre-result evidence
              prompts and the full deliberation input)
   → BLIND_PHASE_CLOSED written, frozen file hashed
   → held-out composition and measurements loaded for the first time
-  → retrospective adjudication
+  → post-freeze adjudication
 ```
 
 `scripts/adjudicate_agent_v4.py` is the only place in the V4 pipeline that reads the

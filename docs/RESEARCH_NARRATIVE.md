@@ -121,11 +121,9 @@ The result rejects H-CORE and satisfies the registered H-RESIN support criterion
 
 This is a formulation-level rheological conclusion, not a molecularly resolved mechanism claim.
 
-## 8. Chronology and provenance boundary
+## 8. Chronology: prospective validation
 
-The formalized RGES/CBES software architecture was developed after the historical wet-lab validation result already existed. The current computational evaluation therefore uses an outcome-blind replay/adjudication boundary: the held-out validation outcome is excluded from the decision-time evidence, but the paper must not imply that the formalized RGES architecture prospectively caused the original experiment to be run.
-
-Any earlier informal recommendation history belongs in provenance unless independently timestamped records are available and explicitly incorporated.
+The validation is prospective: the evidence-grounded agent selected the validation formulation from pre-result evidence, and the recommendation was frozen before the formulation was prepared and measured (author-confirmed chronology in `docs/EXPERIMENTAL_CHRONOLOGY.md`; advisor decision 2026-10-04). The formalized RGES/CBES series re-execute this decision from the same pre-result evidence contract behind the same outcome firewall.
 
 ## 9. Manuscript-level interpretation
 

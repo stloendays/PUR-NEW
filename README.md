@@ -306,9 +306,9 @@ registered H-RESIN support threshold = 3.89%
 
 Thus H-CORE is rejected and H-RESIN satisfies its registered support criterion at the formulation level. H-DUAL remains unresolved and requires an acrylic-only matched-window hold.
 
-### Chronology boundary
+### Chronology: prospective validation
 
-The formalized RGES/CBES software architecture was developed after the historical wet-lab validation result already existed. The current computational evaluation is therefore an outcome-blind retrospective adjudication: the held-out result is excluded from decision-time evidence, but the formalized architecture must not be described as having prospectively caused the original experiment to be run.
+The validation is prospective: the evidence-grounded agent selected the validation formulation from pre-result evidence, and the recommendation was frozen before the formulation was prepared and measured (author-confirmed chronology in `docs/EXPERIMENTAL_CHRONOLOGY.md`; advisor decision 2026-10-04). The formalized RGES/CBES series re-execute this decision from the same pre-result evidence contract behind the same outcome firewall.
 
 Historical numbered Agent implementations remain preserved in repository provenance. Reader-facing manuscript text uses the semantic CRB/RGES/CBES names.
 

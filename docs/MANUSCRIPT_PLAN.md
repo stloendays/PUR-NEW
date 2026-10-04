@@ -186,11 +186,11 @@ The main text should prioritize:
 
 Run hashes, engineering chronology, full prompts, failed outputs, detailed arm manifests and superseded architecture history belong in SI/provenance.
 
-## Chronology boundary
+## Chronology: prospective validation
 
-The formalized RGES/CBES architecture must **not** be described as having prospectively caused the historical wet-lab validation experiment. The wet-lab result existed before the formalized RGES software architecture. The current computational evaluation is outcome-blind at decision time and supports retrospective scientific adjudication of the frozen decision logic.
+The validation is prospective: the evidence-grounded agent selected the validation formulation from pre-result evidence, and the recommendation was frozen before the formulation was prepared and measured (author-confirmed chronology in `docs/EXPERIMENTAL_CHRONOLOGY.md`; advisor decision 2026-10-04). The formalized RGES/CBES series re-execute this decision from the same pre-result evidence contract behind the same outcome firewall.
 
-If independently timestamped evidence for an earlier recommendation is recovered, preserve it in provenance without rewriting the current formalized-RGES chronology.
+If an independently timestamped record of the original recommendation is recovered, archive it under `records/` without rewriting its content.
 
 ## Version preservation
 

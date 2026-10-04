@@ -35,11 +35,11 @@ experimental realization
 
 Do not rewrite the paper as either (a) a static formulation-to-viscosity prediction study or (b) a materials paper followed by a disconnected Agent benchmark. The Agent operates downstream of the physical analysis and must not receive credit for deterministic rheological rules, chemistry-domain gates, VOI geometry, or wet-lab results.
 
-## Chronology boundary
+## Chronology: prospective validation (advisor decision, 2026-10-04)
 
-The formalized RGES/CBES software architecture was developed after the historical wet-lab validation result already existed. Current computational evaluation must therefore be described as outcome-blind retrospective adjudication, not as proof that the formalized RGES/CBES architecture prospectively caused the original experiment to be run.
+The validation is **prospective**. The evidence-grounded agent selected the validation formulation from pre-result evidence, and the recommendation and its decision criterion were frozen before the formulation was prepared and measured (author-confirmed chronology, `docs/EXPERIMENTAL_CHRONOLOGY.md`). The supervising professor ruled on 2026-10-04 that the work must be described as prospective, not retrospective. Do not reintroduce "retrospective adjudication" wording in the manuscript, SI or project documents.
 
-Keep any earlier informal recommendation history in provenance unless independently timestamped evidence is recovered and explicitly incorporated. Do not let older narrative documents override this boundary.
+The formalized RGES/CBES software and its frozen series re-execute that decision from the same pre-result evidence contract, behind the same outcome firewall. Describe them as reproducing the prospective decision under a formal contract; do not claim that the specific RGES/CBES series runs were executed before the wet-lab measurement.
 
 ## Critical reconciled facts
 
