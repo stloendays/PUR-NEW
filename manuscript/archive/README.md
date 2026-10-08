@@ -42,3 +42,10 @@ This commit contains the SVG/PDF/PNG files and the corresponding figure-generati
 - Continue editing the active files in `manuscript/MAIN_TEXT_V5.md` and `manuscript/SUPPLEMENTARY_INFORMATION_V5.md` unless a later active alias is introduced.
 - Historical `MAIN_TEXT_V2.md`, `MAIN_TEXT_V3.md`, `MAIN_TEXT_V4.md` and earlier SI files remain preserved in the manuscript root.
 - Earlier rendered figure sets are retained in their existing analysis directories; current reader-facing figures remain under `analysis/figures_composite/`.
+
+## 2026-10-08 pre-compression snapshot
+
+- `MAIN_TEXT_2026-10-08_pre_compression.md`
+- `SUPPLEMENTARY_INFORMATION_2026-10-08_pre_compression.md`
+
+These snapshots preserve the active manuscript and SI immediately before the 2026-10-08 compression. That pass merged Results 2.1-2.2 and 2.7-2.8, moved duplicated model equations to Methods, added Section 2.8 (registered follow-up round) and Section 2.9 (level-shift structure in solid polymer electrolytes), named the language models in Methods 3.9, and added Supplementary Notes 22-23 with Tables S15-S17.

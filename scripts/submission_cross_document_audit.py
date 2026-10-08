@@ -112,8 +112,8 @@ def main() -> int:
         errors.append("Main table captions must be continuous from Table 1")
     if not continuous([int(x) for x in SI_FIG_RE.findall(si)], [1, 2]):
         errors.append("SI figure captions must be Supplementary Figure S1-S2")
-    if not continuous([int(x) for x in SI_TABLE_RE.findall(si)], list(range(1, 15))):
-        errors.append("SI table headings must be continuous Supplementary Table S1-S14")
+    if not continuous([int(x) for x in SI_TABLE_RE.findall(si)], list(range(1, 18))):
+        errors.append("SI table headings must be continuous Supplementary Table S1-S17")
 
     # Headline values that must stay synchronized across documents.
     require_all(

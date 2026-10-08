@@ -4,7 +4,7 @@
 
 ### Scope of this Supplementary Information
 
-This Supplementary Information (SI) supports one closed scientific sequence from experimental realization and rheological-state identification to physical hypothesis adjudication. Notes 1–4 establish the local formulation set, state-conditioned temperature response, one-point state calibration and thermal-hold failure coordinate. Notes 5–7 place the local response inside the broader external evidence base and define the proportional-dilution null. Notes 8 onward document the Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), Chemistry-Bounded Experiment Selection (CBES), controlled rule tests and post-freeze wet-lab adjudication; Note 21 reports the cross-model replication of the decision matrix; Note 22 tests the level-shift structure on solid-polymer-electrolyte conductivity curves; Note 23 documents the registered follow-up round.
+This Supplementary Information (SI) supports one closed scientific sequence from experimental realization and rheological-state identification to physical hypothesis adjudication. Notes 1–4 establish the local formulation set, state-conditioned temperature response, one-point state calibration and thermal-hold failure coordinate. Notes 5–7 place the local response inside the broader external evidence base and define the proportional-dilution null. Notes 8 onward document the Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), Chemistry-Bounded Experiment Selection (CBES), controlled rule tests and post-freeze wet-lab adjudication; Note 21 reports the cross-model replication of the decision matrix.
 
 The SI preserves the separation between material evidence and computational decision evidence without presenting them as two independent stories. Material measurements define the physical state and unresolved failure mode; the hypothesis registry and decision rules determine what experiment can resolve that uncertainty; the held-out wet-lab result then updates the hypothesis state.
 
@@ -19,9 +19,7 @@ The principal claims supported here are:
 7. inverting rule order yields 10/10 zero-discrimination selections, showing that rule order changes scientific decision quality even when the critique stage detects the defect;
 8. under CBES, chemistry applicability is non-binding for a direct thermal-hold question but causes the processing-window problem to be framed as direct sweep verification before reuse of a one-point anchor shortcut;
 9. the wet-lab result rejects the reactive-core-only dilution explanation (probability 0.010 under H-CORE after propagating hold-drift repeatability) and satisfies the registered H-RESIN support criterion at the formulation level;
-10. the deterministic decision layer and both rule ablations reproduce under a second base model, and the two models make the same measurement proposal in every valid run;
-11. in 14 solid-polymer-electrolyte host families, between-curve conductivity variation is likewise dominated by a level shift on a shared temperature response, and one measurement predicts the next 20 °C within 1.68× against 12.0× from host identity;
-12. the follow-up round, including the acrylic-only contrast that separates H-RESIN from H-DUAL, is registered with frozen predictions, thresholds and simulated operating characteristics.
+10. the deterministic decision layer and both rule ablations reproduce under a second base model, and the two models make the same measurement proposal in every valid run.
 
 ---
 
@@ -797,7 +795,7 @@ All RGES and CBES conditions were re-executed with a second base model, gpt-5.6-
 
 | Robustness revision by the second model | Runs | Scientific content |
 |---|---:|---|
-| acrylic-only 120 °C hold | 14 | the contrast that separates H-RESIN from H-DUAL (Section 2.8) |
+| acrylic-only 120 °C hold | 14 | the contrast that separates H-RESIN from H-DUAL (Section 2.10) |
 | replicated-preparation check before the direct sweep | 8 | motivated by the 2.80–3.57× E2 realization spread (Section 2.1) |
 | contemporaneous reactive-core reference hold outside the declared inventory | 4 | rejected at the freeze stage; no inadmissible experiment committed |
 
@@ -806,82 +804,6 @@ All RGES and CBES conditions were re-executed with a second base model, gpt-5.6-
 **Interpretation.** The scientific rules fixed what was informative and admissible independently of the base model. Model-specific deliberation decided which admissible contrast to pursue next.
 
 The stage-level attribution is in `analysis/results/upgrades_20261003/crossmodel_sol/`. Run records, per-run integrity checks and the replay-environment manifest are indexed in `docs/decision_architecture_provenance.md`.
-
----
-
-# Supplementary Note 22 | Level-shift structure in solid polymer electrolytes
-
-The state-shift test of Note 7 was applied outside polyurethanes, to the ionic conductivity of solid polymer electrolytes in the open database of Bradford et al. (ACS Cent. Sci. 2023, 9, 206–216; MIT licence).
-- **Curves.** Neat polymer + one salt, without a second component or inorganic filler; temperatures rounded to 0.5 °C with duplicate measurements averaged; at least five temperatures spanning at least 30 °C. This gives 710 curves on 141 polymer hosts.
-- **Grid.** For each host, the common window on a 5 °C grid, at least 30 °C wide and covered by the most curves, was selected. Each covering curve with at least four measured points inside the window was smoothed by its own quadratic in $z(T)$, interpolation only.
-- **Hosts.** Hosts with at least eight such curves: 14 hosts, 323 curves. Within a host, curves differ by salt, salt concentration and molecular weight.
-- **Statistics.** Singular-value and nested shape models as in Note 7; anchor intervals are 10,000-replicate curve-level cluster bootstraps (seed 20261008).
-
-The first between-curve mode carried a median 99.1% of between-curve variance (range 76.0–99.7%), with a median cosine of 0.989 to a uniform shift. A curve-specific level on the host's shared quadratic response explained 93–99% of ln σ variation, against 6–80% for a single host level.
-
-For the anchor test, each curve was held out in turn, the shared shape was fitted to the host's other curves with curve-specific levels, the held curve's warmest grid value set its level, and its colder grid values were predicted. Over the 1292 predictions within 20 °C of the anchor, the pooled error was 1.68× (1.57–1.81×), and 90.0% of predictions fell within 2×. Host identity alone, through the host-mean curve, gave 12.0× on the same predictions. Over the full window, which extends up to 80 °C below the anchor, the pooled error was 2.99× against 15.6×.
-
-## Supplementary Table S15 | Polymer-electrolyte host families
-
-Host is the polymer repeat unit (SMILES; `[Cu]` and `[Au]` mark chain ends). Mode-1 share and cosine refer to the temperature-centred ln σ matrix on the host's common window.
-
-| Host | Curves | Window (°C) | Mode-1 share | Mode-1 cosine to shift | $R^2$, host level | $R^2$, curve level + shared shape |
-|---|---:|---|---:|---:|---:|---:|
-| `[Cu]OCC[Au]` | 163 | 50–80 | 0.961 | 0.993 | 0.106 | 0.955 |
-| `[Cu]OC(=O)OCCC[Au]` | 40 | 40–75 | 0.992 | 1.000 | 0.113 | 0.993 |
-| `[Cu]P(OCCOCCOC)(OCCOCCOC)=N[Au]` | 14 | 25–80 | 0.937 | 0.998 | 0.277 | 0.952 |
-| `[Cu]CC(O)[Au]` | 13 | 30–110 | 0.984 | 0.941 | 0.460 | 0.932 |
-| `[Cu][Si](C)(CCC1OC(=O)OC1)CCC[Au]` | 12 | 30–80 | 0.997 | 0.983 | 0.208 | 0.971 |
-| `[Cu]CN(C)C[Au]` | 11 | 40–70 | 0.990 | 0.995 | 0.299 | 0.986 |
-| `[Cu][Si](CCC1OC(=O)OC1)(CCC1OC(=O)OC1)CCC[Au]` | 11 | 25–80 | 0.995 | 0.980 | 0.285 | 0.969 |
-| `[Cu]OC(=O)OCC[Au]` | 9 | 30–70 | 0.994 | 0.988 | 0.318 | 0.979 |
-| `[Cu]CC(C#N)[Au]` | 9 | 65–105 | 0.997 | 0.971 | 0.287 | 0.957 |
-| `[Cu]OS(=O)OCCCC[Au]` | 9 | 0–80 | 0.987 | 0.978 | 0.711 | 0.984 |
-| `[Cu]OC(=O)OCC(OC)(OC)C[Au]` | 8 | 40–80 | 0.997 | 0.990 | 0.062 | 0.978 |
-| `[Cu]CC(OCC)[Au]` | 8 | 15–45 | 0.916 | 1.000 | 0.509 | 0.959 |
-| `[Cu]OCP(=S)(CC1=CC=CC=C1)COCC(C(C)=C1(C))=C(C)C(C)=C1C[Au]` | 8 | 30–80 | 0.995 | 0.999 | 0.084 | 0.994 |
-| `[Cu]OCOCCOCC[Au]` | 8 | 30–110 | 0.760 | 0.872 | 0.798 | 0.926 |
-
-Script: `scripts/external_spe_state_shift.py`. Outputs: `analysis/results/generality_20261008/spe_state_shift/`. Data subset and licence: `data/external/bradford2023_spe/`.
-
----
-
-# Supplementary Note 23 | Registered follow-up round
-
-The next experimental round is registered in `experiments/supplementary_20261004/PLAN.md` with its frozen comparability conditions, blocking order, decision thresholds and verdict classes (supports; supports with boundary; inconclusive; contradicts; not comparable). A pre-result addendum adds the frozen-registry predictions for the acrylic-only contrast and the operating characteristics of every registered rule, computed by `scripts/preregistration_addendum_20261004.py` (seed 20261004); it changes no threshold of the plan.
-
-**Acrylic-only hold.** Card S1C39 (15 wt% acrylic-like modifier, no tackifier-like modifier) has reactive mass fraction 0.850. With the E1 reference drift of 9.51%, H-CORE and H-DUAL predict 8.08% 15–60 min drift and H-RESIN predicts drift below 4.04%. The statistic is the mean absolute drift of the acrylic-only repeats: below 4.04% supports H-RESIN and falsifies H-DUAL; at or above 4.04% supports H-DUAL. When the new E1 reference holds are measured, prediction and threshold are recomputed from the mean E1 drift by the same formula, threshold = 0.5 × reactive fraction × mean E1 drift. Hold-drift repeatability is σ = 0.0226 in ln η (8 degrees of freedom), with its sampling uncertainty propagated.
-
-## Supplementary Table S16 | Operating characteristics of the acrylic-only decision rule
-
-E1 reference holds include the existing one.
-
-| Acrylic-only repeats | E1 reference holds | P(H-RESIN supported \| H-DUAL true) | P(H-RESIN supported \| H-RESIN true at validation-level suppression) |
-|---:|---:|---:|---:|
-| 2 | 1 | 0.076 | 0.87 |
-| 2 | 3 | 0.038 | 0.87 |
-| 3 | 1 | 0.061 | 0.90 |
-| 3 | 3 | 0.023 | 0.90 |
-| 4 | 1 | 0.054 | 0.91 |
-| 4 | 3 | 0.016 | 0.92 |
-
-Three acrylic-only repeats with three E1 reference holds keep false support near 2% while detecting H-RESIN with probability 0.90.
-
-**Direct sweeps of the validation formulation.** Shape transfer is supported when the full-curve error with the E1–E3 shared shape and a free level is ≤1.10× and a 110 °C anchor predicts 120 and 130 °C within 1.13×; ≥1.20× is a clear shape change, and values in between form a gray zone adjudicated by the second independent preparation. The apparent $E_\eta$ is local-shape-compatible within 37.2–46.9 kJ mol⁻¹, and the 110 °C return point must reproduce within 3%. Operating characteristics were simulated from the shared shape with realization-level bootstrap uncertainty, a free level per simulated curve and realization-specific noise from the hierarchical posterior; a shape change is a shift $\Delta E$ in the apparent descriptor.
-
-## Supplementary Table S17 | Operating characteristics of the registered sweep criteria
-
-| $\Delta E$ (kJ mol⁻¹) | P(full curve ≤1.10×) | P(full curve ≥1.20×) | P(110 °C anchor ≤1.13×) | P($E_\eta$ in 37.2–46.9) |
-|---:|---:|---:|---:|---:|
-| -15 | 0.00 | 0.96 | 0.09 | 0.00 |
-| -10 | 0.01 | 0.12 | 0.45 | 0.02 |
-| -5 | 0.72 | 0.04 | 0.80 | 0.47 |
-| 0 | 0.89 | 0.03 | 0.86 | 0.96 |
-| +5 | 0.73 | 0.04 | 0.80 | 0.43 |
-| +10 | 0.01 | 0.12 | 0.41 | 0.02 |
-| +15 | 0.00 | 0.96 | 0.09 | 0.00 |
-
-When the shape transfers, the registered criteria classify a single sweep correctly in 86–96% of simulations. A 10 kJ mol⁻¹ change leaves the full-curve error mostly in the gray zone but places $E_\eta$ outside the registered interval in 98% of simulations, and the full-curve contradiction threshold responds reliably to changes of about 15 kJ mol⁻¹. Independent E1 and E3 preparations are assessed with the same full-curve, anchor and $E_\eta$ tests; their absolute viscosity levels are not pass/fail criteria.
 
 ---
 
