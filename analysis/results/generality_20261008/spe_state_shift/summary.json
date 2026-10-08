@@ -1,0 +1,47 @@
+{
+  "source": "Bradford et al. 2023, ACS Cent. Sci. 9, 206-216, doi:10.1021/acscentsci.2c01123 (MIT licence)",
+  "raw_sha256": "5ad82b4b75b9bb95f8f402fd394686d69c97cd0edaa110ad9c330655268a9fab",
+  "curves_csv_sha256": "1a16b66987a479066baf74ccc0e00c7462e320a6dcadd8d20fd333c03c27f823",
+  "n_curves_neat": 710,
+  "n_families_neat": 141,
+  "n_families_analysed": 14,
+  "n_curves_analysed": 323,
+  "mode1_variance_fraction_range": [
+    0.7603663129586726,
+    0.997397485722839
+  ],
+  "mode1_variance_fraction_median": 0.9912339502483496,
+  "mode1_cosine_range": [
+    0.8720181442293673,
+    0.9999261178952326
+  ],
+  "mode1_cosine_median": 0.9886455864213257,
+  "r2_family_level_only_range": [
+    0.061838018341608625,
+    0.7983345400402821
+  ],
+  "r2_curve_level_shared_shape_range": [
+    0.9264866402888233,
+    0.9938842087901765
+  ],
+  "r2_curve_level_shared_shape_median": 0.9698969140267877,
+  "one_anchor_pooled_mult": 2.9935661914811513,
+  "one_anchor_pooled_mult_ci95": [
+    2.5099784037672674,
+    3.6215907591549867
+  ],
+  "family_mean_no_anchor_pooled_mult": 15.60408948189107,
+  "family_mean_no_anchor_pooled_mult_ci95": [
+    12.060351600553956,
+    20.314439509380332
+  ],
+  "one_anchor_within_20C_pooled_mult": 1.683183088366914,
+  "one_anchor_within_20C_pooled_mult_ci95": [
+    1.5676102770761122,
+    1.8129648834366836
+  ],
+  "family_mean_no_anchor_within_20C_pooled_mult": 12.013084750408456,
+  "one_anchor_within_20C_fraction_within_2x": 0.9001547987616099,
+  "n_anchor_predictions_within_20C": 1292,
+  "n_anchor_predictions": 2535
+}
