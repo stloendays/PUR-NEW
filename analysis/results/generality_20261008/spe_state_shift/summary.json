@@ -1,7 +1,7 @@
 {
   "source": "Bradford et al. 2023, ACS Cent. Sci. 9, 206-216, doi:10.1021/acscentsci.2c01123 (MIT licence)",
   "raw_sha256": "5ad82b4b75b9bb95f8f402fd394686d69c97cd0edaa110ad9c330655268a9fab",
-  "curves_csv_sha256": "1a16b66987a479066baf74ccc0e00c7462e320a6dcadd8d20fd333c03c27f823",
+  "curves_csv_sha256_lf": "1a16b66987a479066baf74ccc0e00c7462e320a6dcadd8d20fd333c03c27f823",
   "n_curves_neat": 710,
   "n_families_neat": 141,
   "n_families_analysed": 14,

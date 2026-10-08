@@ -45,12 +45,11 @@ MIN_FAMILY_CURVES = 8
 SEED, N_BOOT = 20261008, 10000
 
 
-def sha256(path: Path) -> str:
-    h = hashlib.sha256()
-    with open(path, "rb") as fh:
-        for chunk in iter(lambda: fh.read(1 << 20), b""):
-            h.update(chunk)
-    return h.hexdigest()
+def sha256(path: Path, normalise_eol: bool = False) -> str:
+    data = path.read_bytes()
+    if normalise_eol:   # repository text files may be checked out with CRLF on Windows
+        data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def z_of(t_c, t_ref_c):
@@ -213,7 +212,7 @@ def main():
     rng = np.random.default_rng(SEED)
     summary = {
         "source": "Bradford et al. 2023, ACS Cent. Sci. 9, 206-216, doi:10.1021/acscentsci.2c01123 (MIT licence)",
-        "raw_sha256": RAW_SHA256, "curves_csv_sha256": sha256(CURVES_CSV),
+        "raw_sha256": RAW_SHA256, "curves_csv_sha256_lf": sha256(CURVES_CSV, normalise_eol=True),
         "n_curves_neat": int(curves["curve_id"].nunique()), "n_families_neat": int(curves["family"].nunique()),
         "n_families_analysed": int(len(fam_df)), "n_curves_analysed": int(fam_df["n_curves_window"].sum()),
         "mode1_variance_fraction_range": [float(fam_df["mode1_variance_fraction"].min()), float(fam_df["mode1_variance_fraction"].max())],
