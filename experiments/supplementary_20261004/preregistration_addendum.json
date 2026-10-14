@@ -1,0 +1,209 @@
+{
+  "status": "pre-result addendum: computed before any 2026-10-04 follow-up measurement exists",
+  "seed": 20261004,
+  "n_monte_carlo": 400000,
+  "inputs_sha256": {
+    "configs/hypothesis_registry.json": "d279df46918d54930daab1e83d364444b14f3d162f47e21f5a2f1690ef1715f1",
+    "derived/stage1_blind_candidate_space_v1.json": "2b92e5d976e76b674a05f9b8fc17f4c78cc873b42641fbe67b35a37beeec4346",
+    "data/thermal_hold.csv": "78aeb9c126a83048307f822f715c2a169a7414eaea6233b1770e5acf4b74d854",
+    "data/temperature_sweeps.csv": "8ff4e8c43967e90a48c6d12547b5bb762d558f50b5dd702d84b65cbd53782495",
+    "data/realization_metadata.csv": "700f7fe2edd5caa8c08a5dee48069c275cf49b66efb91ede3fd6ab7b8db4573d",
+    "experiments/supplementary_20261004/PLAN.md": "3741ffdab13e2a89c1495733bd3bb12cd2a4f1421d4b32b06552488be6e7085c",
+    "experiments/supplementary_20261004/preregistered_targets.csv": "ac72b585f34b32d2a3fd3075247e65ca8617963f4955c88a7824ffb59f947985"
+  },
+  "registered_thresholds_unchanged": true,
+  "acrylic_only_hold": {
+    "card": "S1C39::M-HOLD-120",
+    "composition_wt_pct": {
+      "AC1920": 15.0,
+      "MDI": 17.162,
+      "PDP70": 33.919,
+      "PPG2000": 33.919,
+      "TK100": 0.0
+    },
+    "reactive_mass_fraction": 0.85000000000015,
+    "reference_E1_drift_pct": 9.51,
+    "registered_predictions_pct": {
+      "H-CORE": 8.083500000001425,
+      "H-RESIN": 4.041750000000713,
+      "H-DUAL": 8.083500000001425
+    },
+    "decision_threshold_pct": 4.041750000000713,
+    "decision_rule": "Mean absolute 15->60 min drift of the acrylic-only repeats below 4.04% supports H-RESIN and falsifies H-DUAL (acrylic alone reaches the low-drift regime). A value at or above 4.04% falsifies H-RESIN's claim that resin modification without the tackifier axis suffices and supports H-DUAL. If new E1 reference holds are measured, the prediction and threshold are recomputed with the mean E1 drift using exactly the same formula (threshold = 0.5 x phi_r x mean E1 drift).",
+    "hold_drift_sigma_ln": 0.022553731190291425,
+    "hold_drift_sigma_dof": 8,
+    "operating_characteristics": [
+      {
+        "n_acrylic_only_repeats": 2,
+        "n_E1_reference_holds": 1,
+        "P_support_HRESIN_given_HDUAL_true": 0.076325,
+        "P_support_HRESIN_given_HRESIN_at_F1_suppression": 0.8656225,
+        "P_support_HRESIN_given_HRESIN_at_boundary": 0.476575,
+        "HDUAL_stat_95pct_interval": [
+          2.5846914528839835,
+          14.573929366081595
+        ],
+        "HRESIN_F1like_stat_95pct_interval": [
+          0.43478230036209115,
+          5.96039672410534
+        ]
+      },
+      {
+        "n_acrylic_only_repeats": 2,
+        "n_E1_reference_holds": 3,
+        "P_support_HRESIN_given_HDUAL_true": 0.03833,
+        "P_support_HRESIN_given_HRESIN_at_F1_suppression": 0.8708525,
+        "P_support_HRESIN_given_HRESIN_at_boundary": 0.4768575,
+        "HDUAL_stat_95pct_interval": [
+          3.557706579558225,
+          13.093474695932015
+        ],
+        "HRESIN_F1like_stat_95pct_interval": [
+          0.4367399844926326,
+          5.882951589809288
+        ]
+      },
+      {
+        "n_acrylic_only_repeats": 3,
+        "n_E1_reference_holds": 1,
+        "P_support_HRESIN_given_HDUAL_true": 0.060745,
+        "P_support_HRESIN_given_HRESIN_at_F1_suppression": 0.89598,
+        "P_support_HRESIN_given_HRESIN_at_boundary": 0.4669125,
+        "HDUAL_stat_95pct_interval": [
+          2.984386865624393,
+          14.138967742088123
+        ],
+        "HRESIN_F1like_stat_95pct_interval": [
+          0.6829885866817644,
+          5.423652519243788
+        ]
+      },
+      {
+        "n_acrylic_only_repeats": 3,
+        "n_E1_reference_holds": 3,
+        "P_support_HRESIN_given_HDUAL_true": 0.02328,
+        "P_support_HRESIN_given_HRESIN_at_F1_suppression": 0.9010175,
+        "P_support_HRESIN_given_HRESIN_at_boundary": 0.4641125,
+        "HDUAL_stat_95pct_interval": [
+          4.1095154008620405,
+          12.493489488525372
+        ],
+        "HRESIN_F1like_stat_95pct_interval": [
+          0.6877028864401254,
+          5.343045484676049
+        ]
+      },
+      {
+        "n_acrylic_only_repeats": 4,
+        "n_E1_reference_holds": 1,
+        "P_support_HRESIN_given_HDUAL_true": 0.0538675,
+        "P_support_HRESIN_given_HRESIN_at_F1_suppression": 0.9139175,
+        "P_support_HRESIN_given_HRESIN_at_boundary": 0.46177,
+        "HDUAL_stat_95pct_interval": [
+          3.1953732481833463,
+          13.883840597957354
+        ],
+        "HRESIN_F1like_stat_95pct_interval": [
+          0.8552834474325831,
+          5.1027857462534225
+        ]
+      },
+      {
+        "n_acrylic_only_repeats": 4,
+        "n_E1_reference_holds": 3,
+        "P_support_HRESIN_given_HDUAL_true": 0.0161425,
+        "P_support_HRESIN_given_HRESIN_at_F1_suppression": 0.9198325,
+        "P_support_HRESIN_given_HRESIN_at_boundary": 0.4583125,
+        "HDUAL_stat_95pct_interval": [
+          4.411781079662263,
+          12.181266647611944
+        ],
+        "HRESIN_F1like_stat_95pct_interval": [
+          0.8584722415402354,
+          5.010299921445909
+        ]
+      }
+    ]
+  },
+  "f1_sweep": {
+    "shared_shape_beta": [
+      4.072648024364191,
+      4.387108244361796
+    ],
+    "shape_bootstrap_reps": 2000,
+    "noise_model": "log sigma_r ~ N(lambda, omega^2); lambda ~ N(-3.43, 0.42^2), omega = 0.87 (heteroscedastic hierarchical posterior)",
+    "shape_change_model": "ln eta shifted by (dE/R)(1/T - mean 1/T), i.e. apparent E_eta changed by dE",
+    "operating_characteristics": [
+      {
+        "dE_eta_kJ_mol": -15,
+        "P_full_le_1.10": 0.00028,
+        "P_full_ge_1.20": 0.95922,
+        "P_anchor_le_1.13": 0.08718,
+        "P_anchor_ge_1.20": 0.54934,
+        "P_Eeta_in_37.2_46.9": 0.00342,
+        "full_rmse_median": 1.2443180883399316,
+        "E_eta_median": 27.124556151658027
+      },
+      {
+        "dE_eta_kJ_mol": -10,
+        "P_full_le_1.10": 0.00872,
+        "P_full_ge_1.20": 0.1239,
+        "P_anchor_le_1.13": 0.44608,
+        "P_anchor_ge_1.20": 0.17338,
+        "P_Eeta_in_37.2_46.9": 0.01728,
+        "full_rmse_median": 1.1592346800603421,
+        "E_eta_median": 32.1342580433845
+      },
+      {
+        "dE_eta_kJ_mol": -5,
+        "P_full_le_1.10": 0.72478,
+        "P_full_ge_1.20": 0.039,
+        "P_anchor_le_1.13": 0.80264,
+        "P_anchor_ge_1.20": 0.08614,
+        "P_Eeta_in_37.2_46.9": 0.47132,
+        "full_rmse_median": 1.0826671511335428,
+        "E_eta_median": 37.11776726539844
+      },
+      {
+        "dE_eta_kJ_mol": 0,
+        "P_full_le_1.10": 0.89144,
+        "P_full_ge_1.20": 0.03084,
+        "P_anchor_le_1.13": 0.86438,
+        "P_anchor_ge_1.20": 0.06994,
+        "P_Eeta_in_37.2_46.9": 0.95682,
+        "full_rmse_median": 1.0313652616470552,
+        "E_eta_median": 42.13141642174344
+      },
+      {
+        "dE_eta_kJ_mol": 5,
+        "P_full_le_1.10": 0.72692,
+        "P_full_ge_1.20": 0.04028,
+        "P_anchor_le_1.13": 0.80322,
+        "P_anchor_ge_1.20": 0.08798,
+        "P_Eeta_in_37.2_46.9": 0.43194,
+        "full_rmse_median": 1.0845620539256333,
+        "E_eta_median": 47.115373768496355
+      },
+      {
+        "dE_eta_kJ_mol": 10,
+        "P_full_le_1.10": 0.00854,
+        "P_full_ge_1.20": 0.11982,
+        "P_anchor_le_1.13": 0.4128,
+        "P_anchor_ge_1.20": 0.1673,
+        "P_Eeta_in_37.2_46.9": 0.01664,
+        "full_rmse_median": 1.1619040661282056,
+        "E_eta_median": 52.128423082190565
+      },
+      {
+        "dE_eta_kJ_mol": 15,
+        "P_full_le_1.10": 0.00034,
+        "P_full_ge_1.20": 0.9568,
+        "P_anchor_le_1.13": 0.08652,
+        "P_anchor_ge_1.20": 0.5782,
+        "P_Eeta_in_37.2_46.9": 0.00374,
+        "full_rmse_median": 1.246874383063066,
+        "E_eta_median": 57.13379468743629
+      }
+    ]
+  }
+}
