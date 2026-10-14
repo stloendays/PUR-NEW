@@ -34,7 +34,7 @@
       "evaluation": "within_20C",
       "n_held_curves": 34,
       "n_predictions": 68,
-      "multiplicative_rmse": 1.868826263169423,
+      "multiplicative_rmse": 1.8688262631694232,
       "no_anchor_multiplicative_rmse": 4.320968158804242,
       "constant_viscosity_anchor_mult_rmse": 3.4523355081384217,
       "fraction_within_1p2x": 0.2647058823529412,
@@ -57,7 +57,7 @@
       "n_held_curves": 34,
       "n_predictions": 68,
       "multiplicative_rmse": 1.0764488569123007,
-      "no_anchor_multiplicative_rmse": 2.097944918361959,
+      "no_anchor_multiplicative_rmse": 2.0979449183619594,
       "constant_viscosity_anchor_mult_rmse": 1.7544602198761272,
       "fraction_within_1p2x": 0.9558823529411765,
       "mean_training_pNCO_gap": 0.5441176470588235
@@ -111,5 +111,13 @@
     "curve_bootstrap_reps": 10000,
     "curve_bootstrap_seed": 20261014,
     "interpretation": "Matching the number of training curves, transferring thermal response across polyol identity is less accurate than retaining polyol identity across isocyanates. This is a matched predictive comparison, not identification of a molecular causal mechanism; pNCO proximity differs."
+  },
+  "pNCO_proximity_sensitivity_10C": {
+    "max_mean_pNCO_gap_pp_per_training_pool": 1.0,
+    "n_held_curves": 22,
+    "n_predictions": 44,
+    "cross_polyol_multiplicative_rmse": 1.1659656441689645,
+    "same_polyol_multiplicative_rmse": 1.0569954093211602,
+    "interpretation": "Paired held curves where both chemical-domain training pools have mean pNCO distance no more than 1 percentage point; residual polyol/iso chemistry differences persist."
   }
 }
