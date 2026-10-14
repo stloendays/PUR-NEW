@@ -56,7 +56,7 @@ def test_chronology_keeps_historical_selection_distinct_from_replay() -> None:
     assert "after results from the first block were inspected" in si
     assert "0/5 zero-discrimination" in si
     assert "0/10" in si and "3/10" in si
-    assert "three primary E2" in main.lower()
+    assert "three primary e2" in main.lower()
     assert "next-day retest" in main
 
 
