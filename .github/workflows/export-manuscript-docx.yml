@@ -58,7 +58,7 @@ jobs:
           python - <<'PY'
           from docx import Document
           from docx.enum.section import WD_SECTION
-          from docx.enum.text import WD_LINE_SPACING
+          from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
           from docx.shared import Inches, Pt, RGBColor
           from docx.oxml.ns import qn
 
@@ -91,6 +91,9 @@ jobs:
           set_font("Heading 2", 11.5, True, 8, 4)
           set_font("Heading 3", 11, True, 7, 3)
           set_font("Caption", 10, False, 4, 7)
+          doc.styles["Normal"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+          doc.styles["Title"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+          doc.styles["Heading 1"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
           # Pandoc commonly uses these styles if present.
           for name in ("Body Text", "First Paragraph"):
@@ -496,6 +499,24 @@ jobs:
                           para.paragraph_format.space_after = Pt(1.5)
                           for run in para.runs:
                               run.font.size = Pt(10)
+
+              # Apply consistent typesetting to both exported documents.
+              # Paragraph alignment is normalized after table reconstruction,
+              # without touching OMML equations or paragraph structure.
+              before_references = True
+              for para in doc.paragraphs:
+                  name = para.style.name if para.style is not None else ""
+                  txt = para.text.strip()
+                  if txt == "References":
+                      before_references = False
+                  if para._p.xpath(".//w:drawing"):
+                      para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                  elif name in ("Title", "Heading 1"):
+                      para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                  elif txt.startswith(("Junbo Tong", "¹ Department", "² Ningbo", "*Corresponding author")):
+                      para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                  elif before_references and name in ("Normal", "Body Text", "First Paragraph"):
+                      para.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
 
               # Keep each figure with its full scientific caption.
               for para in doc.paragraphs:
