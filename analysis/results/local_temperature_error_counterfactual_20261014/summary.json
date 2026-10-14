@@ -1,0 +1,19 @@
+{
+  "status": "Counterfactual analytic transformation of existing measurements; no additional wet-lab data",
+  "source_sweeps": "data/temperature_sweeps.csv",
+  "source_apparent_E": "analysis/results/local_thermal_curve_fits.csv",
+  "chemistry_audited_realizations": 6,
+  "apparent_E_mean_kJ_mol": 42.05161614116358,
+  "apparent_E_sample_sd_kJ_mol": 2.425726434733874,
+  "viscosity_ratio_range": [
+    2.796221322537112,
+    3.5687979539641943
+  ],
+  "equivalent_colder_offset_c_range": [
+    24.367547382180135,
+    35.38156422622262
+  ],
+  "max_viscosity_ratio_from_2c_bias": 1.084988380896322,
+  "source_pairs": "Nominal E2 R03 / E2 R01, no one-day retests",
+  "interpretation": "Under a constant apparent E_eta Andrade null, the observed same-temperature E2 contrast corresponds to a temperature displacement much larger than a hypothetical 1\u20132 C bias. These displacements are not observed thermometer offsets and do not identify the molecular cause of the state variation."
+}
