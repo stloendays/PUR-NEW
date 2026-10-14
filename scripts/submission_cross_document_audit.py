@@ -161,6 +161,21 @@ def main() -> int:
                 "indeterminate interval and matched-control prerequisite"
             )
 
+    # Genuine source-reading PUR transfer must not regress into a smoothed
+    # single-anchor claim: chemistry comparison, denominators and provenance.
+    require_all(
+        main,
+        ["1.076×", "1.238×", "1.057×", "1.166×", "34 eligible curves"],
+        "main external PUR raw-observation comparison",
+        errors,
+    )
+    require_all(
+        si,
+        ["1.076×", "1.238×", "1.429×", "1.869×", "1.057×", "1.166×"],
+        "SI external PUR raw-observation comparison",
+        errors,
+    )
+
     # Statistical-unit language required in the final Methods.
     required_stats = [
         "experimental realization was treated as the independent material-level unit",
