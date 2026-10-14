@@ -16,6 +16,16 @@ on:
       - "data/**"
       - "derived/**"
       - "analysis/results/**"
+  pull_request:
+    paths:
+      - ".github/workflows/export-manuscript-docx.yml"
+      - "manuscript/**"
+      - "scripts/submission_cross_document_audit.py"
+      - "analysis/figures_composite/**"
+      - "analysis/figures/Supplementary_Figure_S1_PUR_chemistry.*"
+      - "data/**"
+      - "derived/**"
+      - "analysis/results/**"
   workflow_dispatch:
 
 permissions:
