@@ -4,7 +4,7 @@
 
 ### Scope of this Supplementary Information
 
-This Supplementary Information (SI) supports one closed scientific sequence from experimental realization and rheological-state identification to physical hypothesis adjudication. Notes 1–4 establish the local formulation set, state-conditioned temperature response, one-point state calibration and thermal-hold failure coordinate. Notes 5–7 place the local response inside the broader external evidence base and define the proportional-dilution null. Notes 8 onward document the Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), Chemistry-Bounded Experiment Selection (CBES), controlled rule tests and post-freeze wet-lab adjudication; Note 21 reports the cross-model replication of the decision matrix; Note 22 tests the level-shift structure on solid-polymer-electrolyte conductivity curves; Note 23 documents the registered follow-up round.
+This Supplementary Information (SI) documents a single scientific sequence: realization-dependent viscosity, chemistry-bounded temperature response, thermal-hold stabilization hypotheses and subsequent experiment selection. Notes 1–5 establish the local measurements, state-conditioned models and one-point calibration. Note 6 isolates isothermal drift and the physical dilution null; Note 7 evaluates the chemical transfer boundary on external PUR viscosity data. Notes 8–21 describe the Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), Chemistry-Bounded Experiment Selection (CBES), controlled decisions, frozen replay evidence and cross-model comparisons. Note 22 tests the corresponding curve geometry on solid-polymer-electrolyte conductivity; Note 23 records the independently registered future measurements and their simulated operating characteristics.
 
 The SI preserves the separation between material evidence and computational decision evidence without presenting them as two independent stories. Material measurements define the physical state and unresolved failure mode; the hypothesis registry and decision rules determine what experiment can resolve that uncertainty; the held-out wet-lab result then updates the hypothesis state.
 
@@ -618,7 +618,7 @@ This is the measurable model-layer contribution in the confirmatory series. The 
 
 # Supplementary Note 14 | Controlled VOI-score withholding
 
-The score-withheld arm comprises ten runs under one fixed contract. The model, endpoint, all five stage prompts, hypothesis registry, measurement catalog, evidence profile, structural firewall, 73-node lattice and all 292 experiment cards were held fixed. Only the deterministic VOI score, component vector, ranking/tie set, stability sweep and tool-generated acceptance/falsification criteria were withheld.
+The score-withheld comparison contains **two separate five-run blocks**, carried out with byte-identical model, endpoint, stage prompts, hypothesis registry, measurement catalog, evidence profile, structural firewall, 73-node formulation lattice and 292-card inventory. The second N=5 extension was initiated **after results from the first block were inspected**. Both blocks withheld the deterministic VOI score, component vector, ranking/tied top set, stability sweep and tool-generated acceptance/falsification criteria. Thus the combined N=10 is a **descriptive extension under the same experimental settings**, not one prospectively frozen ten-run confirmatory series. The complete chronology and independent block manifests are archived under `analysis/results/upgrades_20261003/score_withheld_extension/`.
 
 ## Supplementary Table S11 | Rule-complete architecture versus VOI-score-withheld arm
 
@@ -634,7 +634,7 @@ The score-withheld arm comprises ten runs under one fixed contract. The model, e
 | mean hypothesis discrimination | 0.667 | 0.467 |
 | mean post-hoc VOI | 0.6850 | 0.5053 |
 
-The measurement choice survives score withholding because the registered failure mode still points to the 120 °C hold. The composition choice does not: without the score, no run selects the dual-axis intervention that the evidence supports. The selections instead fall on single-modifier acrylic-only probes or on reactive-core-only compositions that cannot separate the registered hypotheses. The decision-relevance term of the VOI is what directs the experiment to the intervention most likely to deliver a low-drift formulation (Supplementary Note 11).
+The two score-withheld blocks selected the 120 °C hold in all runs but differed in composition: block 1 (N=5) yielded **0/5 evidence-supported dual-axis** and **3/5 zero-discrimination** selections (mean hypothesis discrimination 0.267), whereas block 2 (N=5) yielded **0/5 evidence-supported dual-axis** and **0/5 zero-discrimination** selections (mean discrimination 0.667). Combined descriptively, the 10 runs contain 7 acrylic-only and 3 reactive-core-only choices, with 0/10 selecting the evidence-supported dual-axis family. The registered failure coordinate still guided the measurement even without VOI; the intervention choice changed. The formal decision-relevance component of VOI directed selection to the dual-axis intervention, while acrylic-only holds remain informative for discriminating H-RESIN from H-DUAL (Supplementary Note 11).
 
 ---
 
@@ -692,7 +692,7 @@ For the dual-axis validation result:
 - H-RESIN satisfies its registered support criterion;
 - H-DUAL remains entangled with H-RESIN for a dual-axis experiment and requires an acrylic-only measurement for direct separation.
 
-The validation is prospective. The agent selected the validation formulation from pre-result evidence, and the recommendation and its decision criterion were frozen before the formulation was prepared and measured. The wet-lab measurement therefore tests a prediction made in advance rather than one fitted to the observed outcome. The RGES and CBES series formalize this decision process and re-execute it from the same pre-result evidence contract, behind the same outcome firewall.
+The research team confirms that the resin-modified validation formulation was recommended from pre-result evidence before the laboratory measurement was performed. This historical ordering is documented retrospectively in `docs/EXPERIMENTAL_CHRONOLOGY.md`; an original contemporaneously timestamped recommendation/freeze artifact has **not** yet been recovered, so the repository does not claim that its current software implementation was the original selection interface. The separately frozen RGES and CBES computational runs replay the same pre-result decision problem behind an outcome firewall, and their recommendations were closed before post hoc comparison with the measured thermal-hold result. Thus the physical result adjudicates the earlier recommended formulation, whereas the controlled computational series assesses whether the present, auditable decision architecture reconstructs informative experiments under the same evidence boundaries.
 
 ---
 
@@ -718,7 +718,12 @@ The validation is prospective. The agent selected the validation formulation fro
 | CBES processing-window condition | `derived/cbes_processing_window_condition_summary.json` |
 | historical run manifests and hashes | `docs/decision_architecture_provenance.md` |
 | hierarchical state model and thermal-basis comparison | `analysis/results/upgrades_20261003/hierarchical_state_model/` |
-| external level-shift and one-point calibration test | `analysis/results/upgrades_20261003/external_state_shift/` |
+| external interpolated-curve geometry and calibration diagnostic | `analysis/results/upgrades_20261003/external_state_shift/` |
+| measured-point PUR viscosity transfer, true 60 °C anchor | `scripts/external_pur_raw_anchor.py`; `analysis/results/generality_20261014/pur_raw_anchor/` |
+| measured-point SPE conductivity transfer and publication holdout | `scripts/spe_raw_anchor_audit.py`; `analysis/results/generality_20261014/raw_anchor/` |
+| physical temperature-bias counterfactual for same-formulation E2 | `scripts/pur_temperature_error_counterfactual.py`; `analysis/results/local_temperature_error_counterfactual_20261014/` |
+| original recommendation / retrospective chronology boundary | `docs/EXPERIMENTAL_CHRONOLOGY.md` |
+| original frozen S1C39 interpretation and correction record | `experiments/prospective/S1C39_M-HOLD-120_20260920.md`; `experiments/supplementary_20261004/INTERPRETATION_RECONCILIATION_20261014.md` |
 | H-CORE uncertainty propagation | `analysis/results/upgrades_20261003/hcore_uncertainty/` |
 | joint VOI weight sensitivity and expected information gain | `analysis/results/upgrades_20261003/voi_eig_sensitivity/` |
 | score-withheld arm (ten runs) | `analysis/results/upgrades_20261003/score_withheld_extension/`; run records indexed in `docs/decision_architecture_provenance.md` |
