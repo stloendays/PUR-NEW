@@ -273,6 +273,28 @@ def summarize(pred: pd.DataFrame, report: dict) -> dict:
             "identification of a molecular causal mechanism; pNCO proximity differs."
         ),
     }
+    # Sensitivity to the pNCO-matching imbalance: retain only held curves
+    # for which *both* two-curve training pools match within a mean of
+    # one NCO percentage point. Report on paired identical target points.
+    nco_by_curve = (
+        short.groupby(["sample_id", "training_scope"])["mean_training_pNCO_gap_pct"]
+        .first()
+        .unstack("training_scope")
+        .dropna()
+    )
+    eligible = nco_by_curve.loc[
+        (nco_by_curve[expected[0]] <= 1.0)
+        & (nco_by_curve[expected[1]] <= 1.0)
+    ].index
+    near = wide.loc[wide.index.get_level_values("sample_id").isin(eligible)]
+    report["pNCO_proximity_sensitivity_10C"] = {
+        "max_mean_pNCO_gap_pp_per_training_pool": 1.0,
+        "n_held_curves": int(len(eligible)),
+        "n_predictions": int(len(near)),
+        "cross_polyol_multiplicative_rmse": mult_rmse(near[expected[0]].to_numpy()),
+        "same_polyol_multiplicative_rmse": mult_rmse(near[expected[1]].to_numpy()),
+        "interpretation": "Paired held curves where both chemical-domain training pools have mean pNCO distance no more than 1 percentage point; residual polyol/iso chemistry differences persist.",
+    }
     return report
 
 
@@ -300,6 +322,7 @@ def main() -> None:
         assert report["paired_10C_comparison"]["n_predictions"] == 68
         assert abs(report["paired_10C_comparison"]["same_polyol_multiplicative_error"] - 1.07645) < 0.01
         assert abs(report["paired_10C_comparison"]["cross_polyol_multiplicative_error"] - 1.23841) < 0.01
+        assert report["pNCO_proximity_sensitivity_10C"]["n_held_curves"] == 22
     print(json.dumps(report, indent=2))
 
 
