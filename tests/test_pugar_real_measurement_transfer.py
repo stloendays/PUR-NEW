@@ -40,6 +40,6 @@ def test_canonical_manuscript_distinguishes_raw_and_interpolated_anchors() -> No
         for token in ("1.076×", "1.238×", "1.057×", "1.166×"):
             assert token in t
         assert "raw" in t.lower()
-    assert "grid-level reconstruction" in si.lower()
+    assert "shared-grid reconstruction" in si.lower()
     assert "scripts/external_pur_raw_anchor.py" in si
     assert "one-measurement calibration" in main.lower()
