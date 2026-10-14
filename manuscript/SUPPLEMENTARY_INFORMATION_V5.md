@@ -419,10 +419,10 @@ The public-data workflow resolves a pinned upstream source revision, records the
 
 ## External test of the level-shift structure and one-point calibration
 
-The descriptor-level asymmetry was tested directly on the calibration task.
+The descriptor-level asymmetry was first examined through interpolated-curve geometry.
 - **Grid.** Each external curve was placed on a common 42.5–77.5 °C grid (2.5 °C steps, never outside the curve's measured range) by a per-curve quadratic smooth of $\ln\eta$ against $z(T)$, with $T_{\mathrm{ref}}=60$ °C. The median smoothing residual was 0.003 in $\ln\eta$.
-- **Curves.** The primary set used the curves with $R^2\ge0.98$. Paired comparisons used the 31 curves for which all four shape sources were available.
-- **Statistics.** Intervals are 10,000-replicate curve-level cluster bootstraps (seed 20261003).
+- **Curves.** The primary set used the curves with $R^2\ge0.98$. Paired descriptive comparisons used the 31 curves for which all four shape sources were available.
+- **Statistics.** Intervals are 10,000-replicate curve-level cluster bootstraps (seed 20261003). Because the original full held trajectory is used to smooth its grid before the held-out test, these reconstructions assess **shared curve geometry**, not an independently observed one-reading prediction.
 
 Within each polyol family, a curve-specific level on a shared quadratic thermal response explained 99.6–99.9% of $\ln\eta$ variation, compared with 25–38% for a single family level. After removing the curve level, the residual spread across a family was 1.03–1.08×. The external families therefore reproduce the level-shift structure identified locally.
 
@@ -433,7 +433,28 @@ Within each polyol family, a curve-specific level on a shared quadratic thermal 
 | different polyol, same isocyanate | 1.221× (1.186–1.257) | 1.285× (1.23–1.36) |
 | all other curves | 1.151× (1.122–1.189) | 1.210× (1.15–1.29) |
 
-Shapes from the same polyol family reproduce the local 1.06–1.10× one-point performance. Changing the isocyanate within a polyol family carries no detectable cost: the paired log-error ratio is 0.89 (0.69–1.00). Taking the shape from a different polyol family roughly triples the log error, with a paired ratio of 2.99 (2.18–5.13). Median absolute errors in the strict test are 3–4% within a polyol family and 19% across polyol families. This is the empirical basis of the CBES applicability rule, demonstrated on the calibration task itself.
+The shared-grid reconstruction is compatible with a polyol-family boundary, but its anchor is interpolated from an entire observed curve. We therefore validated the operational one-reading claim separately on **actual original rheometer observations**, without smoothing a held curve to construct its anchor or prediction targets.
+
+### Original-measurement calibration with matched chemistry domains
+
+The pinned public Pugar viscosity workbook comprises 39 source formulations and 4559 original temperature–viscosity readings. For each held formulation, we selected the actual reading closest to 60 °C as its sole calibration point (within 0.5 °C). Four distinct raw readings nearest 40, 50, 70 and 80 °C, each within 0.5 °C of the nominal temperature, served as test points. The training temperature shape was a quadratic in $z(T)=1000(1/T-1/333.15)$, fitted with one free level per *other* training curve and equal total weighting for each training curve.
+
+Two matched chemistry conditions used exactly **two training curves** each, chosen by closest source NCO percentage: (i) the same polyol family but different isocyanates, and (ii) different polyols but the same isocyanate family. The held curve, its actual anchor and its prediction targets were identical between conditions. The 34 eligible held formulations contributed 68 independent recorded target observations near 50 and 70 °C; the independent unit for bootstrap uncertainty was the **entire held formulation curve**, not each temperature point. Two source curves lacked a reading within 0.5 °C of 60 °C, and three further curves had no two-curve training pool for the second condition.
+
+| Raw-reading transfer test | Same polyol / different isocyanate | Different polyol / same isocyanate |
+|---|---:|---:|
+| Multiplicative RMSE, near 50 and 70 °C (34 held curves, 68 targets) | **1.076×** | **1.238×** |
+| 95% curve-bootstrap interval, 10,000 replicates | 1.033–1.112× | 1.195–1.283× |
+| Fraction of raw predictions within 1.2-fold | 95.6% | 60.3% |
+| Multiplicative RMSE, near 40 and 80 °C (34 held curves, 68 targets) | 1.429× | 1.869× |
+| Raw-reading calibration absent: host-domain mean, near 50 and 70 °C | 2.098× | 3.611× |
+| Mean NCO difference between held and selected training curves (percentage points) | 0.544 | 0.721 |
+
+The paired difference in **log-RMSE** (cross-polyol minus within-polyol) over the same 68 predictions was 0.140 (10,000 held-curve bootstrap interval 0.104–0.184; seed 20261014). As a sensitivity check, restricting both training pools to mean source-NCO differences of at most 1 percentage point retained **22 held curves / 44 target points**, with multiplicative errors of **1.057×** (same polyol) versus **1.166×** (different polyol). The directional result remains, although training-pool chemistry and residual NCO differences cannot be eliminated by this design. These are **external prepolymer viscosity measurements**, not new local adhesive synthesis repeats and not thermal-hold drift labels.
+
+The public workbook was downloaded from `joepugar/viscosity-modeling` at commit `57ede2b22f964a99d6467d627236c37d0a7231d2` and verified by its SHA-256. Script: `scripts/external_pur_raw_anchor.py`. Verified summary and method note: `analysis/results/generality_20261014/pur_raw_anchor/`; full held-out prediction rows are regenerated from the public workbook and uploaded by `.github/workflows/pugar-raw-anchor-validation.yml`.
+
+The descriptive grid analysis and the raw-measurement prediction differ in both the source of the anchor and the evaluation temperature points; their RMSEs cannot be subtracted as a paired improvement. The actual-reading test independently establishes useful **within-polyol temperature-response transfer** under the specified composition and temperature windows, with clear degradation under a polyol-family change.
 
 This family-level result sharpens the claim scope. The local shared thermal shape is treated as a **chemistry-bounded transferable representation**, not a universal PUR relation. For prospective use, unmodified local-family candidates can use one-point state calibration as an interpolation prior, whereas resin-modified or otherwise chemistry-shifted candidates require a direct temperature-sweep check before that shortcut is accepted.
 

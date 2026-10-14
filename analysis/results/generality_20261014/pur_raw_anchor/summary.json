@@ -1,0 +1,123 @@
+{
+  "source": "Pugar et al. 2025, Digital Discovery, DOI 10.1039/D5DD00287G",
+  "source_repo_sha": "57ede2b22f964a99d6467d627236c37d0a7231d2",
+  "source_workbook_sha256": "bbec41da4ff3cae1231686e5d219ec217ac53d85e0f5fc561e408e78fdaf7085",
+  "n_raw_measurements": 4559,
+  "n_raw_curves": 39,
+  "n_raw_polyol_families": 3,
+  "n_raw_polyol_isocyanate_pairs": 13,
+  "excluded_no_60C_anchor_within_half_degree": [
+    "D_I_9",
+    "D_W_9"
+  ],
+  "excluded_no_two_curve_chemistry_pool": [
+    "P_TDS_10",
+    "P_TDS_4",
+    "P_TDS_7"
+  ],
+  "paired_train_curve_count_per_scope": 2,
+  "comparison_design": "One real measured ~60 C anchor; predictions near 40/50/70/80 C at other measured source temperatures; two pNCO-nearest, equal-count training curves per comparison",
+  "results": [
+    {
+      "scope": "different_polyol_same_isocyanate",
+      "evaluation": "within_10C",
+      "n_held_curves": 34,
+      "n_predictions": 68,
+      "multiplicative_rmse": 1.2384142784076282,
+      "no_anchor_multiplicative_rmse": 3.6112047945025707,
+      "constant_viscosity_anchor_mult_rmse": 1.7544602198761272,
+      "fraction_within_1p2x": 0.6029411764705882,
+      "mean_training_pNCO_gap": 0.7205882352941176
+    },
+    {
+      "scope": "different_polyol_same_isocyanate",
+      "evaluation": "within_20C",
+      "n_held_curves": 34,
+      "n_predictions": 68,
+      "multiplicative_rmse": 1.8688262631694232,
+      "no_anchor_multiplicative_rmse": 4.320968158804242,
+      "constant_viscosity_anchor_mult_rmse": 3.4523355081384217,
+      "fraction_within_1p2x": 0.2647058823529412,
+      "mean_training_pNCO_gap": 0.7205882352941176
+    },
+    {
+      "scope": "different_polyol_same_isocyanate",
+      "evaluation": "all_four_targets",
+      "n_held_curves": 34,
+      "n_predictions": 136,
+      "multiplicative_rmse": 1.595678963478361,
+      "no_anchor_multiplicative_rmse": 3.961754911943828,
+      "constant_viscosity_anchor_mult_rmse": 2.6171866127406536,
+      "fraction_within_1p2x": 0.4338235294117647,
+      "mean_training_pNCO_gap": 0.7205882352941176
+    },
+    {
+      "scope": "same_polyol_different_isocyanate",
+      "evaluation": "within_10C",
+      "n_held_curves": 34,
+      "n_predictions": 68,
+      "multiplicative_rmse": 1.0764488569123007,
+      "no_anchor_multiplicative_rmse": 2.0979449183619594,
+      "constant_viscosity_anchor_mult_rmse": 1.7544602198761272,
+      "fraction_within_1p2x": 0.9558823529411765,
+      "mean_training_pNCO_gap": 0.5441176470588235
+    },
+    {
+      "scope": "same_polyol_different_isocyanate",
+      "evaluation": "within_20C",
+      "n_held_curves": 34,
+      "n_predictions": 68,
+      "multiplicative_rmse": 1.4291936371339564,
+      "no_anchor_multiplicative_rmse": 2.2559456344833237,
+      "constant_viscosity_anchor_mult_rmse": 3.4523355081384217,
+      "fraction_within_1p2x": 0.8676470588235294,
+      "mean_training_pNCO_gap": 0.5441176470588235
+    },
+    {
+      "scope": "same_polyol_different_isocyanate",
+      "evaluation": "all_four_targets",
+      "n_held_curves": 34,
+      "n_predictions": 136,
+      "multiplicative_rmse": 1.2941214614140288,
+      "no_anchor_multiplicative_rmse": 2.177355759648753,
+      "constant_viscosity_anchor_mult_rmse": 2.6171866127406536,
+      "fraction_within_1p2x": 0.9117647058823529,
+      "mean_training_pNCO_gap": 0.5441176470588235
+    }
+  ],
+  "paired_10C_comparison": {
+    "held_curve_unit": "one source formulation / full matched two-target curve",
+    "n_held_curves": 34,
+    "n_predictions": 68,
+    "source_order": [
+      "different_polyol_same_isocyanate",
+      "same_polyol_different_isocyanate"
+    ],
+    "cross_polyol_multiplicative_error": 1.2384142784076282,
+    "same_polyol_multiplicative_error": 1.0764488569123007,
+    "cross_polyol_mult_ci95": [
+      1.1946776239888406,
+      1.2826377393502026
+    ],
+    "same_polyol_mult_ci95": [
+      1.033227524159905,
+      1.1118852145116347
+    ],
+    "difference_log_rmse_cross_minus_same": 0.14016422548920143,
+    "difference_log_rmse_bootstrap_ci95": [
+      0.10395854244198784,
+      0.18350577440639548
+    ],
+    "curve_bootstrap_reps": 10000,
+    "curve_bootstrap_seed": 20261014,
+    "interpretation": "Matching the number of training curves, transferring thermal response across polyol identity is less accurate than retaining polyol identity across isocyanates. This is a matched predictive comparison, not identification of a molecular causal mechanism; pNCO proximity differs."
+  },
+  "pNCO_proximity_sensitivity_10C": {
+    "max_mean_pNCO_gap_pp_per_training_pool": 1.0,
+    "n_held_curves": 22,
+    "n_predictions": 44,
+    "cross_polyol_multiplicative_rmse": 1.1659656441689645,
+    "same_polyol_multiplicative_rmse": 1.0569954093211602,
+    "interpretation": "Paired held curves where both chemical-domain training pools have mean pNCO distance no more than 1 percentage point; residual polyol/iso chemistry differences persist."
+  }
+}

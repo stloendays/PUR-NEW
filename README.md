@@ -262,9 +262,9 @@ The rule-complete confirmatory series gives:
 Controlled perturbations show why the explicit policy matters:
 
 ```text
-VOI withheld:
-0/5 evidence-supported family
-3/5 zero-discrimination selections
+VOI withheld (two sequential N=5 blocks, combined descriptively):
+0/10 evidence-supported family
+3/10 zero-discrimination selections
 
 rule order inverted:
 0/10 evidence-supported family
@@ -363,6 +363,27 @@ Repository CI runs the local audit automatically.
 
 ---
 
+### Independent raw-reading viscosity transfer
+
+A chemically matched external PUR test now verifies actual one-reading
+calibration without using the held curve's smoothed trajectory. Using the
+original Pugar prepolymer workbook (39 curves, 4559 measurements), a
+single *measured* ~60 °C value anchors predictions for held-out measured
+50 and 70 °C values. On 34 held curves / 68 predictions, using two
+NCO-nearest training curves in either arm yields:
+
+- **1.076×** multiplicative error for same-polyol/different-isocyanate
+  shape transfer;
+- **1.238×** for different-polyol/same-isocyanate transfer;
+- **1.057× versus 1.166×** on a 22-curve NCO-proximity-matched subset.
+
+This directly verifies a **polyol-dependent transfer boundary** on raw
+readings; it does not establish F1 thermal response or resin mechanism.
+Script: `scripts/external_pur_raw_anchor.py`; verified details:
+`analysis/results/generality_20261014/pur_raw_anchor/`.
+The external solid-polymer-electrolyte raw-reading analysis is separately
+archived in `analysis/results/generality_20261014/raw_anchor/`.
+
 ## 9. Manuscript status
 
 The active canonical manuscript backbone is:
@@ -454,7 +475,7 @@ RGES changes the decision unit from a formulation candidate to an **experiment c
 The manuscript-facing RGES evidence contains three controlled conditions under one model/evidence contract:
 
 - rule-complete confirmatory series: 10 declared runs, 9/10 evidence-supported family selections, 0/10 zero-discrimination selections;
-- VOI-score-withheld ablation: 5 declared runs, 0/5 evidence-supported family selections, 3/5 zero-discrimination selections;
+- VOI-score-withheld ablation: two sequentially run N=5 blocks (the second initiated after observing the first), 0/10 evidence-supported family selections, 3/10 zero-discrimination selections combined descriptively;
 - rule-order-inverted ablation: 10 runs, 0/10 evidence-supported family selections, 10/10 zero-discrimination selections.
 
 The order-inverted arm is particularly important: the Skeptic identified the zero-discrimination defect at high severity in 10/10 runs, yet all ten frozen decisions still committed. RGES therefore supports a rule-design result rather than an autonomy claim: **rule content and rule order are causal parts of scientific decision quality, while critique without decision authority is diagnostic rather than corrective.**

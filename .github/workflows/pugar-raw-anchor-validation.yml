@@ -1,0 +1,39 @@
+name: Reproduce raw PUR prepolymer anchor validation
+
+on:
+  pull_request:
+    paths:
+      - "scripts/external_pur_raw_anchor.py"
+      - ".github/workflows/pugar-raw-anchor-validation.yml"
+      - "analysis/results/generality_20261014/pur_raw_anchor/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  raw-anchor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install scientific dependencies
+        run: python -m pip install numpy pandas openpyxl
+      - name: Retrieve pinned original Pugar viscosity workbook
+        run: |
+          mkdir -p /tmp/pugar
+          curl --fail --location --retry 3 --output /tmp/pugar/ViscTempData.xlsx \
+            "https://raw.githubusercontent.com/joepugar/viscosity-modeling/57ede2b22f964a99d6467d627236c37d0a7231d2/ViscTempData.xlsx"
+          sha256sum /tmp/pugar/ViscTempData.xlsx
+      - name: Verify source checksum and raw-observation transfer
+        run: |
+          echo "bbec41da4ff3cae1231686e5d219ec217ac53d85e0f5fc561e408e78fdaf7085  /tmp/pugar/ViscTempData.xlsx" | sha256sum --check
+          python scripts/external_pur_raw_anchor.py --workbook /tmp/pugar/ViscTempData.xlsx --check --out /tmp/pugar/raw_anchor
+      - name: Upload numerical evidence and prediction rows
+        uses: actions/upload-artifact@v4
+        with:
+          name: pugar-raw-anchor-20261014
+          path: /tmp/pugar/raw_anchor
+          if-no-files-found: error
