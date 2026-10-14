@@ -7,6 +7,7 @@ This file is the first-stop project handoff for coding/research agents working i
 - Active manuscript: `manuscript/MAIN_TEXT_V5.md`
 - Active SI: `manuscript/SUPPLEMENTARY_INFORMATION_V5.md`
 - Scientific audit: `docs/DATA_AND_MODEL_AUDIT.md`
+- Submission claim-to-evidence map: `docs/SUBMISSION_SCIENTIFIC_EVIDENCE_MAP.md`
 - Primary local formulation table: `data/formulations.csv`
 - Temperature sweeps: `data/temperature_sweeps.csv`
 - Realization roles: `data/realization_metadata.csv`
@@ -39,7 +40,7 @@ Do not rewrite the paper as either (a) a static formulation-to-viscosity predict
 
 The validation is **prospective**. The evidence-grounded agent selected the validation formulation from pre-result evidence, and the recommendation and its decision criterion were frozen before the formulation was prepared and measured (author-confirmed chronology, `docs/EXPERIMENTAL_CHRONOLOGY.md`). The supervising professor ruled on 2026-10-04 that the work must be described as prospective, not retrospective. Do not reintroduce "retrospective adjudication" wording in the manuscript, SI or project documents.
 
-The formalized RGES/CBES software and its frozen series re-execute that decision from the same pre-result evidence contract, behind the same outcome firewall. Describe them as reproducing the prospective decision under a formal contract; do not claim that the specific RGES/CBES series runs were executed before the wet-lab measurement.
+The original contemporaneous F1 recommendation/freeze artifact has not yet been recovered; `docs/EXPERIMENTAL_CHRONOLOGY.md` records an author-confirmed ordering rather than an independently dated primary record. The formalized RGES/CBES software and its frozen series re-execute the decision from pre-result evidence behind the outcome firewall. Describe them as reproducing the prospective decision under a formal contract; do not claim that the specific RGES/CBES series runs were executed before the wet-lab measurement.
 
 ## Critical reconciled facts
 

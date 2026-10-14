@@ -16,6 +16,16 @@ on:
       - "data/**"
       - "derived/**"
       - "analysis/results/**"
+  pull_request:
+    paths:
+      - ".github/workflows/export-manuscript-docx.yml"
+      - "manuscript/**"
+      - "scripts/submission_cross_document_audit.py"
+      - "analysis/figures_composite/**"
+      - "analysis/figures/Supplementary_Figure_S1_PUR_chemistry.*"
+      - "data/**"
+      - "derived/**"
+      - "analysis/results/**"
   workflow_dispatch:
 
 permissions:
@@ -58,7 +68,7 @@ jobs:
           python - <<'PY'
           from docx import Document
           from docx.enum.section import WD_SECTION
-          from docx.enum.text import WD_LINE_SPACING
+          from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
           from docx.shared import Inches, Pt, RGBColor
           from docx.oxml.ns import qn
 
@@ -91,6 +101,9 @@ jobs:
           set_font("Heading 2", 11.5, True, 8, 4)
           set_font("Heading 3", 11, True, 7, 3)
           set_font("Caption", 10, False, 4, 7)
+          doc.styles["Normal"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+          doc.styles["Title"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+          doc.styles["Heading 1"].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
           # Pandoc commonly uses these styles if present.
           for name in ("Body Text", "First Paragraph"):
@@ -497,6 +510,24 @@ jobs:
                           for run in para.runs:
                               run.font.size = Pt(10)
 
+              # Apply consistent typesetting to both exported documents.
+              # Paragraph alignment is normalized after table reconstruction,
+              # without touching OMML equations or paragraph structure.
+              before_references = True
+              for para in doc.paragraphs:
+                  name = para.style.name if para.style is not None else ""
+                  txt = para.text.strip()
+                  if txt == "References":
+                      before_references = False
+                  if para._p.xpath(".//w:drawing"):
+                      para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                  elif name in ("Title", "Heading 1"):
+                      para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                  elif txt.startswith(("Junbo Tong", "¹ Department", "² Ningbo", "*Corresponding author")):
+                      para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                  elif before_references and name in ("Normal", "Body Text", "First Paragraph"):
+                      para.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+
               # Keep each figure with its full scientific caption.
               for para in doc.paragraphs:
                   has_drawing = bool(para._p.xpath(".//w:drawing"))
@@ -540,6 +571,24 @@ jobs:
                   raise SystemExit(f"Expected at least {min_images} embedded figures in {p}")
               if leftovers:
                   raise SystemExit(f"Literal LaTeX commands remain in {p}")
+          from docx import Document
+          from docx.enum.text import WD_ALIGN_PARAGRAPH
+          for p, min_images, _ in files:
+              doc = Document(p)
+              if doc.styles["Normal"].paragraph_format.alignment != WD_ALIGN_PARAGRAPH.JUSTIFY:
+                  raise SystemExit(f"Body style is not justified: {p}")
+              if doc.styles["Title"].paragraph_format.alignment != WD_ALIGN_PARAGRAPH.CENTER:
+                  raise SystemExit(f"Title style is not centered: {p}")
+              if doc.styles["Heading 1"].paragraph_format.alignment != WD_ALIGN_PARAGRAPH.CENTER:
+                  raise SystemExit(f"Major heading style is not centered: {p}")
+              figure_paragraphs = [
+                  para for para in doc.paragraphs if para._p.xpath(".//w:drawing")
+              ]
+              if len(figure_paragraphs) < min_images:
+                  raise SystemExit(f"Too few drawing paragraphs for layout QA: {p}")
+              if any(para.alignment != WD_ALIGN_PARAGRAPH.CENTER for para in figure_paragraphs):
+                  raise SystemExit(f"An embedded figure is not centered: {p}")
+              print(f"  typography and {len(figure_paragraphs)} figure alignments: PASS")
           PY
 
       - name: Render DOCX files for visual QA

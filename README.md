@@ -395,6 +395,18 @@ manuscript/SUPPLEMENTARY_INFORMATION_V5.md
 
 Historical manuscript revisions remain preserved as repository provenance rather than overwritten. Reader-facing decision architectures now use semantic names: Candidate-Recovery Benchmark (CRB), Rule-Grounded Experiment Selection (RGES), and Chemistry-Bounded Experiment Selection (CBES).
 
+For editorial consistency and reviewer traceability, the current
+[scientific claim-to-evidence map](docs/SUBMISSION_SCIENTIFIC_EVIDENCE_MAP.md)
+connects each main claim to raw observations, analysis scripts, and figures.
+[Digital Discovery submission preparation](submission/DIGITAL_DISCOVERY_PRE_SUBMISSION.md)
+covers journal-specific code/data deposition requirements, author approvals
+and TOC entry text; a
+[cover letter draft](submission/DIGITAL_DISCOVERY_COVER_LETTER_DRAFT.md)
+is available for corresponding-author review. The export workflow now
+checks and renders the main and Supplementary Word files on manuscript
+pull requests, as well as on merges to `main`.
+
+
 The intended Results order is:
 
 ```text

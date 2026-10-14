@@ -30,7 +30,7 @@ The prime (`'`) denotes the source-sheet retest after one day of storage.
 
 R01, R02 and R03 are retained as source run labels. Project metadata confirms that these records were produced by the **same operator**. They are therefore treated as opaque within-operator experimental realizations. Differences among them are not assigned to operator effects or to any specific preparation mechanism unless the corresponding process metadata are available.
 
-The absolute viscosity unit should be copied from the original instrument/source record in the final manuscript. Until that metadata is explicitly confirmed, the numeric values are treated here as **source-reported viscosity values** rather than assigning an inferred unit.
+The viscosity unit has been verified from the laboratory instrument record as **mPa·s**. The source measurements use an **RV-SSR-H high-temperature rotational viscometer**, **NKY-25 heater** and **No. 27 spindle**, with rotation speed adjusted to maintain approximately **40–60% torque** and **15 min equilibration** at each target temperature. The canonical machine-readable instrument and method provenance is `data/experimental_methods_metadata.csv`. Distinct curve labels are not assumed to be independent synthesis batches.
 
 ### Within-operator realization sensitivity in E2
 
@@ -73,7 +73,7 @@ The source sheet gives the follow-up formulation on a parts basis:
 |---:|---:|---:|---:|---:|
 | 39.60 | 39.60 | 17 | 5 | 20.19 |
 
-No NCO:OH value is inferred for this row because it was not explicitly reported with the correction data.
+The verified NCO:OH equivalent ratio for this F1 resin-modified formulation is **1.82**, as recorded in the reconciled project chemistry audit; this supersedes the old incomplete annotation. The source-reported component parts above remain unaltered.
 
 ### Repeated 120 °C hold measurements
 
@@ -88,11 +88,12 @@ The matched 15->60 min drifts are:
 
 - repeat 1: -0.16%;
 - repeat 2: +3.04%;
-- mean profile: +1.47%.
+- signed drift of the averaged viscosity trajectory: **+1.47%**;
+- mean of the absolute drifts of the two individual repeats (the registered H-CORE/H-RESIN adjudication statistic): **1.60%**.
 
 There is no 90 min measurement for the follow-up formulation in the supplied data, so the comparison with E1/E5 must use the common 15-60 min window.
 
-Relative to the matched absolute drift of the mean profile, the follow-up reduces observed drift by approximately **84.5% versus E1** and **97.1% versus E5**.
+For the **signed drift of the averaged profile** (+1.47%), the apparent reduction relative to the E1 and E5 single-reference drifts is 84.5% and 97.1%, respectively. The registered hypothesis comparison instead uses the **mean absolute drift across the two F1 repeats (1.60%)**, which does not allow opposite-signed repeat changes to cancel.
 
 ## 5. Directly supported conclusions
 
