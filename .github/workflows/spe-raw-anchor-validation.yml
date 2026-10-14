@@ -1,0 +1,32 @@
+name: SPE raw-anchor scientific validation
+
+on:
+  pull_request:
+    paths:
+      - "scripts/spe_raw_anchor_audit.py"
+      - "data/external/bradford2023_spe/spe_neat_curves.csv"
+      - "analysis/results/generality_20261008/spe_state_shift/grid_ln_sigma.csv"
+      - ".github/workflows/spe-raw-anchor-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install numerical analysis dependencies
+        run: python -m pip install numpy pandas
+      - name: Independently verify measured-point and publication-held-out predictions
+        run: python scripts/spe_raw_anchor_audit.py --check --out /tmp/spe-raw-anchor
+      - name: Upload auditable per-prediction results
+        uses: actions/upload-artifact@v4
+        with:
+          name: spe-raw-anchor-20261014
+          path: /tmp/spe-raw-anchor
+          if-no-files-found: error
