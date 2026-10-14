@@ -139,6 +139,28 @@ def main() -> int:
         errors,
     )
 
+    # Raw-measurement, publication-held-out evidence and frozen prospective rules.
+    # The smoothed-grid SPE diagnostic remains separately reported but must never
+    # silently replace the measured-reading validation.
+    require_all(
+        main,
+        ["1.66×", "1.70×", "91.9%", "6.08%", "3.80%", "S1C41"],
+        "main raw SPE transfer and prospective experiment",
+        errors,
+    )
+    require_all(
+        si,
+        ["1.659×", "1.705×", "1.495×", "1.614×", "6.08%", "3.80%", "S1C41"],
+        "SI measured-point transfer and frozen experiment",
+        errors,
+    )
+    for name, text in (("main", main), ("SI", si)):
+        if "at or above 4.04% supports H-DUAL" in text:
+            errors.append(
+                f"{name}: binary H-DUAL rule conflicts with frozen 2026-09-20 "
+                "indeterminate interval and matched-control prerequisite"
+            )
+
     # Statistical-unit language required in the final Methods.
     required_stats = [
         "experimental realization was treated as the independent material-level unit",
