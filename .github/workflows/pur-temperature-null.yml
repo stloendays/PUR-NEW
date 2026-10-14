@@ -1,0 +1,30 @@
+name: PUR temperature-bias counterfactual
+
+on:
+  pull_request:
+    paths:
+      - "scripts/pur_temperature_error_counterfactual.py"
+      - "data/temperature_sweeps.csv"
+      - "data/realization_metadata.csv"
+      - "analysis/results/local_thermal_curve_fits.csv"
+      - ".github/workflows/pur-temperature-null.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Recompute temperature-equivalent offset from audited E2 data
+        run: python scripts/pur_temperature_error_counterfactual.py --check --out /tmp/pur-temperature-null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pur-temperature-counterfactual-20261014
+          path: /tmp/pur-temperature-null
+          if-no-files-found: error
