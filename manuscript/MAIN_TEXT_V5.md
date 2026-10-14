@@ -264,7 +264,7 @@ The authors declare no competing interests.
 
 ---
 
-## 6. Data and Code Availability
+## 6. Data availability
 
 All local formulation records, original temperature-sweep and thermal-hold observations, chemistry-audit metadata, analysis scripts, hypothesis definitions, experiment-selection rules and run-level adjudication records are available at https://github.com/stloendays/PUR-NEW. The manuscript and Supplementary Information correspond to the versioned sources in `manuscript/`; composite figures and their data are in `analysis/figures_composite/` and `analysis/figures_origin/data/`. The raw-observation PUR transfer reanalysis is reproducible with `scripts/external_pur_raw_anchor.py` and the derived records under `analysis/results/generality_20261014/pur_raw_anchor/`. Its source is the published Pugar prepolymer workbook, preserved by the original authors at https://github.com/joepugar/viscosity-modeling and identified by the pinned source commit and checksum in our analysis record. The solid-polymer-electrolyte analysis, including a separate raw-measurement and publication-holdout validation (script `scripts/spe_raw_anchor_audit.py`), is in `analysis/results/generality_20261014/raw_anchor/` and `data/external/bradford2023_spe/` (source licence and provenance included).
 
