@@ -104,9 +104,11 @@ training-to-held NCO differences are not perfectly identical:
 **0.54** percentage points in same-polyol training versus **0.72**
 percentage points in cross-polyol training. A more closely
 pNCO-matched subset (both training pools within 1.0 percentage point
-in mean absolute NCO difference) is also provided in `summary.json`
-and avoids interpreting the entire observed gap as caused by polyol
-identity alone.
+in mean absolute NCO difference) retained **22 held curves / 44 targets**:
+**1.057×** when polyol identity was preserved versus **1.166×** when
+polyol identity changed. This supports the direction of the observed
+predictive boundary, while avoiding an exclusively molecular or causal
+interpretation of its size.
 
 ## Reporting limits
 
