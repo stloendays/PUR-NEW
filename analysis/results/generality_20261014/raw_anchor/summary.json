@@ -1,0 +1,108 @@
+{
+  "source": "Bradford et al. (2023), DOI 10.1021/acscentsci.2c01123",
+  "raw_measurement_count": 7640,
+  "source_raw": "data/external/bradford2023_spe/spe_neat_curves.csv",
+  "training_grid": "analysis/results/generality_20261008/spe_state_shift/grid_ln_sigma.csv",
+  "method": "One actual measured warm-end anchor; distinct raw measurement targets; training shape from other held-out curves or publications only",
+  "prediction_type": "interpolation within measured temperature windows, not chemical extrapolation",
+  "curve": {
+    "all_target_temperatures": {
+      "n_predictions": 1766,
+      "n_curves": 323,
+      "n_families": 14,
+      "n_publications": 60,
+      "multiplicative_rmse": 2.4931889004035863,
+      "family_mean_without_anchor_multiplicative_rmse": 12.888489328604535,
+      "fraction_within_factor_two": 0.7417893544733862
+    },
+    "within_20_c": {
+      "n_predictions": 979,
+      "n_curves": 322,
+      "n_families": 14,
+      "n_publications": 60,
+      "multiplicative_rmse": 1.658505360849546,
+      "family_mean_without_anchor_multiplicative_rmse": 10.949238778733923,
+      "fraction_within_factor_two": 0.9193054136874361
+    },
+    "within_10_c": {
+      "n_predictions": 470,
+      "n_curves": 309,
+      "n_families": 14,
+      "n_publications": 60,
+      "multiplicative_rmse": 1.3046809502043355,
+      "family_mean_without_anchor_multiplicative_rmse": 9.361187734440172,
+      "fraction_within_factor_two": 0.9808510638297873
+    },
+    "within_30_c": {
+      "n_predictions": 1476,
+      "n_curves": 323,
+      "n_families": 14,
+      "n_publications": 60,
+      "multiplicative_rmse": 2.2512572690695256,
+      "family_mean_without_anchor_multiplicative_rmse": 12.3922242607884,
+      "fraction_within_factor_two": 0.7865853658536586
+    },
+    "dominant_family": "[Cu]OCC[Au]",
+    "excluding_dominant_family_within_20_c": {
+      "n_predictions": 414,
+      "n_curves": 159,
+      "n_families": 13,
+      "n_publications": 25,
+      "multiplicative_rmse": 1.494941211970813,
+      "family_mean_without_anchor_multiplicative_rmse": 10.833630873520297,
+      "fraction_within_factor_two": 0.9130434782608695
+    },
+    "family_equal_weight_multiplicative_rmse_within_20_c": 1.6141077426747326,
+    "eligible_family_count": 14
+  },
+  "doi": {
+    "all_target_temperatures": {
+      "n_predictions": 1196,
+      "n_curves": 232,
+      "n_families": 5,
+      "n_publications": 53,
+      "multiplicative_rmse": 2.4538400590901928,
+      "family_mean_without_anchor_multiplicative_rmse": 15.021620687369381,
+      "fraction_within_factor_two": 0.7633779264214047
+    },
+    "within_20_c": {
+      "n_predictions": 767,
+      "n_curves": 232,
+      "n_families": 5,
+      "n_publications": 53,
+      "multiplicative_rmse": 1.704904458155343,
+      "family_mean_without_anchor_multiplicative_rmse": 13.186918242685355,
+      "fraction_within_factor_two": 0.9230769230769231
+    },
+    "within_10_c": {
+      "n_predictions": 368,
+      "n_curves": 229,
+      "n_families": 5,
+      "n_publications": 53,
+      "multiplicative_rmse": 1.3159138982022065,
+      "family_mean_without_anchor_multiplicative_rmse": 10.842259152839912,
+      "fraction_within_factor_two": 0.9836956521739131
+    },
+    "within_30_c": {
+      "n_predictions": 1163,
+      "n_curves": 232,
+      "n_families": 5,
+      "n_publications": 53,
+      "multiplicative_rmse": 2.425380996390848,
+      "family_mean_without_anchor_multiplicative_rmse": 15.073564527038693,
+      "fraction_within_factor_two": 0.7721410146173688
+    },
+    "dominant_family": "[Cu]OCC[Au]",
+    "excluding_dominant_family_within_20_c": {
+      "n_predictions": 202,
+      "n_curves": 69,
+      "n_families": 4,
+      "n_publications": 17,
+      "multiplicative_rmse": 1.4341840650310558,
+      "family_mean_without_anchor_multiplicative_rmse": 17.368929283746056,
+      "fraction_within_factor_two": 0.9306930693069307
+    },
+    "family_equal_weight_multiplicative_rmse_within_20_c": 1.5501849743971186,
+    "eligible_family_count": 5
+  }
+}

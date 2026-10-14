@@ -196,6 +196,8 @@ jobs:
         run: python -m json.tool /tmp/master-curve-collapse/master_curve_collapse_summary.json > /dev/null
       - name: Validate manuscript citation integrity
         run: python scripts/check_manuscript_citations.py
+      - name: Audit manuscript-SI scientific consistency
+        run: python scripts/submission_cross_document_audit.py
 
       - name: Validate Agent V4 configuration JSON
         run: |
