@@ -561,6 +561,24 @@ jobs:
                   raise SystemExit(f"Expected at least {min_images} embedded figures in {p}")
               if leftovers:
                   raise SystemExit(f"Literal LaTeX commands remain in {p}")
+          from docx import Document
+          from docx.enum.text import WD_ALIGN_PARAGRAPH
+          for p, min_images, _ in files:
+              doc = Document(p)
+              if doc.styles["Normal"].paragraph_format.alignment != WD_ALIGN_PARAGRAPH.JUSTIFY:
+                  raise SystemExit(f"Body style is not justified: {p}")
+              if doc.styles["Title"].paragraph_format.alignment != WD_ALIGN_PARAGRAPH.CENTER:
+                  raise SystemExit(f"Title style is not centered: {p}")
+              if doc.styles["Heading 1"].paragraph_format.alignment != WD_ALIGN_PARAGRAPH.CENTER:
+                  raise SystemExit(f"Major heading style is not centered: {p}")
+              figure_paragraphs = [
+                  para for para in doc.paragraphs if para._p.xpath(".//w:drawing")
+              ]
+              if len(figure_paragraphs) < min_images:
+                  raise SystemExit(f"Too few drawing paragraphs for layout QA: {p}")
+              if any(para.alignment != WD_ALIGN_PARAGRAPH.CENTER for para in figure_paragraphs):
+                  raise SystemExit(f"An embedded figure is not centered: {p}")
+              print(f"  typography and {len(figure_paragraphs)} figure alignments: PASS")
           PY
 
       - name: Render DOCX files for visual QA
