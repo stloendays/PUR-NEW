@@ -37,7 +37,7 @@ def test_s1c39_hypothesis_verdict_keeps_frozen_indeterminate_region() -> None:
         assert "contemporaneous" in text.lower()
     assert "at or above 4.04% supports H-DUAL" not in si
     assert "at or above 4.04% supports H-DUAL" not in main
-    assert "do not automatically reset" in note
+    assert "not automatically reset" in note.replace("**", "")
     assert "not automatically updated" in si
 
 
