@@ -59,14 +59,15 @@ https://www.rsc.org/publishing/publish-with-us/publish-a-journal-article/data-sh
 
 ## Draft graphical-entry text
 
-> Reactive polyurethane melts can share a local temperature response
-> while showing distinct viscosity levels and thermal-hold drift.
-> One measured state anchor and chemically bounded decision rules
-> direct the next experiment toward a specific stabilization mechanism.
+> Polyurethane melts can share a local temperature response yet differ
+> in viscosity level and thermal-hold drift. One measured anchor and
+> chemistry-aware rules select experiments that distinguish
+> stabilization mechanisms.
 
-The text describes the study's main finding, not a particular proposed
-graphic. Confirm the final 250-character requirement after editorial
-selection; do not put this explanatory paragraph onto the graphic.
+The TOC text is 219 characters when spaces and line wraps are
+normalised, within the stated 250-character limit. It describes the
+scientific finding rather than a particular proposed graphic; do not
+put this explanatory text onto the graphic.
 
 ## Items requiring coauthor confirmation
 
